@@ -36,34 +36,34 @@ public class CharBuffTable {
 			.getLogger(CharBuffTable.class.getName());
 
 	private static final int[] buffSkill = {  
-			/** фВ╪г ╦╤╧Щ ╧Жга */
+			/** М▐╛Л┘≤ К╖┬К╡∙ К╡└М■└ */
 			STATUS_BRAVE, STATUS_HASTE, STATUS_BLUE_POTION, 
 			STATUS_CHAT_PROHIBITED, STATUS_RIBRAVE,
-			/** дз╦╤.╩С╬ф.гВхГ.╦╤╬х ╧Жга */
+			/** Л╫■К╖┬.Л┐│Л∙└.М≤┬М²■.К╖┬Л∙┬ К╡└М■└ */
 			FAFU_MAAN, ANTA_MAAN, LIND_MAAN, VALA_MAAN, LIFE_MAAN, BIRTH_MAAN, SHAPE_MAAN, 
 			SANGA, SANGABUFF, COMA, COMABUFF, CRAY, ANTA_BLOOD, 
-			/** юо╧щ ╦╤╧Щ ╧Жга */
+			/** Л²╪К╟≤ К╖┬К╡∙ К╡└М■└ */
 			LIGHT, SHIELD, PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, HASTE, HOLY_WALK,
 			GREATER_HASTE, SHAPE_CHANGE, DECREASE_WEIGHT, DECAY_POTION, 
 			SILENCE, WEAKNESS, DISEASE, BERSERKERS,	
-			/** ╠╨аж ╟Э╥ц ╧Жга */
+			/** Й╣╟Лё╪ Й╢─К═╗ К╡└М■└ */
 			GLOWING_AURA, SHINING_AURA, BRAVE_AURA,
-			/** ╢ые╘ ©╓га ╟Э╥ц ╧Жга */
+			/** К▀╓М│╛ Л≈≤М■└ Й╢─К═╗ К╡└М■└ */
 			SHADOW_ARMOR, MOVING_ACCELERATION, DRESS_EVASION, BLOODLUST, VENOM_RESIST, 
 			DRESS_MIGHTY, DRESS_DEXTERITY,
-			/** ©К╠Б╩Г х╞╪З╩Г ╟Э╥ц ╧Жга */
+			/** Л ╘Й╦╟Л┌╛ М≥≤Л┬═Л┌╛ Й╢─К═╗ К╡└М■└ */
 			CONSENTRATION, INSIGHT, PANIC, PAYTIONS, 
 			GUARDBREAK, DRAGON_SKIN, MOTALBODY, HOUROFDEATH, PEAR, 
-			/** ©Да╓ а╓╥и ╦╤╧Щ ╟Э╥ц ╧Жга */
+			/** Л ■Л═∙ Л═∙К═╧ К╖┬К╡∙ Й╢─К═╗ К╡└М■└ */
 			FIRE_WEAPON, NATURES_TOUCH, WIND_SHACKLE, ERASE_MAGIC, ELEMENTAL_FALL_DOWN,
 			ADDITIONAL_FIRE, STRIKER_GALE, ELEMENTAL_FIRE, SOUL_OF_FLAME, POLLUTE_WATER, WIND_SHOT,
 			RESIST_MAGIC, CLEAR_MIND, RESIST_ELEMENTAL, ELEMENTAL_PROTECTION, WIND_WALK, EARTH_SKIN,
 			FIRE_BLESS, STORM_EYE, EARTH_BLESS, BURNING_WEAPON, STORM_SHOT, IRON_SKIN,
-			/** дц╥╞г╝ фпе╟аЖ ╧Жга */
+			/** Л╩╛К÷╛М▓─ М▄╗М┌╓Л╖─ К╡└М■└ */
 			EXP_POTION, COLOR_A, COLOR_B, COLOR_C,
-			/** ©Н╪╪ ╧Жга */
+			/** Л ╢Л└╦ К╡└М■└ */
 			LUCK_A, LUCK_B, LUCK_C, LUCK_D,
-			/** ©Д╦╝ ╧Жга */
+			/** Л ■К╕╛ К╡└М■└ */
 			COOKING_1_0_N, COOKING_1_0_S, COOKING_1_1_N, COOKING_1_1_S, 
 			COOKING_1_2_N, COOKING_1_2_S, COOKING_1_3_N, COOKING_1_3_S,
 			COOKING_1_4_N, COOKING_1_4_S, COOKING_1_5_N, COOKING_1_5_S,

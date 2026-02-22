@@ -21,7 +21,7 @@ public class S_GameTime1 extends ServerBasePacket {
 
 	//0000 : 7e 41 14 fa 7f 50 80 f9                            ~A..P..
 
-    /*00:00 ½Ã°£ Èê·¯°¡´Â ÆĞÅ¶*/
+    /*00:00 ì‹œê°„ í˜ëŸ¬ê°€ëŠ” íŒ¨í‚·*/
 	private void buildPacket(L1PcInstance pc) {
 		writeC(Opcodes.S_OPCODE_UNKNOWN2);
     writeC(0x41);

@@ -35,7 +35,7 @@ public class S_SkillSound extends ServerBasePacket {
 	}
 
 	private void buildPacket(int objid, int gfxid, int aid) {
-		// aid´Â »ç¿ëµÇÁö ¾Ê¾Ò´Ù
+		// aidëŠ” ì‚¬ìš©ë˜ì§€ ì•Šì•˜ë‹¤
 		writeC(Opcodes.S_OPCODE_SKILLSOUNDGFX);
 		writeD(objid);
 		writeH(gfxid);

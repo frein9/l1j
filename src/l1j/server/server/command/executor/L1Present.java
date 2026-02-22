@@ -40,7 +40,7 @@ public class L1Present implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 
 			StringTokenizer st = new StringTokenizer(arg);
 			String account = st.nextToken();
@@ -50,21 +50,21 @@ public class L1Present implements L1CommandExecutor {
 
 			L1Item temp = ItemTable.getInstance(). getTemplate(itemid);
 			if (temp == null) {
-				pc.sendPackets(new S_SystemMessage("Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌÅÛ IDÀÔ´Ï´Ù. "));
+				pc.sendPackets(new S_SystemMessage("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´í…œ IDì…ë‹ˆë‹¤. "));
 				return;
 			}
 
 			L1DwarfInventory.present(account, itemid, enchant, count);
-			pc.sendPackets(new S_SystemMessage(temp.getNameId() + "¸¦" + count
-					+ "°³¼±¹° Çß½À´Ï´Ù. ", true));
+			pc.sendPackets(new S_SystemMessage(temp.getNameId() + "ë¥¼" + count
+					+ "ê°œì„ ë¬¼ í–ˆìŠµë‹ˆë‹¤. ", true));
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
 			pc
 					. sendPackets(new S_SystemMessage(
-							".¼±¹° °èÁ¤¸í ¾ÆÀÌÅÛID ÀÎÃ¦Æ®¼ö ¾ÆÀÌÅÛ¼ö·Î ÀÔ·ÂÇØ ÁÖ¼¼¿ä. (°èÁ¤¸í=* À¸·Î ¸ğµÎ)"));
+							".ì„ ë¬¼ ê³„ì •ëª… ì•„ì´í…œID ì¸ì±ˆíŠ¸ìˆ˜ ì•„ì´í…œìˆ˜ë¡œ ì…ë ¥í•´ ì£¼ì„¸ìš”. (ê³„ì •ëª…=* ìœ¼ë¡œ ëª¨ë‘)"));
 		}
 	}
 }

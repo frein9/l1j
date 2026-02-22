@@ -35,19 +35,19 @@ public class S_TradeAddItem extends ServerBasePacket {
 
 	public S_TradeAddItem(L1ItemInstance item, int count, int type) {
 		writeC(Opcodes.S_OPCODE_TRADEADDITEM);
-		writeC(type); // 0:Æ®·¹ÀÌµå À©µµ¿ì »ó´Ü 1:Æ®·¹ÀÌµå À©µµ¿ì ÇÏ´Ü
+		writeC(type); // 0:íŠ¸ë ˆì´ë“œ ìœˆë„ìš° ìƒë‹¨ 1:íŠ¸ë ˆì´ë“œ ìœˆë„ìš° í•˜ë‹¨
 		writeH(item.getItem().getGfxId());
 		writeS(item.getNumberedViewName(count));
 
-		// 0:Ãàº¹ 1:Åë»ó 2:ÀúÁÖ 3:¹Ì°¨Á¤
-		if (!item.isIdentified()) { // ¹Ì°¨Á¤
+		// 0:ì¶•ë³µ 1:í†µìƒ 2:ì €ì£¼ 3:ë¯¸ê°ì •
+		if (!item.isIdentified()) { // ë¯¸ê°ì •
 			writeC(3);
-		} else { // °¨Á¤ÀÌ ³¡³­ »óÅÂ
-			if (item.getItem().getBless() == 0) { // Ãàº¹
+		} else { // ê°ì •ì´ ëë‚œ ìƒíƒœ
+			if (item.getItem().getBless() == 0) { // ì¶•ë³µ
 				writeC(0);
-			} else if (item.getItem().getBless() == 1) { // Åë»ó
+			} else if (item.getItem().getBless() == 1) { // í†µìƒ
 				writeC(1);
-			} else if (item.getItem().getBless() == 2) { // ÀúÁÖ
+			} else if (item.getItem().getBless() == 2) { // ì €ì£¼
 				writeC(2);
 			}
 		}

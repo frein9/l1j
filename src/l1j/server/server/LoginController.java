@@ -85,9 +85,9 @@ public class LoginController {
 	public synchronized void login(ClientThread client, Account account)
 			throws GameServerFullException, AccountAlreadyLoginException {
 		if (!account.isValid()) {
-			// ÆĞ½º¿öµå ÀÎÁõÀÌµÇ¾î ÀÖÁö ¾ÊÀº, È¤Àº ÀÎÁõ¿¡ ½ÇÆĞÇÑ ¾îÄ«¿îÆ®°¡ ÁöÁ¤µÇ¾ú´Ù.
-			// ÀÌ ÄÚµå´Â, ¹ö±× °ËÃâÀ» À§ÇØ ¸¶¼Å Á¸ÀçÇÑ´Ù.
-			throw new IllegalArgumentException("ÀÎÁõµÇ¾î ÀÖÁö ¾ÊÀº ¾îÄ«¿îÆ®ÀÔ´Ï´Ù");
+			// íŒ¨ìŠ¤ì›Œë“œ ì¸ì¦ì´ë˜ì–´ ìˆì§€ ì•Šì€, í˜¹ì€ ì¸ì¦ì— ì‹¤íŒ¨í•œ ì–´ì¹´ìš´íŠ¸ê°€ ì§€ì •ë˜ì—ˆë‹¤.
+			// ì´ ì½”ë“œëŠ”, ë²„ê·¸ ê²€ì¶œì„ ìœ„í•´ ë§ˆì…” ì¡´ì¬í•œë‹¤.
+			throw new IllegalArgumentException("ì¸ì¦ë˜ì–´ ìˆì§€ ì•Šì€ ì–´ì¹´ìš´íŠ¸ì…ë‹ˆë‹¤");
 		}
 		if ((getMaxAllowedOnlinePlayers() <= getOnlinePlayerCount())
 				&& !account.isGameMaster()) {
@@ -105,12 +105,12 @@ public class LoginController {
 		if (client.getAccountName() == null) {
 			return false;
 		}
-		//** 2ÄÉ¸¯ ¹ö±× ¹æÁö **//  
+		//** 2ì¼€ë¦­ ë²„ê·¸ ë°©ì§€ **//  
 		if(_accounts.containsKey(client.getAccountName())){
 	         kickClient(_accounts.remove(client.getAccountName()));
 	         return false;
 	    }
-		//** 2ÄÉ¸¯ ¹ö±× ¹æÁö **//  
+		//** 2ì¼€ë¦­ ë²„ê·¸ ë°©ì§€ **//  
 		return _accounts.remove(client.getAccountName()) != null;
 	}
 }

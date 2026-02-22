@@ -40,7 +40,7 @@ public class S_ChangeShape extends ServerBasePacket {
 		writeC(Opcodes.S_OPCODE_POLY);
 		writeD(objId);
 		writeH(polyId);
-		// ΏΦ 29ΐΞ°΅ ΊÒΈν
+		// μ™ 29μΈκ°€ λ¶λª…
 		writeH(weaponTakeoff ?  0 : 29);
 	}
 

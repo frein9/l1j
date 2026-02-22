@@ -61,10 +61,10 @@ public class L1PetRaceEnd {
 public L1PetRaceEnd() {
 	}
 
-	class PetThread2 implements Runnable { //°æ±â³¡
+	class PetThread2 implements Runnable { //ê²½ê¸°ë
 
 		/**
-		 * thread ÇÁ·Î½ÃÀú  °æ±â³¡
+		 * thread í”„ë¡œì‹œì €  ê²½ê¸°ë
 		 */
 		@Override
 		public void run() {
@@ -77,7 +77,7 @@ public L1PetRaceEnd() {
 				Thread.sleep(15000);
 				GameEnd();
 
-				for (L1PcInstance pc : L1World.getInstance().getAllPlayers()){ //°ÔÀÓÁ¾·á À¯Àú¸¦ ¹ÛÀ¸·Î ³½´Ù
+				for (L1PcInstance pc : L1World.getInstance().getAllPlayers()){ //ê²Œì„ì¢…ë£Œ ìœ ì €ë¥¼ ë°–ìœ¼ë¡œ ë‚¸ë‹¤
 					if(pc.getMapId() == 5143) {
 						Random random = new Random();
 						int rndx = random.nextInt(4);
@@ -86,7 +86,7 @@ public L1PetRaceEnd() {
 						int locy = 32774 + rndy;
 						short mapid = 4;
 						L1Teleport.teleport(pc, locx, locy, mapid, 5, true);
-						L1PolyMorph.undoPoly(pc); // º¯½Å Ç®±â
+						L1PolyMorph.undoPoly(pc); // ë³€ì‹  í’€ê¸°
 					}
 				}
 				
@@ -106,7 +106,7 @@ public L1PetRaceEnd() {
 	public void GameOver(){
 		L1PetRace pe = L1World.getInstance().getPetRace();
 
-		for (L1PcInstance pc : pe.getMembersArray()){ //°ÔÀÓÁ¾·á À¯Àú¸¦ ¹ÛÀ¸·Î ³½´Ù
+		for (L1PcInstance pc : pe.getMembersArray()){ //ê²Œì„ì¢…ë£Œ ìœ ì €ë¥¼ ë°–ìœ¼ë¡œ ë‚¸ë‹¤
 			pc.sendPackets(new S_GameOver(pc));
 		}
 	}
@@ -114,13 +114,13 @@ public L1PetRaceEnd() {
 	public void GameEnd(){
 		L1PetRace pe2 = L1World.getInstance().getPetRace();
 
-		for (L1PcInstance pc : pe2.getMembersArray()){ //°ÔÀÓÁ¾·á À¯Àú¸¦ ¹ÛÀ¸·Î ³½´Ù
+		for (L1PcInstance pc : pe2.getMembersArray()){ //ê²Œì„ì¢…ë£Œ ìœ ì €ë¥¼ ë°–ìœ¼ë¡œ ë‚¸ë‹¤
 			pc.sendPackets(new S_GameEnd(pc));
 		}
 	}
 
 	public void start2(int petId) {
-		if (petId == 1) // Æê·¹ÀÌ½Ì ³¡
+		if (petId == 1) // í«ë ˆì´ì‹± ë
 		{
 			_locX = 32767;
 			_locY = 32848;

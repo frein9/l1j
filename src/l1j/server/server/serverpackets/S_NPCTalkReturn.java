@@ -68,8 +68,8 @@ public class S_NPCTalkReturn extends ServerBasePacket {
 		writeD(objid);
 		writeS(htmlid);
 		if (data != null && 1 <= data.length) {
-			writeH(0x01); // ºÒ¸í ¹ÙÀÌÆ® ¾Æ´Â »ç¶÷ ÀÖÀ¸¸é(ÀÚ) ¼öÁ¤ ¹Ù¶ø´Ï´Ù
-			writeH(data.length); // ÀÎ¼öÀÇ ¼ö
+			writeH(0x01); // ë¶ˆëª… ë°”ì´íŠ¸ ì•„ëŠ” ì‚¬ëžŒ ìžˆìœ¼ë©´(ìž) ìˆ˜ì • ë°”ëžë‹ˆë‹¤
+			writeH(data.length); // ì¸ìˆ˜ì˜ ìˆ˜
 			for (String datum : data) {
 				writeS(datum);
 			}

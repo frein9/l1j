@@ -60,7 +60,7 @@ public class S_FollowerPack extends ServerBasePacket {
 		writeS(follower.getNameId());
 		writeS(follower.getTitle());
 		int status = 0;
-		if (follower.getPoison() != null) { // µ¶»óÅÂ
+		if (follower.getPoison() != null) { // ë…ìƒíƒœ
 			if (follower.getPoison().getEffectId() == 1) {
 				status |= STATUS_POISON;
 			}

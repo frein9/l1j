@@ -34,18 +34,18 @@ public final class Config {
 	
 	private static final Logger _log = Logger.getLogger(Config.class.getName());
    
-	 public static boolean ÀÏ¹İ = false;//¸Å´ÏÀú ¶§¹®¿¡ Ãß°¡ºÎºĞ
-     public static boolean ±Ó¼Ó¸» = false;
-     public static boolean ±Û·Î¹ú = false;
-     public static boolean Ç÷¸Í = false;
-     public static boolean ÆÄÆ¼ = false;
-     public static boolean Àå»ç = false;//¿©±â±îÁö.
-     public static boolean ¿ÜÄ§ = false;
-     public static boolean Ã¤ÆÃÆÄÆ¼ = false; // Ã¤ÆÃÆÄÆ¼ ¼­¹ö¸Å´ÏÀú Ãß°¡
+	 public static boolean ì¼ë°˜ = false;//ë§¤ë‹ˆì € ë•Œë¬¸ì— ì¶”ê°€ë¶€ë¶„
+     public static boolean ê·“ì†ë§ = false;
+     public static boolean ê¸€ë¡œë²Œ = false;
+     public static boolean í˜ˆë§¹ = false;
+     public static boolean íŒŒí‹° = false;
+     public static boolean ì¥ì‚¬ = false;//ì—¬ê¸°ê¹Œì§€.
+     public static boolean ì™¸ì¹¨ = false;
+     public static boolean ì±„íŒ…íŒŒí‹° = false; // ì±„íŒ…íŒŒí‹° ì„œë²„ë§¤ë‹ˆì € ì¶”ê°€
      
-     /** ¸ÅÅ©·Î **/
+     /** ë§¤í¬ë¡œ **/
      
-     //Ä«½Ã
+     //ì¹´ì‹œ
      public static int systime;
      public static String sys1;
      public static String sys2;
@@ -55,7 +55,7 @@ public final class Config {
      public static String sys6;
      public static String sys7;
      
-     /** ¸ÅÅ©·Î ³¡ **/
+     /** ë§¤í¬ë¡œ ë **/
 
 
 
@@ -158,14 +158,14 @@ public final class Config {
 
     public static boolean DETECT_DB_RESOURCE_LEAKS;
 	
-	public static int ACCOUNT_LIMIT; // IP´ç °èÁ¤ »ı¼º °³¼ö ¿ÜºÎÈ­
+	public static int ACCOUNT_LIMIT; // IPë‹¹ ê³„ì • ìƒì„± ê°œìˆ˜ ì™¸ë¶€í™”
 
 	/** Rate control */
 	public static double RATE_XP;
 
-	public static double RATE_PET_XP; // ########## A137 Æê °æÇèÄ¡ ¹èÀ² ¼³Á¤ ¿ÜºÎÈ­ [³Ú] 
+	public static double RATE_PET_XP; // ########## A137 í« ê²½í—˜ì¹˜ ë°°ìœ¨ ì„¤ì • ì™¸ë¶€í™” [ë„¬] 
 	
-	public static double RATE_CCLAN_XP;  /// ¼ºÇ÷°æÇèÄ¡ ¿ÜºÎÈ­
+	public static double RATE_CCLAN_XP;  /// ì„±í˜ˆê²½í—˜ì¹˜ ì™¸ë¶€í™”
 
 	public static double RATE_LA;
 
@@ -179,10 +179,10 @@ public final class Config {
 
 	public static int ENCHANT_CHANCE_ARMOR;
 	
-	public static int MAX_WEAPON_ENCHANT;  // ¹«±â ÀÎÃ¦ ¿ÜºÎÈ­
+	public static int MAX_WEAPON_ENCHANT;  // ë¬´ê¸° ì¸ì±ˆ ì™¸ë¶€í™”
 	
-	public static int MAX_ARMOR_ENCHANT;   //¹æ¾î±¸ ÀÎÃ¦ ¿ÜºÎÈ­
-	//Àå½Å±¸¾÷±×·¹ÀÌµå ByÃß¾ï
+	public static int MAX_ARMOR_ENCHANT;   //ë°©ì–´êµ¬ ì¸ì±ˆ ì™¸ë¶€í™”
+	//ì¥ì‹ êµ¬ì—…ê·¸ë ˆì´ë“œ Byì¶”ì–µ
 	public static int UPACSE_CHANCE; 
 
 	public static double RATE_WEIGHT_LIMIT;
@@ -209,17 +209,17 @@ public final class Config {
 
     public static int CREATE_CHANCE_HISTORY_BOOK;
 
-    public static int RATE_PRIMIUM_TIME; // ÇÁ¸®¹Ì¾ö »óÀÎ
+    public static int RATE_PRIMIUM_TIME; // í”„ë¦¬ë¯¸ì—„ ìƒì¸
 
-	public static int RATE_PRIMIUM_NUMBER; // ÇÁ¸®¹Ì¾ö »óÀÎ 
+	public static int RATE_PRIMIUM_NUMBER; // í”„ë¦¬ë¯¸ì—„ ìƒì¸ 
 	
-	public static int RATE_AIN_TIME; // ¾ÆÀÎÇÏ»çµå Ãàº¹ ½Ã°£
+	public static int RATE_AIN_TIME; // ì•„ì¸í•˜ì‚¬ë“œ ì¶•ë³µ ì‹œê°„
 
     public static int RATE_AIN_OUTTIME;
 
-	public static int RATE_BUGRACE_TIME; //¹ö°æ
+	public static int RATE_BUGRACE_TIME; //ë²„ê²½
 	
-	public static int RATE_EITEM;  //¸ğµç ¸÷ ¾ÆÀÌÅÛ µå¶ø
+	public static int RATE_EITEM;  //ëª¨ë“  ëª¹ ì•„ì´í…œ ë“œë
 
 	/** AltSettings control */
 
@@ -265,7 +265,7 @@ public final class Config {
 
     public static boolean ALT_TALKINGSCROLLQUEST;
 	
-	public static int WHOIS_CONTER; // #### »½Æ¢±â ¿ÜºÎÈ­(¾Æ¿ì¶ó) ####
+	public static int WHOIS_CONTER; // #### ë»¥íŠ€ê¸° ì™¸ë¶€í™”(ì•„ìš°ë¼) ####
 
 	public static boolean ALT_WHO_COMMAND;
 
@@ -551,18 +551,18 @@ public final class Config {
 
 	public static final String CHAR_SETTINGS_CONFIG_FILE = "./config/charsettings.properties";
 
-	/** ±× ¿ÜÀÇ ¼³Á¤ */
+	/** ê·¸ ì™¸ì˜ ì„¤ì • */
 
-	// NPC·ÎºÎÅÍ µéÀÌ¸¶½Ç ¼ö ÀÖ´Â MPÇÑ°è
+	// NPCë¡œë¶€í„° ë“¤ì´ë§ˆì‹¤ ìˆ˜ ìˆëŠ” MPí•œê³„
 	public static final int MANA_DRAIN_LIMIT_PER_NPC = 40;
 
-	// 1È¸ÀÇ °ø°İÀ¸·Î µéÀÌ¸¶½Ç ¼ö ÀÖ´Â MPÇÑ°è(SOM, °­Ã¶ SOM)
+	// 1íšŒì˜ ê³µê²©ìœ¼ë¡œ ë“¤ì´ë§ˆì‹¤ ìˆ˜ ìˆëŠ” MPí•œê³„(SOM, ê°•ì²  SOM)
 	public static final int MANA_DRAIN_LIMIT_PER_SOM_ATTACK = 9;
 	
-	// NPC·ÎºÎÅÍ µéÀÌ¸¶½Ç ¼ö ÀÖ´Â HPÇÑ°è // (ÆÄ¸êÀÇ ´ë°Ë)
+	// NPCë¡œë¶€í„° ë“¤ì´ë§ˆì‹¤ ìˆ˜ ìˆëŠ” HPí•œê³„ // (íŒŒë©¸ì˜ ëŒ€ê²€)
 	public static final int HP_DRAIN_LIMIT_PER_NPC = 30;
 
-	// 1È¸ÀÇ °ø°İÀ¸·Î µéÀÌ¸¶½Ç ¼ö ÀÖ´Â HPÇÑ°è (ÆÄ¸êÀÇ ´ë°Ë)
+	// 1íšŒì˜ ê³µê²©ìœ¼ë¡œ ë“¤ì´ë§ˆì‹¤ ìˆ˜ ìˆëŠ” HPí•œê³„ (íŒŒë©¸ì˜ ëŒ€ê²€)
 	public static final int HP_DRAIN_LIMIT_PER_HP_ATTACK = 15;
 
 	public static void load() {
@@ -634,7 +634,7 @@ public final class Config {
 			is.close();
 			
 			systime = Integer.parseInt(rateSettings.getProperty("systime", "6000"));
-				   sys1 =rateSettings.getProperty("sys1","°ÔÀÓ¸¶½ºÅÍ³ª ´ç»ç ¿î¿µÁøÀ» »çÄªÇÏ¿© °ÔÀÓ ³»¿¡¼­ ºñ¹Ğ¹øÈ£/°èÁ¤ Á¤º¸ µîÀ» ¿ä±¸ÇÏ´Â ÇÃ·¹ÀÌ¾î´Â E-Mail·Î Á¦º¸ÇØ ÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.");
+				   sys1 =rateSettings.getProperty("sys1","ê²Œì„ë§ˆìŠ¤í„°ë‚˜ ë‹¹ì‚¬ ìš´ì˜ì§„ì„ ì‚¬ì¹­í•˜ì—¬ ê²Œì„ ë‚´ì—ì„œ ë¹„ë°€ë²ˆí˜¸/ê³„ì • ì •ë³´ ë“±ì„ ìš”êµ¬í•˜ëŠ” í”Œë ˆì´ì–´ëŠ” E-Mailë¡œ ì œë³´í•´ ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤.");
 				   sys2 =rateSettings.getProperty("sys2",";;");
 				   sys3 =rateSettings.getProperty("sys3",";;");
 				   sys4 =rateSettings.getProperty("sys4",";;");
@@ -653,7 +653,7 @@ public final class Config {
 			ENCHANT_CHANCE_ARMOR = Integer.parseInt(rateSettings.getProperty("EnchantChanceArmor", "52"));
 			MAX_WEAPON_ENCHANT = Integer.parseInt(rateSettings.getProperty("Maxweaponenchant", "13"));
 			MAX_ARMOR_ENCHANT = Integer.parseInt(rateSettings.getProperty("Maxarmorenchant", "11"));
-			//Àå½Å±¸¾÷±×·¹ÀÌµå ByÃß¾ï
+			//ì¥ì‹ êµ¬ì—…ê·¸ë ˆì´ë“œ Byì¶”ì–µ
 			UPACSE_CHANCE = Integer.parseInt(rateSettings.getProperty("UpAcseChance", "1"));
 			RATE_BUGRACE_TIME = Integer.parseInt(rateSettings.getProperty("RateBugRaceTime", "1")); 
 			RATE_WEIGHT_LIMIT = Double.parseDouble(rateSettings.getProperty("RateWeightLimit", "1"));
@@ -702,11 +702,11 @@ public final class Config {
 			ALT_ITEM_DELETION_TIME = Integer.parseInt(altSettings.getProperty("ItemDeletionTime", "10"));
 			ALT_ITEM_DELETION_RANGE = Integer.parseInt(altSettings.getProperty("ItemDeletionRange", "5"));
 			ALT_GMSHOP = Boolean.parseBoolean(altSettings.getProperty("GMshop", "false"));
-			ALT_GMSHOP_MIN_ID = Integer.parseInt(altSettings.getProperty("GMshopMinID", "0xffffffff")); // Ãëµæ ½ÇÆĞ½Ã´Â ¹«È¿
-			ALT_GMSHOP_MAX_ID = Integer.parseInt(altSettings.getProperty("GMshopMaxID", "0xffffffff")); // Ãëµæ ½ÇÆĞ½Ã´Â ¹«È¿
+			ALT_GMSHOP_MIN_ID = Integer.parseInt(altSettings.getProperty("GMshopMinID", "0xffffffff")); // ì·¨ë“ ì‹¤íŒ¨ì‹œëŠ” ë¬´íš¨
+			ALT_GMSHOP_MAX_ID = Integer.parseInt(altSettings.getProperty("GMshopMaxID", "0xffffffff")); // ì·¨ë“ ì‹¤íŒ¨ì‹œëŠ” ë¬´íš¨
 			ALT_HALLOWEENIVENT = Boolean.parseBoolean(altSettings.getProperty("HalloweenIvent", "true"));
             ALT_TALKINGSCROLLQUEST = Boolean.parseBoolean(altSettings.getProperty("TalkingScrollQuest", "false"));
-			WHOIS_CONTER = Integer.parseInt(altSettings.getProperty("WhoisConter", "0")); // #### »½Æ¢±â ¿ÜºÎÈ­(¾Æ¿ì¶ó) ####
+			WHOIS_CONTER = Integer.parseInt(altSettings.getProperty("WhoisConter", "0")); // #### ë»¥íŠ€ê¸° ì™¸ë¶€í™”(ì•„ìš°ë¼) ####
 			ALT_WHO_COMMAND = Boolean.parseBoolean(altSettings.getProperty("WhoCommand", "false"));
 			ALT_REVIVAL_POTION = Boolean.parseBoolean(altSettings.getProperty("RevivalPotion", "false"));
 			String strWar;
@@ -885,11 +885,11 @@ public final class Config {
 
 	private static void validate() {
 		if (! IntRange.includes(Config.ALT_ITEM_DELETION_RANGE, 0, 5)) {
-			throw new IllegalStateException("ItemDeletionRangeÀÇ °ªÀÌ ¼³Á¤ °¡´É ¹üÀ§¿ÜÀÔ´Ï´Ù. ");
+			throw new IllegalStateException("ItemDeletionRangeì˜ ê°’ì´ ì„¤ì • ê°€ëŠ¥ ë²”ìœ„ì™¸ì…ë‹ˆë‹¤. ");
 		}
 
 		if (! IntRange.includes(Config.ALT_ITEM_DELETION_TIME, 1, 35791)) {
-			throw new IllegalStateException("ItemDeletionTimeÀÇ °ªÀÌ ¼³Á¤ °¡´É ¹üÀ§¿ÜÀÔ´Ï´Ù. ");
+			throw new IllegalStateException("ItemDeletionTimeì˜ ê°’ì´ ì„¤ì • ê°€ëŠ¥ ë²”ìœ„ì™¸ì…ë‹ˆë‹¤. ");
 		}
 	}
 	
@@ -940,7 +940,7 @@ public final class Config {
 			LEVEL_DOWN_RANGE = Integer.parseInt(pValue);   
         } else if (pName.equalsIgnoreCase("SendPacketBeforeTeleport")) {
 			SEND_PACKET_BEFORE_TELEPORT = Boolean.parseBoolean(pValue);
-		} else if (pName.equalsIgnoreCase("AccountLimit")) { // IP´ç °èÁ¤ »ı¼º °³¼ö ¿ÜºÎÈ­
+		} else if (pName.equalsIgnoreCase("AccountLimit")) { // IPë‹¹ ê³„ì • ìƒì„± ê°œìˆ˜ ì™¸ë¶€í™”
 			ACCOUNT_LIMIT = Integer.parseInt(pValue);  
 		} else if (pName.equalsIgnoreCase("systime")) {
 			   systime =Integer.parseInt(pValue);
@@ -969,9 +969,9 @@ public final class Config {
 		// rates.properties
 		else if (pName.equalsIgnoreCase("RateXp")) {
 			RATE_XP = Double.parseDouble(pValue);
-		} else if (pName.equalsIgnoreCase("RatePetXp")) { // ########## A137 Æê °æÇèÄ¡ ¹èÀ² ¼³Á¤ ¿ÜºÎÈ­ [³Ú] 
+		} else if (pName.equalsIgnoreCase("RatePetXp")) { // ########## A137 í« ê²½í—˜ì¹˜ ë°°ìœ¨ ì„¤ì • ì™¸ë¶€í™” [ë„¬] 
 			RATE_PET_XP = Double.parseDouble(pValue); // #####
-		} else if (pName.equalsIgnoreCase("RateCclanXp")) {         //¼ºÇ÷ °æÇèÄ¡ ¿ÜºÎÈ­
+		} else if (pName.equalsIgnoreCase("RateCclanXp")) {         //ì„±í˜ˆ ê²½í—˜ì¹˜ ì™¸ë¶€í™”
 			RATE_CCLAN_XP = Double.parseDouble(pValue);
 		} else if (pName.equalsIgnoreCase("RateLawful")) {
 			RATE_LA = Double.parseDouble(pValue);
@@ -985,12 +985,12 @@ public final class Config {
 			ENCHANT_CHANCE_WEAPON = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("EnchantChanceArmor")) {
 			ENCHANT_CHANCE_ARMOR = Integer.parseInt(pValue);
-		// ¹«±â ¹æ¾î±¸ ÃÖ´ëÀÎÃ¦ Á¦ÇÑ ¿ÜºÎÈ­
+		// ë¬´ê¸° ë°©ì–´êµ¬ ìµœëŒ€ì¸ì±ˆ ì œí•œ ì™¸ë¶€í™”
 		} else if (pName.equalsIgnoreCase("Maxweaponenchant")) {
 			MAX_WEAPON_ENCHANT = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("Maxenchant")) {
 			MAX_ARMOR_ENCHANT = Integer.parseInt(pValue);
-		//Àå½Å±¸¾÷±×·¹ÀÌµå ByÃß¾ï
+		//ì¥ì‹ êµ¬ì—…ê·¸ë ˆì´ë“œ Byì¶”ì–µ
 		} else if (pName.equalsIgnoreCase("UpAcseChance")) {
 		    UPACSE_CHANCE = Integer.parseInt(pValue);	    
 		} else if (pName.equalsIgnoreCase("Weightrate")) {

@@ -21,12 +21,12 @@ public class S_GameStart extends ServerBasePacket {
 
 	//0000 : 7e 40 05 3c 0a ac b7 b6                            ~@.<....
 
-// 40 = ½ÃÀÛ, 41 = ½Ã°£, 42 = ¸®½ºÆ®, 43 = ¹ÙÄû¼ö, 44 = ·©Å·, 45 = ¿À¹ö, 45 = ¿£µå
-    /*½ºÅ¸Æ®*/
+// 40 = ì‹œìž‘, 41 = ì‹œê°„, 42 = ë¦¬ìŠ¤íŠ¸, 43 = ë°”í€´ìˆ˜, 44 = ëž­í‚¹, 45 = ì˜¤ë²„, 45 = ì—”ë“œ
+    /*ìŠ¤íƒ€íŠ¸*/
 	private void buildPacket1(L1PcInstance pc) {
 		writeC(Opcodes.S_OPCODE_UNKNOWN2);
 		writeC(0x40);
-        writeC(0x05); // ¼Óµµ
+        writeC(0x05); // ì†ë„
         writeC(0); 
         writeC(0); 
         writeC(0); 

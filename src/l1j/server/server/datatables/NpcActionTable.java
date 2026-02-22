@@ -92,7 +92,7 @@ public class NpcActionTable {
 			_instance = new NpcActionTable();
 			System.out.println("OK! " + timer.get() + "ms");
 		} catch (Exception e) {
-			_log.log(Level.SEVERE, "NpcAction¸¦ ÀĞ¾îµéÀÏ ¼ö ¾ø¾ú½À´Ï´Ù", e);
+			_log.log(Level.SEVERE, "NpcActionë¥¼ ì½ì–´ë“¤ì¼ ìˆ˜ ì—†ì—ˆìŠµë‹ˆë‹¤", e);
 			System.exit(0);
 		}
 	}

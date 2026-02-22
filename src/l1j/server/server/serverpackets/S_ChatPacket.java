@@ -20,7 +20,7 @@ package l1j.server.server.serverpackets;
 
 import java.util.logging.Logger;
 
-import l1j.server.Config;//<-----ÀÓÆ÷Æ® Ãß°¡
+import l1j.server.Config;//<-----ì„í¬íŠ¸ ì¶”ê°€
 import l1j.server.server.model.Instance.L1PcInstance;
 
 // Referenced classes of package l1j.server.server.serverpackets:
@@ -34,7 +34,7 @@ public class S_ChatPacket extends ServerBasePacket {
 
 	public S_ChatPacket(L1PcInstance pc, String chat, int opcode, int type) {
 
-		if (type == 0) { // Åë»ó Ã¤ÆÃ
+		if (type == 0) { // í†µìƒ ì±„íŒ…
 			writeC(opcode);
 			writeC(type);
 			writeD(pc.getId()); 
@@ -44,10 +44,10 @@ public class S_ChatPacket extends ServerBasePacket {
 				writeD(pc.getId());
 			}	*/
 			writeS(pc.getName() + ": " + chat);
-			if(Config.ÀÏ¹İ == true){
-				l1j.server.Leaf.chatlog.append("\r\n[ÀÏ¹İ] " +pc.getName()+": " + chat);
+			if(Config.ì¼ë°˜ == true){
+				l1j.server.Leaf.chatlog.append("\r\n[ì¼ë°˜] " +pc.getName()+": " + chat);
 			} 
-		} else if (type == 2) // Àı±Ô
+		} else if (type == 2) // ì ˆê·œ
 		{
 			writeC(opcode);
 			writeC(type);
@@ -59,48 +59,48 @@ public class S_ChatPacket extends ServerBasePacket {
 			writeS("<" + pc.getName() + "> " + chat);
 			writeH(pc.getX());
 			writeH(pc.getY());
-		} else if (type == 3) { // ÀüÃ¼ Ã¤ÆÃ
+		} else if (type == 3) { // ì „ì²´ ì±„íŒ…
 			writeC(opcode);
 			writeC(type);
 			if (pc.isGm() == true) {
 				writeS("\\fW[******] " + chat);
-				if(Config.±Û·Î¹ú == true){
-					l1j.server.Leaf.chatlog.append("\r\n[¿î¿µÀÚ] " +pc.getName()+": " + chat);
+				if(Config.ê¸€ë¡œë²Œ == true){
+					l1j.server.Leaf.chatlog.append("\r\n[ìš´ì˜ì] " +pc.getName()+": " + chat);
 				} 
 			} else {
 				writeS("[" + pc.getName() + "] " + chat);
 			}
-		} else if (type == 4) // Ç÷¸Í Ã¤ÆÃ
+		} else if (type == 4) // í˜ˆë§¹ ì±„íŒ…
 		{
 			writeC(opcode);
 			writeC(type);
 			writeS("{" + pc.getName() + "} " + chat);
-			if(Config.Ç÷¸Í == true){
-               l1j.server.Leaf.chatlog.append("\r\n[Ç÷¸Í ("+pc.getClanname()+") ] " +pc.getName()+": "+ chat);
+			if(Config.í˜ˆë§¹ == true){
+               l1j.server.Leaf.chatlog.append("\r\n[í˜ˆë§¹ ("+pc.getClanname()+") ] " +pc.getName()+": "+ chat);
             }
-		} else if (type == 9) { // À§½ºÆÄ
+		} else if (type == 9) { // ìœ„ìŠ¤íŒŒ
 			writeC(opcode);
 			writeC(type);
 			writeS("-> (" + pc.getName() + ") " + chat);
-		} else if (type == 11) { // ÆÄÆ¼ Ã¤ÆÃ
+		} else if (type == 11) { // íŒŒí‹° ì±„íŒ…
 			writeC(opcode);
 			writeC(type);
 			writeS("(" + pc.getName() + ") " + chat);	
-	        if(Config.ÆÄÆ¼ == true){
-                  l1j.server.Leaf.chatlog.append("\r\n[ÆÄÆ¼] " +pc.getName()+": " + chat);
+	        if(Config.íŒŒí‹° == true){
+                  l1j.server.Leaf.chatlog.append("\r\n[íŒŒí‹°] " +pc.getName()+": " + chat);
             }
-		} else if (type == 12) { // Æ®·¹ÀÌµå Ã¤ÆÃ
+		} else if (type == 12) { // íŠ¸ë ˆì´ë“œ ì±„íŒ…
 			writeC(opcode);
 			writeC(type);
 			writeS("[" + pc.getName() + "] " + chat);
-			/*if(Config.Àå»ç == true){
-               l1j.server.Leaf.chatlog.append("\r\n[Àå»ç] " +pc.getName()+": " + chat);
+			/*if(Config.ì¥ì‚¬ == true){
+               l1j.server.Leaf.chatlog.append("\r\n[ì¥ì‚¬] " +pc.getName()+": " + chat);
             }*/
-		} else if (type == 13) { // ¿¬ÇÕ Ã¤ÆÃ
+		} else if (type == 13) { // ì—°í•© ì±„íŒ…
 			writeC(opcode);
 			writeC(type);
 			writeS("{{" + pc.getName() + "}} " + chat);
-		} else if (type == 14) { // Ã¤ÆÃ ÆÄÆ¼
+		} else if (type == 14) { // ì±„íŒ… íŒŒí‹°
 			writeC(opcode);
 			writeC(type);
 			//if (pc.isInvisble()) {
@@ -109,10 +109,10 @@ public class S_ChatPacket extends ServerBasePacket {
 				writeD(pc.getId());
 			//}
 			writeS("(" + pc.getName() + ") " + chat);
-			if(Config.Ã¤ÆÃÆÄÆ¼ == true){
-               l1j.server.Leaf.chatlog.append("\r\n[Ã¤ÆÃÆÄÆ¼] " +pc.getName()+": " + chat);
+			if(Config.ì±„íŒ…íŒŒí‹° == true){
+               l1j.server.Leaf.chatlog.append("\r\n[ì±„íŒ…íŒŒí‹°] " +pc.getName()+": " + chat);
            }
-		} else if (type == 16) { // À§½ºÆÄ
+		} else if (type == 16) { // ìœ„ìŠ¤íŒŒ
 			writeC(opcode);
 			writeS(pc.getName());
 			writeS(chat);

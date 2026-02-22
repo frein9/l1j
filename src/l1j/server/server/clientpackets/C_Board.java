@@ -19,7 +19,7 @@
 
 package l1j.server.server.clientpackets;
 
-import java.io.FileNotFoundException; // ·©Å· °Ô½ÃÆÇ
+import java.io.FileNotFoundException; // ë­í‚¹ ê²Œì‹œíŒ
 import java.util.logging.Logger;
 
 import l1j.server.server.ClientThread;
@@ -27,7 +27,7 @@ import l1j.server.server.model.L1Object;
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1AuctionBoardInstance;
 import l1j.server.server.model.Instance.L1BoardInstance;
-import l1j.server.server.model.Instance.L1PcInstance; // ·©Å· °Ô½ÃÆÇ  
+import l1j.server.server.model.Instance.L1PcInstance; // ë­í‚¹ ê²Œì‹œíŒ  
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket, C_Board
@@ -47,7 +47,7 @@ public class C_Board extends ClientBasePacket {
 		int objectId = readD();
 		L1Object obj = L1World.getInstance().findObject(objectId);
 		if (!isBoardInstance(obj)) {
-			return; // ºÎÁ¤ Å¬¶óÀÌ¾ğÆ®°¡ ¾Æ´Ï¸é ÀÖÀ» ¼ö  ¾ø°ÚÁö¸¸¡¤¡¤¡¤
+			return; // ë¶€ì • í´ë¼ì´ì–¸íŠ¸ê°€ ì•„ë‹ˆë©´ ìˆì„ ìˆ˜  ì—†ê² ì§€ë§ŒÂ·Â·Â·
 		}
 		obj.onAction(client.getActiveChar());
 	} */
@@ -60,13 +60,13 @@ public class C_Board extends ClientBasePacket {
 		if (obj instanceof L1BoardInstance) {
 			L1BoardInstance board = (L1BoardInstance) obj;
 			board.onAction(pc);
-			if(board.getNpcTemplate().get_npcId() == 81129){ // ·©Å· °Ô½ÃÆÇ ÄÚµå ÀÔ·Â 
+			if(board.getNpcTemplate().get_npcId() == 81129){ // ë­í‚¹ ê²Œì‹œíŒ ì½”ë“œ ì…ë ¥ 
 				board.onRanking(pc); 
 			}
-			else if(board.getNpcTemplate().get_npcId() == 200042){ // È¯¼ú»ç ¿ë±â»ç ·©Å· °Ô½ÃÆÇ
+			else if(board.getNpcTemplate().get_npcId() == 200042){ // í™˜ìˆ ì‚¬ ìš©ê¸°ì‚¬ ë­í‚¹ ê²Œì‹œíŒ
 				board.onRanking2(pc);
 			}
-			else if(board.getNpcTemplate().get_npcId() == 81130){ // ÀÎÃ¦ ·©Å· °Ô½ÃÆÇ ÄÚµå ÀÔ·Â  
+			else if(board.getNpcTemplate().get_npcId() == 81130){ // ì¸ì±ˆ ë­í‚¹ ê²Œì‹œíŒ ì½”ë“œ ì…ë ¥  
 			    board.onEnchantRanking(pc); 
 			}else if(board.getNpcTemplate().get_npcId()==81241){
 				board.onChoboList(pc);

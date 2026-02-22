@@ -40,7 +40,7 @@ public class L1Summon implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 			StringTokenizer tok = new StringTokenizer(arg);
 			String nameid = tok.nextToken();
 			int npcid = 0;
@@ -50,7 +50,7 @@ public class L1Summon implements L1CommandExecutor {
 				npcid = NpcTable.getInstance().findNpcIdByNameWithoutSpace(
 						nameid);
 				if (npcid == 0) {
-					pc.sendPackets(new S_SystemMessage("ÇØ´ç NPC°¡ ¹ß°ßµÇÁö ¾Ê½À´Ï´Ù."));
+					pc.sendPackets(new S_SystemMessage("í•´ë‹¹ NPCê°€ ë°œê²¬ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 					return;
 				}
 			}
@@ -65,13 +65,13 @@ public class L1Summon implements L1CommandExecutor {
 			}
 			nameid = NpcTable.getInstance().getTemplate(npcid).get_name();
 			pc.sendPackets(new S_SystemMessage(nameid + "(ID:" + npcid + ") ("
-					+ count + ")¸¦ ¼ÒÈ¯Çß½À´Ï´Ù."));
+					+ count + ")ë¥¼ ì†Œí™˜í–ˆìŠµë‹ˆë‹¤."));
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".¼­¸Õ npcid ¶Ç´Â name [¼ö] ¶ó°í ÀÔ·ÂÇØ ÁÖ¼¼¿ä."));
+			pc.sendPackets(new S_SystemMessage(".ì„œë¨¼ npcid ë˜ëŠ” name [ìˆ˜] ë¼ê³  ì…ë ¥í•´ ì£¼ì„¸ìš”."));
 		}
 	}
 }

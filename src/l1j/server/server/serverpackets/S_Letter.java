@@ -57,8 +57,8 @@ public class S_Letter extends ServerBasePacket {
 			while (rs.next()) {
 				writeC(Opcodes.S_OPCODE_MAIL);
 				writeD(item.getId());
-				if (item.get_gfxid() == 465) { // ¿­±â Àü
-					writeH(466); // ¿¬ ÈÄ
+				if (item.get_gfxid() == 465) { // ì—´ê¸° ì „
+					writeH(466); // ì—° í›„
 				} else if (item.get_gfxid() == 606) {
 					writeH(605);
 				} else if (item.get_gfxid() == 616) {
@@ -71,8 +71,8 @@ public class S_Letter extends ServerBasePacket {
 				writeS(rs.getString(4));
 				writeByte(rs.getBytes(7));
 				writeByte(rs.getBytes(8));
-				writeC(rs.getInt(6)); // ÅÙÇÁ·¹
-				writeS(rs.getString(5)); // ÀÏÀÚ
+				writeC(rs.getInt(6)); // í…í”„ë ˆ
+				writeS(rs.getString(5)); // ì¼ì
 			}
 		} catch (SQLException e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);

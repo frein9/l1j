@@ -51,14 +51,14 @@ public class L1PartyRecall implements L1CommandExecutor {
 				L1PcInstance[] players = party.getMembers();
 				for (L1PcInstance pc2 : players) {
 					try {
-						if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+						if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 
 						L1Teleport.teleport(pc2, x, y, map, 5, true);
 						pc2
 								. sendPackets(new S_SystemMessage(
-										"°ÔÀÓ ¸¶½ºÅÍ¿¡ ¼ÒÈ¯µÇ¾ú½À´Ï´Ù. "));
+										"ê²Œì„ ë§ˆìŠ¤í„°ì— ì†Œí™˜ë˜ì—ˆìŠµë‹ˆë‹¤. "));
 						} else {
-							pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+							pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 							return;
 						}
 					} catch (Exception e) {
@@ -66,10 +66,10 @@ public class L1PartyRecall implements L1CommandExecutor {
 					}
 				}
 			} else {
-				pc.sendPackets(new S_SystemMessage("ÆÄÆ¼ ¸â¹ö°¡ ¾Æ´Õ´Ï´Ù. "));
+				pc.sendPackets(new S_SystemMessage("íŒŒí‹° ë©¤ë²„ê°€ ì•„ë‹™ë‹ˆë‹¤. "));
 			}
 		} else {
-			pc.sendPackets(new S_SystemMessage("±×·¯ÇÑ Ä³¸¯ÅÍ´Â ¾ø½À´Ï´Ù. "));
+			pc.sendPackets(new S_SystemMessage("ê·¸ëŸ¬í•œ ìºë¦­í„°ëŠ” ì—†ìŠµë‹ˆë‹¤. "));
 		}
 	}
 }

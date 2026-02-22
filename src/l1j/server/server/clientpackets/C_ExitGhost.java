@@ -32,7 +32,7 @@ public class C_ExitGhost extends ClientBasePacket {
 
 	private static final String C_EXIT_GHOST = "[C] C_ExitGhost";
 
-	// ¿Ãµø
+	// Ïù¥Îèô
 	public C_ExitGhost(byte decrypt[], ClientThread client)
 			throws Exception {
 		super(decrypt);

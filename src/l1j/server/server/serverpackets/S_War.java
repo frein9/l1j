@@ -37,13 +37,13 @@ public class S_War extends ServerBasePacket {
 	}
 
 	private void buildPacket(int type, String clan_name1, String clan_name2) {
-		// 1 : _Ç÷¸ÍÀÌ_Ç÷¸Í¿¡ ¼±ÀüÆ÷°íÇß½À´Ï´Ù.
-		// 2 : _Ç÷¸ÍÀÌ_Ç÷¸Í¿¡ Ç×º¹Çß½À´Ï´Ù.
-		// 3 : _Ç÷¸Í°ú_Ç÷¸Í°úÀÇ ÀüÀïÀÌ Á¾°áÇß½À´Ï´Ù.
-		// 4 : _Ç÷¸ÍÀÌ_Ç÷¸Í°úÀÇ ÀüÀïÀ¸·Î ½Â¸®Çß½À´Ï´Ù.
-		// 6 : _Ç÷¸Í°ú_Ç÷¸ÍÀÌ µ¿¸ÍÀ» ¸Î¾ú½À´Ï´Ù.
-		// 7 : _Ç÷¸Í°ú_Ç÷¸Í°úÀÇ µ¿¸Í °ü°è°¡ ÇØÁ¦µÇ¾ú½À´Ï´Ù.
-		// 8 : ´ç½ÅÀÇ Ç÷¸ÍÀÌ ÇöÀç_Ç÷¸Í°ú ±³ÀüÁßÀÔ´Ï´Ù.
+		// 1 : _í˜ˆë§¹ì´_í˜ˆë§¹ì— ì„ ì „í¬ê³ í–ˆìŠµë‹ˆë‹¤.
+		// 2 : _í˜ˆë§¹ì´_í˜ˆë§¹ì— í•­ë³µí–ˆìŠµë‹ˆë‹¤.
+		// 3 : _í˜ˆë§¹ê³¼_í˜ˆë§¹ê³¼ì˜ ì „ìŸì´ ì¢…ê²°í–ˆìŠµë‹ˆë‹¤.
+		// 4 : _í˜ˆë§¹ì´_í˜ˆë§¹ê³¼ì˜ ì „ìŸìœ¼ë¡œ ìŠ¹ë¦¬í–ˆìŠµë‹ˆë‹¤.
+		// 6 : _í˜ˆë§¹ê³¼_í˜ˆë§¹ì´ ë™ë§¹ì„ ë§ºì—ˆìŠµë‹ˆë‹¤.
+		// 7 : _í˜ˆë§¹ê³¼_í˜ˆë§¹ê³¼ì˜ ë™ë§¹ ê´€ê³„ê°€ í•´ì œë˜ì—ˆìŠµë‹ˆë‹¤.
+		// 8 : ë‹¹ì‹ ì˜ í˜ˆë§¹ì´ í˜„ìž¬_í˜ˆë§¹ê³¼ êµì „ì¤‘ìž…ë‹ˆë‹¤.
 
 		writeC(Opcodes.S_OPCODE_WAR);
 		writeC(type);

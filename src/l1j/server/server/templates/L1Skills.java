@@ -142,7 +142,7 @@ public class L1Skills {
 		_itmeConsumeCount = i;
 	}
 
-	private int _reuseDelay; // ´ÜÀ§£º¹Ğ¸® ¼¼ÄÁµå
+	private int _reuseDelay; // ë‹¨ìœ„ï¼šë°€ë¦¬ ì„¸ì»¨ë“œ
 
 	public int getReuseDelay() {
 		return _reuseDelay;
@@ -152,7 +152,7 @@ public class L1Skills {
 		_reuseDelay = i;
 	}
 
-	private int _buffDuration; // ´ÜÀ§£ºÃÊ
+	private int _buffDuration; // ë‹¨ìœ„ï¼šì´ˆ
 
 	public int getBuffDuration() {
 		return _buffDuration;
@@ -172,7 +172,7 @@ public class L1Skills {
 		_target = s;
 	}
 
-	private int _targetTo; // ´ë»ó 0:ÀÚ½Å 1:PC 2:NPC 4:Ç÷¸Í 8:ÆÄÆ¼ 16:Æê 32:Àå¼Ò
+	private int _targetTo; // ëŒ€ìƒ 0:ìì‹  1:PC 2:NPC 4:í˜ˆë§¹ 8:íŒŒí‹° 16:í« 32:ì¥ì†Œ
 
 	public int getTargetTo() {
 		return _targetTo;
@@ -235,8 +235,8 @@ public class L1Skills {
 	private int _attr;
 
 	/**
-	 * ½ºÅ³ÀÇ ¼Ó¼ºÀ» µ¹·ÁÁØ´Ù.<br>
-	 * 0.¹«¼Ó¼º ¸¶¹ı, 1.¶¥¸¶¹ı, 2.ºÒ¸¶¹ı, 4.¼öÇØ¹ı, 8.¹Ù¶÷ ¸¶¹ı, 16.±¤¸¶¹ı
+	 * ìŠ¤í‚¬ì˜ ì†ì„±ì„ ëŒë ¤ì¤€ë‹¤.<br>
+	 * 0.ë¬´ì†ì„± ë§ˆë²•, 1.ë•…ë§ˆë²•, 2.ë¶ˆë§ˆë²•, 4.ìˆ˜í•´ë²•, 8.ë°”ëŒ ë§ˆë²•, 16.ê´‘ë§ˆë²•
 	 */
 	public int getAttr() {
 		return _attr;
@@ -246,11 +246,11 @@ public class L1Skills {
 		_attr = i;
 	}
 
-	private int _type; // Å¸ÀÔ
+	private int _type; // íƒ€ì…
 
 	/**
-	 * ½ºÅ³ÀÇ ÀÛ¿ëÀÇ Á¾·ù¸¦ µ¹·ÁÁØ´Ù.<br>
-	 * 1.È®·ü°è, 2.¿£Ã®Æ®, 4.ÀúÁÖÇØ, 8.Á×À½, 16.Ä¡·á, 32.ºÎÈ°, 64.°ø°İ, 128.±× ¿Ü Æ¯¼ö
+	 * ìŠ¤í‚¬ì˜ ì‘ìš©ì˜ ì¢…ë¥˜ë¥¼ ëŒë ¤ì¤€ë‹¤.<br>
+	 * 1.í™•ë¥ ê³„, 2.ì—”ì±¤íŠ¸, 4.ì €ì£¼í•´, 8.ì£½ìŒ, 16.ì¹˜ë£Œ, 32.ë¶€í™œ, 64.ê³µê²©, 128.ê·¸ ì™¸ íŠ¹ìˆ˜
 	 */
 	public int getType() {
 		return _type;

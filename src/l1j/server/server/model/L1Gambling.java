@@ -46,13 +46,13 @@ public class L1Gambling {
 			    L1NpcInstance Npc = (L1NpcInstance) l1object;
 			    if (Npc.getNpcTemplate().get_npcId() == 400064){
 			    	L1NpcInstance dealer = Npc;
-			    	String chat = player.getName()+"´Ô "+ bettingmoney + "¿ø ¹èÆÃÇÏ¼Ì½À´Ï´Ù.";
+			    	String chat = player.getName()+"ë‹˜ "+ bettingmoney + "ì› ë°°íŒ…í•˜ì…¨ìŠµë‹ˆë‹¤.";
 					player.sendPackets(new S_NpcChatPacket(dealer, chat, 0));
 					player.broadcastPacket(new S_NpcChatPacket(dealer, chat, 0));
 					Thread.sleep(1000);
 					Thread.sleep(1000);
 					Thread.sleep(1000);
-			    	String chat2 = "È¦ or Â¦ 2¹è//// 1 ~ 6 ¼ıÀÚ 3¹è///È¦Â¦or¼ıÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä";
+			    	String chat2 = "í™€ or ì§ 2ë°°//// 1 ~ 6 ìˆ«ì 3ë°°///í™€ì§orìˆ«ìë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”";
 					player.sendPackets(new S_NpcChatPacket(dealer, chat2, 0));
 					player.broadcastPacket(new S_NpcChatPacket(dealer, chat2, 0));
 					player.setGamblingMoney(bettingmoney);
@@ -84,14 +84,14 @@ public class L1Gambling {
 			    L1NpcInstance Npc = (L1NpcInstance) l1object;
 			    if (Npc.getNpcTemplate().get_npcId() == 400064){
 			    	L1NpcInstance dealer = Npc;
-			    	String chat9 = pc.getName()+"´Ô ¸ÂÃß¼Ë½À´Ï´Ù. "+ pc.getGamblingMoney()*2 +"¿ø ÀÔ±İÇß½À´Ï´Ù.";
-			    	String chat10 = pc.getName()+"´Ô ¸ÂÃß¼Ë½À´Ï´Ù." + pc.getGamblingMoney()*3 + "¿ø ÀÔ±İÇß½À´Ï´Ù.";
-			    	String chat11 = pc.getName()+"´Ô Æ²¸®¼Ë½À´Ï´Ù »ÇÂî´Â¾ø½À´Ï´Ù Áñ.";
+			    	String chat9 = pc.getName()+"ë‹˜ ë§ì¶”ì…§ìŠµë‹ˆë‹¤. "+ pc.getGamblingMoney()*2 +"ì› ì…ê¸ˆí–ˆìŠµë‹ˆë‹¤.";
+			    	String chat10 = pc.getName()+"ë‹˜ ë§ì¶”ì…§ìŠµë‹ˆë‹¤." + pc.getGamblingMoney()*3 + "ì› ì…ê¸ˆí–ˆìŠµë‹ˆë‹¤.";
+			    	String chat11 = pc.getName()+"ë‹˜ í‹€ë¦¬ì…§ìŠµë‹ˆë‹¤ ë½€ì°ŒëŠ”ì—†ìŠµë‹ˆë‹¤ ì¦.";
 					int gfxid = 3204 + random.nextInt(6);
 			    	switch(type){
 			    	case 1:
 			    	Thread.sleep(2000);
-			    	String chat = pc.getName()+"´Ô È¦À» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù. ¸Ö¸®°¡½Ã¸é °ÔÀÓÀÌ Ãë¼ÒµË´Ï´Ù.";
+			    	String chat = pc.getName()+"ë‹˜ í™€ì„ ì„ íƒí•˜ì…¨ìŠµë‹ˆë‹¤. ë©€ë¦¬ê°€ì‹œë©´ ê²Œì„ì´ ì·¨ì†Œë©ë‹ˆë‹¤.";
 					pc.sendPackets(new S_NpcChatPacket(dealer, chat, 0));
 					pc.broadcastPacket(new S_NpcChatPacket(dealer, chat, 0));
 					Thread.sleep(1000);
@@ -109,7 +109,7 @@ public class L1Gambling {
 					break;
 			    	case 2:
 				    	Thread.sleep(2000);
-				    	String chat2 = pc.getName()+"´Ô Â¦À» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù. ¸Ö¸®°¡½Ã¸é °ÔÀÓÀÌ Ãë¼ÒµË´Ï´Ù.";
+				    	String chat2 = pc.getName()+"ë‹˜ ì§ì„ ì„ íƒí•˜ì…¨ìŠµë‹ˆë‹¤. ë©€ë¦¬ê°€ì‹œë©´ ê²Œì„ì´ ì·¨ì†Œë©ë‹ˆë‹¤.";
 						pc.sendPackets(new S_NpcChatPacket(dealer, chat2, 0));
 						pc.broadcastPacket(new S_NpcChatPacket(dealer, chat2, 0));
 						Thread.sleep(1000);
@@ -127,7 +127,7 @@ public class L1Gambling {
 						break;
 			    	case 3:
 				    	Thread.sleep(2000);
-				    	String chat3 = pc.getName()+"´Ô 1À» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù. ¸Ö¸®°¡½Ã¸é °ÔÀÓÀÌ Ãë¼ÒµË´Ï´Ù.";
+				    	String chat3 = pc.getName()+"ë‹˜ 1ì„ ì„ íƒí•˜ì…¨ìŠµë‹ˆë‹¤. ë©€ë¦¬ê°€ì‹œë©´ ê²Œì„ì´ ì·¨ì†Œë©ë‹ˆë‹¤.";
 						pc.sendPackets(new S_NpcChatPacket(dealer, chat3, 0));
 						pc.broadcastPacket(new S_NpcChatPacket(dealer, chat3, 0));
 						Thread.sleep(1000);
@@ -145,7 +145,7 @@ public class L1Gambling {
 						break;
 			    	case 4:
 				    	Thread.sleep(2000);
-				    	String chat4 = pc.getName()+"´Ô 2À» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù. ¸Ö¸®°¡½Ã¸é °ÔÀÓÀÌ Ãë¼ÒµË´Ï´Ù.";
+				    	String chat4 = pc.getName()+"ë‹˜ 2ì„ ì„ íƒí•˜ì…¨ìŠµë‹ˆë‹¤. ë©€ë¦¬ê°€ì‹œë©´ ê²Œì„ì´ ì·¨ì†Œë©ë‹ˆë‹¤.";
 						pc.sendPackets(new S_NpcChatPacket(dealer, chat4, 0));
 						pc.broadcastPacket(new S_NpcChatPacket(dealer, chat4, 0));
 						Thread.sleep(1000);
@@ -163,7 +163,7 @@ public class L1Gambling {
 						break;
 			    	case 5:
 				    	Thread.sleep(2000);
-				    	String chat5 = pc.getName()+"´Ô 3À» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù. ¸Ö¸®°¡½Ã¸é °ÔÀÓÀÌ Ãë¼ÒµË´Ï´Ù.";
+				    	String chat5 = pc.getName()+"ë‹˜ 3ì„ ì„ íƒí•˜ì…¨ìŠµë‹ˆë‹¤. ë©€ë¦¬ê°€ì‹œë©´ ê²Œì„ì´ ì·¨ì†Œë©ë‹ˆë‹¤.";
 						pc.sendPackets(new S_NpcChatPacket(dealer, chat5, 0));
 						pc.broadcastPacket(new S_NpcChatPacket(dealer, chat5, 0));
 						Thread.sleep(1000);
@@ -181,7 +181,7 @@ public class L1Gambling {
 						break;
 			    	case 6:
 				    	Thread.sleep(2000);
-				    	String chat6 = pc.getName()+"´Ô 4À» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù. ¸Ö¸®°¡½Ã¸é °ÔÀÓÀÌ Ãë¼ÒµË´Ï´Ù.";
+				    	String chat6 = pc.getName()+"ë‹˜ 4ì„ ì„ íƒí•˜ì…¨ìŠµë‹ˆë‹¤. ë©€ë¦¬ê°€ì‹œë©´ ê²Œì„ì´ ì·¨ì†Œë©ë‹ˆë‹¤.";
 						pc.sendPackets(new S_NpcChatPacket(dealer, chat6, 0));
 						pc.broadcastPacket(new S_NpcChatPacket(dealer, chat6, 0));
 						Thread.sleep(1000);
@@ -199,7 +199,7 @@ public class L1Gambling {
 						break;
 			    	case 7:
 				    	Thread.sleep(2000);
-				    	String chat7 = pc.getName()+"´Ô 5À» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù. ¸Ö¸®°¡½Ã¸é °ÔÀÓÀÌ Ãë¼ÒµË´Ï´Ù.";
+				    	String chat7 = pc.getName()+"ë‹˜ 5ì„ ì„ íƒí•˜ì…¨ìŠµë‹ˆë‹¤. ë©€ë¦¬ê°€ì‹œë©´ ê²Œì„ì´ ì·¨ì†Œë©ë‹ˆë‹¤.";
 						pc.sendPackets(new S_NpcChatPacket(dealer, chat7, 0));
 						pc.broadcastPacket(new S_NpcChatPacket(dealer, chat7, 0));
 						Thread.sleep(1000);
@@ -217,7 +217,7 @@ public class L1Gambling {
 						break;
 			    	case 8:
 				    	Thread.sleep(2000);
-				    	String chat8 = pc.getName()+"´Ô 6À» ¼±ÅÃÇÏ¼Ì½À´Ï´Ù. ¸Ö¸®°¡½Ã¸é °ÔÀÓÀÌ Ãë¼ÒµË´Ï´Ù.";
+				    	String chat8 = pc.getName()+"ë‹˜ 6ì„ ì„ íƒí•˜ì…¨ìŠµë‹ˆë‹¤. ë©€ë¦¬ê°€ì‹œë©´ ê²Œì„ì´ ì·¨ì†Œë©ë‹ˆë‹¤.";
 						pc.sendPackets(new S_NpcChatPacket(dealer, chat8, 0));
 						pc.broadcastPacket(new S_NpcChatPacket(dealer, chat8, 0));
 						Thread.sleep(1000);
@@ -247,7 +247,7 @@ public class L1Gambling {
 		L1Object obj = L1World.getInstance().findObject(400064);
 		L1Npc npc = NpcTable.getInstance().getTemplate(400064);
 		if(player.getX() == 33507 && player.getY() == 32851 && player.getHeading() == 0){
-			player.sendPackets(new S_Message_YN(252, npc.get_name())); // %0%s°¡ ´ç½Å°ú ¾ÆÀÌÅÛÀÇ °Å·¡¸¦ ¹Ù¶ó°í ÀÖ½À´Ï´Ù. °Å·¡ÇÕ´Ï±î? (Y/N)	
+			player.sendPackets(new S_Message_YN(252, npc.get_name())); // %0%sê°€ ë‹¹ì‹ ê³¼ ì•„ì´í…œì˜ ê±°ë˜ë¥¼ ë°”ë¼ê³  ìˆìŠµë‹ˆë‹¤. ê±°ë˜í•©ë‹ˆê¹Œ? (Y/N)	
 		}
 	}
 

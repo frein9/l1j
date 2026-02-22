@@ -25,11 +25,11 @@ import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.serverpackets.S_Paralysis;
 
 public class L1ParalysisPoison extends L1Poison {
-	// ¸¶ºñµ¶ÀÇ ¼º´É ÀÏ¶÷ À¯¿¹ Áö¼Ó (Âü°í°¡°İ, ¹ÌÀû¿ë)
-	// ±¼ 20 45
-	// ¾Æ½ºÅ× 10 60
-	// ÀÇÇ÷Áö³× 14 30
-	// D-±¼ 39 45
+	// ë§ˆë¹„ë…ì˜ ì„±ëŠ¥ ì¼ëŒ ìœ ì˜ˆ ì§€ì† (ì°¸ê³ ê°€ê²©, ë¯¸ì ìš©)
+	// êµ´ 20 45
+	// ì•„ìŠ¤í…Œ 10 60
+	// ì˜í˜ˆì§€ë„¤ 14 30
+	// D-êµ´ 39 45
 
 	private final L1Character _target;
 	private Thread _timer;
@@ -43,23 +43,23 @@ public class L1ParalysisPoison extends L1Poison {
 			_target.setSkillEffect(L1SkillId.STATUS_POISON_PARALYZING, 0);
 
 			try {
-				Thread.sleep(_delay); // ¸¶ºñµÉ ¶§±îÁöÀÇ À¯¿¹ ½Ã°£À» ±â´Ù¸°´Ù.
+				Thread.sleep(_delay); // ë§ˆë¹„ë  ë•Œê¹Œì§€ì˜ ìœ ì˜ˆ ì‹œê°„ì„ ê¸°ë‹¤ë¦°ë‹¤.
 			} catch (InterruptedException e) {
 				_target
 						.killSkillEffectTimer(L1SkillId.STATUS_POISON_PARALYZING);
 				return;
 			}
 
-			// È¿°ú¸¦ ÃÊ·ÏÀ¸·ÎºÎÅÍ È¸»ö¿¡
+			// íš¨ê³¼ë¥¼ ì´ˆë¡ìœ¼ë¡œë¶€í„° íšŒìƒ‰ì—
 			_effectId = 2;
 			_target.setPoisonEffect(2);
 
 			if (_target instanceof L1PcInstance) {
 				L1PcInstance player = (L1PcInstance) _target;
 				if (player.isDead() == false) {
-					player.sendPackets(new S_Paralysis(1, true)); // ¸¶ºñ »óÅÂ·Î ÇÑ´Ù
+					player.sendPackets(new S_Paralysis(1, true)); // ë§ˆë¹„ ìƒíƒœë¡œ í•œë‹¤
 					_timer = new ParalysisTimer();
-					GeneralThreadPool.getInstance().execute(_timer); // ¸¶ºñ Å¸ÀÌ¸Ó °³½Ã
+					GeneralThreadPool.getInstance().execute(_timer); // ë§ˆë¹„ íƒ€ì´ë¨¸ ê°œì‹œ
 					if (isInterrupted()) {
 						_timer.interrupt();
 					}
@@ -82,8 +82,8 @@ public class L1ParalysisPoison extends L1Poison {
 			if (_target instanceof L1PcInstance) {
 				L1PcInstance player = (L1PcInstance) _target;
 				if (!player.isDead()) {
-					player.sendPackets(new S_Paralysis(1, false)); // ¸¶ºñ »óÅÂ¸¦ ÇØÁ¦ÇÑ´Ù
-					cure(); // ÇØµ¶ Ã³¸®
+					player.sendPackets(new S_Paralysis(1, false)); // ë§ˆë¹„ ìƒíƒœë¥¼ í•´ì œí•œë‹¤
+					cure(); // í•´ë… ì²˜ë¦¬
 				}
 			}
 		}
@@ -124,7 +124,7 @@ public class L1ParalysisPoison extends L1Poison {
 	@Override
 	public void cure() {
 		if (_timer != null) {
-			_timer.interrupt(); // ¸¶ºñµ¶Å¸ÀÌ¸Ó ÇØÁ¦
+			_timer.interrupt(); // ë§ˆë¹„ë…íƒ€ì´ë¨¸ í•´ì œ
 		}
 
 		_target.setPoisonEffect(0);

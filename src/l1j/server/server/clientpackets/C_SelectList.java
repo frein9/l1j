@@ -47,19 +47,19 @@ public class C_SelectList extends ClientBasePacket {
 
 	public C_SelectList(byte abyte0[], ClientThread clientthread) {
 		super(abyte0);
-		// ¾ÆÀÌÅÛ¸¶´Ù ¸®Äù½ºÆ®°¡ ¿Â´Ù.
+		// ì•„ì´í…œë§ˆë‹¤ ë¦¬í€˜ìŠ¤íŠ¸ê°€ ì˜¨ë‹¤.
 		int itemObjectId = readD();
 		int npcObjectId = readD();
 		L1PcInstance pc = clientthread.getActiveChar();
 
-		if (npcObjectId != 0) { // ¹«±âÀÇ ¼ö¸®
+		if (npcObjectId != 0) { // ë¬´ê¸°ì˜ ìˆ˜ë¦¬
 			L1Object obj = L1World.getInstance().findObject(npcObjectId);
 			if (obj != null) {
 				if (obj instanceof L1NpcInstance) {
 					L1NpcInstance npc = (L1NpcInstance) obj;
 					int difflocx = Math.abs(pc.getX() - npc.getX());
 					int difflocy = Math.abs(pc.getY() - npc.getY());
-					// 3 ¸Å½º ÀÌ»ó ¶³¾îÁ³À» °æ¿ì ¾×¼Ç ¹«È¿
+					// 3 ë§¤ìŠ¤ ì´ìƒ ë–¨ì–´ì¡Œì„ ê²½ìš° ì•¡ì…˜ ë¬´íš¨
 					if (difflocx > 3 || difflocy > 3) {
 						return;
 					}
@@ -74,16 +74,16 @@ public class C_SelectList extends ClientBasePacket {
 			}
 			item.set_durability(0);
 			pcInventory.updateItem(item, L1PcInventory.COL_DURABILITY);
-		} else { // ÆêÀÇ ÀÎÃâ
+		} else { // í«ì˜ ì¸ì¶œ
 			int petCost = 0;
 			Object[] petList = pc.getPetList().values().toArray();
 			for (Object pet : petList) {
 				petCost += ((L1NpcInstance) pet).getPetcost();
 			}
 			int charisma = pc.getCha();
-			if (pc.isCrown()) { // ±ºÁÖ
+			if (pc.isCrown()) { // êµ°ì£¼
 				charisma += 6;
-			} else if (pc.isElf()) { // ¿¡¸£ÇÁ
+			} else if (pc.isElf()) { // ì—ë¥´í”„
 				charisma += 12;
 			} else if (pc.isWizard()) { // WIZ
 				charisma += 6;
@@ -97,7 +97,7 @@ public class C_SelectList extends ClientBasePacket {
 			charisma -= petCost;
 			int petCount = charisma / 6;
 			if (petCount <= 0) {
-				pc.sendPackets(new S_ServerMessage(489)); // ¹°·¯°¡·Á°í ÇÏ´Â ¾Ö¿Ïµ¿¹°ÀÌ ³Ê¹« ¸¹½À´Ï´Ù.
+				pc.sendPackets(new S_ServerMessage(489)); // ë¬¼ëŸ¬ê°€ë ¤ê³  í•˜ëŠ” ì• ì™„ë™ë¬¼ì´ ë„ˆë¬´ ë§ìŠµë‹ˆë‹¤.
 				return;
 			}
 

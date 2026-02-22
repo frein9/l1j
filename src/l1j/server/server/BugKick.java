@@ -53,11 +53,11 @@ public class BugKick {
 	public void KickPlayer(L1PcInstance pc){
 		try {
 		L1Teleport.teleport(pc, 32737, 32796, (short) 99, 5, true);
-		pc.sendPackets(new S_Poison(pc.getId(), 2)); // µ¿°á »óÅÂ°¡ µÇ¾ú½À´Ï´Ù.
-		pc.broadcastPacket(new S_Poison(pc.getId(), 2)); // µ¿°á »óÅÂ°¡ µÇ¾ú½À´Ï´Ù.
+		pc.sendPackets(new S_Poison(pc.getId(), 2)); // ë™ê²° ìƒíƒœê°€ ë˜ì—ˆìŠµë‹ˆë‹¤.
+		pc.broadcastPacket(new S_Poison(pc.getId(), 2)); // ë™ê²° ìƒíƒœê°€ ë˜ì—ˆìŠµë‹ˆë‹¤.
 		pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_STUN, true));
 		pc.killSkillEffectTimer(87);
-		pc.setSkillEffect(87, 24 * 60 * 60 * 1000);//¿©±â±îÁö ½ºÅÏ
+		pc.setSkillEffect(87, 24 * 60 * 60 * 1000);//ì—¬ê¸°ê¹Œì§€ ìŠ¤í„´
 		Connection con = null;
 		PreparedStatement pstm = null;
 		con = L1DatabaseFactory.getInstance().getConnection();
@@ -66,10 +66,10 @@ public class BugKick {
 		pstm.execute();
 		pstm.close();
 		con.close();
-		pc.sendPackets(new S_SystemMessage("¹ö±×¸¦ »ç¿ëÇÏÁö ¾Ê¾ÒÀ¸¸é ÀÌ°÷¿¡ ¿Ã ÀÌÀ¯°¡ ¾øÀ»ÅÙµ¥??"));
-		L1World.getInstance().broadcastServerMessage("\\fY¹ö±×»ç¿ëÀÚ ["+pc.getName()+"] ½Å°í¹Ù¶÷!!");
+		pc.sendPackets(new S_SystemMessage("ë²„ê·¸ë¥¼ ì‚¬ìš©í•˜ì§€ ì•Šì•˜ìœ¼ë©´ ì´ê³³ì— ì˜¬ ì´ìœ ê°€ ì—†ì„í…ë°??"));
+		L1World.getInstance().broadcastServerMessage("\\fYë²„ê·¸ì‚¬ìš©ì ["+pc.getName()+"] ì‹ ê³ ë°”ëŒ!!");
 		} catch (Exception e) {
-			System.out.println(pc.getName()+" È­ÇüÀå µî·Ï ¿¡·¯");
+			System.out.println(pc.getName()+" í™”í˜•ì¥ ë“±ë¡ ì—ëŸ¬");
 		}
 	}
 }

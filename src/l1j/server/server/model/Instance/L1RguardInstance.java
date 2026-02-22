@@ -31,22 +31,22 @@ public class L1RguardInstance extends L1NpcInstance {
  private int _randomMoveDirection = 0;
  private static Random _random = new Random();
 
- // Å¸°ÙÀ» Ã£´Â´Ù
+ // íƒ€ê²Ÿì„ ì°¾ëŠ”ë‹¤
  @Override
  public void searchTarget() {
-  // Å¸°Ù ¼ö»ö
+  // íƒ€ê²Ÿ ìˆ˜ìƒ‰
   L1PcInstance targetPlayer = null;
-  boolean isNowWar = false; // by Äí¿ì
+  boolean isNowWar = false; // by ì¿ ìš°
   
   for (L1PcInstance pc : L1World.getInstance(). getVisiblePlayer(this)) {
    int castleId = L1CastleLocation.getCastleIdByArea(pc);
    if (pc.getCurrentHp() <= 0 || pc.isDead() || pc.isGm()
-     || pc.isGhost() || isNowWar) { // by Äí¿ì
+     || pc.isGhost() || isNowWar) { // by ì¿ ìš°
     continue;
    }
-   if (!pc.isInvisble() || getNpcTemplate(). is_agrocoi()) // ÀÎºñÁöÃ¼Å©
+   if (!pc.isInvisble() || getNpcTemplate(). is_agrocoi()) // ì¸ë¹„ì§€ì²´í¬
    {
-    if (pc.isWanted()) { // PK·Î ÁØºñÁßÀÎ°¡
+    if (pc.isWanted()) { // PKë¡œ ì¤€ë¹„ì¤‘ì¸ê°€
      targetPlayer = pc;
      break;
     }  
@@ -65,7 +65,7 @@ public class L1RguardInstance extends L1NpcInstance {
   }
  }
 
- // Å¸°ÙÀÌ ¾ø´Â °æ¿ìÀÇ Ã³¸®
+ // íƒ€ê²Ÿì´ ì—†ëŠ” ê²½ìš°ì˜ ì²˜ë¦¬
  @Override
  public boolean noTarget() {
   if (getLocation()
@@ -75,22 +75,22 @@ public class L1RguardInstance extends L1NpcInstance {
     setDirectionMove(dir);
     setSleepTime(calcSleepTime(getPassispeed(), MOVE_SPEED));
    }
-   else // ³Ê¹« ¸Õ or°æ·Î°¡ ¹ß°ßµÇÁö ¾Ê´Â °æ¿ì´Â ÅÚ·¹Æ÷Æ® ÇØ µ¹¾Æ°£´Ù
+   else // ë„ˆë¬´ ë¨¼ orê²½ë¡œê°€ ë°œê²¬ë˜ì§€ ì•ŠëŠ” ê²½ìš°ëŠ” í…”ë ˆí¬íŠ¸ í•´ ëŒì•„ê°„ë‹¤
    {
     teleport(getHomeX(), getHomeY(), 1);
    }
   } else {
    if (L1World.getInstance(). getRecognizePlayer(this). size() == 0) {
-    return true; // ÁÖÀ§¿¡ ÇÃ·¹ÀÌ¾î°¡ ¾ø¾îÁö¸é(ÀÚ) AIÃ³¸® Á¾·á
+    return true; // ì£¼ìœ„ì— í”Œë ˆì´ì–´ê°€ ì—†ì–´ì§€ë©´(ì) AIì²˜ë¦¬ ì¢…ë£Œ
    }
-    // ±×·ì¿¡ ¼ÓÇÏÁö ¾ÊÀº or±×·ì¿¡ ¼ÓÇÏ°í ÀÖ¾î ¸®´õÀÇ °æ¿ì, ·£´ı¿¡ ¿òÁ÷¿© µĞ´Ù
+    // ê·¸ë£¹ì— ì†í•˜ì§€ ì•Šì€ orê·¸ë£¹ì— ì†í•˜ê³  ìˆì–´ ë¦¬ë”ì˜ ê²½ìš°, ëœë¤ì— ì›€ì§ì—¬ ë‘”ë‹¤
      
-     // ÀÌµ¿ÇÒ ¿¹Á¤ÀÇ °Å¸®¸¦ ÀÌµ¿ ³¡¸¶Ä¡¸é(ÀÚ), »õ·Ó°Ô °Å¸®¿Í ¹æÇâÀ» °áÁ¤ÇÑ´Ù
-     // ±×·¸Áö ¾ÊÀ¸¸é, ÀÌµ¿ÇÒ ¿¹Á¤ÀÇ °Å¸®¸¦ °¨¼Ò
+     // ì´ë™í•  ì˜ˆì •ì˜ ê±°ë¦¬ë¥¼ ì´ë™ ëë§ˆì¹˜ë©´(ì), ìƒˆë¡­ê²Œ ê±°ë¦¬ì™€ ë°©í–¥ì„ ê²°ì •í•œë‹¤
+     // ê·¸ë ‡ì§€ ì•Šìœ¼ë©´, ì´ë™í•  ì˜ˆì •ì˜ ê±°ë¦¬ë¥¼ ê°ì†Œ
      if (_randomMoveDistance == 0) {
       _randomMoveDistance = _random.nextInt(5) + 1;
       _randomMoveDirection = _random.nextInt(20);
-      // È¨ Æ÷ÀÎÆ®·ÎºÎÅÍ ³Ê¹« ¸Ö¾îÁöÁö ¾Ê°Ô, ÀÏÁ¤ÇÑ È®·ü·Î È¨ Æ÷ÀÎÆ®ÀÇ ¹æÇâÀ¸·Î º¸Á¤
+      // í™ˆ í¬ì¸íŠ¸ë¡œë¶€í„° ë„ˆë¬´ ë©€ì–´ì§€ì§€ ì•Šê²Œ, ì¼ì •í•œ í™•ë¥ ë¡œ í™ˆ í¬ì¸íŠ¸ì˜ ë°©í–¥ìœ¼ë¡œ ë³´ì •
       if (getHomeX() != 0 && getHomeY() != 0
         && _randomMoveDirection < 8
         && _random.nextInt(3) == 0) {
@@ -157,10 +157,10 @@ public class L1RguardInstance extends L1NpcInstance {
  }
 
  @Override
- public void receiveDamage(L1Character attacker, int damage) { // °ø°İÀ¸·Î HP¸¦ ÁÙÀÏ ¶§´Â ¿©±â¸¦ »ç¿ë
+ public void receiveDamage(L1Character attacker, int damage) { // ê³µê²©ìœ¼ë¡œ HPë¥¼ ì¤„ì¼ ë•ŒëŠ” ì—¬ê¸°ë¥¼ ì‚¬ìš©
   if (getCurrentHp() > 0 && !isDead()) {
    if (damage >= 0) {
-    if (!(attacker instanceof L1EffectInstance)) { // FW´Â ÇìÀÌÆ® ¾øÀ½
+    if (!(attacker instanceof L1EffectInstance)) { // FWëŠ” í—¤ì´íŠ¸ ì—†ìŒ
      setHate(attacker, damage);
     }
    }
@@ -186,7 +186,7 @@ public class L1RguardInstance extends L1NpcInstance {
    if (newHp > 0) {
     setCurrentHp(newHp);
    }
-  } else if (!isDead()) { // ¸¸¾àÀ» À§ÇØ
+  } else if (!isDead()) { // ë§Œì•½ì„ ìœ„í•´
    setDead(true);
    setStatus(ActionCodes.ACTION_Die);
    Death death = new Death(attacker);
@@ -243,11 +243,11 @@ public class L1RguardInstance extends L1NpcInstance {
     break;
    }
   }
-  if (!isExistDefenseClan) { // ¼ºÁÖ Å©¶õÀÌ ¾ø´Ù
+  if (!isExistDefenseClan) { // ì„±ì£¼ í¬ë€ì´ ì—†ë‹¤
    return true;
   }
 
-  if (pc.getClanid() != 0) { // Å©¶õ ¼Ò¼ÓÁß
+  if (pc.getClanid() != 0) { // í¬ë€ ì†Œì†ì¤‘
    L1Clan clan = L1World.getInstance(). getClan(pc.getClanname());
    if (clan != null) {
     if (clan.getCastleId() == castleId) {

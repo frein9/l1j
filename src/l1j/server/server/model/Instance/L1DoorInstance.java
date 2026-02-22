@@ -46,7 +46,7 @@ public class L1DoorInstance extends L1NpcInstance {
 
 	@Override
 	public void onAction(L1PcInstance pc) {
-		if (getMaxHp() == 0 || getMaxHp() == 1) { // ÆÄ±« ºÒ°¡´ÉÇÑ ¹®Àº ´ë»ó¿Ü
+		if (getMaxHp() == 0 || getMaxHp() == 1) { // íŒŒê´´ ë¶ˆê°€ëŠ¥í•œ ë¬¸ì€ ëŒ€ìƒì™¸
 			return;
 		}
 
@@ -90,7 +90,7 @@ public class L1DoorInstance extends L1NpcInstance {
 
 	@Override
 	public void receiveDamage(L1Character attacker, int damage) {
-		if (getMaxHp() == 0 || getMaxHp() == 1) { // ÆÄ±« ºÒ°¡´ÉÇÑ ¹®Àº ´ë»ó¿Ü
+		if (getMaxHp() == 0 || getMaxHp() == 1) { // íŒŒê´´ ë¶ˆê°€ëŠ¥í•œ ë¬¸ì€ ëŒ€ìƒì™¸
 			return;
 		}
 
@@ -142,7 +142,7 @@ public class L1DoorInstance extends L1NpcInstance {
 					}
 				}
 			}
-		} else if (!isDead()) { // ¸¸¾àÀ» À§ÇØ
+		} else if (!isDead()) { // ë§Œì•½ì„ ìœ„í•´
 			setDead(true);
 			setStatus(ActionCodes.ACTION_DoorDie);
 			Death death = new Death(attacker);
@@ -188,14 +188,14 @@ public class L1DoorInstance extends L1NpcInstance {
 		int rightEdgeLocation = getRightEdgeLocation();
 
 		int size = rightEdgeLocation - leftEdgeLocation;
-		if (size == 0) { // 1 ¸Å½º ºĞÀÇÆøÀÇ ¹®
+		if (size == 0) { // 1 ë§¤ìŠ¤ ë¶„ì˜í­ì˜ ë¬¸
 			sendPacket(pc, entranceX, entranceY);
-		} else { // 2 ¸Å½ººĞ ÀÌ»óÀÇ ÆøÀÌ ÀÖ´Â ¹®
-			if (getDirection() == 0) { // /¹æÇâ
+		} else { // 2 ë§¤ìŠ¤ë¶„ ì´ìƒì˜ í­ì´ ìˆëŠ” ë¬¸
+			if (getDirection() == 0) { // /ë°©í–¥
 				for (int x = leftEdgeLocation; x <= rightEdgeLocation; x++) {
 					sendPacket(pc, x, entranceY);
 				}
-			} else { // ¡¬¹æÇâ
+			} else { // ï¼¼ë°©í–¥
 				for (int y = leftEdgeLocation; y <= rightEdgeLocation; y++) {
 					sendPacket(pc, entranceX, y);
 				}
@@ -205,8 +205,8 @@ public class L1DoorInstance extends L1NpcInstance {
 
 	private void sendPacket(L1PcInstance pc, int x, int y) {
 		S_Door packet = new S_Door(x, y, getDirection(), getPassable());
-		if (pc != null) { // onPerceive() °æÀ¯ÀÇ °æ¿ì
-			// ¿­·Á ÀÖ´Â °æ¿ì´Â ÅëÇà ºÒ°¡ ÆĞÅ¶ ¼Û½Å ºÒ¿ä
+		if (pc != null) { // onPerceive() ê²½ìœ ì˜ ê²½ìš°
+			// ì—´ë ¤ ìˆëŠ” ê²½ìš°ëŠ” í†µí–‰ ë¶ˆê°€ íŒ¨í‚· ì†¡ì‹  ë¶ˆìš”
 			if (getOpenStatus() == ActionCodes.ACTION_Close) {
 				pc.sendPackets(packet);
 			}
@@ -260,7 +260,7 @@ public class L1DoorInstance extends L1NpcInstance {
 		_doorId = i;
 	}
 
-	private int _direction = 0; // ¹®ÀÇ ¹æÇâ
+	private int _direction = 0; // ë¬¸ì˜ ë°©í–¥
 
 	public int getDirection() {
 		return _direction;
@@ -274,9 +274,9 @@ public class L1DoorInstance extends L1NpcInstance {
 
 	public int getEntranceX() {
 		int entranceX = 0;
-		if (getDirection() == 0) { // /¹æÇâ
+		if (getDirection() == 0) { // /ë°©í–¥
 			entranceX = getX();
-		} else { // ¡¬¹æÇâ
+		} else { // ï¼¼ë°©í–¥
 			entranceX = getX() - 1;
 		}
 		return entranceX;
@@ -284,15 +284,15 @@ public class L1DoorInstance extends L1NpcInstance {
 
 	public int getEntranceY() {
 		int entranceY = 0;
-		if (getDirection() == 0) { // /¹æÇâ
+		if (getDirection() == 0) { // /ë°©í–¥
 			entranceY = getY() + 1;
-		} else { // ¡¬¹æÇâ
+		} else { // ï¼¼ë°©í–¥
 			entranceY = getY();
 		}
 		return entranceY;
 	}
 
-	private int _leftEdgeLocation = 0; // ¹®ÀÇ ÁÂ´ÜÀÇ ÁÂÇ¥(¹®ÀÇ ¹æÇâÀ¸·ÎºÎÅÍ XÃàorYÃàÀ» °áÁ¤ÇÑ´Ù)
+	private int _leftEdgeLocation = 0; // ë¬¸ì˜ ì¢Œë‹¨ì˜ ì¢Œí‘œ(ë¬¸ì˜ ë°©í–¥ìœ¼ë¡œë¶€í„° Xì¶•orYì¶•ì„ ê²°ì •í•œë‹¤)
 
 	public int getLeftEdgeLocation() {
 		return _leftEdgeLocation;
@@ -302,7 +302,7 @@ public class L1DoorInstance extends L1NpcInstance {
 		_leftEdgeLocation = i;
 	}
 
-	private int _rightEdgeLocation = 0; // ¹®ÀÇ ¿ì´ÜÀÇ ÁÂÇ¥(¹®ÀÇ ¹æÇâÀ¸·ÎºÎÅÍ XÃàorYÃàÀ» °áÁ¤ÇÑ´Ù)
+	private int _rightEdgeLocation = 0; // ë¬¸ì˜ ìš°ë‹¨ì˜ ì¢Œí‘œ(ë¬¸ì˜ ë°©í–¥ìœ¼ë¡œë¶€í„° Xì¶•orYì¶•ì„ ê²°ì •í•œë‹¤)
 
 	public int getRightEdgeLocation() {
 		return _rightEdgeLocation;

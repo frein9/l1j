@@ -40,7 +40,7 @@ public class L1EquipmentSlot {
 	private L1PcInstance _owner;
 
 	/**
-	 * È¿°úÁß¼¼Æ® ¾ÆÀÌÅÛ
+	 * íš¨ê³¼ì¤‘ì„¸íŠ¸ ì•„ì´í…œ
 	 */
 	private ArrayList<L1ArmorSet> _currentArmorSet;
 
@@ -75,7 +75,7 @@ public class L1EquipmentSlot {
 		_owner.addWeightReduction(item.getWeightReduction());
 		_owner.addBowHitRate(item.getBowHitRate());
 		_owner.addBowDmgModifier(item.getBowDmgModifier());
-		//Àå½Å±¸¾÷±×·¹ÀÌµå 
+		//ì¥ì‹ êµ¬ì—…ê·¸ë ˆì´ë“œ 
 		if (armor.getUpacse() != 0 && armor.getItem().getUpacselv() == 1){
 			  _owner.addEarth(item.get_defense_earth() + armor.getUpacse());
 			  _owner.addWind(item.get_defense_wind() + armor.getUpacse());
@@ -93,7 +93,7 @@ public class L1EquipmentSlot {
 			  _owner.addRegistSustain(item.get_regist_sustain()); 
 			  _owner.addRegistBlind(item.get_regist_blind()); 
 		}
-		//Àå½Å±¸¾÷±×·¹ÀÌµå 
+		//ì¥ì‹ êµ¬ì—…ê·¸ë ˆì´ë“œ 
 
 		_armors.add(armor);
 
@@ -117,14 +117,14 @@ public class L1EquipmentSlot {
 				_owner.killSkillEffectTimer(L1SkillId.BLIND_HIDING);
 				_owner.setSkillEffect(L1SkillId.INVISIBILITY, 0);
 				_owner.sendPackets(new S_Invis(_owner.getId(), 1));
-				L1World.getInstance().broadcastPacketToAll(new S_Invis(_owner.getId(), 1)); // Ãß°¡
+				L1World.getInstance().broadcastPacketToAll(new S_Invis(_owner.getId(), 1)); // ì¶”ê°€
 				//_owner.broadcastPacket(new S_RemoveObject(_owner));
 			}
 		}
 		if (itemId == 20288) { // ROTC
 			_owner.sendPackets(new S_Ability(1, true));
 		}
-		if (itemId == 20383) { // ±â¸¶¿ë Çì·ë
+		if (itemId == 20383) { // ê¸°ë§ˆìš© í—¤ë£¸
 			if (armor.getChargeCount() != 0) {
 				armor.setChargeCount(armor.getChargeCount() - 1);
 				_owner.getInventory().updateItem(armor, L1PcInventory
@@ -159,7 +159,7 @@ public class L1EquipmentSlot {
 		_owner.addWeightReduction(-item.getWeightReduction());
 		_owner.addBowHitRate(-item.getBowHitRate());
 		_owner.addBowDmgModifier(-item.getBowDmgModifier());
-		//Àå½Å±¸¾÷±×·¹ÀÌµå 
+		//ì¥ì‹ êµ¬ì—…ê·¸ë ˆì´ë“œ 
 		if (armor.getUpacse() != 0 && armor.getItem().getUpacselv() == 1){
 			  _owner.addEarth(-item.get_defense_earth() - armor.getUpacse());
 			  _owner.addWind(-item.get_defense_wind() - armor.getUpacse());
@@ -177,7 +177,7 @@ public class L1EquipmentSlot {
 			  _owner.addRegistSustain(-item.get_regist_sustain());
 			  _owner.addRegistBlind(-item.get_regist_blind()); 
 		}
-		//Àå½Å±¸¾÷±×·¹ÀÌµå 
+		//ì¥ì‹ êµ¬ì—…ê·¸ë ˆì´ë“œ 
 
 		for (L1ArmorSet armorSet : L1ArmorSet.getAllSet()) {
 			if (armorSet.isPartOfSet(itemId)
@@ -189,7 +189,7 @@ public class L1EquipmentSlot {
 		}
 
 		if (itemId == 20077 || itemId == 20062 || itemId == 120077) {
-			_owner.delInvis(); // ÀÎºñÁöºñ¸®Æ¼ »óÅÂ ÇØÁ¦
+			_owner.delInvis(); // ì¸ë¹„ì§€ë¹„ë¦¬í‹° ìƒíƒœ í•´ì œ
 		}
 		if (itemId == 20288) { // ROTC
 			_owner.sendPackets(new S_Ability(1, false));
@@ -205,7 +205,7 @@ public class L1EquipmentSlot {
 			return;
 		}
 
-		//Àå½Å±¸¾÷±×·¹ÀÌµå 
+		//ì¥ì‹ êµ¬ì—…ê·¸ë ˆì´ë“œ 
 		if (equipment.getUpacse() != 0 && equipment.getItem().getUpacselv() == 2){
 			  _owner.addMaxHp(item.get_addhp() + (equipment.getUpacse() * 2));
 			  } else {
@@ -216,7 +216,7 @@ public class L1EquipmentSlot {
 			  } else {
 			  _owner.addMaxMp(item.get_addmp());
 		}
-		//Àå½Å±¸¾÷±×·¹ÀÌµå 
+		//ì¥ì‹ êµ¬ì—…ê·¸ë ˆì´ë“œ 
 		_owner.addStr(item.get_addstr());
 		_owner.addCon(item.get_addcon());
 		_owner.addDex(item.get_adddex());
@@ -240,7 +240,7 @@ public class L1EquipmentSlot {
 		     _owner.addMr(addMr + (equipment.getUpacse() - 5));
 		     _owner.sendPackets(new S_SPMR(_owner));
 		   }
-		//Àå½Å±¸¾÷±×·¹ÀÌµå 
+		//ì¥ì‹ êµ¬ì—…ê·¸ë ˆì´ë“œ 
 		  if (item.get_addsp() != 0) {
 		   _owner.addSp(item.get_addsp());
 		   _owner.sendPackets(new S_SPMR(_owner));
@@ -248,7 +248,7 @@ public class L1EquipmentSlot {
 		   _owner.addSp(item.get_addsp() + (equipment.getUpacse() - 5));
 		   _owner.sendPackets(new S_SPMR(_owner));
 		  }
-		//Àå½Å±¸¾÷±×·¹ÀÌµå 
+		//ì¥ì‹ êµ¬ì—…ê·¸ë ˆì´ë“œ 
 
 		if (item.isHasteItem()) {
 			_owner.addHasteItemEquipped(1);
@@ -259,7 +259,7 @@ public class L1EquipmentSlot {
 				_owner.broadcastPacket(new S_SkillHaste(_owner.getId(), 1, 0));
 			}
 		}
-		  if (item.isBraveItem()){//¿ë±â¾ÆÀÌÅÛ 
+		  if (item.isBraveItem()){//ìš©ê¸°ì•„ì´í…œ 
 			  int type = 0; 
 			  if (_owner.isElf()){ 
 			    type = 3; 
@@ -275,7 +275,7 @@ public class L1EquipmentSlot {
 			  } 
 			  } 
 
-		if (item.getItemId() == 20383) { // ±â¸¶¿ë Çì·ë
+		if (item.getItemId() == 20383) { // ê¸°ë§ˆìš© í—¤ë£¸
 			if (_owner.hasSkillEffect(STATUS_BRAVE)) {
 				_owner.killSkillEffectTimer(STATUS_BRAVE);
 				_owner.sendPackets(new S_SkillBrave(_owner.getId(), 0, 0));
@@ -299,7 +299,7 @@ public class L1EquipmentSlot {
 			return;
 		}
 
-		//Àå½Å±¸¾÷±×·¹ÀÌµå 
+		//ì¥ì‹ êµ¬ì—…ê·¸ë ˆì´ë“œ 
 		if (equipment.getUpacse() != 0 && equipment.getItem().getUpacselv() == 2){
 			  _owner.addMaxHp(-item.get_addhp() - (equipment.getUpacse() * 2));
 			  } else {
@@ -310,7 +310,7 @@ public class L1EquipmentSlot {
 			  } else {
 			  _owner.addMaxMp(-item.get_addmp());
 		}
-		//Àå½Å±¸¾÷±×·¹ÀÌµå 
+		//ì¥ì‹ êµ¬ì—…ê·¸ë ˆì´ë“œ 
 		_owner.addStr((byte) -item.get_addstr());
 		_owner.addCon((byte) -item.get_addcon());
 		_owner.addDex((byte) -item.get_adddex());
@@ -334,7 +334,7 @@ public class L1EquipmentSlot {
 		     _owner.addMr(addMr + (equipment.getUpacse() - 5));
 		     _owner.sendPackets(new S_SPMR(_owner));
 		   }
-		//Àå½Å±¸¾÷±×·¹ÀÌµå 
+		//ì¥ì‹ êµ¬ì—…ê·¸ë ˆì´ë“œ 
 		if (item.get_addsp() != 0) {
 		   _owner.addSp(-item.get_addsp());
 		   _owner.sendPackets(new S_SPMR(_owner));
@@ -342,7 +342,7 @@ public class L1EquipmentSlot {
 		   _owner.addSp(-(item.get_addsp() + (equipment.getUpacse() - 5)));
 		   _owner.sendPackets(new S_SPMR(_owner));
 		}
-		//Àå½Å±¸¾÷±×·¹ÀÌµå 
+		//ì¥ì‹ êµ¬ì—…ê·¸ë ˆì´ë“œ 
 
 		if (item.isHasteItem()) {
 			_owner.addHasteItemEquipped(-1);
@@ -352,7 +352,7 @@ public class L1EquipmentSlot {
 				_owner.broadcastPacket(new S_SkillHaste(_owner.getId(), 0, 0));
 			}
 		}
-		  if (item.isBraveItem()){//¿ë±â¾ÆÀÌÅÛ  
+		  if (item.isBraveItem()){//ìš©ê¸°ì•„ì´í…œ  
 			  _owner.addBraveItemEquipped(-1); 
 			  if (_owner.getBraveItemEquipped() == 0) { 
 			    _owner.setBraveSpeed(0); 
@@ -398,12 +398,12 @@ public class L1EquipmentSlot {
 	}
 
 	public void removeMagicHelm(int objectId, L1ItemInstance item) {
-		if (item.getItemId() == 20013) { // ¸¶¹ıÀÇ Çì·ë£º½Å¼Ó
-			if (!SkillsTable.getInstance().spellCheck(objectId, 26)) { // ÇÇÁöÄÃ ¿£Ã®Æ®£ºDEX
+		if (item.getItemId() == 20013) { // ë§ˆë²•ì˜ í—¤ë£¸ï¼šì‹ ì†
+			if (!SkillsTable.getInstance().spellCheck(objectId, 26)) { // í”¼ì§€ì»¬ ì—”ì±¤íŠ¸ï¼šDEX
 				_owner.sendPackets(new S_DelSkill(0, 0, 0, 2, 0, 0, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			}
-			if (!SkillsTable.getInstance().spellCheck(objectId, 43)) { // ÇìÀÌ ÆÄ¾÷
+			if (!SkillsTable.getInstance().spellCheck(objectId, 43)) { // í—¤ì´ íŒŒì—…
 				_owner.sendPackets(new S_DelSkill(0, 0, 0, 0, 0, 4, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			}
@@ -413,7 +413,7 @@ public class L1EquipmentSlot {
 				_owner.sendPackets(new S_DelSkill(1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			}
-			if (!SkillsTable.getInstance().spellCheck(objectId, 19)) { // ¿¢½ºÆ®¶ó Èú
+			if (!SkillsTable.getInstance().spellCheck(objectId, 19)) { // ì—‘ìŠ¤íŠ¸ë¼ í
 				_owner.sendPackets(new S_DelSkill(0, 0, 4, 0, 0, 0, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			}
@@ -423,11 +423,11 @@ public class L1EquipmentSlot {
 				_owner.sendPackets(new S_DelSkill(0, 8, 0, 0, 0, 0, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			}
-			if (!SkillsTable.getInstance().spellCheck(objectId, 13)) { // µğ ÅØ ¼ğ
+			if (!SkillsTable.getInstance().spellCheck(objectId, 13)) { // ë”” í… ìˆ€
 				_owner.sendPackets(new S_DelSkill(0, 16, 0, 0, 0, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			}
-			if (!SkillsTable.getInstance().spellCheck(objectId, 42)) { // ÇÇÁöÄÃ ¿£Ã®Æ®£ºSTR
+			if (!SkillsTable.getInstance().spellCheck(objectId, 42)) { // í”¼ì§€ì»¬ ì—”ì±¤íŠ¸ï¼šSTR
 				_owner.sendPackets(new S_DelSkill(0, 0, 0, 0, 0, 2, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			}
@@ -457,7 +457,7 @@ public class L1EquipmentSlot {
 				_owner.sendPackets(new S_DelSkill(1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			}
-			if (!SkillsTable.getInstance().spellCheck(objectId, 19)) { // ¿¢½ºÆ®¶ó Èú
+			if (!SkillsTable.getInstance().spellCheck(objectId, 19)) { // ì—‘ìŠ¤íŠ¸ë¼ í
 				_owner.sendPackets(new S_DelSkill(0, 0, 4, 0, 0, 0, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			}
@@ -465,11 +465,11 @@ public class L1EquipmentSlot {
 				_owner.sendPackets(new S_DelSkill(0, 8, 0, 0, 0, 0, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			}
-			if (!SkillsTable.getInstance().spellCheck(objectId, 13)) { // µğ ÅØ ¼ğ
+			if (!SkillsTable.getInstance().spellCheck(objectId, 13)) { // ë”” í… ìˆ€
 				_owner.sendPackets(new S_DelSkill(0, 16, 0, 0, 0, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			}
-			if (!SkillsTable.getInstance().spellCheck(objectId, 42)) { // ÇÇÁöÄÃ ¿£Ã®Æ®£ºSTR
+			if (!SkillsTable.getInstance().spellCheck(objectId, 42)) { // í”¼ì§€ì»¬ ì—”ì±¤íŠ¸ï¼šSTR
 				_owner.sendPackets(new S_DelSkill(0, 0, 0, 0, 0, 2, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
 			}

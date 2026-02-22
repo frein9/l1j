@@ -35,7 +35,7 @@ public class L1PrivateShopBuyList {
 		return _itemObjectId;
 	}
 
-	private int _buyTotalCount; // »ì ¿¹Á¤ÀÇ °³¼ö
+	private int _buyTotalCount; // ì‚´ ì˜ˆì •ì˜ ê°œìˆ˜
 
 	public void setBuyTotalCount(int i) {
 		_buyTotalCount = i;
@@ -55,7 +55,7 @@ public class L1PrivateShopBuyList {
 		return _buyPrice;
 	}
 
-	private int _buyCount; // »ê ´©°è
+	private int _buyCount; // ì‚° ëˆ„ê³„
 
 	public void setBuyCount(int i) {
 		_buyCount = i;

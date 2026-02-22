@@ -51,13 +51,13 @@ public class C_AddBookmark extends ClientBasePacket {
 					.getMapId()) || L1HouseLocation.isInHouse(pc.getX(), pc
 					.getY(), pc.getMapId()))
 					&& !pc.isGm()) {
-				// \f1¿©±â¸¦ ±â¾ïÇÒ ¼ö°¡ ¾ø½À´Ï´Ù.
+				// \f1ì—¬ê¸°ë¥¼ ê¸°ì–µí•  ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤.
 				pc.sendPackets(new S_ServerMessage(214));
 			} else {
 				L1BookMark.addBookmark(pc, s);
 			}
 		} else {
-			// \f1¿©±â¸¦ ±â¾ïÇÒ ¼ö°¡ ¾ø½À´Ï´Ù.
+			// \f1ì—¬ê¸°ë¥¼ ê¸°ì–µí•  ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤.
 			pc.sendPackets(new S_ServerMessage(214));
 		}
 	}

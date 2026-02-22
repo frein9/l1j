@@ -26,7 +26,7 @@ import l1j.server.server.datatables.SkillsTable;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.item.L1ItemId;
 import l1j.server.server.serverpackets.S_AddSkill;
-import l1j.server.server.serverpackets.S_Disconnect; // ########## (¹ö±× ¹æÁö) °Ô·À ¹ö±× ¹æÁö  
+import l1j.server.server.serverpackets.S_Disconnect; // ########## (ë²„ê·¸ ë°©ì§€) ê²Œë  ë²„ê·¸ ë°©ì§€  
 import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.serverpackets.S_SkillSound;
 import l1j.server.server.templates.L1Skills;
@@ -62,14 +62,14 @@ public class C_SkillBuyOK extends ClientBasePacket {
 		}
 		for (int i = 0; i < count; i++) {
 			sid[i] = readD();
-// ########## (¹ö±× ¹æÁö) °Ô·À ¹ö±× ¹æÁö [Â¯µ¹] 
+// ########## (ë²„ê·¸ ë°©ì§€) ê²Œë  ë²„ê·¸ ë°©ì§€ [ì§±ëŒ] 
 			if( sid[i] > 24){ 
 				pc.sendPackets(new S_Disconnect());
 				 return;
 			}
-// ########## (¹ö±× ¹æÁö) °Ô·À ¹ö±× ¹æÁö [Â¯µ¹] 
+// ########## (ë²„ê·¸ ë°©ì§€) ê²Œë  ë²„ê·¸ ë°©ì§€ [ì§±ëŒ] 
 			switch (sid[i]) {
-			// Lv1 ¸¶¹ı
+			// Lv1 ë§ˆë²•
 			case 0:
 				level1 += 1;
 				level1_cost += 100;
@@ -103,7 +103,7 @@ public class C_SkillBuyOK extends ClientBasePacket {
 				level1_cost += 100;
 				break;
 
-			// Lv2 ¸¶¹ı
+			// Lv2 ë§ˆë²•
 			case 8:
 				level2 += 1;
 				level2_cost += 400;
@@ -137,7 +137,7 @@ public class C_SkillBuyOK extends ClientBasePacket {
 				level2_cost += 400;
 				break;
 
-			// Lv3 ¸¶¹ı
+			// Lv3 ë§ˆë²•
 			case 16:
 				level3 += 1;
 				level3_cost += 900;
@@ -177,7 +177,7 @@ public class C_SkillBuyOK extends ClientBasePacket {
 		}
 
 		switch (pc.getType()) {
-		case 0: // ±ºÁÖ
+		case 0: // êµ°ì£¼
 			if (pc.getLevel() < 10) {
 				level1 = 0;
 				level1_cost = 0;
@@ -196,7 +196,7 @@ public class C_SkillBuyOK extends ClientBasePacket {
 			}
 			break;
 
-		case 1: // ³ªÀÌÆ®
+		case 1: // ë‚˜ì´íŠ¸
 			if (pc.getLevel() < 50) {
 				level1 = 0;
 				level1_cost = 0;
@@ -212,7 +212,7 @@ public class C_SkillBuyOK extends ClientBasePacket {
 			}
 			break;
 
-		case 2: // ¿¡¸£ÇÁ
+		case 2: // ì—ë¥´í”„
 			if (pc.getLevel() < 8) {
 				level1 = 0;
 				level1_cost = 0;
@@ -449,7 +449,7 @@ public class C_SkillBuyOK extends ClientBasePacket {
 						skill_name, 0, 0);
 			}
 		} else {
-			pc.sendPackets(new S_ServerMessage(189)); // \f1¾Æµ¥³ª°¡ ºÎÁ·ÇÕ´Ï´Ù.
+			pc.sendPackets(new S_ServerMessage(189)); // \f1ì•„ë°ë‚˜ê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.
 		}
 	}
 

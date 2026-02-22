@@ -27,7 +27,7 @@ public abstract class L1ArmorSet {
 	private static ArrayList<L1ArmorSet> _allSet = new ArrayList<L1ArmorSet>();
 
 	/*
-	 * ¿©±â¼­ ÃÊ±âÈ­ÇØ ¹ö¸®´Â °ÍÀº ¾î¶°ÇÑ °ÍÀÎ°¡¡¤¡¤¡¤¾Æ¸§´äÁö ¾ÊÀº »ı°¢ÀÌ µç´Ù
+	 * ì—¬ê¸°ì„œ ì´ˆê¸°í™”í•´ ë²„ë¦¬ëŠ” ê²ƒì€ ì–´ë– í•œ ê²ƒì¸ê°€Â·Â·Â·ì•„ë¦„ë‹µì§€ ì•Šì€ ìƒê°ì´ ë“ ë‹¤
 	 */
 	static {
 		L1ArmorSetImpl impl;
@@ -130,7 +130,7 @@ class L1ArmorSetImpl extends L1ArmorSet {
 		L1ItemInstance armor = null;
 		boolean isSetContainRing = false;
 
-		// ¼¼Æ® Àåºñ¿¡ ¸µÀÌ Æ÷ÇÔµÇ¾î ÀÖÀ»±î Á¶»çÇÑ´Ù
+		// ì„¸íŠ¸ ì¥ë¹„ì— ë§ì´ í¬í•¨ë˜ì–´ ìˆì„ê¹Œ ì¡°ì‚¬í•œë‹¤
 		for (int id : _ids) {
 			armor = pcInventory.findItemId(id);
 			if (armor.getItem().getType2() == 2
@@ -140,7 +140,7 @@ class L1ArmorSetImpl extends L1ArmorSet {
 			}
 		}
 
-		// ¸µÀ» 2°³ Àåºñ ÇÏ°í ÀÖ¾î, ±×°ÍÀÌ ¾çÂÊ ¸ğµÎ ¼¼Æ® ÀåºñÀÎ°¡ Á¶»çÇÑ´Ù
+		// ë§ì„ 2ê°œ ì¥ë¹„ í•˜ê³  ìˆì–´, ê·¸ê²ƒì´ ì–‘ìª½ ëª¨ë‘ ì„¸íŠ¸ ì¥ë¹„ì¸ê°€ ì¡°ì‚¬í•œë‹¤
 		if (armor != null && isSetContainRing) {
 			int itemId = armor.getItem().getItemId();
 			if (pcInventory.getTypeEquipped(2, 9) == 2) {
@@ -272,7 +272,7 @@ class PolymorphEffect implements L1ArmorSetEffect {
 			} else {
 				_gfxId = 6080;
 			}
-			if (!isRemainderOfCharge(pc)) { // ÀÜ¿ä±İ¼ö¾øÀ½
+			if (!isRemainderOfCharge(pc)) { // ì”ìš”ê¸ˆìˆ˜ì—†ìŒ
 				return;
 			}
 		}

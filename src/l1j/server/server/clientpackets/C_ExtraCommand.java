@@ -42,20 +42,20 @@ public class C_ExtraCommand extends ClientBasePacket {
 		if (pc.isGhost()) {
 			return;
 		}
-		if (pc.isInvisble()) { // ÀÎºñÁöºñ¸®Æ¼, ºê¶óÀÎµåÇÏÀÌµò±×Áß
+		if (pc.isInvisble()) { // ì¸ë¹„ì§€ë¹„ë¦¬í‹°, ë¸Œë¼ì¸ë“œí•˜ì´ë”˜ê·¸ì¤‘
 			return;
 		}
-		if (pc.isTeleport()) { // ÅÚ·¹Æ÷Æ® Ã³¸®Áß
+		if (pc.isTeleport()) { // í…”ë ˆí¬íŠ¸ ì²˜ë¦¬ì¤‘
 			return;
 		}
-		if (pc.hasSkillEffect(SHAPE_CHANGE)) { // ¸¸ÀÏÀ» À§ÇØ, º¯½ÅÁßÀº Å¸ÇÃ·¹ÀÌ¾î¿¡ ¼Û½ÅÇÏÁö ¾Ê´Â´Ù
+		if (pc.hasSkillEffect(SHAPE_CHANGE)) { // ë§Œì¼ì„ ìœ„í•´, ë³€ì‹ ì¤‘ì€ íƒ€í”Œë ˆì´ì–´ì— ì†¡ì‹ í•˜ì§€ ì•ŠëŠ”ë‹¤
 			int gfxId = pc.getTempCharGfx();
-			if (gfxId != 6080 && gfxId != 6094) { // ±â¸¶¿ë Çì·ë º¯½ÅÀº ¿¹¿Ü
+			if (gfxId != 6080 && gfxId != 6094) { // ê¸°ë§ˆìš© í—¤ë£¸ ë³€ì‹ ì€ ì˜ˆì™¸
 				return;
 			}
 		}
 		S_DoActionGFX gfx = new S_DoActionGFX(pc.getId(), actionId);
-		pc.broadcastPacket(gfx); // ÁÖÀ§ÀÇ ÇÃ·¹ÀÌ¾î¿¡ ¼Û½Å
+		pc.broadcastPacket(gfx); // ì£¼ìœ„ì˜ í”Œë ˆì´ì–´ì— ì†¡ì‹ 
 	}
 
 	@Override

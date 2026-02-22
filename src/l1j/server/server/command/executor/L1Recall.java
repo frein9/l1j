@@ -40,7 +40,7 @@ public class L1Recall implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 			Collection<L1PcInstance> targets = null;
 			if (arg.equalsIgnoreCase("all")) {
 				targets = L1World.getInstance(). getAllPlayers();
@@ -48,11 +48,11 @@ public class L1Recall implements L1CommandExecutor {
 				targets = new ArrayList<L1PcInstance>();
 				L1PcInstance tg = L1World.getInstance().getPlayer(arg);
 				if (tg == null) {
-					pc.sendPackets(new S_SystemMessage("±×·¯ÇÑ Ä³¸¯ÅÍ´Â ¾ø½À´Ï´Ù. "));
+					pc.sendPackets(new S_SystemMessage("ê·¸ëŸ¬í•œ ìºë¦­í„°ëŠ” ì—†ìŠµë‹ˆë‹¤. "));
 					return;
 				}
-				if (tg.isPrivateShop()) {  // »óÁ¡ÁßÀÌ¶ó¸é <±êÅĞ ¹ö±× ¹æÁö>
-					pc.sendPackets(new S_SystemMessage("»óÁ¡ÁßÀÎ ÄÉ¸¯ÅÍ´Â ¼ÒÈ¯ ÇÒ ¼ö ¾ø½À´Ï´Ù."));
+				if (tg.isPrivateShop()) {  // ìƒì ì¤‘ì´ë¼ë©´ <ê¹ƒí„¸ ë²„ê·¸ ë°©ì§€>
+					pc.sendPackets(new S_SystemMessage("ìƒì ì¤‘ì¸ ì¼€ë¦­í„°ëŠ” ì†Œí™˜ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤."));
 					return;
 				}
 
@@ -65,17 +65,17 @@ public class L1Recall implements L1CommandExecutor {
 				}
 				L1Teleport.teleportToTargetFront(target, pc, 2);
 				pc.sendPackets(new S_SystemMessage((new StringBuilder())
-						. append(target.getName()). append("´ÔÀ» ¼ÒÈ¯Çß½À´Ï´Ù. ")
+						. append(target.getName()). append("ë‹˜ì„ ì†Œí™˜í–ˆìŠµë‹ˆë‹¤. ")
 						. toString()));
-				target.sendPackets(new S_SystemMessage("°ÔÀÓ ¸¶½ºÅÍ¿¡ ¼ÒÈ¯µÇ¾ú½À´Ï´Ù. "));
+				target.sendPackets(new S_SystemMessage("ê²Œì„ ë§ˆìŠ¤í„°ì— ì†Œí™˜ë˜ì—ˆìŠµë‹ˆë‹¤. "));
 			}
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
 			pc.sendPackets(new S_SystemMessage(cmdName
-					+ " all|Ä³¸¯ÅÍ¸íÀ¸·Î ÀÔ·ÂÇØ ÁÖ¼¼¿ä. "));
+					+ " all|ìºë¦­í„°ëª…ìœ¼ë¡œ ì…ë ¥í•´ ì£¼ì„¸ìš”. "));
 		}
 	}
 }

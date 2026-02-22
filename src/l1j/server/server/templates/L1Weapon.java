@@ -27,7 +27,7 @@ public class L1Weapon extends L1Item {
 	public L1Weapon() {
 	}
 
-	private int _hitModifier = 0; // ¡Ü ¸íÁßÀ² º¸Á¤
+	private int _hitModifier = 0; // â— ëª…ì¤‘ìœ¨ ë³´ì •
 
 	@Override
 	public int getHitModifier() {
@@ -38,7 +38,7 @@ public class L1Weapon extends L1Item {
 		_hitModifier = i;
 	}
 
-	private int _dmgModifier = 0; // ¡Ü µ¥¹ÌÁö º¸Á¤
+	private int _dmgModifier = 0; // â— ë°ë¯¸ì§€ ë³´ì •
 
 	@Override
 	public int getDmgModifier() {
@@ -49,7 +49,7 @@ public class L1Weapon extends L1Item {
 		_dmgModifier = i;
 	}
 
-	private int _doubleDmgChance; // ¡Ü DB, Å©·Î¿ìÀÇ ¹ßµ¿ È®·ü
+	private int _doubleDmgChance; // â— DB, í¬ë¡œìš°ì˜ ë°œë™ í™•ë¥ 
 
 	@Override
 	public int getDoubleDmgChance() {
@@ -60,7 +60,7 @@ public class L1Weapon extends L1Item {
 		_doubleDmgChance = i;
 	}
 
-	private int _magicDmgModifier = 0; // ¡Ü °ø°İ ¸¶¹ıÀÇ µ¥¹ÌÁö º¸Á¤
+	private int _magicDmgModifier = 0; // â— ê³µê²© ë§ˆë²•ì˜ ë°ë¯¸ì§€ ë³´ì •
 
 	@Override
 	public int getMagicDmgModifier() {
@@ -71,7 +71,7 @@ public class L1Weapon extends L1Item {
 		_magicDmgModifier = i;
 	}
 
-	private int _canbedmg = 0; // ¡Ü ¼Õ»óÀÇ À¯¹«
+	private int _canbedmg = 0; // â— ì†ìƒì˜ ìœ ë¬´
 
 	@Override
 	public int get_canbedmg() {

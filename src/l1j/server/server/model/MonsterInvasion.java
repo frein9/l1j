@@ -24,12 +24,12 @@ public class MonsterInvasion{
    .getName());
  private static Random _random = new Random();
  
- int[] _Monster1={451751,451911,452201,452331,452381}; //1¶ó¿îµå ¸ó½ºÅÍID
- int[] _Monster2={454981,455301,455371,455621,456031}; //2¶ó¿îµå ¸ó½ºÅÍID
- int[] _Monster3={456231,456241,456281,456291,456301}; //3¶ó¿îµå ¸ó½ºÅÍID
+ int[] _Monster1={451751,451911,452201,452331,452381}; //1ë¼ìš´ë“œ ëª¬ìŠ¤í„°ID
+ int[] _Monster2={454981,455301,455371,455621,456031}; //2ë¼ìš´ë“œ ëª¬ìŠ¤í„°ID
+ int[] _Monster3={456231,456241,456281,456291,456301}; //3ë¼ìš´ë“œ ëª¬ìŠ¤í„°ID
  
 
-private  L1NpcInstance ±Õ¿­ = L1World.getInstance().findNpc(2031);
+private  L1NpcInstance ê· ì—´ = L1World.getInstance().findNpc(2031);
 
 
  private static MonsterInvasion instance;
@@ -105,9 +105,9 @@ private  L1NpcInstance ±Õ¿­ = L1World.getInstance().findNpc(2031);
  public class InvasionStart implements Runnable {
   public void run(){
    try{
-    WorldMessage("\\fY ¸ó½ºÅÍÄ§°øÀÌ ½ÃÀÛµË´Ï´Ù.");
+    WorldMessage("\\fY ëª¬ìŠ¤í„°ì¹¨ê³µì´ ì‹œì‘ë©ë‹ˆë‹¤.");
     Thread.sleep(1000);
-    WorldMessage("\\fY ¸¶Áö¸·¿¡ ³ª¿À´Â º¸½º±îÁö Á¦°ÅÇÏ¼Å¾ßµË´Ï´Ù.");
+    WorldMessage("\\fY ë§ˆì§€ë§‰ì— ë‚˜ì˜¤ëŠ” ë³´ìŠ¤ê¹Œì§€ ì œê±°í•˜ì…”ì•¼ë©ë‹ˆë‹¤.");
     L1SpawnUtil.spawn(2031,getMainX(),getMainY(),5,getMainMap());
     Thread.sleep(2000);
     setRound(1);
@@ -115,11 +115,11 @@ private  L1NpcInstance ±Õ¿­ = L1World.getInstance().findNpc(2031);
     SpawnStartON();
     while(true){
      if(getStopCom()==true){
-     ±Õ¿­.deleteMe();
+     ê· ì—´.deleteMe();
      EndMonster();
-     WorldMessage("\\fY º¸½º¸ó½ºÅÍ°¡ Á¦°ÅµÇ¾ú½À´Ï´Ù.");
+     WorldMessage("\\fY ë³´ìŠ¤ëª¬ìŠ¤í„°ê°€ ì œê±°ë˜ì—ˆìŠµë‹ˆë‹¤.");
      Thread.sleep(3000);
-     WorldMessage("\\fY ÃàÇÏµå¸³´Ï´Ù ¸ó½ºÅÍÄ§°ø ¹æ¾î¿¡ ¼º°øÇÏ¼Ì½À´Ï´Ù..");
+     WorldMessage("\\fY ì¶•í•˜ë“œë¦½ë‹ˆë‹¤ ëª¬ìŠ¤í„°ì¹¨ê³µ ë°©ì–´ì— ì„±ê³µí•˜ì…¨ìŠµë‹ˆë‹¤..");
      break;
      }
      Thread.sleep(1000);
@@ -146,9 +146,9 @@ private  L1NpcInstance ±Õ¿­ = L1World.getInstance().findNpc(2031);
    try{
    
     while(getRound() <= 4){
-     WorldMessage("\\fY"+getRound()+"Â÷°ø°İÀÌ ½ÃÀÛµË´Ï´Ù.");
+     WorldMessage("\\fY"+getRound()+"ì°¨ê³µê²©ì´ ì‹œì‘ë©ë‹ˆë‹¤.");
     for(int B=0;B<=5;B++){
-     WorldMessage("\\fY¸ó½ºÅÍ°¡ ³ªÅ¸³µ½À´Ï´Ù.");
+     WorldMessage("\\fYëª¬ìŠ¤í„°ê°€ ë‚˜íƒ€ë‚¬ìŠµë‹ˆë‹¤.");
     for(int A=0;A<=50;A++){
      switch(getRound()){
      case 1:
@@ -170,7 +170,7 @@ private  L1NpcInstance ±Õ¿­ = L1World.getInstance().findNpc(2031);
       Thread.sleep(100);
       break;
      case 4:
-      WorldMessage("\\fYº¸½º¸ó½ºÅÍ°¡ ³ªÅ¸³µ½À´Ï´Ù.");
+      WorldMessage("\\fYë³´ìŠ¤ëª¬ìŠ¤í„°ê°€ ë‚˜íƒ€ë‚¬ìŠµë‹ˆë‹¤.");
       L1SpawnUtil.spawn(456851,X,Y,Heading,Mapid);
       break;
      }
@@ -180,11 +180,11 @@ private  L1NpcInstance ±Õ¿­ = L1World.getInstance().findNpc(2031);
      }
     Thread.sleep(40000);
     }
-    WorldMessage("\\fY"+getRound()+"Â÷°ø°İÀ» ÀúÁöÇÏ¼Ì½À´Ï´Ù.");
+    WorldMessage("\\fY"+getRound()+"ì°¨ê³µê²©ì„ ì €ì§€í•˜ì…¨ìŠµë‹ˆë‹¤.");
     setRound(getRound()+1);
    }
    }catch(Exception a){
-    WorldMessage("\\fY ½ºÆù¿¡·¯.");
+    WorldMessage("\\fY ìŠ¤í°ì—ëŸ¬.");
    }
   }
  }

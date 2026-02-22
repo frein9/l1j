@@ -29,12 +29,12 @@ import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.item.L1ItemId;
-import l1j.server.server.model.skill.L1SkillId; //Ãß°¡
+import l1j.server.server.model.skill.L1SkillId; //ì¶”ê°€
 import l1j.server.server.serverpackets.S_AttackPacket;
-import l1j.server.server.serverpackets.S_Disconnect; // ########## (¹ö±× ¹æÁö) ¼ö·®¼º ¾ÆÀÌÅÛ Åä±Û ¹ö±× ¹æÁö 
+import l1j.server.server.serverpackets.S_Disconnect; // ########## (ë²„ê·¸ ë°©ì§€) ìˆ˜ëŸ‰ì„± ì•„ì´í…œ í† ê¸€ ë²„ê·¸ ë°©ì§€ 
 import l1j.server.server.serverpackets.S_SystemMessage; // #####
 import l1j.server.server.serverpackets.S_ServerMessage;
-import l1j.server.server.BugKick;	//** ¹ö±×ÀïÀÌ Ã³´Ü **//	By µµ¿ì³Ê
+import l1j.server.server.BugKick;	//** ë²„ê·¸ìŸì´ ì²˜ë‹¨ **//	By ë„ìš°ë„ˆ
 
 public class C_PickUpItem extends ClientBasePacket {
 
@@ -50,10 +50,10 @@ public class C_PickUpItem extends ClientBasePacket {
 		int objectId = readD();
 		int pickupCount = readD();
 
-		//** ¿£Â¡ ¹æ¾î **//	By µµ¿ì³Ê
+		//** ì—”ì§• ë°©ì–´ **//	By ë„ìš°ë„ˆ
         long pickupCheck = 0;
 		pickupCheck = pickupCheck + pickupCount; 
-		//** ¿£Â¡ ¹æ¾î **//	By µµ¿ì³Ê
+		//** ì—”ì§• ë°©ì–´ **//	By ë„ìš°ë„ˆ
 
 		L1PcInstance pc = client.getActiveChar();
 		if (pc.isDead() || pc.isGhost()) {
@@ -64,13 +64,13 @@ public class C_PickUpItem extends ClientBasePacket {
 			return;
 		}
 
-        // ¿ùµå¸Ê»ó ³» °èÁ¤°ú °°Àº µ¿ÀÏ ÇÑ °èÁ¤À» °¡Áø Ä³¸¯ÀÌ Á¢¼ÓÁßÀÌ¶ó¸é
+        // ì›”ë“œë§µìƒ ë‚´ ê³„ì •ê³¼ ê°™ì€ ë™ì¼ í•œ ê³„ì •ì„ ê°€ì§„ ìºë¦­ì´ ì ‘ì†ì¤‘ì´ë¼ë©´
 		//if(isTwoLogin(pc)) return;
 		
-		if (pc.isInvisble()) { // ÀÎºñÁö »óÅÂ
+		if (pc.isInvisble()) { // ì¸ë¹„ì§€ ìƒíƒœ
 			return;
 		}
-		if (pc.isInvisDelay()) { // ÀÎºñÁöµğ·¹ÀÌ »óÅÂ
+		if (pc.isInvisDelay()) { // ì¸ë¹„ì§€ë””ë ˆì´ ìƒíƒœ
 			return;
 		}		
 
@@ -80,7 +80,7 @@ public class C_PickUpItem extends ClientBasePacket {
 
 		if (object != null && !pc.isDead()) {
 			L1ItemInstance item = (L1ItemInstance) object;
-			if (item.getItemOwnerId() != 0 && pc.getId() != item.getItemOwnerId()) { // ¾ÆÀÌÅÛ ¼ÒÀ¯ ±ÇÇÑ
+			if (item.getItemOwnerId() != 0 && pc.getId() != item.getItemOwnerId()) { // ì•„ì´í…œ ì†Œìœ  ê¶Œí•œ
 				pc.sendPackets(new S_ServerMessage(623)); 
 				return;   
 			} 
@@ -89,8 +89,8 @@ public class C_PickUpItem extends ClientBasePacket {
 				return;  
 			} 
 		
-			//** ¾ÆÀÌÅÛ ÇÈ¾÷¹æÁö **// by µµ¿ì³Ê	
-			if (objectId != item.getId()) {  //¹Ù²¨Ä¡±â ºÎºĞ
+			//** ì•„ì´í…œ í”½ì—…ë°©ì§€ **// by ë„ìš°ë„ˆ	
+			if (objectId != item.getId()) {  //ë°”êº¼ì¹˜ê¸° ë¶€ë¶„
 				return;
 			}
 			int itemType = item.getItem().getType2(); 
@@ -113,31 +113,31 @@ public class C_PickUpItem extends ClientBasePacket {
 				if (inventoryItem != null) {
 					inventoryItemCount = inventoryItem.getCount();
 				}
-				// ÁÖ¿î ÈÄ¿¡ 2 G¸¦ ÃÊ°úÇÏÁö ¾Ê°Ô Ã¼Å©
+				// ì£¼ìš´ í›„ì— 2 Gë¥¼ ì´ˆê³¼í•˜ì§€ ì•Šê²Œ ì²´í¬
 				if ((long) inventoryItemCount + (long) pickupCount > 2000000000L) {*/
 				if (l1iteminstance != null 
 					      && l1iteminstance.getCount() > 2000000000) {
-					pc.sendPackets(new S_ServerMessage(166, // \f1%0ÀÌ%4%1%3%2
-							"¼ÒÁöÇÏ°í ÀÖ´Â ¾Æµ¥³ª", "2,000,000,000À» ÃÊ°úÇÏ¹Ç·Î ÁÖ¿ï ¼ö ¾ø½À´Ï´Ù."));
+					pc.sendPackets(new S_ServerMessage(166, // \f1%0ì´%4%1%3%2
+							"ì†Œì§€í•˜ê³  ìˆëŠ” ì•„ë°ë‚˜", "2,000,000,000ì„ ì´ˆê³¼í•˜ë¯€ë¡œ ì£¼ìš¸ ìˆ˜ ì—†ìŠµë‹ˆë‹¤."));
 					return;
 				}
-				if(pc.hasSkillEffect(L1SkillId.STATUS_XNAKD)){    //Ãß°¡
+				if(pc.hasSkillEffect(L1SkillId.STATUS_XNAKD)){    //ì¶”ê°€
 				       return;
 				       }
-				       if(pc.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)){    //Ãß°¡
-				        pc.sendPackets(new S_SystemMessage("¾Û¼Ö·çÆ® ¹è¸®¾î »óÅÂ¿¡¼­´Â ¾ÆÀÌÅÛÀ» ÁÖ¿ï ¼ö ¾ø½À´Ï´Ù."));
+				       if(pc.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)){    //ì¶”ê°€
+				        pc.sendPackets(new S_SystemMessage("ì•±ì†”ë£¨íŠ¸ ë°°ë¦¬ì–´ ìƒíƒœì—ì„œëŠ” ì•„ì´í…œì„ ì£¼ìš¸ ìˆ˜ ì—†ìŠµë‹ˆë‹¤."));
 				       return;
 				       }
 
 			}
 
-			if (pc.getInventory().checkAddItem( // ¿ë·® Áß·® È®ÀÎ ¹× ¸Ş¼¼Áö ¼Û½Å
+			if (pc.getInventory().checkAddItem( // ìš©ëŸ‰ ì¤‘ëŸ‰ í™•ì¸ ë° ë©”ì„¸ì§€ ì†¡ì‹ 
 					//item , pickupCount) == L1Inventory.OK) {
 					item, item.getCount()) == L1Inventory.OK) { 
 
-        if (item.getX() != 0 && item.getY() != 0) { // ¿ùµå ¸Ê À§ÀÇ ¾ÆÀÌÅÛ
-	// ¾ÆÀÌÅÛÁİ±â ½ÃÀÛ - ACE
-		if (pc.isInParty() && !item.get_pcDrop()) { // ÆÄÆ¼»óÅÂÀÌ°í »ç¶÷ÀÌ ¹ö¸°°Ô ¾Æ´Ñ ¾ÆÀÌÅÛ
+        if (item.getX() != 0 && item.getY() != 0) { // ì›”ë“œ ë§µ ìœ„ì˜ ì•„ì´í…œ
+	// ì•„ì´í…œì¤ê¸° ì‹œì‘ - ACE
+		if (pc.isInParty() && !item.get_pcDrop()) { // íŒŒí‹°ìƒíƒœì´ê³  ì‚¬ëŒì´ ë²„ë¦°ê²Œ ì•„ë‹Œ ì•„ì´í…œ
 			L1PcInstance partyMember[] = pc.getParty().getMembers();
 			L1PcInstance itemMember[] = new L1PcInstance[partyMember.length];
 			int cnt = 0;
@@ -145,30 +145,30 @@ public class C_PickUpItem extends ClientBasePacket {
 			for(i=0; i<partyMember.length; i++){
 				if(partyMember[i].getLocation().getTileLineDistance(item.getLocation())<= 16) {
 					itemMember[cnt] = partyMember[i];
-					cnt++; // ¾ÆÀÌÅÛÀ» °¡Áú¼ö ÀÖ´Â ¸â¹ö ¼ö
+					cnt++; // ì•„ì´í…œì„ ê°€ì§ˆìˆ˜ ìˆëŠ” ë©¤ë²„ ìˆ˜
 				}
 			}
-			if(item.getItemId() == L1ItemId.ADENA){ // ¾Æµ¥³ªÀÏ °æ¿ì
+			if(item.getItemId() == L1ItemId.ADENA){ // ì•„ë°ë‚˜ì¼ ê²½ìš°
 				int adenadiv = item.getCount()/cnt;
 				int adenaremainder = item.getCount()%cnt;
 				for(i=0; i<cnt; i++){
 					groundInventory.tradeItem(item, adenadiv, itemMember[i].getInventory());
 				}
-				if(adenaremainder>0){ // ³ª´©°í ³²Àº ¾Æµ¥³ª°¡ ÀÖÀ¸¸é ÁÖ¿î »ç¶÷ÀÌ °®ÀÚ
+				if(adenaremainder>0){ // ë‚˜ëˆ„ê³  ë‚¨ì€ ì•„ë°ë‚˜ê°€ ìˆìœ¼ë©´ ì£¼ìš´ ì‚¬ëŒì´ ê°–ì
 					groundInventory.tradeItem(item, adenaremainder, pc.getInventory());
 				}
-			} else { // ¾Æµ¥³ª°¡ ¾Æ´Ñ ¾ÆÀÌÅÛ
-				if(pc.getAutoDivision()){ // ºĞ¹èÆÄÆ¼ÀÏ °æ¿ì
+			} else { // ì•„ë°ë‚˜ê°€ ì•„ë‹Œ ì•„ì´í…œ
+				if(pc.getAutoDivision()){ // ë¶„ë°°íŒŒí‹°ì¼ ê²½ìš°
 					int Who = _random.nextInt(itemMember.length);
 					groundInventory.tradeItem(item, item.getCount(), itemMember[Who].getInventory());
 					for(i=0; i<partyMember.length; i++){
-						partyMember[i].sendPackets(new S_SystemMessage(itemMember[Who].getName()+" ´Ô²²¼­ "+item.getName()+"¸¦ ("+item.getCount()+")°³ È¹µæÇÏ¿´½À´Ï´Ù."));
+						partyMember[i].sendPackets(new S_SystemMessage(itemMember[Who].getName()+" ë‹˜ê»˜ì„œ "+item.getName()+"ë¥¼ ("+item.getCount()+")ê°œ íšë“í•˜ì˜€ìŠµë‹ˆë‹¤."));
 					}
-				} else { // ÀÏ¹İÆÄÆ¼ÀÏ °æ¿ì
+				} else { // ì¼ë°˜íŒŒí‹°ì¼ ê²½ìš°
 					groundInventory.tradeItem(item, item.getCount(), pc.getInventory());
 				}
 			}
-		} else { // ÆÄÆ¼°¡ ¾Æ´Ï°Å³ª »ç¶÷ÀÌ ¹ö¸° ¾ÆÀÌÅÛ
+		} else { // íŒŒí‹°ê°€ ì•„ë‹ˆê±°ë‚˜ ì‚¬ëŒì´ ë²„ë¦° ì•„ì´í…œ
 			groundInventory.tradeItem(item, item.getCount(), pc.getInventory());
 		}
 		pc.turnOnOffLight();
@@ -176,25 +176,25 @@ public class C_PickUpItem extends ClientBasePacket {
 	 	if (!pc.isGmInvis()) {
 			pc.broadcastPacket(new S_AttackPacket(pc, objectId, ActionCodes.ACTION_Pickup));
 		}
-	// ¾ÆÀÌÅÛÁİ±â ³¡ - ACE
+	// ì•„ì´í…œì¤ê¸° ë - ACE
 					}
 				}
 			}
 		}
-/*	  if (pc.isInParty()) { // ÆÄÆ¼ÀÇ °æ¿ì
-	       L1PcInstance partyMember[] = pc.getParty().getMembers(); //ÆÄÆ¼¸â¹ö¸¦ ¹è¿­¿¡»ğÀÔ
-	       int Who = _random.nextInt(partyMember.length); //·£´ıÀ¸·Î ÆÄÆ¼¿øÁßÇÏ³ª¼±ÅÃ
-	       L1PcInstance pc1 = partyMember[Who]; //pc1À¸·Î Áı¾î³ÖÀ½
-	  if (pc1.getLocation().getTileLineDistance(item.getLocation()) > 16 || item.get_pcDrop() || !pc.getAutoDivision()) {  //pc1ÀÌ ¾ÆÀÌÅÛ°ú ¸Ö¸®¶³¾îÁø °æ¿ì, »ç¶÷ÀÌ ¹ö¸° °æ¿ì, ºĞ¹èÆÄÆ¼°¡ ¾Æ´Ñ °æ¿ì
-		   pc1 = pc; // Åä±ÛÇÑ »ç¶÷À» pc1À¸·Î, Áï Åä±ÛÇÑ »ç¶÷ÀÌ ¸Ôµµ·Ï ÇÔ
+/*	  if (pc.isInParty()) { // íŒŒí‹°ì˜ ê²½ìš°
+	       L1PcInstance partyMember[] = pc.getParty().getMembers(); //íŒŒí‹°ë©¤ë²„ë¥¼ ë°°ì—´ì—ì‚½ì…
+	       int Who = _random.nextInt(partyMember.length); //ëœë¤ìœ¼ë¡œ íŒŒí‹°ì›ì¤‘í•˜ë‚˜ì„ íƒ
+	       L1PcInstance pc1 = partyMember[Who]; //pc1ìœ¼ë¡œ ì§‘ì–´ë„£ìŒ
+	  if (pc1.getLocation().getTileLineDistance(item.getLocation()) > 16 || item.get_pcDrop() || !pc.getAutoDivision()) {  //pc1ì´ ì•„ì´í…œê³¼ ë©€ë¦¬ë–¨ì–´ì§„ ê²½ìš°, ì‚¬ëŒì´ ë²„ë¦° ê²½ìš°, ë¶„ë°°íŒŒí‹°ê°€ ì•„ë‹Œ ê²½ìš°
+		   pc1 = pc; // í† ê¸€í•œ ì‚¬ëŒì„ pc1ìœ¼ë¡œ, ì¦‰ í† ê¸€í•œ ì‚¬ëŒì´ ë¨¹ë„ë¡ í•¨
 	       }  
-	      groundInventory.tradeItem(item, item.getCount(), pc1.getInventory()); //¹Ù´ÚÀÇ¾ÆÀÌÅÛÀ» pc1¿¡°Ô »ğÀÔ
+	      groundInventory.tradeItem(item, item.getCount(), pc1.getInventory()); //ë°”ë‹¥ì˜ì•„ì´í…œì„ pc1ì—ê²Œ ì‚½ì…
 	  if (!item.get_pcDrop()) {  
-	       String ÀÌ¸§ = pc1.getName();
-	       String ¾ÆÀÌÅÛÀÌ¸§ = item.getName();
-	       int ¾ÆÀÌÅÛ°¹¼ö = item.getCount();
+	       String ì´ë¦„ = pc1.getName();
+	       String ì•„ì´í…œì´ë¦„ = item.getName();
+	       int ì•„ì´í…œê°¯ìˆ˜ = item.getCount();
 	       for(int i=0;i<partyMember.length;i++){
-	       partyMember[i].sendPackets(new S_SystemMessage(""+ÀÌ¸§+" ´Ô²²¼­ "+¾ÆÀÌÅÛÀÌ¸§+"¸¦ ("+¾ÆÀÌÅÛ°¹¼ö+")°³ È¹µæÇÏ¿´½À´Ï´Ù."));
+	       partyMember[i].sendPackets(new S_SystemMessage(""+ì´ë¦„+" ë‹˜ê»˜ì„œ "+ì•„ì´í…œì´ë¦„+"ë¥¼ ("+ì•„ì´í…œê°¯ìˆ˜+")ê°œ íšë“í•˜ì˜€ìŠµë‹ˆë‹¤."));
 	       }
 	       }
 	       pc.turnOnOffLight();
@@ -202,7 +202,7 @@ public class C_PickUpItem extends ClientBasePacket {
 	  if (!pc.isGmInvis()) {
 		   pc.broadcastPacket(new S_AttackPacket(pc, objectId, ActionCodes.ACTION_Pickup));
 		   }
-	  }else{ //ÆÄÆ¼°¡¾Æ´Ò½Ã
+	  }else{ //íŒŒí‹°ê°€ì•„ë‹ì‹œ
 	       groundInventory.tradeItem(item, item.getCount(), pc.getInventory());
 	       pc.turnOnOffLight();
 	       pc.sendPackets(new S_AttackPacket(pc, objectId, ActionCodes.ACTION_Pickup));
@@ -215,9 +215,9 @@ public class C_PickUpItem extends ClientBasePacket {
 		  }
 		  }*/
 	/**
-	 * ¿ùµå»ó¿¡ ÀÖ´Â ¸ğµç Ä³¸¯ÀÇ °èÁ¤À» ºñ±³ÇØ °°Àº °èÁ¤ÀÌ ÀÖ´Ù¸é true ¾ø´Ù¸é false
+	 * ì›”ë“œìƒì— ìˆëŠ” ëª¨ë“  ìºë¦­ì˜ ê³„ì •ì„ ë¹„êµí•´ ê°™ì€ ê³„ì •ì´ ìˆë‹¤ë©´ true ì—†ë‹¤ë©´ false
 	 * @param c L1PcInstance
-	 * @return ÀÖ´Ù¸é true
+	 * @return ìˆë‹¤ë©´ true
 	 */
 	private boolean isTwoLogin(L1PcInstance c) {
 		boolean bool = false;

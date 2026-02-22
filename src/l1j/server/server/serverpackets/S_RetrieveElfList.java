@@ -32,7 +32,7 @@ public class S_RetrieveElfList extends ServerBasePacket {
 				writeC(Opcodes.S_OPCODE_SHOWRETRIEVELIST);
 				writeD(objid);
 				writeH(size);
-				writeC(9); // ¿¡¸£ÇÁ Ã¢°í
+				writeC(9); // ì—ë¥´í”„ ì°½ê³ 
 				for (Object itemObject : pc.getDwarfForElfInventory()
 						.getItems()) {
 					L1ItemInstance item = (L1ItemInstance) itemObject;
@@ -46,7 +46,7 @@ public class S_RetrieveElfList extends ServerBasePacket {
 				}
 			}
 		} else {
-			pc.sendPackets(new S_ServerMessage(263)); // \f1ÇÑ»ç¶÷ÀÇ Ä³¸¯ÅÍ°¡ °¡Áö°í °ÉÀ» ¼ö ÀÖ´Â ¾ÆÀÌÅÛÀº ÃÖ´ë 180°³±îÁöÀÔ´Ï´Ù.
+			pc.sendPackets(new S_ServerMessage(263)); // \f1í•œì‚¬ëŒì˜ ìºë¦­í„°ê°€ ê°€ì§€ê³  ê±¸ì„ ìˆ˜ ìˆëŠ” ì•„ì´í…œì€ ìµœëŒ€ 180ê°œê¹Œì§€ì…ë‹ˆë‹¤.
 		}
 	}
 

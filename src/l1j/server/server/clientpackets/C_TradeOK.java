@@ -45,30 +45,30 @@ public class C_TradeOK extends ClientBasePacket {
 		if (trading_partner != null) {
 			player.setTradeOk(true);
 
-			if (player.getTradeOk() && trading_partner.getTradeOk()) // ¸ğµÎ OK¸¦ ´­·¶´Ù
+			if (player.getTradeOk() && trading_partner.getTradeOk()) // ëª¨ë‘ OKë¥¼ ëˆŒë €ë‹¤
 			{
-				// (180 - 16) °³¹Ì¸¸ÀÌ¶ó¸é Æ®·¹ÀÌµå ¼º¸³.
-				// º»·¡´Â °ãÄ¡´Â ¾ÆÀÌÅÛ(¾Æµ¥³ªµî )À» ÀÌ¹Ì °¡Áö°í ÀÖ´Â °æ¿ì¸¦ °í·ÁÇÏÁö ¾Ê´Â Â÷¸é ¾È µÈ´Ù.
+				// (180 - 16) ê°œë¯¸ë§Œì´ë¼ë©´ íŠ¸ë ˆì´ë“œ ì„±ë¦½.
+				// ë³¸ë˜ëŠ” ê²¹ì¹˜ëŠ” ì•„ì´í…œ(ì•„ë°ë‚˜ë“± )ì„ ì´ë¯¸ ê°€ì§€ê³  ìˆëŠ” ê²½ìš°ë¥¼ ê³ ë ¤í•˜ì§€ ì•ŠëŠ” ì°¨ë©´ ì•ˆ ëœë‹¤.
 				if (player.getInventory().getSize() < (180 - 16)
-						&& trading_partner.getInventory().getSize() < (180 - 16)) // ¼­·ÎÀÇ ¾ÆÀÌÅÛÀ» »ó´ë¿¡°Ô °Ç³×ÁØ´Ù
+						&& trading_partner.getInventory().getSize() < (180 - 16)) // ì„œë¡œì˜ ì•„ì´í…œì„ ìƒëŒ€ì—ê²Œ ê±´ë„¤ì¤€ë‹¤
 				{
 					L1Trade trade = new L1Trade();
 					trade.TradeOK(player);
-				} else // ¼­·ÎÀÇ ¾ÆÀÌÅÛÀ» ¼öÁß¿¡ µÇµ¹¸°´Ù
+				} else // ì„œë¡œì˜ ì•„ì´í…œì„ ìˆ˜ì¤‘ì— ë˜ëŒë¦°ë‹¤
 				{
-					player.sendPackets(new S_ServerMessage(263)); // \f1ÇÑ»ç¶÷ÀÇ Ä³¸¯ÅÍ°¡ °¡Áö°í °ÉÀ» ¼ö ÀÖ´Â ¾ÆÀÌÅÛÀº ÃÖ´ë 180°³±îÁöÀÔ´Ï´Ù.
-					trading_partner.sendPackets(new S_ServerMessage(263)); // \f1ÇÑ»ç¶÷ÀÇ Ä³¸¯ÅÍ°¡ °¡Áö°í °ÉÀ» ¼ö ÀÖ´Â ¾ÆÀÌÅÛÀº ÃÖ´ë 180°³±îÁöÀÔ´Ï´Ù.
+					player.sendPackets(new S_ServerMessage(263)); // \f1í•œì‚¬ëŒì˜ ìºë¦­í„°ê°€ ê°€ì§€ê³  ê±¸ì„ ìˆ˜ ìˆëŠ” ì•„ì´í…œì€ ìµœëŒ€ 180ê°œê¹Œì§€ì…ë‹ˆë‹¤.
+					trading_partner.sendPackets(new S_ServerMessage(263)); // \f1í•œì‚¬ëŒì˜ ìºë¦­í„°ê°€ ê°€ì§€ê³  ê±¸ì„ ìˆ˜ ìˆëŠ” ì•„ì´í…œì€ ìµœëŒ€ 180ê°œê¹Œì§€ì…ë‹ˆë‹¤.
 					L1Trade trade = new L1Trade();
 					trade.TradeCancel(player);
 				}
 			}
 
-////////////ÁÖ»çÀ§   
+////////////ì£¼ì‚¬ìœ„   
 		}
 		else{
 			L1Trade trade = new L1Trade();
 			trade.TradeOK(player);   
-////////////////   ÁÖ»çÀ§   
+////////////////   ì£¼ì‚¬ìœ„   
 		}
 	}
 

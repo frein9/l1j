@@ -47,11 +47,11 @@ public class S_Door extends ServerBasePacket {
 		writeC(Opcodes.S_OPCODE_ATTRIBUTE);
 		writeH(x);
 		writeH(y);
-		writeC(direction); // πÆ¿« πÊ«‚ 0: / 1: °¨
+		writeC(direction); // Î¨∏Ïùò Î∞©Ìñ• 0: / 1: Ôºº
 		writeC(passable);
 	}
 
-	public S_Door(L1CastleDoorInstance door, int a, int b, int c, int d) { // ∏∑¥¬∫Œ∫–
+	public S_Door(L1CastleDoorInstance door, int a, int b, int c, int d) { // ÎßâÎäîÎ∂ÄÎ∂Ñ
 		attribute(a, b, c, d);
 	}
 
@@ -59,7 +59,7 @@ public class S_Door extends ServerBasePacket {
 		writeC(Opcodes.S_OPCODE_ATTRIBUTE);
 		writeH(a);
 		writeH(b);
-		writeC(c); // πÆ¿« πÊ«‚ 0: / 1: °¨
+		writeC(c); // Î¨∏Ïùò Î∞©Ìñ• 0: / 1: Ôºº
 		writeC(d);
 	}
 

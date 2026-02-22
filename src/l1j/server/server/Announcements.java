@@ -70,7 +70,7 @@ public class Announcements {
 			showTo.sendPackets(new S_SystemMessage(msg));
 		}
 	}
-/**  2007.12. 31 °øÁö»çÇ× Ãß°¡ »èÁ¦) */
+/**  2007.12. 31 ê³µì§€ì‚¬í•­ ì¶”ê°€ ì‚­ì œ) */
  public void addAnnouncement(String text) {
   _announcements.add(text);
   saveToDisk();
@@ -98,9 +98,9 @@ public class Announcements {
 				}
 			}
 
-			_log.config("°øÁö»çÇ× " + i + "°Ç·Îµå");
+			_log.config("ê³µì§€ì‚¬í•­ " + i + "ê±´ë¡œë“œ");
 		} catch (FileNotFoundException e) {
-			// ÆÄÀÏÀÌ ¾ø´Â °æ¿ì´Â, °øÁö»çÇ× ¾øÀ½
+			// íŒŒì¼ì´ ì—†ëŠ” ê²½ìš°ëŠ”, ê³µì§€ì‚¬í•­ ì—†ìŒ
 		} catch (IOException e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 		} finally {

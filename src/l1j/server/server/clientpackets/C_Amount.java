@@ -56,23 +56,23 @@ public class C_Amount extends ClientBasePacket {
 		super(decrypt);
 		int objectId = readD();
 		int amount = readD();
-		// ¾ÆÁöÆ® °æ¸Å°Ô½ÃÆÇ ¹ö±× ¼öÁ¤ -Â¯µ¹
-		long _amount = amount; //Ãß°¡ ºÎºÐ
-		if(_amount < 0){ //Ãß°¡ ºÎºÐ
+		// ì•„ì§€íŠ¸ ê²½ë§¤ê²Œì‹œíŒ ë²„ê·¸ ìˆ˜ì • -ì§±ëŒ
+		long _amount = amount; //ì¶”ê°€ ë¶€ë¶„
+		if(_amount < 0){ //ì¶”ê°€ ë¶€ë¶„
            return;
 		}
-		// ¾ÆÁöÆ® °æ¸Å°Ô½ÃÆÇ ¹ö±× ¼öÁ¤ -Â¯µ¹
+		// ì•„ì§€íŠ¸ ê²½ë§¤ê²Œì‹œíŒ ë²„ê·¸ ìˆ˜ì • -ì§±ëŒ
 		int c = readC();
 		String s = readS();
 
 		L1PcInstance pc = client.getActiveChar();
 		L1NpcInstance npc = (L1NpcInstance) L1World.getInstance().findObject(
 				objectId);
-		// ¾ÆÁöÆ® °æ¸Å°Ô½ÃÆÇ ¹ö±× ¼öÁ¤ -Â¯µ¹
-		if (pc.getInventory().findItemId(40308).getCount() < _amount){//Ãß°¡ ºÎºÐ
+		// ì•„ì§€íŠ¸ ê²½ë§¤ê²Œì‹œíŒ ë²„ê·¸ ìˆ˜ì • -ì§±ëŒ
+		if (pc.getInventory().findItemId(40308).getCount() < _amount){//ì¶”ê°€ ë¶€ë¶„
 			return; 
 		}
-		// ¾ÆÁöÆ® °æ¸Å°Ô½ÃÆÇ ¹ö±× ¼öÁ¤ -Â¯µ¹
+		// ì•„ì§€íŠ¸ ê²½ë§¤ê²Œì‹œíŒ ë²„ê·¸ ìˆ˜ì • -ì§±ëŒ
 		if (npc == null) {
 			return;
 		}
@@ -87,12 +87,12 @@ public class C_Amount extends ClientBasePacket {
 			s1 = "";
 			s2 = "";
 		}
-		if (s1.equalsIgnoreCase("agapply")) { // °æ¸Å¿¡ ÀÔÂûÇßÀ» °æ¿ì
+		if (s1.equalsIgnoreCase("agapply")) { // ê²½ë§¤ì— ìž…ì°°í–ˆì„ ê²½ìš°
 			String pcName = pc.getName();
 			AuctionBoardTable boardTable = new AuctionBoardTable();
 			for (L1AuctionBoard board : boardTable.getAuctionBoardTableList()) {
 				if (pcName.equalsIgnoreCase(board.getBidder())) {
-					pc.sendPackets(new S_ServerMessage(523)); // ¹ú½á ´Ù¸¥ ÁýÀÇ °æ¸Å¿¡ Âü°¡ÇÏ°í ÀÖ½À´Ï´Ù.
+					pc.sendPackets(new S_ServerMessage(523)); // ë²Œì¨ ë‹¤ë¥¸ ì§‘ì˜ ê²½ë§¤ì— ì°¸ê°€í•˜ê³  ìžˆìŠµë‹ˆë‹¤.
 					return;
 				}
 			}
@@ -101,7 +101,7 @@ public class C_Amount extends ClientBasePacket {
 			if (board != null) {
 				int nowPrice = board.getPrice();
 				int nowBidderId = board.getBidderId();
-				// ¾ÆÁöÆ® °æ¸Å°Ô½ÃÆÇ ¹ö±× ¼öÁ¤ -Â¯µ¹
+				// ì•„ì§€íŠ¸ ê²½ë§¤ê²Œì‹œíŒ ë²„ê·¸ ìˆ˜ì • -ì§±ëŒ
 				long _nowPrice = nowPrice;
 					if (_nowPrice <= 0 ){
 						return;
@@ -109,25 +109,25 @@ public class C_Amount extends ClientBasePacket {
 				if (pc.getInventory().findItemId(40308).getCount() < _nowPrice){
 					return; 
 				}
-				// ¾ÆÁöÆ® °æ¸Å°Ô½ÃÆÇ ¹ö±× ¼öÁ¤ -Â¯µ¹
+				// ì•„ì§€íŠ¸ ê²½ë§¤ê²Œì‹œíŒ ë²„ê·¸ ìˆ˜ì • -ì§±ëŒ
 				if (pc.getInventory().consumeItem(L1ItemId.ADENA, amount)) {
-					// °æ¸Å °Ô½ÃÆÇÀ» °»½Å
+					// ê²½ë§¤ ê²Œì‹œíŒì„ ê°±ì‹ 
 					board.setPrice(amount);
 					board.setBidder(pcName);
 					board.setBidderId(pc.getId());
 					boardTable.updateAuctionBoard(board);
 					if (nowBidderId != 0) {
-						// ÀÔÂûÀÚ¿¡°Ô ¾Æµ¥³ª¸¦ È¯ºÒ
+						// ìž…ì°°ìžì—ê²Œ ì•„ë°ë‚˜ë¥¼ í™˜ë¶ˆ
 						L1PcInstance bidPc = (L1PcInstance) L1World
 								.getInstance().findObject(nowBidderId);
-						if (bidPc != null) { // ¿Â¶óÀÎÁß
+						if (bidPc != null) { // ì˜¨ë¼ì¸ì¤‘
 							bidPc.getInventory().storeItem(L1ItemId.ADENA,
 									nowPrice);
-							// ´ç½ÅÀÌ Á¦½ÃµÈ ±Ý¾×º¸´Ù Á» ´õ ºñ½Ñ ±Ý¾×À» Á¦½ÃÇÑ (ºÐ)ÆíÀÌ ³ªÅ¸³µ±â ¶§¹®¿¡, À¯°¨½º·´Áö¸¸ ÀÔÂû¿¡ ½ÇÆÐÇß½À´Ï´Ù.%n
-							// ´ç½ÅÀÌ °æ¸Å¿¡ ¸Ã±ä%0¾Æµ¥³ª¸¦ ´ä·ÊÇÕ´Ï´Ù.%n °¨»çÇÕ´Ï´Ù.%n%n
+							// ë‹¹ì‹ ì´ ì œì‹œëœ ê¸ˆì•¡ë³´ë‹¤ ì¢€ ë” ë¹„ì‹¼ ê¸ˆì•¡ì„ ì œì‹œí•œ (ë¶„)íŽ¸ì´ ë‚˜íƒ€ë‚¬ê¸° ë•Œë¬¸ì—, ìœ ê°ìŠ¤ëŸ½ì§€ë§Œ ìž…ì°°ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.%n
+							// ë‹¹ì‹ ì´ ê²½ë§¤ì— ë§¡ê¸´%0ì•„ë°ë‚˜ë¥¼ ë‹µë¡€í•©ë‹ˆë‹¤.%n ê°ì‚¬í•©ë‹ˆë‹¤.%n%n
 							bidPc.sendPackets(new S_ServerMessage(525, String
 									.valueOf(nowPrice)));
-						} else { // ¿ÀÇÁ ¶óÀÎÁß
+						} else { // ì˜¤í”„ ë¼ì¸ì¤‘
 							L1ItemInstance item = ItemTable.getInstance()
 									.createItem(L1ItemId.ADENA);
 							item.setCount(nowPrice);
@@ -137,23 +137,23 @@ public class C_Amount extends ClientBasePacket {
 						}
 					}
 				} else {
-					pc.sendPackets(new S_ServerMessage(189)); // \f1¾Æµ¥³ª°¡ ºÎÁ·ÇÕ´Ï´Ù.
+					pc.sendPackets(new S_ServerMessage(189)); // \f1ì•„ë°ë‚˜ê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.
 				}
 			}
-		} else if (s1.equalsIgnoreCase("agsell")) { // °¡¸¦ ÆÈ¾ÒÀ» °æ¿ì
+		} else if (s1.equalsIgnoreCase("agsell")) { // ê°€ë¥¼ íŒ”ì•˜ì„ ê²½ìš°
 			int houseId = Integer.valueOf(s2);
 			AuctionBoardTable boardTable = new AuctionBoardTable();
 			L1AuctionBoard board = new L1AuctionBoard();
 			if (board != null) {
-				// °æ¸Å °Ô½ÃÆÇ¿¡ ½Å±Ô ±âÀÔ
+				// ê²½ë§¤ ê²Œì‹œíŒì— ì‹ ê·œ ê¸°ìž…
 				board.setHouseId(houseId);
 				L1House house = HouseTable.getInstance().getHouseTable(houseId);
 				board.setHouseName(house.getHouseName());
 				board.setHouseArea(house.getHouseArea());
 				TimeZone tz = TimeZone.getTimeZone(Config.TIME_ZONE);
 				Calendar cal = Calendar.getInstance(tz);
-				cal.add(Calendar.DATE, 5); // 5ÀÏ ÈÄ
-				cal.set(Calendar.MINUTE, 0); // ºÐ , ÃÊ´Â Àß¶ó¼­ ¹ö¸²
+				cal.add(Calendar.DATE, 5); // 5ì¼ í›„
+				cal.set(Calendar.MINUTE, 0); // ë¶„ , ì´ˆëŠ” ìž˜ë¼ì„œ ë²„ë¦¼
 				cal.set(Calendar.SECOND, 0);
 				board.setDeadline(cal);
 				board.setPrice(amount);
@@ -164,9 +164,9 @@ public class C_Amount extends ClientBasePacket {
 				board.setBidderId(0);
 				boardTable.insertAuctionBoard(board);
 
-				house.setOnSale(true); // °æ¸ÅÁßÀ¸·Î ¼³Á¤
-				house.setPurchaseBasement(true); // ÁöÇÏ ¾ÆÁöÆ®¹Ì±¸ÀÔÀ¸·Î ¼³Á¤
-				HouseTable.getInstance().updateHouse(house); // DB¿¡ ±âÀÔÇØ
+				house.setOnSale(true); // ê²½ë§¤ì¤‘ìœ¼ë¡œ ì„¤ì •
+				house.setPurchaseBasement(true); // ì§€í•˜ ì•„ì§€íŠ¸ë¯¸êµ¬ìž…ìœ¼ë¡œ ì„¤ì •
+				HouseTable.getInstance().updateHouse(house); // DBì— ê¸°ìž…í•´
 			}
 		} else {
 			L1NpcAction action = NpcActionTable.getInstance().get(s, pc, npc);

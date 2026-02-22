@@ -38,7 +38,7 @@ import l1j.server.server.serverpackets.S_CommonNews;
 import l1j.server.server.serverpackets.S_Disconnect;
 import l1j.server.server.serverpackets.S_LoginResult;
 import l1j.server.server.utils.SQLUtil;
-//import l1j.server.server.clientpackets.C_CommonClick;//·Î±×ÀÎºÎ ±¸Á¶º¯°æÀ» À§ÇØ Ãß°¡
+//import l1j.server.server.clientpackets.C_CommonClick;//ë¡œê·¸ì¸ë¶€ êµ¬ì¡°ë³€ê²½ì„ ìœ„í•´ ì¶”ê°€
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
@@ -48,15 +48,15 @@ public class C_AuthLogin extends ClientBasePacket {
 	private static final String C_AUTH_LOGIN = "[C] C_AuthLogin";
 	private static Logger _log = Logger.getLogger(C_AuthLogin.class.getName());
 
-    // ########## A105 °èÁ¤¸í ±æÀÌ Á¦ÇÑ ¹× °ø¹éÀ¸·Î »ı¼º ¸øÇÏ°Ô  
+    // ########## A105 ê³„ì •ëª… ê¸¸ì´ ì œí•œ ë° ê³µë°±ìœ¼ë¡œ ìƒì„± ëª»í•˜ê²Œ  
 	private static boolean isDisitAlaha(String str) {
 		boolean check = true;
 		for (int i = 0; i < str.length(); i++) {
-			if (!Character.isDigit(str.charAt(i)) // ¼ıÀÚ°¡ ¾Æ´Ï¶ó¸é
-					&& Character.isLetterOrDigit(str.charAt(i)) // Æ¯¼ö¹®ÀÚ¶ó¸é
-					&& !Character.isUpperCase(str.charAt(i)) // ´ë¹®ÀÚ°¡ ¾Æ´Ï¶ó¸é
-					&& Character.isWhitespace(str.charAt(i)) // °ø¹éÀÌ¶ó¸é
-					&& !Character.isLowerCase(str.charAt(i))) { // ¼Ò¹®ÀÚ°¡ ¾Æ´Ï¶ó¸é
+			if (!Character.isDigit(str.charAt(i)) // ìˆ«ìê°€ ì•„ë‹ˆë¼ë©´
+					&& Character.isLetterOrDigit(str.charAt(i)) // íŠ¹ìˆ˜ë¬¸ìë¼ë©´
+					&& !Character.isUpperCase(str.charAt(i)) // ëŒ€ë¬¸ìê°€ ì•„ë‹ˆë¼ë©´
+					&& Character.isWhitespace(str.charAt(i)) // ê³µë°±ì´ë¼ë©´
+					&& !Character.isLowerCase(str.charAt(i))) { // ì†Œë¬¸ìê°€ ì•„ë‹ˆë¼ë©´
 				check = false;
 				break;
 			}
@@ -64,10 +64,10 @@ public class C_AuthLogin extends ClientBasePacket {
 		return check;
 	}
 
-	// µÎÄÉ¸¯ ¹ö±× ¹æÁö¿ë.
+	// ë‘ì¼€ë¦­ ë²„ê·¸ ë°©ì§€ìš©.
 	/*
-	 * ±âº»ÀûÀ¸·Î ·Î±äÇÑ °èÁ¤¸íÀ¸·Î ¿ùµå³»¿¡ ¿ùµå³»¿¡ OnlineStatus °¡ 1 ÀÎ ÄÉ¸¯ÅÍ°¡ ÀÖ´ÂÁö¸¦ Ã£¾Æ¼­
-	 * ÀÖ´Ù¸é ÇØ´ç ÄÉ¸¯ÅÍÀÇ Á¤º¸¸¦ ¹Ş¾Æ Disconnect ½ÃÅ°°í °¹¼ö¸¦ µ¹·ÁÁÜ.
+	 * ê¸°ë³¸ì ìœ¼ë¡œ ë¡œê¸´í•œ ê³„ì •ëª…ìœ¼ë¡œ ì›”ë“œë‚´ì— ì›”ë“œë‚´ì— OnlineStatus ê°€ 1 ì¸ ì¼€ë¦­í„°ê°€ ìˆëŠ”ì§€ë¥¼ ì°¾ì•„ì„œ
+	 * ìˆë‹¤ë©´ í•´ë‹¹ ì¼€ë¦­í„°ì˜ ì •ë³´ë¥¼ ë°›ì•„ Disconnect ì‹œí‚¤ê³  ê°¯ìˆ˜ë¥¼ ëŒë ¤ì¤Œ.
 	 */
 	private int checkLoadAccount(String account) {
 		int resultFlag = 0;
@@ -107,7 +107,7 @@ public class C_AuthLogin extends ClientBasePacket {
 
 		String ip = client.getIp();
 		String host = client.getHostname();
-		client.ipcountzero(ip); //## ¾ÆÀÌÇÇ Ä«¿îÆ® Á¦·Î¼±¾ğ
+		client.ipcountzero(ip); //## ì•„ì´í”¼ ì¹´ìš´íŠ¸ ì œë¡œì„ ì–¸
 
 
 		_log.finest("Request AuthLogin from user : " + accountName);
@@ -116,14 +116,14 @@ public class C_AuthLogin extends ClientBasePacket {
 			for (ClientThread tempClient : LoginController.getInstance()
 					.getAllAccounts()) {
 				if (ip.equalsIgnoreCase(tempClient.getIp())) {
-					_log.info("2 PCÀÇ ·Î±×ÀÎÀ» °ÅºÎÇß½À´Ï´Ù.account="
+					_log.info("2 PCì˜ ë¡œê·¸ì¸ì„ ê±°ë¶€í–ˆìŠµë‹ˆë‹¤.account="
 							+ accountName + " host=" + host);
 					client.sendPacket(new S_LoginResult(
 							S_LoginResult.REASON_USER_OR_PASS_WRONG));
 					return;
 				}   
                 if (accountName.equalsIgnoreCase(tempClient.getAccountName())) {
-				    _log.warning("µÎ ÄÉ¸¯ÅÍ ¹ö±× ½Ãµµ°¡ °¨ÁöµÇ¾ú½À´Ï´Ù. account=" + accountName);			
+				    _log.warning("ë‘ ì¼€ë¦­í„° ë²„ê·¸ ì‹œë„ê°€ ê°ì§€ë˜ì—ˆìŠµë‹ˆë‹¤. account=" + accountName);			
 				    tempClient.kick();
 			        client.kick();
 				    return;
@@ -135,7 +135,7 @@ public class C_AuthLogin extends ClientBasePacket {
 
 		if (account == null) {
 			if (Config.AUTO_CREATE_ACCOUNTS) {
-             // ########## A105 °èÁ¤¸í ±æÀÌ Á¦ÇÑ ¹× °ø¹éÀ¸·Î »ı¼º ¸øÇÏ°Ô 
+             // ########## A105 ê³„ì •ëª… ê¸¸ì´ ì œí•œ ë° ê³µë°±ìœ¼ë¡œ ìƒì„± ëª»í•˜ê²Œ 
 				if (isDisitAlaha(accountName) == false) {
 					client.sendPacket(new S_LoginResult(
 							S_LoginResult.REASON_ACCESS_FAILED));
@@ -145,19 +145,19 @@ public class C_AuthLogin extends ClientBasePacket {
 							S_LoginResult.REASON_ACCESS_FAILED));
 					return;
 				}
-             // ########## A105 °èÁ¤¸í ±æÀÌ Á¦ÇÑ ¹× °ø¹éÀ¸·Î »ı¼º ¸øÇÏ°Ô 
+             // ########## A105 ê³„ì •ëª… ê¸¸ì´ ì œí•œ ë° ê³µë°±ìœ¼ë¡œ ìƒì„± ëª»í•˜ê²Œ 
 				
-             // ########## A62 IP´ç °èÁ¤ »ı¼º Á¦ÇÑ 
+             // ########## A62 IPë‹¹ ê³„ì • ìƒì„± ì œí•œ 
 				if(Account.Check_LoginIP(ip)) {   
 					_log.info("Connect from IP check : "+ip); 
-					client.sendPacket(new S_CommonNews("ÀÌ¹Ì °èÁ¤À» ¼ÒÀ¯ÇÏ½Ã°í °è½Ê´Ï´Ù."));
+					client.sendPacket(new S_CommonNews("ì´ë¯¸ ê³„ì •ì„ ì†Œìœ í•˜ì‹œê³  ê³„ì‹­ë‹ˆë‹¤."));
 					try {
 						Thread.sleep(1500);
 						client.kick();
 					} catch (Exception e1) {}
 					return;
 				}
-            // ########## A62 IP´ç °èÁ¤ »ı¼º Á¦ÇÑ 
+            // ########## A62 IPë‹¹ ê³„ì • ìƒì„± ì œí•œ 
 				account = Account.create(accountName, password, ip, host);
 			} else {
 				_log.warning("account missing for user " + accountName);
@@ -168,33 +168,33 @@ public class C_AuthLogin extends ClientBasePacket {
 					S_LoginResult.REASON_USER_OR_PASS_WRONG));
 			return;
 		}
-		if (account.isBanned()) { // BAN ¾îÄ«¿îÆ®
-			_log.info("BAN ¾îÄ«¿îÆ®ÀÇ ·Î±×ÀÎÀ» °ÅºÎÇß½À´Ï´Ù.account=" + accountName + " host="
+		if (account.isBanned()) { // BAN ì–´ì¹´ìš´íŠ¸
+			_log.info("BAN ì–´ì¹´ìš´íŠ¸ì˜ ë¡œê·¸ì¸ì„ ê±°ë¶€í–ˆìŠµë‹ˆë‹¤.account=" + accountName + " host="
 					+ host);
 			client.sendPacket(new S_LoginResult(
 					S_LoginResult.REASON_USER_OR_PASS_WRONG));
 			return;
 		}
 		if (checkLoadAccount(accountName) > 0) {
-			_log.warning("µÎ Ä³¸¯ÅÍ ¹ö±× ½Ãµµ°¡ °¨ÁöµÇ¾ú½À´Ï´Ù. account=" + accountName);		
+			_log.warning("ë‘ ìºë¦­í„° ë²„ê·¸ ì‹œë„ê°€ ê°ì§€ë˜ì—ˆìŠµë‹ˆë‹¤. account=" + accountName);		
 			client.kick();
 			return;
 		}
 		try {
 			LoginController.getInstance().login(client, account);
-			Account.updateLastActive(account); // ÃÖÁ¾ ·Î±×ÀÎÀÏÀ» °»½ÅÇÑ´Ù
+			Account.updateLastActive(account); // ìµœì¢… ë¡œê·¸ì¸ì¼ì„ ê°±ì‹ í•œë‹¤
 			client.setAccount(account);
-			//client.sendPacket(new S_LoginResult(S_LoginResult.REASON_LOGIN_OK)); // ########## A96 EPU ÀüÈ¯ À§ÇØ ¿øº» ¼Ò½º ÁÖ¼® Ã³¸® ##########
+			//client.sendPacket(new S_LoginResult(S_LoginResult.REASON_LOGIN_OK)); // ########## A96 EPU ì „í™˜ ìœ„í•´ ì›ë³¸ ì†ŒìŠ¤ ì£¼ì„ ì²˜ë¦¬ ##########
 			client.sendPacket(new S_CommonNews());
 		} catch (GameServerFullException e) {
 			client.kick();
-			_log.info("Á¢¼Ó ÀÎ¿ø¼ö »óÇÑ¿¡ ÀÌ¸£°í ÀÖ±â ¶§¹®¿¡(À§ÇØ)(" + client.getHostname()
-					+ ")ÀÇ ·Î±×ÀÎÀ» °ÅºÎÇØ, Àı´Ü Çß½À´Ï´Ù.");
+			_log.info("ì ‘ì† ì¸ì›ìˆ˜ ìƒí•œì— ì´ë¥´ê³  ìˆê¸° ë•Œë¬¸ì—(ìœ„í•´)(" + client.getHostname()
+					+ ")ì˜ ë¡œê·¸ì¸ì„ ê±°ë¶€í•´, ì ˆë‹¨ í–ˆìŠµë‹ˆë‹¤.");
 			return;
 		} catch (AccountAlreadyLoginException e) {
 			client.kick();
-			_log.info("µ¿ÀÏ ID¿¡¼­ÀÇ Áßº¹ Á¢¼Ó (À§ÇØ)¶§¹®¿¡(" + client.getHostname()
-					+ ")(¿Í)°úÀÇ Á¢¼ÓÀ» °­Á¦ Àı´Ü Çß½À´Ï´Ù.");
+			_log.info("ë™ì¼ IDì—ì„œì˜ ì¤‘ë³µ ì ‘ì† (ìœ„í•´)ë•Œë¬¸ì—(" + client.getHostname()
+					+ ")(ì™€)ê³¼ì˜ ì ‘ì†ì„ ê°•ì œ ì ˆë‹¨ í–ˆìŠµë‹ˆë‹¤.");
 			return;
 		}
 	}

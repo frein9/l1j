@@ -55,7 +55,7 @@ public class C_AddBuddy extends ClientBasePacket {
 			return;
 		} else if (buddyList.containsName(charName)) {
 			pc.sendPackets(new S_ServerMessage(1052, charName)); // %s
-																	// (Àº)´Â ÀÌ¹Ì µî·ÏµÇ¾î ÀÖ½À´Ï´Ù.
+																	// (ì€)ëŠ” ì´ë¯¸ ë“±ë¡ë˜ì–´ ìˆìŠµë‹ˆë‹¤.
 			return;
 		}
 
@@ -63,13 +63,13 @@ for (L1CharName cn : CharacterTable.getInstance(). getCharNameList()) {
   if (charName.equalsIgnoreCase(cn.getName())) {
     int objId = cn.getId();
     L1PcInstance target = (L1PcInstance) L1World.getInstance().findObject(objId);
-    if (target != null) { // Ä£±¸Ãß°¡ÇÒ ´ë»óÀÌ ÀÖÀ¸¸é    
-     target.setTempID(pc.getId()); // »ó´ëÀÇ ¿ÀºêÁ§Æ® ID¸¦ º¸Á¸ÇØ µĞ´Ù
-     target.sendPackets(new S_Message_YN(622, pc.getName() + "´ÔÀÌ Ä£±¸ µî·ÏÀ» ¿äÃ»ÇÕ´Ï´Ù."));
+    if (target != null) { // ì¹œêµ¬ì¶”ê°€í•  ëŒ€ìƒì´ ìˆìœ¼ë©´    
+     target.setTempID(pc.getId()); // ìƒëŒ€ì˜ ì˜¤ë¸Œì íŠ¸ IDë¥¼ ë³´ì¡´í•´ ë‘”ë‹¤
+     target.sendPackets(new S_Message_YN(622, pc.getName() + "ë‹˜ì´ ì¹œêµ¬ ë“±ë¡ì„ ìš”ì²­í•©ë‹ˆë‹¤."));
     }
    }
   }
-  pc.sendPackets(new S_SystemMessage(charName +"´Ô¿¡°Ô Ä£±¸ µî·ÏÀ» ¿äÃ»ÇÕ´Ï´Ù."));
+  pc.sendPackets(new S_SystemMessage(charName +"ë‹˜ì—ê²Œ ì¹œêµ¬ ë“±ë¡ì„ ìš”ì²­í•©ë‹ˆë‹¤."));
  }
 	@Override
 	public String getType() {

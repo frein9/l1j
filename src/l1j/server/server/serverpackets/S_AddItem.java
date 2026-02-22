@@ -32,7 +32,7 @@ public class S_AddItem extends ServerBasePacket {
 	private static final String S_ADD_ITEM = "[S] S_AddItem";
 
 	/**
-	 * ¸ñ·Ï¿¡ ¾ÆÀÌÅÛÀ» 1°³ Ãß°¡ÇÑ´Ù.
+	 * ëª©ë¡ì— ì•„ì´í…œì„ 1ê°œ ì¶”ê°€í•œë‹¤.
 	 */
 	public S_AddItem(L1ItemInstance item) {
 		writeC(Opcodes.S_OPCODE_ADDITEM);
@@ -45,7 +45,7 @@ public class S_AddItem extends ServerBasePacket {
 		writeC((item.isIdentified()) ?  1 : 0);
 		writeS(item.getViewName());
 		if (!item.isIdentified()) {
-			// ¹Ì°¨Á¤ÀÇ °æ¿ì ½ºÅ×ÀÌÅÍ½º¸¦ º¸³¾ ÇÊ¿ä´Â ¾ø´Ù
+			// ë¯¸ê°ì •ì˜ ê²½ìš° ìŠ¤í…Œì´í„°ìŠ¤ë¥¼ ë³´ë‚¼ í•„ìš”ëŠ” ì—†ë‹¤
 			writeC(0);
 		} else {
 			byte[] status = item.getStatusBytes();

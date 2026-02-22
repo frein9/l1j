@@ -27,7 +27,7 @@ import l1j.server.server.Opcodes;
 public class S_TradeStatus extends ServerBasePacket {
 	public S_TradeStatus(int type) {
 		writeC(Opcodes.S_OPCODE_TRADESTATUS);
-		writeC(type); // 0:°Å·¡ ¿Ï·á 1:°Å·¡ Äµ½½
+		writeC(type); // 0:ê±°ëž˜ ì™„ë£Œ 1:ê±°ëž˜ ìº”ìŠ¬
 	}
 
 	@Override

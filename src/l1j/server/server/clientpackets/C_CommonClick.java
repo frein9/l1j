@@ -47,9 +47,9 @@ public class C_CommonClick {
 			.getLogger(C_CommonClick.class.getName());
 
 	public C_CommonClick(ClientThread client) {
-		deleteCharacter(client); // »èÁ¦ ±âÇÑ¿¡ ÀÌ¸¥ Ä³¸¯ÅÍ¸¦ »èÁ¦ÇÑ´Ù
+		deleteCharacter(client); // ì‚­ì œ ê¸°í•œì— ì´ë¥¸ ìºë¦­í„°ë¥¼ ì‚­ì œí•œë‹¤
 		int amountOfChars = client.getAccount().countCharacters();
-		client.sendPacket(new S_Unknown2(0));		// ½ÃÁð3
+		client.sendPacket(new S_Unknown2(0));		// ì‹œì¦Œ3
 		client.sendPacket(new S_CharAmount(amountOfChars));
 		if (amountOfChars > 0) {
 			sendCharPacks(client);

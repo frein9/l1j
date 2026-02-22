@@ -21,7 +21,7 @@ public class S_GameEnd extends ServerBasePacket {
 
 	//0000 : 7e 46 00 f6 af 53 02 5c                            ~F...S.\
 
-    /*∆–≈∂ªË¡¶*/
+    /*Ìå®ÌÇ∑ÏÇ≠Ï†ú*/
 	private void buildPacket(L1PcInstance pc) {
 		writeC(Opcodes.S_OPCODE_UNKNOWN2);
 		writeC(0x46);

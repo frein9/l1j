@@ -51,10 +51,10 @@ public class S_ServerVersion extends ServerBasePacket {
         writeD(0x000188f9);
         writeD(0x77cef9f0);
         writeD(0x00018914);
-        writeD(time); // ·Î±×ÀÎ½ÃÀÇ ½Ã°£ ¼³Á¤ 49DC57F1
+        writeD(time); // ë¡œê·¸ì¸ì‹œì˜ ì‹œê°„ ì„¤ì • 49DC57F1
         writeC(0x00); // unk 1
         writeC(0x00); // unk 2
-        writeC(0x00); // 0:¿µ¾î 8:ÀÏº»¾î //writeC(0x00);
+        writeC(0x00); // 0:ì˜ì–´ 8:ì¼ë³¸ì–´ //writeC(0x00);
         //writeH(0x3727); //3727
         //writeH(0x4669); //4669
         //writeH(0x8793); //8793

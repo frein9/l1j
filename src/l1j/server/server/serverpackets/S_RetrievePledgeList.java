@@ -25,7 +25,7 @@ import l1j.server.server.model.L1Clan;
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.serverpackets.S_NPCTalkReturn; /*Ãß°¡*/
+import l1j.server.server.serverpackets.S_NPCTalkReturn; /*ì¶”ê°€*/
 
 public class S_RetrievePledgeList extends ServerBasePacket {
 	public S_RetrievePledgeList(int objid, L1PcInstance pc) {
@@ -35,20 +35,20 @@ public class S_RetrievePledgeList extends ServerBasePacket {
 		}
 
 		if (clan.getWarehouseUsingChar() != 0
-				&& clan.getWarehouseUsingChar() != pc.getId()) // ÀÚÄ³¸¯ÅÍ ÀÌ¿Ü°¡ Å©¶õ Ã¢°í »ç¿ëÁß
+				&& clan.getWarehouseUsingChar() != pc.getId()) // ììºë¦­í„° ì´ì™¸ê°€ í¬ë€ ì°½ê³  ì‚¬ìš©ì¤‘
 		{
-			pc.sendPackets(new S_ServerMessage(209)); // \f1 ´Ù¸¥ Ç÷¸Í¿øÀÌ Ã¢°í¸¦ »ç¿ëÁßÀÔ´Ï´Ù.´çºĞ°£ Áö³ª°í ³ª¼­ ÀÌ¿ëÇØ ÁÖ¼¼¿ä.
+			pc.sendPackets(new S_ServerMessage(209)); // \f1 ë‹¤ë¥¸ í˜ˆë§¹ì›ì´ ì°½ê³ ë¥¼ ì‚¬ìš©ì¤‘ì…ë‹ˆë‹¤.ë‹¹ë¶„ê°„ ì§€ë‚˜ê³  ë‚˜ì„œ ì´ìš©í•´ ì£¼ì„¸ìš”.
 			return;
 		}
 
 		if (pc.getInventory().getSize() < 180) {
 			int size = clan.getDwarfForClanInventory().getSize();
 			if (size > 0) {
-				clan.setWarehouseUsingChar(pc.getId()); // Å©¶õ Ã¢°í¸¦ ¶ô
+				clan.setWarehouseUsingChar(pc.getId()); // í¬ë€ ì°½ê³ ë¥¼ ë½
 				writeC(Opcodes.S_OPCODE_SHOWRETRIEVELIST);
 				writeD(objid);
 				writeH(size);
-				writeC(5); // Ç÷¸Í Ã¢°í
+				writeC(5); // í˜ˆë§¹ ì°½ê³ 
 				for (Object itemObject : clan.getDwarfForClanInventory()
 						.getItems()) {
 					L1ItemInstance item = (L1ItemInstance) itemObject;
@@ -61,13 +61,13 @@ public class S_RetrievePledgeList extends ServerBasePacket {
 					writeS(item.getViewName());
 				}
 			}
-			/*Ãß°¡*/			
+			/*ì¶”ê°€*/			
 			else {
-				pc.sendPackets(new S_NPCTalkReturn(pc.getId(), "noitemret")); // ¸Ã°ÜÁø ¹°°ÇÀº ¾ø´Â..
+				pc.sendPackets(new S_NPCTalkReturn(pc.getId(), "noitemret")); // ë§¡ê²¨ì§„ ë¬¼ê±´ì€ ì—†ëŠ”..
 			}
-			/*Ãß°¡*/			
+			/*ì¶”ê°€*/			
 		} else {
-			pc.sendPackets(new S_ServerMessage(263)); // \f1ÇÑ»ç¶÷ÀÇ Ä³¸¯ÅÍ°¡ °¡Áö°í °ÉÀ» ¼ö ÀÖ´Â ¾ÆÀÌÅÛÀº ÃÖ´ë 180°³±îÁöÀÔ´Ï´Ù.
+			pc.sendPackets(new S_ServerMessage(263)); // \f1í•œì‚¬ëŒì˜ ìºë¦­í„°ê°€ ê°€ì§€ê³  ê±¸ì„ ìˆ˜ ìˆëŠ” ì•„ì´í…œì€ ìµœëŒ€ 180ê°œê¹Œì§€ì…ë‹ˆë‹¤.
 		}
 	}
 

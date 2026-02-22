@@ -24,7 +24,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat; //## A18 AuctionBoardTable ¿À·ù ¼öÁ¤ À§ÇØ ÀÓÆ÷Æ® Ãß°¡ 
+import java.text.SimpleDateFormat; //## A18 AuctionBoardTable ì˜¤ë¥˜ ìˆ˜ì • ìœ„í•´ ì„í¬íŠ¸ ì¶”ê°€ 
 import java.util.Calendar;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -112,9 +112,9 @@ public class AuctionBoardTable {
 			pstm.setInt(1, board.getHouseId());
 			pstm.setString(2, board.getHouseName());
 			pstm.setInt(3, board.getHouseArea());
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //## A18 AuctionBoardTable ¿À·ù ¼öÁ¤ À§ÇØ º¯°æ 
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //## A18 AuctionBoardTable ì˜¤ë¥˜ ìˆ˜ì • ìœ„í•´ ë³€ê²½ 
 			String fm = formatter.format(board.getDeadline().getTime()); //#
-//			String fm = DateFormat.getDateTimeInstance().format( //## A18 ¿øº» 
+//			String fm = DateFormat.getDateTimeInstance().format( //## A18 ì›ë³¸ 
 //					board.getDeadline().getTime()); //#
 			pstm.setString(4, fm);
 			pstm.setInt(5, board.getPrice());
@@ -143,9 +143,9 @@ public class AuctionBoardTable {
 					.prepareStatement("UPDATE board_auction SET house_name=?, house_area=?, deadline=?, price=?, location=?, old_owner=?, old_owner_id=?, bidder=?, bidder_id=? WHERE house_id=?");
 			pstm.setString(1, board.getHouseName());
 			pstm.setInt(2, board.getHouseArea());
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //## A18 AuctionBoardTable ¿À·ù ¼öÁ¤ À§ÇØ º¯°æ 
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //## A18 AuctionBoardTable ì˜¤ë¥˜ ìˆ˜ì • ìœ„í•´ ë³€ê²½ 
 			String fm = formatter.format(board.getDeadline().getTime()); //#
-//			String fm = DateFormat.getDateTimeInstance().format( //## A18 ¿øº» 
+//			String fm = DateFormat.getDateTimeInstance().format( //## A18 ì›ë³¸ 
 //					board.getDeadline().getTime()); //#
 			pstm.setString(3, fm);
 			pstm.setInt(4, board.getPrice());

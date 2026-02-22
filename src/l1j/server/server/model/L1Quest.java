@@ -48,7 +48,7 @@ public class L1Quest {
     public static final int QUEST_SEVEN = 41;
     public static final int QUEST_ICE = 42;
 
-	public static final int QUEST_END = 255; // Á¾·á°¡ ³¡³­ Äù½ºÆ®ÀÇ ½ºÅÜ
+	public static final int QUEST_END = 255; // ì¢…ë£Œê°€ ëë‚œ í€˜ìŠ¤íŠ¸ì˜ ìŠ¤í…
 
 	private L1PcInstance _owner = null;
 	private HashMap<Integer, Integer> _quest = null;

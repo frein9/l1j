@@ -69,7 +69,7 @@ public class WarTimeController implements Runnable {
 	public void run() {
 		try {
 			while (true) {
-				checkWarTime(); // ÀüÀï ½Ã°£À» Ã¼Å©
+				checkWarTime(); // ì „ìŸ ì‹œê°„ì„ ì²´í¬
 				Thread.sleep(1000);
 			}
 		} catch (Exception e1) {
@@ -90,18 +90,18 @@ public class WarTimeController implements Runnable {
 		for (int i = 0; i < 8; i++) {
 			if (_is_now_war[i]) {
 				player.sendPackets(
-						new S_PacketBox(S_PacketBox.MSG_WAR_GOING, i + 1)); // %sÀÇ °ø¼ºÀüÀÌ ÁøÇàÁßÀÔ´Ï´Ù.
+						new S_PacketBox(S_PacketBox.MSG_WAR_GOING, i + 1)); // %sì˜ ê³µì„±ì „ì´ ì§„í–‰ì¤‘ì…ë‹ˆë‹¤.
 			}
 		}
 	}
 
 	private void checkWarTime() {
 		for (int i = 0; i < 8; i++) {
-			if (_war_start_time[i].before(getRealTime()) // ÀüÀï °³½Ã
+			if (_war_start_time[i].before(getRealTime()) // ì „ìŸ ê°œì‹œ
 					&& _war_end_time[i].after(getRealTime())) {
 				if (_is_now_war[i] == false) {
 					_is_now_war[i] = true;
-					// ±â¸¦ spawn ÇÑ´Ù
+					// ê¸°ë¥¼ spawn í•œë‹¤
 					L1WarSpawn warspawn = new L1WarSpawn();
 					warspawn.SpawnFlag(i + 1);
 					
@@ -112,17 +112,17 @@ public class WarTimeController implements Runnable {
 						}
 					}
                  	L1World.getInstance().broadcastPacketToAll(
-					new S_PacketBox(S_PacketBox.MSG_WAR_BEGIN, i + 1)); // %sÀÇ °ø¼ºÀüÀÌ ½ÃÀÛµÇ¾ú½À´Ï´Ù.
+					new S_PacketBox(S_PacketBox.MSG_WAR_BEGIN, i + 1)); // %sì˜ ê³µì„±ì „ì´ ì‹œì‘ë˜ì—ˆìŠµë‹ˆë‹¤.
 					int[] loc = new int[3];
 					for (L1PcInstance pc : L1World.getInstance()
 							.getAllPlayers()) {
 						int castleId = i + 1;
 						if (L1CastleLocation.checkInWarArea(castleId, pc)
-								&& !pc.isGm()) { // ±â³»¿¡ ÀÖ´Ù
+								&& !pc.isGm()) { // ê¸°ë‚´ì— ìˆë‹¤
 							L1Clan clan = L1World.getInstance().getClan(pc
 									.getClanname());
 						if (clan != null) {
-						if (clan.getCastleId() == castleId) { // ¼ºÁÖ Å©¶õ¿ø
+						if (clan.getCastleId() == castleId) { // ì„±ì£¼ í¬ë€ì›
 							continue;
 								}
 							}
@@ -132,22 +132,22 @@ public class WarTimeController implements Runnable {
 						}
 					}
 				}
-			} else if (_war_end_time[i].before(getRealTime())) { // ÀüÀï Á¾·á
+			} else if (_war_end_time[i].before(getRealTime())) { // ì „ìŸ ì¢…ë£Œ
 				if (_is_now_war[i] == true) {
 					_is_now_war[i] = false;
 					L1World.getInstance().broadcastPacketToAll(
-							new S_PacketBox(S_PacketBox.MSG_WAR_END, i + 1)); // %sÀÇ °ø¼ºÀüÀÌ Á¾·áÇß½À´Ï´Ù.
+							new S_PacketBox(S_PacketBox.MSG_WAR_END, i + 1)); // %sì˜ ê³µì„±ì „ì´ ì¢…ë£Œí–ˆìŠµë‹ˆë‹¤.
 					_war_start_time[i].add(Config.ALT_WAR_INTERVAL_UNIT,
 							Config.ALT_WAR_INTERVAL);
 					_war_end_time[i].add(Config.ALT_WAR_INTERVAL_UNIT,
 							Config.ALT_WAR_INTERVAL);
-					_l1castle[i].setTaxRate(10); // ¼¼À²10%
-					_l1castle[i].setPublicMoney(0); // °ø±İ Å¬¸®¾î
+					_l1castle[i].setTaxRate(10); // ì„¸ìœ¨10%
+					_l1castle[i].setPublicMoney(0); // ê³µê¸ˆ í´ë¦¬ì–´
 					CastleTable.getInstance().updateCastle(_l1castle[i]);
 
 					int castle_id = i + 1;
 					for (L1Object l1object : L1World.getInstance().getObject()) {
-						// ÀüÀï ¿¡¸®¾î³»ÀÇ ±â¸¦ Áö¿î´Ù
+						// ì „ìŸ ì—ë¦¬ì–´ë‚´ì˜ ê¸°ë¥¼ ì§€ìš´ë‹¤
 						if (l1object instanceof L1FieldObjectInstance) {
 							L1FieldObjectInstance flag = (L1FieldObjectInstance) l1object;
 							if (L1CastleLocation
@@ -155,7 +155,7 @@ public class WarTimeController implements Runnable {
 								flag.deleteMe();
 							}
 						}
-						// Å©¶ó¿îÀ» Áö¿î´Ù
+						// í¬ë¼ìš´ì„ ì§€ìš´ë‹¤
 						if (l1object instanceof L1CrownInstance) {
 							L1CrownInstance crown = (L1CrownInstance) l1object;
 							if (L1CastleLocation.checkInWarArea(castle_id,
@@ -163,7 +163,7 @@ public class WarTimeController implements Runnable {
 								crown.deleteMe();
 							}
 						}
-						// Å¸¿ö¸¦ ÀÏ´Ü Áö¿î´Ù
+						// íƒ€ì›Œë¥¼ ì¼ë‹¨ ì§€ìš´ë‹¤
 						if (l1object instanceof L1TowerInstance) {
 							L1TowerInstance tower = (L1TowerInstance) l1object;
 							if (L1CastleLocation.checkInWarArea(castle_id,
@@ -172,11 +172,11 @@ public class WarTimeController implements Runnable {
 							}
 						}
 					}
-					// Å¸¿ö¸¦ °°Àº ±Û¾¾, ±Û±Í°¡ ´Ù¸¥ °÷¿¡µµ  ³ªÅ¸³»°Ô ÇÑ´Ù
+					// íƒ€ì›Œë¥¼ ê°™ì€ ê¸€ì”¨, ê¸€ê·€ê°€ ë‹¤ë¥¸ ê³³ì—ë„  ë‚˜íƒ€ë‚´ê²Œ í•œë‹¤
 					L1WarSpawn warspawn = new L1WarSpawn();
 					warspawn.SpawnTower(castle_id);
 
-					// ¼º¹®À» ¹ÙÅÁÀ¸·Î µÇµ¹¸°´Ù
+					// ì„±ë¬¸ì„ ë°”íƒ•ìœ¼ë¡œ ë˜ëŒë¦°ë‹¤
 					for (L1DoorInstance door : DoorSpawnTable.getInstance()
 							.getDoorList()) {
 						if (L1CastleLocation.checkInWarArea(castle_id, door)) {

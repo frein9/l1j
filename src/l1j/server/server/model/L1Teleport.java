@@ -33,7 +33,7 @@ public class L1Teleport {
 
 	private static Logger _log = Logger.getLogger(L1Teleport.class.getName());
 
-	// ÅÚ·¹Æ÷Æ® ½ºÅ³ÀÇ Á¾·ù
+	// í…”ë ˆí¬íŠ¸ ìŠ¤í‚¬ì˜ ì¢…ë¥˜
 	public static final int TELEPORT = 0;
 
 	public static final int CHANGE_POSITION = 1;
@@ -42,7 +42,7 @@ public class L1Teleport {
 
 	public static final int CALL_CLAN = 3;
 
-	// Â÷·Ê·Î teleport(Èò»ö), change position e(ÆÄ¶û), ad mass teleport e(»¡°­), call clan(ÃÊ·Ï)
+	// ì°¨ë¡€ë¡œ teleport(í°ìƒ‰), change position e(íŒŒëž‘), ad mass teleport e(ë¹¨ê°•), call clan(ì´ˆë¡)
 	public static final int[] EFFECT_SPR = { 169, 2235, 2236, 2281 };
 
 	public static final int[] EFFECT_TIME = { 280, 440, 440, 1120 };
@@ -74,7 +74,7 @@ public class L1Teleport {
 				.sendPackets(new S_Paralysis(S_Paralysis.TYPE_TELEPORT_UNLOCK,
 						false));
 
-		// È¿°úÀÇ Ç¥½Ã
+		// íš¨ê³¼ì˜ í‘œì‹œ
 		pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_TELEPORT_UNLOCK,false));
 		if (effectable && (skillType >= 0 && skillType <= EFFECT_SPR.length)) {
 			S_SkillSound packet = new S_SkillSound(pc.getId(),
@@ -82,8 +82,8 @@ public class L1Teleport {
 			pc.sendPackets(packet);
 			pc.broadcastPacket(packet);
 
-			// ÅÚ·¹Æ÷Æ® ÀÌ¿ÜÀÇ spr´Â Ä³¸¯ÅÍ°¡ »ç¶óÁöÁö ¾Ê±â ¶§¹®¿¡ ¿ÜÇü»ó º¸³» µÎ°í ½Í°ÚÁö¸¸
-			// ÀÌµ¿ÁßÀÌ¾ú´ø °æ¿ì °÷°£ ¶³¾îÁö°í ÇÏ´Â ÀÏÀÌ ÀÖ´Ù
+			// í…”ë ˆí¬íŠ¸ ì´ì™¸ì˜ sprëŠ” ìºë¦­í„°ê°€ ì‚¬ë¼ì§€ì§€ ì•Šê¸° ë•Œë¬¸ì— ì™¸í˜•ìƒ ë³´ë‚´ ë‘ê³  ì‹¶ê² ì§€ë§Œ
+			// ì´ë™ì¤‘ì´ì—ˆë˜ ê²½ìš° ê³³ê°„ ë–¨ì–´ì§€ê³  í•˜ëŠ” ì¼ì´ ìžˆë‹¤
 // if (skillType != TELEPORT) {
 			// pc.sendPackets(new S_DeleteNewObject(pc));
 			// pc.broadcastPacket(new S_DeleteObjectFromScreen(pc));
@@ -107,7 +107,7 @@ public class L1Teleport {
 	}
 
 		/*
-	 * target Ä³¸¯ÅÍÀÇ distance·Î ÁöÁ¤ÇÑ ¸Å½º ¹è´ç¿¡ ÅÚ·¹Æ÷Æ® ÇÑ´Ù. ÁöÁ¤µÈ ¸Å½º°¡ ¸ÊÀÌ ¾Æ´Ñ °æ¿ì ¾Æ¹«°Íµµ ÇÏÁö ¾Ê´Â´Ù.
+	 * target ìºë¦­í„°ì˜ distanceë¡œ ì§€ì •í•œ ë§¤ìŠ¤ ë°°ë‹¹ì— í…”ë ˆí¬íŠ¸ í•œë‹¤. ì§€ì •ëœ ë§¤ìŠ¤ê°€ ë§µì´ ì•„ë‹Œ ê²½ìš° ì•„ë¬´ê²ƒë„ í•˜ì§€ ì•ŠëŠ”ë‹¤.
 	 */
 	public static void teleportToTargetFront(L1Character cha,
 			L1Character target, int distance) {
@@ -117,7 +117,7 @@ public class L1Teleport {
 		L1Map map = target.getMap();
 		short mapId = target.getMapId();
 
-		// Å¸°ÙÀÇ ¹æÇâÀ¸·ÎºÎÅÍ ÅÚ·¹Æ÷Æ®Ã³ÀÇ ÁÂÇ¥¸¦ °áÁ¤ÇÑ´Ù.
+		// íƒ€ê²Ÿì˜ ë°©í–¥ìœ¼ë¡œë¶€í„° í…”ë ˆí¬íŠ¸ì²˜ì˜ ì¢Œí‘œë¥¼ ê²°ì •í•œë‹¤.
 		switch (heading) {
 		case 1:
 			locX += distance;
@@ -171,7 +171,7 @@ public class L1Teleport {
 	}
 
 	public static void randomTeleport(L1PcInstance pc, boolean effectable) {
-		// ¾ÆÁ÷ º»¼­¹öÀÇ ·± ÅÚ·¹ Ã³¸®¿Í ´Ù¸¥ °÷(Áß)ÀÌ »ó´çÈ÷ ÀÖ´Â °Í °°Àº¡¤¡¤¡¤
+		// ì•„ì§ ë³¸ì„œë²„ì˜ ëŸ° í…”ë ˆ ì²˜ë¦¬ì™€ ë‹¤ë¥¸ ê³³(ì¤‘)ì´ ìƒë‹¹ížˆ ìžˆëŠ” ê²ƒ ê°™ì€Â·Â·Â·
 		L1Location newLocation = pc.getLocation().randomLocation(200, true);
 		int newX = newLocation.getX();
 		int newY = newLocation.getY();

@@ -71,12 +71,12 @@ public class S_DropItem extends ServerBasePacket {
 		} else {
 			int itemId = item.getItem().getItemId();
 			int isId = item.isIdentified() ?  1 : 0;
-			if (itemId == 20383 && isId == 1) { // ±â¸¶¿ë Çì·ë
+			if (itemId == 20383 && isId == 1) { // ê¸°ë§ˆìš© í—¤ë£¸
 				writeS(item.getItem().getName() + " [" + item
 						.getChargeCount() + "]");
 			} else if ((itemId == 40006 || itemId == 40007
 					|| itemId == 40008 || itemId == 40009
-					|| itemId == 140006 || itemId == 140008) && isId == 1) { // wand·ù
+					|| itemId == 140006 || itemId == 140008) && isId == 1) { // wandë¥˜
 				writeS(item.getItem().getName() + " (" + item
 						.getChargeCount() + ")");
 			} else if (item.getItem().getLightRange() != 0 && item

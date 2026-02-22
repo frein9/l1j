@@ -51,7 +51,7 @@ public class S_SkillBuy extends ServerBasePacket {
 		int RC = 0;
 		// int TC = 0;
 		switch (player.getType()) {
-		case 0: // ±ºÁÖ
+		case 0: // êµ°ì£¼
 			/*
 			 * if (player.get_level() >= 10 && player.get_level() <= 19) { RC =
 			 * 8; } else if (player.get_level() >= 20) { RC = 16; }
@@ -60,7 +60,7 @@ public class S_SkillBuy extends ServerBasePacket {
 			RC = 16;
 			break;
 
-		case 1: // ³ªÀÌÆ®
+		case 1: // ë‚˜ì´íŠ¸
 			/*
 			 * if (player.get_level() >= 50) { RC = 8; }
 			 */
@@ -68,7 +68,7 @@ public class S_SkillBuy extends ServerBasePacket {
 			RC = 8;
 			break;
 
-		case 2: // ¿¡¸£ÇÁ
+		case 2: // ì—ë¥´í”„
 			/*
 			 * if (player.get_level() >= 8 && player.get_level() <= 15) { RC =
 			 * 8; } else if (player.get_level() >= 16 && player.get_level() <=

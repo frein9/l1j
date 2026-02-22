@@ -27,7 +27,7 @@ import l1j.server.server.Opcodes;
 public class S_SkillIconWindShackle extends ServerBasePacket {
 
 	public S_SkillIconWindShackle(int objectId, int time) {
-		int buffTime = (int) (time / 4); // ¿ØÁö 4¹è µÇ±â (À§ÇØ)¶§¹®¿¡ 4·Î ³ª´©¾î µĞ´Ù
+		int buffTime = (int) (time / 4); // ì™ ì§€ 4ë°° ë˜ê¸° (ìœ„í•´)ë•Œë¬¸ì— 4ë¡œ ë‚˜ëˆ„ì–´ ë‘”ë‹¤
 		writeC(Opcodes.S_OPCODE_SKILLICONGFX);
 		writeC(0x2c);
 		writeD(objectId);

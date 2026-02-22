@@ -56,22 +56,22 @@ public class S_AuctionBoardRead extends ServerBasePacket {
 				writeC(Opcodes.S_OPCODE_SHOWHTML);
 				writeD(objectId);
 				writeS("agsel");
-				writeS(house_number); // ¾ÆÁöÆ®ÀÇ ¹øÈ£
-				writeH(9); // ÀÌÇÏÀÇ Ä³¸¯ÅÍ ¶óÀÎÀÇ °³¼ö
-				writeS(rs.getString(2)); // ¾ÆÁöÆ®ÀÇ ÀÌ¸§
-				writeS(rs.getString(6)); // ¾ÆÁöÆ®ÀÇ À§Ä¡
-				writeS(String.valueOf(rs.getString(3))); // ¾ÆÁöÆ®ÀÇ ³ĞÀÌ
-				writeS(rs.getString(7)); // ÀÌÀüÀÇ ¼ÒÀ¯ÀÚ
-				writeS(rs.getString(9)); // ÇöÀçÀÇ ÀÔÂûÀÚ
-				writeS(String.valueOf(rs.getInt(5))); // ÇöÀçÀÇ ÀÔÂû °¡°İ
+				writeS(house_number); // ì•„ì§€íŠ¸ì˜ ë²ˆí˜¸
+				writeH(9); // ì´í•˜ì˜ ìºë¦­í„° ë¼ì¸ì˜ ê°œìˆ˜
+				writeS(rs.getString(2)); // ì•„ì§€íŠ¸ì˜ ì´ë¦„
+				writeS(rs.getString(6)); // ì•„ì§€íŠ¸ì˜ ìœ„ì¹˜
+				writeS(String.valueOf(rs.getString(3))); // ì•„ì§€íŠ¸ì˜ ë„“ì´
+				writeS(rs.getString(7)); // ì´ì „ì˜ ì†Œìœ ì
+				writeS(rs.getString(9)); // í˜„ì¬ì˜ ì…ì°°ì
+				writeS(String.valueOf(rs.getInt(5))); // í˜„ì¬ì˜ ì…ì°° ê°€ê²©
 				Calendar cal = timestampToCalendar((Timestamp) rs.
 						getObject(4));
 				int month = cal.get(Calendar.MONTH) + 1;
 				int day = cal.get(Calendar.DATE);
 				int hour = cal.get(Calendar.HOUR_OF_DAY);
-				writeS(String.valueOf(month)); // ¸¶°¨¿ù
-				writeS(String.valueOf(day)); // ¸¶°¨ÀÏ
-				writeS(String.valueOf(hour)); // ¸¶°¨½Ã
+				writeS(String.valueOf(month)); // ë§ˆê°ì›”
+				writeS(String.valueOf(day)); // ë§ˆê°ì¼
+				writeS(String.valueOf(hour)); // ë§ˆê°ì‹œ
 			}
 		} catch (SQLException e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);

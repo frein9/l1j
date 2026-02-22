@@ -136,7 +136,7 @@ public class GMCommandsConfig {
 				}
 			}
 		} catch (Exception e) {
-			_log.log(Level.SEVERE, "GMCommands.xmlÀÇ read¿¡ ½ÇÆĞ", e);
+			_log.log(Level.SEVERE, "GMCommands.xmlì˜ readì— ì‹¤íŒ¨", e);
 		}
 	}
 }

@@ -89,7 +89,7 @@ public class WeaponSkillTable {
 					effectTarget, isArrowType, attr);
 			_weaponIdIndex.put(weaponId, weaponSkill);
 		}
-		_log.config("¹«±â ½ºÅ³ ¸®½ºÆ® " + _weaponIdIndex.size() + "°Ç·Îµå");
+		_log.config("ë¬´ê¸° ìŠ¤í‚¬ ë¦¬ìŠ¤íŠ¸ " + _weaponIdIndex.size() + "ê±´ë¡œë“œ");
 	}
 
 	public L1WeaponSkill getTemplate(int weaponId) {

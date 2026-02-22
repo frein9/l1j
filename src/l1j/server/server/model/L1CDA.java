@@ -27,48 +27,48 @@ import l1j.server.server.ActionCodes;
 import l1j.server.server.model.L1World;
 import l1j.server.server.serverpackets.S_Door;
 
-public class L1CDA { // CastleDoorAttribute // ³×ÀÌ¹Ö¿¡ ºÒ¸¸ÀÖÀ¸¸é »çÅÁ´ÔÇÑÅ× µûÁö¼Å¾ßµÊ
+public class L1CDA { // CastleDoorAttribute // ë„¤ì´ë°ì— ë¶ˆë§Œìžˆìœ¼ë©´ ì‚¬íƒ•ë‹˜í•œí…Œ ë”°ì§€ì…”ì•¼ë¨
 
 	private static Logger _log = Logger.getLogger(L1CDA.class.getName());
 
-/*	¹®ÀÇ ÁÂÇ¥ ÁÂ¿ì 4Ä­À» ¸·¾Æ¼­ ¹® ½ºÆù ÁÂÇ¥°¡ ¹«¾ùÀÌµç, ¸·È÷µµ·Ï ¼³Á¤
+/*	ë¬¸ì˜ ì¢Œí‘œ ì¢Œìš° 4ì¹¸ì„ ë§‰ì•„ì„œ ë¬¸ ìŠ¤í° ì¢Œí‘œê°€ ë¬´ì—‡ì´ë“ , ë§‰ížˆë„ë¡ ì„¤ì •
 	
-	°ÆÁ¤µÇ´Â ºÎºÐÀº ³­¼º, ³»¼º¹® Á¤µµ
-	³­¼ºÀÇ °ËÅäÈÄ ¹®Á¦°¡ µÈ´Ù¸é ÃßÈÄ ¼öÁ¤, ³»¼º¹®Àº ¹®Á¦°¡ µÉÁö´Â ¸ð¸£°ÚÁö¸¸ ÀÏ´Ü ¿°µÎ¿¡ µÐ´Ù
+	ê±±ì •ë˜ëŠ” ë¶€ë¶„ì€ ë‚œì„±, ë‚´ì„±ë¬¸ ì •ë„
+	ë‚œì„±ì˜ ê²€í† í›„ ë¬¸ì œê°€ ëœë‹¤ë©´ ì¶”í›„ ìˆ˜ì •, ë‚´ì„±ë¬¸ì€ ë¬¸ì œê°€ ë ì§€ëŠ” ëª¨ë¥´ê² ì§€ë§Œ ì¼ë‹¨ ì—¼ë‘ì— ë‘”ë‹¤
 
-	¹®ÀÌ ºÎ¼ÅÁöÁö ¾Ê¾Ò°Å³ª, ´ÝÇôÀÖÀ»°æ¿ì ¸·¾Æ¾ß ÇÏ±â ¶§¹®¿¡, ÀÌ°ÍÀ» ¸ÕÀú °Ë»ç
-	¶ÇÇÑ, ¹®ÀÌ ºÎ¼ÅÁ³´Ù¸é ´ÝÇû°Å³ª, ¿­·È°Å³ª ¸·Áö ¸»¾Æ¾ß ÇÏ±â¿¡ ³ªÁß¿¡ °Ë»ç
+	ë¬¸ì´ ë¶€ì…”ì§€ì§€ ì•Šì•˜ê±°ë‚˜, ë‹«í˜€ìžˆì„ê²½ìš° ë§‰ì•„ì•¼ í•˜ê¸° ë•Œë¬¸ì—, ì´ê²ƒì„ ë¨¼ì € ê²€ì‚¬
+	ë˜í•œ, ë¬¸ì´ ë¶€ì…”ì¡Œë‹¤ë©´ ë‹«í˜”ê±°ë‚˜, ì—´ë ¸ê±°ë‚˜ ë§‰ì§€ ë§ì•„ì•¼ í•˜ê¸°ì— ë‚˜ì¤‘ì— ê²€ì‚¬
 
-	À¯·ÉÀÇÁý ¹®ÀÇ °æ¿ì ºÎ¼ÅÁú ÇÊ¿ä°¡ ¾ø±â¶§¹®¿¡ CastleDoor°¡ ¾Æ´Ñ ÀÏ¹Ý Door
-	ÇÏÁö¸¸ ¸·´Â ¹üÀ§°¡ ³Ð¾î¼­ ÀÏ¹Ý Door¿¡ ³Ö±â Èûµé´Ù¸é À¯·ÉÀÇÁý ¹®µµ CastleDoor·Î ÀÌµ¿
+	ìœ ë ¹ì˜ì§‘ ë¬¸ì˜ ê²½ìš° ë¶€ì…”ì§ˆ í•„ìš”ê°€ ì—†ê¸°ë•Œë¬¸ì— CastleDoorê°€ ì•„ë‹Œ ì¼ë°˜ Door
+	í•˜ì§€ë§Œ ë§‰ëŠ” ë²”ìœ„ê°€ ë„“ì–´ì„œ ì¼ë°˜ Doorì— ë„£ê¸° íž˜ë“¤ë‹¤ë©´ ìœ ë ¹ì˜ì§‘ ë¬¸ë„ CastleDoorë¡œ ì´ë™
 
-	°Ë»çÀ§Ä¡
-	C_NPCAction - ¼º ¹®À» npc¸¦ ÅëÇØ ¿­°í ´ÝÀ»¶§
-	L1CastleDoorInstance - pc°¡ ¹®À» Ã³À½ ºÃÀ»¶§, ¹®À» Å¸°ÝÇßÀ»¶§, ¹®ÀÌ ºÎ¼ÅÁ³À»¶§
+	ê²€ì‚¬ìœ„ì¹˜
+	C_NPCAction - ì„± ë¬¸ì„ npcë¥¼ í†µí•´ ì—´ê³  ë‹«ì„ë•Œ
+	L1CastleDoorInstance - pcê°€ ë¬¸ì„ ì²˜ìŒ ë´¤ì„ë•Œ, ë¬¸ì„ íƒ€ê²©í–ˆì„ë•Œ, ë¬¸ì´ ë¶€ì…”ì¡Œì„ë•Œ
 
 
-	by ¸°ÇÁ¸®´ý - °¡´Ï
+	by ë¦°í”„ë¦¬ë¤ - ê°€ë‹ˆ
 */
 
 	public static void CDA(L1CastleDoorInstance door){ // CastleDoorAttribute
 			int att = 0;
 
-			if(!door.isDead() || door.getOpenStatus() == ActionCodes.ACTION_Close){ // ¹®ÀÌ ¾ÈºÎ¼­Á³°Å³ª, ´ÝÇú´Ù¸é
+			if(!door.isDead() || door.getOpenStatus() == ActionCodes.ACTION_Close){ // ë¬¸ì´ ì•ˆë¶€ì„œì¡Œê±°ë‚˜, ë‹«í˜“ë‹¤ë©´
 				att = 65;
 			}
-			if(door.isDead() || door.getOpenStatus() == ActionCodes.ACTION_Open){ // ¹®ÀÌ ºÎ¼­Á³°Å³ª, ¿­·ÁÀÕÀ¸¸é
+			if(door.isDead() || door.getOpenStatus() == ActionCodes.ACTION_Open){ // ë¬¸ì´ ë¶€ì„œì¡Œê±°ë‚˜, ì—´ë ¤ìž‡ìœ¼ë©´
 				att = 0;
 			}
 
-			switch(door.getDirection()){ // ¹®ÀÇ ¹æÇâ ÆÇ´Ü
-			case 0: // 7½Ã ¹æÇâ ¹®
-				for(int i = 0; i < 4 ; i++ ){ //4Ä­ÀÌ´Ï±î 4¹ø
+			switch(door.getDirection()){ // ë¬¸ì˜ ë°©í–¥ íŒë‹¨
+			case 0: // 7ì‹œ ë°©í–¥ ë¬¸
+				for(int i = 0; i < 4 ; i++ ){ //4ì¹¸ì´ë‹ˆê¹Œ 4ë²ˆ
 					L1World.getInstance().broadcastPacketToAll(new S_Door(door, door.getEntranceX(), door.getEntranceY() - i, 1, att));
 					L1World.getInstance().broadcastPacketToAll(new S_Door(door, door.getEntranceX(), door.getEntranceY() + i, 1, att));
 				}
 				break;
-			case 1: // 5½Ã ¹æÇâ ¹®
-				for(int i = 0; i < 4 ; i++ ){ //4Ä­ÀÌ´Ï±î
+			case 1: // 5ì‹œ ë°©í–¥ ë¬¸
+				for(int i = 0; i < 4 ; i++ ){ //4ì¹¸ì´ë‹ˆê¹Œ
 					L1World.getInstance().broadcastPacketToAll(new S_Door(door, door.getEntranceX() - i, door.getEntranceY(), 0, att));
 					L1World.getInstance().broadcastPacketToAll(new S_Door(door, door.getEntranceX() + i, door.getEntranceY(), 0, att));
 				}

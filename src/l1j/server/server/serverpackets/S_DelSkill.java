@@ -70,7 +70,7 @@ public class S_DelSkill extends ServerBasePacket {
 		writeC(bw1);
 		writeC(bw2);
 		writeC(bw3);
-		//writeD(0); // ½ÅÁ¾Á· ½ºÅ³ ±¸Á¶ º¯°æÀ» À§ÇØ ÁÖ¼®Ã³¸®
+		//writeD(0); // ì‹ ì¢…ì¡± ìŠ¤í‚¬ êµ¬ì¡° ë³€ê²½ì„ ìœ„í•´ ì£¼ì„ì²˜ë¦¬
 		writeD(0);
 	}
 

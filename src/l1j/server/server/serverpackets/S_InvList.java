@@ -33,11 +33,11 @@ public class S_InvList extends ServerBasePacket {
 	private static final String S_INV_LIST = "[S] S_InvList";
 
 	/**
-	 * ¸ñ·Ï¿¡ ¾ÆÀÌÅÛÀ» º¹¼ö°³ Á¤¸®ÇØ Ãß°¡ÇÑ´Ù.
+	 * ëª©ë¡ì— ì•„ì´í…œì„ ë³µìˆ˜ê°œ ì •ë¦¬í•´ ì¶”ê°€í•œë‹¤.
 	 */
 	public S_InvList(List<L1ItemInstance> items) {
 		writeC(Opcodes.S_OPCODE_INVLIST);
-		writeC(items.size()); // ¾ÆÀÌÅÛ¼ö
+		writeC(items.size()); // ì•„ì´í…œìˆ˜
 
 		for (L1ItemInstance item : items) {
 			writeD(item.getId());
@@ -53,7 +53,7 @@ public class S_InvList extends ServerBasePacket {
 			writeC((item.isIdentified()) ?  1 : 0);
 			writeS(item.getViewName());
 			if (!item.isIdentified()) {
-				// ¹Ì°¨Á¤ÀÇ °æ¿ì ½ºÅ×ÀÌÅÍ½º¸¦ º¸³¾ ÇÊ¿ä´Â ¾ø´Ù
+				// ë¯¸ê°ì •ì˜ ê²½ìš° ìŠ¤í…Œì´í„°ìŠ¤ë¥¼ ë³´ë‚¼ í•„ìš”ëŠ” ì—†ë‹¤
 				writeC(0);
 			} else {
 				byte[] status = item.getStatusBytes();

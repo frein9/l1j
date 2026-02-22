@@ -43,7 +43,7 @@ public class L1GfxId implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 			StringTokenizer st = new StringTokenizer(arg);
 			int gfxid = Integer.parseInt(st.nextToken(), 10);
 			int count = Integer.parseInt(st.nextToken(), 10);
@@ -73,13 +73,13 @@ public class L1GfxId implements L1CommandExecutor {
 				}
 			}
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception exception) {
 			pc
 					.sendPackets(new S_SystemMessage(cmdName
-							+ " id ÃâÇö½ÃÅ°´Â ¼ö·Î ÀÔ·ÂÇØ ÁÖ¼¼¿ä."));
+							+ " id ì¶œí˜„ì‹œí‚¤ëŠ” ìˆ˜ë¡œ ì…ë ¥í•´ ì£¼ì„¸ìš”."));
 		}
 	}
 }

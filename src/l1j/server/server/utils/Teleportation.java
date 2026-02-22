@@ -74,7 +74,7 @@ public class Teleportation {
 		short mapId = pc.getTeleportMapId();
 		int head = pc.getTeleportHeading();
 
-		// ÅÚ·¹Æ÷Æ®Ã³°¡ ºÎÁ¤ÇÏ¸é ¿øÀÇ ÁÂÇ¥¿¡(GM´Â Á¦¿ÜÇÏ´Ù)
+		// í…”ë ˆí¬íŠ¸ì²˜ê°€ ë¶€ì •í•˜ë©´ ì›ì˜ ì¢Œí‘œì—(GMëŠ” ì œì™¸í•˜ë‹¤)
 		L1Map map = L1WorldMap.getInstance(). getMap(mapId);
 
 		if (! map.isInMap(x, y) && ! pc.isGm()) {
@@ -87,8 +87,8 @@ public class Teleportation {
 
 		L1Clan clan = L1World.getInstance(). getClan(pc.getClanname());
 		if (clan != null) {
-			if (clan.getWarehouseUsingChar() == pc.getId()) { // ÀÚÄ³¸¯ÅÍ°¡ Å©¶õ Ã¢°í »ç¿ëÁß
-				clan.setWarehouseUsingChar(0); // Å©¶õ Ã¢°íÀÇ ¶ôÀ» ÇØÁ¦
+			if (clan.getWarehouseUsingChar() == pc.getId()) { // ììºë¦­í„°ê°€ í¬ë€ ì°½ê³  ì‚¬ìš©ì¤‘
+				clan.setWarehouseUsingChar(0); // í¬ë€ ì°½ê³ ì˜ ë½ì„ í•´ì œ
 			}
 		}
 
@@ -97,7 +97,7 @@ public class Teleportation {
 		pc.setHeading(head);
 		pc.sendPackets(new S_MapID(pc.getMapId(), pc.getMap(). isUnderwater()));
 
-		if (pc.isReserveGhost()) { // °í¿ì½ºÆ® »óÅÂ ÇØÁ¦
+		if (pc.isReserveGhost()) { // ê³ ìš°ìŠ¤íŠ¸ ìƒíƒœ í•´ì œ
 			pc.endGhost();
 		}
 		if (! pc.isGhost() && ! pc.isGmInvis() && ! pc.isInvisble()) {
@@ -106,10 +106,10 @@ public class Teleportation {
 		pc.sendPackets(new S_OwnCharPack(pc));
 
 		pc.removeAllKnownObjects();
-		pc.sendVisualEffectAtTeleport(); // Å©¶ó¿î, µ¶, ¼öÁßµîÀÇ ½Ã°¢ È¿°ú¸¦ Ç¥½Ã
+		pc.sendVisualEffectAtTeleport(); // í¬ë¼ìš´, ë…, ìˆ˜ì¤‘ë“±ì˜ ì‹œê° íš¨ê³¼ë¥¼ í‘œì‹œ
 		pc.updateObject();
-		// spr ¹øÈ£ 6310, 5641ÀÇ º¯½ÅÁß¿¡ ÅÚ·¹Æ÷Æ® ÇÏ¸é(ÀÚ) ÅÚ·¹Æ÷Æ® ÈÄ·Î ÀÌµ¿ÇÒ ¼ö ¾ø¾îÁø´Ù
-		// ¹«±â¸¦ ÂøÅ»ÇÏ¸é(ÀÚ) ÀÌµ¿ÇÒ ¼ö ÀÖ°Ô µÇ±â (À§ÇØ)¶§¹®¿¡, S_CharVisualUpdate¸¦ ¼Û½ÅÇÑ´Ù
+		// spr ë²ˆí˜¸ 6310, 5641ì˜ ë³€ì‹ ì¤‘ì— í…”ë ˆí¬íŠ¸ í•˜ë©´(ì) í…”ë ˆí¬íŠ¸ í›„ë¡œ ì´ë™í•  ìˆ˜ ì—†ì–´ì§„ë‹¤
+		// ë¬´ê¸°ë¥¼ ì°©íƒˆí•˜ë©´(ì) ì´ë™í•  ìˆ˜ ìˆê²Œ ë˜ê¸° (ìœ„í•´)ë•Œë¬¸ì—, S_CharVisualUpdateë¥¼ ì†¡ì‹ í•œë‹¤
 		pc.sendPackets(new S_CharVisualUpdate(pc));
 		 if (pc.getBraveItemEquipped() > 0){ 
 			  int type = 0; 
@@ -126,52 +126,52 @@ public class Teleportation {
 			  buff(pc);
 		  }
 		pc.killSkillEffectTimer(L1SkillId.MEDITATION);
-		pc.setCallClanId(0); // Äİ Å©¶õÀ» ÁÖÃ¢ÇÑ ÈÄ·Î ÀÌµ¿ÇÏ¸é(ÀÚ) ¼ÒÈ¯ ¹«È¿
+		pc.setCallClanId(0); // ì½œ í¬ë€ì„ ì£¼ì°½í•œ í›„ë¡œ ì´ë™í•˜ë©´(ì) ì†Œí™˜ ë¬´íš¨
 
 		/*
-		 * subjects Æê°ú »ç¸óÀÇ ÅÚ·¹Æ÷Æ®Ã³ È­¸é³»¿¡ ÀÖ´ø ÇÃ·¹ÀÌ¾î.
-		 * °¢ Æê ¸¶´Ù UpdateObject¸¦ ½Ç½ÃÇÏ´Â (ºĞ)ÆíÀÌ ÄÚµå»ó¿¡¼­´Â ½º¸¶Æ®ÇÏÁö¸¸,
-		 * ³×Æ®¿öÅ© ºÎÇÏ°¡ Ä¿Áö±â ¶§¹®¿¡(À§ÇØ), ÀÏ´Ü Set¿¡ °İ³³ÇØ ¸¶Áö¸·¿¡ Á¤¸®ÇØ UpdateObject ÇÑ´Ù.
+		 * subjects í«ê³¼ ì‚¬ëª¬ì˜ í…”ë ˆí¬íŠ¸ì²˜ í™”ë©´ë‚´ì— ìˆë˜ í”Œë ˆì´ì–´.
+		 * ê° í« ë§ˆë‹¤ UpdateObjectë¥¼ ì‹¤ì‹œí•˜ëŠ” (ë¶„)í¸ì´ ì½”ë“œìƒì—ì„œëŠ” ìŠ¤ë§ˆíŠ¸í•˜ì§€ë§Œ,
+		 * ë„¤íŠ¸ì›Œí¬ ë¶€í•˜ê°€ ì»¤ì§€ê¸° ë•Œë¬¸ì—(ìœ„í•´), ì¼ë‹¨ Setì— ê²©ë‚©í•´ ë§ˆì§€ë§‰ì— ì •ë¦¬í•´ UpdateObject í•œë‹¤.
 		 */
 		HashSet<L1PcInstance> subjects = new HashSet<L1PcInstance>();
 		subjects.add(pc);
 
 		if (! pc.isGhost() && pc.getMap(). isTakePets()) {
-			// ¾Ö¿Ïµ¿¹°°ú »ç¸óµµ ÇÔ²² ÀÌµ¿½ÃÅ²´Ù.
+			// ì• ì™„ë™ë¬¼ê³¼ ì‚¬ëª¬ë„ í•¨ê»˜ ì´ë™ì‹œí‚¨ë‹¤.
 			for (L1NpcInstance petNpc : pc.getPetList(). values()) {
 
-				// ÅÚ·¹Æ÷Æ®Ã³ÀÇ ¼³Á¤
+				// í…”ë ˆí¬íŠ¸ì²˜ì˜ ì„¤ì •
 				L1Location loc = pc.getLocation(). randomLocation(3, false);
 				int nx = loc.getX();
 				int ny = loc.getY();
 				if (pc.getMapId() == 5125 || pc.getMapId() == 5131
 						|| pc.getMapId() == 5132 || pc.getMapId() == 5133
-						|| pc.getMapId() == 5134) { // Æê ¸ÅÄ¡ È¸Àå
+						|| pc.getMapId() == 5134) { // í« ë§¤ì¹˜ íšŒì¥
 					nx = 32799 + _random.nextInt(5) - 3;
 					ny = 32864 + _random.nextInt(5) - 3;
 				}
 				teleport(petNpc, nx, ny, mapId, head);
-				if (petNpc instanceof L1SummonInstance) { // »ç¸ó¸ó½ºÅ¸
+				if (petNpc instanceof L1SummonInstance) { // ì‚¬ëª¬ëª¬ìŠ¤íƒ€
 					L1SummonInstance summon = (L1SummonInstance) petNpc;
 					pc.sendPackets(new S_SummonPack(summon, pc));
-				} else if (petNpc instanceof L1PetInstance) { // Æê
+				} else if (petNpc instanceof L1PetInstance) { // í«
 					L1PetInstance pet = (L1PetInstance) petNpc;
 					pc.sendPackets(new S_PetPack(pet, pc));
 				}
 
 				for (L1PcInstance visiblePc : L1World.getInstance()
 						. getVisiblePlayer(petNpc)) {
-					// ÅÚ·¹Æ÷Æ®¿ø°ú ¸ÕÀú °°Àº PC°¡ ÀÖ¾úÀ» °æ¿ì, ¿Ã¹Ù¸£°Ô °»½ÅµÇÁö ¾Ê±â ¶§¹®¿¡, ÇÑ ¹ø remove ÇÑ´Ù.
+					// í…”ë ˆí¬íŠ¸ì›ê³¼ ë¨¼ì € ê°™ì€ PCê°€ ìˆì—ˆì„ ê²½ìš°, ì˜¬ë°”ë¥´ê²Œ ê°±ì‹ ë˜ì§€ ì•Šê¸° ë•Œë¬¸ì—, í•œ ë²ˆ remove í•œë‹¤.
 					visiblePc.removeKnownObject(petNpc);
 					subjects.add(visiblePc);
 				}
 
 			}
 
-			// ¸ÅÁ÷ ½Ç¾÷ ¼ö´çµµ ÇÔ²² ÀÌµ¿½ÃÅ²´Ù.
+			// ë§¤ì§ ì‹¤ì—… ìˆ˜ë‹¹ë„ í•¨ê»˜ ì´ë™ì‹œí‚¨ë‹¤.
 			for (L1DollInstance doll : pc.getDollList(). values()) {
 
-				// ÅÚ·¹Æ÷Æ®Ã³ÀÇ ¼³Á¤
+				// í…”ë ˆí¬íŠ¸ì²˜ì˜ ì„¤ì •
 				L1Location loc = pc.getLocation(). randomLocation(3, false);
 				int nx = loc.getX();
 				int ny = loc.getY();
@@ -181,7 +181,7 @@ public class Teleportation {
 
 				for (L1PcInstance visiblePc : L1World.getInstance()
 						. getVisiblePlayer(doll)) {
-					// ÅÚ·¹Æ÷Æ®¿ø°ú ¸ÕÀú °°Àº PC°¡ ÀÖ¾úÀ» °æ¿ì, ¿Ã¹Ù¸£°Ô °»½ÅµÇÁö ¾Ê±â ¶§¹®¿¡, ÇÑ ¹ø remove ÇÑ´Ù.
+					// í…”ë ˆí¬íŠ¸ì›ê³¼ ë¨¼ì € ê°™ì€ PCê°€ ìˆì—ˆì„ ê²½ìš°, ì˜¬ë°”ë¥´ê²Œ ê°±ì‹ ë˜ì§€ ì•Šê¸° ë•Œë¬¸ì—, í•œ ë²ˆ remove í•œë‹¤.
 					visiblePc.removeKnownObject(doll);
 					subjects.add(visiblePc);
 				}
@@ -212,7 +212,7 @@ public class Teleportation {
 		npc.setHeading(head);
 		L1WorldMap.getInstance(). getMap(npc.getMapId()). setPassable(npc.getX(), npc.getY(), false);
 	}
-		private static void buff(L1PcInstance pc) {//ºí·¯µå·¯½ºÆ®¶§¹®¿¡
+		private static void buff(L1PcInstance pc) {//ë¸”ëŸ¬ë“œëŸ¬ìŠ¤íŠ¸ë•Œë¬¸ì—
 		  Connection con = null; 
 		  PreparedStatement pstm = null; 
 		  ResultSet rs = null; 
@@ -225,7 +225,7 @@ public class Teleportation {
 		  while (rs.next()) { 
 		    int skillid = rs.getInt("skill_id"); 
 		    int remaining_time = rs.getInt("remaining_time"); 
-		    if (skillid == BLOODLUST) { // ºí·¯µå·¯½ºÆ® 
+		    if (skillid == BLOODLUST) { // ë¸”ëŸ¬ë“œëŸ¬ìŠ¤íŠ¸ 
 		    pc.sendPackets(new S_SkillBrave(pc.getId(), 6, remaining_time)); 
 		    pc.broadcastPacket(new S_SkillBrave(pc.getId(), 6, 0)); 
 		    pc.setBraveSpeed(1); 

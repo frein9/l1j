@@ -39,31 +39,31 @@ public class L1SKick implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 			L1PcInstance target = L1World.getInstance(). getPlayer(arg);
 			if (target != null) {
 				pc.sendPackets(new S_SystemMessage((new StringBuilder())
-						. append(target.getName()). append("¾¾¸¦ Å± Çß½À´Ï´Ù. ")
+						. append(target.getName()). append("ì”¨ë¥¼ í‚¥ í–ˆìŠµë‹ˆë‹¤. ")
 						. toString()));
-				// SKT¿¡ ÀÌµ¿½ÃÅ²´Ù
+				// SKTì— ì´ë™ì‹œí‚¨ë‹¤
 				target.setX(33080);
 				target.setY(33392);
 				target.setMap((short) 4);
 				target.sendPackets(new S_Disconnect());
 				ClientThread targetClient = target.getNetConnection();
 				targetClient.kick();
-				_log.warning("GMÀÇ skick Ä¿¸àµå¿¡ ÀÇÇØ(" + targetClient.getAccountName()
-						+ ":" + targetClient.getHostname() + ")¿ÍÀÇ Á¢¼ÓÀ» °­Á¦ Àı´Ü Çß½À´Ï´Ù. ");
+				_log.warning("GMì˜ skick ì»¤ë©˜ë“œì— ì˜í•´(" + targetClient.getAccountName()
+						+ ":" + targetClient.getHostname() + ")ì™€ì˜ ì ‘ì†ì„ ê°•ì œ ì ˆë‹¨ í–ˆìŠµë‹ˆë‹¤. ");
 			} else {
 				pc.sendPackets(new S_SystemMessage(
-						"±×·¯ÇÑ ÀÌ¸§ÀÇ Ä³¸¯ÅÍ´Â ¿ùµå³»¿¡´Â Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù. "));
+						"ê·¸ëŸ¬í•œ ì´ë¦„ì˜ ìºë¦­í„°ëŠ” ì›”ë“œë‚´ì—ëŠ” ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. "));
 			}
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " Ä³¸¯ÅÍ¸íÀ¸·Î ÀÔ·ÂÇØ ÁÖ¼¼¿ä. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + " ìºë¦­í„°ëª…ìœ¼ë¡œ ì…ë ¥í•´ ì£¼ì„¸ìš”. "));
 		}
 	}
 }

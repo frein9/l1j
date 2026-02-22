@@ -51,17 +51,17 @@ public class C_ShopList extends ClientBasePacket {
 			return;
 		}
 		
-		// npc °³ÀÎ»óÁ¡ÀÌ ÀÖÀ¸¹Ç·Î ¿ÀºêÁ§Æ®¸¦ ¸ÕÀú Ã£ÀºÈÄ °³º° Ã³¸®
+		// npc ê°œì¸ìƒì ì´ ìˆìœ¼ë¯€ë¡œ ì˜¤ë¸Œì íŠ¸ë¥¼ ë¨¼ì € ì°¾ì€í›„ ê°œë³„ ì²˜ë¦¬
 		L1Object o = L1World.getInstance().findObject(objectId);
-		// ±× ½ÃÅ°°¡ ÀÎ°£ÀÌ¸é
+		// ê·¸ ì‹œí‚¤ê°€ ì¸ê°„ì´ë©´
 		if(o instanceof L1PcInstance){
 			pc.sendPackets(new S_PrivateShop(pc, objectId, type));
-		// npc ¶ó¸é 
+		// npc ë¼ë©´ 
 		}else if(o instanceof L1NpcInstance){
 			L1NpcInstance n = (L1NpcInstance) o;
-			// °³ÀÎ»óÁ¡ npc
+			// ê°œì¸ìƒì  npc
 			L1ShopItem shop = ShopTable.getInstance().getShop(n.getNpcTemplate().get_npcId());
-			// °³ÀÎ»óÁ¡ npc ¶ó¸é
+			// ê°œì¸ìƒì  npc ë¼ë©´
 			if(shop != null && shop.getMessage() != null){
 				switch(type){
 					// buy 

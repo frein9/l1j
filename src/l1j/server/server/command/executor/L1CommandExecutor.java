@@ -21,23 +21,23 @@ package l1j.server.server.command.executor;
 import l1j.server.server.model.Instance.L1PcInstance;
 
 /**
- * Ä¿¸àµå ½ÇÇà Ã³¸® ÀÎÅÍÆäÀÌ½º
+ * ì»¤ë©˜ë“œ ì‹¤í–‰ ì²˜ë¦¬ ì¸í„°íŽ˜ì´ìŠ¤
  * 
- * Ä¿¸àµå Ã³¸® Å¬·¡½º´Â, ÀÌ ÀÎÅÍÆäÀÌ½º ¸Þ¼Òµå ÀÌ¿Ü¿¡<br>
+ * ì»¤ë©˜ë“œ ì²˜ë¦¬ í´ëž˜ìŠ¤ëŠ”, ì´ ì¸í„°íŽ˜ì´ìŠ¤ ë©”ì†Œë“œ ì´ì™¸ì—<br>
  * public static L1CommandExecutor getInstance()<br>
- * (À»)¸¦ ½ÇÀåÇØ¾ß ÇÑ´Ù.
- * Åë»ó, ÀÚÅ¬·¡½º¸¦ ÀÎ½ºÅÏ½ºÈ­ÇØ µ¹·ÁÁÖÁö¸¸, ÇÊ¿ä¿¡ µû¶ó¼­ Ä³½¬µÈ ÀÎ½ºÅÏ½º¸¦ µ¹·ÁÁÖ°Å³ª ´Ù¸¥ Å¬·¡½º¸¦ ÀÎ½ºÅÏ½ºÈ­ÇØ µ¹·ÁÁÙ ¼ö°¡ ÀÖ´Ù.
+ * (ì„)ë¥¼ ì‹¤ìž¥í•´ì•¼ í•œë‹¤.
+ * í†µìƒ, ìží´ëž˜ìŠ¤ë¥¼ ì¸ìŠ¤í„´ìŠ¤í™”í•´ ëŒë ¤ì£¼ì§€ë§Œ, í•„ìš”ì— ë”°ë¼ì„œ ìºì‰¬ëœ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ëŒë ¤ì£¼ê±°ë‚˜ ë‹¤ë¥¸ í´ëž˜ìŠ¤ë¥¼ ì¸ìŠ¤í„´ìŠ¤í™”í•´ ëŒë ¤ì¤„ ìˆ˜ê°€ ìžˆë‹¤.
  */
 public interface L1CommandExecutor {
 	/**
-	 * ÀÌ Ä¿¸àµå¸¦ ½ÇÇàÇÑ´Ù.
+	 * ì´ ì»¤ë©˜ë“œë¥¼ ì‹¤í–‰í•œë‹¤.
 	 * 
 	 * @param pc
-	 *            ½ÇÇàÀÚ
+	 *            ì‹¤í–‰ìž
 	 * @param cmdName
-	 *            ½ÇÇàµÈ Ä¿¸àµå¸í
+	 *            ì‹¤í–‰ëœ ì»¤ë©˜ë“œëª…
 	 * @param arg
-	 *            ÀÎ¼ö
+	 *            ì¸ìˆ˜
 	 */
 	public void execute(L1PcInstance pc, String cmdName, String arg);
 }

@@ -24,7 +24,7 @@ public class L1DwarfInventory extends L1Inventory {
 		_owner = owner;
 	}
 
-	// DBÀÇ character_itemsÀÇ µ¶ÀÔ
+	// DBì˜ character_itemsì˜ ë…ì…
 	@Override
 	public void loadItems() {
 		Connection con = null;
@@ -66,7 +66,7 @@ public class L1DwarfInventory extends L1Inventory {
 		}
 	}
 
-	// DBÀÇ character_warehouse¿¡ µî·Ï
+	// DBì˜ character_warehouseì— ë“±ë¡
 	@Override
 	public void insertItem(L1ItemInstance item) {
 		Connection con = null;
@@ -97,7 +97,7 @@ public class L1DwarfInventory extends L1Inventory {
 
 	}
 
-	// DBÀÇ character_warehouse¸¦ °»½Å
+	// DBì˜ character_warehouseë¥¼ ê°±ì‹ 
 	@Override
 	public void updateItem(L1ItemInstance item) {
 		Connection con = null;
@@ -117,7 +117,7 @@ public class L1DwarfInventory extends L1Inventory {
 		}
 	}
 
-	// DBÀÇ character_warehouse·ÎºÎÅÍ »èÁ¦
+	// DBì˜ character_warehouseë¡œë¶€í„° ì‚­ì œ
 	@Override
 	public void deleteItem(L1ItemInstance item) {
 		Connection con = null;
@@ -222,7 +222,7 @@ public class L1DwarfInventory extends L1Inventory {
 
 		L1Item temp = ItemTable.getInstance().getTemplate(itemid);
 		if (temp == null) {
-			throw new Exception("Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌÅÛ ID");
+			throw new Exception("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´í…œ ID");
 		}
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -284,7 +284,7 @@ public class L1DwarfInventory extends L1Inventory {
 				// ignore
 			}
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-			throw new Exception(".present Ã³¸®Áß¿¡ ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù.");
+			throw new Exception(".present ì²˜ë¦¬ì¤‘ì— ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.");
 		} finally {
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);

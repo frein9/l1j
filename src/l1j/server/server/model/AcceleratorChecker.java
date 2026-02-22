@@ -31,7 +31,7 @@ import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.serverpackets.S_Poison;
 
 /**
- * °¡¼Ó±âÀÇ »ç¿ëÀ» Ã¼Å©ÇÏ´Â Å¬·¡½º.
+ * ê°€ì†ê¸°ì˜ ì‚¬ìš©ì„ ì²´í¬í•˜ëŠ” í´ë˜ìŠ¤.
  */
 public class AcceleratorChecker {
 
@@ -48,8 +48,8 @@ public class AcceleratorChecker {
 
 	private static final int JUSTICE_COUNT_LIMIT = Config.JUSTICE_COUNT;
 
-	// ½ÇÁ¦·Î´Â ÀÌµ¿°ú °ø°İÀÇ ÆĞÅ¶ °£°İÀº sprÀÇ ÀÌ·ĞÄ¡º¸´Ù5%¸¸Å­ ´Ê´Ù.
-	// ±×°ÍÀ» °í·ÁÇØ¡ª5·Î ÇÏ°í ÀÖ´Ù.
+	// ì‹¤ì œë¡œëŠ” ì´ë™ê³¼ ê³µê²©ì˜ íŒ¨í‚· ê°„ê²©ì€ sprì˜ ì´ë¡ ì¹˜ë³´ë‹¤5%ë§Œí¼ ëŠ¦ë‹¤.
+	// ê·¸ê²ƒì„ ê³ ë ¤í•´â€•5ë¡œ í•˜ê³  ìˆë‹¤.
 	private static final double CHECK_STRICTNESS = (Config.CHECK_STRICTNESS - 5) / 100D;
 
 	private static final double HASTE_RATE = 0.745;
@@ -66,7 +66,7 @@ public class AcceleratorChecker {
 		MOVE, ATTACK, SPELL_DIR, SPELL_NODIR
 	}
 
-	// Ã¼Å©ÀÇ °á°ú
+	// ì²´í¬ì˜ ê²°ê³¼
 	public static final int R_OK = 0;
 
 	public static final int R_DETECTED = 1;
@@ -85,11 +85,11 @@ public class AcceleratorChecker {
 	}
 
 	/**
-	 * ¾×¼ÇÀÇ °£°İÀÌ ºÎÁ¤ÇÏÁö ¾ÊÀ»±î Ã¼Å©ÇØ, Àû´ç Ã³¸®¸¦ ½Ç½ÃÇÑ´Ù.
+	 * ì•¡ì…˜ì˜ ê°„ê²©ì´ ë¶€ì •í•˜ì§€ ì•Šì„ê¹Œ ì²´í¬í•´, ì ë‹¹ ì²˜ë¦¬ë¥¼ ì‹¤ì‹œí•œë‹¤.
 	 * 
 	 * @param type -
-	 *            Ã¼Å©ÇÏ´Â ¾×¼ÇÀÇ Å¸ÀÔ
-	 * @return ¹®Á¦°¡ ¾ø¾ú´ø °æ¿ì´Â 0, ºÎÁ¤ÇÒ °æ¿ì´Â 1, ºÎÁ¤ µ¿ÀÛÀÌ ÀÏÁ¤ È¸¼ö¿¡ ÀÌ¸£·¶±â ¶§¹®¿¡ ÇÃ·¹ÀÌ¾î¸¦ Àı´Ü ÇßÀ» °æ¿ì´Â 2¸¦ µ¹·ÁÁØ´Ù.
+	 *            ì²´í¬í•˜ëŠ” ì•¡ì…˜ì˜ íƒ€ì…
+	 * @return ë¬¸ì œê°€ ì—†ì—ˆë˜ ê²½ìš°ëŠ” 0, ë¶€ì •í•  ê²½ìš°ëŠ” 1, ë¶€ì • ë™ì‘ì´ ì¼ì • íšŒìˆ˜ì— ì´ë¥´ë €ê¸° ë•Œë¬¸ì— í”Œë ˆì´ì–´ë¥¼ ì ˆë‹¨ í–ˆì„ ê²½ìš°ëŠ” 2ë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 */
 	public int checkInterval(ACT_TYPE type) {
 		int result = R_OK;
@@ -115,7 +115,7 @@ public class AcceleratorChecker {
 			}
 		}
 
-		// °ËÁõ¿ë
+		// ê²€ì¦ìš©
 // double rate = (double) interval / rightInterval;
 // System.out.println(String.format("%s: %d / %d = %.2f (o-%d x-%d)",
 // type.toString(), interval, rightInterval, rate,
@@ -127,29 +127,29 @@ public class AcceleratorChecker {
 
 	private void doDisconnect() {
 		if (!_pc.isGm()) {
-		/*	_pc.sendPackets(new S_ServerMessage(945)); // À§¹ı ÇÁ·Î±×·¥ÀÌ ¹ß°ßµÇ¾úÀ¸¹Ç·Î, Á¾·áÇÕ´Ï´Ù.
+		/*	_pc.sendPackets(new S_ServerMessage(945)); // ìœ„ë²• í”„ë¡œê·¸ë¨ì´ ë°œê²¬ë˜ì—ˆìœ¼ë¯€ë¡œ, ì¢…ë£Œí•©ë‹ˆë‹¤.
 			_pc.sendPackets(new S_Disconnect());
-			_log.info(String.format("°¡¼Ó±â °ËÁö¸¦ À§ÇØ%s¸¦ °­Á¦ Àı´Ü Çß½À´Ï´Ù.", _pc.getName())); */
-			 L1Teleport.teleport(_pc, 33442, 32796, (short) 4, 5, true);   // ±â¶õ¸¶À»·Î ÀÌµ¿
+			_log.info(String.format("ê°€ì†ê¸° ê²€ì§€ë¥¼ ìœ„í•´%së¥¼ ê°•ì œ ì ˆë‹¨ í–ˆìŠµë‹ˆë‹¤.", _pc.getName())); */
+			 L1Teleport.teleport(_pc, 33442, 32796, (short) 4, 5, true);   // ê¸°ë€ë§ˆì„ë¡œ ì´ë™
 		     _pc.sendPackets(new S_Poison(_pc.getId(), 2)); 
 		     _pc.broadcastPacket(new S_Poison(_pc.getId(), 2)); 
-		     _pc.sendPackets(new S_SystemMessage("½ºÇÇµåÇÙ »ç¿ë³»¿ªÀÌ ¿î¿µÀÚ¿¡°Ô Àü¼ÛµË´Ï´Ù"));
+		     _pc.sendPackets(new S_SystemMessage("ìŠ¤í”¼ë“œí•µ ì‚¬ìš©ë‚´ì—­ì´ ìš´ì˜ìì—ê²Œ ì „ì†¡ë©ë‹ˆë‹¤"));
 
 		} else {
-			// GM´Â Àı´Ü ÇÏÁö ¾Ê´Â´Ù
-			_pc.sendPackets(new S_SystemMessage("°¡¼Ó±â °ËÁö¿¡ °É¸®°í ÀÖ½À´Ï´Ù."));
+			// GMëŠ” ì ˆë‹¨ í•˜ì§€ ì•ŠëŠ”ë‹¤
+			_pc.sendPackets(new S_SystemMessage("ê°€ì†ê¸° ê²€ì§€ì— ê±¸ë¦¬ê³  ìˆìŠµë‹ˆë‹¤."));
 			_injusticeCount = 0;
 		}
 	}
 
 	/**
-	 * PC »óÅÂ·ÎºÎÅÍ ÁöÁ¤µÈ Á¾·ùÀÇ ¾×¼ÇÀÇ ¿Ã¹Ù¸¥ ÀÎÅÍ¹ú(ms)À» °è»êÇØ, µ¹·ÁÁØ´Ù.
+	 * PC ìƒíƒœë¡œë¶€í„° ì§€ì •ëœ ì¢…ë¥˜ì˜ ì•¡ì…˜ì˜ ì˜¬ë°”ë¥¸ ì¸í„°ë²Œ(ms)ì„ ê³„ì‚°í•´, ëŒë ¤ì¤€ë‹¤.
 	 * 
 	 * @param type -
-	 *            ¾×¼ÇÀÇ Á¾·ù
+	 *            ì•¡ì…˜ì˜ ì¢…ë¥˜
 	 * @param _pc -
-	 *            Á¶»çÇÏ´Â PC
-	 * @return ¿Ã¹Ù¸¥ ÀÎÅÍ¹ú(ms)
+	 *            ì¡°ì‚¬í•˜ëŠ” PC
+	 * @return ì˜¬ë°”ë¥¸ ì¸í„°ë²Œ(ms)
 	 */
 	private int getRightInterval(ACT_TYPE type) {
 		int interval;
@@ -191,10 +191,10 @@ public class AcceleratorChecker {
 				interval *= HASTE_RATE;
 			}
 		}
-		 if (_pc.getBraveItemEquipped() > 0){//¿ë±â¾ÆÀÌÅÛ
+		 if (_pc.getBraveItemEquipped() > 0){//ìš©ê¸°ì•„ì´í…œ
 			  interval *= HASTE_RATE; 
 			  } 
-			  if (_pc.getHasteItemEquipped() > 0){//¿ë±â¾ÆÀÌÅÛ 
+			  if (_pc.getHasteItemEquipped() > 0){//ìš©ê¸°ì•„ì´í…œ 
 			  interval *= HASTE_RATE; 
 			  }
 		return interval;

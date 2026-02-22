@@ -47,7 +47,7 @@ public class L1DeleteGroundItem implements L1CommandExecutor {
 		for (L1Object l1object : L1World.getInstance().getObject()) {
 			if (l1object instanceof L1ItemInstance) {
 				L1ItemInstance l1iteminstance = (L1ItemInstance) l1object;
-				if (l1iteminstance.getX() == 0 && l1iteminstance.getY() == 0) { // Áö¸é»óÀÇ ¾ÆÀÌÅÛÀº ¾Æ´Ï°í, ´©±º°¡ÀÇ ¼ÒÀ¯¹°
+				if (l1iteminstance.getX() == 0 && l1iteminstance.getY() == 0) { // ì§€ë©´ìƒì˜ ì•„ì´í…œì€ ì•„ë‹ˆê³ , ëˆ„êµ°ê°€ì˜ ì†Œìœ ë¬¼
 					continue;
 				}
 
@@ -59,17 +59,17 @@ public class L1DeleteGroundItem implements L1CommandExecutor {
 									l1iteminstance.getY(),
 									l1iteminstance.getMapId());
 					int itemId = l1iteminstance.getItem().getItemId();
-					if (itemId == 40314 || itemId == 40316) { // ÆêÀÇ ¾Æ¹Â·¿Æ®
+					if (itemId == 40314 || itemId == 40316) { // íŽ«ì˜ ì•„ë®¤ë ›íŠ¸
 						PetTable.getInstance()
 								.deletePet(l1iteminstance.getId());
-					} else if (itemId >= 49016 && itemId <= 49025) { // ÆíÁöÁö
+					} else if (itemId >= 49016 && itemId <= 49025) { // íŽ¸ì§€ì§€
 						LetterTable lettertable = new LetterTable();
 						lettertable.deleteLetter(l1iteminstance.getId());
-					} else if (itemId >= 41383 && itemId <= 41400) { // °¡±¸
+					} else if (itemId >= 41383 && itemId <= 41400) { // ê°€êµ¬
 						if (l1object instanceof L1FurnitureInstance) {
 							L1FurnitureInstance furniture = (L1FurnitureInstance) l1object;
 							if (furniture.getItemObjId() == l1iteminstance
-									.getId()) { // ÀÌ¹Ì ²¨³»°í ÀÖ´Â °¡±¸
+									.getId()) { // ì´ë¯¸ êº¼ë‚´ê³  ìžˆëŠ” ê°€êµ¬
 								FurnitureSpawnTable.getInstance()
 										.deleteFurniture(furniture);
 							}
@@ -82,6 +82,6 @@ public class L1DeleteGroundItem implements L1CommandExecutor {
 			}
 		}
 		L1World.getInstance().broadcastServerMessage(
-				"¿ùµå¸Ê»óÀÇ ¾ÆÀÌÅÛÀÌ ¿î¿µÀÚ¿¡ ÀÇÇØ »èÁ¦µÇ¾ú½À´Ï´Ù.");
+				"ì›”ë“œë§µìƒì˜ ì•„ì´í…œì´ ìš´ì˜ìžì— ì˜í•´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.");
 	}
 }

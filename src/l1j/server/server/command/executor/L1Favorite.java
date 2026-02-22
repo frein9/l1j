@@ -42,25 +42,25 @@ public class L1Favorite implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 			if (! _faviCom.containsKey(pc.getId())) {
 				_faviCom.put(pc.getId(), "");
 			}
 			String faviCom = _faviCom.get(pc.getId());
 			if (arg.startsWith("set")) {
-				// Ä¿¸àµåÀÇ µî·Ï
+				// ì»¤ë©˜ë“œì˜ ë“±ë¡
 				StringTokenizer st = new StringTokenizer(arg);
 				st.nextToken();
 				if (! st.hasMoreTokens()) {
-					pc.sendPackets(new S_SystemMessage("Ä¿¸àµå°¡ ÇÏ´ÃÀÔ´Ï´Ù. "));
+					pc.sendPackets(new S_SystemMessage("ì»¤ë©˜ë“œê°€ í•˜ëŠ˜ì…ë‹ˆë‹¤. "));
 					return;
 				}
 				StringBuilder cmd = new StringBuilder();
-				String temp = st.nextToken(); // Ä¿¸àµå Å¸ÀÔ
+				String temp = st.nextToken(); // ì»¤ë©˜ë“œ íƒ€ì…
 				if (temp.equalsIgnoreCase(cmdName)) {
 					pc
 							. sendPackets(new S_SystemMessage(cmdName
-									+ " ÀÚ½ÅÀº µî·ÏÇÒ ¼ö ¾ø½À´Ï´Ù. "));
+									+ " ìì‹ ì€ ë“±ë¡í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤. "));
 					return;
 				}
 				cmd.append(temp + " ");
@@ -69,11 +69,11 @@ public class L1Favorite implements L1CommandExecutor {
 				}
 				faviCom = cmd.toString(). trim();
 				_faviCom.put(pc.getId(), faviCom);
-				pc.sendPackets(new S_SystemMessage(faviCom + " ¸¦ µî·ÏÇß½À´Ï´Ù. "));
+				pc.sendPackets(new S_SystemMessage(faviCom + " ë¥¼ ë“±ë¡í–ˆìŠµë‹ˆë‹¤. "));
 			} else if (arg.startsWith("show")) {
-				pc.sendPackets(new S_SystemMessage("ÇöÀçÀÇ µî·Ï Ä¿¸àµå: " + faviCom));
+				pc.sendPackets(new S_SystemMessage("í˜„ì¬ì˜ ë“±ë¡ ì»¤ë©˜ë“œ: " + faviCom));
 			} else if (faviCom.isEmpty()) {
-				pc.sendPackets(new S_SystemMessage("µî·ÏÇÏ°í ÀÖ´Â Ä¿¸àµå°¡ ¾ø½À´Ï´Ù. "));
+				pc.sendPackets(new S_SystemMessage("ë“±ë¡í•˜ê³  ìˆëŠ” ì»¤ë©˜ë“œê°€ ì—†ìŠµë‹ˆë‹¤. "));
 			} else {
 				StringBuilder cmd = new StringBuilder();
 				StringTokenizer st = new StringTokenizer(arg);
@@ -89,16 +89,16 @@ public class L1Favorite implements L1CommandExecutor {
 				while (st.hasMoreTokens()) {
 					cmd.append(st.nextToken() + " ");
 				}
-				pc.sendPackets(new S_SystemMessage(cmd + " ¸¦ ½ÇÇàÇÕ´Ï´Ù. "));
+				pc.sendPackets(new S_SystemMessage(cmd + " ë¥¼ ì‹¤í–‰í•©ë‹ˆë‹¤. "));
 				GMCommands.getInstance(). handleCommands(pc, cmd.toString());
 			}
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " set Ä¿¸àµå¸í " + "| "
-					+ cmdName + " show | " + cmdName + " [ÀÎ¼ö] ¶ó°í ÀÔ·ÂÇØ ÁÖ¼¼¿ä. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + " set ì»¤ë©˜ë“œëª… " + "| "
+					+ cmdName + " show | " + cmdName + " [ì¸ìˆ˜] ë¼ê³  ì…ë ¥í•´ ì£¼ì„¸ìš”. "));
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 		}
 	}

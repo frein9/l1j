@@ -87,95 +87,95 @@ public class FishingTimeController implements Runnable {
                 ){
       int chance = _random.nextInt(200) + 1;
       if (chance < 50) {
-            successFishing(pc, 41298, "$5256"); // 25%¾î¸° ¹°°í±â   
+            successFishing(pc, 41298, "$5256"); // 25%ì–´ë¦° ë¬¼ê³ ê¸°   
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
-            pc.setFishingTime(time2); //³¬½Ã½Ã°£ µÉ·ÁÁÖ±â
+            pc.setFishingTime(time2); //ë‚šì‹œì‹œê°„ ë ë ¤ì£¼ê¸°
          } else if (chance < 65) {
-            successFishing(pc, 41300, "$5258"); // 7.5% °­ÇÑ ¹°°í±â
+            successFishing(pc, 41300, "$5258"); // 7.5% ê°•í•œ ë¬¼ê³ ê¸°
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2); 
          } else if (chance < 80) {
-            successFishing(pc, 41299, "$5257"); // 7.5%Àçºü¸¥ ¹°°í±â
+            successFishing(pc, 41299, "$5257"); // 7.5%ìž¬ë¹ ë¥¸ ë¬¼ê³ ê¸°
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2); 
          } else if (chance < 90) {
-            successFishing(pc, 41296, "$5249"); // 5%ºØ¾î
+            successFishing(pc, 41296, "$5249"); // 5%ë¶•ì–´
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2); 
          } else if (chance < 100) {
-            successFishing(pc, 41297, "$5250"); // 5%À×¾î
+            successFishing(pc, 41297, "$5250"); // 5%ìž‰ì–´
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2);
          } else if (chance < 105) {
-            successFishing(pc, 41301, "$5259"); // 2.5%ºÓÀº ºû ³ª´Â ¹°°í±â
+            successFishing(pc, 41301, "$5259"); // 2.5%ë¶‰ì€ ë¹› ë‚˜ëŠ” ë¬¼ê³ ê¸°
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2); 
          } else if (chance < 110) {
-            successFishing(pc, 41302, "$5260"); // 2.5%ÃÊ·Ï ºû ³ª´Â ¹°°í±â
+            successFishing(pc, 41302, "$5260"); // 2.5%ì´ˆë¡ ë¹› ë‚˜ëŠ” ë¬¼ê³ ê¸°
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2); 
          } else if (chance < 115) {
-            successFishing(pc, 41303, "$5261"); // 2.5%ÆÄ¶õ ºû ³ª´Â ¹°°í±â
+            successFishing(pc, 41303, "$5261"); // 2.5%íŒŒëž€ ë¹› ë‚˜ëŠ” ë¬¼ê³ ê¸°
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2); 
          } else if (chance < 120) {
-            successFishing(pc, 41304, "$5262"); // 2.5%Èò ºû ³ª´Â ¹°°í±â
+            successFishing(pc, 41304, "$5262"); // 2.5%í° ë¹› ë‚˜ëŠ” ë¬¼ê³ ê¸°
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2); 
          } else if (chance < 123) {
-            successFishing(pc, 41306, "$5263"); // 1.5%±úÁø ¹ÝÁö
+            successFishing(pc, 41306, "$5263"); // 1.5%ê¹¨ì§„ ë°˜ì§€
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2); 
          } else if (chance < 126) {
-            successFishing(pc, 41307, "$5265"); // 1.5%±úÁø ¸ñ°ÉÀÌ
+            successFishing(pc, 41307, "$5265"); // 1.5%ê¹¨ì§„ ëª©ê±¸ì´
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2);
          } else if (chance < 129) {
-            successFishing(pc, 41305, "$5264"); // 1.5%±úÁø ±Í°ÉÀÌ
+            successFishing(pc, 41305, "$5264"); // 1.5%ê¹¨ì§„ ê·€ê±¸ì´
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2);
          } else if (chance < 134) {
-            successFishing(pc, 21051, "$5269"); // 2.5%¹°¿¡ Á¥Àº Åõ±¸
+            successFishing(pc, 21051, "$5269"); // 2.5%ë¬¼ì— ì –ì€ íˆ¬êµ¬
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2);
          } else if (chance < 139) {
-            successFishing(pc, 21052, "$5270"); // 2.5%¹°¿¡ Á¥Àº ¸ÁÅä
+            successFishing(pc, 21052, "$5270"); // 2.5%ë¬¼ì— ì –ì€ ë§í† 
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2); 
          } else if (chance < 144) {
-            successFishing(pc, 21053, "$5271"); // 2.5%¹°¿¡ Á¥Àº °©¿Ê
+            successFishing(pc, 21053, "$5271"); // 2.5%ë¬¼ì— ì –ì€ ê°‘ì˜·
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2); 
          } else if (chance < 159) {
-            successFishing(pc, 21054, "$5272"); // 2.5%¹°¿¡ Á¥Àº Àå°©
+            successFishing(pc, 21054, "$5272"); // 2.5%ë¬¼ì— ì –ì€ ìž¥ê°‘
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2);
          } else if (chance < 161) {
-            successFishing(pc, 41252, " Áø±ÍÇÑ °ÅºÏÀÌ (1) °³"); // 1%
+            successFishing(pc, 41252, " ì§„ê·€í•œ ê±°ë¶ì´ (1) ê°œ"); // 1%
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2); 
          } else if (chance < 163) {
-            successFishing(pc, 555113, "»óÀÚ ¹°°í±â (1) °³"); // 1% //¾ÆÀÌÅÛ¹øÈ£
+            successFishing(pc, 555113, "ìƒìž ë¬¼ê³ ê¸° (1) ê°œ"); // 1% //ì•„ì´í…œë²ˆí˜¸
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
             pc.setFishingTime(time2); 
          } else if (chance < 164) {
-            successFishing(pc, 555112, "¹ÝÂ¦ÀÌ´Â ºñ´Ã (1) °³"); //0.5%//¾ÆÀÌÅÛ¹øÈ£
+            successFishing(pc, 555112, "ë°˜ì§ì´ëŠ” ë¹„ëŠ˜ (1) ê°œ"); //0.5%//ì•„ì´í…œë²ˆí˜¸
             long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
-            pc.setFishingTime(time2); //³¬½Ã½Ã°£ µÉ·ÁÁÖ±â
-      /*} else if (chance < 172) { //4ÆÛ ºñ´Ã³ª¿À°Ô
-            successFishing(pc, 555112, "¹ÝÂ¦ÀÌ´Â ºñ´Ã (1) °³"); // 1.0% //¾ÆÀÌÅÛ¹øÈ£
-            successFishing(pc, 41252, " Áø±ÍÇÑ °ÅºÏÀÌ (1) °³"); // 1%*/
+            pc.setFishingTime(time2); //ë‚šì‹œì‹œê°„ ë ë ¤ì£¼ê¸°
+      /*} else if (chance < 172) { //4í¼ ë¹„ëŠ˜ë‚˜ì˜¤ê²Œ
+            successFishing(pc, 555112, "ë°˜ì§ì´ëŠ” ë¹„ëŠ˜ (1) ê°œ"); // 1.0% //ì•„ì´í…œë²ˆí˜¸
+            successFishing(pc, 41252, " ì§„ê·€í•œ ê±°ë¶ì´ (1) ê°œ"); // 1%*/
             pc.setFishingTime(0);
             pc.setFishingReady(false);
             pc.setFishing(false);
             pc.sendPackets(new S_CharVisualUpdate(pc));
             pc.broadcastPacket(new S_CharVisualUpdate(pc));
-            pc.sendPackets(new S_ServerMessage(1163, ""));  // ³¬½Ã°¡ Á¾·áÇß½À´Ï´Ù.
+            pc.sendPackets(new S_ServerMessage(1163, ""));  // ë‚šì‹œê°€ ì¢…ë£Œí–ˆìŠµë‹ˆë‹¤.
             removeMember(pc);
      
      }else {
-      pc.sendPackets(new S_ServerMessage(1136, "")); // ³¬½ÃÇØ¿¡ ½ÇÆÐÇß½À´Ï´Ù.
-      pc.getInventory().consumeItem(41295, 1); //½ÇÆÐ½Ã »èÁ¦ 
+      pc.sendPackets(new S_ServerMessage(1136, "")); // ë‚šì‹œí•´ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.
+      pc.getInventory().consumeItem(41295, 1); //ì‹¤íŒ¨ì‹œ ì‚­ì œ 
       long time2 = System.currentTimeMillis() + 10000 + _random.nextInt(6) * 1000;
       pc.setFishingTime(time2);
      }
@@ -190,16 +190,16 @@ private void successFishing(L1PcInstance pc, int itemId, String message) {
    L1ItemInstance item = ItemTable.getInstance().createItem(itemId);
    item.startItemOwnerTimer(pc);
    pc.getInventory().storeItem(item);
-   pc.getInventory().consumeItem(41295, 1);   //¸ÔÀÌ
-   pc.sendPackets(new S_ServerMessage(1185, message));//³¬½Ã¿¡ ¼º°øÇß½À´Ï´Ù.
-    if (!pc.getInventory().checkItem(41295)) {  //¸ÔÀÌ
+   pc.getInventory().consumeItem(41295, 1);   //ë¨¹ì´
+   pc.sendPackets(new S_ServerMessage(1185, message));//ë‚šì‹œì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤.
+    if (!pc.getInventory().checkItem(41295)) {  //ë¨¹ì´
      
      pc.setFishingTime(0);
      pc.setFishingReady(false);
      pc.setFishing(false);
      pc.sendPackets(new S_CharVisualUpdate(pc));
      pc.broadcastPacket(new S_CharVisualUpdate(pc));
-     pc.sendPackets(new S_ServerMessage(1137)); //³¬½Ã¸¦ÇÏ±â À§ÇØ¼± ¸ÔÀÌ°¡ ÇÊ¿äÇÕ´Ï´Ù.
+     pc.sendPackets(new S_ServerMessage(1137)); //ë‚šì‹œë¥¼í•˜ê¸° ìœ„í•´ì„  ë¨¹ì´ê°€ í•„ìš”í•©ë‹ˆë‹¤.
      removeMember(pc);
     
    }

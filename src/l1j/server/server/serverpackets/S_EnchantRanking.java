@@ -91,14 +91,14 @@ public class S_EnchantRanking extends ServerBasePacket {
 			db[count][1] = "";
 			count++;
 		}
-		db[0][2] = "1. ¹«±â ·©Å·";
-		db[1][2] = "2. ¹æ¾î±¸ ·©Å·";
-		db[2][2] = "3. ¾Æµ§ ·©Å·";
-		db[3][2] = "4. »ìÀÎ ·©Å·";
-		db[4][2] = "5. ½Åºñ±êÅĞ ·©Å·";
-		db[5][2] = "6. ¼º °ü·Ã";
-		db[6][2] = "7. ¿î¿µÀÚ ¹«±â";
-		db[7][2] = "8. ¿î¿µÀÚ °©¿Ê";
+		db[0][2] = "1. ë¬´ê¸° ë­í‚¹";
+		db[1][2] = "2. ë°©ì–´êµ¬ ë­í‚¹";
+		db[2][2] = "3. ì•„ë´ ë­í‚¹";
+		db[3][2] = "4. ì‚´ì¸ ë­í‚¹";
+		db[4][2] = "5. ì‹ ë¹„ê¹ƒí„¸ ë­í‚¹";
+		db[5][2] = "6. ì„± ê´€ë ¨";
+		db[6][2] = "7. ìš´ì˜ì ë¬´ê¸°";
+		db[7][2] = "8. ìš´ì˜ì ê°‘ì˜·";
 
 		writeC(Opcodes.S_OPCODE_BOARD);
 		writeC(0x00);
@@ -123,161 +123,161 @@ public class S_EnchantRanking extends ServerBasePacket {
  		String title = null;
 	  writeC(Opcodes.S_OPCODE_BOARDREAD);
 	  writeD(number);
-	  writeS("¿î¿µÀÚ");
+	  writeS("ìš´ì˜ì");
 	  switch(number) {
 	  	case 1:
-	  		title = "ÀÎÃ¾ ·©Å·";
+	  		title = "ì¸ì²¸ ë­í‚¹";
 	  		break;
 	  	case 2:
-	  		title = "¹æ¾î±¸ ·©Å·";
+	  		title = "ë°©ì–´êµ¬ ë­í‚¹";
 	  		break;
 	  	case 3:
-	  		title = "¾Æµ§ ·©Å·";
+	  		title = "ì•„ë´ ë­í‚¹";
 	  		break;
 	  	case 4:
-	  		title = "»ìÀÎ ·©Å·";
+	  		title = "ì‚´ì¸ ë­í‚¹";
 	  		break;
 	  	case 5:
-	  		title = "½Åºñ±êÅĞ ·©Å·";
+	  		title = "ì‹ ë¹„ê¹ƒí„¸ ë­í‚¹";
 	  		break;
 	  	case 6:
-	  		title = "¼º °ü·Ã";
+	  		title = "ì„± ê´€ë ¨";
 	  		break;
 	  	case 7:
-	  		title = "¿î¿µÀÚ ¹«±â";
+	  		title = "ìš´ì˜ì ë¬´ê¸°";
 	  		break;
 	  	case 8:
-	  		title = "¿î¿µÀÚ °©¿Ê";
+	  		title = "ìš´ì˜ì ê°‘ì˜·";
 	  		break;
 	  }
 	  writeS(title);
 	  writeS(date);
 	  switch(pc.getType()) {
 	  	case 0:
-	  		type = "±ºÁÖ";
+	  		type = "êµ°ì£¼";
 	  		break;
 	  	case 1:
-	  		type = "±â»ç";
+	  		type = "ê¸°ì‚¬";
 	  		break;
 	  	case 2:
-	  		type = "¿äÁ¤";
+	  		type = "ìš”ì •";
 	  		break;
 	  	case 3:
-	  		type = "¸¶¹ı»ç";
+	  		type = "ë§ˆë²•ì‚¬";
 	  		break;
 	  	case 4:
-	  		type = "´ÙÅ©¿¤ÇÁ";
+	  		type = "ë‹¤í¬ì—˜í”„";
 	  		break;
 	  }
 		int p = Rank(pc, number);
-	    if(number == 1) { //Ãß°¡ºÎºĞÀÔ´Ï´Ù
-	        writeS("\n\r" + "  1À§ "+ "+" + enchantlvl[0] + " " + name[0] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[0] +"\n\r" +
-	  	          "  2À§ " + "+" + enchantlvl[1] + " " + name[1] +"\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[1] + "\n\r" +
-	  	          "  3À§ " + "+" + enchantlvl[2]  + " " + name[2]+ "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[2] + "\n\r" +
-	  	          "  4À§ " + "+" + enchantlvl[3] + " " + name[3] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[3] + "\n\r" +
-	  	          "  5À§ " + "+" + enchantlvl[4] + " " + name[4] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[4] + "\n\r" +
-	  	          "  6À§ " + "+" + enchantlvl[5] + " " + name[5] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[5] + "\n\r" +
-	  	          "  7À§ " + "+" + enchantlvl[6] + " " + name[6] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[6] +"\n\r" +
-	  	          "  8À§ " + "+" + enchantlvl[7] + " " + name[7] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[7] +"\n\r" +
-	  	          "  9À§ " + "+" + enchantlvl[8] + " " + name[8] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[8] +"\n\r"+
-	  	          " 10À§ " + "+" + enchantlvl[9] + " " + name[9] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[9] +"\n\r" +
+	    if(number == 1) { //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
+	        writeS("\n\r" + "  1ìœ„ "+ "+" + enchantlvl[0] + " " + name[0] + "\n\r" + "  ì†Œìœ ì : " + name1[0] +"\n\r" +
+	  	          "  2ìœ„ " + "+" + enchantlvl[1] + " " + name[1] +"\n\r" + "  ì†Œìœ ì : " + name1[1] + "\n\r" +
+	  	          "  3ìœ„ " + "+" + enchantlvl[2]  + " " + name[2]+ "\n\r" + "  ì†Œìœ ì : " + name1[2] + "\n\r" +
+	  	          "  4ìœ„ " + "+" + enchantlvl[3] + " " + name[3] + "\n\r" + "  ì†Œìœ ì : " + name1[3] + "\n\r" +
+	  	          "  5ìœ„ " + "+" + enchantlvl[4] + " " + name[4] + "\n\r" + "  ì†Œìœ ì : " + name1[4] + "\n\r" +
+	  	          "  6ìœ„ " + "+" + enchantlvl[5] + " " + name[5] + "\n\r" + "  ì†Œìœ ì : " + name1[5] + "\n\r" +
+	  	          "  7ìœ„ " + "+" + enchantlvl[6] + " " + name[6] + "\n\r" + "  ì†Œìœ ì : " + name1[6] +"\n\r" +
+	  	          "  8ìœ„ " + "+" + enchantlvl[7] + " " + name[7] + "\n\r" + "  ì†Œìœ ì : " + name1[7] +"\n\r" +
+	  	          "  9ìœ„ " + "+" + enchantlvl[8] + " " + name[8] + "\n\r" + "  ì†Œìœ ì : " + name1[8] +"\n\r"+
+	  	          " 10ìœ„ " + "+" + enchantlvl[9] + " " + name[9] + "\n\r" + "  ì†Œìœ ì : " + name1[9] +"\n\r" +
 	  	                      "      ");
-	  }else if(number == 2) { //Ãß°¡ºÎºĞÀÔ´Ï´Ù
-	        writeS("\n\r" + "  1À§ "+ "+" + armor[0] + " " + name[0] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[0] +"\n\r" +
-	  	          "  2À§ " + "+" + armor[1] + " " + name[1] +"\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[1] + "\n\r" +
-	  	          "  3À§ " + "+" + armor[2]  + " " + name[2]+ "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[2] + "\n\r" +
-	  	          "  4À§ " + "+" + armor[3] + " " + name[3] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[3] + "\n\r" +
-	  	          "  5À§ " + "+" + armor[4] + " " + name[4] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[4] + "\n\r" +
-	  	          "  6À§ " + "+" + armor[5] + " " + name[5] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[5] + "\n\r" +
-	  	          "  7À§ " + "+" + armor[6] + " " + name[6] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[6] +"\n\r" +
-	  	          "  8À§ " + "+" + armor[7] + " " + name[7] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[7] +"\n\r" +
-	  	          "  9À§ " + "+" + armor[8] + " " + name[8] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[8] +"\n\r"+
-	  	          " 10À§ " + "+" + armor[9] + " " + name[9] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[9] +"\n\r" +
+	  }else if(number == 2) { //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
+	        writeS("\n\r" + "  1ìœ„ "+ "+" + armor[0] + " " + name[0] + "\n\r" + "  ì†Œìœ ì : " + name1[0] +"\n\r" +
+	  	          "  2ìœ„ " + "+" + armor[1] + " " + name[1] +"\n\r" + "  ì†Œìœ ì : " + name1[1] + "\n\r" +
+	  	          "  3ìœ„ " + "+" + armor[2]  + " " + name[2]+ "\n\r" + "  ì†Œìœ ì : " + name1[2] + "\n\r" +
+	  	          "  4ìœ„ " + "+" + armor[3] + " " + name[3] + "\n\r" + "  ì†Œìœ ì : " + name1[3] + "\n\r" +
+	  	          "  5ìœ„ " + "+" + armor[4] + " " + name[4] + "\n\r" + "  ì†Œìœ ì : " + name1[4] + "\n\r" +
+	  	          "  6ìœ„ " + "+" + armor[5] + " " + name[5] + "\n\r" + "  ì†Œìœ ì : " + name1[5] + "\n\r" +
+	  	          "  7ìœ„ " + "+" + armor[6] + " " + name[6] + "\n\r" + "  ì†Œìœ ì : " + name1[6] +"\n\r" +
+	  	          "  8ìœ„ " + "+" + armor[7] + " " + name[7] + "\n\r" + "  ì†Œìœ ì : " + name1[7] +"\n\r" +
+	  	          "  9ìœ„ " + "+" + armor[8] + " " + name[8] + "\n\r" + "  ì†Œìœ ì : " + name1[8] +"\n\r"+
+	  	          " 10ìœ„ " + "+" + armor[9] + " " + name[9] + "\n\r" + "  ì†Œìœ ì : " + name1[9] +"\n\r" +
 	  	                      "      ");
-	  }else if(number == 3) { //Ãß°¡ºÎºĞÀÔ´Ï´Ù
-	        writeS("\n\r" + "  1À§ "+ "$ " + aden[0] + " ¾Æµ¥³ª\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[0] + "\n\r" +
-	  	          "  2À§ " + "$ " + aden[1] + " ¾Æµ¥³ª\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[1] + "\n\r" +
-	  	          "  3À§ " + "$ " + aden[2] + " ¾Æµ¥³ª\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[2] + "\n\r" +
-	  	          "  4À§ " + "$ " + aden[3] + " ¾Æµ¥³ª\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[3] + "\n\r" +
-	  	          "  5À§ " + "$ " + aden[4] + " ¾Æµ¥³ª\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[4] + "\n\r" +
-	  	          "  6À§ " + "$ " + aden[5] + " ¾Æµ¥³ª\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[5] + "\n\r" +
-	  	          "  7À§ " + "$ " + aden[6] + " ¾Æµ¥³ª\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[6] + "\n\r" +
-	  	          "  8À§ " + "$ " + aden[7] + " ¾Æµ¥³ª\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[7] + "\n\r" +
-	  	          "  9À§ " + "$ " + aden[8] + " ¾Æµ¥³ª\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[8] + "\n\r" +
-	  	          " 10À§ " + "$ " + aden[9] + " ¾Æµ¥³ª\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[9] + "\n\r" +
+	  }else if(number == 3) { //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
+	        writeS("\n\r" + "  1ìœ„ "+ "$ " + aden[0] + " ì•„ë°ë‚˜\n\r" + "  ì†Œìœ ì : " + name[0] + "\n\r" +
+	  	          "  2ìœ„ " + "$ " + aden[1] + " ì•„ë°ë‚˜\n\r" + "  ì†Œìœ ì : " + name[1] + "\n\r" +
+	  	          "  3ìœ„ " + "$ " + aden[2] + " ì•„ë°ë‚˜\n\r" + "  ì†Œìœ ì : " + name[2] + "\n\r" +
+	  	          "  4ìœ„ " + "$ " + aden[3] + " ì•„ë°ë‚˜\n\r" + "  ì†Œìœ ì : " + name[3] + "\n\r" +
+	  	          "  5ìœ„ " + "$ " + aden[4] + " ì•„ë°ë‚˜\n\r" + "  ì†Œìœ ì : " + name[4] + "\n\r" +
+	  	          "  6ìœ„ " + "$ " + aden[5] + " ì•„ë°ë‚˜\n\r" + "  ì†Œìœ ì : " + name[5] + "\n\r" +
+	  	          "  7ìœ„ " + "$ " + aden[6] + " ì•„ë°ë‚˜\n\r" + "  ì†Œìœ ì : " + name[6] + "\n\r" +
+	  	          "  8ìœ„ " + "$ " + aden[7] + " ì•„ë°ë‚˜\n\r" + "  ì†Œìœ ì : " + name[7] + "\n\r" +
+	  	          "  9ìœ„ " + "$ " + aden[8] + " ì•„ë°ë‚˜\n\r" + "  ì†Œìœ ì : " + name[8] + "\n\r" +
+	  	          " 10ìœ„ " + "$ " + aden[9] + " ì•„ë°ë‚˜\n\r" + "  ì†Œìœ ì : " + name[9] + "\n\r" +
 	  	                      "      ");
-	  }else if(number == 4) { //Ãß°¡ºÎºĞÀÔ´Ï´Ù
-	        writeS("\n\r" + "  1À§ "+ pkcount[0] + " ¸í »ìÀÎ\n\r" + "  »ì»ıÀÚ : " + name[0] + "\n\r" +
-	  	          "  2À§ " + pkcount[1] + " ¸í »ìÀÎ\n\r" + "  »ì»ıÀÚ : " + name[1] + "\n\r" +
-	  	          "  3À§ " + pkcount[2] + " ¸í »ìÀÎ\n\r" + "  »ì»ıÀÚ : " + name[2] + "\n\r" +
-	  	          "  4À§ " + pkcount[3] + " ¸í »ìÀÎ\n\r" + "  »ì»ıÀÚ : " + name[3] + "\n\r" +
-	  	          "  5À§ " + pkcount[4] + " ¸í »ìÀÎ\n\r" + "  »ì»ıÀÚ : " + name[4] + "\n\r" +
-	  	          "  6À§ " + pkcount[5] + " ¸í »ìÀÎ\n\r" + "  »ì»ıÀÚ : " + name[5] + "\n\r" +
-	  	          "  7À§ " + pkcount[6] + " ¸í »ìÀÎ\n\r" + "  »ì»ıÀÚ : " + name[6] + "\n\r" +
-	  	          "  8À§ " + pkcount[7] + " ¸í »ìÀÎ\n\r" + "  »ì»ıÀÚ : " + name[7] + "\n\r" +
-	  	          "  9À§ " + pkcount[8] + " ¸í »ìÀÎ\n\r" + "  »ì»ıÀÚ : " + name[8] + "\n\r" +
-	  	          " 10À§ " + pkcount[9] + " ¸í »ìÀÎ\n\r" + "  »ì»ıÀÚ : " + name[9] + "\n\r" +
+	  }else if(number == 4) { //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
+	        writeS("\n\r" + "  1ìœ„ "+ pkcount[0] + " ëª… ì‚´ì¸\n\r" + "  ì‚´ìƒì : " + name[0] + "\n\r" +
+	  	          "  2ìœ„ " + pkcount[1] + " ëª… ì‚´ì¸\n\r" + "  ì‚´ìƒì : " + name[1] + "\n\r" +
+	  	          "  3ìœ„ " + pkcount[2] + " ëª… ì‚´ì¸\n\r" + "  ì‚´ìƒì : " + name[2] + "\n\r" +
+	  	          "  4ìœ„ " + pkcount[3] + " ëª… ì‚´ì¸\n\r" + "  ì‚´ìƒì : " + name[3] + "\n\r" +
+	  	          "  5ìœ„ " + pkcount[4] + " ëª… ì‚´ì¸\n\r" + "  ì‚´ìƒì : " + name[4] + "\n\r" +
+	  	          "  6ìœ„ " + pkcount[5] + " ëª… ì‚´ì¸\n\r" + "  ì‚´ìƒì : " + name[5] + "\n\r" +
+	  	          "  7ìœ„ " + pkcount[6] + " ëª… ì‚´ì¸\n\r" + "  ì‚´ìƒì : " + name[6] + "\n\r" +
+	  	          "  8ìœ„ " + pkcount[7] + " ëª… ì‚´ì¸\n\r" + "  ì‚´ìƒì : " + name[7] + "\n\r" +
+	  	          "  9ìœ„ " + pkcount[8] + " ëª… ì‚´ì¸\n\r" + "  ì‚´ìƒì : " + name[8] + "\n\r" +
+	  	          " 10ìœ„ " + pkcount[9] + " ëª… ì‚´ì¸\n\r" + "  ì‚´ìƒì : " + name[9] + "\n\r" +
 	                      "      ");
-	  }else if(number == 5) { //Ãß°¡ºÎºĞÀÔ´Ï´Ù
-	        writeS("\n\r" + "  1À§ "+ priaden[0] + "°³ÀÇ ±êÅĞ\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[0] + "\n\r" +
-	  	          "  2À§ " + priaden[1] + "°³ÀÇ ±êÅĞ\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[1] + "\n\r" +
-	  	          "  3À§ " + priaden[2] + "°³ÀÇ ±êÅĞ\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[2] + "\n\r" +
-	  	          "  4À§ " + priaden[3] + "°³ÀÇ ±êÅĞ\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[3] + "\n\r" +
-	  	          "  5À§ " + priaden[4] + "°³ÀÇ ±êÅĞ\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[4] + "\n\r" +
-	  	          "  6À§ " + priaden[5] + "°³ÀÇ ±êÅĞ\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[5] + "\n\r" +
-	  	          "  7À§ " + priaden[6] + "°³ÀÇ ±êÅĞ\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[6] + "\n\r" +
-	  	          "  8À§ " + priaden[7] + "°³ÀÇ ±êÅĞ\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[7] + "\n\r" +
-	  	          "  9À§ " + priaden[8] + "°³ÀÇ ±êÅĞ\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[8] + "\n\r" +
-	  	          " 10À§ " + priaden[9] + "°³ÀÇ ±êÅĞ\n\r" + "  ¼ÒÀ¯ÀÚ : " + name[9] + "\n\r" +
+	  }else if(number == 5) { //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
+	        writeS("\n\r" + "  1ìœ„ "+ priaden[0] + "ê°œì˜ ê¹ƒí„¸\n\r" + "  ì†Œìœ ì : " + name[0] + "\n\r" +
+	  	          "  2ìœ„ " + priaden[1] + "ê°œì˜ ê¹ƒí„¸\n\r" + "  ì†Œìœ ì : " + name[1] + "\n\r" +
+	  	          "  3ìœ„ " + priaden[2] + "ê°œì˜ ê¹ƒí„¸\n\r" + "  ì†Œìœ ì : " + name[2] + "\n\r" +
+	  	          "  4ìœ„ " + priaden[3] + "ê°œì˜ ê¹ƒí„¸\n\r" + "  ì†Œìœ ì : " + name[3] + "\n\r" +
+	  	          "  5ìœ„ " + priaden[4] + "ê°œì˜ ê¹ƒí„¸\n\r" + "  ì†Œìœ ì : " + name[4] + "\n\r" +
+	  	          "  6ìœ„ " + priaden[5] + "ê°œì˜ ê¹ƒí„¸\n\r" + "  ì†Œìœ ì : " + name[5] + "\n\r" +
+	  	          "  7ìœ„ " + priaden[6] + "ê°œì˜ ê¹ƒí„¸\n\r" + "  ì†Œìœ ì : " + name[6] + "\n\r" +
+	  	          "  8ìœ„ " + priaden[7] + "ê°œì˜ ê¹ƒí„¸\n\r" + "  ì†Œìœ ì : " + name[7] + "\n\r" +
+	  	          "  9ìœ„ " + priaden[8] + "ê°œì˜ ê¹ƒí„¸\n\r" + "  ì†Œìœ ì : " + name[8] + "\n\r" +
+	  	          " 10ìœ„ " + priaden[9] + "ê°œì˜ ê¹ƒí„¸\n\r" + "  ì†Œìœ ì : " + name[9] + "\n\r" +
 	  	                      "      ");
-	  }else if(number == 6) { //Ãß°¡ºÎºĞÀÔ´Ï´Ù
-	        writeS("\n\r" + castlename[0] + " " + clanname[0] + " Ç÷¸Í \n\r" + leadername[0]+ " ¼ºÁÖ " + taxrate[0] + "% ¼¼À² \n\r" + "´©Àû ¾Æµ¥³ª : " + castleaden[0] +"¿ø \n\r\n\r" +
-	  	          castlename[1] + " " + clanname[1] + " Ç÷¸Í \n\r" + leadername[1] + " ¼ºÁÖ " + taxrate[1] + "% ¼¼À² \n\r" + "´©Àû ¾Æµ¥³ª : " + castleaden[1] + "¿ø \n\r\n\r" +
-	  	          castlename[2] + " " + clanname[2] + " Ç÷¸Í \n\r" + leadername[2] + " ¼ºÁÖ " + taxrate[2] + "% ¼¼À² \n\r" + "´©Àû ¾Æµ¥³ª : " + castleaden[2] + "¿ø \n\r\n\r" +
-	  	          castlename[3] + " " + clanname[3] + " Ç÷¸Í \n\r" + leadername[3] + " ¼ºÁÖ " + taxrate[3] + "% ¼¼À² \n\r" + "´©Àû ¾Æµ¥³ª : " + castleaden[3] + "¿ø \n\r\n\r" +
-	  	      //    castlename[4] + " " + clanname[4] + "±æµå \n\r" + leadername[4] + "¼ºÁÖ´Ô " + taxrate[4] + "% ¼¼À² \n\r" + "´©Àû ¾Æµ¥³ª : " + castleaden[4] + "¿ø \n\r" +
-	  	      //    castlename[5] + " " + clanname[5] + "±æµå \n\r" + leadername[5] + "¼ºÁÖ´Ô " + taxrate[5] + "% ¼¼À² \n\r" + "´©Àû ¾Æµ¥³ª : " + castleaden[5] + "¿ø \n\r" +
-	  	      //    castlename[6] + " " + clanname[6] + "±æµå \n\r" + leadername[6] + "¼ºÁÖ´Ô " + taxrate[6] + "% ¼¼À² \n\r" + "´©Àû ¾Æµ¥³ª : " + castleaden[6] + "¿ø \n\r" +
-	  	      //    castlename[7] + " " + clanname[7] + "±æµå \n\r" + leadername[7] + "¼ºÁÖ´Ô " + taxrate[7] + "% ¼¼À² \n\r" + "´©Àû ¾Æµ¥³ª : " + castleaden[7] + "¿ø \n\r" +
-	  	      //    castlename[8] + " " + clanname[8] + "±æµå \n\r" + leadername[8] + "¼ºÁÖ´Ô " + taxrate[8] + "% ¼¼À² \n\r" + "´©Àû ¾Æµ¥³ª : " + castleaden[8] + "¿ø \n\r" +
-	  	      //    castlename[9] + " " + clanname[9] + "±æµå \n\r" + leadername[9] + "¼ºÁÖ´Ô " + taxrate[9] + "% ¼¼À² \n\r" + "´©Àû ¾Æµ¥³ª : " + castleaden[9] + "¿ø \n\r" +
+	  }else if(number == 6) { //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
+	        writeS("\n\r" + castlename[0] + " " + clanname[0] + " í˜ˆë§¹ \n\r" + leadername[0]+ " ì„±ì£¼ " + taxrate[0] + "% ì„¸ìœ¨ \n\r" + "ëˆ„ì  ì•„ë°ë‚˜ : " + castleaden[0] +"ì› \n\r\n\r" +
+	  	          castlename[1] + " " + clanname[1] + " í˜ˆë§¹ \n\r" + leadername[1] + " ì„±ì£¼ " + taxrate[1] + "% ì„¸ìœ¨ \n\r" + "ëˆ„ì  ì•„ë°ë‚˜ : " + castleaden[1] + "ì› \n\r\n\r" +
+	  	          castlename[2] + " " + clanname[2] + " í˜ˆë§¹ \n\r" + leadername[2] + " ì„±ì£¼ " + taxrate[2] + "% ì„¸ìœ¨ \n\r" + "ëˆ„ì  ì•„ë°ë‚˜ : " + castleaden[2] + "ì› \n\r\n\r" +
+	  	          castlename[3] + " " + clanname[3] + " í˜ˆë§¹ \n\r" + leadername[3] + " ì„±ì£¼ " + taxrate[3] + "% ì„¸ìœ¨ \n\r" + "ëˆ„ì  ì•„ë°ë‚˜ : " + castleaden[3] + "ì› \n\r\n\r" +
+	  	      //    castlename[4] + " " + clanname[4] + "ê¸¸ë“œ \n\r" + leadername[4] + "ì„±ì£¼ë‹˜ " + taxrate[4] + "% ì„¸ìœ¨ \n\r" + "ëˆ„ì  ì•„ë°ë‚˜ : " + castleaden[4] + "ì› \n\r" +
+	  	      //    castlename[5] + " " + clanname[5] + "ê¸¸ë“œ \n\r" + leadername[5] + "ì„±ì£¼ë‹˜ " + taxrate[5] + "% ì„¸ìœ¨ \n\r" + "ëˆ„ì  ì•„ë°ë‚˜ : " + castleaden[5] + "ì› \n\r" +
+	  	      //    castlename[6] + " " + clanname[6] + "ê¸¸ë“œ \n\r" + leadername[6] + "ì„±ì£¼ë‹˜ " + taxrate[6] + "% ì„¸ìœ¨ \n\r" + "ëˆ„ì  ì•„ë°ë‚˜ : " + castleaden[6] + "ì› \n\r" +
+	  	      //    castlename[7] + " " + clanname[7] + "ê¸¸ë“œ \n\r" + leadername[7] + "ì„±ì£¼ë‹˜ " + taxrate[7] + "% ì„¸ìœ¨ \n\r" + "ëˆ„ì  ì•„ë°ë‚˜ : " + castleaden[7] + "ì› \n\r" +
+	  	      //    castlename[8] + " " + clanname[8] + "ê¸¸ë“œ \n\r" + leadername[8] + "ì„±ì£¼ë‹˜ " + taxrate[8] + "% ì„¸ìœ¨ \n\r" + "ëˆ„ì  ì•„ë°ë‚˜ : " + castleaden[8] + "ì› \n\r" +
+	  	      //    castlename[9] + " " + clanname[9] + "ê¸¸ë“œ \n\r" + leadername[9] + "ì„±ì£¼ë‹˜ " + taxrate[9] + "% ì„¸ìœ¨ \n\r" + "ëˆ„ì  ì•„ë°ë‚˜ : " + castleaden[9] + "ì› \n\r" +
 	  	                      "      ");
-	  }else if(number == 7) { //Ãß°¡ºÎºĞÀÔ´Ï´Ù
-		        writeS("\n\r" + "  1À§ "+ "+" + enchantlvl[0] + " " + name[0] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[0] +"\n\r" +
-		  	          "  2À§ " + "+" + enchantlvl[1] + " " + name[1] +"\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[1] + "\n\r" +
-		  	          "  3À§ " + "+" + enchantlvl[2]  + " " + name[2]+ "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[2] + "\n\r" +
-		  	          "  4À§ " + "+" + enchantlvl[3] + " " + name[3] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[3] + "\n\r" +
-		  	          "  5À§ " + "+" + enchantlvl[4] + " " + name[4] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[4] + "\n\r" +
-		  	          "  6À§ " + "+" + enchantlvl[5] + " " + name[5] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[5] + "\n\r" +
-		  	          "  7À§ " + "+" + enchantlvl[6] + " " + name[6] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[6] +"\n\r" +
-		  	          "  8À§ " + "+" + enchantlvl[7] + " " + name[7] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[7] +"\n\r" +
-		  	          "  9À§ " + "+" + enchantlvl[8] + " " + name[8] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[8] +"\n\r"+
-		  	          " 10À§ " + "+" + enchantlvl[9] + " " + name[9] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[9] +"\n\r" +
+	  }else if(number == 7) { //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
+		        writeS("\n\r" + "  1ìœ„ "+ "+" + enchantlvl[0] + " " + name[0] + "\n\r" + "  ì†Œìœ ì : " + name1[0] +"\n\r" +
+		  	          "  2ìœ„ " + "+" + enchantlvl[1] + " " + name[1] +"\n\r" + "  ì†Œìœ ì : " + name1[1] + "\n\r" +
+		  	          "  3ìœ„ " + "+" + enchantlvl[2]  + " " + name[2]+ "\n\r" + "  ì†Œìœ ì : " + name1[2] + "\n\r" +
+		  	          "  4ìœ„ " + "+" + enchantlvl[3] + " " + name[3] + "\n\r" + "  ì†Œìœ ì : " + name1[3] + "\n\r" +
+		  	          "  5ìœ„ " + "+" + enchantlvl[4] + " " + name[4] + "\n\r" + "  ì†Œìœ ì : " + name1[4] + "\n\r" +
+		  	          "  6ìœ„ " + "+" + enchantlvl[5] + " " + name[5] + "\n\r" + "  ì†Œìœ ì : " + name1[5] + "\n\r" +
+		  	          "  7ìœ„ " + "+" + enchantlvl[6] + " " + name[6] + "\n\r" + "  ì†Œìœ ì : " + name1[6] +"\n\r" +
+		  	          "  8ìœ„ " + "+" + enchantlvl[7] + " " + name[7] + "\n\r" + "  ì†Œìœ ì : " + name1[7] +"\n\r" +
+		  	          "  9ìœ„ " + "+" + enchantlvl[8] + " " + name[8] + "\n\r" + "  ì†Œìœ ì : " + name1[8] +"\n\r"+
+		  	          " 10ìœ„ " + "+" + enchantlvl[9] + " " + name[9] + "\n\r" + "  ì†Œìœ ì : " + name1[9] +"\n\r" +
 		  	                      "      ");
-		  }else if(number == 8) { //Ãß°¡ºÎºĞÀÔ´Ï´Ù
-		        writeS("\n\r" + "  1À§ "+ "+" + armor[0] + " " + name[0] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[0] +"\n\r" +
-		  	          "  2À§ " + "+" + armor[1] + " " + name[1] +"\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[1] + "\n\r" +
-		  	          "  3À§ " + "+" + armor[2]  + " " + name[2]+ "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[2] + "\n\r" +
-		  	          "  4À§ " + "+" + armor[3] + " " + name[3] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[3] + "\n\r" +
-		  	          "  5À§ " + "+" + armor[4] + " " + name[4] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[4] + "\n\r" +
-		  	          "  6À§ " + "+" + armor[5] + " " + name[5] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[5] + "\n\r" +
-		  	          "  7À§ " + "+" + armor[6] + " " + name[6] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[6] +"\n\r" +
-		  	          "  8À§ " + "+" + armor[7] + " " + name[7] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[7] +"\n\r" +
-		  	          "  9À§ " + "+" + armor[8] + " " + name[8] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[8] +"\n\r"+
-		  	          " 10À§ " + "+" + armor[9] + " " + name[9] + "\n\r" + "  ¼ÒÀ¯ÀÚ : " + name1[9] +"\n\r" +
+		  }else if(number == 8) { //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
+		        writeS("\n\r" + "  1ìœ„ "+ "+" + armor[0] + " " + name[0] + "\n\r" + "  ì†Œìœ ì : " + name1[0] +"\n\r" +
+		  	          "  2ìœ„ " + "+" + armor[1] + " " + name[1] +"\n\r" + "  ì†Œìœ ì : " + name1[1] + "\n\r" +
+		  	          "  3ìœ„ " + "+" + armor[2]  + " " + name[2]+ "\n\r" + "  ì†Œìœ ì : " + name1[2] + "\n\r" +
+		  	          "  4ìœ„ " + "+" + armor[3] + " " + name[3] + "\n\r" + "  ì†Œìœ ì : " + name1[3] + "\n\r" +
+		  	          "  5ìœ„ " + "+" + armor[4] + " " + name[4] + "\n\r" + "  ì†Œìœ ì : " + name1[4] + "\n\r" +
+		  	          "  6ìœ„ " + "+" + armor[5] + " " + name[5] + "\n\r" + "  ì†Œìœ ì : " + name1[5] + "\n\r" +
+		  	          "  7ìœ„ " + "+" + armor[6] + " " + name[6] + "\n\r" + "  ì†Œìœ ì : " + name1[6] +"\n\r" +
+		  	          "  8ìœ„ " + "+" + armor[7] + " " + name[7] + "\n\r" + "  ì†Œìœ ì : " + name1[7] +"\n\r" +
+		  	          "  9ìœ„ " + "+" + armor[8] + " " + name[8] + "\n\r" + "  ì†Œìœ ì : " + name1[8] +"\n\r"+
+		  	          " 10ìœ„ " + "+" + armor[9] + " " + name[9] + "\n\r" + "  ì†Œìœ ì : " + name1[9] +"\n\r" +
 		  	                      "      ");
 		  }
 	    /*else {
-		  writeS("\n\r" + "  1À§ " + name[0] + "\n\r" +
-				  "  2À§ " + name[1] + "\n\r" +
-				  "  3À§ " + name[2] + "\n\r" +
-				  "  4À§ " + name[3] + "\n\r" +
-				  "  5À§ " + name[4] + "\n\r" +
-				  "  6À§ " + name[5] + "\n\r" +
-				  "  7À§ " + name[6] + "\n\r" +
-				  "  8À§ " + name[7] + "\n\r" +
-				  "  9À§ " + name[8] + "\n\r" +
-				  " 10À§ " + name[9] + "\n\r" +
+		  writeS("\n\r" + "  1ìœ„ " + name[0] + "\n\r" +
+				  "  2ìœ„ " + name[1] + "\n\r" +
+				  "  3ìœ„ " + name[2] + "\n\r" +
+				  "  4ìœ„ " + name[3] + "\n\r" +
+				  "  5ìœ„ " + name[4] + "\n\r" +
+				  "  6ìœ„ " + name[5] + "\n\r" +
+				  "  7ìœ„ " + name[6] + "\n\r" +
+				  "  8ìœ„ " + name[7] + "\n\r" +
+				  "  9ìœ„ " + name[8] + "\n\r" +
+				  " 10ìœ„ " + name[9] + "\n\r" +
 		  		  "             ");
 		}*/
   }
@@ -312,18 +312,18 @@ public class S_EnchantRanking extends ServerBasePacket {
 				case 7:
 					pstm = con.prepareStatement("SELECT objid FROM characters WHERE AccessLevel = 0 order by Exp desc");
 					break;*/
-		    case 1: //Ãß°¡ºÎºĞÀÔ´Ï´Ù
+		    case 1: //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
 		        pstm = con.prepareStatement("SELECT enchantlvl, weapon.name, characters.char_name  FROM character_items, weapon, characters WHERE character_items.item_id in(select item_id from weapon) And character_items.char_id in(select objid from characters where AccessLevel = 0) And character_items.item_id=weapon.item_id And character_items.char_id=characters.objid And count = 1 order by character_items.enchantlvl desc limit 10");
 		        //		        pstm = con.prepareStatement("SELECT enchantlvl, weapon.name, characters.char_name FROM character_items, weapon, characters WHERE character_items.item_id in(select item_id from weapon) And character_items.char_id in(select objid from characters where AccessLevel = 200) And character_items.item_id=weapon.item_id And character_items.char_id=characters.objid And character_items.is_equipped = 1 order by character_items.enchantlvl desc limit 10");
 		        break;		
-		    case 2: //Ãß°¡ºÎºĞÀÔ´Ï´Ù
+		    case 2: //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
 		        pstm = con.prepareStatement("SELECT enchantlvl, armor.name, characters.char_name  FROM character_items, armor, characters WHERE character_items.item_id in(select item_id from armor) And character_items.char_id in(select objid from characters where AccessLevel = 0) And character_items.item_id=armor.item_id And character_items.char_id=characters.objid And count = 1 order by character_items.enchantlvl desc limit 10");
 		        break;	
 		    case 3:
 		    	pstm = con.prepareStatement("SELECT count, characters.char_name FROM character_items, characters WHERE item_id in(select item_id from etcitem) And char_id in(select objid from characters where AccessLevel = 0) And character_items.char_id=characters.objid And item_id = 40308 order by count desc limit 10");
 		        break;
 		//	        pstm = con.prepareStatement("SELECT enchantlvl, characters.char_name, armor.name  FROM character_items, characters, armor WHERE item_id in(select item_id from armor) And char_id in(select objid from characters where AccessLevel = 200) And char_id=characters.objid And item_id=armor.item_id And count = 1 order by enchantlvl desc limit 10");
-		    case 4: //Ãß°¡ºÎºĞÀÔ´Ï´Ù
+		    case 4: //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
 		        pstm = con.prepareStatement("SELECT PKcount, char_name FROM characters WHERE AccessLevel = 0 order by PKcount desc limit 10");
 		        break;		
 		    case 5:
@@ -332,11 +332,11 @@ public class S_EnchantRanking extends ServerBasePacket {
 		    case 6:
 		    	pstm = con.prepareStatement("SELECT castle.castle_id, castle.name, clan_data.clan_name, clan_data.leader_name, clan_data.hascastle, castle.tax_rate, castle.public_money from clan_data, castle where castle.castle_id=clan_data.hascastle order by castle.public_money desc limit 10");
 		    	break;
-		    case 7: //Ãß°¡ºÎºĞÀÔ´Ï´Ù
+		    case 7: //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
 		        pstm = con.prepareStatement("SELECT enchantlvl, weapon.name, characters.char_name  FROM character_items, weapon, characters WHERE character_items.item_id in(select item_id from weapon) And character_items.char_id in(select objid from characters where AccessLevel = 200) And character_items.item_id=weapon.item_id And character_items.char_id=characters.objid And character_items.is_equipped = 1 order by character_items.enchantlvl desc limit 10");
 		        //		        pstm = con.prepareStatement("SELECT enchantlvl, weapon.name, characters.char_name FROM character_items, weapon, characters WHERE character_items.item_id in(select item_id from weapon) And character_items.char_id in(select objid from characters where AccessLevel = 200) And character_items.item_id=weapon.item_id And character_items.char_id=characters.objid And character_items.is_equipped = 1 order by character_items.enchantlvl desc limit 10");
 		        break;		
-		    case 8: //Ãß°¡ºÎºĞÀÔ´Ï´Ù
+		    case 8: //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
 		        pstm = con.prepareStatement("SELECT enchantlvl, armor.name, characters.char_name  FROM character_items, armor, characters WHERE character_items.item_id in(select item_id from armor) And character_items.char_id in(select objid from characters where AccessLevel = 200) And character_items.item_id=armor.item_id And character_items.char_id=characters.objid And character_items.is_equipped = 1 order by character_items.enchantlvl desc limit 10");
 		        break;	
 
@@ -346,39 +346,39 @@ public class S_EnchantRanking extends ServerBasePacket {
 			}
 
 			rs = pstm.executeQuery();
-				if(number == 1) { //Ãß°¡ºÎºĞÀÔ´Ï´Ù
+				if(number == 1) { //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
 				    while(rs.next()){
 				     enchantlvl[i] = rs.getInt(1);
 				    	name[i] = rs.getString(2);
 				    	name1[i] = rs.getString(3);
 				      i++;
 				    }
-			    }else if(number == 2) { //Ãß°¡ºÎºĞÀÔ´Ï´Ù
+			    }else if(number == 2) { //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
 				    while(rs.next()){
 				    	armor[i] = rs.getInt(1);
 				    	name[i] = rs.getString(2);
 				    	name1[i] = rs.getString(3);
 					      i++;
 			    }
-		    }else if(number == 3) { //Ãß°¡ºÎºĞÀÔ´Ï´Ù
+		    }else if(number == 3) { //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
 			    while(rs.next()){
 				     aden[i] = rs.getInt(1);
 				     name[i] = rs.getString(2);
 				     i++;
 		    } 
-		    }else if(number == 4) { //Ãß°¡ºÎºĞÀÔ´Ï´Ù
+		    }else if(number == 4) { //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
 			    while(rs.next()){
 			    	pkcount[i] = rs.getInt(1);
 			    	name[i] = rs.getString(2);
 				      i++;
 		    }
-		    }else if(number == 5) { //Ãß°¡ºÎºĞÀÔ´Ï´Ù
+		    }else if(number == 5) { //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
 			    while(rs.next()){
 				     priaden[i] = rs.getInt(1);
 				     name[i] = rs.getString(2);
 				     i++;
 		    } 
-		    }else if(number == 6) { //Ãß°¡ºÎºĞÀÔ´Ï´Ù
+		    }else if(number == 6) { //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
 			    while(rs.next()){
 			    	castleid[i] = rs.getInt(1);
 			    	castlename[i] = rs.getString(2);
@@ -389,7 +389,7 @@ public class S_EnchantRanking extends ServerBasePacket {
 			    	castleaden[i] = rs.getInt(7); 
 				     i++;
 		    } 
-		    }else if(number == 7) { //Ãß°¡ºÎºĞÀÔ´Ï´Ù
+		    }else if(number == 7) { //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
 				    while(rs.next()){
 				     enchantlvl[i] = rs.getInt(1);
 				    	name[i] = rs.getString(2);
@@ -397,7 +397,7 @@ public class S_EnchantRanking extends ServerBasePacket {
 				      i++;
 
 				    }
-			    }else if(number == 8) { //Ãß°¡ºÎºĞÀÔ´Ï´Ù
+			    }else if(number == 8) { //ì¶”ê°€ë¶€ë¶„ì…ë‹ˆë‹¤
 				    while(rs.next()){
 				    	armor[i] = rs.getInt(1);
 				    	name[i] = rs.getString(2);
@@ -411,9 +411,9 @@ public class S_EnchantRanking extends ServerBasePacket {
 					i++;
 				}
 
-				// ·¹ÄÚµå°¡ ¾ø°Å³ª 5º¸´Ù ÀÛÀ»¶§
+				// ë ˆì½”ë“œê°€ ì—†ê±°ë‚˜ 5ë³´ë‹¤ ì‘ì„ë•Œ
 				while(i < 10){
-					name[i] = "¾øÀ½.";
+					name[i] = "ì—†ìŒ.";
 					i++;
 				}
 			}

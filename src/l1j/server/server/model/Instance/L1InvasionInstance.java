@@ -30,10 +30,10 @@ public class L1InvasionInstance extends L1NpcInstance {
  private static Logger _log = Logger.getLogger(L1InvasionInstance.class
    . getName());
 
- // Å¸°ÙÀ» Ã£´Â´Ù
+ // íƒ€ê²Ÿì„ ì°¾ëŠ”ë‹¤
  @Override
  public void searchTarget() {
-  // Å¸°Ù ¼ö»ö
+  // íƒ€ê²Ÿ ìˆ˜ìƒ‰
   L1PcInstance targetPlayer = null;  
   L1GuardInstance targetGuard = null;  
   if(MonsterInvasion.getInstance().getAttackStart()==true){
@@ -47,7 +47,7 @@ public class L1InvasionInstance extends L1NpcInstance {
     break;
    }
   }
-   for (L1Object obj : L1World.getInstance().getVisibleObjects(this)) { //°æºñµµ°ø°İÇÏµµ·Ï
+   for (L1Object obj : L1World.getInstance().getVisibleObjects(this)) { //ê²½ë¹„ë„ê³µê²©í•˜ë„ë¡
     if(obj instanceof L1GuardInstance){
      L1GuardInstance gud = (L1GuardInstance) obj;
      if (gud.getCurrentHp() <= 0 || gud.isDead()) {
@@ -75,9 +75,9 @@ public class L1InvasionInstance extends L1NpcInstance {
   }
  }
 
- // Å¸°ÙÀÌ ¾ø´Â °æ¿ìÀÇ Ã³¸®
+ // íƒ€ê²Ÿì´ ì—†ëŠ” ê²½ìš°ì˜ ì²˜ë¦¬
  @Override
- public boolean noTarget() { //Å¸°ÙÀÌ¾øÀ»½Ã¿£ ±Õ¿­Áß¾ÓÀ¸·Î¸ğÀÌµµ·Ï
+ public boolean noTarget() { //íƒ€ê²Ÿì´ì—†ì„ì‹œì—” ê· ì—´ì¤‘ì•™ìœ¼ë¡œëª¨ì´ë„ë¡
   if(MonsterInvasion.getInstance().getAttackStart()==true){
    int dir = moveDirection(MonsterInvasion.getInstance().getMainX(), MonsterInvasion.getInstance().getMainY());
  //  setDirectionMove2(dir,MonsterInvasion.getInstance().getMainX(),MonsterInvasion.getInstance().getMainY());
@@ -132,10 +132,10 @@ public class L1InvasionInstance extends L1NpcInstance {
  }
 
  @Override
- public void receiveDamage(L1Character attacker, int damage) { // °ø°İÀ¸·Î HP¸¦ ÁÙÀÏ ¶§´Â ¿©±â¸¦ »ç¿ë
+ public void receiveDamage(L1Character attacker, int damage) { // ê³µê²©ìœ¼ë¡œ HPë¥¼ ì¤„ì¼ ë•ŒëŠ” ì—¬ê¸°ë¥¼ ì‚¬ìš©
   if (getCurrentHp() > 0 && !isDead()) {
    if (damage >= 0) {
-    if (!(attacker instanceof L1EffectInstance)) { // FW´Â ÇìÀÌÆ® ¾øÀ½
+    if (!(attacker instanceof L1EffectInstance)) { // FWëŠ” í—¤ì´íŠ¸ ì—†ìŒ
      setHate(attacker, damage);
     }
    }
@@ -152,7 +152,7 @@ public class L1InvasionInstance extends L1NpcInstance {
 
    int newHp = getCurrentHp() - damage;
    if (newHp <= 0 && !isDead()) {
-    if(getNpcTemplate().get_npcId()==456851){ //º¸½º¸ó½ºÅÍ°¡ Á×À¸¸é ±Õ¿­ÀÌ³¡³ªµµ·Ï
+    if(getNpcTemplate().get_npcId()==456851){ //ë³´ìŠ¤ëª¬ìŠ¤í„°ê°€ ì£½ìœ¼ë©´ ê· ì—´ì´ëë‚˜ë„ë¡
      MonsterInvasion.getInstance().setStopCom(true);
     }
     setCurrentHpDirect(0);
@@ -165,7 +165,7 @@ public class L1InvasionInstance extends L1NpcInstance {
     setCurrentHp(newHp);
    }
   } else if (getCurrentHp() == 0 && !isDead()) {
-  } else if (!isDead()) { // ¸¸¾àÀ» À§ÇØ
+  } else if (!isDead()) { // ë§Œì•½ì„ ìœ„í•´
    setDead(true);
    setStatus(ActionCodes.ACTION_Die);
    Death death = new Death(attacker);

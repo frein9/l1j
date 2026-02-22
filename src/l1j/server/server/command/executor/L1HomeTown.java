@@ -38,7 +38,7 @@ public class L1HomeTown implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 			StringTokenizer st = new StringTokenizer(arg);
 			String para1 = st.nextToken();
 			if (para1.equalsIgnoreCase("daily")) {
@@ -49,12 +49,12 @@ public class L1HomeTown implements L1CommandExecutor {
 				throw new Exception();
 			}
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
 			pc.sendPackets(new S_SystemMessage(
-					".È¨Å¸¿î [¸ÅÀÏ] ¶Ç´Â [¸Å´Ş] ÀÌ¶ó°í ÀÔ·Â ÇØÁÖ¼¼¿ä."));
+					".í™ˆíƒ€ìš´ [ë§¤ì¼] ë˜ëŠ” [ë§¤ë‹¬] ì´ë¼ê³  ì…ë ¥ í•´ì£¼ì„¸ìš”."));
 		}
 	}
 }

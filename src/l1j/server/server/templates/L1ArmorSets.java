@@ -181,7 +181,7 @@ public class L1ArmorSets {
 	public void setDmgup(int i) {
 	  _dmgup = i;
 	}
-	private int _hitup; // ¡Ü ¸íÁßÀ² º¸Á¤
+	private int _hitup; // â— ëª…ì¤‘ìœ¨ ë³´ì •
 
 	public int getHitup() {
 	  return _hitup;
@@ -191,7 +191,7 @@ public class L1ArmorSets {
 	  _hitup = i;
 	}
 
-	private int _bowDmgModifier; // ¡Ü È°Ãß°¡ Å¸°İÄ¡
+	private int _bowDmgModifier; // â— í™œì¶”ê°€ íƒ€ê²©ì¹˜
 
 	public int getBowDmgModifier() {
 	   return _bowDmgModifier;
@@ -201,7 +201,7 @@ public class L1ArmorSets {
 	   _bowDmgModifier = i;
 	}
 
-	private int _bowHitRate; // ¡Ü È°ÀÇ ¸íÁßÀ²
+	private int _bowHitRate; // â— í™œì˜ ëª…ì¤‘ìœ¨
 
 	public int getBowHitRate() {
 	  return _bowHitRate;
@@ -211,7 +211,7 @@ public class L1ArmorSets {
 	  _bowHitRate = i;
 	}
 
-	private int _weightReduction; // ¡Ü Áß·® °æ°¨
+	private int _weightReduction; // â— ì¤‘ëŸ‰ ê²½ê°
 
 	public int getWeightReduction() {
 	  return _weightReduction;
@@ -221,7 +221,7 @@ public class L1ArmorSets {
 	  _weightReduction = i;
 	}
 
-	private int _sp; // ¡Ü Áß·® °æ°¨
+	private int _sp; // â— ì¤‘ëŸ‰ ê²½ê°
 
 	public int getSp() {
 	  return _sp;

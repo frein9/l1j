@@ -39,23 +39,23 @@ public class L1Level implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 			StringTokenizer tok = new StringTokenizer(arg);
 			int level = Integer.parseInt(tok.nextToken());
 			if (level == pc.getLevel()) {
 				return;
 			}
 			if (! IntRange.includes(level, 1, 99)) {
-				pc.sendPackets(new S_SystemMessage("1-99ÀÇ ¹üÀ§¿¡¼­ ÁöÁ¤ÇØ ÁÖ¼¼¿ä"));
+				pc.sendPackets(new S_SystemMessage("1-99ì˜ ë²”ìœ„ì—ì„œ ì§€ì •í•´ ì£¼ì„¸ìš”"));
 				return;
 			}
 			pc.setExp(ExpTable.getExpByLevel(level));
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".·¹º§ [1~99]¸¦ ÀÔ·Â ÇØÁÖ¼¼¿ä."));
+			pc.sendPackets(new S_SystemMessage(".ë ˆë²¨ [1~99]ë¥¼ ì…ë ¥ í•´ì£¼ì„¸ìš”."));
 		}
 	}
 }

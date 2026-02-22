@@ -43,17 +43,17 @@ public class C_DeleteInventoryItem extends ClientBasePacket {
 		L1PcInstance pc = client.getActiveChar();
 		L1ItemInstance item = pc.getInventory().getItem(itemObjectId);
 
-		// »èÁ¦ÇÏ·Á°í ÇÑ ¾ÆÀÌÅÛÀÌ ¼­¹ö»ó¿¡ ¾ø´Â °æ¿ì
+		// ì‚­ì œí•˜ë ¤ê³  í•œ ì•„ì´í…œì´ ì„œë²„ìƒì— ì—†ëŠ” ê²½ìš°
 		if (item == null) {
 			return;
 		}
         if (item.getLockitem() > 100){
-            pc.sendPackets(new S_SystemMessage("ºÀÀÎµÈ ¾ÆÀÌÅÛÀº »èÁ¦ÇÒ ¼ö ¾ø½À´Ï´Ù."));
+            pc.sendPackets(new S_SystemMessage("ë´‰ì¸ëœ ì•„ì´í…œì€ ì‚­ì œí•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤."));
 			return;
 		}
 
 		if (item.getItem().isCantDelete()) {
-			// \f1»èÁ¦ÇÒ ¼ö ¾ø´Â ¾ÆÀÌÅÛÀÌ³ª Àåºñ ÇÏ°í ÀÖ´Â ¾ÆÀÌÅÛÀº ¹ö¸± ¼ö ¾ø½À´Ï´Ù.
+			// \f1ì‚­ì œí•  ìˆ˜ ì—†ëŠ” ì•„ì´í…œì´ë‚˜ ì¥ë¹„ í•˜ê³  ìˆëŠ” ì•„ì´í…œì€ ë²„ë¦´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 			pc.sendPackets(new S_ServerMessage(125));
 			return;
 		}
@@ -63,7 +63,7 @@ public class C_DeleteInventoryItem extends ClientBasePacket {
 			if (petObject instanceof L1PetInstance) {
 				L1PetInstance pet = (L1PetInstance) petObject;
 				if (item.getId() == pet.getItemObjId()) {
-					// \f1%0Àº ¹ö¸®°Å³ª ¶Ç´Â Å¸ÀÎ¿¡°Ô ¾çÀÏÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù.
+					// \f1%0ì€ ë²„ë¦¬ê±°ë‚˜ ë˜ëŠ” íƒ€ì¸ì—ê²Œ ì–‘ì¼ì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 					pc.sendPackets(new S_ServerMessage(210, item.getItem()
 							.getName()));
 					return;
@@ -72,7 +72,7 @@ public class C_DeleteInventoryItem extends ClientBasePacket {
 		}
 
 		if (item.isEquipped()) {
-			// \f1»èÁ¦ÇÒ ¼ö ¾ø´Â ¾ÆÀÌÅÛÀÌ³ª Àåºñ ÇÏ°í ÀÖ´Â ¾ÆÀÌÅÛÀº ¹ö¸± ¼ö ¾ø½À´Ï´Ù.
+			// \f1ì‚­ì œí•  ìˆ˜ ì—†ëŠ” ì•„ì´í…œì´ë‚˜ ì¥ë¹„ í•˜ê³  ìˆëŠ” ì•„ì´í…œì€ ë²„ë¦´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 			pc.sendPackets(new S_ServerMessage(125));
 			return;
 		}

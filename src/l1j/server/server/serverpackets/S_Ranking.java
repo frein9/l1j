@@ -66,13 +66,13 @@ public class S_Ranking extends ServerBasePacket {
 			db[count][1] = "";
 			count++;
 		}
-		db[0][2] = "1. ÀüÃ¼ ·©Å·";
-		db[1][2] = "2. ±ºÁÖ ·©Å·";
-		db[2][2] = "3. ±â»ç ·©Å·";
-		db[3][2] = "4. ¿äÁ¤ ·©Å·";
-		db[4][2] = "5. ¸¶¹ı»ç ·©Å·";
-		db[5][2] = "6. ´ÙÅ©¿¤ÇÁ ·©Å·";
-		db[6][2] = "7. °³ÀÎ ·©Å·";
+		db[0][2] = "1. ì „ì²´ ë­í‚¹";
+		db[1][2] = "2. êµ°ì£¼ ë­í‚¹";
+		db[2][2] = "3. ê¸°ì‚¬ ë­í‚¹";
+		db[3][2] = "4. ìš”ì • ë­í‚¹";
+		db[4][2] = "5. ë§ˆë²•ì‚¬ ë­í‚¹";
+		db[5][2] = "6. ë‹¤í¬ì—˜í”„ ë­í‚¹";
+		db[6][2] = "7. ê°œì¸ ë­í‚¹";
 
 		writeC(Opcodes.S_OPCODE_BOARD);
 		writeC(0x00); // opcode_1118
@@ -97,71 +97,71 @@ public class S_Ranking extends ServerBasePacket {
  		String title = null;
 	  writeC(Opcodes.S_OPCODE_BOARDREAD);
 	  writeD(number);
-	  writeS("¿î¿µÀÚ");
+	  writeS("ìš´ì˜ì");
 	  switch(number) {
 	  	case 1:
-	  		title = "ÀüÃ¼·©Å·";
+	  		title = "ì „ì²´ë­í‚¹";
 	  		break;
 	  	case 2:
-	  		title = "±ºÁÖ·©Å·";
+	  		title = "êµ°ì£¼ë­í‚¹";
 	  		break;
 	  	case 3:
-	  		title = "±â»ç·©Å·";
+	  		title = "ê¸°ì‚¬ë­í‚¹";
 	  		break;
 	  	case 4:
-	  		title = "¿äÁ¤·©Å·";
+	  		title = "ìš”ì •ë­í‚¹";
 	  		break;
 	  	case 5:
-	  		title = "¸¶¹ı»ç·©Å·";
+	  		title = "ë§ˆë²•ì‚¬ë­í‚¹";
 	  		break;
 	  	case 6:
-	  		title = "´ÙÅ©¿¤ÇÁ·©Å·";
+	  		title = "ë‹¤í¬ì—˜í”„ë­í‚¹";
 	  		break;
 	  	case 7:
-	  		title = "°³ÀÎ·©Å·";
+	  		title = "ê°œì¸ë­í‚¹";
 	  		break;
 	  }
 	  writeS(title);
 	  writeS(date);
 	  switch(pc.getType()) {
 	  	case 0:
-	  		type = "±ºÁÖ";
+	  		type = "êµ°ì£¼";
 	  		break;
 	  	case 1:
-	  		type = "±â»ç";
+	  		type = "ê¸°ì‚¬";
 	  		break;
 	  	case 2:
-	  		type = "¿äÁ¤";
+	  		type = "ìš”ì •";
 	  		break;
 	  	case 3:
-	  		type = "¸¶¹ı»ç";
+	  		type = "ë§ˆë²•ì‚¬";
 	  		break;
 	  	case 4:
-	  		type = "´ÙÅ©¿¤ÇÁ";
+	  		type = "ë‹¤í¬ì—˜í”„";
 	  		break;
 		case 5:
-	  		type = "¿ë±â»ç";
+	  		type = "ìš©ê¸°ì‚¬";
 	  		break;
 	  	case 6:
-	  		type = "È¯¼ú»ç";
+	  		type = "í™˜ìˆ ì‚¬";
 	  		break;
 	  }
 		int p = Rank(pc, number);
 	  if(number == 7) {
-   		writeS("\n\r\n\r\n\r" + pc.getName() + "´ÔÀÇ ÀüÃ¼·©Å· : " + p + "À§" +
-						"\n\r\n\r\n\r" + type + " Å¬·¡½º ·©Å· : " + j + "À§" +
+   		writeS("\n\r\n\r\n\r" + pc.getName() + "ë‹˜ì˜ ì „ì²´ë­í‚¹ : " + p + "ìœ„" +
+						"\n\r\n\r\n\r" + type + " í´ë˜ìŠ¤ ë­í‚¹ : " + j + "ìœ„" +
 						"\n\r\n\r\n\r" + "        ");
 		} else {
-			 writeS("\n\r" + "  1À§ " + name[0] + "\n\r" +
-				      "  2À§ " + name[1] + "\n\r" +
-				      "  3À§ " + name[2] + "\n\r" +
-				      "  4À§ " + name[3] + "\n\r" +
-				      "  5À§ " + name[4] + "\n\r" +
-				      "  6À§ " + name[5] + "\n\r" +
-				      "  7À§ " + name[6] + "\n\r" +
-				      "  8À§ " + name[7] + "\n\r" +
-				      "  9À§ " + name[8] + "\n\r" +
-				      " 10À§ " + name[9] + "\n\r" +
+			 writeS("\n\r" + "  1ìœ„ " + name[0] + "\n\r" +
+				      "  2ìœ„ " + name[1] + "\n\r" +
+				      "  3ìœ„ " + name[2] + "\n\r" +
+				      "  4ìœ„ " + name[3] + "\n\r" +
+				      "  5ìœ„ " + name[4] + "\n\r" +
+				      "  6ìœ„ " + name[5] + "\n\r" +
+				      "  7ìœ„ " + name[6] + "\n\r" +
+				      "  8ìœ„ " + name[7] + "\n\r" +
+				      "  9ìœ„ " + name[8] + "\n\r" +
+				      " 10ìœ„ " + name[9] + "\n\r" +
 				      "             ");
 
 				
@@ -230,9 +230,9 @@ public class S_Ranking extends ServerBasePacket {
 					i++;
 				}
 
-				// ·¹ÄÚµå°¡ ¾ø°Å³ª 5º¸´Ù ÀÛÀ»¶§
+				// ë ˆì½”ë“œê°€ ì—†ê±°ë‚˜ 5ë³´ë‹¤ ì‘ì„ë•Œ
 				while(i < 10){
-					name[i] = "¾øÀ½.";
+					name[i] = "ì—†ìŒ.";
 					i++;
 				}
 			}

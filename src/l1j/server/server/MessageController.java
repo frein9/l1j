@@ -9,21 +9,21 @@ import l1j.server.server.datatables.ShopTable;
 import l1j.server.server.model.Instance.L1NpcInstance;
 
 /**
- * ¸Ş¼¼Áö °ü·Ã
+ * ë©”ì„¸ì§€ ê´€ë ¨
  * @author user
  *
  */
 public class MessageController extends Thread{
 	
-	// ¸®½ºÆ®
+	// ë¦¬ìŠ¤íŠ¸
 	volatile private ArrayList<L1NpcInstance> list;
 	
-	// ½Ì±ÛÅæ
+	// ì‹±ê¸€í†¤
 	volatile private static MessageController _instance;
 	
 	/**
-	 * Messagecontroller °´Ã¼ ¸®ÅÏ
-	 * @return °´Ã¼
+	 * Messagecontroller ê°ì²´ ë¦¬í„´
+	 * @return ê°ì²´
 	 */
 	public static MessageController getInstance(){
 		if(_instance == null) _instance = new MessageController();
@@ -46,21 +46,21 @@ public class MessageController extends Thread{
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			// ¿¹¿ÜÃ³¸® ...
-			// µî·ÏµÈ ¸®½ºÆ®¸¦  º¹»çÈÄ ... Àç ½ÃÀÛ
+			// ì˜ˆì™¸ì²˜ë¦¬ ...
+			// ë“±ë¡ëœ ë¦¬ìŠ¤íŠ¸ë¥¼  ë³µì‚¬í›„ ... ì¬ ì‹œì‘
 			MessageController desc = new MessageController();
 			copyOf(desc, this);
 			_instance = desc;
 		}
 	}
-	// ºñ°ø°³¸ğµå
+	// ë¹„ê³µê°œëª¨ë“œ
 	private MessageController(){
 		super("MessageController Thread");
 		list = new ArrayList<L1NpcInstance>();
 	}
 	
 	/**
-	 * npc µî·Ï
+	 * npc ë“±ë¡
 	 * @param npc
 	 */
 	public void add(L1NpcInstance npc){
@@ -71,7 +71,7 @@ public class MessageController extends Thread{
 		}
 	}
 	/**
-	 * npc »èÁ¦
+	 * npc ì‚­ì œ
 	 * @param npc
 	 */
 	public void remove(L1NpcInstance npc){
@@ -80,14 +80,14 @@ public class MessageController extends Thread{
 		}
 	}
 	/**
-	 * ¸®½ºÆ® ¹İÈ¯
+	 * ë¦¬ìŠ¤íŠ¸ ë°˜í™˜
 	 * @return
 	 */
 	public ArrayList<L1NpcInstance> getList(){
 		return list;
 	}
 	/**
-	 * npc ¸®½ºÆ® ¹è¿­ 
+	 * npc ë¦¬ìŠ¤íŠ¸ ë°°ì—´ 
 	 * @return
 	 */
 	public L1NpcInstance[] toArray(){

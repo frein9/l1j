@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 import l1j.server.Config;
 import l1j.server.server.ClientThread;
 import l1j.server.server.GMCommands;
-import l1j.server.server.UserCommands; //À¯Àú ¸í·É¾î Ãß°¡
+import l1j.server.server.UserCommands; //ìœ ì € ëª…ë ¹ì–´ ì¶”ê°€
 import l1j.server.server.Opcodes;
 import l1j.server.server.datatables.ChatLogTable;
 import l1j.server.server.model.L1Clan;
@@ -39,7 +39,7 @@ import l1j.server.server.serverpackets.S_ChatPacket;
 import l1j.server.server.serverpackets.S_NpcChatPacket;
 import l1j.server.server.serverpackets.S_PacketBox;
 import l1j.server.server.serverpackets.S_ServerMessage;
-import l1j.server.server.serverpackets.S_SystemMessage; //ÀÓÆ÷Æ® ½ÃÅµ´Ï´Ù.
+import l1j.server.server.serverpackets.S_SystemMessage; //ì„í¬íŠ¸ ì‹œí‚µë‹ˆë‹¤.
 import static l1j.server.server.model.skill.L1SkillId.*;
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
@@ -55,18 +55,18 @@ public class C_Chat extends ClientBasePacket {
 		L1PcInstance pc = clientthread.getActiveChar();
 		int chatType = readC();
 		String chatText = readS();
-	  if(pc.get_autogo()==1&&chatText.equals(pc.get_autocode())) //¿ÀÅäÀÔ·ÂÀ» ´ë±âÁß&&ÀÔ·ÂÇÑÄÚµå¿Í ¿ÀÅäÄÚµå°¡µ¿ÀÏÇÒ¶§ //by»çºÎ ¿ÀÅäÀÎÁõ Ãß°¡ 
+	  if(pc.get_autogo()==1&&chatText.equals(pc.get_autocode())) //ì˜¤í† ì…ë ¥ì„ ëŒ€ê¸°ì¤‘&&ì…ë ¥í•œì½”ë“œì™€ ì˜¤í† ì½”ë“œê°€ë™ì¼í• ë•Œ //byì‚¬ë¶€ ì˜¤í† ì¸ì¦ ì¶”ê°€ 
          {           
-        pc.sendPackets(new S_SystemMessage("¿ÀÅä ¹æÁö ÄÚµå°¡ ÀÎÁõµÇ¾ú½À´Ï´Ù. "));
+        pc.sendPackets(new S_SystemMessage("ì˜¤í†  ë°©ì§€ ì½”ë“œê°€ ì¸ì¦ë˜ì—ˆìŠµë‹ˆë‹¤. "));
         pc.set_autook(0); 
         pc.set_autogo(0);
 
-     }else if (pc.get_autogo()==1){ // ¿ÀÅäÀÔ·ÂÀ» ´ë±âÁß ÀÔ·ÂÇÑÄÚµå¿Í ¿ÀÅäÄÚµå°¡ ºÒÀÏÄ¡ÇÒ¶§
-        pc.sendPackets(new S_SystemMessage("¿ÀÅä ¹æÁö ÄÚµå ÀÔ·Â ½ÇÆĞ! ÄÚµå:"+pc.get_autocode()+"¸¦ ´Ù½ÃÀÔ·ÂÇØÁÖ¼¼¿ä. "));
+     }else if (pc.get_autogo()==1){ // ì˜¤í† ì…ë ¥ì„ ëŒ€ê¸°ì¤‘ ì…ë ¥í•œì½”ë“œì™€ ì˜¤í† ì½”ë“œê°€ ë¶ˆì¼ì¹˜í• ë•Œ
+        pc.sendPackets(new S_SystemMessage("ì˜¤í†  ë°©ì§€ ì½”ë“œ ì…ë ¥ ì‹¤íŒ¨! ì½”ë“œ:"+pc.get_autocode()+"ë¥¼ ë‹¤ì‹œì…ë ¥í•´ì£¼ì„¸ìš”. "));
         pc.set_autook(1); 
         pc.set_autoct(pc.get_autoct()+1);
          pc.set_autogo(1);
-    } //by»çºÎ ¿ÀÅäÀÎÁõ Ãß°¡ 
+    } //byì‚¬ë¶€ ì˜¤í† ì¸ì¦ ì¶”ê°€ 
 
 		//if (pc.hasSkillEffect(L1SkillId.SILENCE)
 			//	|| pc.hasSkillEffect(L1SkillId.AREA_OF_SILENCE)
@@ -76,12 +76,12 @@ public class C_Chat extends ClientBasePacket {
 				|| pc.hasSkillEffect(STATUS_POISON_SILENCE)) {
 			return;
 		}
-		if (pc.hasSkillEffect(1005)) { // Ã¤ÆÃ ±İÁöÁß
-			pc.sendPackets(new S_ServerMessage(242)); // ÇöÀç Ã¤ÆÃ ±İÁöÁßÀÔ´Ï´Ù.
+		if (pc.hasSkillEffect(1005)) { // ì±„íŒ… ê¸ˆì§€ì¤‘
+			pc.sendPackets(new S_ServerMessage(242)); // í˜„ì¬ ì±„íŒ… ê¸ˆì§€ì¤‘ì…ë‹ˆë‹¤.
 			return;
 		}
 
-		 if (chatType == 0) { // Åë»ó Ã¤ÆÃ
+		 if (chatType == 0) { // í†µìƒ ì±„íŒ…
 			if (pc.isGm() && chatText.startsWith(".") || pc.isMonitor() && chatText.startsWith(".")) {
 					String cmd = chatText.substring(1);
 					GMCommands.getInstance().handleCommands(pc, cmd);
@@ -92,8 +92,8 @@ public class C_Chat extends ClientBasePacket {
 					return;
 			}
 					
-			// Æ®·¹ÀÌµå Ã¤ÆÃ
-			// º»·¡´Â chatType==12°¡ µÉ °ÍÀÌÁö¸¸, ÁÙ¸Ó¸®ÀÇ °Í$ÀÌ ¼Û½ÅµÇÁö ¾Ê´Â´Ù
+			// íŠ¸ë ˆì´ë“œ ì±„íŒ…
+			// ë³¸ë˜ëŠ” chatType==12ê°€ ë  ê²ƒì´ì§€ë§Œ, ì¤„ë¨¸ë¦¬ì˜ ê²ƒ$ì´ ì†¡ì‹ ë˜ì§€ ì•ŠëŠ”ë‹¤
 			if (chatText.startsWith("$")) {
 				String text = chatText.substring(1);
 				chatWorld(pc, text, 12);
@@ -103,14 +103,14 @@ public class C_Chat extends ClientBasePacket {
 				return;
 			}
 			
-////////////////////////ÁÖ»çÀ§...
+////////////////////////ì£¼ì‚¬ìœ„...
 
 			L1Gambling gam = new L1Gambling();
 			if(pc.isGambling()){
-				if (chatText.startsWith("È¦")) {
+				if (chatText.startsWith("í™€")) {
 					gam.Gambling2(pc, chatText, 1);
 					return;
-				}else if (chatText.startsWith("Â¦")) {
+				}else if (chatText.startsWith("ì§")) {
 					gam.Gambling2(pc, chatText, 2);
 					return;
 				}else if (chatText.startsWith("1")) {
@@ -135,31 +135,31 @@ public class C_Chat extends ClientBasePacket {
 			}
 			  if(pc.isGambling3()){
 					L1Gambling3 gam1 = new L1Gambling3();
-					if (chatText.startsWith("¿ÀÅ©Àü»ç")) {
+					if (chatText.startsWith("ì˜¤í¬ì „ì‚¬")) {
 						gam1.Gambling3(pc, chatText, 1);
 						return;
-					}else if (chatText.startsWith("½ºÆÄÅäÀÌ")) {
+					}else if (chatText.startsWith("ìŠ¤íŒŒí† ì´")) {
 						gam1.Gambling3(pc, chatText, 2);
 						return;
-					}else if (chatText.startsWith("¸äµÅÁö")) {
+					}else if (chatText.startsWith("ë©§ë¼ì§€")) {
 						gam1.Gambling3(pc, chatText, 3);
 						return;
-					}else if (chatText.startsWith("½½¶óÀÓ")) {
+					}else if (chatText.startsWith("ìŠ¬ë¼ì„")) {
 						gam1.Gambling3(pc, chatText, 4);
 						return;
-					}else if (chatText.startsWith("ÇØ°ñ")) {
+					}else if (chatText.startsWith("í•´ê³¨")) {
 						gam1.Gambling3(pc, chatText, 5);
 						return;
-					}else if (chatText.startsWith("´Á´ëÀÎ°£")) {
+					}else if (chatText.startsWith("ëŠ‘ëŒ€ì¸ê°„")) {
 						gam1.Gambling3(pc, chatText, 6);
 						return;
-					}else if (chatText.startsWith("¹ö±×º£¾î")) {
+					}else if (chatText.startsWith("ë²„ê·¸ë² ì–´")) {
 						gam1.Gambling3(pc, chatText, 7);
 						return;
-					}else if (chatText.startsWith("Àå·Î")) {
+					}else if (chatText.startsWith("ì¥ë¡œ")) {
 						gam1.Gambling3(pc, chatText, 8);
 						return;
-					}else if (chatText.startsWith("±«¹°´«")) {
+					}else if (chatText.startsWith("ê´´ë¬¼ëˆˆ")) {
 						gam1.Gambling3(pc, chatText, 9);
 						return;
 					}
@@ -178,7 +178,7 @@ public class C_Chat extends ClientBasePacket {
 					listner.sendPackets(s_chatpacket);
 				}
 			}
-			// µ½Æç Ã³¸®
+			// ë•í  ì²˜ë¦¬
 			for (L1Object obj : pc.getKnownObjects()) {
 				if (obj instanceof L1MonsterInstance) {
 					L1MonsterInstance mob = (L1MonsterInstance) obj;
@@ -189,7 +189,7 @@ public class C_Chat extends ClientBasePacket {
 					}
 				}
 			} 
-		} else if (chatType == 2) { // Àı±Ô
+		} else if (chatType == 2) { // ì ˆê·œ
 			if (pc.isGhost()) {
 				return;
 			}
@@ -206,7 +206,7 @@ public class C_Chat extends ClientBasePacket {
 				}
 			}
 
-			// µ½Æç Ã³¸®
+			// ë•í  ì²˜ë¦¬
 			for (L1Object obj : pc.getKnownObjects()) {
 				if (obj instanceof L1MonsterInstance) {
 					L1MonsterInstance mob = (L1MonsterInstance) obj;
@@ -220,10 +220,10 @@ public class C_Chat extends ClientBasePacket {
 					}
 				}
 			}
-		} else if (chatType == 3) { // ÀüÃ¼ Ã¤ÆÃ
+		} else if (chatType == 3) { // ì „ì²´ ì±„íŒ…
 			chatWorld(pc, chatText, chatType);
-		} else if (chatType == 4) { // Ç÷¸Í Ã¤ÆÃ
-			if (pc.getClanid() != 0) { // Å©¶õ ¼Ò¼ÓÁß
+		} else if (chatType == 4) { // í˜ˆë§¹ ì±„íŒ…
+			if (pc.getClanid() != 0) { // í¬ë€ ì†Œì†ì¤‘
 				L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 				int rank = pc.getClanRank();
 				if (clan != null
@@ -241,8 +241,8 @@ public class C_Chat extends ClientBasePacket {
 					}
 				}
 			}
-		} else if (chatType == 11) { // ÆÄÆ¼ Ã¤ÆÃ
-			if (pc.isInParty()) { // ÆÄÆ¼Áß
+		} else if (chatType == 11) { // íŒŒí‹° ì±„íŒ…
+			if (pc.isInParty()) { // íŒŒí‹°ì¤‘
 				ChatLogTable.getInstance().storeChat(pc, null, chatText,
 						chatType);
 				S_ChatPacket s_chatpacket = new S_ChatPacket(pc, chatText,
@@ -254,10 +254,10 @@ public class C_Chat extends ClientBasePacket {
 					}
 				}
 			}
-		} else if (chatType == 12) { // Æ®·¹ÀÌµå Ã¤ÆÃ
+		} else if (chatType == 12) { // íŠ¸ë ˆì´ë“œ ì±„íŒ…
 			chatWorld(pc, chatText, chatType);
-		} else if (chatType == 13) { // ¿¬ÇÕ Ã¤ÆÃ
-			if (pc.getClanid() != 0) { // Å©¶õ ¼Ò¼ÓÁß
+		} else if (chatType == 13) { // ì—°í•© ì±„íŒ…
+			if (pc.getClanid() != 0) { // í¬ë€ ì†Œì†ì¤‘
 				L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 				int rank = pc.getClanRank();
 				if (clan != null
@@ -276,8 +276,8 @@ public class C_Chat extends ClientBasePacket {
 					}
 				}
 			}
-		} else if (chatType == 14) { // Ã¤ÆÃ ÆÄÆ¼
-			if (pc.isInChatParty()) { // Ã¤ÆÃ ÆÄÆ¼Áß
+		} else if (chatType == 14) { // ì±„íŒ… íŒŒí‹°
+			if (pc.isInChatParty()) { // ì±„íŒ… íŒŒí‹°ì¤‘
 				ChatLogTable.getInstance().storeChat(pc, null, chatText,
 						chatType);
 				S_ChatPacket s_chatpacket = new S_ChatPacket(pc, chatText,
@@ -304,7 +304,7 @@ public class C_Chat extends ClientBasePacket {
 		} else if (pc.getLevel() >= Config.GLOBAL_CHAT_LEVEL) {
 			if (L1World.getInstance().isWorldChatElabled()) {
 				/*if (pc.get_food() >= 6) {
-					pc.set_food(pc.get_food() - 5);*/ // Ã¤Ã¢»ç¿ë½Ã¿¡ °í±â°ÔÀÌÁö ÁÙ¾îµéÁö ¾Ê°Ô ÁÖ¼®Ã³¸®
+					pc.set_food(pc.get_food() - 5);*/ // ì±„ì°½ì‚¬ìš©ì‹œì— ê³ ê¸°ê²Œì´ì§€ ì¤„ì–´ë“¤ì§€ ì•Šê²Œ ì£¼ì„ì²˜ë¦¬
 					ChatLogTable.getInstance().storeChat(pc, null, chatText,
 							chatType);
 					pc.sendPackets(new S_PacketBox(S_PacketBox.FOOD, pc
@@ -324,18 +324,18 @@ public class C_Chat extends ClientBasePacket {
 							}
 						}
 					}
-					if(Config.±Û·Î¹ú == true){ // <--¼­¹ö¸Å´ÏÀú ÀüÃ¼Ã¤ÆÃ Ãâ·Â Ãß°¡ 
-						l1j.server.Leaf.chatlog.append("\r\n[ÀüÃ¼] " +pc.getName()+": " + chatText); //<--¼­¹ö¸Å´ÏÀú ÀüÃ¼Ã¤ÆÃ Ãâ·Â 
+					if(Config.ê¸€ë¡œë²Œ == true){ // <--ì„œë²„ë§¤ë‹ˆì € ì „ì²´ì±„íŒ… ì¶œë ¥ ì¶”ê°€ 
+						l1j.server.Leaf.chatlog.append("\r\n[ì „ì²´] " +pc.getName()+": " + chatText); //<--ì„œë²„ë§¤ë‹ˆì € ì „ì²´ì±„íŒ… ì¶œë ¥ 
 					}
 			/*	} else {
-					pc.sendPackets(new S_ServerMessage(462)); // \f1°øº¹ÀÌ±â ¶§¹®¿¡ Ã¤ÆÃÇÒ ¼ö ¾ø½À´Ï´Ù.
-				}*/ // Ã¤Ã¢»ç¿ë½Ã¿¡ °í±â°ÔÀÌÁö ÁÙ¾îµéÁö ¾Ê°Ô ÁÖ¼®Ã³¸®
+					pc.sendPackets(new S_ServerMessage(462)); // \f1ê³µë³µì´ê¸° ë•Œë¬¸ì— ì±„íŒ…í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
+				}*/ // ì±„ì°½ì‚¬ìš©ì‹œì— ê³ ê¸°ê²Œì´ì§€ ì¤„ì–´ë“¤ì§€ ì•Šê²Œ ì£¼ì„ì²˜ë¦¬
 			} else {
-				pc.sendPackets(new S_ServerMessage(510)); // ÇöÀç ¿ùµå Ã¤ÆÃÀº Á¤ÁöÁßÀÌ µÇ°í ÀÖ½À´Ï´Ù.´çºĞ°£ÀÇ »çÀÌ ½Â³«ÇØ ÁÖ½Ê½Ã¿À.
+				pc.sendPackets(new S_ServerMessage(510)); // í˜„ì¬ ì›”ë“œ ì±„íŒ…ì€ ì •ì§€ì¤‘ì´ ë˜ê³  ìˆìŠµë‹ˆë‹¤.ë‹¹ë¶„ê°„ì˜ ì‚¬ì´ ìŠ¹ë‚™í•´ ì£¼ì‹­ì‹œì˜¤.
 			}
 		} else {
 			pc.sendPackets(new S_ServerMessage(195, String
-					. valueOf(Config.GLOBAL_CHAT_LEVEL))); // ·¹º§%0¹Ì¸¸ÀÇ Ä³¸¯ÅÍ´Â Ã¤ÆÃÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù.
+					. valueOf(Config.GLOBAL_CHAT_LEVEL))); // ë ˆë²¨%0ë¯¸ë§Œì˜ ìºë¦­í„°ëŠ” ì±„íŒ…ì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 		}
 	}
 

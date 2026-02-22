@@ -144,7 +144,7 @@ public class L1UbSpawn implements Comparable<L1UbSpawn> {
 			mob.addKnownObject(pc);
 			pc.sendPackets(s_npcPack);
 		}
-		// monsterÀÇ AI¸¦ °³½Ã
+		// monsterì˜ AIë¥¼ ê°œì‹œ
 		mob.onNpcAI();
 		mob.turnOnOffLight();  
 		// mob.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); 
@@ -157,7 +157,7 @@ public class L1UbSpawn implements Comparable<L1UbSpawn> {
 	}
 
 	public int compareTo(L1UbSpawn rhs) {
-		// XXX - »ç½ÇÀº Á» ´õ ¾ö¹ĞÇÑ ¼ø¼­ºÎ°¡ ÀÖÀ» °ÍÀÌÁö¸¸, ÇÊ¿äÇÑ À¯È¤ÇÑµ¥ °ÍÀ¸·Î µŞÀü
+		// XXX - ì‚¬ì‹¤ì€ ì¢€ ë” ì—„ë°€í•œ ìˆœì„œë¶€ê°€ ìˆì„ ê²ƒì´ì§€ë§Œ, í•„ìš”í•œ ìœ í˜¹í•œë° ê²ƒìœ¼ë¡œ ë’·ì „
 		if (getId() < rhs.getId()) {
 			return -1;
 		}

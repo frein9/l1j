@@ -62,14 +62,14 @@ public class S_RangeSkill extends ServerBasePacket {
 			cha.setHeading(newHeading);
 			writeC(cha.getHeading());
 		}
-		writeD(_sequentialNumber.incrementAndGet()); // ¹øÈ£°¡ °ãÄ¡Áö ¾Ê°Ô º¸³½´Ù.
+		writeD(_sequentialNumber.incrementAndGet()); // ë²ˆí˜¸ê°€ ê²¹ì¹˜ì§€ ì•Šê²Œ ë³´ë‚¸ë‹¤.
 		writeH(spellgfx);
-		writeC(type); // 0:¹üÀ§ 6:¿ø°Å¸® 8:¹üÀ§&¿ø°Å¸®
+		writeC(type); // 0:ë²”ìœ„ 6:ì›ê±°ë¦¬ 8:ë²”ìœ„&ì›ê±°ë¦¬
 		writeH(0);
 		writeH(target.length);
 		for (int i = 0; i < target.length; i++) {
 			writeD(target[i].getId());
-			writeC(0x20); // 0:µ¥¹ÌÁö ¸ğ¼Ç ÀÖ¾î 0ÀÌ¿Ü:ÀÌ·ç¾î
+			writeC(0x20); // 0:ë°ë¯¸ì§€ ëª¨ì…˜ ìˆì–´ 0ì´ì™¸:ì´ë£¨ì–´
 			writeC(0x00);
 	
 		}

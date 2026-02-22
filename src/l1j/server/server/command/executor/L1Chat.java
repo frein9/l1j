@@ -38,17 +38,17 @@ public class L1Chat implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 			StringTokenizer st = new StringTokenizer(arg);
 			if (st.hasMoreTokens()) {
 				String flag = st.nextToken();
 				String msg;
 				if (flag.compareToIgnoreCase("on") == 0) {
 					L1World.getInstance(). set_worldChatElabled(true);
-					msg = "ÀüÃ¼ Ã¤ÆÃÀ» °¡´ÉÇÏ°Ô Çß½À´Ï´Ù.";
+					msg = "ì „ì²´ ì±„íŒ…ì„ ê°€ëŠ¥í•˜ê²Œ í–ˆìŠµë‹ˆë‹¤.";
 				} else if (flag.compareToIgnoreCase("off") == 0) {
 					L1World.getInstance(). set_worldChatElabled(false);
-					msg = "ÀüÃ¼ Ã¤ÆÃÀ» Á¤ÁöÇß½À´Ï´Ù.";
+					msg = "ì „ì²´ ì±„íŒ…ì„ ì •ì§€í–ˆìŠµë‹ˆë‹¤.";
 				} else {
 					throw new Exception();
 				}
@@ -56,18 +56,18 @@ public class L1Chat implements L1CommandExecutor {
 			} else {
 				String msg;
 				if (L1World.getInstance(). isWorldChatElabled()) {
-					msg = "ÇöÀç ÀüÃ¼ Ã¤ÆÃÀº °¡´ÉÇÑ »óÅÂÀÔ´Ï´Ù. Ã¤ÆÃ ²ûÀ¸·Î Á¤Áö ÇÒ ¼ö ÀÖ½À´Ï´Ù.";
+					msg = "í˜„ì¬ ì „ì²´ ì±„íŒ…ì€ ê°€ëŠ¥í•œ ìƒíƒœì…ë‹ˆë‹¤. ì±„íŒ… ë”ìœ¼ë¡œ ì •ì§€ í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.";
 				} else {
-					msg = "ÇöÀç ÀüÃ¼ Ã¤ÆÃÀº Á¤ÁöµÈ »óÅÂÀÔ´Ï´Ù. Ã¤ÆÃ ÄÔÀ¸·Î °¡´ÉÇÏ°Ô ÇÒ ¼ö ÀÖ½À´Ï´Ù.";
+					msg = "í˜„ì¬ ì „ì²´ ì±„íŒ…ì€ ì •ì§€ëœ ìƒíƒœì…ë‹ˆë‹¤. ì±„íŒ… ì¼¬ìœ¼ë¡œ ê°€ëŠ¥í•˜ê²Œ í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.";
 				}
 				pc.sendPackets(new S_SystemMessage(msg));
 			}
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [on ¶Ç´Â off]"));
+			pc.sendPackets(new S_SystemMessage(cmdName + " [on ë˜ëŠ” off]"));
 		}
 	}
 }

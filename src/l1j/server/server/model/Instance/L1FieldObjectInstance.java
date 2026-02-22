@@ -43,7 +43,7 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 
 	@Override
 	public void onAction(L1PcInstance pc) {
-		if (getNpcTemplate().get_npcId() == 81171) { // ±Í½Å ÀúÅÃÀÇ °ñÀÇ ºÒ±æ
+		if (getNpcTemplate().get_npcId() == 81171) { // ê·€ì‹  ì €íƒì˜ ê³¨ì˜ ë¶ˆê¸¸
 			if (L1HauntedHouse.getInstance().getHauntedHouseStatus() ==
 					L1HauntedHouse.STATUS_PLAYING) {
 				int winnersCount = L1HauntedHouse.getInstance().
@@ -51,7 +51,7 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 				int goalCount = L1HauntedHouse.getInstance().getGoalCount();
 				if (winnersCount == goalCount + 1) {
 					L1ItemInstance item = ItemTable.getInstance()
-							.createItem(41308); // ¿ë»çÀÇ ÆßÇÁÅ²ºÀÅõ
+							.createItem(41308); // ìš©ì‚¬ì˜ íŒí”„í‚¨ë´‰íˆ¬
 					int count = 1;
 					if (item != null) {
 						if (pc.getInventory().checkAddItem(item, count) ==
@@ -59,7 +59,7 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 							item.setCount(count);
 							pc.getInventory().storeItem(item);
 							pc.sendPackets(new S_ServerMessage(403, item
-									.getLogName())); // %0¸¦ ¼Õ¿¡ ³Ö¾ú½À´Ï´Ù.
+									.getLogName())); // %0ë¥¼ ì†ì— ë„£ì—ˆìŠµë‹ˆë‹¤.
 						}
 					}
 					L1HauntedHouse.getInstance().endHauntedHouse();
@@ -67,7 +67,7 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 					L1HauntedHouse.getInstance().setGoalCount(goalCount + 1);
 					L1HauntedHouse.getInstance().removeMember(pc);
 					L1ItemInstance item = ItemTable.getInstance()
-							.createItem(41308); // ¿ë»çÀÇ ÆßÇÁÅ²ºÀÅõ
+							.createItem(41308); // ìš©ì‚¬ì˜ íŒí”„í‚¨ë´‰íˆ¬
 					int count = 1;
 					if (item != null) {
 						if (pc.getInventory().checkAddItem(item, count) ==
@@ -75,7 +75,7 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 							item.setCount(count);
 							pc.getInventory().storeItem(item);
 							pc.sendPackets(new S_ServerMessage(403, item
-									.getLogName())); // %0¸¦ ¼Õ¿¡ ³Ö¾ú½À´Ï´Ù.
+									.getLogName())); // %0ë¥¼ ì†ì— ë„£ì—ˆìŠµë‹ˆë‹¤.
 						}
 					}
 					L1SkillUse l1skilluse = new L1SkillUse();

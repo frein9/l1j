@@ -30,7 +30,7 @@ public class L1SkillTimerCreator {
 			return new L1SkillTimerThreadImpl(cha, skillId, timeMillis);
 		}
 
-		// ºÎÁ¤ÇÑ °ªÀÇ °æ¿ì´Â ¿ì¼± Timer
+		// ë¶€ì •í•œ ê°’ì˜ ê²½ìš°ëŠ” ìš°ì„  Timer
 		return new L1SkillTimerTimerImpl(cha, skillId, timeMillis);
 	}
 }

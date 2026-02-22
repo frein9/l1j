@@ -62,7 +62,7 @@ import l1j.server.server.model.ElementalStoneGenerator;
 import l1j.server.server.model.Getback;
 import l1j.server.server.model.L1BossCycle;
 import l1j.server.server.model.L1CastleLocation;
-import l1j.server.server.model.L1Cube;            // Å¥ºê
+import l1j.server.server.model.L1Cube;            // íë¸Œ
 import l1j.server.server.model.L1Sys;
 import l1j.server.server.model.L1DeleteItemOnGround;
 import l1j.server.server.model.L1NpcRegenerationTimer;
@@ -95,25 +95,25 @@ public class GameServer extends Thread {
 
 	@Override
 	public void run() {
-		System.out.println("ÀÌ¿ë ¸Ş¸ğ¸®: " + SystemUtil.getUsedMemoryMB() + "MB");
-		System.out.println("Å¬¶óÀÌ¾ğÆ® Á¢¼Ó ´ë±âÁß");
-		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		System.out.println("ì´ìš© ë©”ëª¨ë¦¬: " + SystemUtil.getUsedMemoryMB() + "MB");
+		System.out.println("í´ë¼ì´ì–¸íŠ¸ ì ‘ì† ëŒ€ê¸°ì¤‘");
+		System.out.println("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€");
 		while (true) {
 			try {
 				Socket socket = _serverSocket.accept();
-				System.out.println("Á¢¼Ó ½ÃÇàÁß IP: " + socket.getInetAddress());
+				System.out.println("ì ‘ì† ì‹œí–‰ì¤‘ IP: " + socket.getInetAddress());
 				String host = socket.getInetAddress().getHostAddress();
 				if (IpTable.getInstance().isBannedIp(host)) 
 				{
 					MiniClient.getInstance().MessageToServer(host);
 					_log.info("banned IP(" + host + ")");
 				} 
-				/*¼·Æø¹æÁö2*/
+				/*ì„­í­ë°©ì§€2*/
 				else if (socket.getPort() == 0) {
-					System.out.println("¼·ÆøÀÇ½É Å¬¶óÀÌ¾ğÆ® Â÷´Ü");
-				    System.out.println("[Á¢¼ÓÁ¤º¸]: "+socket.getInetAddress()+" :"+socket.getPort()+" ["+host+"]");
+					System.out.println("ì„­í­ì˜ì‹¬ í´ë¼ì´ì–¸íŠ¸ ì°¨ë‹¨");
+				    System.out.println("[ì ‘ì†ì •ë³´]: "+socket.getInetAddress()+" :"+socket.getPort()+" ["+host+"]");
 				}
-				/*¼·Æø¹æÁö2*/
+				/*ì„­í­ë°©ì§€2*/
 				else {
 					ClientThread client = new ClientThread(socket);
 					GeneralThreadPool.getInstance().execute(client);
@@ -151,21 +151,21 @@ public class GameServer extends Thread {
 
             inetaddress.getHostAddress();
             _serverSocket = new ServerSocket(_port, 50, inetaddress);
-            System.out.println("¼­¹ö ¼¼ÆÃ: ¼­¹ö ¼ÒÄÏ »ı¼º");
+            System.out.println("ì„œë²„ ì„¸íŒ…: ì„œë²„ ì†Œì¼“ ìƒì„±");
         } else {
             _serverSocket = new ServerSocket(_port);
-            System.out.println("¼­¹ö ¼¼ÆÃ: ¼­¹ö ¼ÒÄÏ »ı¼º");
+            System.out.println("ì„œë²„ ì„¸íŒ…: ì„œë²„ ì†Œì¼“ ìƒì„±");
         }
 
         System.out.println(
-                "EXP:" + (rateXp) + "¹è  Lawful:" + (LA) + "¹è¾÷:" + (rateKarma)
-                + "¹èµå·ÓÀ²:" + (rateDropItems) + "¹èÃëµæ ¾Æµ¥³ª:"
-                + (rateDropAdena) + "¹è");
-        System.out.println("ÀüÃ¼ Ã¤ÆÃ °¡´É Lv " + (chatlvl));
-        if (Config.ALT_NONPVP) { // Non-PvP ¼³Á¤
-            System.out.println("Non-PvP ¼³Á¤: ¹«È¿(PvP °¡´É)");
+                "EXP:" + (rateXp) + "ë°°  Lawful:" + (LA) + "ë°°ì—…:" + (rateKarma)
+                + "ë°°ë“œë¡­ìœ¨:" + (rateDropItems) + "ë°°ì·¨ë“ ì•„ë°ë‚˜:"
+                + (rateDropAdena) + "ë°°");
+        System.out.println("ì „ì²´ ì±„íŒ… ê°€ëŠ¥ Lv " + (chatlvl));
+        if (Config.ALT_NONPVP) { // Non-PvP ì„¤ì •
+            System.out.println("Non-PvP ì„¤ì •: ë¬´íš¨(PvP ê°€ëŠ¥)");
         } else {
-            System.out.println("Non-PvP ¼³Á¤: À¯È¿(PvP ºÒ°¡)");
+            System.out.println("Non-PvP ì„¤ì •: ìœ íš¨(PvP ë¶ˆê°€)");
         }
 
         System.out.println("=================================================");
@@ -174,84 +174,84 @@ public class GameServer extends Thread {
 
         int maxOnlineUsers = Config.MAX_ONLINE_USERS;
 
-        System.out.println("Á¢¼Ó ÀÎ¿ø¼ö Á¦ÇÑ£º ÃÖ´ë" + (maxOnlineUsers) + "ÀÎ");
+        System.out.println("ì ‘ì† ì¸ì›ìˆ˜ ì œí•œï¼š ìµœëŒ€" + (maxOnlineUsers) + "ì¸");
         IdFactory.getInstance();
         L1WorldMap.getInstance();
         _loginController = LoginController.getInstance();
         _loginController.setMaxAllowedOnlinePlayers(maxOnlineUsers);
 
 		
-		// ÀüÄ³¸¯ÅÍ ³×ÀÓ ·Îµå
+		// ì „ìºë¦­í„° ë„¤ì„ ë¡œë“œ
 		CharacterTable.getInstance(). loadAllCharName();
 
-		// ¿Â¶óÀÎ »óÅÂ ¸®¼ÂÆ®
+		// ì˜¨ë¼ì¸ ìƒíƒœ ë¦¬ì…‹íŠ¸
 		CharacterTable.clearOnlineStatus();
-		//Æê·¹ÀÌ½Ì
+		//í«ë ˆì´ì‹±
 		L1Racing.getInstance().start();
-		// °ÔÀÓ ½Ã°£ ½Ã°è
+		// ê²Œì„ ì‹œê°„ ì‹œê³„
 		L1GameTimeClock.init();
 
-		// ¹ö°æ°ü·Ã.
+		// ë²„ê²½ê´€ë ¨.
 		GameServerSetting gameServerSetting = GameServerSetting.getInstance();
 		GeneralThreadPool.getInstance().execute(gameServerSetting);
 		  
-		// ¹ö°æÅ¸ÀÓ ÄÜÆ®·Ñ·¯ 
+		// ë²„ê²½íƒ€ì„ ì½˜íŠ¸ë¡¤ëŸ¬ 
 		BugRaceTimeControl bugRaceTimeControl = BugRaceTimeControl.getInstance(); 
 		GeneralThreadPool.getInstance().execute(bugRaceTimeControl); 
 		 
-		// UBÅ¸ÀÓ ÄÜÆ®·Ñ·¯
+		// UBíƒ€ì„ ì½˜íŠ¸ë¡¤ëŸ¬
 		UbTimeController ubTimeContoroller = UbTimeController.getInstance();
-		L1Sys.getInstance();//Ä«½Ã sys 
+		L1Sys.getInstance();//ì¹´ì‹œ sys 
 		GeneralThreadPool.getInstance().execute(ubTimeContoroller);
 		
-		//Ä«½Ã sys
+		//ì¹´ì‹œ sys
 	    L1Sys l1Sys = L1Sys.getInstance();
 	    GeneralThreadPool.getInstance().execute(l1Sys);
 
-		// ÀüÀï Å¸ÀÓ ÄÜÆ®·Ñ·¯
+		// ì „ìŸ íƒ€ì„ ì½˜íŠ¸ë¡¤ëŸ¬
 		WarTimeController warTimeController = WarTimeController.getInstance();
 		GeneralThreadPool.getInstance().execute(warTimeController);		
 
-		// ÇÁ¸®¹Ì¾öÅ¸ÀÓ ÄÜÆ®·Ñ·¯
+		// í”„ë¦¬ë¯¸ì—„íƒ€ì„ ì½˜íŠ¸ë¡¤ëŸ¬
 		PrimiumTimeController primiumTimeController = PrimiumTimeController
 				.getInstance(); 
 		GeneralThreadPool.getInstance().execute(primiumTimeController); 
-		  // ¾ÆÀÎÇÏ»çµå  ÄÜÆ®·Ñ·¯
+		  // ì•„ì¸í•˜ì‚¬ë“œ  ì½˜íŠ¸ë¡¤ëŸ¬
         AinTimeController ainTimeController = AinTimeController.getInstance(); 
         GeneralThreadPool.getInstance().execute(ainTimeController);
 
 
-		// Á¤·ÉÀÇ ÀÌ½´¿ì¼º
+		// ì •ë ¹ì˜ ì´ìŠˆìš°ì„±
 		if (Config.ELEMENTAL_STONE_AMOUNT > 0) {
 			ElementalStoneGenerator elementalStoneGenerator
 					= ElementalStoneGenerator.getInstance();
 			GeneralThreadPool.getInstance().execute(elementalStoneGenerator);
 		}
 
-		// È¨ Å¸¿î
+		// í™ˆ íƒ€ìš´
 		HomeTownTimeController.getInstance();
-		// ±â¶õ Å¸ÀÓ ÄÜÆ®·Ñ·¯
+		// ê¸°ë€ íƒ€ì„ ì½˜íŠ¸ë¡¤ëŸ¬
 		GiranController.getInstance().start();
-		//½Ã°£ÀÇ±Õ¿­
+		//ì‹œê°„ì˜ê· ì—´
 		CrockController.getInstance().start();
-		//Æê·¹ÀÌ½Ì
+		//í«ë ˆì´ì‹±
 	//	L1PetRace.getInstance().start();
-		// ¾ÆÁöÆ® °æ¸Å Å¸ÀÓ ÄÜÆ®·Ñ·¯
+		// ì•„ì§€íŠ¸ ê²½ë§¤ íƒ€ì„ ì½˜íŠ¸ë¡¤ëŸ¬
 		AuctionTimeController auctionTimeController = AuctionTimeController
 				.getInstance();
 		GeneralThreadPool.getInstance().execute(auctionTimeController);
 
-		// ¾ÆÁöÆ® ¼¼±İ Å¸ÀÓ ÄÜÆ®·Ñ·¯
+		// ì•„ì§€íŠ¸ ì„¸ê¸ˆ íƒ€ì„ ì½˜íŠ¸ë¡¤ëŸ¬
 		HouseTaxTimeController houseTaxTimeController = HouseTaxTimeController
 				.getInstance();
 		GeneralThreadPool.getInstance().execute(houseTaxTimeController);
 
-		// ³¬½Ã Å¸ÀÓ ÄÜÆ®·Ñ·¯
+		// ë‚šì‹œ íƒ€ì„ ì½˜íŠ¸ë¡¤ëŸ¬
 		FishingTimeController fishingTimeController = FishingTimeController
 				.getInstance();
 		GeneralThreadPool.getInstance().execute(fishingTimeController);
 
-		// NPC Ã¤ÆÃ Å¸ÀÓ ÄÜÆ®·Ñ·¯
+		// NPC ì±„íŒ… íƒ€ì„ ì½˜íŠ¸ë¡¤ëŸ¬
 		NpcChatTimeController npcChatTimeController = NpcChatTimeController
 				. getInstance();
 		GeneralThreadPool.getInstance(). execute(npcChatTimeController);
@@ -283,7 +283,7 @@ public class GameServer extends Thread {
 		PetTable.getInstance();
 		ClanTable.getInstance();
 		CastleTable.getInstance();
-		L1CastleLocation.setCastleTaxRate(); // ÀÌ°ÍÀº CastleTable ÃÊ±âÈ­ ´ÙÀ½ÀÌ ¾Æ´Ï¸é ¾È µÈ´Ù
+		L1CastleLocation.setCastleTaxRate(); // ì´ê²ƒì€ CastleTable ì´ˆê¸°í™” ë‹¤ìŒì´ ì•„ë‹ˆë©´ ì•ˆ ëœë‹¤
 		GetBackRestartTable.getInstance();
 		DoorSpawnTable.getInstance();
 		GeneralThreadPool.getInstance();
@@ -302,11 +302,11 @@ public class GameServer extends Thread {
 		FurnitureSpawnTable.getInstance();
 		NpcChatTable.getInstance();
 		LightSpawnTable.getInstance();		
-		L1Cube.getInstance();    // Å¥ºê
+		L1Cube.getInstance();    // íë¸Œ
 		TimeMapController.getInstance().start();
 		MessageController.getInstance().start();
 
-		System.out.println("·Îµù ¿Ï·á!");
+		System.out.println("ë¡œë”© ì™„ë£Œ!");
 		Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());
 		System.gc();
 		System.runFinalization();
@@ -315,7 +315,7 @@ public class GameServer extends Thread {
 	}
 
 	/**
-	 * ¿Â¶óÀÎÁßÀÇ ÇÃ·¹ÀÌ¾î ¸ğµÎ¿¡ ´ëÇØ¼­ kick, Ä³¸¯ÅÍ Á¤º¸ÀÇ º¸Á¸À» ÇÑ´Ù.
+	 * ì˜¨ë¼ì¸ì¤‘ì˜ í”Œë ˆì´ì–´ ëª¨ë‘ì— ëŒ€í•´ì„œ kick, ìºë¦­í„° ì •ë³´ì˜ ë³´ì¡´ì„ í•œë‹¤.
 	 */
 	public void disconnectAllCharacters() {
 		Collection<L1PcInstance> players = L1World.getInstance()
@@ -326,7 +326,7 @@ public class GameServer extends Thread {
 			pc.getNetConnection().kick();
 		}
 		}
-		// Àü¿ø Kick ÇÑ ÈÄ¿¡ º¸Á¸ Ã³¸®¸¦ ÇÑ´Ù
+		// ì „ì› Kick í•œ í›„ì— ë³´ì¡´ ì²˜ë¦¬ë¥¼ í•œë‹¤
 		for (L1PcInstance pc : players) {
 			ClientThread.quitGame(pc);
 			L1World.getInstance().removeObject(pc);
@@ -345,17 +345,17 @@ public class GameServer extends Thread {
 			L1World world = L1World.getInstance();
 			try {
 				int secondsCount = _secondsCount;
-				world.broadcastServerMessage("¼­¹ö ¾ÈÁ¤È­/¾÷µ¥ÀÌÆ®¸¦ À§ÇÑ ¸®ºÎÆÃÀ» ½Ç½ÃÇÕ´Ï´Ù.");
-				world.broadcastServerMessage("¸®ºÎÆÃ Áß °ÔÀÓÁ¤º¸ÀÇ ¼Ò½ÇÀ» ¹æÁöÇÏ±â À§ÇÏ¿© °¡±ŞÀû");
-				world.broadcastServerMessage("¾ÈÀüÇÑ Àå¼Ò¿¡¼­ °ÔÀÓÀ» Á¾·á ÇØ ÁÖ½Ê½Ã¿À.");
+				world.broadcastServerMessage("ì„œë²„ ì•ˆì •í™”/ì—…ë°ì´íŠ¸ë¥¼ ìœ„í•œ ë¦¬ë¶€íŒ…ì„ ì‹¤ì‹œí•©ë‹ˆë‹¤.");
+				world.broadcastServerMessage("ë¦¬ë¶€íŒ… ì¤‘ ê²Œì„ì •ë³´ì˜ ì†Œì‹¤ì„ ë°©ì§€í•˜ê¸° ìœ„í•˜ì—¬ ê°€ê¸‰ì ");
+				world.broadcastServerMessage("ì•ˆì „í•œ ì¥ì†Œì—ì„œ ê²Œì„ì„ ì¢…ë£Œ í•´ ì£¼ì‹­ì‹œì˜¤.");
 				while (0 < secondsCount) {
 					if (secondsCount <= 30) {
-						world.broadcastServerMessage("°ÔÀÓÀÌ " + secondsCount
-								+ "ÃÊ ÈÄ¿¡ Á¾·á µË´Ï´Ù. °ÔÀÓÀ» Áß´ÜÇØ ÁÖ¼¼¿ä.");
+						world.broadcastServerMessage("ê²Œì„ì´ " + secondsCount
+								+ "ì´ˆ í›„ì— ì¢…ë£Œ ë©ë‹ˆë‹¤. ê²Œì„ì„ ì¤‘ë‹¨í•´ ì£¼ì„¸ìš”.");
 					} else {
 						if (secondsCount % 60 == 0) {
-							world.broadcastServerMessage("°ÔÀÓÀÌ " + secondsCount
-									/ 60 + "ºĞ ÈÄ¿¡ Á¾·á µË´Ï´Ù.");
+							world.broadcastServerMessage("ê²Œì„ì´ " + secondsCount
+									/ 60 + "ë¶„ í›„ì— ì¢…ë£Œ ë©ë‹ˆë‹¤.");
 						}
 					}
 					Thread.sleep(1000);
@@ -363,7 +363,7 @@ public class GameServer extends Thread {
 				}
 				shutdown();
 			} catch (InterruptedException e) {
-				world.broadcastServerMessage("¼­¹ö Á¾·á°¡ Áß´ÜµÇ¾ú½À´Ï´Ù. ¼­¹ö´Â Á¤»ó °¡µ¿ÁßÀÔ´Ï´Ù.");
+				world.broadcastServerMessage("ì„œë²„ ì¢…ë£Œê°€ ì¤‘ë‹¨ë˜ì—ˆìŠµë‹ˆë‹¤. ì„œë²„ëŠ” ì •ìƒ ê°€ë™ì¤‘ì…ë‹ˆë‹¤.");
 				return;
 			}
 		}
@@ -373,8 +373,8 @@ public class GameServer extends Thread {
 
 	public synchronized void shutdownWithCountdown(int secondsCount) {
 		if (_shutdownThread != null) {
-			// ÀÌ¹Ì ½¸´Ù¿î ¿ä±¸¸¦ ÇÏ°í ÀÖ´Ù
-			// TODO ¿¡·¯ ÅëÁö°¡ ÇÊ¿äÇÒÁöµµ ¸ğ¸¥´Ù
+			// ì´ë¯¸ ìŠ›ë‹¤ìš´ ìš”êµ¬ë¥¼ í•˜ê³  ìˆë‹¤
+			// TODO ì—ëŸ¬ í†µì§€ê°€ í•„ìš”í• ì§€ë„ ëª¨ë¥¸ë‹¤
 			return;
 		}
 		_shutdownThread = new ServerShutdownThread(secondsCount);
@@ -388,8 +388,8 @@ public class GameServer extends Thread {
 
 	public synchronized void abortShutdown() {
 		if (_shutdownThread == null) {
-			// ½¸´Ù¿î ¿ä±¸¸¦ ÇÏÁö ¾Ê¾Ò´Ù
-			// TODO ¿¡·¯ ÅëÁö°¡ ÇÊ¿äÇÒÁöµµ ¸ğ¸¥´Ù
+			// ìŠ›ë‹¤ìš´ ìš”êµ¬ë¥¼ í•˜ì§€ ì•Šì•˜ë‹¤
+			// TODO ì—ëŸ¬ í†µì§€ê°€ í•„ìš”í• ì§€ë„ ëª¨ë¥¸ë‹¤
 			return;
 		}
 

@@ -80,33 +80,33 @@ public class Dungeon {
 				int heading = rs.getInt("new_heading");
 				DungeonType dungeonType = DungeonType.NONE;
 				/*if ((srcX == 33423 || srcX == 33424 || srcX == 33425
-						|| srcX == 33426) && srcY == 33502 && srcMapId == 4 // Heine¼±ÂøÀå->FIÇàÀÇ ¹è
+						|| srcX == 33426) && srcY == 33502 && srcMapId == 4 // Heineì„ ì°©ì¥->FIí–‰ì˜ ë°°
 						|| (srcX == 32733 || srcX == 32734 || srcX == 32735
-						|| srcX == 32736) && srcY == 32794 && srcMapId == 83) { // FIÇàÀÇ ¹è->Heine¼±ÂøÀå
+						|| srcX == 32736) && srcY == 32794 && srcMapId == 83) { // FIí–‰ì˜ ë°°->Heineì„ ì°©ì¥
 					dungeonType = DungeonType.SHIP_FOR_FI;*/
-				if (srcX == 33423 && srcY == 33502 && srcMapId == 4 // Heine¼±ÂøÀå->FIÇàÀÇ ¹è							
-							//** ÀØ¼¶¹è ¾ÈÅ¸Á®¼­ ÁÂÇ¥ Ãß°¡ **//
+				if (srcX == 33423 && srcY == 33502 && srcMapId == 4 // Heineì„ ì°©ì¥->FIí–‰ì˜ ë°°							
+							//** ìŠì„¬ë°° ì•ˆíƒ€ì ¸ì„œ ì¢Œí‘œ ì¶”ê°€ **//
 							|| srcX == 33427 && srcY == 33502 && srcMapId == 4
 							|| srcX == 33426 && srcY == 33502 && srcMapId == 4
 							|| srcX == 33425 && srcY == 33502 && srcMapId == 4
 							|| srcX == 32734 && srcY == 32794 && srcMapId == 83
-							//** ÀØ¼¶¹è ¾ÈÅ¸Á®¼­ ÁÂÇ¥ Ãß°¡ **//								
-							|| srcX == 32735 && srcY == 32794 && srcMapId == 83) { // FIÇàÀÇ ¹è->Heine¼±ÂøÀå
+							//** ìŠì„¬ë°° ì•ˆíƒ€ì ¸ì„œ ì¢Œí‘œ ì¶”ê°€ **//								
+							|| srcX == 32735 && srcY == 32794 && srcMapId == 83) { // FIí–‰ì˜ ë°°->Heineì„ ì°©ì¥
 						dungeonType = DungeonType.SHIP_FOR_FI;
 				} else if ((srcX == 32935 || srcX == 32936 || srcX == 32937)
-						&& srcY == 33058 && srcMapId == 70 // FI¼±ÂøÀå->HeineÇàÀÇ ¹è
+						&& srcY == 33058 && srcMapId == 70 // FIì„ ì°©ì¥->Heineí–‰ì˜ ë°°
 						|| (srcX == 32732 || srcX == 32733 || srcX == 32734
-						|| srcX == 32735) && srcY == 32796 && srcMapId == 84) { // HeineÇàÀÇ ¹è->FI¼±ÂøÀå
+						|| srcX == 32735) && srcY == 32796 && srcMapId == 84) { // Heineí–‰ì˜ ë°°->FIì„ ì°©ì¥
 					dungeonType = DungeonType.SHIP_FOR_HEINE;
 				} else if ((srcX == 32750 || srcX == 32751 || srcX == 32752)
-						&& srcY == 32874 && srcMapId == 445 // ¼û°ÜÁø ¼±ÂøÀå->ÇØÀû¼¶ÇàÀÇ ¹è
+						&& srcY == 32874 && srcMapId == 445 // ìˆ¨ê²¨ì§„ ì„ ì°©ì¥->í•´ì ì„¬í–‰ì˜ ë°°
 						|| (srcX == 32731 || srcX == 32732 || srcX == 32733)
-						&& srcY == 32796 && srcMapId == 447) { // ÇØÀû¼¶ÇàÀÇ ¹è->¼û°ÜÁø ¼±ÂøÀå
+						&& srcY == 32796 && srcMapId == 447) { // í•´ì ì„¬í–‰ì˜ ë°°->ìˆ¨ê²¨ì§„ ì„ ì°©ì¥
 					dungeonType = DungeonType.SHIP_FOR_PI;
 				} else if ((srcX == 32296 || srcX == 32297 || srcX == 32298)
-						&& srcY == 33087 && srcMapId == 440 // ÇØÀûµµ¼±ÂøÀå->¼û°ÜÁø ¼±ÂøÀåÇàÀÇ ¹è
+						&& srcY == 33087 && srcMapId == 440 // í•´ì ë„ì„ ì°©ì¥->ìˆ¨ê²¨ì§„ ì„ ì°©ì¥í–‰ì˜ ë°°
 						|| (srcX == 32735 ||  srcX == 32736 ||  srcX == 32737)
-						&& srcY == 32794 && srcMapId == 446) { // ¼û°ÜÁø ¼±ÂøÀåÇàÀÇ ¹è->ÇØÀûµµ¼±ÂøÀå
+						&& srcY == 32794 && srcMapId == 446) { // ìˆ¨ê²¨ì§„ ì„ ì°©ì¥í–‰ì˜ ë°°->í•´ì ë„ì„ ì°©ì¥
 					dungeonType = DungeonType.SHIP_FOR_HIDDENDOCK;
 				} else if ((srcX == 32630 || srcX == 32631 || srcX == 32632)
 						&& srcY == 32983 && srcMapId == 0 // TalkingIsland->TalkingIslandShiptoAdenMainland
@@ -124,7 +124,7 @@ public class Dungeon {
 						(short) newMapId, heading, dungeonType);
 				if (_dungeonMap.containsKey(key)) {
 					_log.log(Level.WARNING,
-							"°°Àº Å°ÀÇ dungeon µ¥ÀÌÅÍ°¡ ÀÖ½À´Ï´Ù. key=" + key);
+							"ê°™ì€ í‚¤ì˜ dungeon ë°ì´í„°ê°€ ìˆìŠµë‹ˆë‹¤. key=" + key);
 				}
 				_dungeonMap.put(key, newDungeon);
 			}
@@ -209,7 +209,7 @@ public class Dungeon {
 			}			
 
 			if (teleportable) {
-				// 2ÃÊ°£Àº ¹«Àû(¾Æºê¼Ò¸£Æ®¹Ù¸®¾Æ »óÅÂ)À¸·Î ÇÑ´Ù.
+				// 2ì´ˆê°„ì€ ë¬´ì (ì•„ë¸Œì†Œë¥´íŠ¸ë°”ë¦¬ì•„ ìƒíƒœ)ìœ¼ë¡œ í•œë‹¤.
 				pc.setSkillEffect(L1SkillId.ABSOLUTE_BARRIER, 2000);
 				pc.stopHpRegeneration();
 				pc.stopMpRegeneration();

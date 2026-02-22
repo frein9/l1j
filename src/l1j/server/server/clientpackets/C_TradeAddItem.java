@@ -54,7 +54,7 @@ public class C_TradeAddItem extends ClientBasePacket {
 		L1Trade trade = new L1Trade();
 		L1ItemInstance item = pc.getInventory().getItem(itemid);
 		
-		/*¹ö±×¹æÁö*/
+		/*ë²„ê·¸ë°©ì§€*/
 		if (itemid != item.getId()) {
 			pc.sendPackets(new S_Disconnect());
 			return;
@@ -66,17 +66,17 @@ public class C_TradeAddItem extends ClientBasePacket {
 		if (itemcount > item.getCount()) {
 			itemcount = item.getCount();
 		}
-		/*¹ö±×¹æÁö*/
+		/*ë²„ê·¸ë°©ì§€*/
 
-		//** º¹»ç¹ö±× ¹æÁö **//	by µµ¿ì³Ê
+		//** ë³µì‚¬ë²„ê·¸ ë°©ì§€ **//	by ë„ìš°ë„ˆ
 		int itemType = item.getItem().getType2();
 		if (!item.getItem().isTradable() || itemcount <= 0 || item.getCount() < itemcount || item.getCount() <= 0) {
-		//** º¹»ç¹ö±× ¹æÁö **//	by µµ¿ì³Ê	
-			pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0Àº ¹ö¸®°Å³ª ¶Ç´Â Å¸ÀÎ¿¡°Ô ¾çÀÏÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù.
+		//** ë³µì‚¬ë²„ê·¸ ë°©ì§€ **//	by ë„ìš°ë„ˆ	
+			pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0ì€ ë²„ë¦¬ê±°ë‚˜ ë˜ëŠ” íƒ€ì¸ì—ê²Œ ì–‘ì¼ì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 			return;
 		}
 		if (item.getLockitem() > 100){
-           pc.sendPackets(new S_SystemMessage("ºÀÀÎµÈ ¾ÆÀÌÅÛÀº °Å·¡ÇÒ ¼ö ¾ø½À´Ï´Ù."));
+           pc.sendPackets(new S_SystemMessage("ë´‰ì¸ëœ ì•„ì´í…œì€ ê±°ë˜í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤."));
           return;
        }			
 					
@@ -91,7 +91,7 @@ public class C_TradeAddItem extends ClientBasePacket {
 		if (itemcount > 2000000000)  {
 			return;
 		}
-		if (item.getItem().getItemId() == 41159) { // ½Åºñ±êÅĞ ¹æÁö
+		if (item.getItem().getItemId() == 41159) { // ì‹ ë¹„ê¹ƒí„¸ ë°©ì§€
 		    return;
 	    }
 		Object[] petlist = pc.getPetList().values().toArray();
@@ -99,7 +99,7 @@ public class C_TradeAddItem extends ClientBasePacket {
 			if (petObject instanceof L1PetInstance) {
 				L1PetInstance pet = (L1PetInstance) petObject;
 				if (item.getId() == pet.getItemObjId()) {
-					// \f1%0Àº ¹ö¸®°Å³ª ¶Ç´Â Å¸ÀÎ¿¡°Ô ¾çÀÏÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù.
+					// \f1%0ì€ ë²„ë¦¬ê±°ë‚˜ ë˜ëŠ” íƒ€ì¸ì—ê²Œ ì–‘ì¼ì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 					pc.sendPackets(new S_ServerMessage(210, item.getItem()
 							.getName()));
 					return;
@@ -111,13 +111,13 @@ public class C_TradeAddItem extends ClientBasePacket {
 		if (tradingPartner == null) {
 			return;
 		}
-		if (pc.getTradeOk()) { // ok¸¦ ´©¸¥»óÅÂ¶ó¸é ¾ÆÀÌÅÛ ´õÀÌ»ó ¸ø ¿Ã¸²
+		if (pc.getTradeOk()) { // okë¥¼ ëˆ„ë¥¸ìƒíƒœë¼ë©´ ì•„ì´í…œ ë”ì´ìƒ ëª» ì˜¬ë¦¼
 			return;
 		}
 		if (tradingPartner.getInventory().checkAddItem(item, itemcount)
-				!= L1Inventory.OK) { // ¿ë·® Áß·® È®ÀÎ ¹× ¸Ş¼¼Áö ¼Û½Å
-			tradingPartner.sendPackets(new S_ServerMessage(270)); // \f1 °¡Áö°í ÀÖ´Â °ÍÀÌ ¹«°Å¿ö¼­ °Å·¡ÇÒ ¼ö ¾ø½À´Ï´Ù.
-			pc.sendPackets(new S_ServerMessage(271)); // \f1»ó´ë°¡ ¹°°ÇÀ» ³Ê¹« °¡Áö°í ÀÖ¾î °Å·¡ÇÒ ¼ö ¾ø½À´Ï´Ù.
+				!= L1Inventory.OK) { // ìš©ëŸ‰ ì¤‘ëŸ‰ í™•ì¸ ë° ë©”ì„¸ì§€ ì†¡ì‹ 
+			tradingPartner.sendPackets(new S_ServerMessage(270)); // \f1 ê°€ì§€ê³  ìˆëŠ” ê²ƒì´ ë¬´ê±°ì›Œì„œ ê±°ë˜í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
+			pc.sendPackets(new S_ServerMessage(271)); // \f1ìƒëŒ€ê°€ ë¬¼ê±´ì„ ë„ˆë¬´ ê°€ì§€ê³  ìˆì–´ ê±°ë˜í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 			return;
                         }	 */
  	

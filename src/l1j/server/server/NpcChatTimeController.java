@@ -47,7 +47,7 @@ public class NpcChatTimeController implements Runnable {
 	public void run() {
 		try {
 			while (true) {
-				checkNpcChatTime(); // Ã¤ÆÃ °³½Ã ½Ã°£À» Ã¼Å©
+				checkNpcChatTime(); // ì±„íŒ… ê°œì‹œ ì‹œê°„ì„ ì²´í¬
 				Thread.sleep(60000);
 			}
 		} catch (Exception e1) {

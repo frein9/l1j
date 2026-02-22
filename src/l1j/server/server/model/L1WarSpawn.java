@@ -54,7 +54,7 @@ public class L1WarSpawn {
 		if (castleId == L1CastleLocation.ADEN_CASTLE_ID) {
 			npcId = 81189;
 		}
-		L1Npc l1npc = NpcTable.getInstance().getTemplate(npcId); // °¡µð¾È Å¸¿ö
+		L1Npc l1npc = NpcTable.getInstance().getTemplate(npcId); // ê°€ë””ì•ˆ íƒ€ì›Œ
 		int[] loc = new int[3];
 		loc = L1CastleLocation.getTowerLoc(castleId);
 		SpawnWarObject(l1npc, loc[0], loc[1], (short) (loc[2]));
@@ -67,21 +67,21 @@ public class L1WarSpawn {
 		L1Npc l1npc;
 		int[] loc = new int[3];
 		for (int i = 1; i <= 4; i++) {
-			l1npc = NpcTable.getInstance().getTemplate(81189 + i); // ¼­ºê Å¸¿ö
+			l1npc = NpcTable.getInstance().getTemplate(81189 + i); // ì„œë¸Œ íƒ€ì›Œ
 			loc = L1CastleLocation.getSubTowerLoc(i);
 			SpawnWarObject(l1npc, loc[0], loc[1], (short) (loc[2]));
 		}
 	}
 
 	public void SpawnCrown(int castleId) {
-		L1Npc l1npc = NpcTable.getInstance().getTemplate(81125); // Å©¶ó¿î
+		L1Npc l1npc = NpcTable.getInstance().getTemplate(81125); // í¬ë¼ìš´
 		int[] loc = new int[3];
 		loc = L1CastleLocation.getTowerLoc(castleId);
 		SpawnWarObject(l1npc, loc[0], loc[1], (short) (loc[2]));
 	}
 
 	public void SpawnFlag(int castleId) {
-		L1Npc l1npc = NpcTable.getInstance().getTemplate(81122); // ±â
+		L1Npc l1npc = NpcTable.getInstance().getTemplate(81122); // ê¸°
 		int[] loc = new int[5];
 		loc = L1CastleLocation.getWarArea(castleId);
 		int x = 0;

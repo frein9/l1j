@@ -20,50 +20,50 @@ public class S_ShowOrignalBonus extends ServerBasePacket {
 		int increaseCon = 0;
 		int increaseWis = 0;
 		int increaseInt = 0;
-		int increaseCha = 0; // Ä«¸®½º¸¶´Â ÃÊ±â½ºÅÈº¸³Ê½º°¡ ¾ø´Ù
-		if (pc.isCrown()) { // ±ºÁÖ
+		int increaseCha = 0; // ì¹´ë¦¬ìŠ¤ë§ˆëŠ” ì´ˆê¸°ìŠ¤íƒ¯ë³´ë„ˆìŠ¤ê°€ ì—†ë‹¤
+		if (pc.isCrown()) { // êµ°ì£¼
 			increaseStr = Math.max(pc.getOriginalStr() - 13, 0);
 			increaseDex = Math.max(pc.getOriginalDex() - 10, 0);
 			increaseCon = Math.max(pc.getOriginalCon() - 10, 0);
 			increaseWis = Math.max(pc.getOriginalWis() - 11, 0);
 			increaseInt = Math.max(pc.getOriginalInt() - 10, 0);
 			increaseCha = Math.max(pc.getOriginalCha() - 13, 0);
-		} else if (pc.isKnight()) { // ³ªÀÌÆ®
+		} else if (pc.isKnight()) { // ë‚˜ì´íŠ¸
 			increaseStr = Math.max(pc.getOriginalStr() - 16, 0);
 			increaseDex = Math.max(pc.getOriginalDex() - 12, 0);
 			increaseCon = Math.max(pc.getOriginalCon() - 14, 0);
 			increaseWis = Math.max(pc.getOriginalWis() - 9, 0);
 			increaseInt = Math.max(pc.getOriginalInt() - 8, 0);
 			increaseCha = Math.max(pc.getOriginalCha() - 12, 0);
-		} else if (pc.isWizard()) { // À§Àúµå
+		} else if (pc.isWizard()) { // ìœ„ì €ë“œ
 			increaseStr = Math.max(pc.getOriginalStr() - 8, 0);
 			increaseDex = Math.max(pc.getOriginalDex() - 7, 0);
 			increaseCon = Math.max(pc.getOriginalCon() - 12, 0);
 			increaseWis = Math.max(pc.getOriginalWis() - 12, 0);
 			increaseInt = Math.max(pc.getOriginalInt() - 12, 0);
 			increaseCha = Math.max(pc.getOriginalCha() - 8, 0);
-		} else if (pc.isElf()) { // ¿¤ÇÁ
+		} else if (pc.isElf()) { // ì—˜í”„
 			increaseStr = Math.max(pc.getOriginalStr() - 11, 0);
 			increaseDex = Math.max(pc.getOriginalDex() - 12, 0);
 			increaseCon = Math.max(pc.getOriginalCon() - 12, 0);
 			increaseWis = Math.max(pc.getOriginalWis() - 12, 0);
 			increaseInt = Math.max(pc.getOriginalInt() - 12, 0);
 			increaseCha = Math.max(pc.getOriginalCha() - 9, 0);
-		} else if (pc.isDarkelf()) { // ´ÙÅ©¿¤ÇÁ
+		} else if (pc.isDarkelf()) { // ë‹¤í¬ì—˜í”„
 			increaseStr = Math.max(pc.getOriginalStr() - 12, 0);
 			increaseDex = Math.max(pc.getOriginalDex() - 15, 0);
 			increaseCon = Math.max(pc.getOriginalCon() - 8, 0);
 			increaseWis = Math.max(pc.getOriginalWis() - 10, 0);
 			increaseInt = Math.max(pc.getOriginalInt() - 11, 0);
 			increaseCha = Math.max(pc.getOriginalCha() - 9, 0);
-		} else if (pc.isDragonKnight()) { // ¿ë±â»ç
+		} else if (pc.isDragonKnight()) { // ìš©ê¸°ì‚¬
 			increaseStr = Math.max(pc.getOriginalStr() - 13, 0);
 			increaseDex = Math.max(pc.getOriginalDex() - 11, 0);
 			increaseCon = Math.max(pc.getOriginalCon() - 14, 0);
 			increaseWis = Math.max(pc.getOriginalWis() - 12, 0);
 			increaseInt = Math.max(pc.getOriginalInt() - 11, 0);
 			increaseCha = Math.max(pc.getOriginalCha() - 8, 0);
-		} else if (pc.isBlackWizard()) { // È¯¼ú»ç 
+		} else if (pc.isBlackWizard()) { // í™˜ìˆ ì‚¬ 
 			increaseStr = Math.max(pc.getOriginalStr() - 11, 0);
 			increaseDex = Math.max(pc.getOriginalDex() - 10, 0);
 			increaseCon = Math.max(pc.getOriginalCon() - 12, 0);
@@ -74,9 +74,9 @@ public class S_ShowOrignalBonus extends ServerBasePacket {
 
 		writeC(Opcodes.S_OPCODE_RETURNEDSTAT);
 		writeC(4);
-		writeC(increaseInt * 16 + increaseStr); // ÀÎÆ®Áõ°¡¼öÄ¡ * 16 + ÈûÁõ°¡¼öÄ¡
-		writeC(increaseDex * 16 + increaseWis); // µ¦½ºÁõ°¡¼öÄ¡ * 16 + À§ÁîÁõ°¡¼öÄ¡
-		writeC(increaseCha * 16 + increaseCon); // Ä«¸®Áõ°¡¼öÄ¡ * 16 + ÄÜÁõ°¡¼öÄ¡
+		writeC(increaseInt * 16 + increaseStr); // ì¸íŠ¸ì¦ê°€ìˆ˜ì¹˜ * 16 + í˜ì¦ê°€ìˆ˜ì¹˜
+		writeC(increaseDex * 16 + increaseWis); // ë±ìŠ¤ì¦ê°€ìˆ˜ì¹˜ * 16 + ìœ„ì¦ˆì¦ê°€ìˆ˜ì¹˜
+		writeC(increaseCha * 16 + increaseCon); // ì¹´ë¦¬ì¦ê°€ìˆ˜ì¹˜ * 16 + ì½˜ì¦ê°€ìˆ˜ì¹˜
 		writeC(0);
 	}
 

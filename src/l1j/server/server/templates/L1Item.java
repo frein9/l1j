@@ -27,9 +27,9 @@ public abstract class L1Item implements Serializable {
 	public L1Item() {
 	}
 
-	// ¡á¡á¡á¡á¡á¡á L1EtcItem, L1Weapon, L1Armor ¿¡ °øÅëµÇ´Â Ç×¸ñ ¡á¡á¡á¡á¡á¡á
+	// â– â– â– â– â– â–  L1EtcItem, L1Weapon, L1Armor ì— ê³µí†µë˜ëŠ” í•­ëª© â– â– â– â– â– â– 
 
-	private int _type2; // ¡Ü 0=L1EtcItem, 1=L1Weapon, 2=L1Armor
+	private int _type2; // â— 0=L1EtcItem, 1=L1Weapon, 2=L1Armor
 
 	/**
 	 * @return 0 if L1EtcItem, 1 if L1Weapon, 2 if L1Armor
@@ -42,7 +42,7 @@ public abstract class L1Item implements Serializable {
 		_type2 = type;
 	}
 
-	private int _itemId; // ¡Ü ¾ÆÀÌÅÛ ID
+	private int _itemId; // â— ì•„ì´í…œ ID
 
 	public int getItemId() {
 		return _itemId;
@@ -52,7 +52,7 @@ public abstract class L1Item implements Serializable {
 		_itemId = itemId;
 	}
 
-	private String _name; // ¡Ü ¾ÆÀÌÅÛ¸í
+	private String _name; // â— ì•„ì´í…œëª…
 
 	public String getName() {
 		return _name;
@@ -62,7 +62,7 @@ public abstract class L1Item implements Serializable {
 		_name = name;
 	}
 
-	private String _nameId; // ¡Ü ³×ÀÓ ID
+	private String _nameId; // â— ë„¤ì„ ID
 
 	public String getNameId() {
 		return _nameId;
@@ -71,7 +71,7 @@ public abstract class L1Item implements Serializable {
 	public void setNameId(String nameid) {
 		_nameId = nameid;
 	}
-	private int _price; // ¡Ü °¡°İ
+	private int _price; // â— ê°€ê²©
 
 	public int get_price() {
 		return _price;
@@ -81,23 +81,23 @@ public abstract class L1Item implements Serializable {
 		_price = price;
 	}
 
-	/* ¹ö±×º£¾î °æÁÖ °ü·Ã Ç×¸ñ */
-	private String _°³ÀÌ¸§;
-	private double _¹èÀ²;
+	/* ë²„ê·¸ë² ì–´ ê²½ì£¼ ê´€ë ¨ í•­ëª© */
+	private String _ê°œì´ë¦„;
+	private double _ë°°ìœ¨;
 
-	public String get_°³ÀÌ¸§(){
-		return _°³ÀÌ¸§;
-	}public void set_°³ÀÌ¸§(String _°³ÀÌ¸§){
-		this._°³ÀÌ¸§ = _°³ÀÌ¸§;
+	public String get_ê°œì´ë¦„(){
+		return _ê°œì´ë¦„;
+	}public void set_ê°œì´ë¦„(String _ê°œì´ë¦„){
+		this._ê°œì´ë¦„ = _ê°œì´ë¦„;
 	}
 
-	public void set_¹èÀ²(double _¹èÀ²){
-		this._¹èÀ² = _¹èÀ²;
-	}public double get_¹èÀ²(){
-		return _¹èÀ²;
+	public void set_ë°°ìœ¨(double _ë°°ìœ¨){
+		this._ë°°ìœ¨ = _ë°°ìœ¨;
+	}public double get_ë°°ìœ¨(){
+		return _ë°°ìœ¨;
 	}
 
-//	########## (³Ú) A75 ¿ëÇØÁ¦ Ãß°¡ °ü·Ã *ÇØÄ¿½º ##########
+//	########## (ë„¬) A75 ìš©í•´ì œ ì¶”ê°€ ê´€ë ¨ *í•´ì»¤ìŠ¤ ##########
 	private int _solvent;
 
 	public int getSolvent() {
@@ -107,13 +107,13 @@ public abstract class L1Item implements Serializable {
 	public void setSolvent(int solvent) {
 		_solvent=solvent;
 	}
-//	########## (³Ú) A75 ¿ëÇØÁ¦ Ãß°¡ °ü·Ã *ÇØÄ¿½º ##########
+//	########## (ë„¬) A75 ìš©í•´ì œ ì¶”ê°€ ê´€ë ¨ *í•´ì»¤ìŠ¤ ##########
 
 
-	private int _type; // ¡Ü »ó¼¼ÇÑ Å¸ÀÔ
+	private int _type; // â— ìƒì„¸í•œ íƒ€ì…
 
 	/**
-	 * ¾ÆÀÌÅÛÀÇ Á¾·ù¸¦ µ¹·ÁÁØ´Ù.<br>
+	 * ì•„ì´í…œì˜ ì¢…ë¥˜ë¥¼ ëŒë ¤ì¤€ë‹¤.<br>
 	 * 
 	 * @return
 	 * <p>
@@ -141,10 +141,10 @@ public abstract class L1Item implements Serializable {
 		_type = type;
 	}
 
-	private int _type1; // ¡Ü Å¸ÀÔ
+	private int _type1; // â— íƒ€ì…
 
 	/**
-	 * ¾ÆÀÌÅÛÀÇ Á¾·ù¸¦ µ¹·ÁÁØ´Ù.<br>
+	 * ì•„ì´í…œì˜ ì¢…ë¥˜ë¥¼ ëŒë ¤ì¤€ë‹¤.<br>
 	 * 
 	 * @return
 	 * <p>
@@ -162,14 +162,14 @@ public abstract class L1Item implements Serializable {
 		_type1 = type1;
 	}
 
-	private int _material; // ¡Ü ¼ÒÀç
+	private int _material; // â— ì†Œì¬
 
 	/**
-	 * ¾ÆÀÌÅÛÀÇ ¼ÒÀç¸¦ µ¹·ÁÁØ´Ù
+	 * ì•„ì´í…œì˜ ì†Œì¬ë¥¼ ëŒë ¤ì¤€ë‹¤
 	 * 
-	 * @return 0:none 1:¾×Ã¼ 2:web 3:½Ä¹°¼º 4:µ¿¹°¼º 5:Áö 6:Æ÷ 7:ÇÇ 8:¸ñ 9:°ñ 10:·æÀÇ ¸° 11:Ã¶
-	 *         12:°­Ã¶ 13:µ¿ 14:Àº 15:±İ 16:ÇÃ¶óÆ¼³ª 17:¹Ì½º¸± 18:ºê¶ôÅ©¹Ì½º¸± 19:À¯¸® 20:º¸¼®
-	 *         21:±¤¹° 22:¿À¸®ÇÏ¸£ÄÜ
+	 * @return 0:none 1:ì•¡ì²´ 2:web 3:ì‹ë¬¼ì„± 4:ë™ë¬¼ì„± 5:ì§€ 6:í¬ 7:í”¼ 8:ëª© 9:ê³¨ 10:ë£¡ì˜ ë¦° 11:ì² 
+	 *         12:ê°•ì²  13:ë™ 14:ì€ 15:ê¸ˆ 16:í”Œë¼í‹°ë‚˜ 17:ë¯¸ìŠ¤ë¦´ 18:ë¸Œë½í¬ë¯¸ìŠ¤ë¦´ 19:ìœ ë¦¬ 20:ë³´ì„
+	 *         21:ê´‘ë¬¼ 22:ì˜¤ë¦¬í•˜ë¥´ì½˜
 	 */
 	public int getMaterial() {
 		return _material;
@@ -179,7 +179,7 @@ public abstract class L1Item implements Serializable {
 		_material = material;
 	}
 
-	private int _weight; // ¡Ü Áß·®
+	private int _weight; // â— ì¤‘ëŸ‰
 
 	public int getWeight() {
 		return _weight;
@@ -189,7 +189,7 @@ public abstract class L1Item implements Serializable {
 		_weight = weight;
 	}
 
-	private int _gfxId; // ¡Ü ¸ñ·Ï³»ÀÇ ±×·¡ÇÈ ID
+	private int _gfxId; // â— ëª©ë¡ë‚´ì˜ ê·¸ë˜í”½ ID
 
 	public int getGfxId() {
 		return _gfxId;
@@ -199,7 +199,7 @@ public abstract class L1Item implements Serializable {
 		_gfxId = gfxId;
 	}
 
-	private int _groundGfxId; // ¡Ü Áö¸é¿¡ µÎ¾úÀ» ¶§ÀÇ ±×·¡ÇÈ ID
+	private int _groundGfxId; // â— ì§€ë©´ì— ë‘ì—ˆì„ ë•Œì˜ ê·¸ë˜í”½ ID
 
 	public int getGroundGfxId() {
 		return _groundGfxId;
@@ -209,12 +209,12 @@ public abstract class L1Item implements Serializable {
 		_groundGfxId = groundGfxId;
 	}
 
-	private int _minLevel; // ¡Ü »ç¿ë, Àåºñ °¡´É ÃÖ¼Ò LV
+	private int _minLevel; // â— ì‚¬ìš©, ì¥ë¹„ ê°€ëŠ¥ ìµœì†Œ LV
 
 	private int _itemDescId;
 
 	/**
-	 * °¨Á¤½Ã¿¡ Ç¥½ÃµÇ´Â ItemDesc.tblÀÇ ¸Ş¼¼Áö ID¸¦ µ¹·ÁÁØ´Ù.
+	 * ê°ì •ì‹œì— í‘œì‹œë˜ëŠ” ItemDesc.tblì˜ ë©”ì„¸ì§€ IDë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 */
 	public int getItemDescId() {
 		return _itemDescId;
@@ -232,7 +232,7 @@ public abstract class L1Item implements Serializable {
 		_minLevel = level;
 	}
 
-	private int _maxLevel; // ¡Ü »ç¿ë, Àåºñ °¡´É ÃÖ´ë LV
+	private int _maxLevel; // â— ì‚¬ìš©, ì¥ë¹„ ê°€ëŠ¥ ìµœëŒ€ LV
 
 	public int getMaxLevel() {
 		return _maxLevel;
@@ -242,7 +242,7 @@ public abstract class L1Item implements Serializable {
 		_maxLevel = maxlvl;
 	}
 
-	private int _bless; // ¡Ü Ãàº¹ »óÅÂ
+	private int _bless; // â— ì¶•ë³µ ìƒíƒœ
 
 	public int getBless() {
 		return _bless;
@@ -252,7 +252,7 @@ public abstract class L1Item implements Serializable {
 		_bless = i;
 	}
 
-	private boolean _tradable; // ¡Ü Æ®·¹ÀÌµå°¡´É/ºÒ°¡
+	private boolean _tradable; // â— íŠ¸ë ˆì´ë“œê°€ëŠ¥/ë¶ˆê°€
 
 	public boolean isTradable() {
 		return _tradable;
@@ -262,7 +262,7 @@ public abstract class L1Item implements Serializable {
 		_tradable = flag;
 	}
 
-	private boolean _cantDelete; // ¡Ü »èÁ¦ ºÒ°¡
+	private boolean _cantDelete; // â— ì‚­ì œ ë¶ˆê°€
 
 	public boolean isCantDelete() {
 		return _cantDelete;
@@ -275,7 +275,7 @@ public abstract class L1Item implements Serializable {
 	private boolean _save_at_once;
 
 	/**
-	 * ¾ÆÀÌÅÛÀÇ °³¼ö°¡ º¯È­ÇßÀ» ¶§¿¡ °ğ¹Ù·Î DB¿¡ ±âÀÔÇØ¾ßÇÒ °ÍÀÎ°¡¸¦ µ¹·ÁÁØ´Ù.
+	 * ì•„ì´í…œì˜ ê°œìˆ˜ê°€ ë³€í™”í–ˆì„ ë•Œì— ê³§ë°”ë¡œ DBì— ê¸°ì…í•´ì•¼í•  ê²ƒì¸ê°€ë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 */
 	public boolean isToBeSavedAtOnce() {
 		return _save_at_once;
@@ -285,9 +285,9 @@ public abstract class L1Item implements Serializable {
 		_save_at_once = flag;
 	}
 
-	// ¡á¡á¡á¡á¡á¡á L1EtcItem, L1Weapon ¿¡ °øÅëµÇ´Â Ç×¸ñ ¡á¡á¡á¡á¡á¡á
+	// â– â– â– â– â– â–  L1EtcItem, L1Weapon ì— ê³µí†µë˜ëŠ” í•­ëª© â– â– â– â– â– â– 
 
-	private int _dmgSmall = 0; // ¡Ü ÃÖ¼Ò µ¥¹ÌÁö
+	private int _dmgSmall = 0; // â— ìµœì†Œ ë°ë¯¸ì§€
 
 	public int getDmgSmall() {
 		return _dmgSmall;
@@ -297,7 +297,7 @@ public abstract class L1Item implements Serializable {
 		_dmgSmall = dmgSmall;
 	}
 
-	private int _dmgLarge = 0; // ¡Ü ÃÖ´ë µ¥¹ÌÁö
+	private int _dmgLarge = 0; // â— ìµœëŒ€ ë°ë¯¸ì§€
 
 	public int getDmgLarge() {
 		return _dmgLarge;
@@ -307,11 +307,11 @@ public abstract class L1Item implements Serializable {
 		_dmgLarge = dmgLarge;
 	}
 
-	// ¡á¡á¡á¡á¡á¡á L1EtcItem, L1Armor ¿¡ °øÅëµÇ´Â Ç×¸ñ ¡á¡á¡á¡á¡á¡á
+	// â– â– â– â– â– â–  L1EtcItem, L1Armor ì— ê³µí†µë˜ëŠ” í•­ëª© â– â– â– â– â– â– 
 
-	// ¡á¡á¡á¡á¡á¡á L1Weapon, L1Armor ¿¡ °øÅëµÇ´Â Ç×¸ñ ¡á¡á¡á¡á¡á¡á
+	// â– â– â– â– â– â–  L1Weapon, L1Armor ì— ê³µí†µë˜ëŠ” í•­ëª© â– â– â– â– â– â– 
 
-	private int _safeEnchant = 0; // ¡Ü OE¾ÈÀü±Ç
+	private int _safeEnchant = 0; // â— OEì•ˆì „ê¶Œ
 
 	public int get_safeenchant() {
 		return _safeEnchant;
@@ -321,7 +321,7 @@ public abstract class L1Item implements Serializable {
 		_safeEnchant = safeenchant;
 	}
 
-	private boolean _useRoyal = false; // ¡Ü ·Î¿­ Å¬·¡½º¸¦ Àåºñ ÇÒ ¼ö ÀÖÀ»±î
+	private boolean _useRoyal = false; // â— ë¡œì—´ í´ë˜ìŠ¤ë¥¼ ì¥ë¹„ í•  ìˆ˜ ìˆì„ê¹Œ
 
 	public boolean isUseRoyal() {
 		return _useRoyal;
@@ -331,7 +331,7 @@ public abstract class L1Item implements Serializable {
 		_useRoyal = flag;
 	}
 
-	private boolean _useKnight = false; // ¡Ü ³ªÀÌÆ® Å¬·¡½º¸¦ Àåºñ ÇÒ ¼ö ÀÖÀ»±î
+	private boolean _useKnight = false; // â— ë‚˜ì´íŠ¸ í´ë˜ìŠ¤ë¥¼ ì¥ë¹„ í•  ìˆ˜ ìˆì„ê¹Œ
 
 	public boolean isUseKnight() {
 		return _useKnight;
@@ -341,7 +341,7 @@ public abstract class L1Item implements Serializable {
 		_useKnight = flag;
 	}
 
-	private boolean _useElf = false; // ¡Ü ¿¡¸£ÇÁ Å¬·¡½º¸¦ Àåºñ ÇÒ ¼ö ÀÖÀ»±î
+	private boolean _useElf = false; // â— ì—ë¥´í”„ í´ë˜ìŠ¤ë¥¼ ì¥ë¹„ í•  ìˆ˜ ìˆì„ê¹Œ
 
 	public boolean isUseElf() {
 		return _useElf;
@@ -351,7 +351,7 @@ public abstract class L1Item implements Serializable {
 		_useElf = flag;
 	}
 
-	private boolean _useMage = false; // ¡Ü ¸ŞÀÌÁöÅ©¶ó½º¸¦ Àåºñ ÇÒ ¼ö ÀÖÀ»±î
+	private boolean _useMage = false; // â— ë©”ì´ì§€í¬ë¼ìŠ¤ë¥¼ ì¥ë¹„ í•  ìˆ˜ ìˆì„ê¹Œ
 
 	public boolean isUseMage() {
 		return _useMage;
@@ -361,7 +361,7 @@ public abstract class L1Item implements Serializable {
 		_useMage = flag;
 	}
 
-	private boolean _useDarkelf = false; // ¡Ü ´ÙÅ© ¿¡¸£ÇÁ Å¬·¡½º¸¦ Àåºñ ÇÒ ¼ö ÀÖÀ»±î
+	private boolean _useDarkelf = false; // â— ë‹¤í¬ ì—ë¥´í”„ í´ë˜ìŠ¤ë¥¼ ì¥ë¹„ í•  ìˆ˜ ìˆì„ê¹Œ
 
 	public boolean isUseDarkelf() {
 		return _useDarkelf;
@@ -390,7 +390,7 @@ public abstract class L1Item implements Serializable {
 		_useBlackwizard = flag;
 	}
 
-	private byte _addstr = 0; // ¡Ü STR º¸Á¤
+	private byte _addstr = 0; // â— STR ë³´ì •
 
 	public byte get_addstr() {
 		return _addstr;
@@ -400,7 +400,7 @@ public abstract class L1Item implements Serializable {
 		_addstr = addstr;
 	}
 
-	private byte _adddex = 0; // ¡Ü DEX º¸Á¤
+	private byte _adddex = 0; // â— DEX ë³´ì •
 
 	public byte get_adddex() {
 		return _adddex;
@@ -410,7 +410,7 @@ public abstract class L1Item implements Serializable {
 		_adddex = adddex;
 	}
 
-	private byte _addcon = 0; // ¡Ü CON º¸Á¤
+	private byte _addcon = 0; // â— CON ë³´ì •
 
 	public byte get_addcon() {
 		return _addcon;
@@ -420,7 +420,7 @@ public abstract class L1Item implements Serializable {
 		_addcon = addcon;
 	}
 
-	private byte _addint = 0; // ¡Ü INT º¸Á¤
+	private byte _addint = 0; // â— INT ë³´ì •
 
 	public byte get_addint() {
 		return _addint;
@@ -430,7 +430,7 @@ public abstract class L1Item implements Serializable {
 		_addint = addint;
 	}
 
-	private byte _addwis = 0; // ¡Ü WIS º¸Á¤
+	private byte _addwis = 0; // â— WIS ë³´ì •
 
 	public byte get_addwis() {
 		return _addwis;
@@ -440,7 +440,7 @@ public abstract class L1Item implements Serializable {
 		_addwis = addwis;
 	}
 
-	private byte _addcha = 0; // ¡Ü CHA º¸Á¤
+	private byte _addcha = 0; // â— CHA ë³´ì •
 
 	public byte get_addcha() {
 		return _addcha;
@@ -450,7 +450,7 @@ public abstract class L1Item implements Serializable {
 		_addcha = addcha;
 	}
 
-	private int _addhp = 0; // ¡Ü HPº¸Á¤
+	private int _addhp = 0; // â— HPë³´ì •
 
 	public int get_addhp() {
 		return _addhp;
@@ -460,7 +460,7 @@ public abstract class L1Item implements Serializable {
 		_addhp = addhp;
 	}
 
-	private int _addmp = 0; // ¡Ü MPº¸Á¤
+	private int _addmp = 0; // â— MPë³´ì •
 
 	public int get_addmp() {
 		return _addmp;
@@ -470,7 +470,7 @@ public abstract class L1Item implements Serializable {
 		_addmp = addmp;
 	}
 
-	private int _addhpr = 0; // ¡Ü HPR º¸Á¤
+	private int _addhpr = 0; // â— HPR ë³´ì •
 
 	public int get_addhpr() {
 		return _addhpr;
@@ -480,7 +480,7 @@ public abstract class L1Item implements Serializable {
 		_addhpr = addhpr;
 	}
 
-	private int _addmpr = 0; // ¡Ü MPR º¸Á¤
+	private int _addmpr = 0; // â— MPR ë³´ì •
 
 	public int get_addmpr() {
 		return _addmpr;
@@ -490,7 +490,7 @@ public abstract class L1Item implements Serializable {
 		_addmpr = addmpr;
 	}
 
-	private int _addsp = 0; // ¡Ü SPº¸Á¤
+	private int _addsp = 0; // â— SPë³´ì •
 
 	public int get_addsp() {
 		return _addsp;
@@ -500,7 +500,7 @@ public abstract class L1Item implements Serializable {
 		_addsp = addsp;
 	}
 
-	private int _mdef = 0; // ¡Ü MR
+	private int _mdef = 0; // â— MR
 
 	public int get_mdef() {
 		return _mdef;
@@ -510,7 +510,7 @@ public abstract class L1Item implements Serializable {
 		this._mdef = i;
 	}
 
-	private boolean _isHasteItem = false; // ¡Ü ÇìÀÌ ÆÄ¾÷ È¿°úÀÇ À¯¹«
+	private boolean _isHasteItem = false; // â— í—¤ì´ íŒŒì—… íš¨ê³¼ì˜ ìœ ë¬´
 
 	public boolean isHasteItem() {
 		return _isHasteItem;
@@ -520,7 +520,7 @@ public abstract class L1Item implements Serializable {
 		_isHasteItem = flag;
 	}
 
-	private boolean _isBraveItem = false; // ¡Ü ¿ë±â¾ÆÀÌÅÛ 
+	private boolean _isBraveItem = false; // â— ìš©ê¸°ì•„ì´í…œ 
 
 	public boolean isBraveItem() { 
 	    return _isBraveItem; 
@@ -530,7 +530,7 @@ public abstract class L1Item implements Serializable {
 	    _isBraveItem = flag; 
 	 } 
 
-	private int _maxUseTime = 0; // ¡Ü »ç¿ë °¡´ÉÇÑ ½Ã°£
+	private int _maxUseTime = 0; // â— ì‚¬ìš© ê°€ëŠ¥í•œ ì‹œê°„
 
 	public int getMaxUseTime() {
 		return _maxUseTime;
@@ -553,7 +553,7 @@ public abstract class L1Item implements Serializable {
 	private int _useType;
 
 	/**
-	 * »ç¿ëÇßÀ» ¶§ÀÇ ¸®¾×¼ÇÀ» °áÁ¤ÇÏ´Â Å¸ÀÔÀ» µ¹·ÁÁØ´Ù.
+	 * ì‚¬ìš©í–ˆì„ ë•Œì˜ ë¦¬ì•¡ì…˜ì„ ê²°ì •í•˜ëŠ” íƒ€ì…ì„ ëŒë ¤ì¤€ë‹¤.
 	 */
 	public int getUseType() {
 		return _useType;
@@ -566,7 +566,7 @@ public abstract class L1Item implements Serializable {
 	private int _foodVolume;
 
 	/**
-	 * °í±âµîÀÇ ¾ÆÀÌÅÛÀ¸·Î ¼³Á¤µÇ¾î ÀÖ´Â ¸¸º¹µµ¸¦ µ¹·ÁÁØ´Ù.
+	 * ê³ ê¸°ë“±ì˜ ì•„ì´í…œìœ¼ë¡œ ì„¤ì •ë˜ì–´ ìˆëŠ” ë§Œë³µë„ë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 */
 	public int getFoodVolume() {
 		return _foodVolume;
@@ -577,16 +577,16 @@ public abstract class L1Item implements Serializable {
 	}
 
 	/**
-	 * ·¥ÇÁµîÀÇ ¾ÆÀÌÅÛÀ¸·Î ¼³Á¤µÇ¾î ÀÖ´Â ¹àÀ½À» µ¹·ÁÁØ´Ù.
+	 * ë¨í”„ë“±ì˜ ì•„ì´í…œìœ¼ë¡œ ì„¤ì •ë˜ì–´ ìˆëŠ” ë°ìŒì„ ëŒë ¤ì¤€ë‹¤.
 	 */
 	public int getLightRange() {
-		if (_itemId == 40001) { // ·¥ÇÁ
+		if (_itemId == 40001) { // ë¨í”„
 			return 11;
-		} else if (_itemId == 40002) { // ·£ÅÏ
+		} else if (_itemId == 40002) { // ëœí„´
 			return 14;
-		} else if (_itemId == 40004) { // ¸ÅÁ÷ ·£ÅÏ
+		} else if (_itemId == 40004) { // ë§¤ì§ ëœí„´
 			return 14;
-		} else if (_itemId == 40005) { // ¾çÃÊ
+		} else if (_itemId == 40005) { // ì–‘ì´ˆ
 			return 8;
 		} else {
 			return 0;
@@ -594,25 +594,25 @@ public abstract class L1Item implements Serializable {
 	}
 
 	/**
-	 * ·¥ÇÁµîÀÇ ¿¬·áÀÇ ¾çÀ» µ¹·ÁÁØ´Ù.
+	 * ë¨í”„ë“±ì˜ ì—°ë£Œì˜ ì–‘ì„ ëŒë ¤ì¤€ë‹¤.
 	 */
 	public int getLightFuel() {
-		if (_itemId == 40001) { // ·¥ÇÁ
+		if (_itemId == 40001) { // ë¨í”„
 			return 600;
-		} else if (_itemId == 40002) { // ·£ÅÏ
+		} else if (_itemId == 40002) { // ëœí„´
 			return 0;
-		} else if (_itemId == 40003) { // ·£ÅÏ ¿ÀÀÏ
+		} else if (_itemId == 40003) { // ëœí„´ ì˜¤ì¼
 			return 600;
-		} else if (_itemId == 40004) { // ¸ÅÁ÷ ·£ÅÏ
+		} else if (_itemId == 40004) { // ë§¤ì§ ëœí„´
 			return 0;
-		} else if (_itemId == 40005) { // ¾çÃÊ
+		} else if (_itemId == 40005) { // ì–‘ì´ˆ
 			return 600;
 		} else {
 			return 0;
 		}
 	}
 
-	// ¡á¡á¡á¡á¡á¡á L1EtcItem ·Î ¿À¹ö¶óÀÌµå(override) ÇÏ´Â Ç×¸ñ ¡á¡á¡á¡á¡á¡á
+	// â– â– â– â– â– â–  L1EtcItem ë¡œ ì˜¤ë²„ë¼ì´ë“œ(override) í•˜ëŠ” í•­ëª© â– â– â– â– â– â– 
 
 	public int get_consumeType() {
 		return 0;
@@ -652,7 +652,7 @@ public abstract class L1Item implements Serializable {
 	}
 
 
-	// ¡á¡á¡á¡á¡á¡á L1Weapon ·Î ¿À¹ö¶óÀÌµå(override) ÇÏ´Â Ç×¸ñ ¡á¡á¡á¡á¡á¡á
+	// â– â– â– â– â– â–  L1Weapon ë¡œ ì˜¤ë²„ë¼ì´ë“œ(override) í•˜ëŠ” í•­ëª© â– â– â– â– â– â– 
 	public int getHitModifier() {
 		return 0;
 	}
@@ -677,7 +677,7 @@ public abstract class L1Item implements Serializable {
 		return false;
 	}
 
-	// ¡á¡á¡á¡á¡á¡á L1Armor ·Î ¿À¹ö¶óÀÌµå(override) ÇÏ´Â Ç×¸ñ ¡á¡á¡á¡á¡á¡á
+	// â– â– â– â– â– â–  L1Armor ë¡œ ì˜¤ë²„ë¼ì´ë“œ(override) í•˜ëŠ” í•­ëª© â– â– â– â– â– â– 
 	public int get_ac() {
 		return 0;
 	}
@@ -741,7 +741,7 @@ public abstract class L1Item implements Serializable {
 		return 0;
 	}
 
-	private int Solidity; // ¾ÆÀÌÅÛ °­µµ
+	private int Solidity; // ì•„ì´í…œ ê°•ë„
 
 	public int getSolidity(){
 		return Solidity;	

@@ -22,11 +22,11 @@ import java.util.Random;
 
 /**
  * <p>
- * ÃÖÀúÄ¡ low¿Í ÃÖ´ëÄ¡ high¿¡ ÀÇÇØ µÑ·¯½ÎÀÎ, ¼öÄ¡ÀÇ ¹üÀ§¸¦ ÁöÁ¤ÇÏ´Â Å¬·¡½º.
+ * ìµœì €ì¹˜ lowì™€ ìµœëŒ€ì¹˜ highì— ì˜í•´ ë‘˜ëŸ¬ì‹¸ì¸, ìˆ˜ì¹˜ì˜ ë²”ìœ„ë¥¼ ì§€ì •í•˜ëŠ” í´ëž˜ìŠ¤.
  * </p>
  * <p>
- * <b>ÀÌ Å¬·¡½º´Â µ¿±âÈ­ µÇÁö ¾Ê´Â´Ù.</b> º¹¼öÀÇ thread°¡ µ¿½Ã¿¡ ÀÌ Å¬·¡½ºÀÇ ÀÎ½ºÅÏ½º¿¡ ¾×¼¼½º ÇØ,
- * 1°³ÀÌ»óÀÇ thread°¡ ¹üÀ§¸¦ º¯°æÇÏ´Â °æ¿ì, ¿ÜºÎÀûÀÎ µ¿±âÈ­°¡ ÇÊ¿äÇÏ´Ù.
+ * <b>ì´ í´ëž˜ìŠ¤ëŠ” ë™ê¸°í™” ë˜ì§€ ì•ŠëŠ”ë‹¤.</b> ë³µìˆ˜ì˜ threadê°€ ë™ì‹œì— ì´ í´ëž˜ìŠ¤ì˜ ì¸ìŠ¤í„´ìŠ¤ì— ì•¡ì„¸ìŠ¤ í•´,
+ * 1ê°œì´ìƒì˜ threadê°€ ë²”ìœ„ë¥¼ ë³€ê²½í•˜ëŠ” ê²½ìš°, ì™¸ë¶€ì ì¸ ë™ê¸°í™”ê°€ í•„ìš”í•˜ë‹¤.
  * </p>
  */
 public class IntRange {
@@ -44,11 +44,11 @@ public class IntRange {
 	}
 
 	/**
-	 * ¼öÄ¡ i°¡, ¹üÀ§³»¿¡ ÀÖÀ»±î¸¦ µ¹·ÁÁØ´Ù.
+	 * ìˆ˜ì¹˜ iê°€, ë²”ìœ„ë‚´ì— ìžˆì„ê¹Œë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 * 
 	 * @param i
-	 *            ¼öÄ¡
-	 * @return ¹üÀ§³»ÀÌ¸é true
+	 *            ìˆ˜ì¹˜
+	 * @return ë²”ìœ„ë‚´ì´ë©´ true
 	 */
 	public boolean includes(int i) {
 		return (_low <= i) && (i <= _high);
@@ -59,11 +59,11 @@ public class IntRange {
 	}
 
 	/**
-	 * ¼öÄ¡ i¸¦, ÀÌ ¹üÀ§³»¿¡ ¸»´Ù.
+	 * ìˆ˜ì¹˜ ië¥¼, ì´ ë²”ìœ„ë‚´ì— ë§ë‹¤.
 	 * 
 	 * @param i
-	 *            ¼öÄ¡
-	 * @return ¸» ¼ö ÀÖ¾ú´ø °ª
+	 *            ìˆ˜ì¹˜
+	 * @return ë§ ìˆ˜ ìžˆì—ˆë˜ ê°’
 	 */
 	public int ensure(int i) {
 		int r = i;
@@ -80,9 +80,9 @@ public class IntRange {
 	}
 
 	/**
-	 * ÀÌ ¹üÀ§³»·ÎºÎÅÍ ·£´ýÀÎ °ªÀ» »ý¼ºÇÑ´Ù.
+	 * ì´ ë²”ìœ„ë‚´ë¡œë¶€í„° ëžœë¤ì¸ ê°’ì„ ìƒì„±í•œë‹¤.
 	 * 
-	 * @return ¹üÀ§³»ÀÇ ·£´ýÀÎ °ª
+	 * @return ë²”ìœ„ë‚´ì˜ ëžœë¤ì¸ ê°’
 	 */
 	public int randomValue() {
 		return _rnd.nextInt(getWidth() + 1) + _low;

@@ -1,5 +1,5 @@
 /**
- * Æê ·¹ÀÌ½Ì
+ * í« ë ˆì´ì‹±
 */
 
 package l1j.server.server.model;
@@ -28,15 +28,15 @@ public class L1Racing extends Thread{
 	private boolean start;
 	private boolean isStart;
 
-	public final int ÀÏ¹İ = 0;
-	public final int ÇÑ¹ÙÄû = 1;
-	public final int µÎ¹ÙÄû = 2;
-	public final int ¼¼¹ÙÄû = 3;
-	public final int ³×¹ÙÄû = 4;
+	public final int ì¼ë°˜ = 0;
+	public final int í•œë°”í€´ = 1;
+	public final int ë‘ë°”í€´ = 2;
+	public final int ì„¸ë°”í€´ = 3;
+	public final int ë„¤ë°”í€´ = 4;
 
-	public final int Ã¼Å©1 = 5;
-	public final int Ã¼Å©2 = 6;
-	public final int Ã¼Å©3 = 7;
+	public final int ì²´í¬1 = 5;
+	public final int ì²´í¬2 = 6;
+	public final int ì²´í¬3 = 7;
 
 	private static L1Racing instance;
 
@@ -51,13 +51,13 @@ public class L1Racing extends Thread{
 		for(int i = 0; i < 8; i++) _List[i] = new ArrayList<L1PcInstance>();
 	}
 
-	/** ±âº» »ı¼ºÀÚ */
+	/** ê¸°ë³¸ ìƒì„±ì */
 	private L1Racing(){}
 
 
 	/** 
-	 * °ÔÀÓ ½ÃÀÛ ¾Ë¸²(ÇöÀç ·¹ÀÌ½Ì ¾²·¹µå¸¦ ¹«ÇÑ·çÇÁ »óÅÂÀÌÁö¸¸ start »óÅÂ°¡µÇ¸é °æ±â½ÃÀÛ
-	 * @param	(boolean)	start	½ÃÀÛ¿©ºÎ(true | false)
+	 * ê²Œì„ ì‹œì‘ ì•Œë¦¼(í˜„ì¬ ë ˆì´ì‹± ì“°ë ˆë“œë¥¼ ë¬´í•œë£¨í”„ ìƒíƒœì´ì§€ë§Œ start ìƒíƒœê°€ë˜ë©´ ê²½ê¸°ì‹œì‘
+	 * @param	(boolean)	start	ì‹œì‘ì—¬ë¶€(true | false)
 	*/
 	public void start(boolean start){
 		if(start){
@@ -77,32 +77,32 @@ public class L1Racing extends Thread{
 	@Override
 	public synchronized void run(){
 		try{
-			// ¹«ÇÑ·çÇÁ »óÅÂ
+			// ë¬´í•œë£¨í”„ ìƒíƒœ
 			while(true){
 				sleep(1000L);
-				// ½ÃÀÛÀüÀÌ¸é °è¼Ó ¹«ÇÑ·çÇÁ
+				// ì‹œì‘ì „ì´ë©´ ê³„ì† ë¬´í•œë£¨í”„
 				if(!getStart()) continue;
-				// ½ÃÀÛ
+				// ì‹œì‘
 				else{
-					L1World.getInstance().broadcastServerMessage("Àá½ÃÈÄ Æê ·¹ÀÌ½ÌÀ» ÁøÇàÇÏ°Ú½À´Ï´Ù.");
+					L1World.getInstance().broadcastServerMessage("ì ì‹œí›„ í« ë ˆì´ì‹±ì„ ì§„í–‰í•˜ê² ìŠµë‹ˆë‹¤.");
 					sleep(2000L);
-					if(size(ÀÏ¹İ) > 0){
-						for(L1PcInstance c : toArray(ÀÏ¹İ)) c.sendPackets(new S_Message_YN(1256, ""));
+					if(size(ì¼ë°˜) > 0){
+						for(L1PcInstance c : toArray(ì¼ë°˜)) c.sendPackets(new S_Message_YN(1256, ""));
 					}else{
-						// °æ±âÀå ÀÎ¿ø ¹ÛÀ¸·Î º¸³»±â
+						// ê²½ê¸°ì¥ ì¸ì› ë°–ìœ¼ë¡œ ë³´ë‚´ê¸°
 						for(L1PcInstance c : L1World.getInstance().getAllPlayers()){
 							if(c.getMapId() == 5143){
 								L1Teleport.teleport(c, 32616 + Rnd(4), 32774 + Rnd(4), (short)4, 5, true);
-								L1PolyMorph.undoPoly(c); // º¯½Å Ç®±â
-								remove(ÀÏ¹İ, c);
+								L1PolyMorph.undoPoly(c); // ë³€ì‹  í’€ê¸°
+								remove(ì¼ë°˜, c);
 							}
 						}
-						// ½ÃÀÛ ¼ÂÆÃ = false;
+						// ì‹œì‘ ì…‹íŒ… = false;
 						start(false);
-						// continue ·Î ¹«ÇÑ·çÇÁ»óÅÂ·Î ¸¸µé±â
+						// continue ë¡œ ë¬´í•œë£¨í”„ìƒíƒœë¡œ ë§Œë“¤ê¸°
 						continue;
 					}
-					// ¹®´İ±â
+					// ë¬¸ë‹«ê¸°
 					L1DoorInstance RaceDoor = null;
 					/*for(L1DoorInstance door : DoorSpawnTable.getInstance().getDoorList()){
 						if(door.getGfxId() == 6677){
@@ -115,7 +115,7 @@ public class L1Racing extends Thread{
 					//RaceDoor.close();
 					isStart(true);
 					sleep(10000L);
-					System.out.println("Ä«¿îÆ®´Ù¿î");
+					System.out.println("ì¹´ìš´íŠ¸ë‹¤ìš´");
 					GameTime();
 					CountDown();
 					//RaceDoor.open();
@@ -127,11 +127,11 @@ public class L1Racing extends Thread{
 		}
 	}
 	/**
-	 *	°æ±â½ÃÀÛ 5ÃÊÀü Ä«¿îÆ® ´Ù¿î ÈÄ º¯½Å, °ü·Ã ÆĞÅ¶Àü¼Û
+	 *	ê²½ê¸°ì‹œì‘ 5ì´ˆì „ ì¹´ìš´íŠ¸ ë‹¤ìš´ í›„ ë³€ì‹ , ê´€ë ¨ íŒ¨í‚·ì „ì†¡
 	*/
 	private boolean CountDown(){
 		try{
-			L1PcInstance[] player = toArray(ÀÏ¹İ);
+			L1PcInstance[] player = toArray(ì¼ë°˜);
 			for(L1PcInstance c : player) c.sendPackets(new S_ServerMessage(1258, ""));
 			Thread.sleep(2000L);
 			int number = 0;
@@ -139,19 +139,19 @@ public class L1Racing extends Thread{
 				int PolyRnd = (int)(Math.random() * 5);
 				switch (PolyRnd) {
 					case 0:
-						L1PolyMorph.doPoly(c, 29, 1000, L1PolyMorph.MORPH_BY_NPC); //±«¹°´«
+						L1PolyMorph.doPoly(c, 29, 1000, L1PolyMorph.MORPH_BY_NPC); //ê´´ë¬¼ëˆˆ
 						break;
 					case 1:
-						L1PolyMorph.doPoly(c, 3184, 1000, L1PolyMorph.MORPH_BY_NPC); //ÇÏÀÌ¼¼ÆÛµå
+						L1PolyMorph.doPoly(c, 3184, 1000, L1PolyMorph.MORPH_BY_NPC); //í•˜ì´ì„¸í¼ë“œ
 						break;
 					case 2:
-						L1PolyMorph.doPoly(c, 5065, 1000, L1PolyMorph.MORPH_BY_NPC); //¾Æ±â Áøµ¾
+						L1PolyMorph.doPoly(c, 5065, 1000, L1PolyMorph.MORPH_BY_NPC); //ì•„ê¸° ì§„ë—
 						break;
 					case 3:
-						L1PolyMorph.doPoly(c, 938, 1000, L1PolyMorph.MORPH_BY_NPC); //ºñ±Û
+						L1PolyMorph.doPoly(c, 938, 1000, L1PolyMorph.MORPH_BY_NPC); //ë¹„ê¸€
 						break;
 					case 4:
-						L1PolyMorph.doPoly(c, 4168, 1000, L1PolyMorph.MORPH_BY_NPC); //¸¾º¸Åä³¢
+						L1PolyMorph.doPoly(c, 4168, 1000, L1PolyMorph.MORPH_BY_NPC); //ë§˜ë³´í† ë¼
 						break;
 				}
 				c.setPetrace(true);
@@ -165,11 +165,11 @@ public class L1Racing extends Thread{
 		return false;
 	}
 	/**
-	 *	°æ±âÁ¾·á
+	 *	ê²½ê¸°ì¢…ë£Œ
 	*/
 	public void close(){
 		try{
-			// °æ±âÀå ÀÎ¿ø ¹ÛÀ¸·Î 
+			// ê²½ê¸°ì¥ ì¸ì› ë°–ìœ¼ë¡œ 
 			for(L1PcInstance c : L1World.getInstance().getAllPlayers()){
 				if(c.getMapId() == 5143){
 					c.setPetrace(false);
@@ -177,7 +177,7 @@ public class L1Racing extends Thread{
 					Thread.sleep(10000L); 
 					c.sendPackets(new S_GameEnd(c));
 					L1Teleport.teleport(c, 32616 + Rnd(4), 32774 + Rnd(4), (short)4, 5, true);
-					L1PolyMorph.undoPoly(c); // º¯½Å Ç®±â
+					L1PolyMorph.undoPoly(c); // ë³€ì‹  í’€ê¸°
 				}
 			}
 		}catch(Exception e){}
@@ -187,44 +187,44 @@ public class L1Racing extends Thread{
 	}
 
 	/**
-	 * ½ÃÀÛ¿©ºÎ ¼ÂÆÃ
-	 * @param	(boolean)	start	½ÃÀÛ¿©ºÎ(true | false)
+	 * ì‹œì‘ì—¬ë¶€ ì…‹íŒ…
+	 * @param	(boolean)	start	ì‹œì‘ì—¬ë¶€(true | false)
 	*/
 	public void setStart(boolean start){
 		this.start = start;
 	}
 	/**
-	 * ½ÃÀÛ¿©ºÎ ¸®ÅÏ
-	 * @return	½ÃÀÛÀÌ¸é true, Á¾·áÀÌ¸é false
+	 * ì‹œì‘ì—¬ë¶€ ë¦¬í„´
+	 * @return	ì‹œì‘ì´ë©´ true, ì¢…ë£Œì´ë©´ false
 	*/
 	public boolean getStart(){
 		return start;
 	}
 	/**
-	 * ½ÃÀÛ¿©ºÎ ¼ÂÆÃ
-	 * @param	(boolean)	start	½ÃÀÛ¿©ºÎ(true | false)
+	 * ì‹œì‘ì—¬ë¶€ ì…‹íŒ…
+	 * @param	(boolean)	start	ì‹œì‘ì—¬ë¶€(true | false)
 	*/
 	public void isStart(boolean isStart){
 		this.isStart = isStart;
 	}
 	/**
-	 * ½ÃÀÛ¿©ºÎ ¸®ÅÏ
-	 * @return	½ÃÀÛÀÌ¸é true, Á¾·áÀÌ¸é false
+	 * ì‹œì‘ì—¬ë¶€ ë¦¬í„´
+	 * @return	ì‹œì‘ì´ë©´ true, ì¢…ë£Œì´ë©´ false
 	*/
 	public boolean isStart(){
 		return isStart;
 	}
 	/**
-	 * °¢ ÀúÀå¼Ò ±æÀÌ¸¦ ¸®ÅÏ
-	 * @param	(int)	index	ArrayList[] ¹è¿­ÀÇ ÀÎµ¦½º
-	 * @return	(int)	ArrayList ÀÎµ¦½º·Î Á¢±ÙµÈ ÀúÀå¼ÒÀÇ ±æÀÌ
+	 * ê° ì €ì¥ì†Œ ê¸¸ì´ë¥¼ ë¦¬í„´
+	 * @param	(int)	index	ArrayList[] ë°°ì—´ì˜ ì¸ë±ìŠ¤
+	 * @return	(int)	ArrayList ì¸ë±ìŠ¤ë¡œ ì ‘ê·¼ëœ ì €ì¥ì†Œì˜ ê¸¸ì´
 	*/
 	private final ArrayList<L1PcInstance> _members = new ArrayList<L1PcInstance>();
 	public L1PcInstance[] getMembersArray() {
 		return _members.toArray(new L1PcInstance[_members.size()]);
 	}
 	public void GameTime(){
-		for (L1PcInstance pc : getMembersArray()){ //°ÔÀÓÁ¾·á À¯Àú¸¦ ¹ÛÀ¸·Î ³½´Ù
+		for (L1PcInstance pc : getMembersArray()){ //ê²Œì„ì¢…ë£Œ ìœ ì €ë¥¼ ë°–ìœ¼ë¡œ ë‚¸ë‹¤
 			pc.sendPackets(new S_GameTime1(pc));
 		}
 	}
@@ -232,34 +232,34 @@ public class L1Racing extends Thread{
 		return _List[index].size();
 	}
 	/**
-	 * °¢ ÀúÀå¼Ò °´Ã¼ ¹è¿­ ¸®ÅÏ
-	 * @param	(int)	index		ArrayList[] ¹è¿­ÀÇ ÀÎµ¦½º
-	 * @return	(L1PcInstance[])	L1PcInstance[] ¹è¿­
+	 * ê° ì €ì¥ì†Œ ê°ì²´ ë°°ì—´ ë¦¬í„´
+	 * @param	(int)	index		ArrayList[] ë°°ì—´ì˜ ì¸ë±ìŠ¤
+	 * @return	(L1PcInstance[])	L1PcInstance[] ë°°ì—´
 	*/
 	public L1PcInstance[] toArray(int index){
 		return (L1PcInstance[]) _List[index].toArray(new L1PcInstance[size(index)]);
 	}
 	/**
-	 * °¢ ÀúÀå¼Ò °´Ã¼ ¸®ÅÏ
-	 * @param	(int)	index		ArrayList[] ¹è¿­ÀÇ ÀÎµ¦½º
-	 * @param	(int)	i			ÀÎµ¦½º
-	 * @return	(L1PcInstance)	L1PcInstance ¹è¿­
+	 * ê° ì €ì¥ì†Œ ê°ì²´ ë¦¬í„´
+	 * @param	(int)	index		ArrayList[] ë°°ì—´ì˜ ì¸ë±ìŠ¤
+	 * @param	(int)	i			ì¸ë±ìŠ¤
+	 * @return	(L1PcInstance)	L1PcInstance ë°°ì—´
 	*/
 	public L1PcInstance toArray(int index, int i){
 		return (L1PcInstance) _List[index].get(i);
 	}
 	/**
-	 * °¢ ÀúÀå¼Ò ¸®ÅÏ
-	 * @param	(int)	index		ArrayList[] ¹è¿­ÀÇ ÀÎµ¦½º
+	 * ê° ì €ì¥ì†Œ ë¦¬í„´
+	 * @param	(int)	index		ArrayList[] ë°°ì—´ì˜ ì¸ë±ìŠ¤
 	 * @return	(ArrayList)			ArrayList
 	*/
 	public ArrayList<L1PcInstance> arrayList(int index){
 		return _List[index];
 	}
 	/**
-	 * °´Ã¼ Ãß°¡
-	 * @param	(int)			index	¹è¿­ÀÎµ¦½º
-	 * @param	(L1PcInstance)	c		°´Ã¼
+	 * ê°ì²´ ì¶”ê°€
+	 * @param	(int)			index	ë°°ì—´ì¸ë±ìŠ¤
+	 * @param	(L1PcInstance)	c		ê°ì²´
 	*/
 	public void add(int index, L1PcInstance c){
 		if(!_List[index].contains(c)){
@@ -270,32 +270,32 @@ public class L1Racing extends Thread{
 		}
 	}	
 	/**
-	 * °´Ã¼ »èÁ¦ 
-	 * @param	(int)			index	¹è¿­ÀÎµ¦½º
-	 * @param	(L1PcInstance)	c		°´Ã¼
+	 * ê°ì²´ ì‚­ì œ 
+	 * @param	(int)			index	ë°°ì—´ì¸ë±ìŠ¤
+	 * @param	(L1PcInstance)	c		ê°ì²´
 	*/
 	public void remove(int index, L1PcInstance c){
 		if(_List[index].contains(c)) _List[index].remove(c);
 	}
 	/**
-	 * °´Ã¼°¡ ÇöÀç Æê·¹ÀÌ½Ì ÁßÀÎÁö Ã¼Å©
-	 * @param	(int)			index	¹è¿­ÀÎµ¦½º
-	 * @param	(L1PcInstance)	c		°´Ã¼
-	 * @return	(boolean)	ÀÖ´Ù¸é true, ¾ø´Ù¸é false
+	 * ê°ì²´ê°€ í˜„ì¬ í«ë ˆì´ì‹± ì¤‘ì¸ì§€ ì²´í¬
+	 * @param	(int)			index	ë°°ì—´ì¸ë±ìŠ¤
+	 * @param	(L1PcInstance)	c		ê°ì²´
+	 * @return	(boolean)	ìˆë‹¤ë©´ true, ì—†ë‹¤ë©´ false
 	*/
 	public boolean contains(int index, L1PcInstance c){
 		return _List[index].contains(c);
 	}
 
 	/**
-	 * ÀúÀå ÃÊ±âÈ­
-	 * @param	(int)			index	¹è¿­ÀÎµ¦½º
+	 * ì €ì¥ ì´ˆê¸°í™”
+	 * @param	(int)			index	ë°°ì—´ì¸ë±ìŠ¤
 	*/
 	public void clear(int index){
 		_List[index].clear();
 	}
 	/**
-	 * ÀúÀå ÃÊ±âÈ­
+	 * ì €ì¥ ì´ˆê¸°í™”
 	*/
 	public void clear(){
 		for(int i = 0; i < _List.length; i++){
@@ -304,11 +304,11 @@ public class L1Racing extends Thread{
 	}
 
 	/**
-	 * Âü°¡ÀÎ¿øÀ» ´Ù½ÃÇÑ¹ø °Ë»ö Ã³À½¸É¹ö¿¡¼­ ÇöÁ¦¾ø´Ù¸é »èÁ¦
+	 * ì°¸ê°€ì¸ì›ì„ ë‹¤ì‹œí•œë²ˆ ê²€ìƒ‰ ì²˜ìŒë§´ë²„ì—ì„œ í˜„ì œì—†ë‹¤ë©´ ì‚­ì œ
 	 */
 	private void checkMember(){
-		for (L1PcInstance c  : toArray(ÀÏ¹İ)){
-			if(c.getMapId() != 5143) remove(ÀÏ¹İ, c);
+		for (L1PcInstance c  : toArray(ì¼ë°˜)){
+			if(c.getMapId() != 5143) remove(ì¼ë°˜, c);
 		}
 	}
 }

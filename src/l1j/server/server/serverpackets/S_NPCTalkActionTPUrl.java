@@ -35,8 +35,8 @@ public class S_NPCTalkActionTPUrl extends ServerBasePacket {
 		writeC(Opcodes.S_OPCODE_SHOWHTML);
 		writeD(objid);
 		writeS(htmlid);
-		writeH(0x01); // ºÒ¸í
-		writeH(prices.length); // ÀÎ¼öÀÇ ¼ö
+		writeH(0x01); // ë¶ˆëª…
+		writeH(prices.length); // ì¸ìˆ˜ì˜ ìˆ˜
 
 		for (Object price : prices) {
 			writeS(String.valueOf(((Integer) price).intValue()));

@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.skill.L1SkillId;
-import l1j.server.server.serverpackets.S_SkillSound;  // ÀÌÆåÆ® Ãß°¡¸¦ À§ÇØ import
+import l1j.server.server.serverpackets.S_SkillSound;  // ì´í™íŠ¸ ì¶”ê°€ë¥¼ ìœ„í•´ import
 
 public class MpRegenerationByDoll extends TimerTask {
 	private static Logger _log = Logger.getLogger(MpRegenerationByDoll.class

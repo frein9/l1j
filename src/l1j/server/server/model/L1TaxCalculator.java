@@ -20,17 +20,17 @@ package l1j.server.server.model;
 
 public class L1TaxCalculator {
 	/**
-	 * ÀüÀï¼¼´Â15% °íÁ¤
+	 * ì „ìŸì„¸ëŠ”15% ê³ ì •
 	 */
 	private static final int WAR_TAX_RATES = 15;
 
 	/**
-	 * ±¹¼¼´Â10% °íÁ¤(Áö¿ª¼¼¿¡ ´ëÇÑ ºñÀ²)
+	 * êµ­ì„¸ëŠ”10% ê³ ì •(ì§€ì—­ì„¸ì— ëŒ€í•œ ë¹„ìœ¨)
 	 */
 	private static final int NATIONAL_TAX_RATES = 10;
 
 	/**
-	 * µğ¾Æµå¼¼´Â10% °íÁ¤(ÀüÀï¼¼¿¡ ´ëÇÑ ºñÀ²)
+	 * ë””ì•„ë“œì„¸ëŠ”10% ê³ ì •(ì „ìŸì„¸ì— ëŒ€í•œ ë¹„ìœ¨)
 	 */
 	private static final int DIAD_TAX_RATES = 10;
 
@@ -40,7 +40,7 @@ public class L1TaxCalculator {
 
 	/**
 	 * @param merchantNpcId
-	 *            °è»ê ´ë»ó »óÁ¡ÀÇ NPCID
+	 *            ê³„ì‚° ëŒ€ìƒ ìƒì ì˜ NPCID
 	 */
 	public L1TaxCalculator(int merchantNpcId) {
 		_taxRatesCastle = L1CastleLocation.getCastleTaxRateByNpcId(merchantNpcId);
@@ -54,7 +54,7 @@ public class L1TaxCalculator {
 		return (taxCastle + taxTown + taxWar) / 100;
 	}
 
-	// XXX °³º°ÀûÀ¸·Î °è»êÇÏ±â ¶§¹®¿¡(À§ÇØ), µÕ±Ù ¿ÀÂ÷°¡ ³ª¿Â´Ù.
+	// XXX ê°œë³„ì ìœ¼ë¡œ ê³„ì‚°í•˜ê¸° ë•Œë¬¸ì—(ìœ„í•´), ë‘¥ê·¼ ì˜¤ì°¨ê°€ ë‚˜ì˜¨ë‹¤.
 	public int calcCastleTaxPrice(int price) {
 		return (price * _taxRatesCastle) / 100 - calcNationalTaxPrice(price);
 	}
@@ -76,11 +76,11 @@ public class L1TaxCalculator {
 	}
 
 	/**
-	 * °ú¼¼ ÈÄÀÇ °¡°İÀ» ¿ä±¸ÇÑ´Ù.
+	 * ê³¼ì„¸ í›„ì˜ ê°€ê²©ì„ ìš”êµ¬í•œë‹¤.
 	 * 
 	 * @param price
-	 *            °ú¼¼ÀüÀÇ °¡°İ
-	 * @return °ú¼¼ ÈÄÀÇ °¡°İ
+	 *            ê³¼ì„¸ì „ì˜ ê°€ê²©
+	 * @return ê³¼ì„¸ í›„ì˜ ê°€ê²©
 	 */
 	public int layTax(int price) {
 		return price + calcTotalTaxPrice(price);

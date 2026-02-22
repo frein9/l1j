@@ -46,22 +46,22 @@ public class L1DollInstance extends L1NpcInstance {
 	public static final int DOLLTYPE_BUGBEAR = 0;
 	public static final int DOLLTYPE_SUCCUBUS = 1;
 	public static final int DOLLTYPE_WAREWOLF = 2;
-	public static final int DOLLTYPE_ELDER = 3;  // 2Â÷ÀÎÇü Ãß°¡
+	public static final int DOLLTYPE_ELDER = 3;  // 2ì°¨ì¸í˜• ì¶”ê°€
 	public static final int DOLLTYPE_CRUST = 4;
 	public static final int DOLLTYPE_STONE = 5;
-	public static final int DOLLTYPE_RICH = 6;   // 3Â÷ÀÎÇü  Ãß°¡
+	public static final int DOLLTYPE_RICH = 6;   // 3ì°¨ì¸í˜•  ì¶”ê°€
 	public static final int DOLLTYPE_COKA = 7;
 	public static final int DOLLTYPE_HESUABI = 8;
 	public static final int DOLLTYPE_SEADANCER = 9; 
-	public static final int DOLLTYPE_ETTY = 10; // ¿¡Æ¼
-	public static final int DOLLTYPE_HEAL = 11; //°øÁÖ 
-	public static final int DOLLTYPE_LAMIA = 12; // ¶ó¹Ì¾Æ
-	public static final int DOLLTYPE_DRAGON1 = 13; //ÇØÃú¸µ ¿©
-	public static final int DOLLTYPE_DRAGON2 = 14; //ÇØÃú¸µ ³²
-	public static final int DOLLTYPE_DRAGON3 = 15; //ÇÏÀÌ ÇØÃú¸µ ¿©
-	public static final int DOLLTYPE_DRAGON4 = 16; //ÇÏÀÌ ÇØÃú¸µ ³²
-	public static final int DOLLTYPE_SPATOY = 17; //½ºÆÄÅäÀÌ
-	public static final int DOLLTYPE_SKELETON = 18; //½ºÄÌ·ºÅæ
+	public static final int DOLLTYPE_ETTY = 10; // ì—í‹°
+	public static final int DOLLTYPE_HEAL = 11; //ê³µì£¼ 
+	public static final int DOLLTYPE_LAMIA = 12; // ë¼ë¯¸ì•„
+	public static final int DOLLTYPE_DRAGON1 = 13; //í•´ì¸¨ë§ ì—¬
+	public static final int DOLLTYPE_DRAGON2 = 14; //í•´ì¸¨ë§ ë‚¨
+	public static final int DOLLTYPE_DRAGON3 = 15; //í•˜ì´ í•´ì¸¨ë§ ì—¬
+	public static final int DOLLTYPE_DRAGON4 = 16; //í•˜ì´ í•´ì¸¨ë§ ë‚¨
+	public static final int DOLLTYPE_SPATOY = 17; //ìŠ¤íŒŒí† ì´
+	public static final int DOLLTYPE_SKELETON = 18; //ìŠ¤ì¼ˆë ‰í†¤
 	public static final int DOLL_TIME = 1800000;
 
 	private static Logger _log = Logger.getLogger(L1DollInstance.class.getName());
@@ -70,12 +70,12 @@ public class L1DollInstance extends L1NpcInstance {
 	private int _dollType;
 	private int _itemObjId;
 
-	// Å¸°ÙÀÌ ¾ø´Â °æ¿ìÀÇ Ã³¸®
+	// íƒ€ê²Ÿì´ ì—†ëŠ” ê²½ìš°ì˜ ì²˜ë¦¬
 	@Override
 	public boolean noTarget() {
 		int castleid = L1CastleLocation.getCastleIdByArea(_master);
-        	if (_master.isDead() || _master.isInvisble()) { // Åõ¸í»óÅÂÀÏ¶§ Ãß°¡
-        		broadcastPacket(new S_SkillSound(getId(), 5936)); //ÀÎÇü ÁÖÀÎÀÌ »ç¸Á½Ã »èÁ¦
+        	if (_master.isDead() || _master.isInvisble()) { // íˆ¬ëª…ìƒíƒœì¼ë•Œ ì¶”ê°€
+        		broadcastPacket(new S_SkillSound(getId(), 5936)); //ì¸í˜• ì£¼ì¸ì´ ì‚¬ë§ì‹œ ì‚­ì œ
         		_master.getDollList().remove(getId());
         		if (_master instanceof L1PcInstance) {
         		L1PcInstance pc = (L1PcInstance) _master;
@@ -84,8 +84,8 @@ public class L1DollInstance extends L1NpcInstance {
         		}
         		deleteDoll();
         		return true;
-        		/**ÀÎÇü °ø¼º½Ã »èÁ¦**/
-        		} else if (castleid != 0 && WarTimeController.getInstance().isNowWar(castleid)){ //ÀÎÇü °ø¼º½Ã »èÁ¦
+        		/**ì¸í˜• ê³µì„±ì‹œ ì‚­ì œ**/
+        		} else if (castleid != 0 && WarTimeController.getInstance().isNowWar(castleid)){ //ì¸í˜• ê³µì„±ì‹œ ì‚­ì œ
         		broadcastPacket(new S_SkillSound(getId(), 5936)); 
         		_master.getDollList().remove(getId());
         		if (_master instanceof L1PcInstance) {
@@ -95,7 +95,7 @@ public class L1DollInstance extends L1NpcInstance {
         		} 
         	deleteDoll();
 			return true;
-			    /**ÀÎÇü ¿ë¹æ¿¡¼­ »èÁ¦**/
+			    /**ì¸í˜• ìš©ë°©ì—ì„œ ì‚­ì œ**/
 		} else if (_master != null && _master.getMapId() == getMapId()) {
 			if( _master.getMapId() == 37 || _master.getMapId() == 65 || _master.getMapId() == 67 ) {  
 				broadcastPacket(new S_SkillSound(getId(), 5936));
@@ -115,7 +115,7 @@ public class L1DollInstance extends L1NpcInstance {
 				/*	if (!isAiRunning()) {
 						startAI();
 					} */
-				//	deleteDoll(); //ÁÖÀÎÀÌ ³Ê¹« ¶³¾îÁö¸é ÀÎÇü »èÁ¦
+				//	deleteDoll(); //ì£¼ì¸ì´ ë„ˆë¬´ ë–¨ì–´ì§€ë©´ ì¸í˜• ì‚­ì œ
 					if (_master instanceof L1PcInstance) {
 						L1PcInstance player = (L1PcInstance) _master;
 						if (player.isTeleport()) {
@@ -128,7 +128,7 @@ public class L1DollInstance extends L1NpcInstance {
 						setSleepTime(calcSleepTime(getPassispeed(), MOVE_SPEED));
 						}
 						} 
-		            if (getLocation().getTileLineDistance(_master.getLocation()) > 5) {  // Ãß°¡
+		            if (getLocation().getTileLineDistance(_master.getLocation()) > 5) {  // ì¶”ê°€
 			            teleport(_master.getX(), _master.getY(), getHeading());
 			            }
 					} else {
@@ -137,11 +137,11 @@ public class L1DollInstance extends L1NpcInstance {
 						}
 						return false;
 						}
-	// ½Ã°£ °èÃø¿ë
+	// ì‹œê°„ ê³„ì¸¡ìš©
 	class DollTimer implements Runnable {
 		@Override
 		public void run() {
-			if (_destroyed) { // ÀÌ¹Ì ÆÄ±âµÇ¾î ÀÖÁö ¾ÊÀº°¡ Ã¼Å©
+			if (_destroyed) { // ì´ë¯¸ íŒŒê¸°ë˜ì–´ ìˆì§€ ì•Šì€ê°€ ì²´í¬
 				return;
 			}
 			deleteDoll();
@@ -185,7 +185,7 @@ public class L1DollInstance extends L1NpcInstance {
 		} 
 		
 		_master.getDollList().remove(getId());
-	//	((L1PcInstance) _master).sendPackets(new S_SkillIconGFX(56, 0)); // ¾ÆÀÌÄÜ Á¦°Å
+	//	((L1PcInstance) _master).sendPackets(new S_SkillIconGFX(56, 0)); // ì•„ì´ì½˜ ì œê±°
 		deleteMe();
 	}
 
@@ -198,7 +198,7 @@ public class L1DollInstance extends L1NpcInstance {
 	@Override
 	public void onItemUse() {
 		if (!isActived()) {
-			// 100%ÀÇ È®·ü·Î ÇìÀÌ ÆÄ¾÷ ÀÏºÎ »ç¿ë
+			// 100%ì˜ í™•ë¥ ë¡œ í—¤ì´ íŒŒì—… ì¼ë¶€ ì‚¬ìš©
 			useItem(USEITEM_HASTE, 100);
 		}
 	}
@@ -213,10 +213,10 @@ public class L1DollInstance extends L1NpcInstance {
 		}
 	}
 	
-	public void getActionByDoll() {  // ÀÎÇü ¾×¼Ç Ãß°¡
+	public void getActionByDoll() {  // ì¸í˜• ì•¡ì…˜ ì¶”ê°€
 		   int chance = _random.nextInt(2);
 		   L1PcInstance pc = (L1PcInstance) _master;
-		   if (getLocation().getTileLineDistance(pc.getLocation()) < 2) { // pc¿ÍÀÇ °Å¸®
+		   if (getLocation().getTileLineDistance(pc.getLocation()) < 2) { // pcì™€ì˜ ê±°ë¦¬
 		   switch (chance) {
 		   case 0:
 		    pc.sendPackets(new S_DoActionGFX(getId(), 67));
@@ -249,7 +249,7 @@ public class L1DollInstance extends L1NpcInstance {
 
 	public int getDamageByDoll() {
 		int damage = 0;
-		if (getDollType() == DOLLTYPE_WAREWOLF) { //´ÁÀÎ
+		if (getDollType() == DOLLTYPE_WAREWOLF) { //ëŠ‘ì¸
 			int chance = _random.nextInt(100) + 1;
 			if (chance <= 8) {
 				damage = 10;
@@ -260,10 +260,10 @@ public class L1DollInstance extends L1NpcInstance {
 				_master.broadcastPacket(new S_SkillSound(_master.getId(), 6319));
 			}
 			} else if (getDollType() == DOLLTYPE_CRUST
-					|| getDollType() == DOLLTYPE_SKELETON) { //Å©·¯½ºÆ®½Ã¾È
+					|| getDollType() == DOLLTYPE_SKELETON) { //í¬ëŸ¬ìŠ¤íŠ¸ì‹œì•ˆ
    int chance = _random.nextInt(100) + 1;
-   if (chance <= 9) { // È®·ü
-    damage = 13; // Ãß°¡µ¥¹ÌÁö
+   if (chance <= 9) { // í™•ë¥ 
+    damage = 13; // ì¶”ê°€ë°ë¯¸ì§€
     if (_master instanceof L1PcInstance) {
      L1PcInstance pc = (L1PcInstance) _master;
      pc.sendPackets(new S_SkillSound(_master.getId(), 6319));
@@ -272,8 +272,8 @@ public class L1DollInstance extends L1NpcInstance {
 		}
 	} else if (getDollType() == DOLLTYPE_SPATOY) { 
    int chance = _random.nextInt(100) + 1;
-   if (chance <= 9) { // È®·ü
-    damage = 15; // Ãß°¡µ¥¹ÌÁö
+   if (chance <= 9) { // í™•ë¥ 
+    damage = 15; // ì¶”ê°€ë°ë¯¸ì§€
     if (_master instanceof L1PcInstance) {
      L1PcInstance pc = (L1PcInstance) _master;
      pc.sendPackets(new S_SkillSound(_master.getId(), 6319));
@@ -288,14 +288,14 @@ public class L1DollInstance extends L1NpcInstance {
 		  int damage = 0;
 		  int _hitRate = 0;
 		 if (getDollType() == DOLLTYPE_COKA
-				 || getDollType() == DOLLTYPE_SKELETON) { // ÄÚÄ«Æ®¸®½º
-		   damage = 5;  //º»¼·Àº ÃßÅ¸ +1 ÀÌÁö¸¸, ÇÁ¸®¼·ÀÎ¸¸Å­ +5·Î ÇØÁÜ.  //ÀÌºÎºĞÀº ¼­¹ö¿¡ ¸Â°Ô ¾Ë¾Æ¼­µé ¼öÁ¤ÇÏ¼¼¿ä.
-		   _hitRate = 5; // º»¼·Àº ¸íÁß·ü +1 ÀÌÁö¸¸ ÇÁ¸®¼·ÀÎ¸¸Å­ +5·Î ÇØÁÜ. //ÀÌºÎºĞÀº ¼­¹ö¿¡ ¸Â°Ô ¾Ë¾Æ¼­µé ¼öÁ¤ÇÏ¼¼¿ä.
+				 || getDollType() == DOLLTYPE_SKELETON) { // ì½”ì¹´íŠ¸ë¦¬ìŠ¤
+		   damage = 5;  //ë³¸ì„­ì€ ì¶”íƒ€ +1 ì´ì§€ë§Œ, í”„ë¦¬ì„­ì¸ë§Œí¼ +5ë¡œ í•´ì¤Œ.  //ì´ë¶€ë¶„ì€ ì„œë²„ì— ë§ê²Œ ì•Œì•„ì„œë“¤ ìˆ˜ì •í•˜ì„¸ìš”.
+		   _hitRate = 5; // ë³¸ì„­ì€ ëª…ì¤‘ë¥  +1 ì´ì§€ë§Œ í”„ë¦¬ì„­ì¸ë§Œí¼ +5ë¡œ í•´ì¤Œ. //ì´ë¶€ë¶„ì€ ì„œë²„ì— ë§ê²Œ ì•Œì•„ì„œë“¤ ìˆ˜ì •í•˜ì„¸ìš”.
 		   }
 		 return damage;
 		 }
 	
-	public int getDamageReductionByDoll() {  // µ¹°ñ·½ ÀÎÇü(µ¥¹ÌÁö°¨¼Ò)  Çã¼ö¾Æºñ ÀÎÇü 
+	public int getDamageReductionByDoll() {  // ëŒê³¨ë ˜ ì¸í˜•(ë°ë¯¸ì§€ê°ì†Œ)  í—ˆìˆ˜ì•„ë¹„ ì¸í˜• 
 		  int DamageReduction = 0;
 		  if (getDollType() == DOLLTYPE_STONE
 				    || getDollType() == DOLLTYPE_HEAL
@@ -312,10 +312,10 @@ public class L1DollInstance extends L1NpcInstance {
 		    }
 		    _master.broadcastPacket(new S_SkillSound(_master.getId(), 6320));
 		   }
-		   } else if (getDollType() == DOLLTYPE_HESUABI) { // Çã¼ö¾Æºñ ÀÎÇü 
+		   } else if (getDollType() == DOLLTYPE_HESUABI) { // í—ˆìˆ˜ì•„ë¹„ ì¸í˜• 
      int chance = _random.nextInt(100) + 1;
-     if (chance <= 8) { // È®·ü
-      DamageReduction = 15; // µ©°¨¼Ò
+     if (chance <= 8) { // í™•ë¥ 
+      DamageReduction = 15; // ë€ê°ì†Œ
       if (_master instanceof L1PcInstance) {
        L1PcInstance pc = (L1PcInstance) _master;
        pc.sendPackets(new S_SkillSound(_master.getId(), 6320));
@@ -335,7 +335,7 @@ public class L1DollInstance extends L1NpcInstance {
 				|| getDollType() == DOLLTYPE_DRAGON1 
 				|| getDollType() == DOLLTYPE_DRAGON2
 				|| getDollType() == DOLLTYPE_DRAGON3
-				|| getDollType() == DOLLTYPE_DRAGON4) {  // Àå·ÎÀÎÇü Ãß°¡, ¸®Ä¡ÀÎÇü
+				|| getDollType() == DOLLTYPE_DRAGON4) {  // ì¥ë¡œì¸í˜• ì¶”ê°€, ë¦¬ì¹˜ì¸í˜•
 			isMpRegeneration = true;
 		}
 		return isMpRegeneration;
@@ -345,12 +345,12 @@ public class L1DollInstance extends L1NpcInstance {
 		boolean isHpRegeneration = false;
 		if (getDollType() == DOLLTYPE_SEADANCER  
 				|| getDollType() == DOLLTYPE_HEAL 
-				|| getDollType() == DOLLTYPE_ETTY) {  // ½Ã´í¼­ ÀÎÇü
+				|| getDollType() == DOLLTYPE_ETTY) {  // ì‹œëŒ„ì„œ ì¸í˜•
 			isHpRegeneration = true;
 		}
 		return isHpRegeneration;
 	}
-	private static void teleport(L1NpcInstance npc, int x, int y, short map,int head) { // Ãß°¡
+	private static void teleport(L1NpcInstance npc, int x, int y, short map,int head) { // ì¶”ê°€
         L1World.getInstance(). moveVisibleObject(npc, map);
         L1WorldMap.getInstance(). getMap(npc.getMapId()). setPassable(npc.getX(),
         npc.getY(), true);

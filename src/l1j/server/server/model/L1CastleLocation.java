@@ -55,8 +55,8 @@ public class L1CastleLocation {
 
 	public static final int DIAD_CASTLE_ID = 8;
 
-	// ¡æ¡èÇÏÁö¸¸ XÃà,¡æ¡éÀÌ YÃà
-	// ÄËÆ®¼º
+	// â†’â†‘í•˜ì§€ë§Œ Xì¶•,â†’â†“ì´ Yì¶•
+	// ì¼„íŠ¸ì„±
 	private static final int KENT_TOWER_X = 33170;
 
 	private static final int KENT_TOWER_Y = 32774;
@@ -75,7 +75,7 @@ public class L1CastleLocation {
 
 	private static final short KENT_INNER_CASTLE_MAP = 15;
 
-	// ¿ÀÅ©ÀÇ ½£
+	// ì˜¤í¬ì˜ ìˆ²
 	private static final int OT_TOWER_X = 32800;
 
 	private static final int OT_TOWER_Y = 32290;
@@ -92,7 +92,7 @@ public class L1CastleLocation {
 
 	private static final short OT_MAP = 4;
 
-	// À©´Ù¿ôµå¼º
+	// ìœˆë‹¤ì›ƒë“œì„±
 	private static final int WW_TOWER_X = 32675;
 
 	private static final int WW_TOWER_Y = 33408;
@@ -111,7 +111,7 @@ public class L1CastleLocation {
 
 	private static final short WW_INNER_CASTLE_MAP = 29;
 
-	// ±â¶õ¼º
+	// ê¸°ë€ì„±
 	private static final int GIRAN_TOWER_X = 33631;
 
 	private static final int GIRAN_TOWER_Y = 32678;
@@ -130,7 +130,7 @@ public class L1CastleLocation {
 
 	private static final short GIRAN_INNER_CASTLE_MAP = 52;
 
-	// Heine¼º
+	// Heineì„±
 	private static final int HEINE_TOWER_X = 33524;
 
 	private static final int HEINE_TOWER_Y = 33396;
@@ -149,7 +149,7 @@ public class L1CastleLocation {
 
 	private static final short HEINE_INNER_CASTLE_MAP = 64;
 
-	// µå¿öÈÄ¼º
+	// ë“œì›Œí›„ì„±
 	private static final int DOWA_TOWER_X = 32828;
 
 	private static final int DOWA_TOWER_Y = 32818;
@@ -166,7 +166,7 @@ public class L1CastleLocation {
 
 	private static final short DOWA_MAP = 66;
 
-	// ¿¡µ§¼º
+	// ì—ë´ì„±
 	private static final int ADEN_TOWER_X = 34090;
 
 	private static final int ADEN_TOWER_Y = 33260;
@@ -185,23 +185,23 @@ public class L1CastleLocation {
 
 	private static final short ADEN_INNER_CASTLE_MAP = 300;
 
-	private static final int ADEN_SUB_TOWER1_X = 34057; // ÆÄ¶û
+	private static final int ADEN_SUB_TOWER1_X = 34057; // íŒŒë‘
 
 	private static final int ADEN_SUB_TOWER1_Y = 33291;
 
-	private static final int ADEN_SUB_TOWER2_X = 34123; // »¡°­
+	private static final int ADEN_SUB_TOWER2_X = 34123; // ë¹¨ê°•
 
 	private static final int ADEN_SUB_TOWER2_Y = 33291;
 
-	private static final int ADEN_SUB_TOWER3_X = 34057; // ÃÊ·Ï
+	private static final int ADEN_SUB_TOWER3_X = 34057; // ì´ˆë¡
 
 	private static final int ADEN_SUB_TOWER3_Y = 33230;
 
-	private static final int ADEN_SUB_TOWER4_X = 34123; // Èò»ö
+	private static final int ADEN_SUB_TOWER4_X = 34123; // í°ìƒ‰
 
 	private static final int ADEN_SUB_TOWER4_Y = 33230;
 
-	// µğ¾Æµå ¿ä»õ
+	// ë””ì•„ë“œ ìš”ìƒˆ
 	private static final int DIAD_TOWER_X = 33033;
 
 	private static final int DIAD_TOWER_Y = 32895;
@@ -300,7 +300,7 @@ public class L1CastleLocation {
 	}
 
 	/**
-	 * °¡µğ¾È Å¸¿ö, Å©¶ó¿îÀÇ ÁÂÇ¥·ÎºÎÅÍ castle_id¸¦ µ¹·ÁÁØ´Ù
+	 * ê°€ë””ì•ˆ íƒ€ì›Œ, í¬ë¼ìš´ì˜ ì¢Œí‘œë¡œë¶€í„° castle_idë¥¼ ëŒë ¤ì¤€ë‹¤
 	 */
 	public static int getCastleId(int locx, int locy, short mapid) {
 		return getCastleId(new L1Location(locx, locy, mapid));
@@ -321,7 +321,7 @@ public class L1CastleLocation {
 	}
 
 	/**
-	 * ÀüÀï ¿¡¸®¾î(±â³»)ÀÇ ÁÂÇ¥·ÎºÎÅÍ castle_id¸¦ µ¹·ÁÁØ´Ù
+	 * ì „ìŸ ì—ë¦¬ì–´(ê¸°ë‚´)ì˜ ì¢Œí‘œë¡œë¶€í„° castle_idë¥¼ ëŒë ¤ì¤€ë‹¤
 	 */
 	public static int getCastleIdByArea(L1Character cha) {
 		return getCastleIdByArea(cha.getLocation());
@@ -332,7 +332,7 @@ public class L1CastleLocation {
 	}
 
 	/**
-	 * ÁöÁ¤ÇÑ ¼ºÀÇ ÀüÀï ¿¡¸®¾î(±â³»)¿¡ ÀÖÀ»±î µ¹·ÁÁØ´Ù
+	 * ì§€ì •í•œ ì„±ì˜ ì „ìŸ ì—ë¦¬ì–´(ê¸°ë‚´)ì— ìˆì„ê¹Œ ëŒë ¤ì¤€ë‹¤
 	 */
 	public static boolean checkInWarArea(int castleId, L1Character cha) {
 		return checkInWarArea(castleId, cha.getLocation());
@@ -343,14 +343,14 @@ public class L1CastleLocation {
 	}
 
 	/**
-	 * ¸î°³ÀÇ ÀüÀï ¿¡¸®¾î(±â³») È­µµ³ª Ã¼Å©
+	 * ëª‡ê°œì˜ ì „ìŸ ì—ë¦¬ì–´(ê¸°ë‚´) í™”ë„ë‚˜ ì²´í¬
 	 */
 	public static boolean checkInAllWarArea(int locx, int locy, short mapid) {
 		return checkInAllWarArea(new L1Location(locx, locy, mapid));
 	}
 
 	/**
-	 * castleId·ÎºÎÅÍ °¡µğ¾È Å¸¿öÀÇ ÁÂÇ¥¸¦ µ¹·ÁÁØ´Ù
+	 * castleIdë¡œë¶€í„° ê°€ë””ì•ˆ íƒ€ì›Œì˜ ì¢Œí‘œë¥¼ ëŒë ¤ì¤€ë‹¤
 	 */
 	public static int[] getTowerLoc(int castleId) {
 		int[] result = new int[3];
@@ -364,53 +364,53 @@ public class L1CastleLocation {
 	}
 
 	/**
-	 * castleId·ÎºÎÅÍ ÀüÀï ¿¡¸®¾î(±â³»)ÀÇ ÁÂÇ¥¸¦ µ¹·ÁÁØ´Ù
+	 * castleIdë¡œë¶€í„° ì „ìŸ ì—ë¦¬ì–´(ê¸°ë‚´)ì˜ ì¢Œí‘œë¥¼ ëŒë ¤ì¤€ë‹¤
 	 */
 	public static int[] getWarArea(int castleId) {
 		int[] loc = new int[5];
-		if (castleId == KENT_CASTLE_ID) { // ÄËÆ®¼º
+		if (castleId == KENT_CASTLE_ID) { // ì¼„íŠ¸ì„±
 			loc[0] = KENT_X1;
 			loc[1] = KENT_X2;
 			loc[2] = KENT_Y1;
 			loc[3] = KENT_Y2;
 			loc[4] = KENT_MAP;
-		} else if (castleId == OT_CASTLE_ID) { // ¿ÀÅ©ÀÇ ½£
+		} else if (castleId == OT_CASTLE_ID) { // ì˜¤í¬ì˜ ìˆ²
 			loc[0] = OT_X1;
 			loc[1] = OT_X2;
 			loc[2] = OT_Y1;
 			loc[3] = OT_Y2;
 			loc[4] = OT_MAP;
-		} else if (castleId == WW_CASTLE_ID) { // À©´Ù¿ôµå¼º
+		} else if (castleId == WW_CASTLE_ID) { // ìœˆë‹¤ì›ƒë“œì„±
 			loc[0] = WW_X1;
 			loc[1] = WW_X2;
 			loc[2] = WW_Y1;
 			loc[3] = WW_Y2;
 			loc[4] = WW_MAP;
-		} else if (castleId == GIRAN_CASTLE_ID) { // ±â¶õ¼º
+		} else if (castleId == GIRAN_CASTLE_ID) { // ê¸°ë€ì„±
 			loc[0] = GIRAN_X1;
 			loc[1] = GIRAN_X2;
 			loc[2] = GIRAN_Y1;
 			loc[3] = GIRAN_Y2;
 			loc[4] = GIRAN_MAP;
-		} else if (castleId == HEINE_CASTLE_ID) { // Heine¼º
+		} else if (castleId == HEINE_CASTLE_ID) { // Heineì„±
 			loc[0] = HEINE_X1;
 			loc[1] = HEINE_X2;
 			loc[2] = HEINE_Y1;
 			loc[3] = HEINE_Y2;
 			loc[4] = HEINE_MAP;
-		} else if (castleId == DOWA_CASTLE_ID) { // µå¿öÈÄ¼º
+		} else if (castleId == DOWA_CASTLE_ID) { // ë“œì›Œí›„ì„±
 			loc[0] = DOWA_X1;
 			loc[1] = DOWA_X2;
 			loc[2] = DOWA_Y1;
 			loc[3] = DOWA_Y2;
 			loc[4] = DOWA_MAP;
-		} else if (castleId == ADEN_CASTLE_ID) { // ¿¡µ§¼º
+		} else if (castleId == ADEN_CASTLE_ID) { // ì—ë´ì„±
 			loc[0] = ADEN_X1;
 			loc[1] = ADEN_X2;
 			loc[2] = ADEN_Y1;
 			loc[3] = ADEN_Y2;
 			loc[4] = ADEN_MAP;
-		} else if (castleId == DIAD_CASTLE_ID) { // µğ¾Æµå ¿ä»õ
+		} else if (castleId == DIAD_CASTLE_ID) { // ë””ì•„ë“œ ìš”ìƒˆ
 			loc[0] = DIAD_X1;
 			loc[1] = DIAD_X2;
 			loc[2] = DIAD_Y1;
@@ -420,37 +420,37 @@ public class L1CastleLocation {
 		return loc;
 	}
 
-	public static int[] getCastleLoc(int castle_id) { // castle_id·ÎºÎÅÍ Å°¿ìÄ¡ÀÇ ÁÂÇ¥¸¦ µ¹·ÁÁØ´Ù
+	public static int[] getCastleLoc(int castle_id) { // castle_idë¡œë¶€í„° í‚¤ìš°ì¹˜ì˜ ì¢Œí‘œë¥¼ ëŒë ¤ì¤€ë‹¤
 		int[] loc = new int[3];
-		if (castle_id == KENT_CASTLE_ID) { // ÄËÆ®¼º
+		if (castle_id == KENT_CASTLE_ID) { // ì¼„íŠ¸ì„±
 			loc[0] = 32731;
 			loc[1] = 32810;
 			loc[2] = 15;
-		} else if (castle_id == OT_CASTLE_ID) { // ¿ÀÅ©ÀÇ ½£
+		} else if (castle_id == OT_CASTLE_ID) { // ì˜¤í¬ì˜ ìˆ²
 			loc[0] = 32800;
 			loc[1] = 32277;
 			loc[2] = 4;
-		} else if (castle_id == WW_CASTLE_ID) { // À©´Ù¿ôµå¼º
+		} else if (castle_id == WW_CASTLE_ID) { // ìœˆë‹¤ì›ƒë“œì„±
 			loc[0] = 32730;
 			loc[1] = 32814;
 			loc[2] = 29;
-		} else if (castle_id == GIRAN_CASTLE_ID) { // ±â¶õ¼º
+		} else if (castle_id == GIRAN_CASTLE_ID) { // ê¸°ë€ì„±
 			loc[0] = 32724;
 			loc[1] = 32827;
 			loc[2] = 52;
-		} else if (castle_id == HEINE_CASTLE_ID) { // Heine¼º
+		} else if (castle_id == HEINE_CASTLE_ID) { // Heineì„±
 			loc[0] = 32568;
 			loc[1] = 32855;
 			loc[2] = 64;
-		} else if (castle_id == DOWA_CASTLE_ID) { // µå¿öÈÄ¼º
+		} else if (castle_id == DOWA_CASTLE_ID) { // ë“œì›Œí›„ì„±
 			loc[0] = 32853;
 			loc[1] = 32810;
 			loc[2] = 66;
-		} else if (castle_id == ADEN_CASTLE_ID) { // ¿¡µ§¼º
+		} else if (castle_id == ADEN_CASTLE_ID) { // ì—ë´ì„±
 			loc[0] = 32892;
 			loc[1] = 32572;
 			loc[2] = 300;
-		} else if (castle_id == DIAD_CASTLE_ID) { // µğ¾Æµå ¿ä»õ
+		} else if (castle_id == DIAD_CASTLE_ID) { // ë””ì•„ë“œ ìš”ìƒˆ
 			loc[0] = 32733;
 			loc[1] = 32985;
 			loc[2] = 330;
@@ -459,27 +459,27 @@ public class L1CastleLocation {
 	}
 
 	/*
-	 * castle_id·ÎºÎÅÍ ±ÍÈ¯Ã³ÀÇ ÁÂÇ¥¸¦ ·£´ı¿¡ µ¹·ÁÁØ´Ù
+	 * castle_idë¡œë¶€í„° ê·€í™˜ì²˜ì˜ ì¢Œí‘œë¥¼ ëœë¤ì— ëŒë ¤ì¤€ë‹¤
 	 */
 	public static int[] getGetBackLoc(int castle_id) {
 		int[] loc;
-		if (castle_id == KENT_CASTLE_ID) { // ÄËÆ®¼º
+		if (castle_id == KENT_CASTLE_ID) { // ì¼„íŠ¸ì„±
 			loc = L1TownLocation.getGetBackLoc(L1TownLocation.TOWNID_KENT);
-		} else if (castle_id == OT_CASTLE_ID) { // ¿ÀÅ©ÀÇ ½£
+		} else if (castle_id == OT_CASTLE_ID) { // ì˜¤í¬ì˜ ìˆ²
 			loc = L1TownLocation
 					.getGetBackLoc(L1TownLocation.TOWNID_ORCISH_FOREST);
-		} else if (castle_id == WW_CASTLE_ID) { // À©´Ù¿ôµå¼º
+		} else if (castle_id == WW_CASTLE_ID) { // ìœˆë‹¤ì›ƒë“œì„±
 			loc = L1TownLocation.getGetBackLoc(L1TownLocation.TOWNID_WINDAWOOD);
-		} else if (castle_id == GIRAN_CASTLE_ID) { // ±â¶õ¼º
+		} else if (castle_id == GIRAN_CASTLE_ID) { // ê¸°ë€ì„±
 			loc = L1TownLocation.getGetBackLoc(L1TownLocation.TOWNID_GIRAN);
-		} else if (castle_id == HEINE_CASTLE_ID) { // Heine¼º
+		} else if (castle_id == HEINE_CASTLE_ID) { // Heineì„±
 			loc = L1TownLocation.getGetBackLoc(L1TownLocation.TOWNID_HEINE);
-		} else if (castle_id == DOWA_CASTLE_ID) { // µå¿öÈÄ¼º
+		} else if (castle_id == DOWA_CASTLE_ID) { // ë“œì›Œí›„ì„±
 			loc = L1TownLocation.getGetBackLoc(L1TownLocation.TOWNID_WERLDAN);
-		} else if (castle_id == ADEN_CASTLE_ID) { // ¿¡µ§¼º
+		} else if (castle_id == ADEN_CASTLE_ID) { // ì—ë´ì„±
 			loc = L1TownLocation.getGetBackLoc(L1TownLocation.TOWNID_ADEN);
-		} else if (castle_id == DIAD_CASTLE_ID) { // µğ¾Æµå ¿ä»õ
-			// µğ¾Æµå ¿ä»õÀÇ ±ÍÈ¯Ã³´Â ¹ÌÁ¶»ç
+		} else if (castle_id == DIAD_CASTLE_ID) { // ë””ì•„ë“œ ìš”ìƒˆ
+			// ë””ì•„ë“œ ìš”ìƒˆì˜ ê·€í™˜ì²˜ëŠ” ë¯¸ì¡°ì‚¬
 			Random random = new Random();
 			int rnd = random.nextInt(3);
 			loc = new int[3];
@@ -496,7 +496,7 @@ public class L1CastleLocation {
 				loc[1] = 32797;
 				loc[2] = 310;
 			}
-		} else { // Á¸ÀçÇÏÁö ¾Ê´Â castle_id°¡ ÁöÁ¤µÇ¾úÀ» °æ¿ì´Â SKT
+		} else { // ì¡´ì¬í•˜ì§€ ì•ŠëŠ” castle_idê°€ ì§€ì •ë˜ì—ˆì„ ê²½ìš°ëŠ” SKT
 			loc = L1TownLocation
 					.getGetBackLoc(L1TownLocation.TOWNID_SILVER_KNIGHT_TOWN);
 		}
@@ -504,31 +504,31 @@ public class L1CastleLocation {
 	}
 
 	/**
-	 * npcid·ÎºÎÅÍ castle_id¸¦ µ¹·ÁÁØ´Ù
+	 * npcidë¡œë¶€í„° castle_idë¥¼ ëŒë ¤ì¤€ë‹¤
 	 * 
 	 * @param npcid
 	 * @return
 	 */
 	public static int getCastleIdByNpcid(int npcid) {
-		// ¿¡µ§¼º£º¿¡µ§ ¿Õ±¹ Àü¿ª
-		// ÄËÆ®¼º£ºÄËÆ®, ±×¸£µò
-		// À©´Ù¿ôµå¼º£º¿ìµå º£Å©, ¿À¾Æ½Ã½º, ½Ç¹ö ³ªÀÌÆ® Å¸¿î
-		// ±â¶õ¼º£º±â¶õ, ÀÌ¾ß±âÇÒ ¼ö ÀÖ´Â ¼¶
-		// Heine¼º£ºHeine
-		// µå¿öÈÄ¼º£º¿Ï¼÷, »ó¾ÆÀÇ Å¾, »ó¾ÆÀÇ Å¾ÀÇ ¸¶À»
-		// ¿ÀÅ©»çÀÌ£ºÈ­Àü¸¶À»
-		// µğ¾Æµå ¿ä»õ£ºÀüÀï¼¼ÀÇ ÀÏºÎ
-		/** Å¸¿öÂÊÀ¸·Î ¼¼±İÀÌ °¡¸é 20¾ïÀÌ ³ÑÀ¸¸é ¿£ÇÇ¾¾µéÀÌ ÆÄ¾÷À»ÇÕ´Ï´Ù.
+		// ì—ë´ì„±ï¼šì—ë´ ì™•êµ­ ì „ì—­
+		// ì¼„íŠ¸ì„±ï¼šì¼„íŠ¸, ê·¸ë¥´ë”˜
+		// ìœˆë‹¤ì›ƒë“œì„±ï¼šìš°ë“œ ë² í¬, ì˜¤ì•„ì‹œìŠ¤, ì‹¤ë²„ ë‚˜ì´íŠ¸ íƒ€ìš´
+		// ê¸°ë€ì„±ï¼šê¸°ë€, ì´ì•¼ê¸°í•  ìˆ˜ ìˆëŠ” ì„¬
+		// Heineì„±ï¼šHeine
+		// ë“œì›Œí›„ì„±ï¼šì™„ìˆ™, ìƒì•„ì˜ íƒ‘, ìƒì•„ì˜ íƒ‘ì˜ ë§ˆì„
+		// ì˜¤í¬ì‚¬ì´ï¼ší™”ì „ë§ˆì„
+		// ë””ì•„ë“œ ìš”ìƒˆï¼šì „ìŸì„¸ì˜ ì¼ë¶€
+		/** íƒ€ì›Œìª½ìœ¼ë¡œ ì„¸ê¸ˆì´ ê°€ë©´ 20ì–µì´ ë„˜ìœ¼ë©´ ì—”í”¼ì”¨ë“¤ì´ íŒŒì—…ì„í•©ë‹ˆë‹¤.
 
-		ÀÌ°É Á¶±İ ¼öÁ¤ÇØ¼­ Å¸¿öÂÊÀ¸·Î ¼¼±İÀ» °¡Áö¾Èµµ·ÏÇÏ°í Ä³½½ÂÊÀ¸·Î¸¸ °¡µµ·Ï ¼öÁ¤ÇØº¸°Ú½À´Ï´Ù.
+		ì´ê±¸ ì¡°ê¸ˆ ìˆ˜ì •í•´ì„œ íƒ€ì›Œìª½ìœ¼ë¡œ ì„¸ê¸ˆì„ ê°€ì§€ì•ˆë„ë¡í•˜ê³  ìºìŠ¬ìª½ìœ¼ë¡œë§Œ ê°€ë„ë¡ ìˆ˜ì •í•´ë³´ê² ìŠµë‹ˆë‹¤.
 
-		°¢ ¸¶À» 1°³¿£ÇÇ¾¾¸¸ ³²±â°í ¸ğµÎ ÁÖ¼®Ã³¸®ÇÏµçÁö ¸¶À½´ë·Î ÇÏ¼¼¿ä.
+		ê° ë§ˆì„ 1ê°œì—”í”¼ì”¨ë§Œ ë‚¨ê¸°ê³  ëª¨ë‘ ì£¼ì„ì²˜ë¦¬í•˜ë“ ì§€ ë§ˆìŒëŒ€ë¡œ í•˜ì„¸ìš”.
 
-		¿Ø¸¸ÇÏ¸é 1°³¸¸ ³²±â°í ¸ğµÎ ÁÖ¼®Ã³¸®ÇØ¾ß Å¸¿öÂÊ¿¡ ¼¼±İÀÌ ¾È½×ÀÌ°ÚÁÒ.
+		ì™ ë§Œí•˜ë©´ 1ê°œë§Œ ë‚¨ê¸°ê³  ëª¨ë‘ ì£¼ì„ì²˜ë¦¬í•´ì•¼ íƒ€ì›Œìª½ì— ì„¸ê¸ˆì´ ì•ˆìŒ“ì´ê² ì£ .
 		
-		±×·³ ÀÌ·¸°Ô ÇÏ¸é Å¸¿îÂÊÀ¸·Î Áß¿ä ¿£ÇÇ¾¾ ¼¼±İÀÌ °¡Áú ¾Ê¾Æ¼­ ÆÄ¾÷Àº ¾ÈÇÒ°Å±¸¿ä.
+		ê·¸ëŸ¼ ì´ë ‡ê²Œ í•˜ë©´ íƒ€ìš´ìª½ìœ¼ë¡œ ì¤‘ìš” ì—”í”¼ì”¨ ì„¸ê¸ˆì´ ê°€ì§ˆ ì•Šì•„ì„œ íŒŒì—…ì€ ì•ˆí• ê±°êµ¬ìš”.
 
-		Ä³½½ÂÊÀ¸·Î ¼¼±İÀÌ °¥°Å¿¡¿ä
+		ìºìŠ¬ìª½ìœ¼ë¡œ ì„¸ê¸ˆì´ ê°ˆê±°ì—ìš”
 
 		**/
 		int castle_id = 0;
@@ -538,24 +538,24 @@ public class L1CastleLocation {
 		switch (town_id) {
 	/*	case L1TownLocation.TOWNID_KENT:
 		case L1TownLocation.TOWNID_GLUDIO: */
-		case 200040: //¾ÆÀÌÅÛ »óÁ¡	
-			castle_id = KENT_CASTLE_ID; // ÄËÆ®¼º
+		case 200040: //ì•„ì´í…œ ìƒì 	
+			castle_id = KENT_CASTLE_ID; // ì¼„íŠ¸ì„±
 			break;
 
 	//	case L1TownLocation.TOWNID_ORCISH_FOREST:
 		case 200006:	
-			castle_id = OT_CASTLE_ID; // ¿ÀÅ©ÀÇ ½£
+			castle_id = OT_CASTLE_ID; // ì˜¤í¬ì˜ ìˆ²
 			break;
 
 	/*	case L1TownLocation.TOWNID_SILVER_KNIGHT_TOWN:
 		case L1TownLocation.TOWNID_WINDAWOOD: */
 		case 200005:	
-			castle_id = WW_CASTLE_ID; // À©´Ù¿ôµå¼º
+			castle_id = WW_CASTLE_ID; // ìœˆë‹¤ì›ƒë“œì„±
 			break;
 
 	/*  case L1TownLocation.TOWNID_TALKING_ISLAND:
 	    case L1TownLocation.TOWNID_GIRAN: 
-        case 200040: //¾ÆÀÌÅÛ »óÁ¡
+        case 200040: //ì•„ì´í…œ ìƒì 
         case 200006: 
         case 200005: */
         case 200004:
@@ -565,28 +565,28 @@ public class L1CastleLocation {
         case 200009:
         case 200052:
         case 200050:  */
-			castle_id = GIRAN_CASTLE_ID; // ±â¶õ¼º
+			castle_id = GIRAN_CASTLE_ID; // ê¸°ë€ì„±
 			break;
 
 	//	case L1TownLocation.TOWNID_HEINE:
 		case 200003:	
-			castle_id = HEINE_CASTLE_ID; // Heine¼º
+			castle_id = HEINE_CASTLE_ID; // Heineì„±
 			break;
 
 	/*	case L1TownLocation.TOWNID_WERLDAN:
 		case L1TownLocation.TOWNID_OREN: */
 		case 200008:	
-			castle_id = DOWA_CASTLE_ID; // µå¿öÈÄ¼º
+			castle_id = DOWA_CASTLE_ID; // ë“œì›Œí›„ì„±
 			break;
 
 	//	case L1TownLocation.TOWNID_ADEN:
 		case 200007:	
-			castle_id = ADEN_CASTLE_ID; // ¿¡µ§¼º
+			castle_id = ADEN_CASTLE_ID; // ì—ë´ì„±
 			break;
 
 	//	case L1TownLocation.TOWNID_OUM_DUNGEON:
 		case 200009:	
-			castle_id = DIAD_CASTLE_ID; // µğ¾Æµå ¿ä»õ
+			castle_id = DIAD_CASTLE_ID; // ë””ì•„ë“œ ìš”ìƒˆ
 			break;
 
 		default:
@@ -595,7 +595,7 @@ public class L1CastleLocation {
 		return castle_id;
 	}
 
-	// ÀÌ ¸Ş¼Òµå´Â ¿¡µ§ ½Ã°£¿¡ 1ÀÏ¸¶´Ù °»½ÅµÇ´Â ¼¼À²À» ¹İÈ¯ÇÑ´Ù.(¸®¾ó Å¸ÀÓÀÇ ¼¼À²Àº ¾Æ´Ï´Ù)
+	// ì´ ë©”ì†Œë“œëŠ” ì—ë´ ì‹œê°„ì— 1ì¼ë§ˆë‹¤ ê°±ì‹ ë˜ëŠ” ì„¸ìœ¨ì„ ë°˜í™˜í•œë‹¤.(ë¦¬ì–¼ íƒ€ì„ì˜ ì„¸ìœ¨ì€ ì•„ë‹ˆë‹¤)
 	public static int getCastleTaxRateByNpcId(int npcId) {
 		int castleId = getCastleIdByNpcid(npcId);
 		if (castleId != 0) {
@@ -604,12 +604,12 @@ public class L1CastleLocation {
 		return 0;
 	}
 
-	// °¢ ¼ºÀÇ ¼¼À²À» º¸°üÇØ µÎ´Â HashMap(¼ó¿ë)
+	// ê° ì„±ì˜ ì„¸ìœ¨ì„ ë³´ê´€í•´ ë‘ëŠ” HashMap(ìˆìš©)
 	private static HashMap<Integer, Integer> _castleTaxRate = new HashMap<Integer, Integer>();
 
 	private static L1CastleTaxRateListener _listener;
 
-	// GameServer#initialize, L1CastleTaxRateListener#onDayChangedÀÎ ¸¸Å­ ºÒ·Á °¥ ¿¹Á¤.
+	// GameServer#initialize, L1CastleTaxRateListener#onDayChangedì¸ ë§Œí¼ ë¶ˆë ¤ ê°ˆ ì˜ˆì •.
 	public static void setCastleTaxRate() {
 		for (L1Castle castle : CastleTable.getInstance().getCastleTableList()) {
 			_castleTaxRate.put(castle.getId(), castle.getTaxRate());
@@ -628,7 +628,7 @@ public class L1CastleLocation {
 	}
 
 	/**
-	 * ¼­ºê Å¸¿ö ¹øÈ£·ÎºÎÅÍ ¼­ºê Å¸¿öÀÇ ÁÂÇ¥¸¦ µ¹·ÁÁØ´Ù
+	 * ì„œë¸Œ íƒ€ì›Œ ë²ˆí˜¸ë¡œë¶€í„° ì„œë¸Œ íƒ€ì›Œì˜ ì¢Œí‘œë¥¼ ëŒë ¤ì¤€ë‹¤
 	 */
 	public static int[] getSubTowerLoc(int no) {
 		int[] result = new int[3];

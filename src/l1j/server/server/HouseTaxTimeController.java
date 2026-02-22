@@ -63,7 +63,7 @@ public class HouseTaxTimeController implements Runnable {
 
 	private void checkTaxDeadline() {
 		for (L1House house : HouseTable.getInstance().getHouseTableList()) {
-			if (!house.isOnSale()) { // °æ¸ÅÁßÀÇ ¾ÆÁöÆ®´Â Ã¼Å©ÇÏÁö ¾Ê´Â´Ù
+			if (!house.isOnSale()) { // ê²½ë§¤ì¤‘ì˜ ì•„ì§€íŠ¸ëŠ” ì²´í¬í•˜ì§€ ì•ŠëŠ”ë‹¤
 				if (house.getTaxDeadline().before(getRealTime())) {
 					sellHouse(house);
 				}
@@ -75,15 +75,15 @@ public class HouseTaxTimeController implements Runnable {
 		AuctionBoardTable boardTable = new AuctionBoardTable();
 		L1AuctionBoard board = new L1AuctionBoard();
 		if (board != null) {
-			// °æ¸Å °Ô½ÃÆÇ¿¡ ½Å±Ô ±âÀÔ
+			// ê²½ë§¤ ê²Œì‹œíŒì— ì‹ ê·œ ê¸°ì…
 			int houseId = house.getHouseId();
 			board.setHouseId(houseId);
 			board.setHouseName(house.getHouseName());
 			board.setHouseArea(house.getHouseArea());
 			TimeZone tz = TimeZone.getTimeZone(Config.TIME_ZONE);
 			Calendar cal = Calendar.getInstance(tz);
-			cal.add(Calendar.DATE, 5); // 5ÀÏ ÈÄ
-			cal.set(Calendar.MINUTE, 0); // ºĞ , ÃÊ´Â Àß¶ó¼­ ¹ö¸²
+			cal.add(Calendar.DATE, 5); // 5ì¼ í›„
+			cal.set(Calendar.MINUTE, 0); // ë¶„ , ì´ˆëŠ” ì˜ë¼ì„œ ë²„ë¦¼
 			cal.set(Calendar.SECOND, 0);
 			board.setDeadline(cal);
 			board.setPrice(100000);
@@ -93,12 +93,12 @@ public class HouseTaxTimeController implements Runnable {
 			board.setBidder("");
 			board.setBidderId(0);
 			boardTable.insertAuctionBoard(board);
-			house.setOnSale(true); // °æ¸ÅÁßÀ¸·Î ¼³Á¤
-			house.setPurchaseBasement(true); // ÁöÇÏ ¾ÆÁöÆ®¹Ì±¸ÀÔÀ¸·Î ¼³Á¤
+			house.setOnSale(true); // ê²½ë§¤ì¤‘ìœ¼ë¡œ ì„¤ì •
+			house.setPurchaseBasement(true); // ì§€í•˜ ì•„ì§€íŠ¸ë¯¸êµ¬ì…ìœ¼ë¡œ ì„¤ì •
 			cal.add(Calendar.DATE, Config.HOUSE_TAX_INTERVAL);
 			house.setTaxDeadline(cal);
-			HouseTable.getInstance().updateHouse(house); // DB¿¡ ±âÀÔÇØ
-			// ÀÌÀüÀÇ ¼ÒÀ¯ÀÚÀÇ ¾ÆÁöÆ®¸¦ Áö¿î´Ù
+			HouseTable.getInstance().updateHouse(house); // DBì— ê¸°ì…í•´
+			// ì´ì „ì˜ ì†Œìœ ìì˜ ì•„ì§€íŠ¸ë¥¼ ì§€ìš´ë‹¤
 			for (L1Clan clan : L1World.getInstance().getAllClans()) {
 				if (clan.getHouseId() == houseId) {
 					clan.setHouseId(0);

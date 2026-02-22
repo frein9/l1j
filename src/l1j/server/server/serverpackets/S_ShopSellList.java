@@ -38,7 +38,7 @@ public class S_ShopSellList extends ServerBasePacket {
 
 
 	/**
-	 * °¡°ÔÀÇ ¹°°Ç ¸®½ºÆ®¸¦ Ç¥½ÃÇÑ´Ù.Ä³¸¯ÅÍ°¡ BUY ¹öÆ°À» ´­·¶À» ¶§¿¡ º¸³½´Ù.
+	 * ê°€ê²Œì˜ ë¬¼ê±´ ë¦¬ìŠ¤íŠ¸ë¥¼ í‘œì‹œí•œë‹¤.ìºë¦­í„°ê°€ BUY ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œì— ë³´ë‚¸ë‹¤.
 	 */
 	public S_ShopSellList(int objId) {
 		writeC(Opcodes.S_OPCODE_SHOWSHOPBUYLIST);
@@ -57,7 +57,7 @@ public class S_ShopSellList extends ServerBasePacket {
 
 		writeH(shopItems.size());
 		
-		// L1ItemInstanceÀÇ getStatusBytes¸¦ ÀÌ¿ëÇÏ±â À§ÇØ(¶§¹®¿¡)
+		// L1ItemInstanceì˜ getStatusBytesë¥¼ ì´ìš©í•˜ê¸° ìœ„í•´(ë•Œë¬¸ì—)
 		L1ItemInstance dummy = new L1ItemInstance();
 
 		for (int i = 0; i < shopItems.size(); i++) {
@@ -86,7 +86,7 @@ public class S_ShopSellList extends ServerBasePacket {
 				}
 			}
 		}
-    if(!(npcId >= 199999 && npcId <= 200002 || npcId == 2000074)) { // ÇÁ¸®¹Ì¾ö ¾Æµ§ Ç¥½Ã Á¦°Å
+    if(!(npcId >= 199999 && npcId <= 200002 || npcId == 2000074)) { // í”„ë¦¬ë¯¸ì—„ ì•„ë´ í‘œì‹œ ì œê±°
 		 writeC(0x07);
 		 writeC(0x00);
          }

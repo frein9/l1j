@@ -121,53 +121,53 @@ public class L1Location extends Point {
 	}
 
 	/**
-	 * ÀÌ Location¿¡ ´ëÇÑ, ÀÌµ¿ °¡´ÉÇÑ ·£´ý ¹üÀ§ÀÇ Location¸¦ µ¹·ÁÁØ´Ù.
-	 * ·£´ý ÅÚ·¹Æ÷Æ®ÀÇ °æ¿ì´Â, ¼º¿¡¸®¾î, ¾ÆÁöÆ®³»ÀÇ Location´Â ¹ÝÈ¯µÇÁö ¾Ê´Â´Ù.
+	 * ì´ Locationì— ëŒ€í•œ, ì´ë™ ê°€ëŠ¥í•œ ëžœë¤ ë²”ìœ„ì˜ Locationë¥¼ ëŒë ¤ì¤€ë‹¤.
+	 * ëžœë¤ í…”ë ˆí¬íŠ¸ì˜ ê²½ìš°ëŠ”, ì„±ì—ë¦¬ì–´, ì•„ì§€íŠ¸ë‚´ì˜ LocationëŠ” ë°˜í™˜ë˜ì§€ ì•ŠëŠ”ë‹¤.
 	 * 
 	 * @param max
-	 *            ·£´ý ¹üÀ§ÀÇ ÃÖ´ëÄ¡
+	 *            ëžœë¤ ë²”ìœ„ì˜ ìµœëŒ€ì¹˜
 	 * @param isRandomTeleport
-	 *            ·£´ý ÅÚ·¹Æ÷Æ®ÀÎ°¡
-	 * @return »õ·Î¿î Location
+	 *            ëžœë¤ í…”ë ˆí¬íŠ¸ì¸ê°€
+	 * @return ìƒˆë¡œìš´ Location
 	 */
 	public L1Location randomLocation(int max, boolean isRandomTeleport) {
 		return randomLocation(0, max, isRandomTeleport);
 	}
 
 	/**
-	 * ÀÌ Location¿¡ ´ëÇÑ, ÀÌµ¿ °¡´ÉÇÑ ·£´ý ¹üÀ§ÀÇ Location¸¦ µ¹·ÁÁØ´Ù.
-	 * ·£´ý ÅÚ·¹Æ÷Æ®ÀÇ °æ¿ì´Â, ¼º¿¡¸®¾î, ¾ÆÁöÆ®³»ÀÇ Location´Â ¹ÝÈ¯µÇÁö ¾Ê´Â´Ù.
+	 * ì´ Locationì— ëŒ€í•œ, ì´ë™ ê°€ëŠ¥í•œ ëžœë¤ ë²”ìœ„ì˜ Locationë¥¼ ëŒë ¤ì¤€ë‹¤.
+	 * ëžœë¤ í…”ë ˆí¬íŠ¸ì˜ ê²½ìš°ëŠ”, ì„±ì—ë¦¬ì–´, ì•„ì§€íŠ¸ë‚´ì˜ LocationëŠ” ë°˜í™˜ë˜ì§€ ì•ŠëŠ”ë‹¤.
 	 * 
 	 * @param min
-	 *            ·£´ý ¹üÀ§ÀÇ ÃÖ¼ÒÄ¡(0À¸·Î ÀÚ½ÅÀÇ ÁÂÇ¥¸¦ Æ÷ÇÔÇÑ´Ù)
+	 *            ëžœë¤ ë²”ìœ„ì˜ ìµœì†Œì¹˜(0ìœ¼ë¡œ ìžì‹ ì˜ ì¢Œí‘œë¥¼ í¬í•¨í•œë‹¤)
 	 * @param max
-	 *            ·£´ý ¹üÀ§ÀÇ ÃÖ´ëÄ¡
+	 *            ëžœë¤ ë²”ìœ„ì˜ ìµœëŒ€ì¹˜
 	 * @param isRandomTeleport
-	 *            ·£´ý ÅÚ·¹Æ÷Æ®ÀÎ°¡
-	 * @return »õ·Î¿î Location
+	 *            ëžœë¤ í…”ë ˆí¬íŠ¸ì¸ê°€
+	 * @return ìƒˆë¡œìš´ Location
 	 */
 	public L1Location randomLocation(int min, int max, boolean isRandomTeleport) {
 		return L1Location.randomLocation(this, min, max, isRandomTeleport);
 	}
 
 	/**
-	 * ÀÎ¼öÀÇ Location¿¡ ´ëÇØ¼­, ÀÌµ¿ °¡´ÉÇÑ ·£´ý ¹üÀ§ÀÇ Location¸¦ µ¹·ÁÁØ´Ù.
-	 * ·£´ý ÅÚ·¹Æ÷Æ®ÀÇ °æ¿ì´Â, ¼º¿¡¸®¾î, ¾ÆÁöÆ®³»ÀÇ Location´Â ¹ÝÈ¯µÇÁö ¾Ê´Â´Ù.
+	 * ì¸ìˆ˜ì˜ Locationì— ëŒ€í•´ì„œ, ì´ë™ ê°€ëŠ¥í•œ ëžœë¤ ë²”ìœ„ì˜ Locationë¥¼ ëŒë ¤ì¤€ë‹¤.
+	 * ëžœë¤ í…”ë ˆí¬íŠ¸ì˜ ê²½ìš°ëŠ”, ì„±ì—ë¦¬ì–´, ì•„ì§€íŠ¸ë‚´ì˜ LocationëŠ” ë°˜í™˜ë˜ì§€ ì•ŠëŠ”ë‹¤.
 	 * 
 	 * @param baseLocation
-	 *            ·£´ý ¹üÀ§ÀÇ ¹ÙÅÁÀ¸·Î µÇ´Â Location
+	 *            ëžœë¤ ë²”ìœ„ì˜ ë°”íƒ•ìœ¼ë¡œ ë˜ëŠ” Location
 	 * @param min
-	 *            ·£´ý ¹üÀ§ÀÇ ÃÖ¼ÒÄ¡(0À¸·Î ÀÚ½ÅÀÇ ÁÂÇ¥¸¦ Æ÷ÇÔÇÑ´Ù)
+	 *            ëžœë¤ ë²”ìœ„ì˜ ìµœì†Œì¹˜(0ìœ¼ë¡œ ìžì‹ ì˜ ì¢Œí‘œë¥¼ í¬í•¨í•œë‹¤)
 	 * @param max
-	 *            ·£´ý ¹üÀ§ÀÇ ÃÖ´ëÄ¡
+	 *            ëžœë¤ ë²”ìœ„ì˜ ìµœëŒ€ì¹˜
 	 * @param isRandomTeleport
-	 *            ·£´ý ÅÚ·¹Æ÷Æ®ÀÎ°¡
-	 * @return »õ·Î¿î Location
+	 *            ëžœë¤ í…”ë ˆí¬íŠ¸ì¸ê°€
+	 * @return ìƒˆë¡œìš´ Location
 	 */
 	public static L1Location randomLocation(L1Location baseLocation, int min,
 			int max, boolean isRandomTeleport) {
 		if (min > max) {
-			throw new IllegalArgumentException("min > max°¡ µÇ´Â ÀÎ¼ö´Â ¹«È¿");
+			throw new IllegalArgumentException("min > maxê°€ ë˜ëŠ” ì¸ìˆ˜ëŠ” ë¬´íš¨");
 		}
 		if (max <= 0) {
 			return new L1Location(baseLocation);
@@ -191,13 +191,13 @@ public class L1Location extends Point {
 		int locY1 = locY - max;
 		int locY2 = locY + max;
 
-		// map ¹üÀ§
+		// map ë²”ìœ„
 		int mapX1 = map.getX();
 		int mapX2 = mapX1 + map.getWidth();
 		int mapY1 = map.getY();
 		int mapY2 = mapY1 + map.getHeight();
 
-		// ÃÖ´ë¿¡¼­µµ ¸ÊÀÇ ¹üÀ§³»±îÁö º¸Á¤
+		// ìµœëŒ€ì—ì„œë„ ë§µì˜ ë²”ìœ„ë‚´ê¹Œì§€ ë³´ì •
 		if (locX1 < mapX1) {
 			locX1 = mapX1;
 		}
@@ -211,11 +211,11 @@ public class L1Location extends Point {
 			locY2 = mapY2;
 		}
 
-		int diffX = locX2 - locX1; // x¹æÇâ
-		int diffY = locY2 - locY1; // y¹æÇâ
+		int diffX = locX2 - locX1; // xë°©í–¥
+		int diffY = locY2 - locY1; // yë°©í–¥
 
 		int trial = 0;
-		// ½ÃÇà È¸¼ö¸¦ ¹üÀ§ ÃÖ¼ÒÄ¡¿¡ ÀÇÇØ ÁÖ±â ¶§¹®¿¡(À§ÇØ)ÀÇ °è»ê
+		// ì‹œí–‰ íšŒìˆ˜ë¥¼ ë²”ìœ„ ìµœì†Œì¹˜ì— ì˜í•´ ì£¼ê¸° ë•Œë¬¸ì—(ìœ„í•´)ì˜ ê³„ì‚°
 		int amax = (int) Math.pow(1 + (max * 2), 2);
 		int amin = (min == 0) ?  0 : (int) Math.pow(1 + ((min - 1) * 2), 2);
 		int trialLimit = 40 * amax / (amax - amin);
@@ -236,12 +236,12 @@ public class L1Location extends Point {
 				continue;
 
 			}
-			if (isRandomTeleport) { // ·£´ý ÅÚ·¹Æ÷Æ®ÀÇ °æ¿ì
-				if (L1CastleLocation.checkInAllWarArea(newX, newY, mapId)) { // ¸î°³ÀÇ ¼º¿¡¸®¾î
+			if (isRandomTeleport) { // ëžœë¤ í…”ë ˆí¬íŠ¸ì˜ ê²½ìš°
+				if (L1CastleLocation.checkInAllWarArea(newX, newY, mapId)) { // ëª‡ê°œì˜ ì„±ì—ë¦¬ì–´
 					continue;
 				}
 
-				// ¸î°³ÀÇ ¾ÆÁöÆ®³»
+				// ëª‡ê°œì˜ ì•„ì§€íŠ¸ë‚´
 				if (L1HouseLocation.isInHouse(newX, newY, mapId)) {
 					continue;
 				}

@@ -21,7 +21,7 @@ package l1j.server.server.model;
 import java.util.Timer;
 
 /**
- * NPCÀÇ ÀÚ¿¬ È¸º¹ TimerTask¸¦ ½ºÄÉÁÙÇÏ±â À§ÇÑ Timer Å¬·¡½º
+ * NPCì˜ ìì—° íšŒë³µ TimerTaskë¥¼ ìŠ¤ì¼€ì¤„í•˜ê¸° ìœ„í•œ Timer í´ë˜ìŠ¤
  * 
  */
 public class L1NpcRegenerationTimer extends Timer {

@@ -16,7 +16,7 @@ public class GiranController extends Thread {
 		private static GiranController _instance;
 
 
-		/** ±â¶õ °¨¿Á ½ÃÀÛ¾Ë¸² **/
+		/** ê¸°ë€ ê°ì˜¥ ì‹œì‘ì•Œë¦¼ **/
 		private boolean _GiranStart;
 		public boolean getGiranStart() {
 			return _GiranStart;
@@ -24,7 +24,7 @@ public class GiranController extends Thread {
 		public void setGiranStart(boolean giran) {
 			_GiranStart = giran;
 		}
-		/** °¨¿Á ÀÔÀå¿©ºÎ **/
+		/** ê°ì˜¥ ì…ì¥ì—¬ë¶€ **/
 		private boolean _GiranOpen;
 		public boolean getGiranOpen() {
 			return _GiranStart;
@@ -32,7 +32,7 @@ public class GiranController extends Thread {
 		public void setGiranOpen(boolean giran) {
 			_GiranOpen = giran;
 		}
-		/** µà¾ó ÀÔÀå½Ã°ü°ü¸® **/
+		/** ë“€ì–¼ ì…ì¥ì‹œê´€ê´€ë¦¬ **/
 		private boolean _GiranTime;
 		public boolean getGiranTime() {
 			return _GiranTime;
@@ -41,20 +41,20 @@ public class GiranController extends Thread {
 			_GiranTime = giran;
 		}
 
-		/** °¨¿Á Á¾·á ¸Ş¼Òµå **/
+		/** ê°ì˜¥ ì¢…ë£Œ ë©”ì†Œë“œ **/
 		private boolean Close;
-		/** ±â¶õ°¨¿Á ¿ÀÇÂ ½Ã°£(ms) **/
+		/** ê¸°ë€ê°ì˜¥ ì˜¤í”ˆ ì‹œê°„(ms) **/
 		private static long sTime = 0;
-		/** ÇöÀç ½Ã°£À» ÀÓ½Ã·Î ´ã±â **/
+		/** í˜„ì¬ ì‹œê°„ì„ ì„ì‹œë¡œ ë‹´ê¸° **/
 		private String NowTime = "";
-		/** °¨¿ÁÀÌ ¿­¸®´Â ½Ã°£ °£°İ **/
+		/** ê°ì˜¥ì´ ì—´ë¦¬ëŠ” ì‹œê°„ ê°„ê²© **/
 		private static final int LOOP = 3;
-		/** ½Ã°¢ µ¥ÀÌÅÍ Æ÷¸Ë **/
+		/** ì‹œê° ë°ì´í„° í¬ë§· **/
 		private static final SimpleDateFormat s = new SimpleDateFormat("HH", Locale.KOREA);
-		/** ½Ã°¢ µ¥ÀÌÅÍ Æ÷¸Ë **/
+		/** ì‹œê° ë°ì´í„° í¬ë§· **/
 		private static final SimpleDateFormat ss = new SimpleDateFormat("MM-dd HH:mm", Locale.KOREA);
 
-		/** Å¸ÀÓ ÄÁÆ®·Ñ °´Ã¼ **/
+		/** íƒ€ì„ ì»¨íŠ¸ë¡¤ ê°ì²´ **/
 		public static GiranController getInstance() {
 			if(_instance == null) {
 				_instance = new GiranController();
@@ -71,40 +71,40 @@ public class GiranController extends Thread {
 					       Thread.sleep(1000); 
 					   }catch(Exception e){
 					   }
-						/** ±â¶õ °¨¿Á ¿ÀÇÂ **/
+						/** ê¸°ë€ ê°ì˜¥ ì˜¤í”ˆ **/
 						if(!isOpen())
 							continue;
 						if(L1World.getInstance().getAllPlayers().size() <= 0)
 							continue;
 
-						/** ±â¶õ°¨¿Á ¿ÀÇÂ ¸Ş¼¼Áö ¼ÛÃâ**/
-						L1World.getInstance().broadcastServerMessage("±â¶õ °¨¿ÁÀÌ ¿­·È½À´Ï´Ù. ¾ÕÀ¸·Î 3½Ã°£ Ã¼·ù °¡´ÉÇÕ´Ï´Ù.");
+						/** ê¸°ë€ê°ì˜¥ ì˜¤í”ˆ ë©”ì„¸ì§€ ì†¡ì¶œ**/
+						L1World.getInstance().broadcastServerMessage("ê¸°ë€ ê°ì˜¥ì´ ì—´ë ¸ìŠµë‹ˆë‹¤. ì•ìœ¼ë¡œ 3ì‹œê°„ ì²´ë¥˜ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
 						
-						/** ±â¶õ°¨¿Á ¿ÀÇÂ ¸Ş¼¼Áö ¼ÛÃâ**/
-						L1World.getInstance().broadcastServerMessage("¾Ç¸¶¿Õ ¿µÅä°¡ ¿­·È½À´Ï´Ù. ¾ÕÀ¸·Î 3½Ã°£ Ã¼·ù °¡´ÉÇÕ´Ï´Ù.");
+						/** ê¸°ë€ê°ì˜¥ ì˜¤í”ˆ ë©”ì„¸ì§€ ì†¡ì¶œ**/
+						L1World.getInstance().broadcastServerMessage("ì•…ë§ˆì™• ì˜í† ê°€ ì—´ë ¸ìŠµë‹ˆë‹¤. ì•ìœ¼ë¡œ 3ì‹œê°„ ì²´ë¥˜ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
 
-						/** Ã³À½¿£ ÀÔÀåÀ» ¾È¹Ş´Â´Ù **/
+						/** ì²˜ìŒì—” ì…ì¥ì„ ì•ˆë°›ëŠ”ë‹¤ **/
 						setGiranTime(false);
 
-						/**±â¶õ¿ÀÇÂ ½ÃÀÛ**/
+						/**ê¸°ë€ì˜¤í”ˆ ì‹œì‘**/
 						setGiranOpen(true);
 
-						/** ±â¶õ ¿ÀÇÂÀÔÀå ½ÃÀÛ **/
+						/** ê¸°ë€ ì˜¤í”ˆì…ì¥ ì‹œì‘ **/
 						setGiranTime(true);
 
-						/** ±â¶õ°¨¿Á ½ÃÀÛ**/
+						/** ê¸°ë€ê°ì˜¥ ì‹œì‘**/
 						setGiranStart(true);
 
-						/**°¨¿Á °ÔÀÓ½ÇÇà 3½Ã°£ ½ÃÀÛ**/
+						/**ê°ì˜¥ ê²Œì„ì‹¤í–‰ 3ì‹œê°„ ì‹œì‘**/
 						try	{
 							Thread.sleep(86400000L);
 						} catch(Exception e) {
 						}
-						/** 3½Ã°£ ÈÄ ÀÚµ¿ ÅÚ·¹Æ÷Æ®**/
+						/** 3ì‹œê°„ í›„ ìë™ í…”ë ˆí¬íŠ¸**/
 
 						TelePort();
 
-						/** ±â¶õ°¨¿ÁÁ¾·á ¸ğµÎÃ¼·ù**/
+						/** ê¸°ë€ê°ì˜¥ì¢…ë£Œ ëª¨ë‘ì²´ë¥˜**/
 						End();
 					}
 
@@ -113,9 +113,9 @@ public class GiranController extends Thread {
 			}
 
 			/**
-			 *¿ÀÇÂ ½Ã°¢À» °¡Á®¿Â´Ù
+			 *ì˜¤í”ˆ ì‹œê°ì„ ê°€ì ¸ì˜¨ë‹¤
 			 *
-			 *@return (Strind) ¿ÀÇÂ ½Ã°¢(MM-dd HH:mm)
+			 *@return (Strind) ì˜¤í”ˆ ì‹œê°(MM-dd HH:mm)
 			 */
 			 public String OpenTime() {
 				 Calendar c = Calendar.getInstance();
@@ -124,10 +124,10 @@ public class GiranController extends Thread {
 			 }
 
 			 /**
-			 *Æ¯Á¤½Ã°¢À» °¡Á®¿Â´Ù
+			 *íŠ¹ì •ì‹œê°ì„ ê°€ì ¸ì˜¨ë‹¤
 			 *
 			 *@param (long)
-			 *@return (string) Æ¯Á¤ ½Ã°¢(HH:mm)
+			 *@return (string) íŠ¹ì • ì‹œê°(HH:mm)
 			 */
 			 private String getTime(long time) {
 				 Calendar c = Calendar.getInstance();
@@ -136,9 +136,9 @@ public class GiranController extends Thread {
 			 }
 
 			 /**
-			 *±â¶õ°¨¿ÁÀÌ ¿­·ÁÀÖ´ÂÁö È®ÀÎ
+			 *ê¸°ë€ê°ì˜¥ì´ ì—´ë ¤ìˆëŠ”ì§€ í™•ì¸
 			 *
-			 *@return (boolean) ¿­·ÁÀÖ´Ù¸é true ´İÇôÀÖ´Ù¸é false
+			 *@return (boolean) ì—´ë ¤ìˆë‹¤ë©´ true ë‹«í˜€ìˆë‹¤ë©´ false
 			 */
 			 private boolean isOpen() {
 				 NowTime = getTime();
@@ -146,15 +146,15 @@ public class GiranController extends Thread {
 				 return false;
 			 }
 			 /**
-			 *½ÇÁ¦ ÇöÀç½Ã°¢À» °¡Á®¿Â´Ù
+			 *ì‹¤ì œ í˜„ì¬ì‹œê°ì„ ê°€ì ¸ì˜¨ë‹¤
 			 *
-			 *@return (String) ÇöÀç ½Ã°¢(HH:mm)
+			 *@return (String) í˜„ì¬ ì‹œê°(HH:mm)
 			 */
 			 private String getTime() {
 				 return s.format(Calendar.getInstance().getTime());
 			 }
 
-			 /**¾Æµ§¸¶À»·Î ÆÃ±â°Ô**/
+			 /**ì•„ë´ë§ˆì„ë¡œ íŒ…ê¸°ê²Œ**/
 			 private void TelePort() {
 				 for(L1PcInstance c : L1World.getInstance().getAllPlayers()) {
 					 switch(c.getMap().getId()) {
@@ -166,7 +166,7 @@ public class GiranController extends Thread {
 						 c.stopHpRegeneration();
 						 c.stopMpRegeneration();
 						 L1Teleport.teleport(c, 33970, 33246, (short) 4, 4, true);
-						 c.sendPackets(new S_SystemMessage("±â¶õ °¨¿Á Ã¼·ù½Ã°£ÀÌ ¸¸·áµÇ¾î ¸¶À»·Î µ¹¾Æ°©´Ï´Ù."));
+						 c.sendPackets(new S_SystemMessage("ê¸°ë€ ê°ì˜¥ ì²´ë¥˜ì‹œê°„ì´ ë§Œë£Œë˜ì–´ ë§ˆì„ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤."));
 						 break;
 						 default:
 						 break;
@@ -174,9 +174,9 @@ public class GiranController extends Thread {
 				 }
 			 }
 
-			 /** ±â¶õ°¨¿Á Á¾·á **/
+			 /** ê¸°ë€ê°ì˜¥ ì¢…ë£Œ **/
 			 private void End() {
-				 Announcements.getInstance().announceToAll("±â¶õ °¨¿Á ½Ã°£ÀÌ ¸ğµÎ ¸¸·áµÇ¾ú½À´Ï´Ù.");
+				 Announcements.getInstance().announceToAll("ê¸°ë€ ê°ì˜¥ ì‹œê°„ì´ ëª¨ë‘ ë§Œë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 				 setGiranStart(false);
 				 Close = false;
 			 }

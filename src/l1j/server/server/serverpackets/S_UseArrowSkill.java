@@ -42,7 +42,7 @@ public class S_UseArrowSkill extends ServerBasePacket {
 			int x, int y, boolean isHit) {
 
 		int aid = 1;
-		// ¿ÀÅ©¾ÆÃ­ ¸¶¼Å º¯°æ
+		// ì˜¤í¬ì•„ì±  ë§ˆì…” ë³€ê²½
 		if (cha.getTempCharGfx() == 3860) {
 			aid = 21;
 		}
@@ -55,7 +55,7 @@ public class S_UseArrowSkill extends ServerBasePacket {
 		writeC(cha.getHeading());
 		writeD(_sequentialNumber.incrementAndGet());
 		writeH(spellgfx);
-		writeC(127); // ½ºÅ³ »ç¿ë½ÃÀÇ ±¤¿øÀÇ ³ĞÀÌ?
+		writeC(127); // ìŠ¤í‚¬ ì‚¬ìš©ì‹œì˜ ê´‘ì›ì˜ ë„“ì´?
 		writeH(cha.getX());
 		writeH(cha.getY());
 		writeH(x);

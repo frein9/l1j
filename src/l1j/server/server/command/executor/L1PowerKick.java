@@ -40,27 +40,27 @@ public class L1PowerKick implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 			L1PcInstance target = L1World.getInstance(). getPlayer(arg);
 
 			IpTable iptable = IpTable.getInstance();
 			if (target != null) {
 				Account.ban(target.getAccountName());
-				iptable.banIp(target.getNetConnection(). getIp()); // BAN ¸®½ºÆ®¿¡ IP¸¦ ´õÇÑ´Ù
+				iptable.banIp(target.getNetConnection(). getIp()); // BAN ë¦¬ìŠ¤íŠ¸ì— IPë¥¼ ë”í•œë‹¤
 				L1World.getInstance().broadcastPacketToAll(new S_SystemMessage((new StringBuilder())
-						.append(target.getName()).append(" ´ÔÀ» Ãß¹æ Çß½À´Ï´Ù.")
+						.append(target.getName()).append(" ë‹˜ì„ ì¶”ë°© í–ˆìŠµë‹ˆë‹¤.")
 						.toString()));
 				target.sendPackets(new S_Disconnect());
 			} else {
 				pc.sendPackets(new S_SystemMessage(
-						"±×·¯ÇÑ ÀÌ¸§ÀÇ Ä³¸¯ÅÍ´Â ¿ùµå³»¿¡´Â Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù. "));
+						"ê·¸ëŸ¬í•œ ì´ë¦„ì˜ ìºë¦­í„°ëŠ” ì›”ë“œë‚´ì—ëŠ” ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. "));
 			}
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " Ä³¸¯ÅÍ¸íÀ¸·Î ÀÔ·ÂÇØ ÁÖ¼¼¿ä. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + " ìºë¦­í„°ëª…ìœ¼ë¡œ ì…ë ¥í•´ ì£¼ì„¸ìš”. "));
 		}
 	}
 }

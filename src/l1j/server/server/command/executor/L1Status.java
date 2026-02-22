@@ -41,7 +41,7 @@ public class L1Status implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 			StringTokenizer st = new StringTokenizer(arg);
 			String char_name = st.nextToken();
 			String param = st.nextToken();
@@ -55,7 +55,7 @@ public class L1Status implements L1CommandExecutor {
 			}
 
 			if (target == null) {
-				pc.sendPackets(new S_ServerMessage(73, char_name)); // \f1%0Àº °ÔÀÓÀ» ÇÏ°í ÀÖÁö ¾Ê½À´Ï´Ù.
+				pc.sendPackets(new S_ServerMessage(73, char_name)); // \f1%0ì€ ê²Œì„ì„ í•˜ê³  ìˆì§€ ì•ŠìŠµë‹ˆë‹¤.
 				return;
 			}
 
@@ -94,7 +94,7 @@ public class L1Status implements L1CommandExecutor {
 					}
 					target.setAccessLevel((short) value);
 					target.sendPackets(new S_SystemMessage(
-							"¸®½ºÅ¸Æ®ÇÏ¸é ¿î¿µÀÚ·Î ½Â°İµË´Ï´Ù."));
+							"ë¦¬ìŠ¤íƒ€íŠ¸í•˜ë©´ ìš´ì˜ìë¡œ ìŠ¹ê²©ë©ë‹ˆë‹¤."));
 				} else if (param.equalsIgnoreCase("STR")) {
 					target.addBaseStr((byte) (value - target.getBaseStr()));
 				} else if (param.equalsIgnoreCase("CON")) {
@@ -108,21 +108,21 @@ public class L1Status implements L1CommandExecutor {
 				} else if (param.equalsIgnoreCase("CHA")) {
 					target.addBaseCha((byte) (value - target.getBaseCha()));
 				} else {
-					pc.sendPackets(new S_SystemMessage("½ºÅ×ÀÌÅÍ½º " + param
-							+ " (Àº)´Â ºÒ¸íÇÕ´Ï´Ù."));
+					pc.sendPackets(new S_SystemMessage("ìŠ¤í…Œì´í„°ìŠ¤ " + param
+							+ " (ì€)ëŠ” ë¶ˆëª…í•©ë‹ˆë‹¤."));
 					return;
 				}
-				target.save(); // DB¿¡ Ä³¸¯ÅÍ Á¤º¸¸¦ ±âÀÔÇÑ´Ù
+				target.save(); // DBì— ìºë¦­í„° ì •ë³´ë¥¼ ê¸°ì…í•œë‹¤
 			}
 			target.sendPackets(new S_OwnCharStatus(target));
-			pc.sendPackets(new S_SystemMessage(target.getName() + " ÀÇ" + param
-					+ "(À»)¸¦" + value + "·Î º¯°æÇß½À´Ï´Ù."));
+			pc.sendPackets(new S_SystemMessage(target.getName() + " ì˜" + param
+					+ "(ì„)ë¥¼" + value + "ë¡œ ë³€ê²½í–ˆìŠµë‹ˆë‹¤."));
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".¼ÂÆÃ Ä³¸¯ÅÍ¸í ½ºÅİ º¯°æÄ¡ ¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä."));
+			pc.sendPackets(new S_SystemMessage(".ì…‹íŒ… ìºë¦­í„°ëª… ìŠ¤í…Ÿ ë³€ê²½ì¹˜ ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”."));
 		}
 	}
 }

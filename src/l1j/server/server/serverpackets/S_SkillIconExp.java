@@ -7,7 +7,7 @@ import l1j.server.server.Opcodes;
 
 public class S_SkillIconExp extends ServerBasePacket {
 
-	public S_SkillIconExp(int i){  // ¾ÆÀÎÇÏ»çµåÀÇ Ãàº¹
+	public S_SkillIconExp(int i){  // ì•„ì¸í•˜ì‚¬ë“œì˜ ì¶•ë³µ
 	    writeC(Opcodes.S_OPCODE_SKILLICONGFX);
 	    writeC(0x52);
 	    writeC(i);

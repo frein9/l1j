@@ -43,8 +43,8 @@ public class L1MonsterTrap extends L1Trap {
 	private final int _npcId;
 	private final int _count;
 
-	private L1Npc _npcTemp = null; // ÆÛÆ÷¸Õ½º¸¦ À§ÇØ¼­(¶§¹®¿¡) Ä³½¬
-	private Constructor _constructor = null; // ÆÛÆ÷¸Õ½º¸¦ À§ÇØ¼­(¶§¹®¿¡) Ä³½¬
+	private L1Npc _npcTemp = null; // í¼í¬ë¨¼ìŠ¤ë¥¼ ìœ„í•´ì„œ(ë•Œë¬¸ì—) ìºì‰¬
+	private Constructor _constructor = null; // í¼í¬ë¨¼ìŠ¤ë¥¼ ìœ„í•´ì„œ(ë•Œë¬¸ì—) ìºì‰¬
 
 	public L1MonsterTrap(TrapStorage storage) {
 		super(storage);
@@ -64,7 +64,7 @@ public class L1MonsterTrap extends L1Trap {
 		L1Map m = loc.getMap();
 		int x = loc.getX();
 		int y = loc.getY();
-		// loc¸¦ Áß½ÉÀ¸·Î, 1¿·dÅ¸ÀÏÀÇ Á¤¹æÇüÀ» ±×¸®´Â Point ¸®½ºÆ®¸¦ ¸¸µç´Ù
+		// locë¥¼ ì¤‘ì‹¬ìœ¼ë¡œ, 1ì˜†díƒ€ì¼ì˜ ì •ë°©í˜•ì„ ê·¸ë¦¬ëŠ” Point ë¦¬ìŠ¤íŠ¸ë¥¼ ë§Œë“ ë‹¤
 		for (int i = 0; i < d; i++) {
 			addListIfPassable(result, m, new Point(d - i + x, i + y));
 			addListIfPassable(result, m, new Point(-(d - i) + x, -i + y));
@@ -112,7 +112,7 @@ public class L1MonsterTrap extends L1Trap {
 
 		List<Point> points = getSpawnablePoints(trapObj.getLocation(), 5);
 		
-		// ²úÀ» ¼ö ÀÖ´Â Àå¼Ò°¡ ¾øÀ¸¸é Á¾·á
+		// ë“ì„ ìˆ˜ ìˆëŠ” ì¥ì†Œê°€ ì—†ìœ¼ë©´ ì¢…ë£Œ
 		if (points.isEmpty()) {
 			return;
 		}

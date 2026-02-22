@@ -46,11 +46,11 @@ public class C_BoardWrite extends ClientBasePacket {
 		String date = currentTime();
 		String title = readS();
 		String content = readS();
-		//System.out.println("°Ô½ÃÆÇ Á¦¸ñ ±æÀÌ : "+ title.length()); 
+		//System.out.println("ê²Œì‹œíŒ ì œëª© ê¸¸ì´ : "+ title.length()); 
 		L1Object tg = L1World.getInstance().findObject(id);	
 		if (title.length() > 16) {
 			L1PcInstance pc = client.getActiveChar();
-			pc.sendPackets(new S_SystemMessage("Á¦¸ñÀ¸·Î ¾µ ¼ö ÀÖ´Â ±ÛÀÚ¼ö¸¦ ÃÊ°úÇÏ¿´½À´Ï´Ù."));
+			pc.sendPackets(new S_SystemMessage("ì œëª©ìœ¼ë¡œ ì“¸ ìˆ˜ ìˆëŠ” ê¸€ììˆ˜ë¥¼ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤."));
 			return;
 		}
 		if (tg != null) {
@@ -58,7 +58,7 @@ public class C_BoardWrite extends ClientBasePacket {
 			pc.getInventory().consumeItem(L1ItemId.ADENA, 300);
 			BoardTable.getInstance().writeTopic(pc, date, title, content);
 		} else {
-			_log.warning("ºÎÁ¤ÇÑ NPCID : " + id);
+			_log.warning("ë¶€ì •í•œ NPCID : " + id);
 		}
 	}
 

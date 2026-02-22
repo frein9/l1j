@@ -45,38 +45,38 @@ public class L1GuardInstance extends L1NpcInstance {
 	private static final long serialVersionUID = 1L;
 	private static Logger _log = Logger.getLogger(L1GuardInstance.class. getName());
 
-	// Å¸°ÙÀ» Ã£´Â´Ù
+	// íƒ€ê²Ÿì„ ì°¾ëŠ”ë‹¤
 	@Override
 	public void searchTarget() {
-		// Å¸°Ù ¼ö»ö
+		// íƒ€ê²Ÿ ìˆ˜ìƒ‰
 		L1PcInstance targetPlayer = null;
 		L1InvasionInstance targetGuard= null;
 		int npcid = getNpcTemplate().get_npcId();
 		boolean isNowWar = false;
 		for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(this)) {	
-			/** °ø¼ºÀÏ¶§? */
+			/** ê³µì„±ì¼ë•Œ? */
 			int castleId = L1CastleLocation.getCastleIdByArea(pc);
 				if (castleId > 0) {
 					isNowWar = WarTimeController.getInstance()
 							.isNowWar(castleId);
 				}	
-			/** °ø¼ºÀÏ¶§? */
+			/** ê³µì„±ì¼ë•Œ? */
 			if (pc.getCurrentHp() <= 0 || pc.isDead() || pc.isGm()
-					|| pc.isGhost() || !isNowWar) { // °ø¼ºÀÏ¶§?
+					|| pc.isGhost() || !isNowWar) { // ê³µì„±ì¼ë•Œ?
 				continue;
 			}
-			if (!pc.isInvisble() || getNpcTemplate(). is_agrocoi()) // ÀÎºñÁöÃ¼Å© 
+			if (!pc.isInvisble() || getNpcTemplate(). is_agrocoi()) // ì¸ë¹„ì§€ì²´í¬ 
 			{
-				if (pc.isWanted()) { // PK·Î ÁØºñÁßÀÎ°¡
+				if (pc.isWanted()) { // PKë¡œ ì¤€ë¹„ì¤‘ì¸ê°€
 					targetPlayer = pc;
 					break;
 				}		
-				if(npcid == 778805 || npcid == 778806 ){ //°æºñº´id
-					L1Clan clan = L1World.getInstance().getClan(pc.getClanname()); //Å¬·£ÀÇ ÀÌ¸§À» ¿ÀºêÁ§Æ®clan¿¡ »ğÀÔ
-					if (clan != null) { //Å¬·£ÀÌÀÖ´ÂÁö ¿©ºÎ
-					int castle_id = clan.getCastleId(); // ¿ÀºêÁ§Æ®clanÀÇ ¼ºid¸¦ °Ë»ö
-					if(castle_id != 4){ //±â¶õ¼ºÀÇ Ç÷¿øÀÌ¾Æ´Ò½Ã 4:±â¶õ¼º
-					targetPlayer = pc; //Å¸°Ù¿¡³Ö¾îÁØ´Ù
+				if(npcid == 778805 || npcid == 778806 ){ //ê²½ë¹„ë³‘id
+					L1Clan clan = L1World.getInstance().getClan(pc.getClanname()); //í´ëœì˜ ì´ë¦„ì„ ì˜¤ë¸Œì íŠ¸clanì— ì‚½ì…
+					if (clan != null) { //í´ëœì´ìˆëŠ”ì§€ ì—¬ë¶€
+					int castle_id = clan.getCastleId(); // ì˜¤ë¸Œì íŠ¸clanì˜ ì„±idë¥¼ ê²€ìƒ‰
+					if(castle_id != 4){ //ê¸°ë€ì„±ì˜ í˜ˆì›ì´ì•„ë‹ì‹œ 4:ê¸°ë€ì„±
+					targetPlayer = pc; //íƒ€ê²Ÿì—ë„£ì–´ì¤€ë‹¤
 					break;
 					}
 					}
@@ -110,7 +110,7 @@ public class L1GuardInstance extends L1NpcInstance {
 		}
 	}
 
-	// Å¸°ÙÀÌ ¾ø´Â °æ¿ìÀÇ Ã³¸®
+	// íƒ€ê²Ÿì´ ì—†ëŠ” ê²½ìš°ì˜ ì²˜ë¦¬
 	@Override
 	public boolean noTarget() {
 		if (getLocation()
@@ -119,16 +119,16 @@ public class L1GuardInstance extends L1NpcInstance {
 			if (dir != -1) {
 				setDirectionMove(dir);
 				setSleepTime(calcSleepTime(getPassispeed(), MOVE_SPEED));
-			} else // ³Ê¹« ¸Õ or°æ·Î°¡ ¹ß°ßµÇÁö ¾Ê´Â °æ¿ì´Â ÅÚ·¹Æ÷Æ® ÇØ µ¹¾Æ°£´Ù
+			} else // ë„ˆë¬´ ë¨¼ orê²½ë¡œê°€ ë°œê²¬ë˜ì§€ ì•ŠëŠ” ê²½ìš°ëŠ” í…”ë ˆí¬íŠ¸ í•´ ëŒì•„ê°„ë‹¤
 			{
 				teleport(getHomeX(), getHomeY(), 1);
 			}
 		} else {
 			if (L1World.getInstance().getRecognizePlayer(this).size() == 0) {
-				return true; // ÁÖÀ§¿¡ ÇÃ·¹ÀÌ¾î°¡ ¾ø¾îÁö¸é(ÀÚ) AIÃ³¸® Á¾·á
+				return true; // ì£¼ìœ„ì— í”Œë ˆì´ì–´ê°€ ì—†ì–´ì§€ë©´(ì) AIì²˜ë¦¬ ì¢…ë£Œ
 			}
 			if (isDead()) {
-				return true; //°æºñº´ÀÌÁ×À»½Ã Å¸°ÙÀ»ÇØÁ¦ÇÏµµ·Ïº¯°æ
+				return true; //ê²½ë¹„ë³‘ì´ì£½ì„ì‹œ íƒ€ê²Ÿì„í•´ì œí•˜ë„ë¡ë³€ê²½
 				}
 		   }
 		return false;
@@ -180,117 +180,117 @@ public class L1GuardInstance extends L1NpcInstance {
 		String pri_name = "";
 
 		if (talking != null) {
-			// Å°ÆÛ
-			if (npcid == 70549 || // ÄËÆ®¼º¿ŞÂÊ ¹Ù±ù¹®Å°ÆÛ
-					npcid == 70985) { // ÄËÆ®¼º ¿À¸¥ÂÊ¿Ü¹®Å°ÆÛ
+			// í‚¤í¼
+			if (npcid == 70549 || // ì¼„íŠ¸ì„±ì™¼ìª½ ë°”ê¹¥ë¬¸í‚¤í¼
+					npcid == 70985) { // ì¼„íŠ¸ì„± ì˜¤ë¥¸ìª½ì™¸ë¬¸í‚¤í¼
 				hascastle = checkHasCastle(player,
 						L1CastleLocation.KENT_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
 					htmlid = "gateokeeper";
 					htmldata = new String[] { player.getName() };
 				} else {
 					htmlid = "gatekeeperop";
 				}
-			} else if (npcid == 70656) { // ÄËÆ® Å°¿ìÄ¡¹®Å°ÆÛ
+			} else if (npcid == 70656) { // ì¼„íŠ¸ í‚¤ìš°ì¹˜ë¬¸í‚¤í¼
 				hascastle = checkHasCastle(player,
 						L1CastleLocation.KENT_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
 					htmlid = "gatekeeper";
 					htmldata = new String[] { player.getName() };
 				} else {
 					htmlid = "gatekeeperop";
 				}
-			} else if (npcid == 70600 || // ¿ÀÅ©ÀÇ »ï¿Ü¹®Å°ÆÛ
+			} else if (npcid == 70600 || // ì˜¤í¬ì˜ ì‚¼ì™¸ë¬¸í‚¤í¼
 					npcid == 70986) {
 				hascastle = checkHasCastle(player,
 						L1CastleLocation.OT_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
 					htmlid = "orckeeper";
 				} else {
 					htmlid = "orckeeperop";
 				}
-			} else if (npcid == 70687 || // À©´Ù¿ôµå ¼º¹Û¹®Å°ÆÛ
+			} else if (npcid == 70687 || // ìœˆë‹¤ì›ƒë“œ ì„±ë°–ë¬¸í‚¤í¼
 					npcid == 70987) {
 				hascastle = checkHasCastle(player,
 						L1CastleLocation.WW_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
 					htmlid = "gateokeeper";
 					htmldata = new String[] { player.getName() };
 				} else {
 					htmlid = "gatekeeperop";
 				}
-			} else if (npcid == 70778) { // À©´Ù¿ôµå Å°¿ìÄ¡¹®Å°ÆÛ
+			} else if (npcid == 70778) { // ìœˆë‹¤ì›ƒë“œ í‚¤ìš°ì¹˜ë¬¸í‚¤í¼
 				hascastle = checkHasCastle(player,
 						L1CastleLocation.WW_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
 					htmlid = "gatekeeper";
 					htmldata = new String[] { player.getName() };
 				} else {
 					htmlid = "gatekeeperop";
 				}
 			} else if (npcid == 70800
-					|| // ±â¶õ ¼º¹Û¹®Å°ÆÛ
+					|| // ê¸°ë€ ì„±ë°–ë¬¸í‚¤í¼
 					npcid == 70988 || npcid == 70989 || npcid == 70990
 					|| npcid == 70991) {
 				hascastle = checkHasCastle(player,
 						L1CastleLocation.GIRAN_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
 					htmlid = "gateokeeper";
 					htmldata = new String[] { player.getName() };
 				} else {
 					htmlid = "gatekeeperop";
 				}
-			} else if (npcid == 70817) { // ±â¶õ Å°¿ìÄ¡¹®Å°ÆÛ
+			} else if (npcid == 70817) { // ê¸°ë€ í‚¤ìš°ì¹˜ë¬¸í‚¤í¼
 				hascastle = checkHasCastle(player,
 						L1CastleLocation.GIRAN_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
 					htmlid = "gatekeeper";
 					htmldata = new String[] { player.getName() };
 				} else {
 					htmlid = "gatekeeperop";
 				}
-			} else if (npcid == 70862 || // Heine ¼º¹Û¹®Å°ÆÛ
+			} else if (npcid == 70862 || // Heine ì„±ë°–ë¬¸í‚¤í¼
 					npcid == 70992) {
 				hascastle = checkHasCastle(player,
 						L1CastleLocation.HEINE_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
 					htmlid = "gateokeeper";
 					htmldata = new String[] { player.getName() };
 				} else {
 					htmlid = "gatekeeperop";
 				}
-			} else if (npcid == 70863) { // Heine Å°¿ìÄ¡¹®Å°ÆÛ
+			} else if (npcid == 70863) { // Heine í‚¤ìš°ì¹˜ë¬¸í‚¤í¼
 				hascastle = checkHasCastle(player,
 						L1CastleLocation.HEINE_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
 					htmlid = "gatekeeper";
 					htmldata = new String[] { player.getName() };
 				} else {
 					htmlid = "gatekeeperop";
 				}
-			} else if (npcid == 70993 || // µå¿öÈÄ ¼º¹Û¹®Å°ÆÛ
+			} else if (npcid == 70993 || // ë“œì›Œí›„ ì„±ë°–ë¬¸í‚¤í¼
 					npcid == 70994) {
 				hascastle = checkHasCastle(player,
 						L1CastleLocation.DOWA_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
 					htmlid = "gateokeeper";
 					htmldata = new String[] { player.getName() };
 				} else {
 					htmlid = "gatekeeperop";
 				}
-			} else if (npcid == 70995) { // µå¿öÈÄ Å°¿ìÄ¡¹®Å°ÆÛ
+			} else if (npcid == 70995) { // ë“œì›Œí›„ í‚¤ìš°ì¹˜ë¬¸í‚¤í¼
 				hascastle = checkHasCastle(player,
 						L1CastleLocation.DOWA_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
 					htmlid = "gatekeeper";
 					htmldata = new String[] { player.getName() };
 				} else {
 					htmlid = "gatekeeperop";
 				}
-			} else if (npcid == 70996) { // ¿¡µ§ Å°¿ìÄ¡¹®Å°ÆÛ
+			} else if (npcid == 70996) { // ì—ë´ í‚¤ìš°ì¹˜ë¬¸í‚¤í¼
 				hascastle = checkHasCastle(player,
 						L1CastleLocation.ADEN_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
 					htmlid = "gatekeeper";
 					htmldata = new String[] { player.getName() };
 				} else {
@@ -298,10 +298,10 @@ public class L1GuardInstance extends L1NpcInstance {
 				}
 			}
 
-			// ±ÙÀ§º´
-			else if (npcid == 60514) { // ÄËÆ®¼º±ÙÀ§º´
+			// ê·¼ìœ„ë³‘
+			else if (npcid == 60514) { // ì¼„íŠ¸ì„±ê·¼ìœ„ë³‘
 				for (L1Clan clan : L1World.getInstance(). getAllClans()) {
-					if (clan.getCastleId() // ¼ºÁÖ Å©¶õ
+					if (clan.getCastleId() // ì„±ì£¼ í¬ë€
 					== L1CastleLocation.KENT_CASTLE_ID) {
 						clan_name = clan.getClanName();
 						pri_name = clan.getLeaderName();
@@ -310,9 +310,9 @@ public class L1GuardInstance extends L1NpcInstance {
 				}
 				htmlid = "ktguard6";
 				htmldata = new String[] { getName(), clan_name, pri_name };
-			} else if (npcid == 60560) { // ¿ÀÅ© ±ÙÀ§º´
+			} else if (npcid == 60560) { // ì˜¤í¬ ê·¼ìœ„ë³‘
 				for (L1Clan clan : L1World.getInstance(). getAllClans()) {
-					if (clan.getCastleId() // ¼ºÁÖ Å©¶õ
+					if (clan.getCastleId() // ì„±ì£¼ í¬ë€
 					== L1CastleLocation.OT_CASTLE_ID) {
 						clan_name = clan.getClanName();
 						pri_name = clan.getLeaderName();
@@ -321,9 +321,9 @@ public class L1GuardInstance extends L1NpcInstance {
 				}
 				htmlid = "orcguard6";
 				htmldata = new String[] { getName(), clan_name, pri_name };
-			} else if (npcid == 60552) { // À©´Ù¿ôµå¼º±ÙÀ§º´
+			} else if (npcid == 60552) { // ìœˆë‹¤ì›ƒë“œì„±ê·¼ìœ„ë³‘
 				for (L1Clan clan : L1World.getInstance(). getAllClans()) {
-					if (clan.getCastleId() // ¼ºÁÖ Å©¶õ
+					if (clan.getCastleId() // ì„±ì£¼ í¬ë€
 					== L1CastleLocation.WW_CASTLE_ID) {
 						clan_name = clan.getClanName();
 						pri_name = clan.getLeaderName();
@@ -332,11 +332,11 @@ public class L1GuardInstance extends L1NpcInstance {
 				}
 				htmlid = "wdguard6";
 				htmldata = new String[] { getName(), clan_name, pri_name };
-			} else if (npcid == 60524 || // ±â¶õ°Å¸® ÀÔ±¸ ±ÙÀ§º´(È°)
-					npcid == 60525 || // ±â¶õ°Å¸® ÀÔ±¸ ±ÙÀ§º´
-					npcid == 60529) { // ±â¶õ¼º±ÙÀ§º´
+			} else if (npcid == 60524 || // ê¸°ë€ê±°ë¦¬ ì…êµ¬ ê·¼ìœ„ë³‘(í™œ)
+					npcid == 60525 || // ê¸°ë€ê±°ë¦¬ ì…êµ¬ ê·¼ìœ„ë³‘
+					npcid == 60529) { // ê¸°ë€ì„±ê·¼ìœ„ë³‘
 				for (L1Clan clan : L1World.getInstance(). getAllClans()) {
-					if (clan.getCastleId() // ¼ºÁÖ Å©¶õ
+					if (clan.getCastleId() // ì„±ì£¼ í¬ë€
 					== L1CastleLocation.GIRAN_CASTLE_ID) {
 						clan_name = clan.getClanName();
 						pri_name = clan.getLeaderName();
@@ -345,9 +345,9 @@ public class L1GuardInstance extends L1NpcInstance {
 				}
 				htmlid = "grguard6";
 				htmldata = new String[] { getName(), clan_name, pri_name };
-			} else if (npcid == 70857) { // Heine¼ºHeine °¡ÀÌµå
+			} else if (npcid == 70857) { // Heineì„±Heine ê°€ì´ë“œ
 				for (L1Clan clan : L1World.getInstance(). getAllClans()) {
-					if (clan.getCastleId() // ¼ºÁÖ Å©¶õ
+					if (clan.getCastleId() // ì„±ì£¼ í¬ë€
 					== L1CastleLocation.HEINE_CASTLE_ID) {
 						clan_name = clan.getClanName();
 						pri_name = clan.getLeaderName();
@@ -356,10 +356,10 @@ public class L1GuardInstance extends L1NpcInstance {
 				}
 				htmlid = "heguard6";
 				htmldata = new String[] { getName(), clan_name, pri_name };
-			} else if (npcid == 60530 || // µå¿öÈÄ¼ºµå¿öÈÄ°¡µå
+			} else if (npcid == 60530 || // ë“œì›Œí›„ì„±ë“œì›Œí›„ê°€ë“œ
 					npcid == 60531) {
 				for (L1Clan clan : L1World.getInstance(). getAllClans()) {
-					if (clan.getCastleId() // ¼ºÁÖ Å©¶õ
+					if (clan.getCastleId() // ì„±ì£¼ í¬ë€
 					== L1CastleLocation.DOWA_CASTLE_ID) {
 						clan_name = clan.getClanName();
 						pri_name = clan.getLeaderName();
@@ -368,10 +368,10 @@ public class L1GuardInstance extends L1NpcInstance {
 				}
 				htmlid = "dcguard6";
 				htmldata = new String[] { getName(), clan_name, pri_name };
-			} else if (npcid == 60533 || // ¿¡µ§¼º°¡ÀÌµå
+			} else if (npcid == 60533 || // ì—ë´ì„±ê°€ì´ë“œ
 					npcid == 60534) {
 				for (L1Clan clan : L1World.getInstance(). getAllClans()) {
-					if (clan.getCastleId() // ¼ºÁÖ Å©¶õ
+					if (clan.getCastleId() // ì„±ì£¼ í¬ë€
 					== L1CastleLocation.ADEN_CASTLE_ID) {
 						clan_name = clan.getClanName();
 						pri_name = clan.getLeaderName();
@@ -380,9 +380,9 @@ public class L1GuardInstance extends L1NpcInstance {
 				}
 				htmlid = "adguard6";
 				htmldata = new String[] { getName(), clan_name, pri_name };
-			} else if (npcid == 81156) { // ¿¡µ§ Á¤Âûº´(µğ¾Æµå ¿ä»õ)
+			} else if (npcid == 81156) { // ì—ë´ ì •ì°°ë³‘(ë””ì•„ë“œ ìš”ìƒˆ)
 				for (L1Clan clan : L1World.getInstance(). getAllClans()) {
-					if (clan.getCastleId() // ¼ºÁÖ Å©¶õ
+					if (clan.getCastleId() // ì„±ì£¼ í¬ë€
 					== L1CastleLocation.DIAD_CASTLE_ID) {
 						clan_name = clan.getClanName();
 						pri_name = clan.getLeaderName();
@@ -393,16 +393,16 @@ public class L1GuardInstance extends L1NpcInstance {
 				htmldata = new String[] { getName(), clan_name, pri_name };
 			}
 
-			// html Ç¥½Ã ÆĞÅ¶ ¼Û½Å
-			if (htmlid != null) { // htmlid°¡ ÁöÁ¤µÇ°í ÀÖ´Â °æ¿ì
-				if (htmldata != null) { // html ÁöÁ¤ÀÌ ÀÖ´Â °æ¿ì´Â Ç¥½Ã
+			// html í‘œì‹œ íŒ¨í‚· ì†¡ì‹ 
+			if (htmlid != null) { // htmlidê°€ ì§€ì •ë˜ê³  ìˆëŠ” ê²½ìš°
+				if (htmldata != null) { // html ì§€ì •ì´ ìˆëŠ” ê²½ìš°ëŠ” í‘œì‹œ
 					player.sendPackets(new S_NPCTalkReturn(objid, htmlid,
 							htmldata));
 				} else {
 					player.sendPackets(new S_NPCTalkReturn(objid, htmlid));
 				}
 			} else {
-				if (player.getLawful() < -1000) { // ÇÃ·¹ÀÌ¾î°¡ Ä«¿ÀÆ½
+				if (player.getLawful() < -1000) { // í”Œë ˆì´ì–´ê°€ ì¹´ì˜¤í‹±
 					player.sendPackets(new S_NPCTalkReturn(talking, objid, 2));
 				} else {
 					player.sendPackets(new S_NPCTalkReturn(talking, objid, 1));
@@ -420,10 +420,10 @@ public class L1GuardInstance extends L1NpcInstance {
 	}
 
 	@Override
-	public void receiveDamage(L1Character attacker, int damage) { // °ø°İÀ¸·Î HP¸¦ ÁÙÀÏ ¶§´Â ¿©±â¸¦ »ç¿ë
+	public void receiveDamage(L1Character attacker, int damage) { // ê³µê²©ìœ¼ë¡œ HPë¥¼ ì¤„ì¼ ë•ŒëŠ” ì—¬ê¸°ë¥¼ ì‚¬ìš©
 		if (getCurrentHp() > 0 && !isDead()) {
 			if (damage >= 0) {
-				if (!(attacker instanceof L1EffectInstance)) { // FW´Â ÇìÀÌÆ® ¾øÀ½
+				if (!(attacker instanceof L1EffectInstance)) { // FWëŠ” í—¤ì´íŠ¸ ì—†ìŒ
 					setHate(attacker, damage);
 				}
 			}
@@ -450,7 +450,7 @@ public class L1GuardInstance extends L1NpcInstance {
 				setCurrentHp(newHp);
 			}
 		} else if (getCurrentHp() == 0 && !isDead()) {
-		} else if (!isDead()) { // ¸¸¾àÀ» À§ÇØ
+		} else if (!isDead()) { // ë§Œì•½ì„ ìœ„í•´
 			setDead(true);
 			setStatus(ActionCodes.ACTION_Die);
 			Death death = new Death(attacker);
@@ -507,11 +507,11 @@ public class L1GuardInstance extends L1NpcInstance {
 				break;
 			}
 		}
-		if (!isExistDefenseClan) { // ¼ºÁÖ Å©¶õÀÌ ¾ø´Ù
+		if (!isExistDefenseClan) { // ì„±ì£¼ í¬ë€ì´ ì—†ë‹¤
 			return true;
 		}
 
-		if (pc.getClanid() != 0) { // Å©¶õ ¼Ò¼ÓÁß
+		if (pc.getClanid() != 0) { // í¬ë€ ì†Œì†ì¤‘
 			L1Clan clan = L1World.getInstance(). getClan(pc.getClanname());
 			if (clan != null) {
 				if (clan.getCastleId() == castleId) {

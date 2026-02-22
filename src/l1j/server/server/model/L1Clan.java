@@ -113,7 +113,7 @@ public class L1Clan {
 		}
 	}
 
-	public L1PcInstance[] getOnlineClanMember() // ¿Â¶óÀÎÁßÀÇ Å©¶õ¿ø¸¸
+	public L1PcInstance[] getOnlineClanMember() // ì˜¨ë¼ì¸ì¤‘ì˜ í¬ë€ì›ë§Œ
 	{
 		ArrayList<L1PcInstance> onlineMembers = new ArrayList<L1PcInstance>();
 		for (String name : membersNameList) {
@@ -176,13 +176,13 @@ public class L1Clan {
 		String rank = "";
 		if (pc != null) {
 			if (pc.getClanRank() == CLAN_RANK_PROBATION) {
-				rank = "[°ß½À]";
+				rank = "[ê²¬ìŠµ]";
 			} else if (pc.getClanRank() == CLAN_RANK_PUBLIC) {
-				rank = "[ÀÏ¹İ]";
+				rank = "[ì¼ë°˜]";
 			} else if (pc.getClanRank() == CLAN_RANK_GUARDIAN) {
-				rank = "[°¡µğ¾È]";
+				rank = "[ê°€ë””ì•ˆ]";
 			} else if (pc.getClanRank() == CLAN_RANK_PRINCE) {
-				rank = "[Ç÷¸Í ±ºÁÖ]";
+				rank = "[í˜ˆë§¹ êµ°ì£¼]";
 			} else {
 				rank = "";
 			}

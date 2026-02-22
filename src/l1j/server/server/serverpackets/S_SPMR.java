@@ -37,19 +37,19 @@ public class S_SPMR extends ServerBasePacket {
 
 	private void buildPacket(L1PcInstance pc) {
 		writeC(Opcodes.S_OPCODE_SPMR);
-		// À§Áî ´ï ÀÏºÎÀÇ SP´Â S_SkillBrave ¼Û½Å½Ã¿¡ °»½ÅµÇ±â (À§ÇØ)¶§¹®¿¡ °øÁ¦ÇØ µĞ´Ù
+		// ìœ„ì¦ˆ ëŒ ì¼ë¶€ì˜ SPëŠ” S_SkillBrave ì†¡ì‹ ì‹œì— ê°±ì‹ ë˜ê¸° (ìœ„í•´)ë•Œë¬¸ì— ê³µì œí•´ ë‘”ë‹¤
 		if (pc.hasSkillEffect(L1SkillId.STATUS_WISDOM_POTION)) {
-			writeC(pc.getSp() - pc.getTrueSp() - 2); // Àåºñ Áõ°¡ÇÑ SP
+			writeC(pc.getSp() - pc.getTrueSp() - 2); // ì¥ë¹„ ì¦ê°€í•œ SP
 		} else {
-			writeC(pc.getSp() - pc.getTrueSp()); // Àåºñ Áõ°¡ÇÑ SP
+			writeC(pc.getSp() - pc.getTrueSp()); // ì¥ë¹„ ì¦ê°€í•œ SP
 		}
 		int mr = pc.getTrueMr() - pc.getBaseMr();
 		  if(mr > 0){
-		    writeC(mr); // Àåºñ³ª ¸¶¹ıÀ¸·Î Áõ°¡ÇÑ MR
+		    writeC(mr); // ì¥ë¹„ë‚˜ ë§ˆë²•ìœ¼ë¡œ ì¦ê°€í•œ MR
 		   } else {
 		    writeC(0);
 		}
-		//writeC(pc.getTrueMr() - pc.getBaseMr()); // Àåºñ³ª ¸¶¹ıÀ¸·Î Áõ°¡ÇÑ MR
+		//writeC(pc.getTrueMr() - pc.getBaseMr()); // ì¥ë¹„ë‚˜ ë§ˆë²•ìœ¼ë¡œ ì¦ê°€í•œ MR
 	}
 
 	@Override

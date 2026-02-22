@@ -34,16 +34,16 @@ public class C_HireSoldier extends ClientBasePacket {
 	private static Logger _log = Logger.getLogger(C_HireSoldier.class
 			.getName());
 
-	// S_HireSoldier¸¦ º¸³½´Ù°í Ç¥½ÃµÇ´Â °í¿ë À©µµ¿ì·Î OK¸¦ ´©¸£´Â °÷ÀÇ ÆĞÅ¶ÀÌ º¸³»Áø´Ù
+	// S_HireSoldierë¥¼ ë³´ë‚¸ë‹¤ê³  í‘œì‹œë˜ëŠ” ê³ ìš© ìœˆë„ìš°ë¡œ OKë¥¼ ëˆ„ë¥´ëŠ” ê³³ì˜ íŒ¨í‚·ì´ ë³´ë‚´ì§„ë‹¤
 	public C_HireSoldier(byte[] decrypt, ClientThread client) {
 		super(decrypt);
-		int something1 = readH(); // S_HireSoldier ÆĞÅ¶ÀÇ ÀÎ¼ö
-		int something2 = readH(); // S_HireSoldier ÆĞÅ¶ÀÇ ÀÎ¼ö
-		int something3 = readD(); // 1ÀÌ¿Ü µé¾î°¡Áö ¾Ê¾Æ?
-		int something4 = readD(); // S_HireSoldier ÆĞÅ¶ÀÇ ÀÎ¼ö
-		int number = readH(); // °í¿ëÇÏ´Â ¼ö
+		int something1 = readH(); // S_HireSoldier íŒ¨í‚·ì˜ ì¸ìˆ˜
+		int something2 = readH(); // S_HireSoldier íŒ¨í‚·ì˜ ì¸ìˆ˜
+		int something3 = readD(); // 1ì´ì™¸ ë“¤ì–´ê°€ì§€ ì•Šì•„?
+		int something4 = readD(); // S_HireSoldier íŒ¨í‚·ì˜ ì¸ìˆ˜
+		int number = readH(); // ê³ ìš©í•˜ëŠ” ìˆ˜
 		
-		// < ¿ëº´ °í¿ë Ã³¸®
+		// < ìš©ë³‘ ê³ ìš© ì²˜ë¦¬
 	}
 
 	@Override

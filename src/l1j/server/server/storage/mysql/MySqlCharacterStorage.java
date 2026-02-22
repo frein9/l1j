@@ -50,7 +50,7 @@ public class MySqlCharacterStorage implements CharacterStorage {
 			rs = pstm.executeQuery();
 			if (!rs.next()) {
 				/*
-				 * SELECT°¡ °á°ú¸¦ µ¹·ÁÁÖÁö ¾Ê¾Ò´Ù.
+				 * SELECTê°€ ê²°ê³¼ë¥¼ ëŒë ¤ì£¼ì§€ ì•Šì•˜ë‹¤.
 				 */
 				return null;
 			}
@@ -130,7 +130,7 @@ public class MySqlCharacterStorage implements CharacterStorage {
 			pc.setOriginalInt(rs.getInt("OriginalInt"));
 			pc.setOriginalWis(rs.getInt("OriginalWis"));
 			pc.setSealingPW(rs.getString("sealingPW"));
-            pc.setLastActive(rs.getTimestamp("lastactive")); // ¾ÆÀÎÇÏ»çµåÀÇ Ãàº¹
+            pc.setLastActive(rs.getTimestamp("lastactive")); // ì•„ì¸í•˜ì‚¬ë“œì˜ ì¶•ë³µ
             pc.setAinZone(rs.getInt("ain_zone"));
             pc.setAinPoint(rs.getInt("ain_point"));
             pc.setStExp(rs.getInt("St_Exp")); 
@@ -251,8 +251,8 @@ public class MySqlCharacterStorage implements CharacterStorage {
 			rs = pstm.executeQuery();
 			if (!rs.next()) {
 				/*
-				 * SELECT°¡ °ªÀ» µ¹·ÁÁÖÁö ¾Ê¾Ò´Ù
-				 * Á¸ÀçÇÏÁö ¾Ê´ÂÁö, È¤Àº ´Ù¸¥ ¾îÄ«¿îÆ®°¡ ¼ÒÀ¯ÇÏ°í ÀÖ´Â Ä³¸¯ÅÍ¸íÀÌ ÁöÁ¤µÇ¾ú´Ù°í ÇÏ´Â °ÍÀÌ µÈ´Ù.
+				 * SELECTê°€ ê°’ì„ ëŒë ¤ì£¼ì§€ ì•Šì•˜ë‹¤
+				 * ì¡´ì¬í•˜ì§€ ì•ŠëŠ”ì§€, í˜¹ì€ ë‹¤ë¥¸ ì–´ì¹´ìš´íŠ¸ê°€ ì†Œìœ í•˜ê³  ìˆëŠ” ìºë¦­í„°ëª…ì´ ì§€ì •ë˜ì—ˆë‹¤ê³  í•˜ëŠ” ê²ƒì´ ëœë‹¤.
 				 */
 				_log.warning("invalid delete char request: account="
 						+ accountName + " char=" + charName);
@@ -356,7 +356,7 @@ public class MySqlCharacterStorage implements CharacterStorage {
 			pstm.setInt(++i, pc.getOriginalInt());
 			pstm.setInt(++i, pc.getOriginalWis());
 			pstm.setString(++i, pc.getSealingPW());
-			pstm.setTimestamp(++i, pc.getLastActive());  // ¾ÆÀÎÇÏ»çµåÀÇ Ãàº¹
+			pstm.setTimestamp(++i, pc.getLastActive());  // ì•„ì¸í•˜ì‚¬ë“œì˜ ì¶•ë³µ
             pstm.setInt(++i, pc.getAinZone());
             pstm.setInt(++i, pc.getAinPoint());
             pstm.setInt(++i, pc.getStExp()); 

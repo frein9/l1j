@@ -25,10 +25,10 @@ import l1j.server.Config;
 import l1j.server.server.model.L1TaxCalculator;
 import l1j.server.server.templates.L1ShopItem;
 import l1j.server.server.model.Instance.L1PcInstance;
-//** ¹ö±×ÀïÀÌ Ã³´Ü **//	By µµ¿ì³Ê
+//** ë²„ê·¸ìŸì´ ì²˜ë‹¨ **//	By ë„ìš°ë„ˆ
 import l1j.server.server.BugKick;	
 import l1j.server.server.serverpackets.S_SystemMessage; 
-//** ¹ö±×ÀïÀÌ Ã³´Ü **//	By µµ¿ì³Ê
+//** ë²„ê·¸ìŸì´ ì²˜ë‹¨ **//	By ë„ìš°ë„ˆ
 
 class L1ShopBuyOrder {
 	private final L1ShopItem _item;
@@ -56,7 +56,7 @@ public class L1ShopBuyOrderList {
 	private int _totalWeight = 0;
 	private int _totalPrice = 0;
 	private int _totalPriceTaxIncluded = 0;
-	private int bugok  = 0;	//** »óÁ¡ ±¸ÀÔ ºñ¼Å½º ¹æ¾î **//  by µµ¿ì³Ê	
+	private int bugok  = 0;	//** ìƒì  êµ¬ì… ë¹„ì…”ìŠ¤ ë°©ì–´ **//  by ë„ìš°ë„ˆ	
 
 	L1ShopBuyOrderList(L1Shop shop) {
 		_shop = shop;
@@ -71,32 +71,32 @@ public class L1ShopBuyOrderList {
 		L1ShopItem shopItem = _shop.getSellingItems().get(orderNumber);
 
 		int price = (int) (shopItem.getPrice() * Config.RATE_SHOP_SELLING_PRICE);
-		// ¿À¹öÇÃ·Î¿ì Ã¼Å©
+		// ì˜¤ë²„í”Œë¡œìš° ì²´í¬
 		for (int j = 0; j < count; j++) {
 			if (price * j < 0) {
 				return;
 			}
 		}
 
-		if (price >= 10000 && count > 50 ) { //43¾ï ¹ö±×¹æÁö By_Black
-            pc.sendPackets(new S_SystemMessage("\\fV1¸¸¿øÀÌ»óÀÇ ¹°Ç°Àº 50°³ÀÌ»ó ±¸ÀÔÇÒ¼ö¾ø½À´Ï´Ù."));
+		if (price >= 10000 && count > 50 ) { //43ì–µ ë²„ê·¸ë°©ì§€ By_Black
+            pc.sendPackets(new S_SystemMessage("\\fV1ë§Œì›ì´ìƒì˜ ë¬¼í’ˆì€ 50ê°œì´ìƒ êµ¬ì…í• ìˆ˜ì—†ìŠµë‹ˆë‹¤."));
 			return;
 		}
 
-        if (price > 10000000 && count > 1) { // ########### »óÁ¡ ¹ö±×¹æÁö Ãß°¡
-            pc.sendPackets(new S_SystemMessage("\\fV10000000¿øÀÌ»óÀÇ ¹°Ç°Àº 1°³ÀÌ»ó ±¸ÀÔÇÒ¼ö¾ø½À´Ï´Ù."));
+        if (price > 10000000 && count > 1) { // ########### ìƒì  ë²„ê·¸ë°©ì§€ ì¶”ê°€
+            pc.sendPackets(new S_SystemMessage("\\fV10000000ì›ì´ìƒì˜ ë¬¼í’ˆì€ 1ê°œì´ìƒ êµ¬ì…í• ìˆ˜ì—†ìŠµë‹ˆë‹¤."));
             return;
         } 
 
-		long totalPrice = _totalPrice;	//** ¿£Áø¹æ¾î Ãß°¡ **//		By µµ¿ì³Ê
+		long totalPrice = _totalPrice;	//** ì—”ì§„ë°©ì–´ ì¶”ê°€ **//		By ë„ìš°ë„ˆ
 		_totalPrice += price * count;
 			   _totalPriceTaxIncluded += _taxCalc.layTax(price) * count;
 		_totalWeight += shopItem.getItem().getWeight() * count
 				* shopItem.getPackCount();
 
-		//** »óÁ¡ ±¸ÀÔ ºñ¼Å½º ¹æ¾î **//  by µµ¿ì³Ê		
-		if( totalPrice >100000000){	// ±¸ÀÔ ±İ¾× ÃÑ±İ¾×Àº 1¾ïÀÌ´Ù!!
-	   	 bugok =1;         //42¾ï ¹ö±× ¸·¾Æº¸Àå 
+		//** ìƒì  êµ¬ì… ë¹„ì…”ìŠ¤ ë°©ì–´ **//  by ë„ìš°ë„ˆ		
+		if( totalPrice >100000000){	// êµ¬ì… ê¸ˆì•¡ ì´ê¸ˆì•¡ì€ 1ì–µì´ë‹¤!!
+	   	 bugok =1;         //42ì–µ ë²„ê·¸ ë§‰ì•„ë³´ì¥ 
 			return;
 			}
 		
@@ -105,7 +105,7 @@ public class L1ShopBuyOrderList {
 	      	return;
 	       }
 			
-		if( totalPrice >50000000 &&_totalWeight >19&&count >500){ //ÀÌ·± °æ¿ì ³ª¿Ã¼ö ¾ø´Ù ¤»
+		if( totalPrice >50000000 &&_totalWeight >19&&count >500){ //ì´ëŸ° ê²½ìš° ë‚˜ì˜¬ìˆ˜ ì—†ë‹¤ ã…‹
 	       BugKick.getInstance().KickPlayer(pc);
 	   	 bugok =1;
 			return;
@@ -119,7 +119,7 @@ public class L1ShopBuyOrderList {
 		if (count > 1000 ) {	
 	   	 bugok =1;
 			return;}
-			//** »óÁ¡ ±¸ÀÔ ºñ¼Å½º ¹æ¾î **//  by µµ¿ì³Ê	
+			//** ìƒì  êµ¬ì… ë¹„ì…”ìŠ¤ ë°©ì–´ **//  by ë„ìš°ë„ˆ	
 
 		if (shopItem.getItem().isStackable()) {
 			_list.add(new L1ShopBuyOrder(shopItem, count
@@ -136,11 +136,11 @@ public class L1ShopBuyOrderList {
 		return _list;
 	}
 	
-	//** »óÁ¡ ±¸ÀÔ ºñ¼Å½º ¹æ¾î **//  by µµ¿ì³Ê	
+	//** ìƒì  êµ¬ì… ë¹„ì…”ìŠ¤ ë°©ì–´ **//  by ë„ìš°ë„ˆ	
 	public int BugOk() {
 		return bugok;
 	}	
-	//** »óÁ¡ ±¸ÀÔ ºñ¼Å½º ¹æ¾î **//  by µµ¿ì³Ê	
+	//** ìƒì  êµ¬ì… ë¹„ì…”ìŠ¤ ë°©ì–´ **//  by ë„ìš°ë„ˆ	
 
 	public int getTotalWeight() {
 		return _totalWeight;

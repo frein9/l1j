@@ -29,7 +29,7 @@ import l1j.server.server.Opcodes;
 import l1j.server.server.datatables.ExpTable;
 import l1j.server.server.datatables.PetTable;
 import l1j.server.server.model.L1Character;
-import l1j.server.server.model.L1Clan; // ¼ºÇ÷ÀÏ°æ¿ì °æÇèÄ¡ Áõ°¡ ±¸Çö
+import l1j.server.server.model.L1Clan; // ì„±í˜ˆì¼ê²½ìš° ê²½í—˜ì¹˜ ì¦ê°€ êµ¬í˜„
 import l1j.server.server.model.L1Object;
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1NpcInstance;
@@ -40,12 +40,12 @@ import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.serverpackets.S_PetPack;
 import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.serverpackets.S_SkillIconExp;
-import l1j.server.server.serverpackets.S_ChatPacket; //¿ä°ÍµÎ Ãß°¡ÇØÁÖ¼¼¿ä
-import l1j.server.server.serverpackets.S_Disconnect; //ÀÓÆ÷Æ®½ÃÅµ´Ï´Ù.
+import l1j.server.server.serverpackets.S_ChatPacket; //ìš”ê²ƒë‘ ì¶”ê°€í•´ì£¼ì„¸ìš”
+import l1j.server.server.serverpackets.S_Disconnect; //ì„í¬íŠ¸ì‹œí‚µë‹ˆë‹¤.
 import l1j.server.server.templates.L1Pet;
 import l1j.server.server.model.Instance.L1ScarecrowInstance;
 
-// import l1j.server.server.serverpackets.S_bonusstats; // º¸·ù
+// import l1j.server.server.serverpackets.S_bonusstats; // ë³´ë¥˜
 
 // Referenced classes of package l1j.server.server.utils:
 // CalcStat
@@ -56,7 +56,7 @@ public class CalcExp {
 
 	private static Logger _log = Logger.getLogger(CalcExp.class.getName());
 
-	private static Random _random = new Random(System.nanoTime()); // Ãß°¡ÇØÁÖ¼¼¿ä
+	private static Random _random = new Random(System.nanoTime()); // ì¶”ê°€í•´ì£¼ì„¸ìš”
 
 
 	public static final int MAX_EXP = ExpTable.getExpByLevel(100) - 1;
@@ -76,7 +76,7 @@ public class CalcExp {
 		L1Object l1object = L1World.getInstance().findObject(targetid);
 		L1NpcInstance npc = (L1NpcInstance) l1object;
 
-		// ÇìÀÌÆ®ÀÇ ÇÕ°è¸¦ Ãëµæ
+		// í—¤ì´íŠ¸ì˜ í•©ê³„ë¥¼ ì·¨ë“
 		L1Character acquisitor;
 		int hate = 0;
 		int acquire_exp = 0;
@@ -100,12 +100,12 @@ public class CalcExp {
 				if (acquisitor instanceof L1PcInstance) {
 					totalHateLawful += hate;
 				}
-			} else { // null¿´°Å³ª Á×¾î ÀÖÀ¸¸é(ÀÚ) ¹èÁ¦
+			} else { // nullì˜€ê±°ë‚˜ ì£½ì–´ ìˆìœ¼ë©´(ì) ë°°ì œ
 				acquisitorList.remove(i);
 				hateList.remove(i);
 			}
 		}
-		if (totalHateExp == 0) { // ÃëµæÀÚ°¡ ¾ø´Â °æ¿ì
+		if (totalHateExp == 0) { // ì·¨ë“ìê°€ ì—†ëŠ” ê²½ìš°
 			return;
 		}
 
@@ -119,9 +119,9 @@ public class CalcExp {
 			}
 			int lawful = npc.getLawful();
 
-			if (l1pcinstance.isInParty()) { // ÆÄÆ¼Áß
-				// ÆÄÆ¼ÀÇ ÇìÀÌÆ®ÀÇ ÇÕ°è¸¦ »êÃâ
-				// ÆÄÆ¼ ¸â¹ö ÀÌ¿Ü¿¡´Â ±×´ë·Î ¹èºĞ
+			if (l1pcinstance.isInParty()) { // íŒŒí‹°ì¤‘
+				// íŒŒí‹°ì˜ í—¤ì´íŠ¸ì˜ í•©ê³„ë¥¼ ì‚°ì¶œ
+				// íŒŒí‹° ë©¤ë²„ ì´ì™¸ì—ëŠ” ê·¸ëŒ€ë¡œ ë°°ë¶„
 				partyHateExp = 0;
 				partyHateLawful = 0;
 				for (i = hateList.size() - 1; i >= 0; i--) {
@@ -175,9 +175,9 @@ public class CalcExp {
 					party_lawful = (lawful * partyHateLawful / totalHateLawful);
 				}
 
-				// EXP, ·Î¿ìÈÇ ¹èºĞ
+				// EXP, ë¡œìš°í›Œ ë°°ë¶„
 
-				// ÇÁ¸®º¸³ª½º
+				// í”„ë¦¬ë³´ë‚˜ìŠ¤
 				double pri_bonus = 0;
 				L1PcInstance leader = l1pcinstance.getParty().getLeader();
 				if (leader.isCrown()
@@ -186,7 +186,7 @@ public class CalcExp {
 					pri_bonus = 0.059;
 				}
 
-				// PT°æÇèÄ¡ÀÇ °è»ê
+				// PTê²½í—˜ì¹˜ì˜ ê³„ì‚°
 				L1PcInstance[] ptMembers = l1pcinstance.getParty().getMembers();
 				double pt_bonus = 0;
 				for (L1PcInstance each : ptMembers) {
@@ -201,7 +201,7 @@ public class CalcExp {
 
 				party_exp = (int) (party_exp * (1 + pt_bonus + pri_bonus));
 
-				// ÀÚÄ³¸¯ÅÍ¿Í ±× ¾Ö¿Ïµ¿¹°¡¤»ç¸óÀÇ ÇìÀÌÆ®ÀÇ ÇÕ°è¸¦ »êÃâ
+				// ììºë¦­í„°ì™€ ê·¸ ì• ì™„ë™ë¬¼Â·ì‚¬ëª¬ì˜ í—¤ì´íŠ¸ì˜ í•©ê³„ë¥¼ ì‚°ì¶œ
 				if (party_level > 0) {
 					dist = ((l1pcinstance.getLevel() * l1pcinstance.getLevel()) / party_level);
 				}
@@ -231,8 +231,8 @@ public class CalcExp {
 						}
 					}
 				}
-				// ÀÚÄ³¸¯ÅÍ¿Í ±× ¾Ö¿Ïµ¿¹°¡¤»ç¸ó¿¡ ºĞ¹è
-				if (ownHateExp != 0) { // °ø°İ¿¡ Âü°¡ÇÏ°í ÀÖ¾ú´Ù
+				// ììºë¦­í„°ì™€ ê·¸ ì• ì™„ë™ë¬¼Â·ì‚¬ëª¬ì— ë¶„ë°°
+				if (ownHateExp != 0) { // ê³µê²©ì— ì°¸ê°€í•˜ê³  ìˆì—ˆë‹¤
 					for (i = hateList.size() - 1; i >= 0; i--) {
 						acquisitor = (L1Character) acquisitorList.get(i);
 						hate = (Integer) hateList.get(i);
@@ -257,12 +257,12 @@ public class CalcExp {
 						} else if (acquisitor instanceof L1SummonInstance) {
 						}
 					}
-				} else { // °ø°İ¿¡ Âü°¡ÇÏ°í ÀÖÁö ¾Ê¾Ò´Ù
-					// ÀÚÄ³¸¯ÅÍ¿¡¸¸ ºĞ¹è
+				} else { // ê³µê²©ì— ì°¸ê°€í•˜ê³  ìˆì§€ ì•Šì•˜ë‹¤
+					// ììºë¦­í„°ì—ë§Œ ë¶„ë°°
 					AddExp(l1pcinstance, member_exp, member_lawful);
 				}
 
-				// ÆÄÆ¼ ¸â¹ö¿Í ±× ¾Ö¿Ïµ¿¹°¡¤»ç¸óÀÇ ÇìÀÌÆ®ÀÇ ÇÕ°è¸¦ »êÃâ
+				// íŒŒí‹° ë©¤ë²„ì™€ ê·¸ ì• ì™„ë™ë¬¼Â·ì‚¬ëª¬ì˜ í—¤ì´íŠ¸ì˜ í•©ê³„ë¥¼ ì‚°ì¶œ
 				for (int cnt = 0; cnt < ptMembers.length; cnt++) {
 					if (l1pcinstance.knownsObject(ptMembers[cnt])) {
 						if (party_level > 0) {
@@ -297,8 +297,8 @@ public class CalcExp {
 								}
 							}
 						}
-						// ÆÄÆ¼ ¸â¹ö¿Í ±× ¾Ö¿Ïµ¿¹°¡¤»ç¸ó¿¡ ºĞ¹è
-						if (ownHateExp != 0) { // °ø°İ¿¡ Âü°¡ÇÏ°í ÀÖ¾ú´Ù
+						// íŒŒí‹° ë©¤ë²„ì™€ ê·¸ ì• ì™„ë™ë¬¼Â·ì‚¬ëª¬ì— ë¶„ë°°
+						if (ownHateExp != 0) { // ê³µê²©ì— ì°¸ê°€í•˜ê³  ìˆì—ˆë‹¤
 							for (i = hateList.size() - 1; i >= 0; i--) {
 								acquisitor = (L1Character) acquisitorList
 										.get(i);
@@ -324,14 +324,14 @@ public class CalcExp {
 								} else if (acquisitor instanceof L1SummonInstance) {
 								}
 							}
-						} else { // °ø°İ¿¡ Âü°¡ÇÏ°í ÀÖÁö ¾Ê¾Ò´Ù
-							// ÆÄÆ¼ ¸â¹ö¿¡¸¸ ºĞ¹è
+						} else { // ê³µê²©ì— ì°¸ê°€í•˜ê³  ìˆì§€ ì•Šì•˜ë‹¤
+							// íŒŒí‹° ë©¤ë²„ì—ë§Œ ë¶„ë°°
 							AddExp(ptMembers[cnt], member_exp, member_lawful);
 						}
 					}
 				}
-			} else { // ÆÄÆ¼¸¦ Â¥Áö ¾Ê¾Ò´Ù
-				// EXP, ·Î¿ìÈÇÀÇ ºĞ¹è
+			} else { // íŒŒí‹°ë¥¼ ì§œì§€ ì•Šì•˜ë‹¤
+				// EXP, ë¡œìš°í›Œì˜ ë¶„ë°°
 				for (i = hateList.size() - 1; i >= 0; i--) {
 					acquisitor = (L1Character) acquisitorList.get(i);
 					hate = (Integer) hateList.get(i);
@@ -364,18 +364,18 @@ public class CalcExp {
 		double foodBonus = 1.0;
 		double expposion = 1.0;
 		double buffBonus = 1.0;
-        double ainBonus = 1.0;  // ¾ÆÀÎÇÏ»çµåÀÇ Ãàº¹
+        double ainBonus = 1.0;  // ì•„ì¸í•˜ì‚¬ë“œì˜ ì¶•ë³µ
 
 
-		if (pc.hasSkillEffect(L1SkillId.COOKING_1_7_N) // ¹ö¼¸½ºÇÁ °æÇèÄ¡ Áõ°¡ 1%
+		if (pc.hasSkillEffect(L1SkillId.COOKING_1_7_N) // ë²„ì„¯ìŠ¤í”„ ê²½í—˜ì¹˜ ì¦ê°€ 1%
 				|| pc.hasSkillEffect(L1SkillId.COOKING_1_7_S)) {
 			foodBonus = 1.01;
 		}
-		if (pc.hasSkillEffect(L1SkillId.COOKING_1_15_N) // Å©·¦»ì½ºÇÁ °æÇèÄ¡ Áõ°¡ 2%
+		if (pc.hasSkillEffect(L1SkillId.COOKING_1_15_N) // í¬ë©ì‚´ìŠ¤í”„ ê²½í—˜ì¹˜ ì¦ê°€ 2%
 				|| pc.hasSkillEffect(L1SkillId.COOKING_1_15_S)) {
 			foodBonus = 1.02;
 		}
-		if (pc.hasSkillEffect(L1SkillId.COOKING_1_23_N) // ¹Ù½Ç¸®½ºÅ© ¾Ë °æÇèÄ¡ Áõ°¡ 3%
+		if (pc.hasSkillEffect(L1SkillId.COOKING_1_23_N) // ë°”ì‹¤ë¦¬ìŠ¤í¬ ì•Œ ê²½í—˜ì¹˜ ì¦ê°€ 3%
 				|| pc.hasSkillEffect(L1SkillId.COOKING_1_23_S)) {
 			foodBonus = 1.03;
 		}
@@ -388,10 +388,10 @@ public class CalcExp {
 		if (pc.hasSkillEffect(7383)) {
             buffBonus = 1.20;
         } 
-		if (pc.getAinPoint() > 0) {   // ¾ÆÀÎÇÏ»çµåÀÇ Ãàº¹
+		if (pc.getAinPoint() > 0) {   // ì•„ì¸í•˜ì‚¬ë“œì˜ ì¶•ë³µ
 			
    if (!(_npc instanceof L1PetInstance || _npc instanceof L1SummonInstance
-     || _npc instanceof L1ScarecrowInstance)) { // Æê/¼­¸Õ/Çã¼ö¾Æºñ´Â Á¦¿Ü
+     || _npc instanceof L1ScarecrowInstance)) { // í«/ì„œë¨¼/í—ˆìˆ˜ì•„ë¹„ëŠ” ì œì™¸
             ainBonus = 1.7;
             pc.setStExp(pc.getStExp() + Ain_Exp);
             if (pc.getStExp() >= 5500 && pc.getAinPoint() > 0){
@@ -402,21 +402,21 @@ public class CalcExp {
             }
           } 
  
-////////////////////  ÄÚ¸¶ ¹öÇÁ»ç Ãß°¡  //////////////////////
+////////////////////  ì½”ë§ˆ ë²„í”„ì‚¬ ì¶”ê°€  //////////////////////
 
 		int add_exp = (int) (exp * exppenalty * Config.RATE_XP * foodBonus * expposion * buffBonus * ainBonus);	
 
 
-        /*½ºÅİÃ¢*/
+        /*ìŠ¤í…Ÿì°½*/
 		/*if (pc.getLevel() >= 51 && pc.getLevel() - 50 > pc.getBonusStats()) {
 		if ((pc.getBaseStr() + pc.getBaseDex() + pc.getBaseCon()
 			+ pc.getBaseInt() + pc.getBaseWis() + pc.getBaseCha()) < 150) {
 			pc.sendPackets(new S_bonusstats(pc.getId(), 1));
 			}
-		}*/ // º¸·ù
-		/*½ºÅİÃ¢*/
+		}*/ // ë³´ë¥˜
+		/*ìŠ¤í…Ÿì°½*/
 		
-		/* Æø·¾ ¹æÁö*/
+		/* í­ë ™ ë°©ì§€*/
 		
 		/* L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
   if (pc.getLevel() == 1 || pc.getLevel() == 2  || pc.getLevel() == 3 || pc.getLevel() == 4 || pc.getLevel() == 5 || pc.getLevel() == 6
@@ -452,66 +452,66 @@ public class CalcExp {
   } else { 
    pc.addExp(add_exp); 
   }*/
-		/* Æø·¾ ¹æÁö */
+		/* í­ë ™ ë°©ì§€ */
 		
-	/////////////////////////////¼º´ø °æÇèÄ¡ Áõ°¡////////////
+	/////////////////////////////ì„±ë˜ ê²½í—˜ì¹˜ ì¦ê°€////////////
 		if(pc.getMapId() == 523 || pc.getMapId() == 524 || pc.getMapId() == 88
 				 || pc.getMapId() == 783 || pc.getMapId() == 784 || pc.getMapId() == 23 || pc.getMapId() == 24
 				 || pc.getMapId() == 240 || pc.getMapId() == 241 || pc.getMapId() == 242 || pc.getMapId() == 243
 				 || pc.getMapId() == 248 || pc.getMapId() == 249 || pc.getMapId() == 250 || pc.getMapId() == 251
-				 || pc.getMapId() == 257 || pc.getMapId() == 258 || pc.getMapId() == 259)////¸Ê¾ÆµÚÀÔ´Ï´Ù.
+				 || pc.getMapId() == 257 || pc.getMapId() == 258 || pc.getMapId() == 259)////ë§µì•„ë’¤ì…ë‹ˆë‹¤.
 		  {
-		   pc.addExp(add_exp * 6/5);/// ¼ıÀÚ°¡ ¹èÀ²ÀÔ´Ï´Ù.
+		   pc.addExp(add_exp * 6/5);/// ìˆ«ìê°€ ë°°ìœ¨ì…ë‹ˆë‹¤.
 		  // add_exp += add_exp * 0.5;// 
 		  }else{
 
-	if (pc.get_autogo()==1){ //¿ÀÅäÀÎÁõÀ» ÀÔ·Â¹Ş±âÀ§ÇØ ´ë±âÁß
-          pc.set_autook(1);  // ¿ÀÅäÀÎÁõ ¼º°ø½Ã 0À» ÀÔ·Â¹Ş±âÀ§ÇÑ
+	if (pc.get_autogo()==1){ //ì˜¤í† ì¸ì¦ì„ ì…ë ¥ë°›ê¸°ìœ„í•´ ëŒ€ê¸°ì¤‘
+          pc.set_autook(1);  // ì˜¤í† ì¸ì¦ ì„±ê³µì‹œ 0ì„ ì…ë ¥ë°›ê¸°ìœ„í•œ
           pc.set_autoct(pc.get_autoct()+1); 
          }
   
-    if (pc.get_autook()==0){ // ¿ÀÅäÀÎÁõ ¼º°ø½Ã
-          pc.set_autoct(0); // ¿ÀÅä Ä«¿îÆ® ÃÊ±âÈ­
+    if (pc.get_autook()==0){ // ì˜¤í† ì¸ì¦ ì„±ê³µì‹œ
+          pc.set_autoct(0); // ì˜¤í†  ì¹´ìš´íŠ¸ ì´ˆê¸°í™”
          }
   
-    if (pc.get_autoct() >= 7){ //¿ÀÅä ½ÇÆĞ 7¹ø °­Á¦Á¾·á
-         pc.sendPackets(new S_Disconnect()); // ¿©±â ¼öÁ¤½Ã ¾Ğ·ù¹× Á¦Á¦¸¦ °¡ÇÔ
+    if (pc.get_autoct() >= 7){ //ì˜¤í†  ì‹¤íŒ¨ 7ë²ˆ ê°•ì œì¢…ë£Œ
+         pc.sendPackets(new S_Disconnect()); // ì—¬ê¸° ìˆ˜ì •ì‹œ ì••ë¥˜ë° ì œì œë¥¼ ê°€í•¨
          }
-      String code ; // ·£´ı ÄÚµå¸¦ Á¤ÇÏ´Â ½ºÆ®¸µ ¼±¾ğ
-      int autoch = 0; // ¿ÀÅäÀÎÁõÀ» ·£´ıÀ¸·Î ¶ß°ÔÇÏ±âÀ§ÇØ
-        autoch = _random.nextInt(250);  // ¿©±â ¼öÄ¡¸¦ ³ôÀÌ¸é ³ôÀÏ¼ö·Ï ÀÎÁõÄÚµå¶ã È®·ü Àû¾îÁü
-    if(autoch == 177 && pc.get_autoct()==0) { // 250/1È®·ü·Î ¿ÀÅäÀÎÁõÄÚµå Ç¥½Ã && ¿ÀÅäÄ«¿îÆ® 0ÀÏ¶§
+      String code ; // ëœë¤ ì½”ë“œë¥¼ ì •í•˜ëŠ” ìŠ¤íŠ¸ë§ ì„ ì–¸
+      int autoch = 0; // ì˜¤í† ì¸ì¦ì„ ëœë¤ìœ¼ë¡œ ëœ¨ê²Œí•˜ê¸°ìœ„í•´
+        autoch = _random.nextInt(250);  // ì—¬ê¸° ìˆ˜ì¹˜ë¥¼ ë†’ì´ë©´ ë†’ì¼ìˆ˜ë¡ ì¸ì¦ì½”ë“œëœ° í™•ë¥  ì ì–´ì§
+    if(autoch == 177 && pc.get_autoct()==0) { // 250/1í™•ë¥ ë¡œ ì˜¤í† ì¸ì¦ì½”ë“œ í‘œì‹œ && ì˜¤í† ì¹´ìš´íŠ¸ 0ì¼ë•Œ
         pc.set_autogo(1);
    
-       code = String.format("%04d", new Object[] { //·£´ı ÄÚµå¸¦ Á¤ÇÏ´Â ½ºÆ®¸µ
+       code = String.format("%04d", new Object[] { //ëœë¤ ì½”ë“œë¥¼ ì •í•˜ëŠ” ìŠ¤íŠ¸ë§
               Integer.valueOf(_random.nextInt(10000))
           });
-        pc.set_autocode(code); // Á¤ÇØÁø ÄÚµå¸¦ ÀúÀåÇÏ´Â ½ºÆ®¸µ
-      String chatText = "¿ÀÅä ¹æÁö ÄÚµå"+"["+pc.get_autocode()+"]"+"¸¦  Ã¤ÆÃÃ¢¿¡ ÀÔ·ÂÇÏ½Ê½Ã¿À. 3È¸ ¹ÌÀÔ·Â½Ã °ÔÀÓÁ¾·á";
+        pc.set_autocode(code); // ì •í•´ì§„ ì½”ë“œë¥¼ ì €ì¥í•˜ëŠ” ìŠ¤íŠ¸ë§
+      String chatText = "ì˜¤í†  ë°©ì§€ ì½”ë“œ"+"["+pc.get_autocode()+"]"+"ë¥¼  ì±„íŒ…ì°½ì— ì…ë ¥í•˜ì‹­ì‹œì˜¤. 3íšŒ ë¯¸ì…ë ¥ì‹œ ê²Œì„ì¢…ë£Œ";
        S_ChatPacket s_chatpacket1 = new S_ChatPacket(pc, chatText, Opcodes.S_OPCODE_NORMALCHAT, 2);
        pc.sendPackets(s_chatpacket1);
    
    
           }
 
-   if(pc.get_autoct()==3){ // ¿ÀÅäÀÎÁõ ¶ß°í ¹«½ÃÇÏ°í ¸÷3¸¶¸® ÀâÀ»½Ã µÎ¹øÂ° »õ·Î¿î ¿ÀÅäÀÎÁõ
+   if(pc.get_autoct()==3){ // ì˜¤í† ì¸ì¦ ëœ¨ê³  ë¬´ì‹œí•˜ê³  ëª¹3ë§ˆë¦¬ ì¡ì„ì‹œ ë‘ë²ˆì§¸ ìƒˆë¡œìš´ ì˜¤í† ì¸ì¦
       pc.set_autogo(1);
       code = String.format("%04d", new Object[] {
                Integer.valueOf(_random.nextInt(10000))
           });
        pc.set_autocode(code);
-     String chatText = "¿ÀÅä ¹æÁö ÄÚµå"+"["+pc.get_autocode()+"]"+"¸¦  Ã¤ÆÃÃ¢¿¡ ÀÔ·ÂÇÏ½Ê½Ã¿À. 2È¸ ¹ÌÀÔ·Â½Ã °ÔÀÓÁ¾·á";
+     String chatText = "ì˜¤í†  ë°©ì§€ ì½”ë“œ"+"["+pc.get_autocode()+"]"+"ë¥¼  ì±„íŒ…ì°½ì— ì…ë ¥í•˜ì‹­ì‹œì˜¤. 2íšŒ ë¯¸ì…ë ¥ì‹œ ê²Œì„ì¢…ë£Œ";
       S_ChatPacket s_chatpacket1 = new S_ChatPacket(pc, chatText, Opcodes.S_OPCODE_NORMALCHAT, 2);
       pc.sendPackets(s_chatpacket1);
         }
 
-   if(pc.get_autoct() == 6){ //µÎ¹øÂ° ¿ÀÅäÀÎÁõ ¹«½ÃÈÄ ¸÷ 3¸¶¸®´õ ÀâÀ»½Ã ¸¶Áö¸· ¿ÀÅäÀÎÁõ
+   if(pc.get_autoct() == 6){ //ë‘ë²ˆì§¸ ì˜¤í† ì¸ì¦ ë¬´ì‹œí›„ ëª¹ 3ë§ˆë¦¬ë” ì¡ì„ì‹œ ë§ˆì§€ë§‰ ì˜¤í† ì¸ì¦
       pc.set_autogo(1);
       code = String.format("%04d", new Object[] {
               Integer.valueOf(_random.nextInt(10000))
          });
       pc.set_autocode(code);
-     String chatText = "¿ÀÅä ¹æÁö ÄÚµå"+"["+code+"]"+"¸¦ Ã¤ÆÃÃ¢¿¡ ÀÔ·ÂÇÏ½Ê½Ã¿À. ¹ÌÀÔ·Â½Ã °ÔÀÓÁ¾·á";
+     String chatText = "ì˜¤í†  ë°©ì§€ ì½”ë“œ"+"["+code+"]"+"ë¥¼ ì±„íŒ…ì°½ì— ì…ë ¥í•˜ì‹­ì‹œì˜¤. ë¯¸ì…ë ¥ì‹œ ê²Œì„ì¢…ë£Œ";
       S_ChatPacket s_chatpacket1 = new S_ChatPacket(pc, chatText, Opcodes.S_OPCODE_NORMALCHAT, 2);
       pc.sendPackets(s_chatpacket1); 
    }
@@ -519,7 +519,7 @@ public class CalcExp {
 		  }
  }
 
-////////////////////////////¼º´ø °æÇèÄ¡ Áõ°¡////////////
+////////////////////////////ì„±ë˜ ê²½í—˜ì¹˜ ì¦ê°€////////////
 
 
 	private static void AddExpPet(L1PetInstance pet, int exp) {
@@ -529,8 +529,8 @@ public class CalcExp {
 		int petItemObjId = pet.getItemObjId();
 
 		int levelBefore = pet.getLevel();
-//		int totalExp = (int) (exp * Config.RATE_XP + pet.getExp()); // ########## A116 ¿øº» ¼Ò½º ÁÖ¼® Ã³¸® 
-		int totalExp = (int) (exp * Config.RATE_PET_XP + pet.getExp()); // ########## A137 Æê °æÇèÄ¡ ¹èÀ² ¼³Á¤ ¿ÜºÎÈ­ [³Ú] 
+//		int totalExp = (int) (exp * Config.RATE_XP + pet.getExp()); // ########## A116 ì›ë³¸ ì†ŒìŠ¤ ì£¼ì„ ì²˜ë¦¬ 
+		int totalExp = (int) (exp * Config.RATE_PET_XP + pet.getExp()); // ########## A137 í« ê²½í—˜ì¹˜ ë°°ìœ¨ ì„¤ì • ì™¸ë¶€í™” [ë„¬] 
 		if (totalExp >= ExpTable.getExpByLevel(51)) {
 			totalExp = ExpTable.getExpByLevel(51) - 1;
 		}
@@ -551,10 +551,10 @@ public class CalcExp {
 		pet.setExpPercent(expPercentage);
 		pc.sendPackets(new S_PetPack(pet, pc));
 
-		if (gap != 0) { // ·¹º§¾÷ÇÏ¸é(ÀÚ) DB¿¡ ±âÀÔÇÑ´Ù
+		if (gap != 0) { // ë ˆë²¨ì—…í•˜ë©´(ì) DBì— ê¸°ì…í•œë‹¤
 			L1Pet petTemplate = PetTable.getInstance()
 					.getTemplate(petItemObjId);
-			if (petTemplate == null) { // PetTable¿¡ ¾ø´Ù
+			if (petTemplate == null) { // PetTableì— ì—†ë‹¤
 				_log.warning("L1Pet == null");
 				return;
 			}
@@ -562,8 +562,8 @@ public class CalcExp {
 			petTemplate.set_level(pet.getLevel());
 			petTemplate.set_hp(pet.getMaxHp());
 			petTemplate.set_mp(pet.getMaxMp());
-			PetTable.getInstance().storePet(petTemplate); // DB¿¡ ±âÀÔÇØ
-			pc.sendPackets(new S_ServerMessage(320, pet.getName())); // \f1%0ÀÇ ·¹º§ÀÌ ¿Ã¶ú½À´Ï´Ù.
+			PetTable.getInstance().storePet(petTemplate); // DBì— ê¸°ì…í•´
+			pc.sendPackets(new S_ServerMessage(320, pet.getName())); // \f1%0ì˜ ë ˆë²¨ì´ ì˜¬ëìŠµë‹ˆë‹¤.
 		}
 	}
 }

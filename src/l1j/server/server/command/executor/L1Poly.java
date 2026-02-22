@@ -40,7 +40,7 @@ public class L1Poly implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 
 			StringTokenizer st = new StringTokenizer(arg);
 			String name = st.nextToken();
@@ -49,23 +49,23 @@ public class L1Poly implements L1CommandExecutor {
 			L1PcInstance tg = L1World.getInstance(). getPlayer(name);
 
 			if (tg == null) {
-				pc.sendPackets(new S_ServerMessage(73, name)); // \f1%0Àº °ÔÀÓÀ» ÇÏ°í ÀÖÁö ¾Ê½À´Ï´Ù.
+				pc.sendPackets(new S_ServerMessage(73, name)); // \f1%0ì€ ê²Œì„ì„ í•˜ê³  ìˆì§€ ì•ŠìŠµë‹ˆë‹¤.
 			} else {
 				try {
 					L1PolyMorph.doPoly(tg, polyid, 7200,
 							L1PolyMorph.MORPH_BY_GM);
 				} catch (Exception exception) {
 					pc.sendPackets(new S_SystemMessage(
-							". poly Ä³¸¯ÅÍ¸í ±×·¡ÇÈ ID ¶ó°í ÀÔ·ÂÇØ ÁÖ¼¼¿ä. "));
+							". poly ìºë¦­í„°ëª… ê·¸ë˜í”½ ID ë¼ê³  ì…ë ¥í•´ ì£¼ì„¸ìš”. "));
 				}
 			}
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
 			pc.sendPackets(new S_SystemMessage(cmdName
-					+ " Ä³¸¯ÅÍ¸í ±×·¡ÇÈ ID ¶ó°í ÀÔ·ÂÇØ ÁÖ¼¼¿ä. "));
+					+ " ìºë¦­í„°ëª… ê·¸ë˜í”½ ID ë¼ê³  ì…ë ¥í•´ ì£¼ì„¸ìš”. "));
 		}
 	}
 }

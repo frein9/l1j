@@ -41,9 +41,9 @@ import l1j.server.server.serverpackets.S_HouseMap;
 import l1j.server.server.serverpackets.S_HPUpdate;
 import l1j.server.server.serverpackets.S_MPUpdate;
 import l1j.server.server.serverpackets.S_SkillSound;
-//import l1j.server.server.model.skill.L1SkillId;  //¿şÆùÃß°¡
-import l1j.server.server.model.skill.L1SkillUse; //¿şÆùÃß°¡
-import static l1j.server.server.model.skill.L1SkillId. *; //¿şÆùÃß°¡
+//import l1j.server.server.model.skill.L1SkillId;  //ì›¨í°ì¶”ê°€
+import l1j.server.server.model.skill.L1SkillUse; //ì›¨í°ì¶”ê°€
+import static l1j.server.server.model.skill.L1SkillId. *; //ì›¨í°ì¶”ê°€
 import l1j.server.server.serverpackets.S_NpcChatPacket;
 import l1j.server.server.templates.L1Npc;	
 import l1j.server.server.serverpackets.S_ChangeHeading;
@@ -95,31 +95,31 @@ public class L1MerchantInstance extends L1NpcInstance {
 		int pcY = player.getY();
 		int npcX = getX();
 		int npcY = getY();
-		if (npcid == 777781){// µå·¡°ï Æ÷Å»
+		if (npcid == 777781){// ë“œë˜ê³¤ í¬íƒˆ
 			L1Teleport.teleport(player, 32601, 32741,(short) 1005, 7, true);
 		}
-		if (npcid == 777788){// ¾ÈÅ¸½ÃÀÛ->µ¿±¼
+		if (npcid == 777788){// ì•ˆíƒ€ì‹œì‘->ë™êµ´
 			L1Teleport.teleport(player, 32681, 32802,(short) 1005, 7, true);
 		}
-		if (npcid == 777791){// ¾ÈÅ¸½ÃÀÛ -> ¾ÈÅ¸´ë±âÇÏ´Â°÷
+		if (npcid == 777791){// ì•ˆíƒ€ì‹œì‘ -> ì•ˆíƒ€ëŒ€ê¸°í•˜ëŠ”ê³³
 			L1Teleport.teleport(player, 32671, 32671,(short) 1005, 7, true);
 		}
-		if (npcid == 777794){//¾ÈÅ¸´ë±â->¾ÈÅ¸¹æ
+		if (npcid == 777794){//ì•ˆíƒ€ëŒ€ê¸°->ì•ˆíƒ€ë°©
 			L1Teleport.teleport(player, 32796, 32662,(short) 1005, 7, true);
 		}
-		if (npcid == 777795){//Å©·¹ÀÌ-> ¾ÈÅ¸´ë±âÇÏ´Â°÷
+		if (npcid == 777795){//í¬ë ˆì´-> ì•ˆíƒ€ëŒ€ê¸°í•˜ëŠ”ê³³
 			L1Teleport.teleport(player, 32671, 32671,(short) 1005, 7, true);
 		}
-		if (npcid == 2000077){//ÆÄÇª½ÃÀÛ-> ÆÄÇªµ¿±¼
+		if (npcid == 2000077){//íŒŒí‘¸ì‹œì‘-> íŒŒí‘¸ë™êµ´
 			L1Teleport.teleport(player, 32762, 32851,(short) 1011, 5, true);
 		}
-		if (npcid == 2000078){//ÆÄÇª½ÃÀÛ-> ÆÄÇª·¹¾î
+		if (npcid == 2000078){//íŒŒí‘¸ì‹œì‘-> íŒŒí‘¸ë ˆì–´
 			L1Teleport.teleport(player, 32940, 32671,(short) 1011, 7, true);
 		}
-		if (npcid == 2000079){//ÆÄÇªµ¿±¼->ÆÄÇª·¹¾î
+		if (npcid == 2000079){//íŒŒí‘¸ë™êµ´->íŒŒí‘¸ë ˆì–´
 			L1Teleport.teleport(player, 32940, 32671,(short) 1011, 7, true);
 		}
-		if (npcid == 2000080){//ÆÄÇª·¹¾î->ÆÄÇª¹æ
+		if (npcid == 2000080){//íŒŒí‘¸ë ˆì–´->íŒŒí‘¸ë°©
 			L1Teleport.teleport(player, 32992, 32842,(short) 1011, 7, true);
 		}
 
@@ -154,155 +154,155 @@ public class L1MerchantInstance extends L1NpcInstance {
 		}
 	
 		if (talking != null) {
-			if (npcid == 70841) { // ·ç µğ ¿¤
-				if (player.isElf()) { // ¿¡¸£ÇÁ
+			if (npcid == 70841) { // ë£¨ ë”” ì—˜
+				if (player.isElf()) { // ì—ë¥´í”„
 					htmlid = "luudielE1";
-				} else if (player.isDarkelf()) { // ´ÙÅ© ¿¡¸£ÇÁ
+				} else if (player.isDarkelf()) { // ë‹¤í¬ ì—ë¥´í”„
 					htmlid = "luudielCE1";
 				} else {
 					htmlid = "luudiel1";
 				}
-			} else if (npcid == 70522) { // ±ºÅ¸
-				if (player.isCrown()) { // ±ºÁÖ
+			} else if (npcid == 70522) { // êµ°íƒ€
+				if (player.isCrown()) { // êµ°ì£¼
 					if (player.getLevel() >= 15) {
 						int lv15_step = quest.get_step(L1Quest.QUEST_LEVEL15);
-						if (lv15_step == 2 || lv15_step == L1Quest.QUEST_END) { // Å¬¸®¾î°¡ ³¡³­ »óÅÂ
+						if (lv15_step == 2 || lv15_step == L1Quest.QUEST_END) { // í´ë¦¬ì–´ê°€ ëë‚œ ìƒíƒœ
 							htmlid = "gunterp11";
 						} else {
 							htmlid = "gunterp9";
 						}
-					} else { // Lv15 ¹Ì¸¸
+					} else { // Lv15 ë¯¸ë§Œ
 						htmlid = "gunterp12";
 					}
-				} else if (player.isKnight()) { // ³ªÀÌÆ®
+				} else if (player.isKnight()) { // ë‚˜ì´íŠ¸
 					int lv30_step = quest.get_step(L1Quest.QUEST_LEVEL30);
-					if (lv30_step == 0) { // ¹Ì°³½Ã
+					if (lv30_step == 0) { // ë¯¸ê°œì‹œ
 						htmlid = "gunterk9";
 					} else if (lv30_step == 1) {
 						htmlid = "gunterkE1";
-					} else if (lv30_step == 2) { // ±ºÅ¸ µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+					} else if (lv30_step == 2) { // êµ°íƒ€ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 						htmlid = "gunterkE2";
-					} else if (lv30_step >= 3) { // ±ºÅ¸ Á¾·á°¡ ³¡³­ »óÅÂ
+					} else if (lv30_step >= 3) { // êµ°íƒ€ ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
 						htmlid = "gunterkE3";
 					}
-				} else if (player.isElf()) { // ¿¡¸£ÇÁ
+				} else if (player.isElf()) { // ì—ë¥´í”„
 					htmlid = "guntere1";
-				} else if (player.isWizard()) { // À§Àúµå
+				} else if (player.isWizard()) { // ìœ„ì €ë“œ
 					htmlid = "gunterw1";
-				} else if (player.isDarkelf()) { // ´ÙÅ© ¿¡¸£ÇÁ
+				} else if (player.isDarkelf()) { // ë‹¤í¬ ì—ë¥´í”„
 					htmlid = "gunterde1";
 				}
-			} else if (npcid == 70653) { // ¸¶»ş
-				if (player.isCrown()) { // ±ºÁÖ
+			} else if (npcid == 70653) { // ë§ˆìƒ¤
+				if (player.isCrown()) { // êµ°ì£¼
 					if (player.getLevel() >= 45) {
-						if (quest.isEnd(L1Quest.QUEST_LEVEL30)) { // lv30 Å¬¸®¾î°¡ ³¡³­ »óÅÂ
+						if (quest.isEnd(L1Quest.QUEST_LEVEL30)) { // lv30 í´ë¦¬ì–´ê°€ ëë‚œ ìƒíƒœ
 							int lv45_step = quest
 									.get_step(L1Quest.QUEST_LEVEL45);
-							if (lv45_step == L1Quest.QUEST_END) { // Å¬¸®¾î°¡ ³¡³­ »óÅÂ
+							if (lv45_step == L1Quest.QUEST_END) { // í´ë¦¬ì–´ê°€ ëë‚œ ìƒíƒœ
 								htmlid = "masha4";
-							} else if (lv45_step >= 1) { // µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+							} else if (lv45_step >= 1) { // ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 								htmlid = "masha3";
-							} else { // ¹Ìµ¿ÀÇ
+							} else { // ë¯¸ë™ì˜
 								htmlid = "masha1";
 							}
 						}
 					}
-				} else if (player.isKnight()) { // ³ªÀÌÆ®
+				} else if (player.isKnight()) { // ë‚˜ì´íŠ¸
 					if (player.getLevel() >= 45) {
-						if (quest.isEnd(L1Quest.QUEST_LEVEL30)) { // Lv30 Äù½ºÆ® Á¾·á°¡ ³¡³­ »óÅÂ
+						if (quest.isEnd(L1Quest.QUEST_LEVEL30)) { // Lv30 í€˜ìŠ¤íŠ¸ ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
 							int lv45_step = quest
 									.get_step(L1Quest.QUEST_LEVEL45);
-							if (lv45_step == L1Quest.QUEST_END) { // Å¬¸®¾î°¡ ³¡³­ »óÅÂ
+							if (lv45_step == L1Quest.QUEST_END) { // í´ë¦¬ì–´ê°€ ëë‚œ ìƒíƒœ
 								htmlid = "mashak3";
-							} else if (lv45_step == 0) { // ¹Ì°³½Ã
+							} else if (lv45_step == 0) { // ë¯¸ê°œì‹œ
 								htmlid = "mashak1";
-							} else if (lv45_step >= 1) { // µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+							} else if (lv45_step >= 1) { // ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 								htmlid = "mashak2";
 							}
 						}
 					}
-				} else if (player.isElf()) { // ¿¡¸£ÇÁ
+				} else if (player.isElf()) { // ì—ë¥´í”„
 					if (player.getLevel() >= 45) {
-						if (quest.isEnd(L1Quest.QUEST_LEVEL30)) { // Lv30 Äù½ºÆ® Á¾·á°¡ ³¡³­ »óÅÂ
+						if (quest.isEnd(L1Quest.QUEST_LEVEL30)) { // Lv30 í€˜ìŠ¤íŠ¸ ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
 							int lv45_step = quest
 									.get_step(L1Quest.QUEST_LEVEL45);
-							if (lv45_step == L1Quest.QUEST_END) { // Å¬¸®¾î°¡ ³¡³­ »óÅÂ
+							if (lv45_step == L1Quest.QUEST_END) { // í´ë¦¬ì–´ê°€ ëë‚œ ìƒíƒœ
 								htmlid = "mashae3";
-							} else if (lv45_step >= 1) { // µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+							} else if (lv45_step >= 1) { // ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 								htmlid = "mashae2";
-							} else { // ¹Ìµ¿ÀÇ
+							} else { // ë¯¸ë™ì˜
 								htmlid = "mashae1";
 							}
 						}
 					}
 				}
-			} else if (npcid == 70554) { // Á¦·Î
-				if (player.isCrown()) { // ±ºÁÖ
+			} else if (npcid == 70554) { // ì œë¡œ
+				if (player.isCrown()) { // êµ°ì£¼
 					if (player.getLevel() >= 15) {
 						int lv15_step = quest.get_step(L1Quest.QUEST_LEVEL15);
-						if (lv15_step == 1) { // Á¦·Î Å¬¸®¾î°¡ ³¡³­ »óÅÂ
+						if (lv15_step == 1) { // ì œë¡œ í´ë¦¬ì–´ê°€ ëë‚œ ìƒíƒœ
 							htmlid = "zero5";
-						} else if (lv15_step == L1Quest.QUEST_END) { // Á¦·Î, ±ºÅ¸Å©¸®¾Æ°¡ ³¡³­ »óÅÂ
+						} else if (lv15_step == L1Quest.QUEST_END) { // ì œë¡œ, êµ°íƒ€í¬ë¦¬ì•„ê°€ ëë‚œ ìƒíƒœ
 							htmlid = "zero1";// 6
 						} else {
 							htmlid = "zero1";
 						}
-					} else { // Lv15 ¹Ì¸¸
+					} else { // Lv15 ë¯¸ë§Œ
 						htmlid = "zero6";
 					}
 				}
-			} else if (npcid == 70783) { // ¾Æ¸®¾Æ
-				if (player.isCrown()) { // ±ºÁÖ
+			} else if (npcid == 70783) { // ì•„ë¦¬ì•„
+				if (player.isCrown()) { // êµ°ì£¼
 					if (player.getLevel() >= 30) {
-						if (quest.isEnd(L1Quest.QUEST_LEVEL15)) { // lv15 ½Ã·Ã Å¬¸®¾î°¡ ³¡³­ »óÅÂ
+						if (quest.isEnd(L1Quest.QUEST_LEVEL15)) { // lv15 ì‹œë ¨ í´ë¦¬ì–´ê°€ ëë‚œ ìƒíƒœ
 							int lv30_step = quest
 									.get_step(L1Quest.QUEST_LEVEL30);
-							if (lv30_step == L1Quest.QUEST_END) { // Å¬¸®¾î°¡ ³¡³­ »óÅÂ
+							if (lv30_step == L1Quest.QUEST_END) { // í´ë¦¬ì–´ê°€ ëë‚œ ìƒíƒœ
 								htmlid = "aria3";
-							} else if (lv30_step == 1) { // µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+							} else if (lv30_step == 1) { // ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 								htmlid = "aria2";
-							} else { // ¹Ìµ¿ÀÇ
+							} else { // ë¯¸ë™ì˜
 								htmlid = "aria1";
 							}
 						}
 					}
 				}
-			} else if (npcid == 70782) { // ¼­Ä¡¾ÈÆ®
-				if (player.getTempCharGfx() == 1037) {// ÀğÀÌ¾ÈÆ®¾ÈÆ® º¯½Å
-					if (player.isCrown()) { // ±ºÁÖ
+			} else if (npcid == 70782) { // ì„œì¹˜ì•ˆíŠ¸
+				if (player.getTempCharGfx() == 1037) {// ìŸˆì´ì•ˆíŠ¸ì•ˆíŠ¸ ë³€ì‹ 
+					if (player.isCrown()) { // êµ°ì£¼
 						if (quest.get_step(L1Quest.QUEST_LEVEL30) == 1) {
 							htmlid = "ant1";
 						} else {
 							htmlid = "ant3";
 						}
-					} else { // ±ºÁÖ ÀÌ¿Ü
+					} else { // êµ°ì£¼ ì´ì™¸
 						htmlid = "ant3";
 					}
 				}
-			} else if (npcid == 70545) { // ¸®Ã³µå
-				if (player.isCrown()) { // ±ºÁÖ
+			} else if (npcid == 70545) { // ë¦¬ì²˜ë“œ
+				if (player.isCrown()) { // êµ°ì£¼
 					int lv45_step = quest.get_step(L1Quest.QUEST_LEVEL45);
-					if (lv45_step >= 1 && lv45_step != L1Quest.QUEST_END) { // °³½Ã ¶ÇÇÑ ¹ÌÁ¾·á
-						if (player.getInventory().checkItem(40586)) { // ¿Õ°¡ÀÇ ¹®Àå(¿ŞÂÊ)
+					if (lv45_step >= 1 && lv45_step != L1Quest.QUEST_END) { // ê°œì‹œ ë˜í•œ ë¯¸ì¢…ë£Œ
+						if (player.getInventory().checkItem(40586)) { // ì™•ê°€ì˜ ë¬¸ì¥(ì™¼ìª½)
 							htmlid = "richard4";
 						} else {
 							htmlid = "richard1";
 						}
 					}
 				}
-			} else if (npcid == 70776) { // ¸Ş±×
-				if (player.isCrown()) { // ±ºÁÖ
+			} else if (npcid == 70776) { // ë©”ê·¸
+				if (player.isCrown()) { // êµ°ì£¼
 					int lv45_step = quest.get_step(L1Quest.QUEST_LEVEL45);
 					if (lv45_step == 1) {
 						htmlid = "meg1";
-					} else if (lv45_step == 2 && lv45_step <= 3 ) { // ¸Ş±× µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+					} else if (lv45_step == 2 && lv45_step <= 3 ) { // ë©”ê·¸ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 						htmlid = "meg2";
-					} else if (lv45_step >= 4) { // ¸Ş±×Å©¸®¾Æ°¡ ³¡³­ »óÅÂ
+					} else if (lv45_step >= 4) { // ë©”ê·¸í¬ë¦¬ì•„ê°€ ëë‚œ ìƒíƒœ
 						htmlid = "meg3";
 					}
 				}
-			} else if (npcid == 71200) { // Èò»ö ¸¶¼ú»ç ÇÇ¿¡Å¸
-				if (player.isCrown()) { // ±ºÁÖ
+			} else if (npcid == 71200) { // í°ìƒ‰ ë§ˆìˆ ì‚¬ í”¼ì—íƒ€
+				if (player.isCrown()) { // êµ°ì£¼
 					int lv45_step = quest.get_step(L1Quest.QUEST_LEVEL45);
 					if (lv45_step == 2 && player.getInventory(). checkItem(41422)) {	
 						player.getInventory(). consumeItem(41422, 1);
@@ -314,63 +314,63 @@ public class L1MerchantInstance extends L1NpcInstance {
 						}
 					}
 				}
-			//} else if (npcid == 71200) { // Èò»ö ¸¶¼ú»ç ÇÇ¿¡Å¸
-				//if (player.isCrown()) { // ±ºÁÖ
+			//} else if (npcid == 71200) { // í°ìƒ‰ ë§ˆìˆ ì‚¬ í”¼ì—íƒ€
+				//if (player.isCrown()) { // êµ°ì£¼
 					//int lv45_step = quest.get_step(L1Quest.QUEST_LEVEL45);
-					//if (lv45_step >= 6 && lv45_step == L1Quest.QUEST_END  ) { //¸Ş±×Å©¸®¾Æ°¡ ³¡³­ orÁ¾·á
+					//if (lv45_step >= 6 && lv45_step == L1Quest.QUEST_END  ) { //ë©”ê·¸í¬ë¦¬ì•„ê°€ ëë‚œ orì¢…ë£Œ
 						//htmlid = "pieta9";
-					//} else if (lv45_step == 2) { // Äù½ºÆ® °³½ÃÀü¡¤¸Ş±× µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+					//} else if (lv45_step == 2) { // í€˜ìŠ¤íŠ¸ ê°œì‹œì „Â·ë©”ê·¸ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 						//htmlid = "pieta2";
 					//} else if (lv45_step == 2 || 
-								//player.getInventory(). checkItem(41422) ) {// ºû³²À» ÀÒÀº ¿µÈ¥ º¸°ü À¯Áö
+								//player.getInventory(). checkItem(41422) ) {// ë¹›ë‚¨ì„ ìƒì€ ì˜í˜¼ ë³´ê´€ ìœ ì§€
 						//htmlid = "pieta4";
-					//} else if (lv45_step == 3) { // ºû³²À» ÀÒÀº È¥ÀÔ ÈÄ	
+					//} else if (lv45_step == 3) { // ë¹›ë‚¨ì„ ìƒì€ í˜¼ì… í›„	
 						//htmlid = "pieta6";
-					//} else {//lv45 ¹Ì¸¸ orÄù½ºÆ® 30 È÷Ã÷Áö
+					//} else {//lv45 ë¯¸ë§Œ orí€˜ìŠ¤íŠ¸ 30 íˆì¸ ì§€
 						//htmlid = "pieta8";
 					//}	
-				//} else { // ±ºÁÖ ÀÌ¿Ü
+				//} else { // êµ°ì£¼ ì´ì™¸
 					//htmlid = "pieta1";
 				//}
-			//} else if (npcid == 70751) { // ºí·¡µå
-				//if (player.isCrown()) { // ±ºÁÖ
+			//} else if (npcid == 70751) { // ë¸”ë˜ë“œ
+				//if (player.isCrown()) { // êµ°ì£¼
 					//if (player.getLevel() >= 45) {
-						//if (quest.get_step(L1Quest.QUEST_LEVEL45) == 2) { // ¸Ş±× µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+						//if (quest.get_step(L1Quest.QUEST_LEVEL45) == 2) { // ë©”ê·¸ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 							//htmlid = "brad1";
 						//}
 					//}
 				//}
-			} else if (npcid == 70798) { // ¸¯Å°
-				if (player.isKnight()) { // ³ªÀÌÆ®
+			} else if (npcid == 70798) { // ë¦­í‚¤
+				if (player.isKnight()) { // ë‚˜ì´íŠ¸
 					if (player.getLevel() >= 15) {
 						int lv15_step = quest.get_step(L1Quest.QUEST_LEVEL15);
-						if (lv15_step >= 1) { // ¸¯Å°Å©¸®¾Æ°¡ ³¡³­ »óÅÂ
+						if (lv15_step >= 1) { // ë¦­í‚¤í¬ë¦¬ì•„ê°€ ëë‚œ ìƒíƒœ
 							htmlid = "riky5";
 						} else {
 							htmlid = "riky1";
 						}
-					} else { // Lv15 ¹Ì¸¸
+					} else { // Lv15 ë¯¸ë§Œ
 						htmlid = "riky6";
 					}
 				}
-			} else if (npcid == 70802) { // ¾Æ³í
-				if (player.isKnight()) { // ³ªÀÌÆ®
+			} else if (npcid == 70802) { // ì•„ë…¼
+				if (player.isKnight()) { // ë‚˜ì´íŠ¸
 					if (player.getLevel() >= 15) {
 						int lv15_step = quest.get_step(L1Quest.QUEST_LEVEL15);
-						if (lv15_step == L1Quest.QUEST_END) { // ¾Æ³íÅ©¸®¾Æ°¡ ³¡³­ »óÅÂ
+						if (lv15_step == L1Quest.QUEST_END) { // ì•„ë…¼í¬ë¦¬ì•„ê°€ ëë‚œ ìƒíƒœ
 							htmlid = "aanon7";
-						} else if (lv15_step == 1) { // ¸¯Å°Å©¸®¾Æ°¡ ³¡³­ »óÅÂ
+						} else if (lv15_step == 1) { // ë¦­í‚¤í¬ë¦¬ì•„ê°€ ëë‚œ ìƒíƒœ
 							htmlid = "aanon4";
 						}
 					}
 				}
-			} else if (npcid == 70775) { // ¸¶Å©
-				if (player.isKnight()) { // ³ªÀÌÆ®
+			} else if (npcid == 70775) { // ë§ˆí¬
+				if (player.isKnight()) { // ë‚˜ì´íŠ¸
 					if (player.getLevel() >= 30) {
-						if (quest.isEnd(L1Quest.QUEST_LEVEL15)) { // LV15 Äù½ºÆ® Á¾·á°¡ ³¡³­ »óÅÂ
+						if (quest.isEnd(L1Quest.QUEST_LEVEL15)) { // LV15 í€˜ìŠ¤íŠ¸ ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
 							int lv30_step = quest
 									.get_step(L1Quest.QUEST_LEVEL30);
-							if (lv30_step == 0) { // ¹Ì°³½Ã
+							if (lv30_step == 0) { // ë¯¸ê°œì‹œ
 								htmlid = "mark1";
 							} else {
 								htmlid = "mark2";
@@ -378,163 +378,163 @@ public class L1MerchantInstance extends L1NpcInstance {
 						}
 					}
 				}
-			} else if (npcid == 70794) { // °Ô¶óµå
-				if (player.isCrown()) { // ±ºÁÖ
+			} else if (npcid == 70794) { // ê²Œë¼ë“œ
+				if (player.isCrown()) { // êµ°ì£¼
 					htmlid = "gerardp1";
-				} else if (player.isKnight()) { // ³ªÀÌÆ®
+				} else if (player.isKnight()) { // ë‚˜ì´íŠ¸
 					int lv30_step = quest.get_step(L1Quest.QUEST_LEVEL30);
-					if (lv30_step == L1Quest.QUEST_END) { // °Ô¶óµå Á¾·á°¡ ³¡³­ »óÅÂ
+					if (lv30_step == L1Quest.QUEST_END) { // ê²Œë¼ë“œ ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
 						htmlid = "gerardkEcg";
-					} else if (lv30_step < 3) { // ±ºÅ¸¹ÌÁ¾·á
+					} else if (lv30_step < 3) { // êµ°íƒ€ë¯¸ì¢…ë£Œ
 						htmlid = "gerardk7";
-					} else if (lv30_step == 3) { // ±ºÅ¸ Á¾·á°¡ ³¡³­ »óÅÂ
+					} else if (lv30_step == 3) { // êµ°íƒ€ ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
 						htmlid = "gerardkE1";
-					} else if (lv30_step == 4) { // °Ô¶óµå µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+					} else if (lv30_step == 4) { // ê²Œë¼ë“œ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 						htmlid = "gerardkE2";
-					} else if (lv30_step == 5) { // ¶ó¹Ì¾ÆÀÇ ºñ´Ã Á¾·á°¡ ³¡³­ »óÅÂ
+					} else if (lv30_step == 5) { // ë¼ë¯¸ì•„ì˜ ë¹„ëŠ˜ ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
 						htmlid = "gerardkE3";
-					} else if (lv30_step >= 6) { // ºÎÈ°ÀÇ ÀÏºÎ µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+					} else if (lv30_step >= 6) { // ë¶€í™œì˜ ì¼ë¶€ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 						htmlid = "gerardkE4";
 					}
-				} else if (player.isElf()) { // ¿¡¸£ÇÁ
+				} else if (player.isElf()) { // ì—ë¥´í”„
 					htmlid = "gerarde1";
-				} else if (player.isWizard()) { // À§Àúµå
+				} else if (player.isWizard()) { // ìœ„ì €ë“œ
 					htmlid = "gerardw1";
-				} else if (player.isDarkelf()) { // ´ÙÅ© ¿¡¸£ÇÁ
+				} else if (player.isDarkelf()) { // ë‹¤í¬ ì—ë¥´í”„
 					htmlid = "gerardde1";
 				}
-			} else if (npcid == 70555) { // Áü
-				if (player.getTempCharGfx() == 2374) { // ½ºÄÌ¸®ÅÏ º¯½Å
-					if (player.isKnight()) { // ³ªÀÌÆ®
-						if (quest.get_step(L1Quest.QUEST_LEVEL30) == 6) { // ºÎÈ°ÀÇ ÀÏºÎ µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+			} else if (npcid == 70555) { // ì§
+				if (player.getTempCharGfx() == 2374) { // ìŠ¤ì¼ˆë¦¬í„´ ë³€ì‹ 
+					if (player.isKnight()) { // ë‚˜ì´íŠ¸
+						if (quest.get_step(L1Quest.QUEST_LEVEL30) == 6) { // ë¶€í™œì˜ ì¼ë¶€ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 							htmlid = "jim2";
 						} else {
 							htmlid = "jim4";
 						}
-					} else { // ³ªÀÌÆ® ÀÌ¿Ü
+					} else { // ë‚˜ì´íŠ¸ ì´ì™¸
 						htmlid = "jim4";
 					}
 				}
-			} else if (npcid == 70715) { // Áü
-				if (player.isKnight()) { // ³ªÀÌÆ®
+			} else if (npcid == 70715) { // ì§
+				if (player.isKnight()) { // ë‚˜ì´íŠ¸
 					int lv45_step = quest.get_step(L1Quest.QUEST_LEVEL45);
-					if (lv45_step == 1) { // ¸¶»ş µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+					if (lv45_step == 1) { // ë§ˆìƒ¤ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 						htmlid = "jimuk1";
-					} else if (lv45_step >= 2) { // Áü µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+					} else if (lv45_step >= 2) { // ì§ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 						htmlid = "jimuk2";
 					}
 				}
-			} else if (npcid == 70711) { // ÀğÀÌ¾ÈÆ®¿¡¸£´Ù
-				if (player.isKnight()) { // ³ªÀÌÆ®
+			} else if (npcid == 70711) { // ìŸˆì´ì•ˆíŠ¸ì—ë¥´ë‹¤
+				if (player.isKnight()) { // ë‚˜ì´íŠ¸
 					int lv45_step = quest.get_step(L1Quest.QUEST_LEVEL45);
-					if (lv45_step == 2) { // Áü µ¿ÀÇ°¡ ³¡³­ »óÅÂ
-						if (player.getInventory().checkItem(20026)) { // ³ªÀÌÆ® ºñÀü
+					if (lv45_step == 2) { // ì§ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
+						if (player.getInventory().checkItem(20026)) { // ë‚˜ì´íŠ¸ ë¹„ì „
 							htmlid = "giantk1";
 						}
-					} else if (lv45_step == 3) { // ÀğÀÌ¾ÈÆ®¿¡¸£´Ù µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+					} else if (lv45_step == 3) { // ìŸˆì´ì•ˆíŠ¸ì—ë¥´ë‹¤ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 						htmlid = "giantk2";
-					} else if (lv45_step >= 4) { // °í´ëÀÇ Å°£º»ó¹İºĞ
+					} else if (lv45_step >= 4) { // ê³ ëŒ€ì˜ í‚¤ï¼šìƒë°˜ë¶„
 						htmlid = "giantk3";
 					}
 				}
-			} else if (npcid == 70826) { // ¼öÄÆ
-				if (player.isElf()) { // ¿¡¸£ÇÁ
+			} else if (npcid == 70826) { // ìˆ˜ì»·
+				if (player.isElf()) { // ì—ë¥´í”„
 					if (player.getLevel() >= 15) {
 						if (quest.isEnd(L1Quest.QUEST_LEVEL15)) {
 							htmlid = "oth5";
 						} else {
 							htmlid = "oth1";
 						}
-					} else { // ·¹º§ 15 ¹Ì¸¸
+					} else { // ë ˆë²¨ 15 ë¯¸ë§Œ
 						htmlid = "oth6";
 					}
 				}
-			} else if (npcid == 70844) { // ½£°ú ¿¡¸£ÇÁÀÇ ¾î¸Ó´Ï
-				if (player.isElf()) { // ¿¡¸£ÇÁ
+			} else if (npcid == 70844) { // ìˆ²ê³¼ ì—ë¥´í”„ì˜ ì–´ë¨¸ë‹ˆ
+				if (player.isElf()) { // ì—ë¥´í”„
 					if (player.getLevel() >= 30) {
-						if (quest.isEnd(L1Quest.QUEST_LEVEL15)) { // Lv15 Á¾·á°¡ ³¡³­ »óÅÂ
+						if (quest.isEnd(L1Quest.QUEST_LEVEL15)) { // Lv15 ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
 							int lv30_step = quest
 									.get_step(L1Quest.QUEST_LEVEL30);
-							if (lv30_step == L1Quest.QUEST_END) { // Á¾·á°¡ ³¡³­ »óÅÂ
+							if (lv30_step == L1Quest.QUEST_END) { // ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
 								htmlid = "motherEE3";
-							} else if (lv30_step >= 1) { // µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+							} else if (lv30_step >= 1) { // ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 								htmlid = "motherEE2";
-							} else if (lv30_step <= 0) { // ¹Ìµ¿ÀÇ
+							} else if (lv30_step <= 0) { // ë¯¸ë™ì˜
 								htmlid = "motherEE1";
 							}
-						} else { // Lv15¹ÌÁ¾·á
+						} else { // Lv15ë¯¸ì¢…ë£Œ
 							htmlid = "mothere1";
 						}
-					} else { // Lv30 ¹Ì¸¸
+					} else { // Lv30 ë¯¸ë§Œ
 						htmlid = "mothere1";
 					}
 				}
-			} else if (npcid == 70724) { // ÇìÀÌÆ®
-				if (player.isElf()) { // ¿¡¸£ÇÁ
+			} else if (npcid == 70724) { // í—¤ì´íŠ¸
+				if (player.isElf()) { // ì—ë¥´í”„
 					int lv45_step = quest.get_step(L1Quest.QUEST_LEVEL45);
-					if (lv45_step >= 4) { // ÇìÀÌÆ® Á¾·á°¡ ³¡³­ »óÅÂ
+					if (lv45_step >= 4) { // í—¤ì´íŠ¸ ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
 						htmlid = "heit5";
-					} else if (lv45_step >= 3) { // ÇÃ·í ±³È¯ÀÌ ³¡³­ »óÅÂ
+					} else if (lv45_step >= 3) { // í”Œë£» êµí™˜ì´ ëë‚œ ìƒíƒœ
 						htmlid = "heit3";
-					} else if (lv45_step >= 2) { // ÇìÀÌÆ® µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+					} else if (lv45_step >= 2) { // í—¤ì´íŠ¸ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 						htmlid = "heit2";
-					} else if (lv45_step >= 1) { // ¸¶»ş µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+					} else if (lv45_step >= 1) { // ë§ˆìƒ¤ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 						htmlid = "heit1";
 					}
 				}
-			} else if (npcid == 70531) { // Áª
-				if (player.isWizard()) { // À§Àúµå
+			} else if (npcid == 70531) { // ì ¬
+				if (player.isWizard()) { // ìœ„ì €ë“œ
 					if (player.getLevel() >= 15) {
-						if (quest.isEnd(L1Quest.QUEST_LEVEL15)) { // Á¾·á°¡ ³¡³­ »óÅÂ
+						if (quest.isEnd(L1Quest.QUEST_LEVEL15)) { // ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
 							htmlid = "jem6";
 						} else {
 							htmlid = "jem1";
 						}
 					}
 				}
-			} else if (npcid == 70009) { // °Ô·»
-				if (player.isCrown()) { // ±ºÁÖ
+			} else if (npcid == 70009) { // ê²Œë Œ
+				if (player.isCrown()) { // êµ°ì£¼
 					htmlid = "gerengp1";
-				} else if (player.isKnight()) { // ³ªÀÌÆ®
+				} else if (player.isKnight()) { // ë‚˜ì´íŠ¸
 					htmlid = "gerengk1";
-				} else if (player.isElf()) { // ¿¡¸£ÇÁ
+				} else if (player.isElf()) { // ì—ë¥´í”„
 					htmlid = "gerenge1";
-				} else if (player.isWizard()) { // À§Àúµå
+				} else if (player.isWizard()) { // ìœ„ì €ë“œ
 					if (player.getLevel() >= 30) {
 						if (quest.isEnd(L1Quest.QUEST_LEVEL15)) {
 							int lv30_step = quest
 									.get_step(L1Quest.QUEST_LEVEL30);
-							if (lv30_step >= 4) { // °Ô·» Á¾·á°¡ ³¡³­ »óÅÂ
+							if (lv30_step >= 4) { // ê²Œë Œ ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
 								htmlid = "gerengw3";
-							} else if (lv30_step >= 3) { // ¿ä±¸°¡ ³¡³­ »óÅÂ
+							} else if (lv30_step >= 3) { // ìš”êµ¬ê°€ ëë‚œ ìƒíƒœ
 								htmlid = "gerengT4";
-							} else if (lv30_step >= 2) { // ¾È µ¥µåÀÇ »À±³È¯ÀÌ ³¡³­ »óÅÂ
+							} else if (lv30_step >= 2) { // ì•ˆ ë°ë“œì˜ ë¼ˆêµí™˜ì´ ëë‚œ ìƒíƒœ
 								htmlid = "gerengT3";
-							} else if (lv30_step >= 1) { // µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+							} else if (lv30_step >= 1) { // ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 								htmlid = "gerengT2";
-							} else { // ¹Ìµ¿ÀÇ
+							} else { // ë¯¸ë™ì˜
 								htmlid = "gerengT1";
 							}
-						} else { // Lv15 Äù½ºÆ®¹ÌÁ¾·á
+						} else { // Lv15 í€˜ìŠ¤íŠ¸ë¯¸ì¢…ë£Œ
 							htmlid = "gerengw3";
 						}
-					} else { // Lv30 ¹Ì¸¸
+					} else { // Lv30 ë¯¸ë§Œ
 						htmlid = "gerengw3";
 					}
-				} else if (player.isDarkelf()) { // ´ÙÅ© ¿¡¸£ÇÁ
+				} else if (player.isDarkelf()) { // ë‹¤í¬ ì—ë¥´í”„
 					htmlid = "gerengde1";
 				}
-			} else if (npcid == 70763) { // Å¸¶ó½º
-				if (player.isWizard()) { // À§Àúµå
+			} else if (npcid == 70763) { // íƒ€ë¼ìŠ¤
+				if (player.isWizard()) { // ìœ„ì €ë“œ
 					int lv30_step = quest.get_step(L1Quest.QUEST_LEVEL30);
 					if (lv30_step == L1Quest.QUEST_END) {
 						if (player.getLevel() >= 45) {
 							int lv45_step = quest
 									.get_step(L1Quest.QUEST_LEVEL45);
 							if (lv45_step >= 1
-									&& lv45_step != L1Quest.QUEST_END) { // µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+									&& lv45_step != L1Quest.QUEST_END) { // ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 								htmlid = "talassmq2";
-							} else if (lv45_step <= 0) { // ¹Ìµ¿ÀÇ
+							} else if (lv45_step <= 0) { // ë¯¸ë™ì˜
 								htmlid = "talassmq1";
 							}
 						}
@@ -544,199 +544,199 @@ public class L1MerchantInstance extends L1NpcInstance {
 						htmlid = "talassE2";
 					}
 				}
-			} else if (npcid == 81105) { // ½ÅºñÀÇ ¹ÙÀ§
-				if (player.isWizard()) { // À§Àúµå
+			} else if (npcid == 81105) { // ì‹ ë¹„ì˜ ë°”ìœ„
+				if (player.isWizard()) { // ìœ„ì €ë“œ
 					int lv45_step = quest.get_step(L1Quest.QUEST_LEVEL45);
-					if (lv45_step >= 3) { // ½ÅºñÀÇ ¹ÙÀ§ Á¾·á°¡ ³¡³­ »óÅÂ
+					if (lv45_step >= 3) { // ì‹ ë¹„ì˜ ë°”ìœ„ ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
 						htmlid = "stoenm3";
-					} else if (lv45_step >= 2) { // ½ÅºñÀÇ ¹ÙÀ§ µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+					} else if (lv45_step >= 2) { // ì‹ ë¹„ì˜ ë°”ìœ„ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 						htmlid = "stoenm2";
-					} else if (lv45_step >= 1) { // Å¸¶ó½º µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+					} else if (lv45_step >= 1) { // íƒ€ë¼ìŠ¤ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 						htmlid = "stoenm1";
 					}
 				}
-			} else if (npcid == 70739) { // µğ°¡¸£µò
+			} else if (npcid == 70739) { // ë””ê°€ë¥´ë”˜
 				if (player.getLevel() >= 50) {
 					int lv50_step = quest.get_step(L1Quest.QUEST_LEVEL50);
 					if (lv50_step == L1Quest.QUEST_END) {
-						if (player.isCrown()) { // ±ºÁÖ
+						if (player.isCrown()) { // êµ°ì£¼
 							htmlid = "dicardingp3";
-						} else if (player.isKnight()) { // ³ªÀÌÆ®
+						} else if (player.isKnight()) { // ë‚˜ì´íŠ¸
 							htmlid = "dicardingk3";
-						} else if (player.isElf()) { // ¿¡¸£ÇÁ
+						} else if (player.isElf()) { // ì—ë¥´í”„
 							htmlid = "dicardinge3";
-						} else if (player.isWizard()) { // À§Àúµå
+						} else if (player.isWizard()) { // ìœ„ì €ë“œ
 							htmlid = "dicardingw3";
-						} else if (player.isDarkelf()) { // ´ÙÅ© ¿¡¸£ÇÁ
+						} else if (player.isDarkelf()) { // ë‹¤í¬ ì—ë¥´í”„
 							htmlid = "dicarding";
 						}
-					} else if (lv50_step >= 1) { // µğ°¡¸£µò µ¿ÀÇ°¡ ³¡³­ »óÅÂ
-						if (player.isCrown()) { // ±ºÁÖ
+					} else if (lv50_step >= 1) { // ë””ê°€ë¥´ë”˜ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
+						if (player.isCrown()) { // êµ°ì£¼
 							htmlid = "dicardingp2";
-						} else if (player.isKnight()) { // ³ªÀÌÆ®
+						} else if (player.isKnight()) { // ë‚˜ì´íŠ¸
 							htmlid = "dicardingk2";
-						} else if (player.isElf()) { // ¿¡¸£ÇÁ
+						} else if (player.isElf()) { // ì—ë¥´í”„
 							htmlid = "dicardinge2";
-						} else if (player.isWizard()) { // À§Àúµå
+						} else if (player.isWizard()) { // ìœ„ì €ë“œ
 							htmlid = "dicardingw2";
-						} else if (player.isDarkelf()) { // ´ÙÅ© ¿¡¸£ÇÁ
+						} else if (player.isDarkelf()) { // ë‹¤í¬ ì—ë¥´í”„
 							htmlid = "dicarding";
 						}
 					} else if (lv50_step >= 0) {
-						if (player.isCrown()) { // ±ºÁÖ
+						if (player.isCrown()) { // êµ°ì£¼
 							htmlid = "dicardingp1";
-						} else if (player.isKnight()) { // ³ªÀÌÆ®
+						} else if (player.isKnight()) { // ë‚˜ì´íŠ¸
 							htmlid = "dicardingk1";
-						} else if (player.isElf()) { // ¿¡¸£ÇÁ
+						} else if (player.isElf()) { // ì—ë¥´í”„
 							htmlid = "dicardinge1";
-						} else if (player.isWizard()) { // À§Àúµå
+						} else if (player.isWizard()) { // ìœ„ì €ë“œ
 							htmlid = "dicardingw1";
-						} else if (player.isDarkelf()) { // ´ÙÅ© ¿¡¸£ÇÁ
+						} else if (player.isDarkelf()) { // ë‹¤í¬ ì—ë¥´í”„
 							htmlid = "dicarding";
 						}
 					} else {
 						htmlid = "dicarding";
 					}
-				} else { // Lv50 ¹Ì¸¸
+				} else { // Lv50 ë¯¸ë§Œ
 					htmlid = "dicarding";
 				}
-			} else if (npcid == 70885) { // Ä­
-				if (player.isDarkelf()) { // ´ÙÅ© ¿¡¸£ÇÁ
+			} else if (npcid == 70885) { // ì¹¸
+				if (player.isDarkelf()) { // ë‹¤í¬ ì—ë¥´í”„
 					if (player.getLevel() >= 15) {
 						int lv15_step = quest.get_step(L1Quest.QUEST_LEVEL15);
-						if (lv15_step == L1Quest.QUEST_END) { // Á¾·á°¡ ³¡³­ »óÅÂ
+						if (lv15_step == L1Quest.QUEST_END) { // ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
 							htmlid = "kanguard3";
-						} else if (lv15_step >= 1) { // µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+						} else if (lv15_step >= 1) { // ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 							htmlid = "kanguard2";
-						} else { // ¹Ìµ¿ÀÇ
+						} else { // ë¯¸ë™ì˜
 							htmlid = "kanguard1";
 						}
-					} else { // Lv15 ¹Ì¸¸
+					} else { // Lv15 ë¯¸ë§Œ
 						htmlid = "kanguard5";
 					}
 				}
-			} else if (npcid == 70892) { // ·ĞµÎ
-				if (player.isDarkelf()) { // ´ÙÅ© ¿¡¸£ÇÁ
+			} else if (npcid == 70892) { // ë¡ ë‘
+				if (player.isDarkelf()) { // ë‹¤í¬ ì—ë¥´í”„
 					if (player.getLevel() >= 30) {
 						if (quest.isEnd(L1Quest.QUEST_LEVEL15)) {
 							int lv30_step = quest
 									.get_step(L1Quest.QUEST_LEVEL30);
-							if (lv30_step == L1Quest.QUEST_END) { // Á¾·á°¡ ³¡³­ »óÅÂ
+							if (lv30_step == L1Quest.QUEST_END) { // ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
 								htmlid = "ronde5";
-							} else if (lv30_step >= 2) { // ¸íºÎ ±³È¯ÀÌ ³¡³­ »óÅÂ
+							} else if (lv30_step >= 2) { // ëª…ë¶€ êµí™˜ì´ ëë‚œ ìƒíƒœ
 								htmlid = "ronde3";
-							} else if (lv30_step >= 1) { // µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+							} else if (lv30_step >= 1) { // ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 								htmlid = "ronde2";
-							} else { // ¹Ìµ¿ÀÇ
+							} else { // ë¯¸ë™ì˜
 								htmlid = "ronde1";
 							}
-						} else { // Lv15 Äù½ºÆ®¹ÌÁ¾·á
+						} else { // Lv15 í€˜ìŠ¤íŠ¸ë¯¸ì¢…ë£Œ
 							htmlid = "ronde7";
 						}
-					} else { // Lv30 ¹Ì¸¸
+					} else { // Lv30 ë¯¸ë§Œ
 						htmlid = "ronde7";
 					}
 				}
-			} else if (npcid == 70895) { // ºê¸£µğÄ«
-				if (player.isDarkelf()) { // ´ÙÅ© ¿¡¸£ÇÁ
+			} else if (npcid == 70895) { // ë¸Œë¥´ë””ì¹´
+				if (player.isDarkelf()) { // ë‹¤í¬ ì—ë¥´í”„
 					if (player.getLevel() >= 45) {
 						if (quest.isEnd(L1Quest.QUEST_LEVEL30)) {
 							int lv45_step = quest
 									.get_step(L1Quest.QUEST_LEVEL45);
-							if (lv45_step == L1Quest.QUEST_END) { // Á¾·á°¡ ³¡³­ »óÅÂ
-								if (player.getLevel() < 50) { // Lv50 ¹Ì¸¸
+							if (lv45_step == L1Quest.QUEST_END) { // ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
+								if (player.getLevel() < 50) { // Lv50 ë¯¸ë§Œ
 									htmlid = "bluedikaq3";
 								} else {
 									int lv50_step = quest
 											.get_step(L1Quest.QUEST_LEVEL50);
-									if (lv50_step == L1Quest.QUEST_END) { // Á¾·á°¡ ³¡³­ »óÅÂ
+									if (lv50_step == L1Quest.QUEST_END) { // ì¢…ë£Œê°€ ëë‚œ ìƒíƒœ
 										htmlid = "bluedikaq8";
 									} else {
 										htmlid = "bluedikaq6";
 									}
 								}
-							} else if (lv45_step >= 1) { // µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+							} else if (lv45_step >= 1) { // ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 								htmlid = "bluedikaq2";
-							} else { // ¹Ìµ¿ÀÇ
+							} else { // ë¯¸ë™ì˜
 								htmlid = "bluedikaq1";
 							}
-						} else { // Lv30 Äù½ºÆ®¹ÌÁ¾·á
+						} else { // Lv30 í€˜ìŠ¤íŠ¸ë¯¸ì¢…ë£Œ
 							htmlid = "bluedikaq5";
 						}
-					} else { // Lv45 ¹Ì¸¸
+					} else { // Lv45 ë¯¸ë§Œ
 						htmlid = "bluedikaq5";
 					}
 				}
-			} else if (npcid == 70904) { // ÄíÇÁ
+			} else if (npcid == 70904) { // ì¿ í”„
 				if (player.isDarkelf()) {
-					if (quest.get_step(L1Quest.QUEST_LEVEL45) == 1) { // ºê¸£µğÄ« µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+					if (quest.get_step(L1Quest.QUEST_LEVEL45) == 1) { // ë¸Œë¥´ë””ì¹´ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 						htmlid = "koup12";
 					}
 				}
-////////////////////////////////////////////////////////////////////////// ¼ö·ÃÀå°ü¸®ÀÎ º»¼·È­
+////////////////////////////////////////////////////////////////////////// ìˆ˜ë ¨ì¥ê´€ë¦¬ì¸ ë³¸ì„­í™”
 
             } else if (npcid == 75026) { 
 				   player.setCurrentHp(player.getMaxHp());
 			       player.setCurrentMp(player.getMaxMp());
 			       player.sendPackets(new S_SkillSound(player.getId(), 830));
 			       player.sendPackets(new S_HPUpdate(player.getCurrentHp(), player.getMaxHp()));
-			       player.sendPackets(new S_MPUpdate(player.getCurrentMp(), player.getMaxMp())); // ±×·¹ÀÌÅÍ ÇìÀÌ½ºÆ® ´ë½Å¿¡ Èú·Î ´ëÃ³
+			       player.sendPackets(new S_MPUpdate(player.getCurrentMp(), player.getMaxMp())); // ê·¸ë ˆì´í„° í—¤ì´ìŠ¤íŠ¸ ëŒ€ì‹ ì— íë¡œ ëŒ€ì²˜
                    if (player.getLevel() == 2) {
                         htmlid = "admin2";
-                   player.setExp(player.getExp() + 175); // 2·¹º§¿¡¼­ 3·¹º§·Î ·¹º§¾÷
+                   player.setExp(player.getExp() + 175); // 2ë ˆë²¨ì—ì„œ 3ë ˆë²¨ë¡œ ë ˆë²¨ì—…
 				   int[] allBuffSkill = { BLESS_WEAPON };
     	           player.setBuffnoch(1);
     	           L1SkillUse l1skilluse = new L1SkillUse();
 				   for (int i = 0; i < allBuffSkill.length ; i++) {
 				   l1skilluse.handleCommands(player, allBuffSkill[i], player.getId(), player.getX(), player.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
-				   } // PC¿¡°Ô ºí·¹½º ¿şÆù °É¾îÁØ´Ù
-				   if (player.isKnight()){ // ±â»ç
-				        player.getInventory().storeItem(40029, 20); // »ó¾ÆÅ¾ ¹°¾à
-				        player.getInventory().storeItem(40101, 5); // »ó¾ÆÅ¾ ±ÍÈ¯ÁÖ¹®¼­
-      		            player.getInventory().storeItem(40014, 10); // ¿ë±âÀÇ ¹°¾à
+				   } // PCì—ê²Œ ë¸”ë ˆìŠ¤ ì›¨í° ê±¸ì–´ì¤€ë‹¤
+				   if (player.isKnight()){ // ê¸°ì‚¬
+				        player.getInventory().storeItem(40029, 20); // ìƒì•„íƒ‘ ë¬¼ì•½
+				        player.getInventory().storeItem(40101, 5); // ìƒì•„íƒ‘ ê·€í™˜ì£¼ë¬¸ì„œ
+      		            player.getInventory().storeItem(40014, 10); // ìš©ê¸°ì˜ ë¬¼ì•½
 
 				   }
-				   if (player.isCrown()){ // ±ºÁÖ
-				        player.getInventory().storeItem(40029, 20); // »ó¾ÆÅ¾ ¹°¾à
-				        player.getInventory().storeItem(40101, 5); // »ó¾ÆÅ¾ ±ÍÈ¯ÁÖ¹®¼­
-                        player.getInventory().storeItem(40031, 10); // ¾Ç¸¶ÀÇ ÇÇ
+				   if (player.isCrown()){ // êµ°ì£¼
+				        player.getInventory().storeItem(40029, 20); // ìƒì•„íƒ‘ ë¬¼ì•½
+				        player.getInventory().storeItem(40101, 5); // ìƒì•„íƒ‘ ê·€í™˜ì£¼ë¬¸ì„œ
+                        player.getInventory().storeItem(40031, 10); // ì•…ë§ˆì˜ í”¼
                    }
-				   if (player.isWizard()){ // ¹ı»ç
-				        player.getInventory().storeItem(40029, 20); // »ó¾ÆÅ¾ ¹°¾à
-				        player.getInventory().storeItem(40101, 5); // »ó¾ÆÅ¾ ±ÍÈ¯ÁÖ¹®¼­
-                        player.getInventory().storeItem(40016, 10); // ÁöÇıÀÇ ¹°¾à
+				   if (player.isWizard()){ // ë²•ì‚¬
+				        player.getInventory().storeItem(40029, 20); // ìƒì•„íƒ‘ ë¬¼ì•½
+				        player.getInventory().storeItem(40101, 5); // ìƒì•„íƒ‘ ê·€í™˜ì£¼ë¬¸ì„œ
+                        player.getInventory().storeItem(40016, 10); // ì§€í˜œì˜ ë¬¼ì•½
 				   }
-				   if (player.isElf()){ // ¿äÁ¤
-				        player.getInventory().storeItem(40029, 20); // »ó¾ÆÅ¾ ¹°¾à
-				        player.getInventory().storeItem(40101, 5); // »ó¾ÆÅ¾ ±ÍÈ¯ÁÖ¹®¼­
-				        player.getInventory().storeItem(40068, 10); // ¿¤ºì ¿ÍÆÛ
+				   if (player.isElf()){ // ìš”ì •
+				        player.getInventory().storeItem(40029, 20); // ìƒì•„íƒ‘ ë¬¼ì•½
+				        player.getInventory().storeItem(40101, 5); // ìƒì•„íƒ‘ ê·€í™˜ì£¼ë¬¸ì„œ
+				        player.getInventory().storeItem(40068, 10); // ì—˜ë¸ ì™€í¼
 				   }
-				   if (player.isDarkelf()){ // ´Ù¿¤
-				        player.getInventory().storeItem(40029, 20); // »ó¾ÆÅ¾ ¹°¾à
-				        player.getInventory().storeItem(40101, 5); // »ó¾ÆÅ¾ ±ÍÈ¯ÁÖ¹®¼­
+				   if (player.isDarkelf()){ // ë‹¤ì—˜
+				        player.getInventory().storeItem(40029, 20); // ìƒì•„íƒ‘ ë¬¼ì•½
+				        player.getInventory().storeItem(40101, 5); // ìƒì•„íƒ‘ ê·€í™˜ì£¼ë¬¸ì„œ
 				   }
-				   if (player.isDragonKnight()){ //¿ë±â»ç
-				        player.getInventory().storeItem(40029, 20); // »ó¾ÆÅ¾ ¹°¾à
-				        player.getInventory().storeItem(40101, 5); // »ó¾ÆÅ¾ ±ÍÈ¯ÁÖ¹®¼­
-				        player.getInventory().storeItem(430006, 10); // À¯±×µå¶ó ¿­¸Å
+				   if (player.isDragonKnight()){ //ìš©ê¸°ì‚¬
+				        player.getInventory().storeItem(40029, 20); // ìƒì•„íƒ‘ ë¬¼ì•½
+				        player.getInventory().storeItem(40101, 5); // ìƒì•„íƒ‘ ê·€í™˜ì£¼ë¬¸ì„œ
+				        player.getInventory().storeItem(430006, 10); // ìœ ê·¸ë“œë¼ ì—´ë§¤
 				   } 
-				   if (player.isBlackWizard()){ //È¯¼ú»ç
-				        player.getInventory().storeItem(40029, 20); // »ó¾ÆÅ¾ ¹°¾à
-				        player.getInventory().storeItem(40101, 5); // »ó¾ÆÅ¾ ±ÍÈ¯ÁÖ¹®¼­
-			            player.getInventory().storeItem(430006, 10); // À¯±×µå¶ó ¿­¸Å
+				   if (player.isBlackWizard()){ //í™˜ìˆ ì‚¬
+				        player.getInventory().storeItem(40029, 20); // ìƒì•„íƒ‘ ë¬¼ì•½
+				        player.getInventory().storeItem(40101, 5); // ìƒì•„íƒ‘ ê·€í™˜ì£¼ë¬¸ì„œ
+			            player.getInventory().storeItem(430006, 10); // ìœ ê·¸ë“œë¼ ì—´ë§¤
 				   }
 
                    } else if (player.getLevel() == 5) {
-                       player.setExp(player.getExp() + 546); // 5·¹º§¿¡¼­ 6·¹º§·Î ·¹º§¾÷
+                       player.setExp(player.getExp() + 546); // 5ë ˆë²¨ì—ì„œ 6ë ˆë²¨ë¡œ ë ˆë²¨ì—…
                            htmlid = "admin3";
                    } else {
                            htmlid = "admin1";
 				   } 
-////////////////////////////////////////////////////////////////////////////////// ¼öÁ¤ °¡ÀÌ¾Æ
+////////////////////////////////////////////////////////////////////////////////// ìˆ˜ì • ê°€ì´ì•„
 
-			} else if (npcid == 70824) { // ¾Æ»ç½Å¸¶½ºÅ¸ÀÇ ÃßÁ¾ÀÚ
+			} else if (npcid == 70824) { // ì•„ì‚¬ì‹ ë§ˆìŠ¤íƒ€ì˜ ì¶”ì¢…ì
 				if (player.isDarkelf()) {
-					if (player.getTempCharGfx() == 3634) { // ¾Æ»ç½Å º¯½Å
+					if (player.getTempCharGfx() == 3634) { // ì•„ì‚¬ì‹  ë³€ì‹ 
 						int lv45_step = quest.get_step(L1Quest.QUEST_LEVEL45);
 						if (lv45_step == 1) {
 							htmlid = "assassin1";
@@ -745,58 +745,58 @@ public class L1MerchantInstance extends L1NpcInstance {
 						} else {
 							htmlid = "assassin3";
 						}
-					} else { // ´ÙÅ© ¿¡¸£ÇÁ ÀÌ¿Ü
+					} else { // ë‹¤í¬ ì—ë¥´í”„ ì´ì™¸
 						htmlid = "assassin3";
 					}
 				}
-			} else if (npcid == 70744) { // ·ÎÁ¦
-				if (player.isDarkelf()) { // ´ÙÅ© ¿¡¸£ÇÁ
+			} else if (npcid == 70744) { // ë¡œì œ
+				if (player.isDarkelf()) { // ë‹¤í¬ ì—ë¥´í”„
 					int lv45_step = quest.get_step(L1Quest.QUEST_LEVEL45);
-					if (lv45_step >= 5) { // ·ÎÁ¦ 2¹øÂ° µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+					if (lv45_step >= 5) { // ë¡œì œ 2ë²ˆì§¸ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 						htmlid = "roje14";
-					} else if (lv45_step >= 4) { // ¼³ÀÎÀÇ ¸Ó¸® ºÎºĞ ±³È¯ÀÌ ³¡³­ »óÅÂ
+					} else if (lv45_step >= 4) { // ì„¤ì¸ì˜ ë¨¸ë¦¬ ë¶€ë¶„ êµí™˜ì´ ëë‚œ ìƒíƒœ
 						htmlid = "roje13";
-					} else if (lv45_step >= 3) { // ·ÎÁ¦ µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+					} else if (lv45_step >= 3) { // ë¡œì œ ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 						htmlid = "roje12";
-					} else if (lv45_step >= 2) { // ¾Æ»ç½Å¸¶½ºÅ¸ÀÇ ÃßÁ¾ÀÚ µ¿ÀÇ°¡ ³¡³­ »óÅÂ
+					} else if (lv45_step >= 2) { // ì•„ì‚¬ì‹ ë§ˆìŠ¤íƒ€ì˜ ì¶”ì¢…ì ë™ì˜ê°€ ëë‚œ ìƒíƒœ
 						htmlid = "roje11";
-					} else { // ¾Æ»ç½Å¸¶½ºÅ¸ÀÇ ÃßÁ¾ÀÚ¹Ìµ¿ÀÇ
+					} else { // ì•„ì‚¬ì‹ ë§ˆìŠ¤íƒ€ì˜ ì¶”ì¢…ìë¯¸ë™ì˜
 						htmlid = "roje15";
 					}
 				}
-			} else if (npcid == 70811) { // ¶óÀÌ¶ó
-				if (quest.get_step(L1Quest.QUEST_LYRA) >= 1) { // °è¾àÇÊ
+			} else if (npcid == 70811) { // ë¼ì´ë¼
+				if (quest.get_step(L1Quest.QUEST_LYRA) >= 1) { // ê³„ì•½í•„
 					htmlid = "lyraEv3";
-				} else { // ¹Ì°è¾à
+				} else { // ë¯¸ê³„ì•½
 					htmlid = "lyraEv1";
 				}
-			} else if (npcid == 70087) { // ¼¼µğ¾Æ
+			} else if (npcid == 70087) { // ì„¸ë””ì•„
 				if (player.isDarkelf()) {
 					htmlid = "sedia";
 				}
-			} else if (npcid == 70099) { // ÄíÆÛ
+			} else if (npcid == 70099) { // ì¿ í¼
 				if (!quest.isEnd(L1Quest.QUEST_OILSKINMANT)) {
 					if (player.getLevel() > 13) {
 						htmlid = "kuper1";
 					}
 				}
-			} else if (npcid == 70796) { // ´í ÇÜ
+			} else if (npcid == 70796) { // ëŒ„ í–„
 				if (!quest.isEnd(L1Quest.QUEST_OILSKINMANT)) {
 					if (player.getLevel() > 13) {
 						htmlid = "dunham1";
 					}
 				}
-			} else if (npcid == 70011) { // ÀÌ¾ß±âÇÒ ¼ö ÀÖ´Â ¼¶ÀÇ ¹è µµÂøÇØ °ü¸®ÀÎ
+			} else if (npcid == 70011) { // ì´ì•¼ê¸°í•  ìˆ˜ ìˆëŠ” ì„¬ì˜ ë°° ë„ì°©í•´ ê´€ë¦¬ì¸
 				int time = L1GameTimeClock.getInstance(). currentTime()
 						.getSeconds() % 86400;
 				if (time < 60 * 60 * 6 || time > 60 * 60 * 20) { // 20:00~6:00
 					htmlid = "shipEvI6";
 				}
-			} else if (npcid == 70553) { // ÄËÆ®¼º½ÃÁ¾Àå ÀÌ½º¸¶¿¤
+			} else if (npcid == 70553) { // ì¼„íŠ¸ì„±ì‹œì¢…ì¥ ì´ìŠ¤ë§ˆì—˜
 				boolean hascastle = checkHasCastle(player,
 						L1CastleLocation.KENT_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
-					if (checkClanLeader(player)) { // Ç÷¸ÍÁÖ
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
+					if (checkClanLeader(player)) { // í˜ˆë§¹ì£¼
 						htmlid = "ishmael1";
 					} else {
 						htmlid = "ishmael6";
@@ -805,11 +805,11 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "ishmael7";
 				}
-			} else if (npcid == 70822) { // ¿ÀÅ©ÀÇ ½£¼¼°×¾ÆÆ®¹Ù
+			} else if (npcid == 70822) { // ì˜¤í¬ì˜ ìˆ²ì„¸ê²œì•„íŠ¸ë°”
 				boolean hascastle = checkHasCastle(player,
 						L1CastleLocation.OT_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
-					if (checkClanLeader(player)) { // Ç÷¸ÍÁÖ
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
+					if (checkClanLeader(player)) { // í˜ˆë§¹ì£¼
 						htmlid = "seghem1";
 					} else {
 						htmlid = "seghem6";
@@ -818,11 +818,11 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "seghem7";
 				}
-			} else if (npcid == 70784) { // À©´Ù¿ôµå¼º½ÃÁ¾Àå ¼öÄÆ »ç±³°è
+			} else if (npcid == 70784) { // ìœˆë‹¤ì›ƒë“œì„±ì‹œì¢…ì¥ ìˆ˜ì»· ì‚¬êµê³„
 				boolean hascastle = checkHasCastle(player,
 						L1CastleLocation.WW_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
-					if (checkClanLeader(player)) { // Ç÷¸ÍÁÖ
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
+					if (checkClanLeader(player)) { // í˜ˆë§¹ì£¼
 						htmlid = "othmond1";
 					} else {
 						htmlid = "othmond6";
@@ -831,11 +831,11 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "othmond7";
 				}
-			} else if (npcid == 70623) { // ±â¶õ¼º½ÃÁ¾Àå ¿À ºôµù
+			} else if (npcid == 70623) { // ê¸°ë€ì„±ì‹œì¢…ì¥ ì˜¤ ë¹Œë”©
 				boolean hascastle = checkHasCastle(player,
 						L1CastleLocation.GIRAN_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
-					if (checkClanLeader(player)) { // Ç÷¸ÍÁÖ
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
+					if (checkClanLeader(player)) { // í˜ˆë§¹ì£¼
 						htmlid = "orville1";
 					} else {
 						htmlid = "orville6";
@@ -844,11 +844,11 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "orville7";
 				}
-			} else if (npcid == 70880) { // Heine¼º½ÃÁ¾Àå ÇÇ¼Å
+			} else if (npcid == 70880) { // Heineì„±ì‹œì¢…ì¥ í”¼ì…”
 				boolean hascastle = checkHasCastle(player,
 						L1CastleLocation.HEINE_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
-					if (checkClanLeader(player)) { // Ç÷¸ÍÁÖ
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
+					if (checkClanLeader(player)) { // í˜ˆë§¹ì£¼
 						htmlid = "fisher1";
 					} else {
 						htmlid = "fisher6";
@@ -857,11 +857,11 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "fisher7";
 				}
-			} else if (npcid == 70665) { // µå¿öÈÄ¼º½ÃÁ¾Àå Æ÷ÅÙÇÉ
+			} else if (npcid == 70665) { // ë“œì›Œí›„ì„±ì‹œì¢…ì¥ í¬í…í•€
 				boolean hascastle = checkHasCastle(player,
 						L1CastleLocation.DOWA_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
-					if (checkClanLeader(player)) { // Ç÷¸ÍÁÖ
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
+					if (checkClanLeader(player)) { // í˜ˆë§¹ì£¼
 						htmlid = "potempin1";
 					} else {
 						htmlid = "potempin6";
@@ -870,11 +870,11 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "potempin7";
 				}
-			} else if (npcid == 70721) { // ¿¡µ§¼º½ÃÁ¾Àå Æ¼¸ó
+			} else if (npcid == 70721) { // ì—ë´ì„±ì‹œì¢…ì¥ í‹°ëª¬
 				boolean hascastle = checkHasCastle(player,
 						L1CastleLocation.ADEN_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
-					if (checkClanLeader(player)) { // Ç÷¸ÍÁÖ
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
+					if (checkClanLeader(player)) { // í˜ˆë§¹ì£¼
 						htmlid = "timon1";
 					} else {
 						htmlid = "timon6";
@@ -883,11 +883,11 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "timon7";
 				}
-			} else if (npcid == 81155) { // µğ¾Æµå ¿ä»õ ¿À·¹
+			} else if (npcid == 81155) { // ë””ì•„ë“œ ìš”ìƒˆ ì˜¤ë ˆ
 				boolean hascastle = checkHasCastle(player,
 						L1CastleLocation.DIAD_CASTLE_ID);
-				if (hascastle) { // ¼ºÁÖ Å©¶õ¿ø
-					if (checkClanLeader(player)) { // Ç÷¸ÍÁÖ
+				if (hascastle) { // ì„±ì£¼ í¬ë€ì›
+					if (checkClanLeader(player)) { // í˜ˆë§¹ì£¼
 						htmlid = "olle1";
 					} else {
 						htmlid = "olle6";
@@ -896,7 +896,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "olle7";
 				}
-			} else if (npcid == 80057) { // ¾Æ¸£Æù½º
+			} else if (npcid == 80057) { // ì•„ë¥´í°ìŠ¤
 				switch (player.getKarmaLevel()) {
 				case 0:
 					htmlid = "alfons1";
@@ -953,7 +953,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "alfons1";
 					break;
 				}
-			} else if (npcid == 80058) { // Â÷¿øÀÇ ¹®(»ç¸·)
+			} else if (npcid == 80058) { // ì°¨ì›ì˜ ë¬¸(ì‚¬ë§‰)
 				int level = player.getLevel();
 				if (level <= 44) {
 					htmlid = "cpass03";
@@ -962,127 +962,127 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "cpass01";
 				}
-			} else if (npcid == 80059) { // Â÷¿øÀÇ ¹®(Åä)
+			} else if (npcid == 80059) { // ì°¨ì›ì˜ ë¬¸(í† )
 				if (player.getKarmaLevel() > 0) {
 					htmlid = "cpass03";
-				} else if (player.getInventory().checkItem(40921)) { // ¿ø¼ÒÀÇ Áö¹èÀÚ
+				} else if (player.getInventory().checkItem(40921)) { // ì›ì†Œì˜ ì§€ë°°ì
 					htmlid = "wpass02";
-				} else if (player.getInventory().checkItem(40917)) { // ÁöÀÇ Áö¹èÀÚ
+				} else if (player.getInventory().checkItem(40917)) { // ì§€ì˜ ì§€ë°°ì
 					htmlid = "wpass14";
-				} else if (player.getInventory().checkItem(40912) // Ç³ÀÇ ÅëÇàÁõ
-						|| player.getInventory().checkItem(40910) // ¼öÀÇ ÅëÇàÁõ
-						|| player.getInventory().checkItem(40911)) { // ºÒÀÇ ÅëÇàÁõ
+				} else if (player.getInventory().checkItem(40912) // í’ì˜ í†µí–‰ì¦
+						|| player.getInventory().checkItem(40910) // ìˆ˜ì˜ í†µí–‰ì¦
+						|| player.getInventory().checkItem(40911)) { // ë¶ˆì˜ í†µí–‰ì¦
 					htmlid = "wpass04";
-				} else if (player.getInventory().checkItem(40909)) { // ÁöÀÇ ÅëÇàÁõ
+				} else if (player.getInventory().checkItem(40909)) { // ì§€ì˜ í†µí–‰ì¦
 					int count = getNecessarySealCount(player);
-					if (player.getInventory().checkItem(40913, count)) { // ÁöÀÇ ÀÎÀå
+					if (player.getInventory().checkItem(40913, count)) { // ì§€ì˜ ì¸ì¥
 						createRuler(player, 1, count);
 						htmlid = "wpass06";
 					} else {
 						htmlid = "wpass03";
 					}
-				} else if (player.getInventory().checkItem(40913)) { // ÁöÀÇ ÀÎÀå
+				} else if (player.getInventory().checkItem(40913)) { // ì§€ì˜ ì¸ì¥
 					htmlid = "wpass08";
 				} else {
 					htmlid = "wpass05";
 				}
-			} else if (npcid == 80060) { // Â÷¿øÀÇ ¹®(¹Ù¶÷)
+			} else if (npcid == 80060) { // ì°¨ì›ì˜ ë¬¸(ë°”ëŒ)
 				if (player.getKarmaLevel() > 0) {
 					htmlid = "cpass03";
-				} else if (player.getInventory().checkItem(40921)) { // ¿ø¼ÒÀÇ Áö¹èÀÚ
+				} else if (player.getInventory().checkItem(40921)) { // ì›ì†Œì˜ ì§€ë°°ì
 					htmlid = "wpass02";
-				} else if (player.getInventory().checkItem(40920)) { // Ç³ÀÇ Áö¹èÀÚ
+				} else if (player.getInventory().checkItem(40920)) { // í’ì˜ ì§€ë°°ì
 					htmlid = "wpass13";
-				} else if (player.getInventory().checkItem(40909) // ÁöÀÇ ÅëÇàÁõ
-						|| player.getInventory().checkItem(40910) // ¼öÀÇ ÅëÇàÁõ
-						|| player.getInventory().checkItem(40911)) { // ºÒÀÇ ÅëÇàÁõ
+				} else if (player.getInventory().checkItem(40909) // ì§€ì˜ í†µí–‰ì¦
+						|| player.getInventory().checkItem(40910) // ìˆ˜ì˜ í†µí–‰ì¦
+						|| player.getInventory().checkItem(40911)) { // ë¶ˆì˜ í†µí–‰ì¦
 					htmlid = "wpass04";
-				} else if (player.getInventory().checkItem(40912)) { // Ç³ÀÇ ÅëÇàÁõ
+				} else if (player.getInventory().checkItem(40912)) { // í’ì˜ í†µí–‰ì¦
 					int count = getNecessarySealCount(player);
-					if (player.getInventory().checkItem(40916, count)) { // Ç³ÀÇ ÀÎÀå
+					if (player.getInventory().checkItem(40916, count)) { // í’ì˜ ì¸ì¥
 						createRuler(player, 8, count);
 						htmlid = "wpass06";
 					} else {
 						htmlid = "wpass03";
 					}
-				} else if (player.getInventory().checkItem(40916)) { // Ç³ÀÇ ÀÎÀå
+				} else if (player.getInventory().checkItem(40916)) { // í’ì˜ ì¸ì¥
 					htmlid = "wpass08";
 				} else {
 					htmlid = "wpass05";
 				}
-			} else if (npcid == 80061) { // Â÷¿øÀÇ ¹®(¼ö)
+			} else if (npcid == 80061) { // ì°¨ì›ì˜ ë¬¸(ìˆ˜)
 				if (player.getKarmaLevel() > 0) {
 					htmlid = "cpass03";
-				} else if (player.getInventory().checkItem(40921)) { // ¿ø¼ÒÀÇ Áö¹èÀÚ
+				} else if (player.getInventory().checkItem(40921)) { // ì›ì†Œì˜ ì§€ë°°ì
 					htmlid = "wpass02";
-				} else if (player.getInventory().checkItem(40918)) { // ¼öÀÇ Áö¹èÀÚ
+				} else if (player.getInventory().checkItem(40918)) { // ìˆ˜ì˜ ì§€ë°°ì
 					htmlid = "wpass11";
-				} else if (player.getInventory().checkItem(40909) // ÁöÀÇ ÅëÇàÁõ
-						|| player.getInventory().checkItem(40912) // Ç³ÀÇ ÅëÇàÁõ
-						|| player.getInventory().checkItem(40911)) { // ºÒÀÇ ÅëÇàÁõ
+				} else if (player.getInventory().checkItem(40909) // ì§€ì˜ í†µí–‰ì¦
+						|| player.getInventory().checkItem(40912) // í’ì˜ í†µí–‰ì¦
+						|| player.getInventory().checkItem(40911)) { // ë¶ˆì˜ í†µí–‰ì¦
 					htmlid = "wpass04";
-				} else if (player.getInventory().checkItem(40910)) { // ¼öÀÇ ÅëÇàÁõ
+				} else if (player.getInventory().checkItem(40910)) { // ìˆ˜ì˜ í†µí–‰ì¦
 					int count = getNecessarySealCount(player);
-					if (player.getInventory().checkItem(40914, count)) { // ¼öÀÇ ÀÎÀå
+					if (player.getInventory().checkItem(40914, count)) { // ìˆ˜ì˜ ì¸ì¥
 						createRuler(player, 4, count);
 						htmlid = "wpass06";
 					} else {
 						htmlid = "wpass03";
 					}
-				} else if (player.getInventory().checkItem(40914)) { // ¼öÀÇ ÀÎÀå
+				} else if (player.getInventory().checkItem(40914)) { // ìˆ˜ì˜ ì¸ì¥
 					htmlid = "wpass08";
 				} else {
 					htmlid = "wpass05";
 				}
-			} else if (npcid == 80062) { // Â÷¿øÀÇ ¹®(È­)
+			} else if (npcid == 80062) { // ì°¨ì›ì˜ ë¬¸(í™”)
 				if (player.getKarmaLevel() > 0) {
 					htmlid = "cpass03";
-				} else if (player.getInventory().checkItem(40921)) { // ¿ø¼ÒÀÇ Áö¹èÀÚ
+				} else if (player.getInventory().checkItem(40921)) { // ì›ì†Œì˜ ì§€ë°°ì
 					htmlid = "wpass02";
-				} else if (player.getInventory().checkItem(40919)) { // ºÒÀÇ Áö¹èÀÚ
+				} else if (player.getInventory().checkItem(40919)) { // ë¶ˆì˜ ì§€ë°°ì
 					htmlid = "wpass12";
-				} else if (player.getInventory().checkItem(40909) // ÁöÀÇ ÅëÇàÁõ
-						|| player.getInventory().checkItem(40912) // Ç³ÀÇ ÅëÇàÁõ
-						|| player.getInventory().checkItem(40910)) { // ¼öÀÇ ÅëÇàÁõ
+				} else if (player.getInventory().checkItem(40909) // ì§€ì˜ í†µí–‰ì¦
+						|| player.getInventory().checkItem(40912) // í’ì˜ í†µí–‰ì¦
+						|| player.getInventory().checkItem(40910)) { // ìˆ˜ì˜ í†µí–‰ì¦
 					htmlid = "wpass04";
-				} else if (player.getInventory().checkItem(40911)) { // ºÒÀÇ ÅëÇàÁõ
+				} else if (player.getInventory().checkItem(40911)) { // ë¶ˆì˜ í†µí–‰ì¦
 					int count = getNecessarySealCount(player);
-					if (player.getInventory().checkItem(40915, count)) { // ºÒÀÇ ÀÎÀå
+					if (player.getInventory().checkItem(40915, count)) { // ë¶ˆì˜ ì¸ì¥
 						createRuler(player, 2, count);
 						htmlid = "wpass06";
 					} else {
 						htmlid = "wpass03";
 					}
-				} else if (player.getInventory().checkItem(40915)) { // ºÒÀÇ ÀÎÀå
+				} else if (player.getInventory().checkItem(40915)) { // ë¶ˆì˜ ì¸ì¥
 					htmlid = "wpass08";
 				} else {
 					htmlid = "wpass05";
 				}
-			} else if (npcid == 80065) { // ¹Ù¸£·Î±×ÀÇ ¹ĞÁ¤
+			} else if (npcid == 80065) { // ë°”ë¥´ë¡œê·¸ì˜ ë°€ì •
 				if (player.getKarmaLevel() < 3) {
 					htmlid = "uturn0";
 				} else {
 					htmlid = "uturn1";
 				}
-			} else if (npcid == 80047) { // ¾ßÈ÷ÀÇ ÇÏÀÎ
+			} else if (npcid == 80047) { // ì•¼íˆì˜ í•˜ì¸
 				if (player.getKarmaLevel() > -3) {
 					htmlid = "uhelp1";
 				} else {
 					htmlid = "uhelp2";
 				}
-			} else if (npcid == 80049) { // ¿äµ¿ÇÏ´Â »ç¶÷
+			} else if (npcid == 80049) { // ìš”ë™í•˜ëŠ” ì‚¬ëŒ
 				if (player.getKarma() <= -10000000) {
 					htmlid = "betray11";
 				} else {
 					htmlid = "betray12";
 				}
-			} else if (npcid == 80050) { // ¾ßÈ÷ÀÇ ÁıÁ¤°ü
+			} else if (npcid == 80050) { // ì•¼íˆì˜ ì§‘ì •ê´€
 				if (player.getKarmaLevel() > -1) {
 					htmlid = "meet103";
 				} else {
 					htmlid = "meet101";
 				}
-			} else if (npcid == 80053) { // ¾ßÈ÷ÀÇ ´ëÀå°£
+			} else if (npcid == 80053) { // ì•¼íˆì˜ ëŒ€ì¥ê°„
 				int karmaLevel = player.getKarmaLevel();
 				if (karmaLevel == 0) {
 					htmlid = "aliceyet";
@@ -1152,23 +1152,23 @@ public class L1MerchantInstance extends L1NpcInstance {
 						htmlid = "alice_no";
 					}
 				}
-			} else if (npcid == 80055) { // ¾ßÈ÷ÀÇ º¸ÁÂ°ü
+			} else if (npcid == 80055) { // ì•¼íˆì˜ ë³´ì¢Œê´€
 				int amuletLevel = 0;
-				if (player.getInventory().checkItem(20358)) { // ³ë¿¹ÀÇ ¾Æ¹Â·¿Æ®
+				if (player.getInventory().checkItem(20358)) { // ë…¸ì˜ˆì˜ ì•„ë®¤ë ›íŠ¸
 					amuletLevel = 1;
-				} else if (player.getInventory().checkItem(20359)) { // ¾à¼ÓÀÇ ¾Æ¹Â·¿Æ®
+				} else if (player.getInventory().checkItem(20359)) { // ì•½ì†ì˜ ì•„ë®¤ë ›íŠ¸
 					amuletLevel = 2;
-				} else if (player.getInventory().checkItem(20360)) { // ÇØ¹æÀÇ ¾Æ¹Â·¿Æ®
+				} else if (player.getInventory().checkItem(20360)) { // í•´ë°©ì˜ ì•„ë®¤ë ›íŠ¸
 					amuletLevel = 3;
-				} else if (player.getInventory().checkItem(20361)) { // »ç³É°³ÀÇ ¾Æ¹Â·¿Æ®
+				} else if (player.getInventory().checkItem(20361)) { // ì‚¬ëƒ¥ê°œì˜ ì•„ë®¤ë ›íŠ¸
 					amuletLevel = 4;
-				} else if (player.getInventory().checkItem(20362)) { // ¸¶Á·ÀÇ ¾Æ¹Â·¿Æ®
+				} else if (player.getInventory().checkItem(20362)) { // ë§ˆì¡±ì˜ ì•„ë®¤ë ›íŠ¸
 					amuletLevel = 5;
-				} else if (player.getInventory().checkItem(20363)) { // ¿ë»çÀÇ ¾Æ¹Â·¿Æ®
+				} else if (player.getInventory().checkItem(20363)) { // ìš©ì‚¬ì˜ ì•„ë®¤ë ›íŠ¸
 					amuletLevel = 6;
-				} else if (player.getInventory().checkItem(20364)) { // Àå±ºÀÇ ¾Æ¹Â·¿Æ®
+				} else if (player.getInventory().checkItem(20364)) { // ì¥êµ°ì˜ ì•„ë®¤ë ›íŠ¸
 					amuletLevel = 7;
-				} else if (player.getInventory().checkItem(20365)) { // ´ëÀå±ºÀÇ ¾Æ¹Â·¿Æ®
+				} else if (player.getInventory().checkItem(20365)) { // ëŒ€ì¥êµ°ì˜ ì•„ë®¤ë ›íŠ¸
 					amuletLevel = 8;
 				}
 				if (player.getKarmaLevel() == -1) {
@@ -1222,41 +1222,41 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "uamulet0";
 				}
-			} else if (npcid == 80056) { // ¾÷ÀÇ °ü¸®ÀÚ
+			} else if (npcid == 80056) { // ì—…ì˜ ê´€ë¦¬ì
 				if (player.getKarma() <= -10000000) {
 					htmlid = "infamous11";
 				} else {
 					htmlid = "infamous12";
 				}
-			} else if (npcid == 80064) { // ¹Ù¸£·Î±×ÀÇ ÁıÁ¤°ü
+			} else if (npcid == 80064) { // ë°”ë¥´ë¡œê·¸ì˜ ì§‘ì •ê´€
 				if (player.getKarmaLevel() < 1) {
 					htmlid = "meet003";
 				} else {
 					htmlid = "meet001";
 				}
-			} else if (npcid == 80066) { // Èçµé°Å¸®´Â »ç¶÷
+			} else if (npcid == 80066) { // í”ë“¤ê±°ë¦¬ëŠ” ì‚¬ëŒ
 				if (player.getKarma() >= 10000000) {
 					htmlid = "betray01";
 				} else {
 					htmlid = "betray02";
 				}
-			} else if (npcid == 80071) { // ¹Ù¸£·Î±×ÀÇ º¸ÁÂ°ü
+			} else if (npcid == 80071) { // ë°”ë¥´ë¡œê·¸ì˜ ë³´ì¢Œê´€
 				int earringLevel = 0;
-				if (player.getInventory().checkItem(21020)) { // ÁÁ¾Æ¼­ ¶ÜÀÇ ±Í ¸µ
+				if (player.getInventory().checkItem(21020)) { // ì¢‹ì•„ì„œ ëœ€ì˜ ê·€ ë§
 					earringLevel = 1;
-				} else if (player.getInventory().checkItem(21021)) { // ½ÖµÕÀÌÀÇ ±Í ¸µ
+				} else if (player.getInventory().checkItem(21021)) { // ìŒë‘¥ì´ì˜ ê·€ ë§
 					earringLevel = 2;
-				} else if (player.getInventory().checkItem(21022)) { // ¿ìÈ£ÀÇ ±Í ¸µ
+				} else if (player.getInventory().checkItem(21022)) { // ìš°í˜¸ì˜ ê·€ ë§
 					earringLevel = 3;
-				} else if (player.getInventory().checkItem(21023)) { // ±ØÁöÀÇ ±Í ¸µ
+				} else if (player.getInventory().checkItem(21023)) { // ê·¹ì§€ì˜ ê·€ ë§
 					earringLevel = 4;
-				} else if (player.getInventory().checkItem(21024)) { // ÆøÁÖÀÇ ±Í ¸µ
+				} else if (player.getInventory().checkItem(21024)) { // í­ì£¼ì˜ ê·€ ë§
 					earringLevel = 5;
-				} else if (player.getInventory().checkItem(21025)) { // Á¾¸¶ÀÇ ±Í ¸µ
+				} else if (player.getInventory().checkItem(21025)) { // ì¢…ë§ˆì˜ ê·€ ë§
 					earringLevel = 6;
-				} else if (player.getInventory().checkItem(21026)) { // Ç÷Á·ÀÇ ±Í ¸µ
+				} else if (player.getInventory().checkItem(21026)) { // í˜ˆì¡±ì˜ ê·€ ë§
 					earringLevel = 7;
-				} else if (player.getInventory().checkItem(21027)) { // ³ë¿¹ÀÇ ±Í ¸µ
+				} else if (player.getInventory().checkItem(21027)) { // ë…¸ì˜ˆì˜ ê·€ ë§
 					earringLevel = 8;
 				}
 				if (player.getKarmaLevel() == 1) {
@@ -1310,7 +1310,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "lring0";
 				}
-			} else if (npcid == 80072) { // ¹Ù¸£·Î±×ÀÇ ´ëÀå°£
+			} else if (npcid == 80072) { // ë°”ë¥´ë¡œê·¸ì˜ ëŒ€ì¥ê°„
 				int karmaLevel = player.getKarmaLevel();
 				if (karmaLevel == 1) {
 					htmlid = "lsmith0";
@@ -1331,88 +1331,88 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "";
 				}
-			} else if (npcid == 80074) { // ¾÷ÀÇ °ü¸®ÀÚ
+			} else if (npcid == 80074) { // ì—…ì˜ ê´€ë¦¬ì
 				if (player.getKarma() >= 10000000) {
 					htmlid = "infamous01";
 				} else {
 					htmlid = "infamous02";
 				}
-			} else if (npcid == 80104) { // ¿¡µ§ ±â¸¶ ´Ü¿ø
-				if (!player.isCrown()) { // ±ºÁÖ
+			} else if (npcid == 80104) { // ì—ë´ ê¸°ë§ˆ ë‹¨ì›
+				if (!player.isCrown()) { // êµ°ì£¼
 					htmlid = "horseseller4";
 				}
-			} else if (npcid == 70528) { // ÀÌ¾ß±âÇÒ ¼ö ÀÖ´Â ¼¶ÀÇ ¸¶À» Å¸¿î ¸¶½ºÅÍ
+			} else if (npcid == 70528) { // ì´ì•¼ê¸°í•  ìˆ˜ ìˆëŠ” ì„¬ì˜ ë§ˆì„ íƒ€ìš´ ë§ˆìŠ¤í„°
 				htmlid = talkToTownmaster(player,
 						L1TownLocation.TOWNID_TALKING_ISLAND);
-			} else if (npcid == 70546) { // ÄËÆ®¸¶À» Å¸¿î ¸¶½ºÅÍ
+			} else if (npcid == 70546) { // ì¼„íŠ¸ë§ˆì„ íƒ€ìš´ ë§ˆìŠ¤í„°
 				htmlid = talkToTownmaster(player, L1TownLocation.TOWNID_KENT);
-			} else if (npcid == 70567) { // ±×¸£µò¸¶À» Å¸¿î ¸¶½ºÅÍ
+			} else if (npcid == 70567) { // ê·¸ë¥´ë”˜ë§ˆì„ íƒ€ìš´ ë§ˆìŠ¤í„°
 				htmlid = talkToTownmaster(player, L1TownLocation.TOWNID_GLUDIO);
-			} else if (npcid == 70815) { // È­Àü¸¶À» Å¸¿î ¸¶½ºÅÍ
+			} else if (npcid == 70815) { // í™”ì „ë§ˆì„ íƒ€ìš´ ë§ˆìŠ¤í„°
 				htmlid = talkToTownmaster(player,
 						L1TownLocation.TOWNID_ORCISH_FOREST);
-			} else if (npcid == 70774) { // ¿ìµå º£Å©¸¶À» Å¸¿î ¸¶½ºÅÍ
+			} else if (npcid == 70774) { // ìš°ë“œ ë² í¬ë§ˆì„ íƒ€ìš´ ë§ˆìŠ¤í„°
 				htmlid = talkToTownmaster(player,
 						L1TownLocation.TOWNID_WINDAWOOD);
-			} else if (npcid == 70799) { // ½Ç¹ö ³ªÀÌÆ® Å¸¿î Å¸¿î ¸¶½ºÅÍ
+			} else if (npcid == 70799) { // ì‹¤ë²„ ë‚˜ì´íŠ¸ íƒ€ìš´ íƒ€ìš´ ë§ˆìŠ¤í„°
 				htmlid = talkToTownmaster(player,
 						L1TownLocation.TOWNID_SILVER_KNIGHT_TOWN);
-			} else if (npcid == 70594) { // ±â¶õ µµ½Ã Å¸¿î ¸¶½ºÅÍ
+			} else if (npcid == 70594) { // ê¸°ë€ ë„ì‹œ íƒ€ìš´ ë§ˆìŠ¤í„°
 				htmlid = talkToTownmaster(player, L1TownLocation.TOWNID_GIRAN);
-			} else if (npcid == 70860) { // Heine µµ½Ã Å¸¿î ¸¶½ºÅÍ
+			} else if (npcid == 70860) { // Heine ë„ì‹œ íƒ€ìš´ ë§ˆìŠ¤í„°
 				htmlid = talkToTownmaster(player, L1TownLocation.TOWNID_HEINE);
-			} else if (npcid == 70654) { // ¿Ï¼÷¸¶À» Å¸¿î ¸¶½ºÅÍ
+			} else if (npcid == 70654) { // ì™„ìˆ™ë§ˆì„ íƒ€ìš´ ë§ˆìŠ¤í„°
 				htmlid = talkToTownmaster(player, L1TownLocation.TOWNID_WERLDAN);
-			} else if (npcid == 70748) { // »ó¾ÆÀÇ Å¾ÀÇ ¸¶À» Å¸¿î ¸¶½ºÅÍ
+			} else if (npcid == 70748) { // ìƒì•„ì˜ íƒ‘ì˜ ë§ˆì„ íƒ€ìš´ ë§ˆìŠ¤í„°
 				htmlid = talkToTownmaster(player, L1TownLocation.TOWNID_OREN);
-			} else if (npcid == 70534) { // ÀÌ¾ß±âÇÒ ¼ö ÀÖ´Â ¼¶ÀÇ ¸¶À» Å¸¿î ¾îµå¹ÙÀÌÀú
+			} else if (npcid == 70534) { // ì´ì•¼ê¸°í•  ìˆ˜ ìˆëŠ” ì„¬ì˜ ë§ˆì„ íƒ€ìš´ ì–´ë“œë°”ì´ì €
 				htmlid = talkToTownadviser(player,
 						L1TownLocation.TOWNID_TALKING_ISLAND);
-			} else if (npcid == 70556) { // ÄËÆ®¸¶À» Å¸¿î ¾îµå¹ÙÀÌÀú
+			} else if (npcid == 70556) { // ì¼„íŠ¸ë§ˆì„ íƒ€ìš´ ì–´ë“œë°”ì´ì €
 				htmlid = talkToTownadviser(player, L1TownLocation.TOWNID_KENT);
-			} else if (npcid == 70572) { // ±×¸£µò¸¶À» Å¸¿î ¾îµå¹ÙÀÌÀú
+			} else if (npcid == 70572) { // ê·¸ë¥´ë”˜ë§ˆì„ íƒ€ìš´ ì–´ë“œë°”ì´ì €
 				htmlid = talkToTownadviser(player, L1TownLocation.TOWNID_GLUDIO);
-			} else if (npcid == 70830) { // È­Àü¸¶À» Å¸¿î ¾îµå¹ÙÀÌÀú
+			} else if (npcid == 70830) { // í™”ì „ë§ˆì„ íƒ€ìš´ ì–´ë“œë°”ì´ì €
 				htmlid = talkToTownadviser(player,
 						L1TownLocation.TOWNID_ORCISH_FOREST);
-			} else if (npcid == 70788) { // ¿ìµå º£Å©¸¶À» Å¸¿î ¾îµå¹ÙÀÌÀú
+			} else if (npcid == 70788) { // ìš°ë“œ ë² í¬ë§ˆì„ íƒ€ìš´ ì–´ë“œë°”ì´ì €
 				htmlid = talkToTownadviser(player,
 						L1TownLocation.TOWNID_WINDAWOOD);
-			} else if (npcid == 70806) { // ½Ç¹ö ³ªÀÌÆ® Å¸¿î Å¸¿î ¾îµå¹ÙÀÌÀú
+			} else if (npcid == 70806) { // ì‹¤ë²„ ë‚˜ì´íŠ¸ íƒ€ìš´ íƒ€ìš´ ì–´ë“œë°”ì´ì €
 				htmlid = talkToTownadviser(player,
 						L1TownLocation.TOWNID_SILVER_KNIGHT_TOWN);
-			} else if (npcid == 70631) { // ±â¶õ µµ½Ã Å¸¿î ¾îµå¹ÙÀÌÀú
+			} else if (npcid == 70631) { // ê¸°ë€ ë„ì‹œ íƒ€ìš´ ì–´ë“œë°”ì´ì €
 				htmlid = talkToTownadviser(player, L1TownLocation.TOWNID_GIRAN);
-			} else if (npcid == 70876) { // Heine µµ½Ã Å¸¿î ¾îµå¹ÙÀÌÀú
+			} else if (npcid == 70876) { // Heine ë„ì‹œ íƒ€ìš´ ì–´ë“œë°”ì´ì €
 				htmlid = talkToTownadviser(player, L1TownLocation.TOWNID_HEINE);
-			} else if (npcid == 70663) { // ¿Ï¼÷¸¶À» Å¸¿î ¾îµå¹ÙÀÌÀú
+			} else if (npcid == 70663) { // ì™„ìˆ™ë§ˆì„ íƒ€ìš´ ì–´ë“œë°”ì´ì €
 				htmlid = talkToTownadviser(player,
 						L1TownLocation.TOWNID_WERLDAN);
-			} else if (npcid == 70761) { // »ó¾ÆÀÇ Å¾ÀÇ ¸¶À» Å¸¿î ¾îµå¹ÙÀÌÀú
+			} else if (npcid == 70761) { // ìƒì•„ì˜ íƒ‘ì˜ ë§ˆì„ íƒ€ìš´ ì–´ë“œë°”ì´ì €
 				htmlid = talkToTownadviser(player, L1TownLocation.TOWNID_OREN);
-			} else if (npcid == 70997) { // µå·Î¸óµå
+			} else if (npcid == 70997) { // ë“œë¡œëª¬ë“œ
 				htmlid = talkToDoromond(player);
-			} else if (npcid == 70998) { // ³ë·¡ÇÏ´Â ¼¶ÀÇ °¡ÀÌµå
+			} else if (npcid == 70998) { // ë…¸ë˜í•˜ëŠ” ì„¬ì˜ ê°€ì´ë“œ
 				htmlid = talkToSIGuide(player);
-			} else if (npcid == 70999) { // ¾Ë·º½º(³ë·¡ÇÏ´Â ¼¶)
+			} else if (npcid == 70999) { // ì•Œë ‰ìŠ¤(ë…¸ë˜í•˜ëŠ” ì„¬)
 				htmlid = talkToAlex(player);
-			} else if (npcid == 71000) { // ¾Ë·º½º(ÈÆ·ÃÀå)
+			} else if (npcid == 71000) { // ì•Œë ‰ìŠ¤(í›ˆë ¨ì¥)
 				htmlid = talkToAlexInTrainingRoom(player);
-			} else if (npcid == 71002) { // ¿Ğ°¡´Ú ¼¼·¹ÀÌ¼Ç»ç
+			} else if (npcid == 71002) { // ì™ˆê°€ë‹¥ ì„¸ë ˆì´ì…˜ì‚¬
 				htmlid = cancellation(player);
-			} else if (npcid == 70506) { // ¸£¹Ù
+			} else if (npcid == 70506) { // ë¥´ë°”
 				htmlid = talkToRuba(player);
-			} else if (npcid == 71005) { // Æ÷ÇÇ·¹¾Æ
+			} else if (npcid == 71005) { // í¬í”¼ë ˆì•„
 				htmlid = talkToPopirea(player);
-			} else if (npcid == 71009) { // ¹æ¾î ¾Æ³ª¿î¼­
+			} else if (npcid == 71009) { // ë°©ì–´ ì•„ë‚˜ìš´ì„œ
 				if (player.getLevel() < 13) {
 					htmlid = "jpe0071";
 				}
-			} else if (npcid == 71011) { // Ä¡ÄÚ¸®
+			} else if (npcid == 71011) { // ì¹˜ì½”ë¦¬
 				if (player.getLevel() < 13) {
 					htmlid = "jpe0061";
 				}
-			} else if (npcid == 71013) { // Ä«·»
+			} else if (npcid == 71013) { // ì¹´ë Œ
 				if (player.isDarkelf()) {
 					if (player.getLevel() <= 3) {
 						htmlid = "karen1";
@@ -1422,21 +1422,21 @@ public class L1MerchantInstance extends L1NpcInstance {
 						htmlid = "karen4";
 					}
 				}
-			} else if (npcid == 71014) { // ¸¶À»ÀÇ ÀÚ°æ´Ü( ¿À¸¥ÂÊ)
+			} else if (npcid == 71014) { // ë§ˆì„ì˜ ìê²½ë‹¨( ì˜¤ë¥¸ìª½)
 				if (player.getLevel() < 13) {
 					htmlid = "en0241";
 				}
-			} else if (npcid == 71015) { // ¸¶À»ÀÇ ÀÚ°æ´Ü(À§)
+			} else if (npcid == 71015) { // ë§ˆì„ì˜ ìê²½ë‹¨(ìœ„)
 				if (player.getLevel() < 13) {
 					htmlid = "en0261";
 				} else if (player.getLevel() >= 13 && player.getLevel() < 25) {
 					htmlid = "en0262";
 				}
-			} else if (npcid == 71031) { // ¿ëº´ ¶óÀÌ¾ğ
+			} else if (npcid == 71031) { // ìš©ë³‘ ë¼ì´ì–¸
 				if (player.getLevel() < 25) {
 					htmlid = "en0081";
 				}
-			} else if (npcid == 71032) { // ¸ğÇèÀÚ ¿¡ÀÌÅ¸
+			} else if (npcid == 71032) { // ëª¨í—˜ì ì—ì´íƒ€
 				if (player.isElf()) {
 					htmlid = "en0091e";
 				} else if (player.isDarkelf()) {
@@ -1448,8 +1448,8 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else if (player.isCrown()) {
 					htmlid = "en0091p";
 				}
-			} else if (npcid == 71034) { // À²¹ı¹Ú»ç
-				if (player.getInventory().checkItem(41227)) { // ¾Ë·º½ºÀÇ ¼Ò°³Àå
+			} else if (npcid == 71034) { // ìœ¨ë²•ë°•ì‚¬
+				if (player.getInventory().checkItem(41227)) { // ì•Œë ‰ìŠ¤ì˜ ì†Œê°œì¥
 					if (player.isElf()) {
 						htmlid = "en0201e";
 					} else if (player.isDarkelf()) {
@@ -1462,8 +1462,8 @@ public class L1MerchantInstance extends L1NpcInstance {
 						htmlid = "en0201p";
 					}
 				}
-			} else if (npcid == 71033) { // ÇÏ-¹ÌÆ®
-				if (player.getInventory().checkItem(41228)) { // À²¹ı¹Ú»çÀÇ ºÎÀû
+			} else if (npcid == 71033) { // í•˜-ë¯¸íŠ¸
+				if (player.getInventory().checkItem(41228)) { // ìœ¨ë²•ë°•ì‚¬ì˜ ë¶€ì 
 					if (player.isElf()) {
 						htmlid = "en0211e";
 					} else if (player.isDarkelf()) {
@@ -1476,7 +1476,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						htmlid = "en0211p";
 					}
 				}
-			} else if (npcid == 71026) { // ÄÚÄÚ
+			} else if (npcid == 71026) { // ì½”ì½”
 				if (player.getLevel() < 10) {
 					htmlid = "en0113";
 				} else if (player.getLevel() >= 10 && player.getLevel() < 25) {
@@ -1484,7 +1484,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else if (player.getLevel() > 25) {
 					htmlid = "en0112";
 				}
-			} else if (npcid == 71027) { // Äí
+			} else if (npcid == 71027) { // ì¿ 
 				if (player.getLevel() < 10) {
 					htmlid = "en0283";
 				} else if (player.getLevel() >= 10 && player.getLevel() < 25) {
@@ -1492,13 +1492,13 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else if (player.getLevel() > 25) {
 					htmlid = "en0282";
 				}
-			} else if (npcid == 71021) { // »À¼¼°øÀÎ ¸ÀÆ¼
+			} else if (npcid == 71021) { // ë¼ˆì„¸ê³µì¸ ë§›í‹°
 				if (player.getLevel() < 12) {
 					htmlid = "en0197";
 				} else if (player.getLevel() >= 12 && player.getLevel() < 25) {
 					htmlid = "en0191";
 				}
-			} else if (npcid == 71022) { // »À¼¼°øÀÎ Áö³­
+			} else if (npcid == 71022) { // ë¼ˆì„¸ê³µì¸ ì§€ë‚œ
 				if (player.getLevel() < 12) {
 					htmlid = "jpe0155";
 				} else if (player.getLevel() >= 12 && player.getLevel() < 25) {
@@ -1513,7 +1513,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						htmlid = "jpe0158";
 					}
 				}
-			} else if (npcid == 71023) { // »À¼¼°øÀÎ ÄÉÀÌÀÌ
+			} else if (npcid == 71023) { // ë¼ˆì„¸ê³µì¸ ì¼€ì´ì´
 				if (player.getLevel() < 12) {
 					htmlid = "jpe0145";
 				} else if (player.getLevel() >= 12 && player.getLevel() < 25) {
@@ -1530,7 +1530,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						htmlid = "jpe0144";
 					}
 				}
-			} else if (npcid == 71020) { // Á¸
+			} else if (npcid == 71020) { // ì¡´
 				if (player.getLevel() < 12) {
 					htmlid = "jpe0125";
 				} else if (player.getLevel() >= 12 && player.getLevel() < 25) {
@@ -1546,44 +1546,44 @@ public class L1MerchantInstance extends L1NpcInstance {
 						htmlid = "jpe0126";
 					}
 				}
-			} else if (npcid == 71019) { // Á¦ÀÚ ºñÆ®
+			} else if (npcid == 71019) { // ì œì ë¹„íŠ¸
 				if (player.getLevel() < 12) {
 					htmlid = "jpe0114";
 				} else if (player.getLevel() >= 12 && player.getLevel() < 25) {
-					if (player.getInventory().checkItem(41239)) { // ºñÆ®¿¡ÀÇ ÆíÁö
+					if (player.getInventory().checkItem(41239)) { // ë¹„íŠ¸ì—ì˜ í¸ì§€
 						htmlid = "jpe0113";
 					} else {
 						htmlid = "jpe0111";
 					}
 				}
-			} else if (npcid == 71018) { // Æä´Ù
+			} else if (npcid == 71018) { // í˜ë‹¤
 				if (player.getLevel() < 12) {
 					htmlid = "jpe0133";
 				} else if (player.getLevel() >= 12 && player.getLevel() < 25) {
-					if (player.getInventory().checkItem(41240)) { // Æä´Ù¿¡ÀÇ ÆíÁö
+					if (player.getInventory().checkItem(41240)) { // í˜ë‹¤ì—ì˜ í¸ì§€
 						htmlid = "jpe0132";
 					} else {
 						htmlid = "jpe0131";
 					}
 				}
-			} else if (npcid == 71025) { // ÄÉ½ºÅ²
+			} else if (npcid == 71025) { // ì¼€ìŠ¤í‚¨
 				if (player.getLevel() < 10) {
 					htmlid = "jpe0086";
 				} else if (player.getLevel() >= 10 && player.getLevel() < 25) {
-					if (player.getInventory().checkItem(41226)) { // ÆÄ°íÀÇ ¾à
+					if (player.getInventory().checkItem(41226)) { // íŒŒê³ ì˜ ì•½
 						htmlid = "jpe0084";
-					} else if (player.getInventory().checkItem(41225)) { // ÄÉ½ºÅ²ÀÇ ¹ßÁÖ¼­
+					} else if (player.getInventory().checkItem(41225)) { // ì¼€ìŠ¤í‚¨ì˜ ë°œì£¼ì„œ
 						htmlid = "jpe0083";
 					} else if (player.getInventory().checkItem(40653)
-							|| player.getInventory().checkItem(40613)) { // ºÓÀº ¿­¼è¡¤°ËÀº ¿­¼è
+							|| player.getInventory().checkItem(40613)) { // ë¶‰ì€ ì—´ì‡ Â·ê²€ì€ ì—´ì‡ 
 						htmlid = "jpe0081";
 					}
 				}
-			} else if (npcid == 71038) { // Àå·Î ³ë³ª¸Ş
-				if (player.getInventory().checkItem(41060)) { // ³ë³ª¸ŞÀÇ ÃßÃµ¼­
-					if (player.getInventory().checkItem(41090) // ³×¸£°¡ÀÇ ÅäÅÛ
-							|| player.getInventory().checkItem(41091) // µÎ´Ù¸¶¶óÀÇ ÅäÅÛ
-							|| player.getInventory().checkItem(41092)) { // ¾ÆÆ®¹ÙÀÇ ÅäÅÛ
+			} else if (npcid == 71038) { // ì¥ë¡œ ë…¸ë‚˜ë©”
+				if (player.getInventory().checkItem(41060)) { // ë…¸ë‚˜ë©”ì˜ ì¶”ì²œì„œ
+					if (player.getInventory().checkItem(41090) // ë„¤ë¥´ê°€ì˜ í† í…œ
+							|| player.getInventory().checkItem(41091) // ë‘ë‹¤ë§ˆë¼ì˜ í† í…œ
+							|| player.getInventory().checkItem(41092)) { // ì•„íŠ¸ë°”ì˜ í† í…œ
 						htmlid = "orcfnoname7";
 					} else {
 						htmlid = "orcfnoname8";
@@ -1591,13 +1591,13 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "orcfnoname1";
 				}
-			} else if (npcid == 71040) { // Á¶»ç´ÜÀå ¾ÆÆ®¹Ù³ë¾Æ
-				if (player.getInventory().checkItem(41060)) { // ³ë³ª¸ŞÀÇ ÃßÃµ¼­
-					if (player.getInventory().checkItem(41065)) { // Á¶»ç´ÜÀÇ Áõ¼­
-						if (player.getInventory().checkItem(41086) // ½ºÇÇ¸´µåÀÇ »Ñ¸®
-								|| player.getInventory().checkItem(41087) // ½ºÇÇ¸´µåÀÇ Ç¥ÇÇ
-								|| player.getInventory().checkItem(41088) // ½ºÇÇ¸´µåÀÇ ÀÙ
-								|| player.getInventory().checkItem(41089)) { // ½ºÇÇ¸´µåÀÇ ³ª¹µ°¡Áö
+			} else if (npcid == 71040) { // ì¡°ì‚¬ë‹¨ì¥ ì•„íŠ¸ë°”ë…¸ì•„
+				if (player.getInventory().checkItem(41060)) { // ë…¸ë‚˜ë©”ì˜ ì¶”ì²œì„œ
+					if (player.getInventory().checkItem(41065)) { // ì¡°ì‚¬ë‹¨ì˜ ì¦ì„œ
+						if (player.getInventory().checkItem(41086) // ìŠ¤í”¼ë¦¿ë“œì˜ ë¿Œë¦¬
+								|| player.getInventory().checkItem(41087) // ìŠ¤í”¼ë¦¿ë“œì˜ í‘œí”¼
+								|| player.getInventory().checkItem(41088) // ìŠ¤í”¼ë¦¿ë“œì˜ ì
+								|| player.getInventory().checkItem(41089)) { // ìŠ¤í”¼ë¦¿ë“œì˜ ë‚˜ë­‡ê°€ì§€
 							htmlid = "orcfnoa6";
 						} else {
 							htmlid = "orcfnoa5";
@@ -1608,14 +1608,14 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "orcfnoa1";
 				}
-			} else if (npcid == 71041) { // ³×¸£°¡ÈÄ¿ì¸ğ
-				if (player.getInventory().checkItem(41060)) { // ³ë³ª¸ŞÀÇ ÃßÃµ¼­
-					if (player.getInventory().checkItem(41064)) { // Á¶»ç´ÜÀÇ Áõ¼­
-						if (player.getInventory().checkItem(41081) // ¿ÀÅ©ÀÇ ¹èÁö
-								|| player.getInventory().checkItem(41082) // ¿ÀÅ©ÀÇ ¾Æ¹Â·¿Æ®
-								|| player.getInventory().checkItem(41083) // ¼Å¸Ç °¡·ç
-								|| player.getInventory().checkItem(41084) // ÀÏ·çÁ¯ °¡·ç
-								|| player.getInventory().checkItem(41085)) { // ¿¹¾ğÀÚÀÇ ÆŞ
+			} else if (npcid == 71041) { // ë„¤ë¥´ê°€í›„ìš°ëª¨
+				if (player.getInventory().checkItem(41060)) { // ë…¸ë‚˜ë©”ì˜ ì¶”ì²œì„œ
+					if (player.getInventory().checkItem(41064)) { // ì¡°ì‚¬ë‹¨ì˜ ì¦ì„œ
+						if (player.getInventory().checkItem(41081) // ì˜¤í¬ì˜ ë°°ì§€
+								|| player.getInventory().checkItem(41082) // ì˜¤í¬ì˜ ì•„ë®¤ë ›íŠ¸
+								|| player.getInventory().checkItem(41083) // ì…”ë§¨ ê°€ë£¨
+								|| player.getInventory().checkItem(41084) // ì¼ë£¨ì ¼ ê°€ë£¨
+								|| player.getInventory().checkItem(41085)) { // ì˜ˆì–¸ìì˜ í„
 							htmlid = "orcfhuwoomo2";
 						} else {
 							htmlid = "orcfhuwoomo8";
@@ -1626,14 +1626,14 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "orcfhuwoomo5";
 				}
-			} else if (npcid == 71042) { // ³×¸£°¡¹ÙÅ©¸ğ
-				if (player.getInventory().checkItem(41060)) { // ³ë³ª¸ŞÀÇ ÃßÃµ¼­
-					if (player.getInventory().checkItem(41062)) { // Á¶»ç´ÜÀÇ Áõ¼­
-						if (player.getInventory().checkItem(41071) // ÀºÀÇ Ãß¼®
-								|| player.getInventory().checkItem(41072) // ÀºÀÇ ÃĞ´ë
-								|| player.getInventory().checkItem(41073) // ¹İµğµåÀÇ ¿­¼è
-								|| player.getInventory().checkItem(41074) // ¹İµğµåÀÇ ºÀÅõ
-								|| player.getInventory().checkItem(41075)) { // ´õ·¯¿öÁø ¸Ó¸®Ä«¶ô
+			} else if (npcid == 71042) { // ë„¤ë¥´ê°€ë°”í¬ëª¨
+				if (player.getInventory().checkItem(41060)) { // ë…¸ë‚˜ë©”ì˜ ì¶”ì²œì„œ
+					if (player.getInventory().checkItem(41062)) { // ì¡°ì‚¬ë‹¨ì˜ ì¦ì„œ
+						if (player.getInventory().checkItem(41071) // ì€ì˜ ì¶”ì„
+								|| player.getInventory().checkItem(41072) // ì€ì˜ ì´›ëŒ€
+								|| player.getInventory().checkItem(41073) // ë°˜ë””ë“œì˜ ì—´ì‡ 
+								|| player.getInventory().checkItem(41074) // ë°˜ë””ë“œì˜ ë´‰íˆ¬
+								|| player.getInventory().checkItem(41075)) { // ë”ëŸ¬ì›Œì§„ ë¨¸ë¦¬ì¹´ë½
 							htmlid = "orcfbakumo2";
 						} else {
 							htmlid = "orcfbakumo8";
@@ -1644,14 +1644,14 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "orcfbakumo5";
 				}
-			} else if (npcid == 71043) { // µÎ´Ù¸¶¶óºêÄ«
-				if (player.getInventory().checkItem(41060)) { // ³ë³ª¸ŞÀÇ ÃßÃµ¼­
-					if (player.getInventory().checkItem(41063)) { // Á¶»ç´ÜÀÇ Áõ¼­
-						if (player.getInventory().checkItem(41076) // ´õ·¯¿öÁø ¶¥ÀÇ ÄÚ¾î
-								|| player.getInventory().checkItem(41077) // ´õ·¯¿öÁø ¹°ÀÇ ÄÚ¾î
-								|| player.getInventory().checkItem(41078) // ´õ·¯¿öÁø ºÒÀÇ ÄÚ¾î
-								|| player.getInventory().checkItem(41079) // ´õ·¯¿öÁø ¹Ù¶÷ÀÇ ÄÚ¾î
-								|| player.getInventory().checkItem(41080)) { // ´õ·¯¿öÁø Á¤·ÉÀÇ ÄÚ¾î
+			} else if (npcid == 71043) { // ë‘ë‹¤ë§ˆë¼ë¸Œì¹´
+				if (player.getInventory().checkItem(41060)) { // ë…¸ë‚˜ë©”ì˜ ì¶”ì²œì„œ
+					if (player.getInventory().checkItem(41063)) { // ì¡°ì‚¬ë‹¨ì˜ ì¦ì„œ
+						if (player.getInventory().checkItem(41076) // ë”ëŸ¬ì›Œì§„ ë•…ì˜ ì½”ì–´
+								|| player.getInventory().checkItem(41077) // ë”ëŸ¬ì›Œì§„ ë¬¼ì˜ ì½”ì–´
+								|| player.getInventory().checkItem(41078) // ë”ëŸ¬ì›Œì§„ ë¶ˆì˜ ì½”ì–´
+								|| player.getInventory().checkItem(41079) // ë”ëŸ¬ì›Œì§„ ë°”ëŒì˜ ì½”ì–´
+								|| player.getInventory().checkItem(41080)) { // ë”ëŸ¬ì›Œì§„ ì •ë ¹ì˜ ì½”ì–´
 							htmlid = "orcfbuka2";
 						} else {
 							htmlid = "orcfbuka8";
@@ -1662,14 +1662,14 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "orcfbuka5";
 				}
-			} else if (npcid == 71044) { // µÎ´Ù¸¶¶óÄ«¸Ş
-				if (player.getInventory().checkItem(41060)) { // ³ë³ª¸ŞÀÇ ÃßÃµ¼­
-					if (player.getInventory().checkItem(41061)) { // Á¶»ç´ÜÀÇ Áõ¼­
-						if (player.getInventory().checkItem(41066) // ´õ·¯¿öÁø »Ñ¸®
-								|| player.getInventory().checkItem(41067) // ´õ·¯¿öÁø °¡Áö
-								|| player.getInventory().checkItem(41068) // ´õ·¯¿öÁø ºó²®Áú
-								|| player.getInventory().checkItem(41069) // ´õ·¯¿öÁø Å¸Å×°¡¹Ì
-								|| player.getInventory().checkItem(41070)) { // ´õ·¯¿öÁø ¿äÁ¤ÀÇ ³¯°³
+			} else if (npcid == 71044) { // ë‘ë‹¤ë§ˆë¼ì¹´ë©”
+				if (player.getInventory().checkItem(41060)) { // ë…¸ë‚˜ë©”ì˜ ì¶”ì²œì„œ
+					if (player.getInventory().checkItem(41061)) { // ì¡°ì‚¬ë‹¨ì˜ ì¦ì„œ
+						if (player.getInventory().checkItem(41066) // ë”ëŸ¬ì›Œì§„ ë¿Œë¦¬
+								|| player.getInventory().checkItem(41067) // ë”ëŸ¬ì›Œì§„ ê°€ì§€
+								|| player.getInventory().checkItem(41068) // ë”ëŸ¬ì›Œì§„ ë¹ˆê»ì§ˆ
+								|| player.getInventory().checkItem(41069) // ë”ëŸ¬ì›Œì§„ íƒ€í…Œê°€ë¯¸
+								|| player.getInventory().checkItem(41070)) { // ë”ëŸ¬ì›Œì§„ ìš”ì •ì˜ ë‚ ê°œ
 							htmlid = "orcfkame2";
 						} else {
 							htmlid = "orcfkame8";
@@ -1680,7 +1680,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "orcfkame5";
 				}
-			} else if (npcid == 71055) { // ·çÄÉ ÀÎ(ÇØÀû¼¶ÀÇ ºñ¹Ğ)
+			} else if (npcid == 71055) { // ë£¨ì¼€ ì¸(í•´ì ì„¬ì˜ ë¹„ë°€)
 				if (player.getQuest().get_step(L1Quest.QUEST_RESTA)
 						== 3) {
 					htmlid = "lukein13";
@@ -1704,50 +1704,50 @@ public class L1MerchantInstance extends L1NpcInstance {
 						<= 10) {
 					htmlid = "lukein8";
 				}
-			} else if (npcid == 71063) { // ÀÛÀº »óÀÚ-1¹øÂ° (ÇØÀû¼¶ÀÇ ºñ¹Ğ)
+			} else if (npcid == 71063) { // ì‘ì€ ìƒì-1ë²ˆì§¸ (í•´ì ì„¬ì˜ ë¹„ë°€)
 				if (player.getQuest().get_step(L1Quest.QUEST_TBOX1)
 						== L1Quest.QUEST_END) {
 				} else if (player.getQuest().get_step(L1Quest.QUEST_LUKEIN1)
 						== 1) {
 					htmlid = "maptbox";
 				}
-			} else if (npcid == 71064) { // ÀÛÀº »óÀÚ-2¹øÂ° -bÁöÁ¡(ÇØÀû¼¶ÀÇ ºñ¹Ğ)
+			} else if (npcid == 71064) { // ì‘ì€ ìƒì-2ë²ˆì§¸ -bì§€ì (í•´ì ì„¬ì˜ ë¹„ë°€)
 				if (player.getQuest().get_step(L1Quest.QUEST_LUKEIN1) == 2) {
 					htmlid = talkToSecondtbox(player);
 				}
-			} else if (npcid == 71065) { // ÀÛÀº »óÀÚ-2¹øÂ° -cÁöÁ¡(ÇØÀû¼¶ÀÇ ºñ¹Ğ)
+			} else if (npcid == 71065) { // ì‘ì€ ìƒì-2ë²ˆì§¸ -cì§€ì (í•´ì ì„¬ì˜ ë¹„ë°€)
 				if (player.getQuest().get_step(L1Quest.QUEST_LUKEIN1) == 3) {
 					htmlid = talkToSecondtbox(player);
 				}
-			} else if (npcid == 71066) { // ÀÛÀº »óÀÚ-2¹øÂ° -dÁöÁ¡(ÇØÀû¼¶ÀÇ ºñ¹Ğ)
+			} else if (npcid == 71066) { // ì‘ì€ ìƒì-2ë²ˆì§¸ -dì§€ì (í•´ì ì„¬ì˜ ë¹„ë°€)
 				if (player.getQuest().get_step(L1Quest.QUEST_LUKEIN1) == 4) {
 					htmlid = talkToSecondtbox(player);
 				}
-			} else if (npcid == 71067) { // ÀÛÀº »óÀÚ-3¹øÂ° -eÁöÁ¡(ÇØÀû¼¶ÀÇ ºñ¹Ğ)
+			} else if (npcid == 71067) { // ì‘ì€ ìƒì-3ë²ˆì§¸ -eì§€ì (í•´ì ì„¬ì˜ ë¹„ë°€)
 				if (player.getQuest().get_step(L1Quest.QUEST_LUKEIN1) == 5) {
 					htmlid = talkToThirdtbox(player);
 				}
-			} else if (npcid == 71068) { // ÀÛÀº »óÀÚ-3¹øÂ° -fÁöÁ¡(ÇØÀû¼¶ÀÇ ºñ¹Ğ)
+			} else if (npcid == 71068) { // ì‘ì€ ìƒì-3ë²ˆì§¸ -fì§€ì (í•´ì ì„¬ì˜ ë¹„ë°€)
 				if (player.getQuest().get_step(L1Quest.QUEST_LUKEIN1) == 6) {
 					htmlid = talkToThirdtbox(player);
 				}
-			} else if (npcid == 71069) { // ÀÛÀº »óÀÚ-3¹øÂ° -gÁöÁ¡(ÇØÀû¼¶ÀÇ ºñ¹Ğ)
+			} else if (npcid == 71069) { // ì‘ì€ ìƒì-3ë²ˆì§¸ -gì§€ì (í•´ì ì„¬ì˜ ë¹„ë°€)
 				if (player.getQuest().get_step(L1Quest.QUEST_LUKEIN1) == 7) {
 					htmlid = talkToThirdtbox(player);
 				}
-			} else if (npcid == 71070) { // ÀÛÀº »óÀÚ-3¹øÂ° -hÁöÁ¡(ÇØÀû¼¶ÀÇ ºñ¹Ğ)
+			} else if (npcid == 71070) { // ì‘ì€ ìƒì-3ë²ˆì§¸ -hì§€ì (í•´ì ì„¬ì˜ ë¹„ë°€)
 				if (player.getQuest().get_step(L1Quest.QUEST_LUKEIN1) == 8) {
 					htmlid = talkToThirdtbox(player);
 				}
-			} else if (npcid == 71071) { // ÀÛÀº »óÀÚ-3¹øÂ° -iÁöÁ¡(ÇØÀû¼¶ÀÇ ºñ¹Ğ)
+			} else if (npcid == 71071) { // ì‘ì€ ìƒì-3ë²ˆì§¸ -iì§€ì (í•´ì ì„¬ì˜ ë¹„ë°€)
 				if (player.getQuest().get_step(L1Quest.QUEST_LUKEIN1) == 9) {
 					htmlid = talkToThirdtbox(player);
 				}
-			} else if (npcid == 71072) { // ÀÛÀº »óÀÚ-3¹øÂ° -jÁöÁ¡(ÇØÀû¼¶ÀÇ ºñ¹Ğ)
+			} else if (npcid == 71072) { // ì‘ì€ ìƒì-3ë²ˆì§¸ -jì§€ì (í•´ì ì„¬ì˜ ë¹„ë°€)
 				if (player.getQuest().get_step(L1Quest.QUEST_LUKEIN1) == 10) {
 					htmlid = talkToThirdtbox(player);
 				}
-			} else if (npcid == 71056) { // ½Ã¹ÌÁî(»ç¶óÁø ¾Æµé)
+			} else if (npcid == 71056) { // ì‹œë¯¸ì¦ˆ(ì‚¬ë¼ì§„ ì•„ë“¤)
 				if (player.getQuest().get_step(L1Quest.QUEST_RESTA)
 						== 4) {
 					if (player.getInventory().checkItem(40631)) {
@@ -1765,12 +1765,12 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 1) {
 					htmlid = "SIMIZZ6";
 				}
-			} else if (npcid == 71057) { // µµÀÏ(º¸¹°ÀÇ Áöµµ 1)
+			} else if (npcid == 71057) { // ë„ì¼(ë³´ë¬¼ì˜ ì§€ë„ 1)
 				if (player.getQuest().get_step(L1Quest.QUEST_DOIL)
 						== L1Quest.QUEST_END) {
 					htmlid = "doil4b";
 				}
-			} else if (npcid == 71059) { // ·çµğ ¾È(º¸¹°ÀÇ Áöµµ 2)
+			} else if (npcid == 71059) { // ë£¨ë”” ì•ˆ(ë³´ë¬¼ì˜ ì§€ë„ 2)
 				if (player.getQuest().get_step(L1Quest.QUEST_RUDIAN)
 						== L1Quest.QUEST_END) {
 					htmlid = "rudian1c";
@@ -1783,7 +1783,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 					htmlid = "rudian1a";
 				}
-			} else if (npcid == 71060) { // ·¹½ºÅ¸(º¸¹°ÀÇ Áöµµ 3)
+			} else if (npcid == 71060) { // ë ˆìŠ¤íƒ€(ë³´ë¬¼ì˜ ì§€ë„ 3)
 				if (player.getQuest().get_step(L1Quest.QUEST_RESTA)
 						== L1Quest.QUEST_END) {
 					htmlid = "resta1e";
@@ -1814,7 +1814,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 2) {
 					htmlid = "resta1b";
 				}
-			} else if (npcid == 71061) { // Ä«Á»½º(º¸¹°ÀÇ Áöµµ 4)
+			} else if (npcid == 71061) { // ì¹´ì¢€ìŠ¤(ë³´ë¬¼ì˜ ì§€ë„ 4)
 				if (player.getQuest().get_step(L1Quest.QUEST_CADMUS)
 						== L1Quest.QUEST_END) {
 					htmlid = "cadmus1c";
@@ -1828,7 +1828,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== L1Quest.QUEST_END) {
 					htmlid = "cadmus1b";
 				}
-			} else if (npcid == 71036) { // Ä«¹Ì¶ó(µå·¹ÀÌÅ©ÀÇ Áø½Ç)
+			} else if (npcid == 71036) { // ì¹´ë¯¸ë¼(ë“œë ˆì´í¬ì˜ ì§„ì‹¤)
 				if (player.getQuest().get_step(L1Quest.QUEST_KAMYLA)
 						== L1Quest.QUEST_END) {
 					htmlid = "kamyla26";
@@ -1855,12 +1855,12 @@ public class L1MerchantInstance extends L1NpcInstance {
 							.checkItem(40621)) {
 					htmlid = "kamyla1";
 				}
-			} else if (npcid == 71089) { // Èå¶ûÄÚ(µå·¹ÀÌÅ©ÀÇ Áø½Ç)
+			} else if (npcid == 71089) { // íë‘ì½”(ë“œë ˆì´í¬ì˜ ì§„ì‹¤)
 				if (player.getQuest().get_step(L1Quest.QUEST_KAMYLA)
 						== 2 ) {
 					htmlid = "francu12";
 				}
-			} else if (npcid == 71090) { // ½Ã·ÃÀÇ Å©¸®½ºÅ» 2(µå·¹ÀÌÅ©ÀÇ Áø½Ç)
+			} else if (npcid == 71090) { // ì‹œë ¨ì˜ í¬ë¦¬ìŠ¤íƒˆ 2(ë“œë ˆì´í¬ì˜ ì§„ì‹¤)
 				if (player.getQuest().get_step(L1Quest.QUEST_CRYSTAL)
 						== 1 && player.getInventory().checkItem(40620)) {
 					htmlid = "jcrystal2";
@@ -1868,12 +1868,12 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 1){
 					htmlid = "jcrystal3";
 				}
-			} else if (npcid == 71091) { // ½Ã·ÃÀÇ Å©¸®½ºÅ» 3(µå·¹ÀÌÅ©ÀÇ Áø½Ç)
+			} else if (npcid == 71091) { // ì‹œë ¨ì˜ í¬ë¦¬ìŠ¤íƒˆ 3(ë“œë ˆì´í¬ì˜ ì§„ì‹¤)
 				if (player.getQuest().get_step(L1Quest.QUEST_CRYSTAL)
 						== 2 && player.getInventory().checkItem(40654)) {
 					htmlid = "jcrystall2";
 				}
-			} else if (npcid == 71074) { // ¸®ÀÚµå¸¸ÀÇ Àå·Î
+			} else if (npcid == 71074) { // ë¦¬ìë“œë§Œì˜ ì¥ë¡œ
 				if (player.getQuest().get_step(L1Quest.QUEST_LIZARD)
 						== L1Quest.QUEST_END) {
 					htmlid = "lelder0";
@@ -1895,13 +1895,13 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else if (player.getLevel() >= 40) {
 					htmlid = "lelder1";
 				}
-			} else if (npcid == 71076) { // ¾ç¸®ÀÚµå¸¸ÆÄÀÌÅ¸
+			} else if (npcid == 71076) { // ì–‘ë¦¬ìë“œë§ŒíŒŒì´íƒ€
 				if (player.getQuest().get_step(L1Quest.QUEST_LIZARD)
 						== L1Quest.QUEST_END) {
 					htmlid = "ylizardb";
 				} else {
 				}
-			} else if (npcid == 200011) {  // ´ŞÀÇÀå±Ã
+			} else if (npcid == 200011) {  // ë‹¬ì˜ì¥ê¶
 				 if(player.isCrown() && player.isWizard()&& player.isKnight()){
 				 // int MOONBOW_step = quest.get_step(L1Quest.QUEST_MOONBOW);
 				  } else if (player.getQuest().get_step(L1Quest.QUEST_MOONBOW) == 0) {
@@ -1917,7 +1917,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				  } else {
 				   htmlid = "robinhood3";
 				   }	
-			} else if (npcid == 200010) {  // ´ŞÀÇÀå±Ã Áöºê¸±
+			} else if (npcid == 200010) {  // ë‹¬ì˜ì¥ê¶ ì§€ë¸Œë¦´
 				  if (player.getQuest().get_step(L1Quest.QUEST_MOONBOW) == 2) {
 				   htmlid = "zybril1";
 				  } else if (player.getQuest().get_step(L1Quest.QUEST_MOONBOW) == 3) {
@@ -1929,7 +1929,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				   } else {
 				   htmlid = "zybril16";
 				}   
-			} else if (npcid == 200063) {  // º¸¼®¼¼°ø»ç - ¾óÀ½¿©¿ÕÀÇ ±Í°ÉÀÌ
+			} else if (npcid == 200063) {  // ë³´ì„ì„¸ê³µì‚¬ - ì–¼ìŒì—¬ì™•ì˜ ê·€ê±¸ì´
 				  if (player.getQuest().get_step(L1Quest.QUEST_ICE) == 1) {
 				       htmlid = "gemout10";
 				  } else if (player.getQuest().get_step(L1Quest.QUEST_ICE) == 2) {
@@ -1949,47 +1949,47 @@ public class L1MerchantInstance extends L1NpcInstance {
 				  } else {
 					  htmlid = "gemout1";
 				  }
-			} else if (npcid == 200054) {  // 7°¡Áö ¼­¾à
+			} else if (npcid == 200054) {  // 7ê°€ì§€ ì„œì•½
 					  if (player.getQuest().get_step(L1Quest.QUEST_SEVEN) == 1) {
 					   htmlid = "campaignN";
 					  } else {
 					   htmlid = "campaign";
 				}  
-			} else if (npcid == 80079) { // ÄÉÇÁ¸®»ş
+			} else if (npcid == 80079) { // ì¼€í”„ë¦¬ìƒ¤
 				if (player.getQuest().get_step(L1Quest.QUEST_KEPLISHA)
 						== L1Quest.QUEST_END
 								&& !player.getInventory().checkItem(41312)) {
 					htmlid = "keplisha6";
 				} else {
-					if (player.getInventory().checkItem(41314)) { // Á¡¼º¼ú»çÀÇ ºÎÀû
+					if (player.getInventory().checkItem(41314)) { // ì ì„±ìˆ ì‚¬ì˜ ë¶€ì 
 						htmlid = "keplisha3";
-					} else if (player.getInventory().checkItem(41313)) { // Á¡¼º¼ú»çÀÇ ±¸½½
+					} else if (player.getInventory().checkItem(41313)) { // ì ì„±ìˆ ì‚¬ì˜ êµ¬ìŠ¬
 						htmlid = "keplisha2";
-					} else if (player.getInventory().checkItem(41312)) { // Á¡¼º¼ú»çÀÇ Ç×¾Æ¸®
+					} else if (player.getInventory().checkItem(41312)) { // ì ì„±ìˆ ì‚¬ì˜ í•­ì•„ë¦¬
 						htmlid = "keplisha4";
 					}
 				}
-			} else if (npcid == 80102) { // ÇÇ¸®½º
-				if (player.getInventory().checkItem(41329)) { // ¹ÚÁ¦ÀÇ Á¦ÀÛ ÀÇ·Ú¼­
+			} else if (npcid == 80102) { // í”¼ë¦¬ìŠ¤
+				if (player.getInventory().checkItem(41329)) { // ë°•ì œì˜ ì œì‘ ì˜ë¢°ì„œ
 					htmlid = "fillis3";
 				}
-			} else if (npcid == 71167) { // ÈÄ¸²
-				if (player.getTempCharGfx() == 3887) {// Ä¼ ¸µ ´ÙÅ© ¿¡¸£ÇÁ º¯½Å
+			} else if (npcid == 71167) { // í›„ë¦¼
+				if (player.getTempCharGfx() == 3887) {// ìº¬ ë§ ë‹¤í¬ ì—ë¥´í”„ ë³€ì‹ 
 					htmlid = "frim1";
 				}
-			} else if (npcid == 71141) { // °»ºÎ ¿À¿È 1
-				if (player.getTempCharGfx() == 3887) {// Ä¼ ¸µ ´ÙÅ© ¿¡¸£ÇÁ º¯½Å
+			} else if (npcid == 71141) { // ê°±ë¶€ ì˜¤ì˜´ 1
+				if (player.getTempCharGfx() == 3887) {// ìº¬ ë§ ë‹¤í¬ ì—ë¥´í”„ ë³€ì‹ 
 					htmlid = "moumthree1";
 				}
-			} else if (npcid == 71142) { // °»ºÎ ¿À¿È 2
-				if (player.getTempCharGfx() == 3887) {// Ä¼ ¸µ ´ÙÅ© ¿¡¸£ÇÁ º¯½Å
+			} else if (npcid == 71142) { // ê°±ë¶€ ì˜¤ì˜´ 2
+				if (player.getTempCharGfx() == 3887) {// ìº¬ ë§ ë‹¤í¬ ì—ë¥´í”„ ë³€ì‹ 
 					htmlid = "moumtwo1";
 				}
-			} else if (npcid == 71145) { // °»ºÎ ¿À¿È 3
-				if (player.getTempCharGfx() == 3887) {// Ä¼ ¸µ ´ÙÅ© ¿¡¸£ÇÁ º¯½Å
+			} else if (npcid == 71145) { // ê°±ë¶€ ì˜¤ì˜´ 3
+				if (player.getTempCharGfx() == 3887) {// ìº¬ ë§ ë‹¤í¬ ì—ë¥´í”„ ë³€ì‹ 
 					htmlid = "moumone1";
 				}
-			} else if (npcid == 71198) { // ¿ëº´ ´ÜÀå Æ¼¿Â
+			} else if (npcid == 71198) { // ìš©ë³‘ ë‹¨ì¥ í‹°ì˜¨
 				if (player.getQuest().get_step(71198) == 1) {
 					htmlid = "tion4";
 				} else if (player.getQuest().get_step(71198) == 2) {
@@ -2003,58 +2003,58 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else if (player.getInventory().checkItem(21059, 1)) {
 					htmlid = "tion19";
 				}
-			} else if (npcid == 71199) { // Á¦·Ğ
+			} else if (npcid == 71199) { // ì œë¡ 
 				if (player.getQuest().get_step(71199) == 1) {
 					htmlid = "jeron3";
 				} else if (player.getInventory().checkItem(21059, 1)
 						|| player.getQuest().get_step(71199) == 255) {
 					htmlid = "jeron7";
 				}
-          //  } else if (npcid == 100016) { // Ç®¹öÇÁ »óÀÎ
-          //      broadcastPacket(new S_NpcChatPacket(this,"Ç®¹öÇÁ ±İ¾×Àº " + Config.BUFF_PRICE + "¾Æµ¥³ª ÀÔ´Ï´Ù.", 0)); 
-			} else if (npcid == 778813) { // º»¼·¹öÇÁ
-                broadcastPacket(new S_NpcChatPacket(this,"³ª´Â ´Ï°¡ Áö³­ ¿©¸§¿¡ ÇÑÂ¢À» ¾Ë°íÀÖ´Ù.", 0)); 
-			} else if (npcid == 70538 || npcid == 70560 || npcid == 70644 || npcid == 70667 || npcid == 70725 || npcid == 70790 || npcid == 70884) { // ±ºÁÖÇ÷¸Í
-                broadcastPacket(new S_NpcChatPacket(this,"ÈÇ¸¢ÇÑ ¾Æµ§ÀÇ ±ºÁÖ°¡ µÉ°ÍÀÌ¿À.", 0)); 
-			} else if (npcid == 70514) { // ÃÊº¸ÀÚ
-                broadcastPacket(new S_NpcChatPacket(this,""+ player.getName() +"´Ô ¾î¼­¿À¼¼¿ä?", 0)); 
-			} else if (npcid == 777786) { // Å©·¹ÀÌ
-                broadcastPacket(new S_NpcChatPacket(this,"³ªÀÇ ¿µÈ¥Àº ¾ÈÅ¸¶ó½º¸¦ ¹«Âî¸¦ "+ player.getName() +"À» ±â´Ù¸®°í ÀÖ¾ú´Ù.", 0)); 
-			} else if (npcid == 81200) { // Æ¯Àü ¾ÆÀÌÅÛ °ü¸®ÀÎ
-				if (player.getInventory(). checkItem(21069) // ½Å»ıÀÇ º§Æ®
-						|| player.getInventory(). checkItem(21074)) { // Ä£¸ñÀÇ ±Í ¸µ
+          //  } else if (npcid == 100016) { // í’€ë²„í”„ ìƒì¸
+          //      broadcastPacket(new S_NpcChatPacket(this,"í’€ë²„í”„ ê¸ˆì•¡ì€ " + Config.BUFF_PRICE + "ì•„ë°ë‚˜ ì…ë‹ˆë‹¤.", 0)); 
+			} else if (npcid == 778813) { // ë³¸ì„­ë²„í”„
+                broadcastPacket(new S_NpcChatPacket(this,"ë‚˜ëŠ” ë‹ˆê°€ ì§€ë‚œ ì—¬ë¦„ì— í•œì§–ì„ ì•Œê³ ìˆë‹¤.", 0)); 
+			} else if (npcid == 70538 || npcid == 70560 || npcid == 70644 || npcid == 70667 || npcid == 70725 || npcid == 70790 || npcid == 70884) { // êµ°ì£¼í˜ˆë§¹
+                broadcastPacket(new S_NpcChatPacket(this,"í›Œë¥­í•œ ì•„ë´ì˜ êµ°ì£¼ê°€ ë ê²ƒì´ì˜¤.", 0)); 
+			} else if (npcid == 70514) { // ì´ˆë³´ì
+                broadcastPacket(new S_NpcChatPacket(this,""+ player.getName() +"ë‹˜ ì–´ì„œì˜¤ì„¸ìš”?", 0)); 
+			} else if (npcid == 777786) { // í¬ë ˆì´
+                broadcastPacket(new S_NpcChatPacket(this,"ë‚˜ì˜ ì˜í˜¼ì€ ì•ˆíƒ€ë¼ìŠ¤ë¥¼ ë¬´ì°Œë¥¼ "+ player.getName() +"ì„ ê¸°ë‹¤ë¦¬ê³  ìˆì—ˆë‹¤.", 0)); 
+			} else if (npcid == 81200) { // íŠ¹ì „ ì•„ì´í…œ ê´€ë¦¬ì¸
+				if (player.getInventory(). checkItem(21069) // ì‹ ìƒì˜ ë²¨íŠ¸
+						|| player.getInventory(). checkItem(21074)) { // ì¹œëª©ì˜ ê·€ ë§
 					htmlid = "c_belt";
 				}	
-			} else if (npcid == 80076) { // ³Ñ¾îÁø Ç×ÇØ»ç
-				if (player.getInventory(). checkItem(41058)) { // ¿Ï¼ºÇÑ Ç×ÇØ ÀÏÁö
+			} else if (npcid == 80076) { // ë„˜ì–´ì§„ í•­í•´ì‚¬
+				if (player.getInventory(). checkItem(41058)) { // ì™„ì„±í•œ í•­í•´ ì¼ì§€
 					htmlid = "voyager8";
-				} else if (player.getInventory(). checkItem(49082) // ¹Ì¿Ï¼ºÀÇ Ç×ÇØ ÀÏÁö
+				} else if (player.getInventory(). checkItem(49082) // ë¯¸ì™„ì„±ì˜ í•­í•´ ì¼ì§€
 						|| player.getInventory(). checkItem(49083)) {
-						// ÆäÀÌÁö¸¦ Ãß°¡ÇÏ°í ÀÖÁö ¾Ê´Â »óÅÂ
-					if (player.getInventory(). checkItem(41038) // Ç×ÇØ ÀÏÁö 1 ÆäÀÌÁö
-							|| player.getInventory(). checkItem(41039) // Ç×ÇØ ÀÏÁö
-																		// 2 ÆäÀÌÁö
-							|| player.getInventory(). checkItem(41039) // Ç×ÇØ ÀÏÁö
-																		// 3 ÆäÀÌÁö
-							|| player.getInventory(). checkItem(41039) // Ç×ÇØ ÀÏÁö
-																		// 4 ÆäÀÌÁö
-							|| player.getInventory(). checkItem(41039) // Ç×ÇØ ÀÏÁö
-																		// 5 ÆäÀÌÁö
-							|| player.getInventory(). checkItem(41039) // Ç×ÇØ ÀÏÁö
-																		// 6 ÆäÀÌÁö
-							|| player.getInventory(). checkItem(41039) // Ç×ÇØ ÀÏÁö
-																		// 7 ÆäÀÌÁö
-							|| player.getInventory(). checkItem(41039) // Ç×ÇØ ÀÏÁö
-																		// 8 ÆäÀÌÁö
-							|| player.getInventory(). checkItem(41039) // Ç×ÇØ ÀÏÁö
-																		// 9 ÆäÀÌÁö
-							|| player.getInventory(). checkItem(41039)){ // Ç×ÇØ ÀÏÁö
-																		// 10 ÆäÀÌÁö
+						// í˜ì´ì§€ë¥¼ ì¶”ê°€í•˜ê³  ìˆì§€ ì•ŠëŠ” ìƒíƒœ
+					if (player.getInventory(). checkItem(41038) // í•­í•´ ì¼ì§€ 1 í˜ì´ì§€
+							|| player.getInventory(). checkItem(41039) // í•­í•´ ì¼ì§€
+																		// 2 í˜ì´ì§€
+							|| player.getInventory(). checkItem(41039) // í•­í•´ ì¼ì§€
+																		// 3 í˜ì´ì§€
+							|| player.getInventory(). checkItem(41039) // í•­í•´ ì¼ì§€
+																		// 4 í˜ì´ì§€
+							|| player.getInventory(). checkItem(41039) // í•­í•´ ì¼ì§€
+																		// 5 í˜ì´ì§€
+							|| player.getInventory(). checkItem(41039) // í•­í•´ ì¼ì§€
+																		// 6 í˜ì´ì§€
+							|| player.getInventory(). checkItem(41039) // í•­í•´ ì¼ì§€
+																		// 7 í˜ì´ì§€
+							|| player.getInventory(). checkItem(41039) // í•­í•´ ì¼ì§€
+																		// 8 í˜ì´ì§€
+							|| player.getInventory(). checkItem(41039) // í•­í•´ ì¼ì§€
+																		// 9 í˜ì´ì§€
+							|| player.getInventory(). checkItem(41039)){ // í•­í•´ ì¼ì§€
+																		// 10 í˜ì´ì§€
 						htmlid = "voyager9";
 					} else {
 						htmlid = "voyager7";
 					}
-				} else if (player.getInventory(). checkItem(49082) // ¹Ì¿Ï¼ºÀÇ Ç×ÇØ ÀÏÁö
+				} else if (player.getInventory(). checkItem(49082) // ë¯¸ì™„ì„±ì˜ í•­í•´ ì¼ì§€
 						|| player.getInventory(). checkItem(49083)
 						|| player.getInventory(). checkItem(49084)
 						|| player.getInventory(). checkItem(49085)
@@ -2064,10 +2064,10 @@ public class L1MerchantInstance extends L1NpcInstance {
 						|| player.getInventory(). checkItem(49089)
 						|| player.getInventory(). checkItem(49090)
 						|| player.getInventory(). checkItem(49091)) {
-						// ÆäÀÌÁö¸¦ Ãß°¡ÇÑ »óÅÂ
+						// í˜ì´ì§€ë¥¼ ì¶”ê°€í•œ ìƒíƒœ
 					htmlid = "voyager7";
 				}
-			} else if (npcid == 80048) { // °ø°£ÀÇ ÀÏ±×·¯Áü
+			} else if (npcid == 80048) { // ê³µê°„ì˜ ì¼ê·¸ëŸ¬ì§
 				int level = player.getLevel();
 				if (level <= 44) {
 					htmlid = "entgate3";
@@ -2076,78 +2076,78 @@ public class L1MerchantInstance extends L1NpcInstance {
 				   } else {
 					htmlid = "entgate";
 				}
-			} else if (npcid == 71168) { // Áø¸í¿Õ ´ÜÅ×½º
-				if (player.getInventory(). checkItem(41028)) { // µ¥½º³ªÀÌÆ®ÀÇ Ã¥
+			} else if (npcid == 71168) { // ì§„ëª…ì™• ë‹¨í…ŒìŠ¤
+				if (player.getInventory(). checkItem(41028)) { // ë°ìŠ¤ë‚˜ì´íŠ¸ì˜ ì±…
 					htmlid = "dantes1";
 				}
-            } else if (npcid == 70035) { // ¹ö°æ »óÀÎ
+            } else if (npcid == 70035) { // ë²„ê²½ ìƒì¸
 			     _GameServerSetting = GameServerSetting.getInstance();
-			   if(_GameServerSetting.getInstance().¹ö°æ == 1){
+			   if(_GameServerSetting.getInstance().ë²„ê²½ == 1){
 			        htmlid = "maeno3";
-			   } else if(_GameServerSetting.getInstance().¹ö°æ == 2){
+			   } else if(_GameServerSetting.getInstance().ë²„ê²½ == 2){
 			        htmlid = "maeno5";
 			   } else {
 			        htmlid = "pandora";
 			   }
-			} else if (npcid == 80067) { //Ã¸º¸¿ø(¿å¸ÁÀÇ µ¿±¼)
+			} else if (npcid == 80067) { //ì²©ë³´ì›(ìš•ë§ì˜ ë™êµ´)
 				if (player.getQuest(). get_step(L1Quest.QUEST_DESIRE)
 						== L1Quest.QUEST_END) {
 					htmlid = "minicod10";
 				} else if (player.getKarmaLevel() >= 1) {				
 					htmlid = "minicod07";
 				} else if (player.getQuest().get_step(L1Quest.QUEST_DESIRE)
-						== 1 && player.getTempCharGfx() == 6034) { // ÄÚ¶óÇÁÇÁ¸®½ºÆ® º¯½Å
+						== 1 && player.getTempCharGfx() == 6034) { // ì½”ë¼í”„í”„ë¦¬ìŠ¤íŠ¸ ë³€ì‹ 
 					htmlid = "minicod03";
 				} else if (player.getQuest().get_step(L1Quest.QUEST_DESIRE)
 						== 1 && player.getTempCharGfx() != 6034) {
 					htmlid = "minicod05";
 				} else if (player.getQuest(). get_step(L1Quest.QUEST_SHADOWS)
-						== L1Quest.QUEST_END // ±×¸²ÀÚÀÇ ½ÅÀüÃø Äù½ºÆ® Á¾·á
-						|| player.getInventory().checkItem(41121) // Ä«ÇïÀÇ Áö·É¼­
-						|| player.getInventory().checkItem(41122)) { // Ä«ÇïÀÇ ¸í·É¼­
+						== L1Quest.QUEST_END // ê·¸ë¦¼ìì˜ ì‹ ì „ì¸¡ í€˜ìŠ¤íŠ¸ ì¢…ë£Œ
+						|| player.getInventory().checkItem(41121) // ì¹´í—¬ì˜ ì§€ë ¹ì„œ
+						|| player.getInventory().checkItem(41122)) { // ì¹´í—¬ì˜ ëª…ë ¹ì„œ
 					htmlid = "minicod01";
-				} else if (player.getInventory().checkItem(41130) // ÇÍÀÚ±¹ÀÇ Áö·É¼­
-						&& player.getInventory().checkItem(41131)) { // ÇÍÀÚ±¹ÀÇ ¸í·É¼­
+				} else if (player.getInventory().checkItem(41130) // í•ìêµ­ì˜ ì§€ë ¹ì„œ
+						&& player.getInventory().checkItem(41131)) { // í•ìêµ­ì˜ ëª…ë ¹ì„œ
 					htmlid = "minicod06";
-				} else if (player.getInventory().checkItem(41130)) { // ÇÍÀÚ±¹ÀÇ ¸í·É¼­
+				} else if (player.getInventory().checkItem(41130)) { // í•ìêµ­ì˜ ëª…ë ¹ì„œ
 					htmlid = "minicod02";
 				}
-			} else if (npcid == 81202) { //Ã¸º¸¿ø(±×¸²ÀÚÀÇ ½ÅÀü)
+			} else if (npcid == 81202) { //ì²©ë³´ì›(ê·¸ë¦¼ìì˜ ì‹ ì „)
 				if (player.getQuest(). get_step(L1Quest.QUEST_SHADOWS)
 						== L1Quest.QUEST_END) {
 					htmlid = "minitos10";
 				} else if (player.getKarmaLevel() <= -1) {				
 					htmlid = "minitos07";
 				} else if (player.getQuest().get_step(L1Quest.QUEST_SHADOWS)
-						== 1 && player.getTempCharGfx() == 6035) { // ·¿¼­µ¥ÀÌ¸ó º¯½Å
+						== 1 && player.getTempCharGfx() == 6035) { // ë ›ì„œë°ì´ëª¬ ë³€ì‹ 
 					htmlid = "minitos03";
 				} else if (player.getQuest().get_step(L1Quest.QUEST_SHADOWS)
 						== 1 && player.getTempCharGfx() != 6035) {
 					htmlid = "minitos05";
 				} else if (player.getQuest(). get_step(L1Quest.QUEST_DESIRE)
-						== L1Quest.QUEST_END // ¿å¸ÁÀÇ µ¿±¼Ãø Äù½ºÆ® Á¾·á
-						|| player.getInventory().checkItem(41130) // ÇÍÀÚ±¹ÀÇ Áö·É¼­
-						|| player.getInventory().checkItem(41131)) { // ÇÍÀÚ±¹ÀÇ ¸í·É¼­
+						== L1Quest.QUEST_END // ìš•ë§ì˜ ë™êµ´ì¸¡ í€˜ìŠ¤íŠ¸ ì¢…ë£Œ
+						|| player.getInventory().checkItem(41130) // í•ìêµ­ì˜ ì§€ë ¹ì„œ
+						|| player.getInventory().checkItem(41131)) { // í•ìêµ­ì˜ ëª…ë ¹ì„œ
 					htmlid = "minitos01";
-				} else if (player.getInventory().checkItem(41121) // Ä«ÇïÀÇ Áö·É¼­
-						&& player.getInventory().checkItem(41122)) { // Ä«ÇïÀÇ ¸í·É¼­
+				} else if (player.getInventory().checkItem(41121) // ì¹´í—¬ì˜ ì§€ë ¹ì„œ
+						&& player.getInventory().checkItem(41122)) { // ì¹´í—¬ì˜ ëª…ë ¹ì„œ
 					htmlid = "minitos06";
-				} else if (player.getInventory().checkItem(41121)) { // Ä«ÇïÀÇ ¸í·É¼­
+				} else if (player.getInventory().checkItem(41121)) { // ì¹´í—¬ì˜ ëª…ë ¹ì„œ
 					htmlid = "minitos02";
 				}
-			} else if (npcid == 81208) { // ´õ·¯¿öÁø ºê·Óºê
-				if (player.getInventory(). checkItem(41129) // ÇÍÀÚ±¹ÀÇ Á¤¼ö
-						||	player.getInventory(). checkItem(41138)) { // Ä«ÇïÀÇ Á¤¼ö
+			} else if (npcid == 81208) { // ë”ëŸ¬ì›Œì§„ ë¸Œë¡­ë¸Œ
+				if (player.getInventory(). checkItem(41129) // í•ìêµ­ì˜ ì •ìˆ˜
+						||	player.getInventory(). checkItem(41138)) { // ì¹´í—¬ì˜ ì •ìˆ˜
 					htmlid = "minibrob04";
-				} else if (player.getInventory().checkItem(41126) // ÇÍÀÚ±¹ÀÇ Å¸¶ô ÇÑ Á¤¼ö
-						&& player.getInventory().checkItem(41127) // ÇÍÀÚ±¹ÀÇ ¹«·ÂÇÑ Á¤¼ö
-						&& player.getInventory().checkItem(41128) // ÇÍÀÚ±¹ÀÇ ¾ÆÁıÀÎ Á¤¼ö
-						|| player.getInventory().checkItem(41135) // Ä«ÇïÀÇ Å¸¶ô ÇÑ Á¤¼ö
-						&& player.getInventory().checkItem(41136) // Ä«ÇïÀÇ ¾ÆÁıÀÎ Á¤¼ö
-						&& player.getInventory().checkItem(41137)) { // Ä«ÇïÀÇ ¾ÆÁıÀÎ Á¤¼ö
+				} else if (player.getInventory().checkItem(41126) // í•ìêµ­ì˜ íƒ€ë½ í•œ ì •ìˆ˜
+						&& player.getInventory().checkItem(41127) // í•ìêµ­ì˜ ë¬´ë ¥í•œ ì •ìˆ˜
+						&& player.getInventory().checkItem(41128) // í•ìêµ­ì˜ ì•„ì§‘ì¸ ì •ìˆ˜
+						|| player.getInventory().checkItem(41135) // ì¹´í—¬ì˜ íƒ€ë½ í•œ ì •ìˆ˜
+						&& player.getInventory().checkItem(41136) // ì¹´í—¬ì˜ ì•„ì§‘ì¸ ì •ìˆ˜
+						&& player.getInventory().checkItem(41137)) { // ì¹´í—¬ì˜ ì•„ì§‘ì¸ ì •ìˆ˜
 					htmlid = "minibrob02";
 				}
-			} else if (npcid == 50113) { // °è°îÀÇ ¸¶À» ·º ¸Ç
+			} else if (npcid == 50113) { // ê³„ê³¡ì˜ ë§ˆì„ ë ‰ ë§¨
 				if (player.getQuest(). get_step(L1Quest.QUEST_TOSCROLL)
 						== L1Quest.QUEST_END) {
 					htmlid = "orena14";
@@ -2191,7 +2191,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 13) {
 					htmlid = "orena13";
 				}
-			} else if (npcid == 50112) { // ±¸¡¤³ë·¡ÇÏ´Â ¼¶¼¼¸®¾È	
+			} else if (npcid == 50112) { // êµ¬Â·ë…¸ë˜í•˜ëŠ” ì„¬ì„¸ë¦¬ì•ˆ	
 				if (player.getQuest(). get_step(L1Quest.QUEST_TOSCROLL)
 						== L1Quest.QUEST_END) {
 					htmlid = "orenb14";
@@ -2235,7 +2235,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 13) {
 					htmlid = "orenb13";
 				}
-			} else if (npcid == 50111) { // ÀÌ¾ß±âÇÒ ¼ö ÀÖ´Â ¼¶¸±¸®	
+			} else if (npcid == 50111) { // ì´ì•¼ê¸°í•  ìˆ˜ ìˆëŠ” ì„¬ë¦´ë¦¬	
 				if (player.getQuest(). get_step(L1Quest.QUEST_TOSCROLL)
 						== L1Quest.QUEST_END) {
 					htmlid = "orenc14";
@@ -2279,7 +2279,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 13) {
 					htmlid = "orenc13";
 				}
-			} else if (npcid == 50116) { // ÇÑÆĞ µğ ¹°¾ï»õ ¿Â
+			} else if (npcid == 50116) { // í•œíŒ¨ ë”” ë¬¼ì–µìƒˆ ì˜¨
 				if (player.getQuest(). get_step(L1Quest.QUEST_TOSCROLL)
 						== L1Quest.QUEST_END) {
 					htmlid = "orend14";
@@ -2323,7 +2323,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 13) {
 					htmlid = "orend13";
 				}
-			} else if (npcid == 50117) { // ÄËÆ® ½Ã¸®¾Æ
+			} else if (npcid == 50117) { // ì¼„íŠ¸ ì‹œë¦¬ì•„
 				if (player.getQuest(). get_step(L1Quest.QUEST_TOSCROLL)
 						== L1Quest.QUEST_END) {
 					htmlid = "orene14";
@@ -2367,7 +2367,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 13) {
 					htmlid = "orene13";
 				}
-			} else if (npcid == 50119) { // ¿ìµå º£Å© ¿À½Ã ¸®¾î
+			} else if (npcid == 50119) { // ìš°ë“œ ë² í¬ ì˜¤ì‹œ ë¦¬ì–´
 				if (player.getQuest(). get_step(L1Quest.QUEST_TOSCROLL)
 						== L1Quest.QUEST_END) {
 					htmlid = "orenf14";
@@ -2411,7 +2411,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 13) {
 					htmlid = "orenf13";
 				}
-			} else if (npcid == 50121) { // È­Àü¸¶À» È£´Ñ
+			} else if (npcid == 50121) { // í™”ì „ë§ˆì„ í˜¸ë‹Œ
 				if (player.getQuest(). get_step(L1Quest.QUEST_TOSCROLL)
 						== L1Quest.QUEST_END) {
 					htmlid = "oreng14";
@@ -2455,7 +2455,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 13) {
 					htmlid = "oreng13";
 				}
-			} else if (npcid == 50114) { // ¿¡¸£ÇÁÀÇ ½£Ä¡ÄÚ
+			} else if (npcid == 50114) { // ì—ë¥´í”„ì˜ ìˆ²ì¹˜ì½”
 				if (player.getQuest(). get_step(L1Quest.QUEST_TOSCROLL)
 						== L1Quest.QUEST_END) {
 					htmlid = "orenh14";
@@ -2499,7 +2499,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 13) {
 					htmlid = "orenh13";
 				}
-			} else if (npcid == 50120) { // ½Ç¹ö ³ªÀÌÆ® Å¸¿î È£ÇÁ
+			} else if (npcid == 50120) { // ì‹¤ë²„ ë‚˜ì´íŠ¸ íƒ€ìš´ í˜¸í”„
 				if (player.getQuest(). get_step(L1Quest.QUEST_TOSCROLL)
 						== L1Quest.QUEST_END) {
 					htmlid = "oreni14";
@@ -2543,7 +2543,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 13) {
 					htmlid = "oreni13";
 				}
-			} else if (npcid == 50122) { // ±â¶õÅ¸Å©
+			} else if (npcid == 50122) { // ê¸°ë€íƒ€í¬
 				if (player.getQuest(). get_step(L1Quest.QUEST_TOSCROLL)
 						== L1Quest.QUEST_END) {
 					htmlid = "orenj14";
@@ -2587,7 +2587,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 13) {
 					htmlid = "orenj13";
 				}
-			} else if (npcid == 50123) { // Heine °¡¸® ¿Â
+			} else if (npcid == 50123) { // Heine ê°€ë¦¬ ì˜¨
 				if (player.getQuest(). get_step(L1Quest.QUEST_TOSCROLL)
 						== L1Quest.QUEST_END) {
 					htmlid = "orenk14";
@@ -2631,7 +2631,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 13) {
 					htmlid = "orenk13";
 				}
-			} else if (npcid == 50125) { // »ó¾ÆÀÇ Å¾±æ¹öÆ®
+			} else if (npcid == 50125) { // ìƒì•„ì˜ íƒ‘ê¸¸ë²„íŠ¸
 				if (player.getQuest(). get_step(L1Quest.QUEST_TOSCROLL)
 						== L1Quest.QUEST_END) {
 					htmlid = "orenl14";
@@ -2675,7 +2675,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 13) {
 					htmlid = "orenl13";
 				}
-			} else if (npcid == 50124) { // ¿ş¸£´ÜÆ÷¸®Ä­
+			} else if (npcid == 50124) { // ì›¨ë¥´ë‹¨í¬ë¦¬ì¹¸
 				if (player.getQuest(). get_step(L1Quest.QUEST_TOSCROLL)
 						== L1Quest.QUEST_END) {
 					htmlid = "orenm14";
@@ -2719,34 +2719,34 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 13) {
 					htmlid = "orenm13";
 				}
-			/* } else if (npcid == 205) { // Å×º£ ¿À½Ã¸®½ºÀÇ Á¦´Ü ¹®Áö±â
-			     //    º¸½º °ø·« ½Ã°£ÀÌ ¾Æ´Ï¶ó¸é 
+			/* } else if (npcid == 205) { // í…Œë²  ì˜¤ì‹œë¦¬ìŠ¤ì˜ ì œë‹¨ ë¬¸ì§€ê¸°
+			     //    ë³´ìŠ¤ ê³µëµ ì‹œê°„ì´ ì•„ë‹ˆë¼ë©´ 
 			        if(!CrockController.getInstance().isBoss()){
 			         htmlid = "tebegate2";
-			     //    º¸½º °ø·« ½Ã°£ÀÌ¶ó¸é 
+			     //    ë³´ìŠ¤ ê³µëµ ì‹œê°„ì´ë¼ë©´ 
 			        }else{
-			      //    ¿­¼è°¡ ¾ø´Ù¸é 
+			      //    ì—´ì‡ ê°€ ì—†ë‹¤ë©´ 
 			         if(!player.getInventory().checkItem(500040, 1)) htmlid = "tebegate3";
-			       //  ¼±Âø¼ø ÀÎ¿øÀÌ ´Ù Ã¡´Ù¸é
+			       //  ì„ ì°©ìˆœ ì¸ì›ì´ ë‹¤ ì°¼ë‹¤ë©´
 			         else if(CrockController.getInstance().size() >= 20) htmlid = "tebegate4";
-			      //    ¸¸Á· 
+			      //    ë§Œì¡± 
 			         else htmlid = "tebegate1";
 			        }
-			 } else if (npcid == 209) {//Æ¼Ä® Á¦´ÜÀÇ ¹®Áö±â
-				//  º¸½º °ø·«½Ã°£ÀÌ ¾Æ´Ï¶ó¸é 
+			 } else if (npcid == 209) {//í‹°ì¹¼ ì œë‹¨ì˜ ë¬¸ì§€ê¸°
+				//  ë³´ìŠ¤ ê³µëµì‹œê°„ì´ ì•„ë‹ˆë¼ë©´ 
 			     if(!CrockController.getInstance().isBoss()){
 			      htmlid = "tikalgate2";
 			     } else {
-			    //   ¿­¼è°¡ ¾ø´Ù¸é 
+			    //   ì—´ì‡ ê°€ ì—†ë‹¤ë©´ 
 			        if(!player.getInventory().checkItem(500060, 1))
 			       htmlid ="tikalgate3";
 			       else if(CrockController.getInstance().size() >= 20) 
 			         htmlid = "tikalgate4"; 
-			    //   ¸¸Á· 
+			    //   ë§Œì¡± 
 			       else 
 			         htmlid = "tikalgate4";
 			     }  */
-			} else if (npcid == 50126) { // ¾Æµ§Á¦¸¯Å©
+			} else if (npcid == 50126) { // ì•„ë´ì œë¦­í¬
 				if (player.getQuest(). get_step(L1Quest.QUEST_TOSCROLL)
 						== L1Quest.QUEST_END) {
 					htmlid = "orenn14";
@@ -2790,7 +2790,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 						== 13) {
 					htmlid = "orenn0";
 				}
-			} else if (npcid == 50115) { // Ä§¹¬ÀÇ µ¿±¼´õ ¸£¸Á
+			} else if (npcid == 50115) { // ì¹¨ë¬µì˜ ë™êµ´ë” ë¥´ë§
 				if (player.getQuest(). get_step(L1Quest.QUEST_TOSCROLL)
 						== L1Quest.QUEST_END) {
 					htmlid = "oreno0";
@@ -2836,16 +2836,16 @@ public class L1MerchantInstance extends L1NpcInstance {
 				}
 			}
 
-			// html Ç¥½Ã ÆĞÅ¶ ¼Û½Å
-			if (htmlid != null) { // htmlid°¡ ÁöÁ¤µÇ°í ÀÖ´Â °æ¿ì
-				if (htmldata != null) { // html ÁöÁ¤ÀÌ ÀÖ´Â °æ¿ì´Â Ç¥½Ã
+			// html í‘œì‹œ íŒ¨í‚· ì†¡ì‹ 
+			if (htmlid != null) { // htmlidê°€ ì§€ì •ë˜ê³  ìˆëŠ” ê²½ìš°
+				if (htmldata != null) { // html ì§€ì •ì´ ìˆëŠ” ê²½ìš°ëŠ” í‘œì‹œ
 					player.sendPackets(new S_NPCTalkReturn(objid, htmlid,
 							htmldata));
 				} else {
 					player.sendPackets(new S_NPCTalkReturn(objid, htmlid));
 				}
 			} else {
-				if (player.getLawful() < -1000) { // ÇÃ·¹ÀÌ¾î°¡ Ä«¿ÀÆ½
+				if (player.getLawful() < -1000) { // í”Œë ˆì´ì–´ê°€ ì¹´ì˜¤í‹±
 					player.sendPackets(new S_NPCTalkReturn(talking, objid, 2));
 				} else {
 					player.sendPackets(new S_NPCTalkReturn(talking, objid, 1));
@@ -2884,7 +2884,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 	}
 
 	private boolean checkHasCastle(L1PcInstance player, int castle_id) {
-		if (player.getClanid() != 0) { // Å©¶õ ¼Ò¼ÓÁß
+		if (player.getClanid() != 0) { // í¬ë€ ì†Œì†ì¤‘
 			L1Clan clan = L1World.getInstance().getClan(player.getClanname());
 			if (clan != null) {
 				if (clan.getCastleId() == castle_id) {
@@ -2896,7 +2896,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 	}
 
 	private boolean checkClanLeader(L1PcInstance player) {
-		if (player.isCrown()) { // ±ºÁÖ
+		if (player.isCrown()) { // êµ°ì£¼
 			L1Clan clan = L1World.getInstance().getClan(player.getClanname());
 			if (clan != null) {
 				if (player.getId() == clan.getLeaderId()) {
@@ -2910,16 +2910,16 @@ public class L1MerchantInstance extends L1NpcInstance {
 	private int getNecessarySealCount(L1PcInstance pc) {
 		int rulerCount = 0;
 		int necessarySealCount = 10;
-		if (pc.getInventory().checkItem(40917)) { // ÁöÀÇ Áö¹èÀÚ
+		if (pc.getInventory().checkItem(40917)) { // ì§€ì˜ ì§€ë°°ì
 			rulerCount++;
 		}
-		if (pc.getInventory().checkItem(40920)) { // Ç³ÀÇ Áö¹èÀÚ
+		if (pc.getInventory().checkItem(40920)) { // í’ì˜ ì§€ë°°ì
 			rulerCount++;
 		}
-		if (pc.getInventory().checkItem(40918)) { // ¼öÀÇ Áö¹èÀÚ
+		if (pc.getInventory().checkItem(40918)) { // ìˆ˜ì˜ ì§€ë°°ì
 			rulerCount++;
 		}
-		if (pc.getInventory().checkItem(40919)) { // ºÒÀÇ Áö¹èÀÚ
+		if (pc.getInventory().checkItem(40919)) { // ë¶ˆì˜ ì§€ë°°ì
 			rulerCount++;
 		}
 		if (rulerCount == 0) {
@@ -2935,7 +2935,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 	}
 
 	private void createRuler(L1PcInstance pc, int attr, int sealCount) {
-		// 1.¶¥¼Ó¼º, 2.ºÒ¼Ó¼º, 4.¹°¼Ó¼º, 8.¹Ù¶÷ ¼Ó¼º
+		// 1.ë•…ì†ì„±, 2.ë¶ˆì†ì„±, 4.ë¬¼ì†ì„±, 8.ë°”ëŒ ì†ì„±
 		int rulerId = 0;
 		int protectionId = 0;
 		int sealId = 0;
@@ -2961,7 +2961,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 		L1ItemInstance item = pc.getInventory().storeItem(rulerId, 1);
 		if (item != null) {
 			pc.sendPackets(new S_ServerMessage(143,
-					getNpcTemplate().get_name(), item.getLogName())); // \f1%0ÀÌ%1¸¦ ÁÖ¾ú½À´Ï´Ù.
+					getNpcTemplate().get_name(), item.getLogName())); // \f1%0ì´%1ë¥¼ ì£¼ì—ˆìŠµë‹ˆë‹¤.
 		}
 	}
 
@@ -2985,7 +2985,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 		} else if (pc.getQuest().get_step(L1Quest.QUEST_AREX) == L1Quest.QUEST_END) {
 			htmlid = "jpe0023";
 		} else if (pc.getLevel() >= 10 && pc.getLevel() < 25) {
-			if (pc.getInventory().checkItem(41227)) { // ¾Ë·º½ºÀÇ ¼Ò°³Àå
+			if (pc.getInventory().checkItem(41227)) { // ì•Œë ‰ìŠ¤ì˜ ì†Œê°œì¥
 				htmlid = "jpe0023";
 			} else if (pc.isCrown()) {
 				htmlid = "jpe0024p";

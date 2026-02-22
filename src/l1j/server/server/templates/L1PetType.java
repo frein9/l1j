@@ -36,7 +36,7 @@ public class L1PetType {
 
 	private final int _npcIdForEvolving;
 	
-	private final int _npcIdForGolding;  // ½ÂÀÚÀÇ ¿­¸Å
+	private final int _npcIdForGolding;  // ìŠ¹ìì˜ ì—´ë§¤
 
 	private final int _msgIds[];
 

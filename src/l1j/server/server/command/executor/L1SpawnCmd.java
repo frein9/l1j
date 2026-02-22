@@ -40,7 +40,7 @@ public class L1SpawnCmd implements L1CommandExecutor {
 	}
 
 	private void sendErrorMessage(L1PcInstance pc, String cmdName) {
-		String errorMsg = cmdName + " npcid|name [¼ö] [¹üÀ§] ¶ó°í ÀÔ·ÂÇØ ÁÖ¼¼¿ä. ";
+		String errorMsg = cmdName + " npcid|name [ìˆ˜] [ë²”ìœ„] ë¼ê³  ì…ë ¥í•´ ì£¼ì„¸ìš”. ";
 		pc.sendPackets(new S_SystemMessage(errorMsg));
 	}
 
@@ -57,7 +57,7 @@ public class L1SpawnCmd implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 			StringTokenizer tok = new StringTokenizer(arg);
 			String nameId = tok.nextToken();
 			int count = 1;
@@ -72,13 +72,13 @@ public class L1SpawnCmd implements L1CommandExecutor {
 
 			L1Npc npc = NpcTable.getInstance(). getTemplate(npcid);
 			if (npc == null) {
-					pc.sendPackets(new S_SystemMessage("ÇØ´ç NPC°¡ ¹ß°ßµÇÁö ¾Ê½À´Ï´Ù."));
+					pc.sendPackets(new S_SystemMessage("í•´ë‹¹ NPCê°€ ë°œê²¬ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 					return;
 				}
 			for (int i = 0; i < count; i++) {
 				L1SpawnUtil.spawn(pc, npcid, randomrange, 0);
 			}
-			String msg = String.format("%s(%d) (%d)¸¦ ¼ÒÈ¯Çß½À´Ï´Ù.  (¹üÀ§ :%d)", npc
+			String msg = String.format("%s(%d) (%d)ë¥¼ ì†Œí™˜í–ˆìŠµë‹ˆë‹¤.  (ë²”ìœ„ :%d)", npc
 					. get_name(), npcid, count, randomrange);
 			pc.sendPackets(new S_SystemMessage(msg));   
             }
@@ -88,7 +88,7 @@ public class L1SpawnCmd implements L1CommandExecutor {
 			sendErrorMessage(pc, cmdName);
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-			pc.sendPackets(new S_SystemMessage(cmdName + " ³»ºÎ ¿¡·¯ÀÔ´Ï´Ù. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + " ë‚´ë¶€ ì—ëŸ¬ì…ë‹ˆë‹¤. "));
 		}
 	}
 }

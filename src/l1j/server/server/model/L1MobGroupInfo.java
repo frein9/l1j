@@ -67,10 +67,10 @@ public class L1MobGroupInfo {
 			throw new NullPointerException();
 		}
 
-		// ÃÖÃÊÀÇ ¸â¹öÀÌ¸é ¸®´õ·Î ÇÑ´Ù
+		// ìµœì´ˆì˜ ë©¤ë²„ì´ë©´ ë¦¬ë”ë¡œ í•œë‹¤
 		if (_membersList.isEmpty()) {
 			setLeader(npc);
-			// ¸®´õÀÇ ÀçÆË Á¤º¸¸¦ º¸Á¸ÇÑ´Ù
+			// ë¦¬ë”ì˜ ì¬íŒ ì •ë³´ë¥¼ ë³´ì¡´í•œë‹¤
 			if (npc.isReSpawn()) {
 				setSpawn(npc.getSpawn());
 			}
@@ -93,9 +93,9 @@ public class L1MobGroupInfo {
 		}
 		npc.setMobGroupInfo(null);
 
-		// ¸®´õ·Î ´Ù¸¥ ¸â¹ö°¡ ÀÖ´Â °æ¿ì´Â, ½Å¸®´õ·Î ÇÑ´Ù
+		// ë¦¬ë”ë¡œ ë‹¤ë¥¸ ë©¤ë²„ê°€ ìˆëŠ” ê²½ìš°ëŠ”, ì‹ ë¦¬ë”ë¡œ í•œë‹¤
 		if (isLeader(npc)) {
-			if (isRemoveGroup() && _membersList.size() != 0) { // ¸®´õ°¡ »ç¸ÁÇÏ¸é(ÀÚ) ±×·ì ÇØÁ¦ÇÏ´Â °æ¿ì
+			if (isRemoveGroup() && _membersList.size() != 0) { // ë¦¬ë”ê°€ ì‚¬ë§í•˜ë©´(ì) ê·¸ë£¹ í•´ì œí•˜ëŠ” ê²½ìš°
 				for (L1NpcInstance minion : _membersList) {
 					minion.setMobGroupInfo(null);
 					minion.setSpawn(null);
@@ -108,7 +108,7 @@ public class L1MobGroupInfo {
 			}
 		}
 
-		// ³ª¸ÓÁöÀÇ ¸â¹ö¼ö¸¦ µ¹·ÁÁØ´Ù
+		// ë‚˜ë¨¸ì§€ì˜ ë©¤ë²„ìˆ˜ë¥¼ ëŒë ¤ì¤€ë‹¤
 		return _membersList.size();
 	}
 

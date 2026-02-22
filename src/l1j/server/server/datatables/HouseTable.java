@@ -115,7 +115,7 @@ public class HouseTable {
 			pstm.setInt(4, house.getKeeperId());
 			pstm.setInt(5, house.isOnSale() == true ? 1 : 0);
 			pstm.setInt(6, house.isPurchaseBasement() == true ? 1 : 0);
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //  HouseTable ¿À·ù ¼öÁ¤ À§ÇØ º¯°æ 
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //  HouseTable ì˜¤ë¥˜ ìˆ˜ì • ìœ„í•´ ë³€ê²½ 
 			String fm = formatter.format(house.getTaxDeadline().getTime()); //
 			/*String fm = DateFormat.getDateTimeInstance().format(
 					house.getTaxDeadline().getTime());*/

@@ -49,7 +49,7 @@ import l1j.server.server.utils.IntRange;
 public class L1UltimateBattle {
 	private int _locX;
 	private int _locY;
-	private L1Location _location; // Áß½ÉÁ¡
+	private L1Location _location; // ì¤‘ì‹¬ì 
 	private short _mapId;
 	private int _locX1;
 	private int _locY1;
@@ -59,7 +59,7 @@ public class L1UltimateBattle {
 	private int _ubId;
 	private int _pattern;
 	private boolean _isNowUb;
-	private boolean _active; // UBÀÔÀå °¡´É~°æ±â Á¾·á±îÁö true
+	private boolean _active; // UBì…ì¥ ê°€ëŠ¥~ê²½ê¸° ì¢…ë£Œê¹Œì§€ true
 
 	private int _minLevel;
 	private int _maxLevel;
@@ -70,15 +70,15 @@ public class L1UltimateBattle {
 	private boolean _enterMage;
 	private boolean _enterElf;
 	private boolean _enterDarkelf;
-	private boolean _enterDragonKnight; // Ãß°¡
-	private boolean _enterBlackWizard;  // Ãß°¡
+	private boolean _enterDragonKnight; // ì¶”ê°€
+	private boolean _enterBlackWizard;  // ì¶”ê°€
 	private boolean _enterMale;
 	private boolean _enterFemale;
 	private boolean _usePot;
 	private int _hpr;
 	private int _mpr;
 
-	private static int BEFORE_MINUTE = 5; // 5ºĞÀüÀ¸·ÎºÎÅÍ ÀÔÀå °³½Ã
+	private static int BEFORE_MINUTE = 5; // 5ë¶„ì „ìœ¼ë¡œë¶€í„° ì…ì¥ ê°œì‹œ
 
 	private Set<Integer> _managers = new HashSet<Integer>();
 	private SortedSet<Integer> _ubTimes = new TreeSet<Integer>();
@@ -89,23 +89,23 @@ public class L1UltimateBattle {
 	private final ArrayList<L1PcInstance> _members = new ArrayList<L1PcInstance>();
 
 	/**
-	 * ¶ó¿îµå °³½Ã½ÃÀÇ ¸Ş¼¼Áö¸¦ ¼Û½ÅÇÑ´Ù.
+	 * ë¼ìš´ë“œ ê°œì‹œì‹œì˜ ë©”ì„¸ì§€ë¥¼ ì†¡ì‹ í•œë‹¤.
 	 * 
 	 * @param curRound
-	 *            °³½ÃÇÏ´Â ¶ó¿îµå
+	 *            ê°œì‹œí•˜ëŠ” ë¼ìš´ë“œ
 	 */
 	private void sendRoundMessage(int curRound) {
-		// XXX - ÀÌ ID´Â Àß¸øµÇ¾î ÀÖ´Ù
+		// XXX - ì´ IDëŠ” ì˜ëª»ë˜ì–´ ìˆë‹¤
 		final int MSGID_ROUND_TABLE[] = { 893, 894, 895, 896 };
 
 		sendMessage(MSGID_ROUND_TABLE[curRound - 1], "");
 	}
 
 	/**
-	 * ÀÏºÎµîÀÇ º¸±Ş ¾ÆÀÌÅÛÀ» ÃâÇö½ÃÅ²´Ù.
+	 * ì¼ë¶€ë“±ì˜ ë³´ê¸‰ ì•„ì´í…œì„ ì¶œí˜„ì‹œí‚¨ë‹¤.
 	 * 
 	 * @param curRound
-	 *            ÇöÀçÀÇ ¶ó¿îµå
+	 *            í˜„ì¬ì˜ ë¼ìš´ë“œ
 	 */
 	private void spawnSupplies(int curRound) {
 		if (curRound == 1) {
@@ -113,28 +113,28 @@ public class L1UltimateBattle {
 			spawnGroundItem(L1ItemId.POTION_OF_CURE_POISON, 3, 20);
 			spawnGroundItem(L1ItemId.POTION_OF_EXTRA_HEALING, 5, 20);
 			spawnGroundItem(L1ItemId.POTION_OF_GREATER_HEALING, 3, 20);
-			spawnGroundItem(40317, 1, 5); // ¼ıµ¹
-			spawnGroundItem(42079, 1, 20); // ±ÍÈ¯ ½ºÅ©
+			spawnGroundItem(40317, 1, 5); // ìˆ«ëŒ
+			spawnGroundItem(42079, 1, 20); // ê·€í™˜ ìŠ¤í¬
 		} else if (curRound == 2) {
 			spawnGroundItem(L1ItemId.ADENA, 30000, 50);
 			spawnGroundItem(L1ItemId.POTION_OF_CURE_POISON, 5, 20);
 			spawnGroundItem(L1ItemId.POTION_OF_EXTRA_HEALING, 10, 20);
 			spawnGroundItem(L1ItemId.POTION_OF_GREATER_HEALING, 5, 20);
-			spawnGroundItem(40317, 1, 7); // ¼ıµ¹
-			spawnGroundItem(40093, 1, 10); // ºê¶õÅ©½ºÅ©(Lv4)
-			spawnGroundItem(42079, 1, 5); // ±ÍÈ¯ ½ºÅ©
+			spawnGroundItem(40317, 1, 7); // ìˆ«ëŒ
+			spawnGroundItem(40093, 1, 10); // ë¸Œë€í¬ìŠ¤í¬(Lv4)
+			spawnGroundItem(42079, 1, 5); // ê·€í™˜ ìŠ¤í¬
 		} else if (curRound == 3) {
 			spawnGroundItem(L1ItemId.ADENA, 50000, 30);
 			spawnGroundItem(L1ItemId.POTION_OF_CURE_POISON, 7, 20);
 			spawnGroundItem(L1ItemId.POTION_OF_EXTRA_HEALING, 20, 20);
 			spawnGroundItem(L1ItemId.POTION_OF_GREATER_HEALING, 10, 20);
-			spawnGroundItem(40317, 1, 10); // ¼ıµ¹
-			spawnGroundItem(40094, 1, 10); // ºê¶õÅ©½ºÅ©(Lv5)
+			spawnGroundItem(40317, 1, 10); // ìˆ«ëŒ
+			spawnGroundItem(40094, 1, 10); // ë¸Œë€í¬ìŠ¤í¬(Lv5)
 		}
 	}
 
 	/**
-	 * Äİ·Ô¼¼¿òÀ¸·ÎºÎÅÍ ³ª¿Â ¸â¹ö¸¦ ¸â¹ö ¸®½ºÆ®·ÎºÎÅÍ »èÁ¦ÇÑ´Ù.
+	 * ì½œë¡¯ì„¸ì›€ìœ¼ë¡œë¶€í„° ë‚˜ì˜¨ ë©¤ë²„ë¥¼ ë©¤ë²„ ë¦¬ìŠ¤íŠ¸ë¡œë¶€í„° ì‚­ì œí•œë‹¤.
 	 */
 	private void removeRetiredMembers() {
 		L1PcInstance[] temp = getMembersArray();
@@ -146,12 +146,12 @@ public class L1UltimateBattle {
 	}
 
 	/**
-	 * UB¿¡ Âü°¡ÇÏ°í ÀÖ´Â ÇÃ·¹ÀÌ¾î¿¡ ¸Ş¼¼Áö(S_ServerMessage)¸¦ ¼Û½ÅÇÑ´Ù.
+	 * UBì— ì°¸ê°€í•˜ê³  ìˆëŠ” í”Œë ˆì´ì–´ì— ë©”ì„¸ì§€(S_ServerMessage)ë¥¼ ì†¡ì‹ í•œë‹¤.
 	 * 
 	 * @param type
-	 *            ¸Ş¼¼Áö Å¸ÀÔ
+	 *            ë©”ì„¸ì§€ íƒ€ì…
 	 * @param msg
-	 *            ¼Û½ÅÇÏ´Â ¸Ş¼¼Áö
+	 *            ì†¡ì‹ í•˜ëŠ” ë©”ì„¸ì§€
 	 */
 	private void sendMessage(int type, String msg) {
 		for (L1PcInstance pc : getMembersArray()) {
@@ -160,14 +160,14 @@ public class L1UltimateBattle {
 	}
 
 	/**
-	 * Äİ·Ô¼¼¿ò»ó¿¡ ¾ÆÀÌÅÛÀ» ÃâÇö½ÃÅ²´Ù.
+	 * ì½œë¡¯ì„¸ì›€ìƒì— ì•„ì´í…œì„ ì¶œí˜„ì‹œí‚¨ë‹¤.
 	 * 
 	 * @param itemId
-	 *            ÃâÇö½ÃÅ°´Â ¾ÆÀÌÅÛÀÇ ¾ÆÀÌÅÛ ID
+	 *            ì¶œí˜„ì‹œí‚¤ëŠ” ì•„ì´í…œì˜ ì•„ì´í…œ ID
 	 * @param stackCount
-	 *            ¾ÆÀÌÅÛÀÇ ½ºÅÃ¼ö
+	 *            ì•„ì´í…œì˜ ìŠ¤íƒìˆ˜
 	 * @param count
-	 *            ÃâÇö½ÃÅ°´Â ¼ö
+	 *            ì¶œí˜„ì‹œí‚¤ëŠ” ìˆ˜
 	 */
 	private void spawnGroundItem(int itemId, int stackCount, int count) {
 		L1Item temp = ItemTable.getInstance().getTemplate(itemId);
@@ -204,12 +204,12 @@ public class L1UltimateBattle {
 	}
 
 	/**
-	 * Äİ·Ô¼¼¿ò»óÀÇ ¾ÆÀÌÅÛ°ú monster¸¦ ¸ğµÎ »èÁ¦ÇÑ´Ù.
+	 * ì½œë¡¯ì„¸ì›€ìƒì˜ ì•„ì´í…œê³¼ monsterë¥¼ ëª¨ë‘ ì‚­ì œí•œë‹¤.
 	 */
 	private void clearColosseum() {
 		for (Object obj : L1World.getInstance().getVisibleObjects(_mapId)
 				.values()) {
-			if (obj instanceof L1MonsterInstance) // monster »èÁ¦
+			if (obj instanceof L1MonsterInstance) // monster ì‚­ì œ
 			{
 				L1MonsterInstance mob = (L1MonsterInstance) obj;
 				if (!mob.isDead()) {
@@ -219,7 +219,7 @@ public class L1UltimateBattle {
 					mob.deleteMe();
 
 				}
-			} else if (obj instanceof L1Inventory) // ¾ÆÀÌÅÛ »èÁ¦
+			} else if (obj instanceof L1Inventory) // ì•„ì´í…œ ì‚­ì œ
 			{
 				L1Inventory inventory = (L1Inventory) obj;
 				inventory.clearItems();
@@ -228,55 +228,55 @@ public class L1UltimateBattle {
 	}
 
 	/**
-	 * constructor¡¡ ¡¡.
+	 * constructorã€€ ã€€.
 	 */
 	public L1UltimateBattle() {
 	}
 
 	class UbThread implements Runnable {
 		/**
-		 * °æ±â °³½Ã±îÁö¸¦ Ä«¿îÆ®´Ù¿î ÇÑ´Ù.
+		 * ê²½ê¸° ê°œì‹œê¹Œì§€ë¥¼ ì¹´ìš´íŠ¸ë‹¤ìš´ í•œë‹¤.
 		 * 
 		 * @throws InterruptedException
 		 */
 		private void countDown() throws InterruptedException {
-			// XXX - ÀÌ ID´Â Àß¸øµÇ¾î ÀÖ´Ù
+			// XXX - ì´ IDëŠ” ì˜ëª»ë˜ì–´ ìˆë‹¤
 			final int MSGID_COUNT = 637;
 			final int MSGID_START = 632;
 
-			for (int loop = 0; loop < BEFORE_MINUTE * 60 - 10; loop++) { // °³½Ã 10ÃÊÀü±îÁö ±â´Ù¸°´Ù
+			for (int loop = 0; loop < BEFORE_MINUTE * 60 - 10; loop++) { // ê°œì‹œ 10ì´ˆì „ê¹Œì§€ ê¸°ë‹¤ë¦°ë‹¤
 				Thread.sleep(1000);
 // removeRetiredMembers();
 			}
 			removeRetiredMembers();
 
-			sendMessage(MSGID_COUNT, "10"); // 10ÃÊÀü
+			sendMessage(MSGID_COUNT, "10"); // 10ì´ˆì „
 
 			Thread.sleep(5000);
-			sendMessage(MSGID_COUNT, "5"); // 5ÃÊÀü
+			sendMessage(MSGID_COUNT, "5"); // 5ì´ˆì „
 
 			Thread.sleep(1000);
-			sendMessage(MSGID_COUNT, "4"); // 4ÃÊÀü
+			sendMessage(MSGID_COUNT, "4"); // 4ì´ˆì „
 
 			Thread.sleep(1000);
-			sendMessage(MSGID_COUNT, "3"); // 3ÃÊÀü
+			sendMessage(MSGID_COUNT, "3"); // 3ì´ˆì „
 
 			Thread.sleep(1000);
-			sendMessage(MSGID_COUNT, "2"); // 2ÃÊÀü
+			sendMessage(MSGID_COUNT, "2"); // 2ì´ˆì „
 
 			Thread.sleep(1000);
-			sendMessage(MSGID_COUNT, "1"); // 1ÃÊÀü
+			sendMessage(MSGID_COUNT, "1"); // 1ì´ˆì „
 
 			Thread.sleep(1000);
-			sendMessage(MSGID_START, "¹«ÇÑ´ëÀü"); // ½ºÅ¸Æ®
+			sendMessage(MSGID_START, "ë¬´í•œëŒ€ì „"); // ìŠ¤íƒ€íŠ¸
 			removeRetiredMembers();
 		}
 
 		/**
-		 * ¸ğµç monster°¡ ÃâÇöÇÑ ÈÄ, ´ÙÀ½ÀÇ ¶ó¿îµå°¡ ½ÃÀÛµÉ ¶§±îÁöÀÇ ½Ã°£À» ´ë±âÇÑ´Ù.
+		 * ëª¨ë“  monsterê°€ ì¶œí˜„í•œ í›„, ë‹¤ìŒì˜ ë¼ìš´ë“œê°€ ì‹œì‘ë  ë•Œê¹Œì§€ì˜ ì‹œê°„ì„ ëŒ€ê¸°í•œë‹¤.
 		 * 
 		 * @param curRound
-		 *            ÇöÀçÀÇ ¶ó¿îµå
+		 *            í˜„ì¬ì˜ ë¼ìš´ë“œ
 		 * @throws InterruptedException
 		 */
 		private void waitForNextRound(int curRound) throws InterruptedException {
@@ -291,7 +291,7 @@ public class L1UltimateBattle {
 		}
 
 		/**
-		 * thread ÇÁ·Î½ÃÀú.
+		 * thread í”„ë¡œì‹œì €.
 		 */
 		@Override
 		public void run() {
@@ -324,7 +324,7 @@ public class L1UltimateBattle {
 					waitForNextRound(round);
 				}
 
-				for (L1PcInstance pc : getMembersArray()) // Äİ·Ô¼¼¿ò³»¿¡ ÀÖ´Â PC¸¦ ¹Û¿¡ ³½´Ù
+				for (L1PcInstance pc : getMembersArray()) // ì½œë¡¯ì„¸ì›€ë‚´ì— ìˆëŠ” PCë¥¼ ë°–ì— ë‚¸ë‹¤
 				{
 					Random random = new Random();
 					int rndx = random.nextInt(4);
@@ -345,25 +345,25 @@ public class L1UltimateBattle {
 	}
 
 	/**
-	 * ¾óÆ¼¸ŞÀÌÆ® ¹èÆ²À» °³½ÃÇÑ´Ù.
+	 * ì–¼í‹°ë©”ì´íŠ¸ ë°°í‹€ì„ ê°œì‹œí•œë‹¤.
 	 * 
 	 * @param ubId
-	 *            °³½ÃÇÏ´Â ¾óÆ¼¸ŞÀÌÆ® ¹èÆ²ÀÇ ID
+	 *            ê°œì‹œí•˜ëŠ” ì–¼í‹°ë©”ì´íŠ¸ ë°°í‹€ì˜ ID
 	 */
 	public void start() {
 		int patternsMax = UBSpawnTable.getInstance().getMaxPattern(_ubId);
 		Random random = new Random();
-		_pattern = random.nextInt(patternsMax) + 1; // ÃâÇö ÆĞÅÏÀ» °áÁ¤ÇÑ´Ù
+		_pattern = random.nextInt(patternsMax) + 1; // ì¶œí˜„ íŒ¨í„´ì„ ê²°ì •í•œë‹¤
 
 		UbThread ub = new UbThread();
 		GeneralThreadPool.getInstance().execute(ub);
 	}
 
 	/**
-	 * ÇÃ·¹ÀÌ¾î¸¦ Âü°¡ ¸â¹ö ¸®½ºÆ®¿¡ Ãß°¡ÇÑ´Ù.
+	 * í”Œë ˆì´ì–´ë¥¼ ì°¸ê°€ ë©¤ë²„ ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€í•œë‹¤.
 	 * 
 	 * @param pc
-	 *            »õ·Ó°Ô Âü°¡ÇÏ´Â ÇÃ·¹ÀÌ¾î
+	 *            ìƒˆë¡­ê²Œ ì°¸ê°€í•˜ëŠ” í”Œë ˆì´ì–´
 	 */
 	public void addMember(L1PcInstance pc) {
 		if (!_members.contains(pc)) {
@@ -372,53 +372,53 @@ public class L1UltimateBattle {
 	}
 
 	/**
-	 * ÇÃ·¹ÀÌ¾î¸¦ Âü°¡ ¸â¹ö ¸®½ºÆ®·ÎºÎÅÍ »èÁ¦ÇÑ´Ù.
+	 * í”Œë ˆì´ì–´ë¥¼ ì°¸ê°€ ë©¤ë²„ ë¦¬ìŠ¤íŠ¸ë¡œë¶€í„° ì‚­ì œí•œë‹¤.
 	 * 
 	 * @param pc
-	 *            »èÁ¦ÇÏ´Â ÇÃ·¹ÀÌ¾î
+	 *            ì‚­ì œí•˜ëŠ” í”Œë ˆì´ì–´
 	 */
 	public void removeMember(L1PcInstance pc) {
 		_members.remove(pc);
 	}
 
 	/**
-	 * Âü°¡ ¸â¹ö ¸®½ºÆ®¸¦ Å¬¸®¾î ÇÑ´Ù.
+	 * ì°¸ê°€ ë©¤ë²„ ë¦¬ìŠ¤íŠ¸ë¥¼ í´ë¦¬ì–´ í•œë‹¤.
 	 */
 	public void clearMembers() {
 		_members.clear();
 	}
 
 	/**
-	 * ÇÃ·¹ÀÌ¾î°¡, Âü°¡ ¸â¹öÀÎÁö¸¦ µ¹·ÁÁØ´Ù.
+	 * í”Œë ˆì´ì–´ê°€, ì°¸ê°€ ë©¤ë²„ì¸ì§€ë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 * 
 	 * @param pc
-	 *            Á¶»çÇÏ´Â ÇÃ·¹ÀÌ¾î
-	 * @return Âü°¡ ¸â¹öÀÌ¸é true, ±×·¸Áö ¾ÊÀ¸¸é false.
+	 *            ì¡°ì‚¬í•˜ëŠ” í”Œë ˆì´ì–´
+	 * @return ì°¸ê°€ ë©¤ë²„ì´ë©´ true, ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ false.
 	 */
 	public boolean isMember(L1PcInstance pc) {
 		return _members.contains(pc);
 	}
 
 	/**
-	 * Âü°¡ ¸â¹öÀÇ ¹è¿­À» ÀÛ¼ºÇØ, µ¹·ÁÁØ´Ù.
+	 * ì°¸ê°€ ë©¤ë²„ì˜ ë°°ì—´ì„ ì‘ì„±í•´, ëŒë ¤ì¤€ë‹¤.
 	 * 
-	 * @return Âü°¡ ¸â¹öÀÇ ¹è¿­
+	 * @return ì°¸ê°€ ë©¤ë²„ì˜ ë°°ì—´
 	 */
 	public L1PcInstance[] getMembersArray() {
 		return _members.toArray(new L1PcInstance[_members.size()]);
 	}
 
 	/**
-	 * Âü°¡ ¸â¹ö¼ö¸¦ µ¹·ÁÁØ´Ù.
+	 * ì°¸ê°€ ë©¤ë²„ìˆ˜ë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 * 
-	 * @return Âü°¡ ¸â¹ö¼ö
+	 * @return ì°¸ê°€ ë©¤ë²„ìˆ˜
 	 */
 	public int getMembersCount() {
 		return _members.size();
 	}
 
 	/**
-	 * UBÁßÀÎÁö¸¦ ¼³Á¤ÇÑ´Ù.
+	 * UBì¤‘ì¸ì§€ë¥¼ ì„¤ì •í•œë‹¤.
 	 * 
 	 * @param i
 	 *            true/false
@@ -428,9 +428,9 @@ public class L1UltimateBattle {
 	}
 
 	/**
-	 * UBÁßÀÎÁö¸¦ µ¹·ÁÁØ´Ù.
+	 * UBì¤‘ì¸ì§€ë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 * 
-	 * @return UBÁßÀÌ¸é true, ±×·¸Áö ¾ÊÀ¸¸é false.
+	 * @return UBì¤‘ì´ë©´ true, ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ false.
 	 */
 	public boolean isNowUb() {
 		return _isNowUb;
@@ -496,11 +496,11 @@ public class L1UltimateBattle {
 		this._enterDarkelf = enterDarkelf;
 	}
 	
-	public void setEnterDragonKnight(boolean enterDragonKnight) { // ¿ë±â»ç Ãß°¡
+	public void setEnterDragonKnight(boolean enterDragonKnight) { // ìš©ê¸°ì‚¬ ì¶”ê°€
 		this._enterDragonKnight = enterDragonKnight;
 	}
 
-	public void setEnterBlackWizard(boolean enterBlackWizard) { // È¯¼ú»ç Ãß°¡
+	public void setEnterBlackWizard(boolean enterBlackWizard) { // í™˜ìˆ ì‚¬ ì¶”ê°€
 		this._enterBlackWizard = enterBlackWizard;
 	}
 
@@ -568,7 +568,7 @@ public class L1UltimateBattle {
 		this._locY2 = locY2;
 	}
 
-	// set µÈ locx1~locy2·ÎºÎÅÍ Áß½ÉÁ¡À» ¿ä±¸ÇÑ´Ù.
+	// set ëœ locx1~locy2ë¡œë¶€í„° ì¤‘ì‹¬ì ì„ ìš”êµ¬í•œë‹¤.
 	public void resetLoc() {
 		_locX = (_locX2 + _locX1) / 2;
 		_locY = (_locY2 + _locY1) / 2;
@@ -628,35 +628,35 @@ public class L1UltimateBattle {
 	}
 
 	/**
-	 * @return UBÀÔÀå °¡´É~°æ±â Á¾·á±îÁö´Â true, ±× ÀÌ¿Ü´Â false¸¦ µ¹·ÁÁØ´Ù.
+	 * @return UBì…ì¥ ê°€ëŠ¥~ê²½ê¸° ì¢…ë£Œê¹Œì§€ëŠ” true, ê·¸ ì´ì™¸ëŠ” falseë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 */
 	public boolean isActive() {
 		return _active;
 	}
 
 	/**
-	 * UB¿¡ Âü°¡ °¡´ÉÇÑ°¡, ·¹º§, Å¬·¡½º¸¦ Ã¼Å©ÇÑ´Ù.
+	 * UBì— ì°¸ê°€ ê°€ëŠ¥í•œê°€, ë ˆë²¨, í´ë˜ìŠ¤ë¥¼ ì²´í¬í•œë‹¤.
 	 * 
 	 * @param pc
-	 *            UB¿¡ Âü°¡ÇÒ ¼ö ÀÖ´ÂÁö Ã¼Å©ÇÏ´Â PC
-	 * @return Âü°¡ ÇÒ ¼ö ÀÖ´Â °æ¿ì´Â true, ÇÒ ¼ö ¾ø´Â °æ¿ì´Â false
+	 *            UBì— ì°¸ê°€í•  ìˆ˜ ìˆëŠ”ì§€ ì²´í¬í•˜ëŠ” PC
+	 * @return ì°¸ê°€ í•  ìˆ˜ ìˆëŠ” ê²½ìš°ëŠ” true, í•  ìˆ˜ ì—†ëŠ” ê²½ìš°ëŠ” false
 	 */
 	public boolean canPcEnter(L1PcInstance pc) {
 		_log.log(Level.FINE, "pcname=" + pc.getName() + " ubid=" + _ubId
 				+ " minlvl=" + _minLevel + " maxlvl=" + _maxLevel);
-		// Âü°¡ °¡´ÉÇÑ ·¹º§ÀÎ°¡
+		// ì°¸ê°€ ê°€ëŠ¥í•œ ë ˆë²¨ì¸ê°€
 		if (!IntRange.includes(pc.getLevel(), _minLevel, _maxLevel)) {
 			return false;
 		}
 
-		// Âü°¡ °¡´ÉÇÑ Å¬·¡½ºÀÎ°¡
+		// ì°¸ê°€ ê°€ëŠ¥í•œ í´ë˜ìŠ¤ì¸ê°€
 		if (!((pc.isCrown() && _enterRoyal)
 				|| (pc.isKnight() && _enterKnight)
 				|| (pc.isWizard() && _enterMage)
 				|| (pc.isElf() && _enterElf)
 				|| (pc.isDarkelf() && _enterDarkelf)
 				|| (pc.isDragonKnight() && _enterDragonKnight)
-			    || (pc.isBlackWizard() && _enterBlackWizard))) { // ¿ë±â»ç È¯¼ú»ç Ãß°¡
+			    || (pc.isBlackWizard() && _enterBlackWizard))) { // ìš©ê¸°ì‚¬ í™˜ìˆ ì‚¬ ì¶”ê°€
 			return false;
 		}
 
@@ -670,48 +670,48 @@ public class L1UltimateBattle {
 			return _ubInfo;
 		}
 		String nextUbTime = getNextUbTime();
-		// Å¬·¡½º
+		// í´ë˜ìŠ¤
 		StringBuilder classesBuff = new StringBuilder();
 		if (_enterBlackWizard) {
-			classesBuff.append("È¯¼ú»ç "); // Ãß°¡
+			classesBuff.append("í™˜ìˆ ì‚¬ "); // ì¶”ê°€
 		}
 		if (_enterDragonKnight) {
-			classesBuff.append("¿ë±â»ç "); // Ãß°¡
+			classesBuff.append("ìš©ê¸°ì‚¬ "); // ì¶”ê°€
 		}
 		if (_enterDarkelf) {
-			classesBuff.append("´ÙÅ©¿¤ÇÁ ");
+			classesBuff.append("ë‹¤í¬ì—˜í”„ ");
 		}
 		if (_enterMage) {
-			classesBuff.append("¸¶¹ı»ç ");
+			classesBuff.append("ë§ˆë²•ì‚¬ ");
 		}
 		if (_enterElf) {
-			classesBuff.append("¿äÁ¤ ");
+			classesBuff.append("ìš”ì • ");
 		}
 		if (_enterKnight) {
-			classesBuff.append("±â»ç ");
+			classesBuff.append("ê¸°ì‚¬ ");
 		}
 		if (_enterRoyal) {
-			classesBuff.append("±ºÁÖ ");
+			classesBuff.append("êµ°ì£¼ ");
 		}
 		String classes = classesBuff.toString().trim();
-		// ¼ºº°
+		// ì„±ë³„
 		StringBuilder sexBuff = new StringBuilder();
 		if (_enterMale) {
-			sexBuff.append("³²ÀÚ ");
+			sexBuff.append("ë‚¨ì ");
 		}
 		if (_enterFemale) {
-			sexBuff.append("¿©ÀÚ ");
+			sexBuff.append("ì—¬ì ");
 		}
 		String sex = sexBuff.toString().trim();
 		String loLevel = String.valueOf(_minLevel);
 		String hiLevel = String.valueOf(_maxLevel);
-		String teleport = _location.getMap().isEscapable() ?  "°¡´É" : "ºÒ°¡´É";
-		String res = _location.getMap().isUseResurrection() ?  "°¡´É" : "ºÒ°¡´É";
-		String pot = "°¡´É";
+		String teleport = _location.getMap().isEscapable() ?  "ê°€ëŠ¥" : "ë¶ˆê°€ëŠ¥";
+		String res = _location.getMap().isUseResurrection() ?  "ê°€ëŠ¥" : "ë¶ˆê°€ëŠ¥";
+		String pot = "ê°€ëŠ¥";
 		String hpr = String.valueOf(_hpr);
 		String mpr = String.valueOf(_mpr);
-		String summon = _location.getMap().isTakePets() ?  "°¡´É" : "ºÒ°¡´É";
-		String summon2 = _location.getMap().isRecallPets() ?  "°¡´É" : "ºÒ°¡´É";
+		String summon = _location.getMap().isTakePets() ?  "ê°€ëŠ¥" : "ë¶ˆê°€ëŠ¥";
+		String summon2 = _location.getMap().isRecallPets() ?  "ê°€ëŠ¥" : "ë¶ˆê°€ëŠ¥";
 		_ubInfo = new String[] { nextUbTime, classes, sex, loLevel, hiLevel,
 				teleport, res, pot, hpr, mpr, summon, summon2 };
 		return _ubInfo;

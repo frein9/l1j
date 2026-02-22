@@ -52,7 +52,7 @@ public class C_NPCTalk extends ClientBasePacket {
 		if(obj instanceof L1NpcInstance){
 			L1NpcInstance n = (L1NpcInstance) obj;
 			L1ShopItem shop = ShopTable.getInstance().getShop(n.getNpcTemplate().get_npcId());
-			// °³ÀÎ»óÁ¡ npc ¶ó¸é
+			// ê°œì¸ìƒì  npc ë¼ë©´
 			if(shop != null && shop.getMessage() != null){
 				return;
 			}
@@ -68,7 +68,7 @@ public class C_NPCTalk extends ClientBasePacket {
 			}
 			obj.onTalkAction(pc);
 		} else {
-			_log.severe("¿ÀºêÁ§Æ®°¡ ¹ß°ßµÇÁö ¾Ê½À´Ï´Ù objid=" + objid);
+			_log.severe("ì˜¤ë¸Œì íŠ¸ê°€ ë°œê²¬ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤ objid=" + objid);
 		}
 	}
 

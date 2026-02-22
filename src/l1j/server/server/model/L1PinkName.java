@@ -50,9 +50,9 @@ public class L1PinkName {
 				} catch (Exception exception) {
 					break;
 				}
-				// »ç¸Á, ¶Ç´Â, »ó´ë¸¦ ³Ñ¾î¶ß·Á »¡°­ ³×ÀÓÀÌ µÇ¸é Á¾·á
+				// ì‚¬ë§, ë˜ëŠ”, ìƒëŒ€ë¥¼ ë„˜ì–´ëœ¨ë ¤ ë¹¨ê°• ë„¤ì„ì´ ë˜ë©´ ì¢…ë£Œ
 				if (_attacker.isDead()) {
-					// setPinkName(false);´Â L1PcInstance#death()·Î ½Ç½ÃÇÑ´Ù
+					// setPinkName(false);ëŠ” L1PcInstance#death()ë¡œ ì‹¤ì‹œí•œë‹¤
 					break;
 				}
 				/*
@@ -97,10 +97,10 @@ public class L1PinkName {
 		}
 
 		if (pc.getLawful() >= 0
-//				&& // pc, attacker ¸ğµÎ ÆÄ¶û ³×ÀÓ
-//				!pc.isPinkName() && attacker.getLawful() >= 0 // ½Ö¹æ º¸¶óµ¹ÀÌ Ã³¸®À§ÇØ ÁÖ¼®
+//				&& // pc, attacker ëª¨ë‘ íŒŒë‘ ë„¤ì„
+//				!pc.isPinkName() && attacker.getLawful() >= 0 // ìŒë°© ë³´ë¼ëŒì´ ì²˜ë¦¬ìœ„í•´ ì£¼ì„
 				&& !attacker.isPinkName()) {
-			if (pc.getZoneType() == 0 && // ¸ğµÎ ³ë¸Ö Á¸¿¡¼­, ÀüÀï ½Ã°£³»¿¡ ±â³»°¡ ¾Æ´Ï´Ù
+			if (pc.getZoneType() == 0 && // ëª¨ë‘ ë…¸ë©€ ì¡´ì—ì„œ, ì „ìŸ ì‹œê°„ë‚´ì— ê¸°ë‚´ê°€ ì•„ë‹ˆë‹¤
 					attacker.getZoneType() == 0 && isNowWar == false) {
 				attacker.setPinkName(true);
 				attacker.sendPackets(new S_PinkName(attacker.getId(), 30));

@@ -29,57 +29,57 @@ import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import l1j.server.Base64;
-import l1j.server.Config; // IP´ç °èÁ¤ »ı¼º °³¼ö ¿ÜºÎÈ­
+import l1j.server.Config; // IPë‹¹ ê³„ì • ìƒì„± ê°œìˆ˜ ì™¸ë¶€í™”
 import l1j.server.L1DatabaseFactory;
 import l1j.server.server.utils.SQLUtil;
 
 /**
- * ·Î±×ÀÎÀ» À§ÇÑ ¿©·¯°¡Áö ÀÎÅÍÆäÀÌ½º¸¦ Á¦°øÇÑ´Ù.
+ * ë¡œê·¸ì¸ì„ ìœ„í•œ ì—¬ëŸ¬ê°€ì§€ ì¸í„°í˜ì´ìŠ¤ë¥¼ ì œê³µí•œë‹¤.
  */
 public class Account {
-	/** ¾îÄ«¿îÆ®¸í. */
+	/** ì–´ì¹´ìš´íŠ¸ëª…. */
 	private String _name;
 
-	/** Á¢¼ÓÃ³ÀÇ IPÁÖ¼Ò. */
+	/** ì ‘ì†ì²˜ì˜ IPì£¼ì†Œ. */
 	private String _ip;
 
-	/** ÆĞ½º¿öµå(¾ÏÈ£È­µÇ°í ÀÖ´Ù). */
+	/** íŒ¨ìŠ¤ì›Œë“œ(ì•”í˜¸í™”ë˜ê³  ìˆë‹¤). */
 	private String _password;
 
-	/** ÃÖÁ¾ ¾×Æ¼ºêÀÏ. */
+	/** ìµœì¢… ì•¡í‹°ë¸Œì¼. */
 	private Timestamp _lastActive;
 
-	/** ¾×¼¼½º ·¹º§(GMÀÎ°¡? ). */
+	/** ì•¡ì„¸ìŠ¤ ë ˆë²¨(GMì¸ê°€? ). */
 	private int _accessLevel;
 
-	/** Á¢¼ÓÃ³ÀÇ È£½ºÆ®¸í. */
+	/** ì ‘ì†ì²˜ì˜ í˜¸ìŠ¤íŠ¸ëª…. */
 	private String _host;
 
-	/** ¾×¼¼½º ±İÁöÀÇ À¯¹«(True·Î ±İÁö). */
+	/** ì•¡ì„¸ìŠ¤ ê¸ˆì§€ì˜ ìœ ë¬´(Trueë¡œ ê¸ˆì§€). */
 	private boolean _banned;
 
-	/** ¾îÄ«¿îÆ®°¡ À¯È¿ÇÑ°¡ ¾Æ´Ñ°¡(True·Î À¯È¿). */
+	/** ì–´ì¹´ìš´íŠ¸ê°€ ìœ íš¨í•œê°€ ì•„ë‹Œê°€(Trueë¡œ ìœ íš¨). */
 	private boolean _isValid = false;
 
-	/** ¸Ş¼¼Áö ·Î±×¿ë. */
+	/** ë©”ì„¸ì§€ ë¡œê·¸ìš©. */
 	private static Logger _log = Logger.getLogger(Account.class.getName());
 
 	/**
-	 * constructor¡¡ ¡¡.
+	 * constructorã€€ ã€€.
 	 */
 	private Account() {
 	}
 
 	/**
-	 * ÆĞ½º¿öµå¸¦ ¾ÏÈ£È­ÇÑ´Ù.
+	 * íŒ¨ìŠ¤ì›Œë“œë¥¼ ì•”í˜¸í™”í•œë‹¤.
 	 *
 	 * @param rawPassword
-	 *            Æò¹®ÀÇ ÆĞ½º¿öµå
+	 *            í‰ë¬¸ì˜ íŒ¨ìŠ¤ì›Œë“œ
 	 * @return String
 	 * @throws NoSuchAlgorithmException
-	 *             ¾ÏÈ£ ¾Ë°í¸®ÁòÀ» »ç¿ëÇÒ ¼ö ¾ø´Â È¯°æ¶§
+	 *             ì•”í˜¸ ì•Œê³ ë¦¬ì¦˜ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ëŠ” í™˜ê²½ë•Œ
 	 * @throws UnsupportedEncodingException
-	 *             ¹®ÀÚÀÇ encode°¡ ¼­Æ÷Æ®µÇ¾î ÀÖÁö ¾ÊÀ» ¶§
+	 *             ë¬¸ìì˜ encodeê°€ ì„œí¬íŠ¸ë˜ì–´ ìˆì§€ ì•Šì„ ë•Œ
 	 */
 	private static String encodePassword(final String rawPassword)
 			throws NoSuchAlgorithmException, UnsupportedEncodingException {
@@ -90,16 +90,16 @@ public class Account {
 	}
 
 	/**
-	 * ¾îÄ«¿îÆ®¸¦ ½Å±Ô ÀÛ¼ºÇÑ´Ù.
+	 * ì–´ì¹´ìš´íŠ¸ë¥¼ ì‹ ê·œ ì‘ì„±í•œë‹¤.
 	 *
 	 * @param name
-	 *            ¾îÄ«¿îÆ®¸í
+	 *            ì–´ì¹´ìš´íŠ¸ëª…
 	 * @param rawPassword
-	 *            Æò¹®ÆĞ½º¿öµå
+	 *            í‰ë¬¸íŒ¨ìŠ¤ì›Œë“œ
 	 * @param ip
-	 *            Á¢¼ÓÃ³ÀÇ IPÁÖ¼Ò
+	 *            ì ‘ì†ì²˜ì˜ IPì£¼ì†Œ
 	 * @param host
-	 *            Á¢¼ÓÃ³ÀÇ È£½ºÆ®¸í
+	 *            ì ‘ì†ì²˜ì˜ í˜¸ìŠ¤íŠ¸ëª…
 	 * @return Account
 	 */
 	public static Account create(final String name, final String rawPassword,
@@ -144,10 +144,10 @@ public class Account {
 	}
 
 	/**
-	 * ¾îÄ«¿îÆ® Á¤º¸¸¦ DB·ÎºÎÅÍ ÃßÃâÇÑ´Ù.
+	 * ì–´ì¹´ìš´íŠ¸ ì •ë³´ë¥¼ DBë¡œë¶€í„° ì¶”ì¶œí•œë‹¤.
 	 *
 	 * @param name
-	 *            ¾îÄ«¿îÆ®¸í
+	 *            ì–´ì¹´ìš´íŠ¸ëª…
 	 * @return Account
 	 */
 	public static Account load(final String name) {
@@ -187,10 +187,10 @@ public class Account {
 	}
 
 	/**
-	 * ÃÖÁ¾ ·Î±×ÀÎÀÏÀ» DB¿¡ ¹İ¿µÇÑ´Ù.
+	 * ìµœì¢… ë¡œê·¸ì¸ì¼ì„ DBì— ë°˜ì˜í•œë‹¤.
 	 *
 	 * @param account
-	 *            ¾îÄ«¿îÆ®
+	 *            ì–´ì¹´ìš´íŠ¸
 	 */
 	public static void updateLastActive(final Account account) {
 		Connection con = null;
@@ -215,7 +215,7 @@ public class Account {
 	}
 
 	/**
-	 * Ä³¸¯ÅÍ ¼ÒÀ¯¼ö¸¦ Ä«¿îÆ® ÇÑ´Ù.
+	 * ìºë¦­í„° ì†Œìœ ìˆ˜ë¥¼ ì¹´ìš´íŠ¸ í•œë‹¤.
 	 *
 	 * @return int
 	 */
@@ -244,10 +244,10 @@ public class Account {
 	}
 
 	/**
-	 * ¾îÄ«¿îÆ®¸¦ ¹«È¿·Î ÇÑ´Ù.
+	 * ì–´ì¹´ìš´íŠ¸ë¥¼ ë¬´íš¨ë¡œ í•œë‹¤.
 	 *
 	 * @param login
-	 *            ¾îÄ«¿îÆ®¸í
+	 *            ì–´ì¹´ìš´íŠ¸ëª…
 	 */
 	public static void ban(final String login) {
 		Connection con = null;
@@ -267,21 +267,21 @@ public class Account {
 	}
 
 	/**
-	 * ÀÔ·ÂµÈ ÆĞ½º¿öµå¿Í DB»óÀÇ ÆĞ½º¿öµå¸¦ Á¶ÇÕÇÑ´Ù.
+	 * ì…ë ¥ëœ íŒ¨ìŠ¤ì›Œë“œì™€ DBìƒì˜ íŒ¨ìŠ¤ì›Œë“œë¥¼ ì¡°í•©í•œë‹¤.
 	 *
 	 * @param rawPassword
-	 *            Æò¹®ÆĞ½º¿öµå
+	 *            í‰ë¬¸íŒ¨ìŠ¤ì›Œë“œ
 	 * @return boolean
 	 */
 	public boolean validatePassword(final String rawPassword) {
-		// ÀÎÁõ ¼º°ø ÈÄ¿¡ ÀçÂ÷ ÀÎÁõµÇ¾úÀ» °æ¿ì´Â ½ÇÆĞ½ÃÅ²´Ù.
+		// ì¸ì¦ ì„±ê³µ í›„ì— ì¬ì°¨ ì¸ì¦ë˜ì—ˆì„ ê²½ìš°ëŠ” ì‹¤íŒ¨ì‹œí‚¨ë‹¤.
 		if (_isValid) {
 			return false;
 		}
 		try {
 			_isValid = _password.equals(encodePassword(rawPassword));
 			if (_isValid) {
-				_password = null; // ÀÎÁõÀÌ ¼º°øÇßÀ» °æ¿ì, ÆĞ½º¿öµå¸¦ ÆÄ±âÇÑ´Ù.
+				_password = null; // ì¸ì¦ì´ ì„±ê³µí–ˆì„ ê²½ìš°, íŒ¨ìŠ¤ì›Œë“œë¥¼ íŒŒê¸°í•œë‹¤.
 			}
 			return _isValid;
 		} catch (Exception e) {
@@ -291,7 +291,7 @@ public class Account {
 	}
 
 	/**
-	 * ¾îÄ«¿îÆ®°¡ À¯È¿ÇÑ°¡ ¾î¶²°¡¸¦ µ¹·ÁÁØ´Ù(True·Î À¯È¿).
+	 * ì–´ì¹´ìš´íŠ¸ê°€ ìœ íš¨í•œê°€ ì–´ë–¤ê°€ë¥¼ ëŒë ¤ì¤€ë‹¤(Trueë¡œ ìœ íš¨).
 	 *
 	 * @return boolean
 	 */
@@ -300,7 +300,7 @@ public class Account {
 	}
 
 	/**
-	 * ¾îÄ«¿îÆ®°¡ °ÔÀÓ ¸¶½ºÅÍÀÎ°¡ ¾î¶²°¡ µ¹·ÁÁØ´Ù(True·Î °ÔÀÓ ¸¶½ºÅÍ).
+	 * ì–´ì¹´ìš´íŠ¸ê°€ ê²Œì„ ë§ˆìŠ¤í„°ì¸ê°€ ì–´ë–¤ê°€ ëŒë ¤ì¤€ë‹¤(Trueë¡œ ê²Œì„ ë§ˆìŠ¤í„°).
 	 *
 	 * @return boolean
 	 */
@@ -309,7 +309,7 @@ public class Account {
 	}
 
 	/**
-	 * ¾îÄ«¿îÆ®¸íÀ» ÃëµæÇÑ´Ù.
+	 * ì–´ì¹´ìš´íŠ¸ëª…ì„ ì·¨ë“í•œë‹¤.
 	 *
 	 * @return String
 	 */
@@ -318,7 +318,7 @@ public class Account {
 	}
 
 	/**
-	 * Á¢¼ÓÃ³ÀÇ IPÁÖ¼Ò¸¦ ÃëµæÇÑ´Ù.
+	 * ì ‘ì†ì²˜ì˜ IPì£¼ì†Œë¥¼ ì·¨ë“í•œë‹¤.
 	 *
 	 * @return String
 	 */
@@ -327,14 +327,14 @@ public class Account {
 	}
 
 	/**
-	 * ÃÖÁ¾ ·Î±×ÀÎÀÏÀ» ÃëµæÇÑ´Ù.
+	 * ìµœì¢… ë¡œê·¸ì¸ì¼ì„ ì·¨ë“í•œë‹¤.
 	 */
 	public Timestamp getLastActive() {
 		return _lastActive;
 	}
 
 	/**
-	 * ¾×¼¼½º ·¹º§À» ÃëµæÇÑ´Ù.
+	 * ì•¡ì„¸ìŠ¤ ë ˆë²¨ì„ ì·¨ë“í•œë‹¤.
 	 *
 	 * @return int
 	 */
@@ -343,7 +343,7 @@ public class Account {
 	}
 
 	/**
-	 * È£½ºÆ®¸íÀ» ÃëµæÇÑ´Ù.
+	 * í˜¸ìŠ¤íŠ¸ëª…ì„ ì·¨ë“í•œë‹¤.
 	 *
 	 * @return String
 	 */
@@ -352,14 +352,14 @@ public class Account {
 	}
 
 	/**
-	 * ¾×¼¼½º ±İÁö Á¤º¸¸¦ ÃëµæÇÑ´Ù.
+	 * ì•¡ì„¸ìŠ¤ ê¸ˆì§€ ì •ë³´ë¥¼ ì·¨ë“í•œë‹¤.
 	 *
 	 * @return boolean
 	 */
 	public boolean isBanned() {
 		return _banned;
 	}
-// ########## A62 IP´ç °èÁ¤ »ı¼º Á¦ÇÑ 
+// ########## A62 IPë‹¹ ê³„ì • ìƒì„± ì œí•œ 
 	public static boolean Check_LoginIP(String ip) {  
 		int num = 0;  
 		Connection con = null;
@@ -390,5 +390,5 @@ public class Account {
 			SQLUtil.close(con);
 		} return false;
 	}
-// ########## A62 IP´ç °èÁ¤ »ı¼º Á¦ÇÑ 
+// ########## A62 IPë‹¹ ê³„ì • ìƒì„± ì œí•œ 
 }

@@ -11,24 +11,24 @@ import l1j.server.server.model.Instance.L1NpcInstance;
 import l1j.server.server.serverpackets.S_OwnCharAttrDef;
 
 /**
- * È¯¼ú»ç Å¥ºê Å¬·¡½º
+ * í™˜ìˆ ì‚¬ íë¸Œ í´ë˜ìŠ¤
 */
 public class L1Cube{
 
-	/** Å¥ºê ¸®½ºÆ® */
+	/** íë¸Œ ë¦¬ìŠ¤íŠ¸ */
 	private ArrayList<L1NpcInstance> CUBE[] = new ArrayList[4];
 
-	/** ´ÜÀÏ Å¬·¡½º */
+	/** ë‹¨ì¼ í´ë˜ìŠ¤ */
 	private static L1Cube instance;
 
-	/** ÀÎ½ºÅÏ½º ÃÊ±âÈ­ */
+	/** ì¸ìŠ¤í„´ìŠ¤ ì´ˆê¸°í™” */
 	{
 		for(int i = 0; i < CUBE.length; i++) CUBE[i] = new ArrayList<L1NpcInstance>();
 	}
 
 	/**
-	 * Å¥ºê Å¬·¡½º ¹İÈ¯
-	 * @return	´ÜÀÏ Å¬·¡½º °´Ã¼
+	 * íë¸Œ í´ë˜ìŠ¤ ë°˜í™˜
+	 * @return	ë‹¨ì¼ í´ë˜ìŠ¤ ê°ì²´
 	*/
 	public static L1Cube getInstance(){
 		if(instance == null) instance = new L1Cube();
@@ -36,16 +36,16 @@ public class L1Cube{
 	}
 
 	/**
-	 * Å¥ºê ¸®½ºÆ® ¹İ³³
-	 * @param	index	¸®½ºÆ® ÀÎµ¦½º
+	 * íë¸Œ ë¦¬ìŠ¤íŠ¸ ë°˜ë‚©
+	 * @param	index	ë¦¬ìŠ¤íŠ¸ ì¸ë±ìŠ¤
 	*/
 	private L1NpcInstance[] toArray(int index){
 		return CUBE[index].toArray(new L1NpcInstance[CUBE[index].size()]);
 	}
 	/**
-	 * Å¥ºê ¸®½ºÆ® µî·Ï
-	 * @param	index	¸®½ºÆ® ÀÎµ¦½º
-	 * @param	npc		µî·ÏµÉ npc °´Ã¼
+	 * íë¸Œ ë¦¬ìŠ¤íŠ¸ ë“±ë¡
+	 * @param	index	ë¦¬ìŠ¤íŠ¸ ì¸ë±ìŠ¤
+	 * @param	npc		ë“±ë¡ë  npc ê°ì²´
 	*/
 	public void add(int index, L1NpcInstance npc){
 		if(!CUBE[index].contains(npc)){
@@ -53,9 +53,9 @@ public class L1Cube{
 		}
 	}
 	/**
-	 * Å¥ºê ¸®½ºÆ® »èÁ¦
-	 * @param	index	¸®½ºÆ® ÀÎµ¦½º
-	 * @param	npc		»èÁ¦µÉ npc °´Ã¼
+	 * íë¸Œ ë¦¬ìŠ¤íŠ¸ ì‚­ì œ
+	 * @param	index	ë¦¬ìŠ¤íŠ¸ ì¸ë±ìŠ¤
+	 * @param	npc		ì‚­ì œë  npc ê°ì²´
 	*/
 	private void remove(int index, L1NpcInstance npc){
 		if(CUBE[index].contains(npc)){
@@ -63,7 +63,7 @@ public class L1Cube{
 		}
 	}
 
-	/** ºñ°ø°³ */
+	/** ë¹„ê³µê°œ */
 	private L1Cube(){
 		new CUBE1().start();
 		new CUBE2().start();
@@ -71,7 +71,7 @@ public class L1Cube{
 		new CUBE4().start();
 	}
 
-	/** 1´Ü°è */
+	/** 1ë‹¨ê³„ */
 	class CUBE1 extends Thread{
 		@Override
 		public void run(){
@@ -79,7 +79,7 @@ public class L1Cube{
 				while(true){
 					sleep(1000L);
 					for(L1NpcInstance npc : toArray(0)){
-						// Áö¼Ó½Ã°£ÀÌ ³¡³µ´Ù¸é
+						// ì§€ì†ì‹œê°„ì´ ëë‚¬ë‹¤ë©´
 						if(npc.Cube()){
 							npc.setCubePc(null);
 							remove(0, npc);
@@ -87,16 +87,16 @@ public class L1Cube{
 							continue;
 						}
 						if(npc.isCube()){
-							// ÁÖÀ§ 3¼¿ Pc °Ë»ö
-							// Å¥ºê¸¦ »ÌÀº »ç¶÷ÀÇ Ç÷ ¿ì¸®Æí
-							// ÀÏ´Ü ´Ù¸¥Ç÷Àº ÀûÇ÷
+							// ì£¼ìœ„ 3ì…€ Pc ê²€ìƒ‰
+							// íë¸Œë¥¼ ë½‘ì€ ì‚¬ëŒì˜ í˜ˆ ìš°ë¦¬í¸
+							// ì¼ë‹¨ ë‹¤ë¥¸í˜ˆì€ ì í˜ˆ
 							ArrayList<L1PcInstance> sTemp = L1World.getInstance().getVisiblePlayer(npc, 3);
 							for(L1PcInstance c : sTemp.toArray(new L1PcInstance[sTemp.size()])){
-								// Å¥ºê¿¡ ÀÖ´Â »ç¶÷ÀÌ ½ÃÀüÀÚÀÌ°Å³ª °°Àº Ç÷¸ÍÀÌ¶ó¸é
+								// íë¸Œì— ìˆëŠ” ì‚¬ëŒì´ ì‹œì „ìì´ê±°ë‚˜ ê°™ì€ í˜ˆë§¹ì´ë¼ë©´
 								if(npc.CubePc().getId() == c.getId() || npc.CubePc().getClanid() == c.getClanid()){
 									if(!c.hasSkillEffect(5003)){
 										c.addFire((byte) 30);
-										// ¿©ºÎ µî·Ï
+										// ì—¬ë¶€ ë“±ë¡
 										c.setSkillEffect(5003, 10 * 1000);
 										c.sendPackets(new S_OwnCharAttrDef(c));
 										c.sendPackets(new S_SkillSound(c.getId(), 6708));
@@ -112,7 +112,7 @@ public class L1Cube{
 			}
 		}
 	}
-	/** 2´Ü°è */
+	/** 2ë‹¨ê³„ */
 	class CUBE2 extends Thread{
 		@Override
 		public void run(){
@@ -120,7 +120,7 @@ public class L1Cube{
 				while(true){
 					sleep(1000L);
 					for(L1NpcInstance npc : toArray(1)){
-						// Áö¼Ó½Ã°£ÀÌ ³¡³µ´Ù¸é
+						// ì§€ì†ì‹œê°„ì´ ëë‚¬ë‹¤ë©´
 						if(npc.Cube()){
 							npc.setCubePc(null);
 							remove(1, npc);
@@ -128,22 +128,22 @@ public class L1Cube{
 							continue;
 						}
 						if(npc.isCube()){
-							// ÁÖÀ§ 3¼¿ Pc °Ë»ö
-							// Å¥ºê¸¦ »ÌÀº »ç¶÷ÀÇ Ç÷ ¿ì¸®Æí
-							// ÀÏ´Ü ´Ù¸¥Ç÷Àº ÀûÇ÷
+							// ì£¼ìœ„ 3ì…€ Pc ê²€ìƒ‰
+							// íë¸Œë¥¼ ë½‘ì€ ì‚¬ëŒì˜ í˜ˆ ìš°ë¦¬í¸
+							// ì¼ë‹¨ ë‹¤ë¥¸í˜ˆì€ ì í˜ˆ
 							ArrayList<L1PcInstance> sTemp = L1World.getInstance().getVisiblePlayer(npc, 3);
 							for(L1PcInstance c : sTemp.toArray(new L1PcInstance[sTemp.size()])){
-								// Å¥ºê¿¡ ÀÖ´Â »ç¶÷ÀÌ ½ÃÀüÀÚÀÌ°Å³ª °°Àº Ç÷¸ÍÀÌ¶ó¸é
+								// íë¸Œì— ìˆëŠ” ì‚¬ëŒì´ ì‹œì „ìì´ê±°ë‚˜ ê°™ì€ í˜ˆë§¹ì´ë¼ë©´
 								if(npc.CubePc().getId() == c.getId() || npc.CubePc().getClanid() == c.getClanid()){
 									if(!c.hasSkillEffect(5001)){
 										c.addEarth((byte) 30);
-										// ¿©ºÎ µî·Ï
+										// ì—¬ë¶€ ë“±ë¡
 										c.setSkillEffect(5001, 10 * 1000);
 										c.sendPackets(new S_OwnCharAttrDef(c));
 										c.sendPackets(new S_SkillSound(c.getId(), 6714));
 										
 										// for test
-										//System.out.println("Å¥ºê ´çÇÔ  " + c.getEarth());
+										//System.out.println("íë¸Œ ë‹¹í•¨  " + c.getEarth());
 									}
 								}else{
 									c.sendPackets(new S_Poison(c.getId(), 2));
@@ -161,7 +161,7 @@ public class L1Cube{
 			}
 		}
 	}
-	/** 3´Ü°è */
+	/** 3ë‹¨ê³„ */
 	class CUBE3 extends Thread{
 		@Override
 		public void run(){
@@ -169,7 +169,7 @@ public class L1Cube{
 				while(true){
 					sleep(1000L);
 					for(L1NpcInstance npc : toArray(2)){
-						// Áö¼Ó½Ã°£ÀÌ ³¡³µ´Ù¸é
+						// ì§€ì†ì‹œê°„ì´ ëë‚¬ë‹¤ë©´
 						if(npc.Cube()){
 							npc.setCubePc(null);
 							remove(2, npc);
@@ -177,16 +177,16 @@ public class L1Cube{
 							continue;
 						}
 						if(npc.isCube()){
-							// ÁÖÀ§ 3¼¿ Pc °Ë»ö
-							// Å¥ºê¸¦ »ÌÀº »ç¶÷ÀÇ Ç÷ ¿ì¸®Æí
-							// ÀÏ´Ü ´Ù¸¥Ç÷Àº ÀûÇ÷
+							// ì£¼ìœ„ 3ì…€ Pc ê²€ìƒ‰
+							// íë¸Œë¥¼ ë½‘ì€ ì‚¬ëŒì˜ í˜ˆ ìš°ë¦¬í¸
+							// ì¼ë‹¨ ë‹¤ë¥¸í˜ˆì€ ì í˜ˆ
 							ArrayList<L1PcInstance> sTemp = L1World.getInstance().getVisiblePlayer(npc, 3);
 							for(L1PcInstance c : sTemp.toArray(new L1PcInstance[sTemp.size()])){
-								// Å¥ºê¿¡ ÀÖ´Â »ç¶÷ÀÌ ½ÃÀüÀÚÀÌ°Å³ª °°Àº Ç÷¸ÍÀÌ¶ó¸é
+								// íë¸Œì— ìˆëŠ” ì‚¬ëŒì´ ì‹œì „ìì´ê±°ë‚˜ ê°™ì€ í˜ˆë§¹ì´ë¼ë©´
 								if(npc.CubePc().getId() == c.getId() || npc.CubePc().getClanid() == c.getClanid()){
 									if(!c.hasSkillEffect(5002)){
 										c.addWind((byte) 30);
-										// ¿©ºÎ µî·Ï
+										// ì—¬ë¶€ ë“±ë¡
 										c.setSkillEffect(5002, 10 * 1000);
 										c.sendPackets(new S_OwnCharAttrDef(c));
 										c.sendPackets(new S_SkillSound(c.getId(), 6720));
@@ -211,7 +211,7 @@ public class L1Cube{
 			}
 		}
 	}
-	/** 4´Ü°è */
+	/** 4ë‹¨ê³„ */
 	class CUBE4 extends Thread{
 		@Override
 		public void run(){
@@ -219,7 +219,7 @@ public class L1Cube{
 				while(true){
 					sleep(1000L);
 					for(L1NpcInstance npc : toArray(3)){
-						// Áö¼Ó½Ã°£ÀÌ ³¡³µ´Ù¸é
+						// ì§€ì†ì‹œê°„ì´ ëë‚¬ë‹¤ë©´
 						if(npc.Cube()){
 							npc.setCubePc(null);
 							remove(3, npc);
@@ -227,9 +227,9 @@ public class L1Cube{
 							continue;
 						}
 						if(npc.isCube()){
-							// ÁÖÀ§ 3¼¿ Pc °Ë»ö
-							// Å¥ºê¸¦ »ÌÀº »ç¶÷ÀÇ Ç÷ ¿ì¸®Æí
-							// ÀÏ´Ü ´Ù¸¥Ç÷Àº ÀûÇ÷
+							// ì£¼ìœ„ 3ì…€ Pc ê²€ìƒ‰
+							// íë¸Œë¥¼ ë½‘ì€ ì‚¬ëŒì˜ í˜ˆ ìš°ë¦¬í¸
+							// ì¼ë‹¨ ë‹¤ë¥¸í˜ˆì€ ì í˜ˆ
 							ArrayList<L1PcInstance> sTemp = L1World.getInstance().getVisiblePlayer(npc, 3);
 							for(L1PcInstance c : sTemp.toArray(new L1PcInstance[sTemp.size()])){
 								if(c != null){

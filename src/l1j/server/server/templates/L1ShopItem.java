@@ -70,7 +70,7 @@ public class L1ShopItem {
 	public int getEnchant() {
 		return _Enchant;
 	}
-	// ¸àÆ®
+	// ë©˜íŠ¸
 	public String[] getMessage(){
 		return _Message;
 	}

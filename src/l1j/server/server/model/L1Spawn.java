@@ -73,7 +73,7 @@ public class L1Spawn extends L1GameTimeAdapter {
 	private int _spawnType;
 	private int _delayInterval;
 	private L1SpawnTime _time;
-	private HashMap<Integer, Point> _homePoint = null; // init·Î spawn ÇÑ °³°³ÀÇ ¿ÀºêÁ§Æ®ÀÇ È¨ Æ÷ÀÎÆ®
+	private HashMap<Integer, Point> _homePoint = null; // initë¡œ spawn í•œ ê°œê°œì˜ ì˜¤ë¸Œì íŠ¸ì˜ í™ˆ í¬ì¸íŠ¸
 	private List<L1NpcInstance> _mobs = new ArrayList<L1NpcInstance>();
 
 	private static Random _random = new Random();
@@ -265,7 +265,7 @@ public class L1Spawn extends L1GameTimeAdapter {
 			respawnDelay += _random.nextInt(_delayInterval) * 1000;
 		}
 		L1GameTime currentTime = L1GameTimeClock.getInstance().currentTime();
-		if (_time != null && ! _time.getTimePeriod().includes(currentTime)) { // ÁöÁ¤ ½Ã°£¿Ü¶ó¸é ÁöÁ¤ ½Ã°£±îÁöÀÇ ½Ã°£À» ´õÇÑ´Ù
+		if (_time != null && ! _time.getTimePeriod().includes(currentTime)) { // ì§€ì • ì‹œê°„ì™¸ë¼ë©´ ì§€ì • ì‹œê°„ê¹Œì§€ì˜ ì‹œê°„ì„ ë”í•œë‹¤
 			long diff = (_time.getTimeStart(). getTime() - currentTime.toTime()
 					.getTime());
 			if (diff < 0) {
@@ -278,10 +278,10 @@ public class L1Spawn extends L1GameTimeAdapter {
 	}
 
 	/**
-	 * SpawnTask¸¦ ±âµ¿ÇÑ´Ù.
+	 * SpawnTaskë¥¼ ê¸°ë™í•œë‹¤.
 	 * 
 	 * @param spawnNumber
-	 *            L1Spawn·Î °ü¸®µÇ°í ÀÖ´Â ¹øÈ£.È¨ Æ÷ÀÎÆ®°¡ ¾øÀ¸¸é ¹«¾ùÀ» ÁöÁ¤ÇØµµ ÁÁ´Ù.
+	 *            L1Spawnë¡œ ê´€ë¦¬ë˜ê³  ìˆëŠ” ë²ˆí˜¸.í™ˆ í¬ì¸íŠ¸ê°€ ì—†ìœ¼ë©´ ë¬´ì—‡ì„ ì§€ì •í•´ë„ ì¢‹ë‹¤.
 	 */
 	public void executeSpawnTask(int spawnNumber, int objectId) {
 		SpawnTask task = new SpawnTask(spawnNumber, objectId);
@@ -294,12 +294,12 @@ public class L1Spawn extends L1GameTimeAdapter {
 
 	public void init() {
 		if (_time != null && _time.isDeleteAtEndTime()) {
-			// ½Ã°£¿Ü »èÁ¦°¡ ÁöÁ¤µÇ°í ÀÖ´Ù¸é, ½Ã°£ °æ°úÀÇ ÅëÁö¸¦ ¹Ş´Â´Ù.
+			// ì‹œê°„ì™¸ ì‚­ì œê°€ ì§€ì •ë˜ê³  ìˆë‹¤ë©´, ì‹œê°„ ê²½ê³¼ì˜ í†µì§€ë¥¼ ë°›ëŠ”ë‹¤.
 			L1GameTimeClock.getInstance().addListener(this);
 		}
 		_delayInterval = _maxRespawnDelay - _minRespawnDelay;
 		_initSpawn = true;
-		// È¨ Æ÷ÀÎÆ®¸¦ °®°ÔÇÒ±î
+		// í™ˆ í¬ì¸íŠ¸ë¥¼ ê°–ê²Œí• ê¹Œ
 		if (Config.SPAWN_HOME_POINT
 				&& Config.SPAWN_HOME_POINT_COUNT <= getAmount()
 				&& Config.SPAWN_HOME_POINT_DELAY >= getMinRespawnDelay()
@@ -310,17 +310,17 @@ public class L1Spawn extends L1GameTimeAdapter {
 
 		int spawnNum = 0;
 		while (spawnNum < _maximumCount) {
-			// spawnNum´Â 1~maxmumCount±îÁö
+			// spawnNumëŠ” 1~maxmumCountê¹Œì§€
 			doSpawn(++spawnNum);
 		}
 		_initSpawn = false;
 	}
 
 	/**
-	 * È¨ Æ÷ÀÎÆ®°¡ ÀÖ´Â °æ¿ì´Â, spawnNumber¸¦ ±âº»À¸·Î spawn ÇÑ´Ù. ±× ÀÌ¿ÜÀÇ °æ¿ì´Â, spawnNumber´Â ¹Ì»ç¿ë.
+	 * í™ˆ í¬ì¸íŠ¸ê°€ ìˆëŠ” ê²½ìš°ëŠ”, spawnNumberë¥¼ ê¸°ë³¸ìœ¼ë¡œ spawn í•œë‹¤. ê·¸ ì´ì™¸ì˜ ê²½ìš°ëŠ”, spawnNumberëŠ” ë¯¸ì‚¬ìš©.
 	 */
-	protected void doSpawn(int spawnNumber) { // ÃÊ±â ¹èÄ¡
-		// ÁöÁ¤ ½Ã°£¿ÜÀÌ¸é, ´ÙÀ½ spawn¸¦ ¿¹¾àÇØ ³¡³­´Ù.
+	protected void doSpawn(int spawnNumber) { // ì´ˆê¸° ë°°ì¹˜
+		// ì§€ì • ì‹œê°„ì™¸ì´ë©´, ë‹¤ìŒ spawnë¥¼ ì˜ˆì•½í•´ ëë‚œë‹¤.
 		if (_time != null
 				&& ! _time.getTimePeriod(). includes(
 						L1GameTimeClock.getInstance().currentTime())) {
@@ -344,25 +344,25 @@ public class L1Spawn extends L1GameTimeAdapter {
 			if (objectId == 0) {  
 				mob.setId(IdFactory.getInstance().nextId());   
 			   } else {   
-				mob.setId(objectId); // ¿ÀºêÁ§Æ® IDÀçÀÌ¿ë
+				mob.setId(objectId); // ì˜¤ë¸Œì íŠ¸ IDì¬ì´ìš©
 			} 
 			
 			if (0 <= getHeading() && getHeading() <= 7) {
 				mob.setHeading(getHeading());
 			} else {
-				// headingÄ¡°¡ ¿Ã¹Ù¸£Áö ¾Ê´Ù
+				// headingì¹˜ê°€ ì˜¬ë°”ë¥´ì§€ ì•Šë‹¤
 				mob.setHeading(5);
 			}
-			// Æ¯Á¤ shop !!
+			// íŠ¹ì • shop !!
 			L1ShopItem s = ShopTable.getInstance().getShop(mob.getNpcTemplate().get_npcId());
 			if(s != null && s.getMessage() != null && s.getMessage().length > 0){
 				MessageController.getInstance().add(mob);
 			}
 
 			int npcId = mob.getNpcTemplate().get_npcId();
-			if (npcId == 45488 && getMapId() == 9) { // ¾Ó±İ ÆÄ
+			if (npcId == 45488 && getMapId() == 9) { // ì•™ê¸ˆ íŒŒ
 				mob.setMap((short) (getMapId() + _random.nextInt(2)));
-			} else if (npcId == 45601 && getMapId() == 11) { // µ¥½º³ªÀÌÆ®
+			} else if (npcId == 45601 && getMapId() == 11) { // ë°ìŠ¤ë‚˜ì´íŠ¸
 				mob.setMap((short) (getMapId() + _random.nextInt(3)));
 			} else {
 				mob.setMap(getMapId());
@@ -371,8 +371,8 @@ public class L1Spawn extends L1GameTimeAdapter {
 			mob.setRest(isRest());
 			while (tryCount <= 50) {
 				switch (getSpawnType()) {
-				case SPAWN_TYPE_PC_AROUND: // PCÁÖº¯¿¡ ¼Ú¾Æ ¿À¸£´Â Å¸ÀÔ
-					if (!_initSpawn) { // ÃÊ±â ¹èÄ¡¿¡¼­´Â ¹«Á¶°Ç Åë»ó spawn
+				case SPAWN_TYPE_PC_AROUND: // PCì£¼ë³€ì— ì†Ÿì•„ ì˜¤ë¥´ëŠ” íƒ€ì…
+					if (!_initSpawn) { // ì´ˆê¸° ë°°ì¹˜ì—ì„œëŠ” ë¬´ì¡°ê±´ í†µìƒ spawn
 						ArrayList<L1PcInstance> players = new ArrayList<L1PcInstance>();
 						for (L1PcInstance pc : L1World.getInstance()
 								.getAllPlayers()) {
@@ -390,12 +390,12 @@ public class L1Spawn extends L1GameTimeAdapter {
 							break;
 						}
 					}
-					// ÇÃ·Î¾î¿¡ PC°¡ ¾øÀ¸¸é Åë»óÀÇ ÃâÇö ¹æ¹ı
+					// í”Œë¡œì–´ì— PCê°€ ì—†ìœ¼ë©´ í†µìƒì˜ ì¶œí˜„ ë°©ë²•
 				default:
-					if (isAreaSpawn()) { // ÁÂÇ¥°¡ ¹üÀ§ ÁöÁ¤µÇ°í ÀÖ´Â °æ¿ì
+					if (isAreaSpawn()) { // ì¢Œí‘œê°€ ë²”ìœ„ ì§€ì •ë˜ê³  ìˆëŠ” ê²½ìš°
 						Point pt = null;
 						if (_spawnHomePoint
-								&& null != (pt = _homePoint.get(spawnNumber))) { // È¨ Æ÷ÀÎÆ®¸¦ ¹ÙÅÁÀ¸·Î °°Àº ±Û¾¾, ±Û±Í°¡ ´Ù¸¥ °÷¿¡µµ  ³ªÅ¸³»°Ô ÇÏ´Â °æ¿ì
+								&& null != (pt = _homePoint.get(spawnNumber))) { // í™ˆ í¬ì¸íŠ¸ë¥¼ ë°”íƒ•ìœ¼ë¡œ ê°™ì€ ê¸€ì”¨, ê¸€ê·€ê°€ ë‹¤ë¥¸ ê³³ì—ë„  ë‚˜íƒ€ë‚´ê²Œ í•˜ëŠ” ê²½ìš°
 							L1Location loc = new L1Location(pt, getMapId())
 									.randomLocation(
 											Config.SPAWN_HOME_POINT_RANGE,
@@ -408,16 +408,16 @@ public class L1Spawn extends L1GameTimeAdapter {
 							newlocx = _random.nextInt(rangeX) + getLocX1();
 							newlocy = _random.nextInt(rangeY) + getLocY1();
 						}
-						if (tryCount > 49) { // ÃâÇö À§Ä¡°¡ Á¤ÇØÁöÁö ¾ÊÀ» ¶§´Â locx, locyÀÇ °ª
+						if (tryCount > 49) { // ì¶œí˜„ ìœ„ì¹˜ê°€ ì •í•´ì§€ì§€ ì•Šì„ ë•ŒëŠ” locx, locyì˜ ê°’
 							newlocx = getLocX();
 							newlocy = getLocY();
 						}
-					} else if (isRandomSpawn()) { // ÁÂÇ¥ÀÇ ·£´ıÄ¡°¡ ÁöÁ¤µÇ°í ÀÖ´Â °æ¿ì
+					} else if (isRandomSpawn()) { // ì¢Œí‘œì˜ ëœë¤ì¹˜ê°€ ì§€ì •ë˜ê³  ìˆëŠ” ê²½ìš°
 						newlocx = (getLocX() + ((int) (Math.random() * getRandomx()) - (int) (Math
 								.random() * getRandomx())));
 						newlocy = (getLocY() + ((int) (Math.random() * getRandomy()) - (int) (Math
 								.random() * getRandomy())));
-					} else { // ¾î´ÀÂÊÀÌ³ª ÁöÁ¤µÇ¾î ÀÖÁö ¾ÊÀº °æ¿ì
+					} else { // ì–´ëŠìª½ì´ë‚˜ ì§€ì •ë˜ì–´ ìˆì§€ ì•Šì€ ê²½ìš°
 						newlocx = getLocX();
 						newlocy = getLocY();
 					}
@@ -438,7 +438,7 @@ public class L1Spawn extends L1GameTimeAdapter {
 								.size() == 0) {
 							break;
 						}
-						// È­¸é³»¿¡ PC°¡ ÀÖ¾î ÃâÇöÇÒ ¼ö ¾ø´Â °æ¿ì´Â, 3ÃÊ ÈÄ¿¡ ½ºÄÉÁÙ¸µ ÇØ ÁÖ¾î ¼ö¼±
+						// í™”ë©´ë‚´ì— PCê°€ ìˆì–´ ì¶œí˜„í•  ìˆ˜ ì—†ëŠ” ê²½ìš°ëŠ”, 3ì´ˆ í›„ì— ìŠ¤ì¼€ì¤„ë§ í•´ ì£¼ì–´ ìˆ˜ì„ 
 						SpawnTask task = new SpawnTask(spawnNumber, mob.getId()); 
 						GeneralThreadPool.getInstance().schedule(task, 3000L);
 						return;
@@ -452,10 +452,10 @@ public class L1Spawn extends L1GameTimeAdapter {
 
 			mob.setSpawn(this);
 			mob.setreSpawn(true);
-			mob.setSpawnNumber(spawnNumber); // L1Spawn¿¡¼­ÀÇ °ü¸® ¹øÈ£(È¨ Æ÷ÀÎÆ®¿¡ »ç¿ë)
-			if (_initSpawn && _spawnHomePoint) { // ÃÊ±â ¹èÄ¡·Î È¨ Æ÷ÀÎÆ®¸¦ ¼³Á¤
+			mob.setSpawnNumber(spawnNumber); // L1Spawnì—ì„œì˜ ê´€ë¦¬ ë²ˆí˜¸(í™ˆ í¬ì¸íŠ¸ì— ì‚¬ìš©)
+			if (_initSpawn && _spawnHomePoint) { // ì´ˆê¸° ë°°ì¹˜ë¡œ í™ˆ í¬ì¸íŠ¸ë¥¼ ì„¤ì •
 				Point pt = new Point(mob.getX(), mob.getY());
-				_homePoint.put(spawnNumber, pt); // ¿©±â¼­ º¸Á¸ÇÑ point¸¦ °°Àº ±Û¾¾, ±Û±Í°¡ ´Ù¸¥ °÷¿¡µµ  Áö±İ¿¡ »ç¿ëÇÑ´Ù
+				_homePoint.put(spawnNumber, pt); // ì—¬ê¸°ì„œ ë³´ì¡´í•œ pointë¥¼ ê°™ì€ ê¸€ì”¨, ê¸€ê·€ê°€ ë‹¤ë¥¸ ê³³ì—ë„  ì§€ê¸ˆì— ì‚¬ìš©í•œë‹¤
 			}
 
 			if (mob instanceof L1MonsterInstance) {
@@ -463,7 +463,7 @@ public class L1Spawn extends L1GameTimeAdapter {
 					((L1MonsterInstance) mob).set_storeDroped(true);
 				}
 			}
-			if (npcId == 45573 && mob.getMapId() == 2) { // ¹ÙÆ÷¸äÆ®
+			if (npcId == 45573 && mob.getMapId() == 2) { // ë°”í¬ë©§íŠ¸
 				for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 					if (pc.getMapId() == 2) {
 						L1Teleport.teleport(pc, 32664, 32797, (short) 2, 0, true);
@@ -488,7 +488,7 @@ public class L1Spawn extends L1GameTimeAdapter {
 			if (mob instanceof L1MonsterInstance) {
 				L1MonsterInstance mobtemp = (L1MonsterInstance) mob;
 				if (!_initSpawn && mobtemp.getHiddenStatus() == 0) {
-					mobtemp.onNpcAI(); // monsterÀÇ AI¸¦ °³½Ã
+					mobtemp.onNpcAI(); // monsterì˜ AIë¥¼ ê°œì‹œ
 				}
 			}
 			if (getGroupId() != 0) {
@@ -496,7 +496,7 @@ public class L1Spawn extends L1GameTimeAdapter {
 						isRespawnScreen(), _initSpawn);
 			}
 			 mob.turnOnOffLight();  
-			mob.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // Ã¤ÆÃ °³½Ã
+			mob.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // ì±„íŒ… ê°œì‹œ
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 		}
@@ -549,7 +549,7 @@ public class L1Spawn extends L1GameTimeAdapter {
 			if (_mobs.isEmpty()) {
 				return;
 			}
-			// ÁöÁ¤ ½Ã°£¿Ü°¡ µÇ¾î ÀÖÀ¸¸é »èÁ¦
+			// ì§€ì • ì‹œê°„ì™¸ê°€ ë˜ì–´ ìˆìœ¼ë©´ ì‚­ì œ
 			for (L1NpcInstance mob : _mobs) {
 				mob.setCurrentHpDirect(0);
 				mob.setDead(true);

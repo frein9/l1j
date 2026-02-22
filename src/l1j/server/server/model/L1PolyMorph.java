@@ -56,9 +56,9 @@ public class L1PolyMorph {
 
 	private static final int CLAW_EQUIP = 128;
 
-	private static final int BOW_EQUIP = 256; // °£Æ®·¿Æ® Æ÷ÇÔÇÑ´Ù
+	private static final int BOW_EQUIP = 256; // ê°„íŠ¸ë ›íŠ¸ í¬í•¨í•œë‹¤
 	
-	private static final int QOO_EQUIP = 512; // Å°¸µÅ©
+	private static final int QOO_EQUIP = 512; // í‚¤ë§í¬
 
 	// armor equip bit
 	private static final int HELM_EQUIP = 1;
@@ -83,16 +83,16 @@ public class L1PolyMorph {
 
 	private static final int BOOTS_EQUIP = 1024;
 	
-	private static final int GUARDER_EQUIP = 2048; // °¡´õ	 
+	private static final int GUARDER_EQUIP = 2048; // ê°€ë”	 
 
-	// º¯½ÅÀÇ ¿øÀÎÀ» ³ªÅ¸³»´Â bit
+	// ë³€ì‹ ì˜ ì›ì¸ì„ ë‚˜íƒ€ë‚´ëŠ” bit
 	public static final int MORPH_BY_ITEMMAGIC = 1;
 
 	public static final int MORPH_BY_GM = 2;
 
 	public static final int ARCH_MORPH_BY_ITEMMAGIC = 3;
 
-	public static final int MORPH_BY_NPC = 4; // Á¡¼º¼ú»ç ÄÉÇÁ¸®»ş ÀÌ¿ÜÀÇ NPC
+	public static final int MORPH_BY_NPC = 4; // ì ì„±ìˆ ì‚¬ ì¼€í”„ë¦¬ìƒ¤ ì´ì™¸ì˜ NPC
 
 	public static final int MORPH_BY_KEPLISHA = 8;
 
@@ -130,7 +130,7 @@ public class L1PolyMorph {
 		armorFlgMap.put(9, RING_EQUIP);
 		armorFlgMap.put(10, BELT_EQUIP);
 		armorFlgMap.put(12, EARRING_EQUIP);
-		//armorFlgMap.put(13, GUARDER_EQUIP); // °¡´õ
+		//armorFlgMap.put(13, GUARDER_EQUIP); // ê°€ë”
 	}  
 
 
@@ -203,7 +203,7 @@ public class L1PolyMorph {
     pc.sendPackets(new S_CloseList(pc.getId()));
     
    } else {
-    pc.sendPackets(new S_ServerMessage(181)); // \f1 ±×·¯ÇÑ monster¿¡°Ô´Â º¯½ÅÇÒ ¼ö ¾ø½À´Ï´Ù.
+    pc.sendPackets(new S_ServerMessage(181)); // \f1 ê·¸ëŸ¬í•œ monsterì—ê²ŒëŠ” ë³€ì‹ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
    }
   }
  }
@@ -224,7 +224,7 @@ private static void eventusePolyScroll(L1PcInstance pc, String ak) {
     pc.sendPackets(new S_CloseList(pc.getId()));
     
    }// else {
-   // pc.sendPackets(new S_ServerMessage(181)); // \f1 ±×·¯ÇÑ monster¿¡°Ô´Â º¯½ÅÇÒ ¼ö ¾ø½À´Ï´Ù.
+   // pc.sendPackets(new S_ServerMessage(181)); // \f1 ê·¸ëŸ¬í•œ monsterì—ê²ŒëŠ” ë³€ì‹ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
    //}
   }
  }
@@ -236,25 +236,25 @@ private static void eventusePolyScroll(L1PcInstance pc, String ak) {
 		}
 		if (cha instanceof L1PcInstance) {
 			L1PcInstance pc = (L1PcInstance) cha;
-			if (pc.getMapId() == 5302) { // ³¬½ÃÅÍ
-				pc.sendPackets(new S_ServerMessage(1170)); // ¿©±â¿¡¼­´Â º¯½ÅÇÒ ¼ö ¾ø½À´Ï´Ù.
+			if (pc.getMapId() == 5302) { // ë‚šì‹œí„°
+				pc.sendPackets(new S_ServerMessage(1170)); // ì—¬ê¸°ì—ì„œëŠ” ë³€ì‹ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 				return;
 			}
 		/*	if (pc.getTempCharGfx() == 6034
 					|| pc.getTempCharGfx() == 6035) {
-				pc.sendPackets(new S_ServerMessage(181)); // \f1 ±×·¯ÇÑ monster¿¡°Ô´Â º¯½ÅÇÒ ¼ö ¾ø½À´Ï´Ù.
+				pc.sendPackets(new S_ServerMessage(181)); // \f1 ê·¸ëŸ¬í•œ monsterì—ê²ŒëŠ” ë³€ì‹ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 				return;
 			}*/
 			if (!isMatchCause(polyId, cause)) {
-				pc.sendPackets(new S_ServerMessage(181)); // \f1 ±×·¯ÇÑ monster¿¡°Ô´Â º¯½ÅÇÒ ¼ö ¾ø½À´Ï´Ù.
+				pc.sendPackets(new S_ServerMessage(181)); // \f1 ê·¸ëŸ¬í•œ monsterì—ê²ŒëŠ” ë³€ì‹ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 				return;
 			}	   
 
  			pc.killSkillEffectTimer(L1SkillId.SHAPE_CHANGE);
 			pc.setSkillEffect(L1SkillId.SHAPE_CHANGE, timeSecs * 1000);
-			if (pc.getTempCharGfx() != polyId) { // °°Àº º¯½ÅÀÇ °æ¿ì´Â ¾ÆÀÌÄÜ ¼Û½Å ÀÌ¿Ü°¡ ÇÊ¿ä¾ø´Ù
+			if (pc.getTempCharGfx() != polyId) { // ê°™ì€ ë³€ì‹ ì˜ ê²½ìš°ëŠ” ì•„ì´ì½˜ ì†¡ì‹  ì´ì™¸ê°€ í•„ìš”ì—†ë‹¤
 				L1ItemInstance weapon = pc.getWeapon();
-				// º¯½Å¿¡ ÀÇÇØ ¹«±â°¡ ºø³ª°¥±î
+				// ë³€ì‹ ì— ì˜í•´ ë¬´ê¸°ê°€ ë¹—ë‚˜ê°ˆê¹Œ
 				boolean weaponTakeoff = (weapon != null && !isEquipableWeapon(
 						polyId, weapon.getItem().getType()));
 				pc.setTempCharGfx(polyId);
@@ -276,7 +276,7 @@ private static void eventusePolyScroll(L1PcInstance pc, String ak) {
 			L1MonsterInstance mob = (L1MonsterInstance) cha;
 			mob.killSkillEffectTimer(L1SkillId.SHAPE_CHANGE);
 			mob.setSkillEffect(L1SkillId.SHAPE_CHANGE, timeSecs * 1000);
-			if (mob.getTempCharGfx() != polyId) { // °°Àº º¯½ÅÀÇ °æ¿ì´Â ¾ÆÀÌÄÜ ¼Û½Å ÀÌ¿Ü°¡ ÇÊ¿ä¾ø´Ù
+			if (mob.getTempCharGfx() != polyId) { // ê°™ì€ ë³€ì‹ ì˜ ê²½ìš°ëŠ” ì•„ì´ì½˜ ì†¡ì‹  ì´ì™¸ê°€ í•„ìš”ì—†ë‹¤
 				mob.setTempCharGfx(polyId);
 				mob.broadcastPacket(new S_ChangeShape(mob.getId(), polyId));
 			}
@@ -303,7 +303,7 @@ private static void eventusePolyScroll(L1PcInstance pc, String ak) {
 		}
 	}
 
-	// ÁöÁ¤ÇÑ polyId°¡ weapontTypeÀÇ ¹«±â¸¦ Àåºñ ÇÒ ¼ö ÀÖÀ»±î?
+	// ì§€ì •í•œ polyIdê°€ weapontTypeì˜ ë¬´ê¸°ë¥¼ ì¥ë¹„ í•  ìˆ˜ ìˆì„ê¹Œ?
 	public static boolean isEquipableWeapon(int polyId, int weaponType) {
 		L1PolyMorph poly = PolyTable.getInstance().getTemplate(polyId);
 		if (poly == null) {
@@ -317,7 +317,7 @@ private static void eventusePolyScroll(L1PcInstance pc, String ak) {
 		return true;
 	}
 
-	// ÁöÁ¤ÇÑ polyId°¡ armorTypeÀÇ ¹æ¾î¿ë ±â±¸¸¦ Àåºñ ÇÒ ¼ö ÀÖÀ»±î?
+	// ì§€ì •í•œ polyIdê°€ armorTypeì˜ ë°©ì–´ìš© ê¸°êµ¬ë¥¼ ì¥ë¹„ í•  ìˆ˜ ìˆì„ê¹Œ?
 	public static boolean isEquipableArmor(int polyId, int armorType) {
 		L1PolyMorph poly = PolyTable.getInstance().getTemplate(polyId);
 		if (poly == null) {
@@ -331,7 +331,7 @@ private static void eventusePolyScroll(L1PcInstance pc, String ak) {
 		return true;
 	}
 
-	// ÁöÁ¤ÇÑ polyId°¡ ¹«¾ù¿¡ ÀÇÇØ º¯½ÅÇØ, ±×°ÍÀÌ º¯½Å ´çÇÒ±î?
+	// ì§€ì •í•œ polyIdê°€ ë¬´ì—‡ì— ì˜í•´ ë³€ì‹ í•´, ê·¸ê²ƒì´ ë³€ì‹  ë‹¹í• ê¹Œ?
 	public static boolean isMatchCause(int polyId, int cause) {
 		L1PolyMorph poly = PolyTable.getInstance(). getTemplate(polyId);
 		if (poly == null) {

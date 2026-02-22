@@ -64,36 +64,36 @@ public class C_Attack extends ClientBasePacket {
 		if (pc.isGhost() || pc.isDead() || pc.isTeleport()) {
 			return;
 		}
-		////Áßº¹ Á¢¼Ó ¹ö±×¹æÁö by ¸¶Æ®¹«»ç for only Æ÷´õ¼­¹ö¸¸!
+		////ì¤‘ë³µ ì ‘ì† ë²„ê·¸ë°©ì§€ by ë§ˆíŠ¸ë¬´ì‚¬ for only í¬ë”ì„œë²„ë§Œ!
         if(pc.getOnlineStatus() == 0){
            client.kick();
            return;
         }
-        ////Áßº¹ Á¢¼Ó ¹ö±×¹æÁö by ¸¶Æ®¹«»ç for only Æ÷´õ¼­¹ö¸¸!
+        ////ì¤‘ë³µ ì ‘ì† ë²„ê·¸ë°©ì§€ by ë§ˆíŠ¸ë¬´ì‚¬ for only í¬ë”ì„œë²„ë§Œ!
 
 		L1Object target = L1World.getInstance().findObject(targetId);
 
-		// °ø°İ ¾×¼ÇÀ» ÃëÇÒ ¼ö ÀÖ´Â »óÅÂ³ª È®ÀÎ
-		//if (pc.getInventory().getWeight30() > 197) { // Áß·® ¿À¹ö
-		if (pc.getInventory().getWeight240() >= 197) { // Áß·® ¿À¹ö			
-			pc.sendPackets(new S_ServerMessage(110)); // \f1¾ÆÀÌÅÛÀÌ ³Ê¹« ¹«°Å¿ö ÀüÅõÇÒ ¼ö°¡ ¾ø½À´Ï´Ù.
+		// ê³µê²© ì•¡ì…˜ì„ ì·¨í•  ìˆ˜ ìˆëŠ” ìƒíƒœë‚˜ í™•ì¸
+		//if (pc.getInventory().getWeight30() > 197) { // ì¤‘ëŸ‰ ì˜¤ë²„
+		if (pc.getInventory().getWeight240() >= 197) { // ì¤‘ëŸ‰ ì˜¤ë²„			
+			pc.sendPackets(new S_ServerMessage(110)); // \f1ì•„ì´í…œì´ ë„ˆë¬´ ë¬´ê±°ì›Œ ì „íˆ¬í•  ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤.
 			return;
 		}
 
-		if (pc.isInvisble()) { // ÀÎºñÁöºñ¸®Æ¼, ºê¶óÀÎµåÇÏÀÌµò±×Áß
+		if (pc.isInvisble()) { // ì¸ë¹„ì§€ë¹„ë¦¬í‹°, ë¸Œë¼ì¸ë“œí•˜ì´ë”˜ê·¸ì¤‘
 			return;
 		}
-		if(pc.hasSkillEffect(L1SkillId.STATUS_XNAKD)){ //Ãß°¡
+		if(pc.hasSkillEffect(L1SkillId.STATUS_XNAKD)){ //ì¶”ê°€
 			   return;
 		}
 
-		if (pc.isInvisDelay()) { // ÀÎºñÁöºñ¸®Æ¼µğ·¹ÀÌÁß
+		if (pc.isInvisDelay()) { // ì¸ë¹„ì§€ë¹„ë¦¬í‹°ë””ë ˆì´ì¤‘
 			return;
 		}
 
 		if (target instanceof L1Character) {
 			if (target.getMapId() != pc.getMapId()
-					|| pc.getLocation().getLineDistance(target.getLocation()) > 20D) { // Å¸°ÙÀÌ ÀÌ»óÇÑ Àå¼Ò¿¡ ÀÖÀ¸¸é(ÀÚ) Á¾·á
+					|| pc.getLocation().getLineDistance(target.getLocation()) > 20D) { // íƒ€ê²Ÿì´ ì´ìƒí•œ ì¥ì†Œì— ìˆìœ¼ë©´(ì) ì¢…ë£Œ
 				return;
 			}
 		}
@@ -102,15 +102,15 @@ public class C_Attack extends ClientBasePacket {
 			int hiddenStatus = ((L1NpcInstance) target).getHiddenStatus();
               if (hiddenStatus == L1NpcInstance.HIDDEN_STATUS_SINK
                || hiddenStatus == L1NpcInstance.HIDDEN_STATUS_FLY
-			   || hiddenStatus == L1NpcInstance.HIDDEN_STATUS_SINK_ANTA			////////////////////////////////////  ¸÷½ºÅ³ÆĞÅÏ Ãß°¡   
-			   || hiddenStatus == L1NpcInstance.HIDDEN_STATUS_FLY_LIND			////////////////////////////////////  ¸÷½ºÅ³ÆĞÅÏ Ãß°¡ 
-			   || hiddenStatus == L1NpcInstance.HIDDEN_STATUS_APPEAR			////////////////////////////////////  ¸÷½ºÅ³ÆĞÅÏ Ãß°¡ 
-				) { // ÁöÁß¿¡ ³¢¾îÀÖÁö ¾ÊÀº, ³¯¾ÆÀÖ´Ù
+			   || hiddenStatus == L1NpcInstance.HIDDEN_STATUS_SINK_ANTA			////////////////////////////////////  ëª¹ìŠ¤í‚¬íŒ¨í„´ ì¶”ê°€   
+			   || hiddenStatus == L1NpcInstance.HIDDEN_STATUS_FLY_LIND			////////////////////////////////////  ëª¹ìŠ¤í‚¬íŒ¨í„´ ì¶”ê°€ 
+			   || hiddenStatus == L1NpcInstance.HIDDEN_STATUS_APPEAR			////////////////////////////////////  ëª¹ìŠ¤í‚¬íŒ¨í„´ ì¶”ê°€ 
+				) { // ì§€ì¤‘ì— ë¼ì–´ìˆì§€ ì•Šì€, ë‚ ì•„ìˆë‹¤
 				return;
 			}
 		}
 
-		// °ø°İ ¿ä±¸ °£°İÀ» Ã¼Å©ÇÑ´Ù
+		// ê³µê²© ìš”êµ¬ ê°„ê²©ì„ ì²´í¬í•œë‹¤
 		if (Config.CHECK_ATTACK_INTERVAL) {
 			int result;
 			result = pc.getAcceleratorChecker()
@@ -122,7 +122,7 @@ public class C_Attack extends ClientBasePacket {
 		if(((pc.getX() == 33420 && pc.getY() == 32799)) && pc.getMapId() == 4){
 			if (target instanceof L1NpcInstance) {
 			        L1NpcInstance npc = (L1NpcInstance) target;
-			         if(npc.getNpcTemplate().get_npcId() == 300026) {//¹öÇÁ»ç
+			         if(npc.getNpcTemplate().get_npcId() == 300026) {//ë²„í”„ì‚¬
 			         L1Gambling2 gam2 = new L1Gambling2();
 			         gam2.dealerTrade(pc);
 			              }
@@ -131,15 +131,15 @@ public class C_Attack extends ClientBasePacket {
 		if(((pc.getX() == 33515 && pc.getY() == 32851)) && pc.getMapId() == 4){
 			   if (target instanceof L1NpcInstance) {
 			        L1NpcInstance npc = (L1NpcInstance) target;
-			        if(npc.getNpcTemplate().get_npcId() == 300027){//¼Ò¸·
+			        if(npc.getNpcTemplate().get_npcId() == 300027){//ì†Œë§‰
 			         L1Gambling3 gam3 = new L1Gambling3();
 			         gam3.dealerTrade(pc);
 			        }
 			       }
 			  }
 		
-		// °ø°İ ¾×¼ÇÀ» ÃëÇÒ ¼ö ÀÖ´Â °æ¿ìÀÇ Ã³¸®
-		//if (pc.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)) { // ¾Æºê¼Ò¸£Æ®¹Ù¸®¾ÆÀÇ ÇØÁ¦
+		// ê³µê²© ì•¡ì…˜ì„ ì·¨í•  ìˆ˜ ìˆëŠ” ê²½ìš°ì˜ ì²˜ë¦¬
+		//if (pc.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)) { // ì•„ë¸Œì†Œë¥´íŠ¸ë°”ë¦¬ì•„ì˜ í•´ì œ
 		if (pc.hasSkillEffect(ABSOLUTE_BARRIER)) {
 			pc.killSkillEffectTimer(ABSOLUTE_BARRIER);
 			//pc.killSkillEffectTimer(L1SkillId.ABSOLUTE_BARRIER);
@@ -150,13 +150,13 @@ public class C_Attack extends ClientBasePacket {
 		//pc.killSkillEffectTimer(L1SkillId.MEDITATION);
 		pc.killSkillEffectTimer(MEDITATION);
 
-		pc.delInvis(); // Åõ¸í»óÅÂÀÇ ÇØÁ¦
+		pc.delInvis(); // íˆ¬ëª…ìƒíƒœì˜ í•´ì œ
 
 		pc.setRegenState(REGENSTATE_ATTACK);
 
 		if (target != null && !((L1Character) target).isDead()) {
 			target.onAction(pc);
-		} else { // ÇÏ´Ã °ø°İ
+		} else { // í•˜ëŠ˜ ê³µê²©
 			L1ItemInstance weapon = pc.getWeapon();
 			int weaponId = 0;
 			int weaponType = 0;
@@ -180,7 +180,7 @@ public class C_Attack extends ClientBasePacket {
 			pc.sendPackets(new S_UseArrowSkill(pc, 0, 66, _targetX, _targetY, true));
 			pc.broadcastPacket(new S_UseArrowSkill(pc, 0, 66, _targetX, _targetY, true));
 			pc.getInventory().removeItem(arrow, 1);
-			} else if (tempchargfx == 7959){ //Ãµ»óÀÇ±â»çÈ°¸¶¹ı
+			} else if (tempchargfx == 7959){ //ì²œìƒì˜ê¸°ì‚¬í™œë§ˆë²•
 			pc.sendPackets(new S_UseArrowSkill(pc, 0, 7972, _targetX, _targetY, true));
 			pc.broadcastPacket(new S_UseArrowSkill(pc, 0, 7972, _targetX, _targetY, true));
 	    	} else if (weaponId == 190) {

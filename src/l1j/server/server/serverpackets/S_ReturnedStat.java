@@ -33,11 +33,11 @@ public class S_ReturnedStat extends ServerBasePacket {
 	private byte[] _byte = null;
 
 	
-	public static final int ½ÃÀÛ = 1;
+	public static final int ì‹œìž‘ = 1;
 	
-	public static final int Á¾·á = 2;
+	public static final int ì¢…ë£Œ = 2;
 	
-	public static final int ·¹º§¾÷ = 3;
+	public static final int ë ˆë²¨ì—… = 3;
 	
 	public S_ReturnedStat(L1PcInstance pc, int type) {
 		buildPacket(pc, type);
@@ -144,7 +144,7 @@ public class S_ReturnedStat extends ServerBasePacket {
 				init_mp = 3;
 				break;
 			}
-		} else if (pc.isDragonKnight()) { // ¿ë±â»ç
+		} else if (pc.isDragonKnight()) { // ìš©ê¸°ì‚¬
 			init_hp = 16;
 			switch (pc.getWis()) {
 			case 10:
@@ -162,7 +162,7 @@ public class S_ReturnedStat extends ServerBasePacket {
 				init_mp = 2;
 				break;
 			}
-		} else if (pc.isBlackWizard()) { // È¯¼ú»ç
+		} else if (pc.isBlackWizard()) { // í™˜ìˆ ì‚¬
 			init_hp = 14;
 			switch (pc.getWis()) {
 			case 10:
@@ -185,7 +185,7 @@ public class S_ReturnedStat extends ServerBasePacket {
 		}
 		writeC(Opcodes.S_OPCODE_RETURNEDSTAT);
     		switch (type) {
-    		case ½ÃÀÛ:
+    		case ì‹œìž‘:
     			writeC(1);
             	writeH(init_hp);
             	writeH(init_mp);
@@ -193,11 +193,11 @@ public class S_ReturnedStat extends ServerBasePacket {
             	writeC(pc.getLevel());
             	writeC(5);
             break;
-    		case Á¾·á:
+    		case ì¢…ë£Œ:
             	writeC(3);
             	writeC(pc.getElixirStats());
             break;
-    		case ·¹º§¾÷:
+    		case ë ˆë²¨ì—…:
                 writeC(2);
                 writeC(pc.getLevel());
                 writeC(pc.getHighLevel());

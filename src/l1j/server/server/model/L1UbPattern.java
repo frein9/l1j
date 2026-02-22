@@ -46,7 +46,7 @@ public class L1UbPattern {
 			return;
 		}
 
-		// °İ³³µÇ°í ÀÖ´Â ±×·ìÀÇ ½ºÆù¸®½ºÆ®¸¦ ID ¼ø¼­¿¡ ¼ÒÆ®
+		// ê²©ë‚©ë˜ê³  ìˆëŠ” ê·¸ë£¹ì˜ ìŠ¤í°ë¦¬ìŠ¤íŠ¸ë¥¼ ID ìˆœì„œì— ì†ŒíŠ¸
 		for (ArrayList<L1UbSpawn> spawnList : _groups.values()) {
 			Collections.sort(spawnList);
 		}

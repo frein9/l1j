@@ -34,8 +34,8 @@ public class L1GroundInventory extends L1Inventory {
 		public void run() {
 			try {
 				synchronized (L1GroundInventory.this) {
-					if (! _items.contains(_item)) {// ÁÖ¿öÁø Å¸ÀÌ¹Ö¿¡ µû¶ó¼­´Â ÀÌ Á¶°ÇÀ» Ã¤¿ï ¼ö ÀÖ´Ù
-						return; // ÀÌ¹Ì ÁÖ¿öÁö°í ÀÖ´Ù
+					if (! _items.contains(_item)) {// ì£¼ì›Œì§„ íƒ€ì´ë°ì— ë”°ë¼ì„œëŠ” ì´ ì¡°ê±´ì„ ì±„ìš¸ ìˆ˜ ìˆë‹¤
+						return; // ì´ë¯¸ ì£¼ì›Œì§€ê³  ìˆë‹¤
 					}
 					removeItem(_item);
 				}
@@ -49,7 +49,7 @@ public class L1GroundInventory extends L1Inventory {
 		if (! Config.ALT_ITEM_DELETION_TYPE.equalsIgnoreCase("std")) {
 			return;
 		}
-		if (item.getItemId() == 40515) { // Á¤·ÉÀÇ µ¹
+		if (item.getItemId() == 40515) { // ì •ë ¹ì˜ ëŒ
 			return;
 		}
 
@@ -78,12 +78,12 @@ public class L1GroundInventory extends L1Inventory {
 		for (L1ItemInstance item : getItems()) {
 			if (!perceivedFrom.knownsObject(item)) {
 				perceivedFrom.addKnownObject(item);
-				perceivedFrom.sendPackets(new S_DropItem(item)); // ÇÃ·¹ÀÌ¾î¿¡ DROPITEM Á¤º¸¸¦ ÅëÁö
+				perceivedFrom.sendPackets(new S_DropItem(item)); // í”Œë ˆì´ì–´ì— DROPITEM ì •ë³´ë¥¼ í†µì§€
 			}
 		}
 	}
 
-	// ÀÎ½Ä ¹üÀ§³»¿¡ ÀÖ´Â ÇÃ·¹ÀÌ¾î¿¡ ¿ÀºêÁ§Æ® ¼Û½Å
+	// ì¸ì‹ ë²”ìœ„ë‚´ì— ìˆëŠ” í”Œë ˆì´ì–´ì— ì˜¤ë¸Œì íŠ¸ ì†¡ì‹ 
 	@Override
 	public void insertItem(L1ItemInstance item) {
 		setTimer(item);
@@ -94,7 +94,7 @@ public class L1GroundInventory extends L1Inventory {
 		}
 	}
 
-	// º¸ÀÌ´Â ¹üÀ§³»¿¡ ÀÖ´Â ÇÃ·¹ÀÌ¾îÀÇ ¿ÀºêÁ§Æ® °»½Å
+	// ë³´ì´ëŠ” ë²”ìœ„ë‚´ì— ìˆëŠ” í”Œë ˆì´ì–´ì˜ ì˜¤ë¸Œì íŠ¸ ê°±ì‹ 
 	@Override
 	public void updateItem(L1ItemInstance item) {
 		for (L1PcInstance pc : L1World.getInstance().getRecognizePlayer(item)) {
@@ -102,7 +102,7 @@ public class L1GroundInventory extends L1Inventory {
 		}
 	}
 
-	// ÇÏ´Ã ¸ñ·Ï ÆÄ±â ¹× º¸ÀÌ´Â ¹üÀ§³»¿¡ ÀÖ´Â ÇÃ·¹ÀÌ¾îÀÇ ¿ÀºêÁ§Æ® »èÁ¦
+	// í•˜ëŠ˜ ëª©ë¡ íŒŒê¸° ë° ë³´ì´ëŠ” ë²”ìœ„ë‚´ì— ìˆëŠ” í”Œë ˆì´ì–´ì˜ ì˜¤ë¸Œì íŠ¸ ì‚­ì œ
 	@Override
 	public void deleteItem(L1ItemInstance item) {
 		cancelTimer(item);

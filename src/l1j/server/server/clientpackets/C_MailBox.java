@@ -27,29 +27,29 @@ public class C_MailBox  extends ClientBasePacket {
 		L1PcInstance pc = client.getActiveChar();
 		//pc.sendPackets(new S_RenewLetter(pc,type,0));  
 		switch(type){
-			//¸ŞÀÏÇÔ Á¾·ù¿¡ µû¸¥ °ª
-			case 0:	//°³ÀÎ¸ŞÀÏÇÔ
+			//ë©”ì¼í•¨ ì¢…ë¥˜ì— ë”°ë¥¸ ê°’
+			case 0:	//ê°œì¸ë©”ì¼í•¨
 				LetterList(pc,type,20);
 				break;
-			case 1: //Ç÷¸Í¸ŞÀÏÇÔ
+			case 1: //í˜ˆë§¹ë©”ì¼í•¨
 				LetterList(pc,type,50);
 				break;
-			case 2: //º¸°üÇÔ 
+			case 2: //ë³´ê´€í•¨ 
 				LetterList(pc,type,10);
 				break;
-			case 16: //°³ÀÎ¸ŞÀÏ ÀĞ±â
+			case 16: //ê°œì¸ë©”ì¼ ì½ê¸°
 				ReadLetter(pc,type,0);
 				break;
-			case 17: //Ç÷¸Í¸ŞÀÏ ÀĞ±â
+			case 17: //í˜ˆë§¹ë©”ì¼ ì½ê¸°
 				ReadLetter(pc,type,1);
 				break;
-			case 18: //º¸°ü¸ŞÀÏ ÀĞ±â
+			case 18: //ë³´ê´€ë©”ì¼ ì½ê¸°
 				ReadLetter(pc,type,2);
 				break;
-			case 32: //°³ÀÎ¸ŞÀÏ ¾²±â
+			case 32: //ê°œì¸ë©”ì¼ ì“°ê¸°
 				WriteLetter(pc,0,50);
 				break;
-			case 33: //Ç÷¸Í¸ŞÀÏ ¾²±â
+			case 33: //í˜ˆë§¹ë©”ì¼ ì“°ê¸°
 				WriteLetter(pc,1,1000);
 				break;
 			case 48:
@@ -69,14 +69,14 @@ public class C_MailBox  extends ClientBasePacket {
 				//LetterList(pc,type);	
 			}
 	}
-	//ÆíÁö¸¦ ¾²±âÀ§ÇÑ ¸Ş¼Òµå 
+	//í¸ì§€ë¥¼ ì“°ê¸°ìœ„í•œ ë©”ì†Œë“œ 
 	// Params
-	// @pc ÄÉ¸¯ÅÍ
-	// @type ¸ŞÀÏÇÔ ÇüÅÂ 
-	// @price °¡°İ 
+	// @pc ì¼€ë¦­í„°
+	// @type ë©”ì¼í•¨ í˜•íƒœ 
+	// @price ê°€ê²© 
 	private void WriteLetter(L1PcInstance pc , int type, int price){
 		
-		   int nu1 = readH(); //ÆíÁöÁö
+		   int nu1 = readH(); //í¸ì§€ì§€
 		   SimpleDateFormat formatter = new SimpleDateFormat ( "yy/MM/dd", Locale.KOREA );
 		   Date currentTime = new Date ( );
 		   String dTime = formatter.format ( currentTime );
@@ -88,17 +88,17 @@ public class C_MailBox  extends ClientBasePacket {
 		   int AdenaCnt = pc.getInventory().countItems(L1ItemId.ADENA);
 		   if(AdenaCnt >=price){
 			   pc.getInventory().consumeItem(L1ItemId.ADENA, price);
-			   if (type == 0){ //°³ÀÎ¸ŞÀÏÀÏ °æ¿ì 
+			   if (type == 0){ //ê°œì¸ë©”ì¼ì¼ ê²½ìš° 
 				   L1PcInstance target = L1World.getInstance().getPlayer(to);
 				   LetterTable.getInstance().writeLetter(0, nu1,dTime, pc.getName(), to, type, subject, content);
 				   if(target != null && target.getOnlineStatus() != 0){
 					   LetterList(target,type,20);
 					   target.sendPackets(new S_SkillSound(target.getId(), 1091));
-					   target.sendPackets(new S_ServerMessage(428)); // ÆíÁö°¡ µµÂøÇß½À´Ï´Ù.
+					   target.sendPackets(new S_ServerMessage(428)); // í¸ì§€ê°€ ë„ì°©í–ˆìŠµë‹ˆë‹¤.
 						pc.sendPackets(new S_LetterList(pc,type,20));
 				   }
 			   }
-			   else if(type == 1){ //Ç÷¸Í ¸ŞÀÏÀÏ°æ¿ì
+			   else if(type == 1){ //í˜ˆë§¹ ë©”ì¼ì¼ê²½ìš°
 				    L1Clan targetClan = null;
 					for (L1Clan clan : L1World.getInstance().getAllClans()) {
 						if (clan.getClanName().toLowerCase().equals(to
@@ -114,7 +114,7 @@ public class C_MailBox  extends ClientBasePacket {
 						if(target !=null && target.getOnlineStatus() !=0){
 							LetterList(target,type,50);
 							target.sendPackets(new S_SkillSound(target.getId(), 1091));
-							target.sendPackets(new S_ServerMessage(428)); // ÆíÁö°¡ µµÂøÇß½À´Ï´Ù.
+							target.sendPackets(new S_ServerMessage(428)); // í¸ì§€ê°€ ë„ì°©í–ˆìŠµë‹ˆë‹¤.
 							pc.sendPackets(new S_LetterList(pc,type,50));
 						}
 					}
@@ -123,23 +123,23 @@ public class C_MailBox  extends ClientBasePacket {
 			   pc.sendPackets(new S_ServerMessage(189,""));
 		   }	   
 	}
-	//ÆíÁö¸¦ »èÁ¦ÇÏ±âÀ§ÇÑ ¸Ş¼Òµå
+	//í¸ì§€ë¥¼ ì‚­ì œí•˜ê¸°ìœ„í•œ ë©”ì†Œë“œ
 	private void DeleteLetter(L1PcInstance pc , int type, int letterType){
 		int id = readD(); 
 		LetterTable.getInstance().deleteLetter(id);
 		pc.sendPackets(new S_RenewLetter(pc,type,id));   
 	}
-	//ÆíÁö¸¦ ÀĞ±âÀ§ÇÑ ¸Ş¼Òµå
+	//í¸ì§€ë¥¼ ì½ê¸°ìœ„í•œ ë©”ì†Œë“œ
 	private void ReadLetter(L1PcInstance pc, int type, int letterType){
 		int id = readD();
 		LetterTable.getInstance().CheckLetter(id);
 		pc.sendPackets(new S_ReadLetter(pc,type,letterType,id));
 	}
-	//ÆíÁö¸®½ºÆ® Ãâ·ÂÀ»À§ÇÑ ¸Ş¼Òµå
+	//í¸ì§€ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ì„ìœ„í•œ ë©”ì†Œë“œ
 	private void LetterList(L1PcInstance pc, int type, int count){
 		pc.sendPackets(new S_LetterList(pc,type,count));
 	}
-	//ÆíÁö¸¦ º¸°üÇÏ±â À§ÇÔ ¸Ş¼Òµå
+	//í¸ì§€ë¥¼ ë³´ê´€í•˜ê¸° ìœ„í•¨ ë©”ì†Œë“œ
 	private void SaveLetter(L1PcInstance pc, int type, int letterType){
 		int id = readD(); 
 		LetterTable.getInstance().SaveLetter(id,letterType);

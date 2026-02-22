@@ -23,11 +23,11 @@ import java.util.List;
 
 import l1j.server.server.model.Instance.L1PcInstance;
 
-//** ¹ö±×ÀïÀÌ Ã³´Ü **//	By µµ¿ì³Ê
+//** ë²„ê·¸ìŸì´ ì²˜ë‹¨ **//	By ë„ìš°ë„ˆ
 import l1j.server.server.BugKick;	
 import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.serverpackets.S_SystemMessage;
-//** ¹ö±×ÀïÀÌ Ã³´Ü **//	By µµ¿ì³Ê
+//** ë²„ê·¸ìŸì´ ì²˜ë‹¨ **//	By ë„ìš°ë„ˆ
 
 class L1ShopSellOrder {
 	private final L1AssessedItem _item;
@@ -52,7 +52,7 @@ public class L1ShopSellOrderList {
 	private final L1Shop _shop;
 	private final L1PcInstance _pc;
 	private final List<L1ShopSellOrder> _list = new ArrayList<L1ShopSellOrder>();
-	private int bugok  = 0;	//** »óÁ¡ ÆÇ¸Å ºñ¼Å½º ¹æ¾î **//  by µµ¿ì³Ê	
+	private int bugok  = 0;	//** ìƒì  íŒë§¤ ë¹„ì…”ìŠ¤ ë°©ì–´ **//  by ë„ìš°ë„ˆ	
 
 	L1ShopSellOrderList(L1Shop shop, L1PcInstance pc) {
 		_shop = shop;
@@ -61,7 +61,7 @@ public class L1ShopSellOrderList {
 
 	public void add(int itemObjectId, int count, L1PcInstance pc) {
 			
-		//** »óÁ¡ ÆÇ¸Å ºñ¼Å½º ¹æ¾î **///   by µµ¿ì³Ê	
+		//** ìƒì  íŒë§¤ ë¹„ì…”ìŠ¤ ë°©ì–´ **///   by ë„ìš°ë„ˆ	
 		L1ItemInstance item;
 		item = pc.getInventory().getItem(itemObjectId);	
 		
@@ -88,15 +88,15 @@ public class L1ShopSellOrderList {
 		  }	
 		  
 	 	  if (item.getLockitem() > 100){
-              pc.sendPackets(new S_SystemMessage("ºÀÀÎµÈ ¾ÆÀÌÅÛÀº ÆÇ¸ÅÇÒ ¼ö ¾ø½À´Ï´Ù."));
+              pc.sendPackets(new S_SystemMessage("ë´‰ì¸ëœ ì•„ì´í…œì€ íŒë§¤í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤."));
               return;
           }
 		  		  
 		  if (count > 50000 ) {
-		       pc.sendPackets(new S_SystemMessage("5¸¸°³ ÀÌ»óÀº ÆÇ¸ÅÇÏÁö ¸øÇÕ´Ï´Ù."));			  
+		       pc.sendPackets(new S_SystemMessage("5ë§Œê°œ ì´ìƒì€ íŒë§¤í•˜ì§€ ëª»í•©ë‹ˆë‹¤."));			  
 			   return;
 		  }	
-		//** »óÁ¡ ÆÇ¸Å ºñ¼Å½º ¹æ¾î **//   by µµ¿ì³Ê		
+		//** ìƒì  íŒë§¤ ë¹„ì…”ìŠ¤ ë°©ì–´ **//   by ë„ìš°ë„ˆ		
 		
 		L1AssessedItem assessedItem = _shop.assessItem(_pc.getInventory()
 				.getItem(itemObjectId));
@@ -104,7 +104,7 @@ public class L1ShopSellOrderList {
 		
 		if (assessedItem == null) {
 			/*
-			 * ¸ÅÀÔ ¸®½ºÆ®¿¡ ¾ø´Â ¾ÆÀÌÅÛÀÌ ÁöÁ¤µÇ¾ú´Ù. ºÎÁ¤ ÆĞÅ°ÁöÀÇ °¡´É¼º.
+			 * ë§¤ì… ë¦¬ìŠ¤íŠ¸ì— ì—†ëŠ” ì•„ì´í…œì´ ì§€ì •ë˜ì—ˆë‹¤. ë¶€ì • íŒ¨í‚¤ì§€ì˜ ê°€ëŠ¥ì„±.
 			 */
 			throw new IllegalArgumentException();
 		}
@@ -112,11 +112,11 @@ public class L1ShopSellOrderList {
 		
 	}
 	
-	//** »óÁ¡ ÆÇ¸Å ºñ¼Å½º ¹æ¾î **//  by µµ¿ì³Ê	
+	//** ìƒì  íŒë§¤ ë¹„ì…”ìŠ¤ ë°©ì–´ **//  by ë„ìš°ë„ˆ	
 	public int BugOk() {
 		return bugok;
 	}	
-	//** »óÁ¡ ÆÇ¸Å ºñ¼Å½º ¹æ¾î **//  by µµ¿ì³Ê	
+	//** ìƒì  íŒë§¤ ë¹„ì…”ìŠ¤ ë°©ì–´ **//  by ë„ìš°ë„ˆ	
 
 	L1PcInstance getPc() {
 		return _pc;

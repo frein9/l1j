@@ -33,23 +33,23 @@ public class S_WarTime extends ServerBasePacket {
 	private static final String S_WAR_TIME = "[S] S_WarTime";	
 
 	public S_WarTime(Calendar cal) {
-		// 1997/01/01 17:00(À»)¸¦ ±âÁ¡À¸·Î ÇÏ°í ÀÖ´Ù
+		// 1997/01/01 17:00(ì„)ë¥¼ ê¸°ì ìœ¼ë¡œ í•˜ê³  ìˆë‹¤
 		Calendar base_cal = Calendar.getInstance();
 		base_cal.set(1997, 0, 1, 17, 0);
 		long base_millis = base_cal.getTimeInMillis();
 		long millis = cal.getTimeInMillis();
 		long diff = millis - base_millis;
-		diff -= 1200 * 60 * 1000; // ¿ÀÂ÷ ¼öÁ¤
-		diff = diff / 60000; // ºĞ ÀÌÇÏ Àß¶ó¹ö¸²
-		// time´Â 1 °¡»êÇÑ´Ù°í3:02(182ºĞ ) ÁøÇàµÈ´Ù
+		diff -= 1200 * 60 * 1000; // ì˜¤ì°¨ ìˆ˜ì •
+		diff = diff / 60000; // ë¶„ ì´í•˜ ì˜ë¼ë²„ë¦¼
+		// timeëŠ” 1 ê°€ì‚°í•œë‹¤ê³ 3:02(182ë¶„ ) ì§„í–‰ëœë‹¤
 		int time = (int) (diff / 182);
 
-		// writeDÀÇ Á÷ÀüÀÇ writeC·Î ½Ã°£ÀÇ Á¶ÀıÀ» ÇÒ ¼ö ÀÖ´Ù
-		// 0.7¹è°¡ µÈ ½Ã°£¸¸ ÁÙ¾îµéÁö¸¸
-		// 1°³ Á¶Á¤ÇÏ¸é(ÀÚ) ±× ´ÙÀ½ÀÇ ½Ã°£ÀÌ ÆÛÁ®?
+		// writeDì˜ ì§ì „ì˜ writeCë¡œ ì‹œê°„ì˜ ì¡°ì ˆì„ í•  ìˆ˜ ìˆë‹¤
+		// 0.7ë°°ê°€ ëœ ì‹œê°„ë§Œ ì¤„ì–´ë“¤ì§€ë§Œ
+		// 1ê°œ ì¡°ì •í•˜ë©´(ì) ê·¸ ë‹¤ìŒì˜ ì‹œê°„ì´ í¼ì ¸?
 		writeC(Opcodes.S_OPCODE_WARTIME);
-		writeH(6); // ¸®½ºÆ®ÀÇ ¼ö(6ÀÌ»óÀº ¹«È¿)
-		writeS(Config.TIME_ZONE); // ½Ã°£ÀÇ µÚ() Áß¿¡ Ç¥½ÃµÇ´Â Ä³¸¯ÅÍ ¶óÀÎ
+		writeH(6); // ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜(6ì´ìƒì€ ë¬´íš¨)
+		writeS(Config.TIME_ZONE); // ì‹œê°„ì˜ ë’¤() ì¤‘ì— í‘œì‹œë˜ëŠ” ìºë¦­í„° ë¼ì¸
 		writeC(0); // ?
 		writeC(0); // ?
 		writeC(0);

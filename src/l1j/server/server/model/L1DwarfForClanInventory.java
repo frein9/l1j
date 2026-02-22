@@ -45,7 +45,7 @@ public class L1DwarfForClanInventory extends L1Inventory {
 		_clan = clan;
 	}
 
-	// DBÀÇ character_itemsÀÇ µ¶ÀÔ
+	// DBì˜ character_itemsì˜ ë…ì…
 	@Override
 	public synchronized void loadItems() {
 		Connection con = null;
@@ -88,7 +88,7 @@ public class L1DwarfForClanInventory extends L1Inventory {
 		}
 	}
 
-	// DBÀÇ clan_warehouse¿¡ µî·Ï
+	// DBì˜ clan_warehouseì— ë“±ë¡
 	@Override
 	public synchronized void insertItem(L1ItemInstance item) {
 		Connection con = null;
@@ -118,7 +118,7 @@ public class L1DwarfForClanInventory extends L1Inventory {
 		}
 	}
 
-	// DBÀÇ clan_warehouse¸¦ °»½Å
+	// DBì˜ clan_warehouseë¥¼ ê°±ì‹ 
 	@Override
 	public synchronized void updateItem(L1ItemInstance item) {
 		Connection con = null;
@@ -139,7 +139,7 @@ public class L1DwarfForClanInventory extends L1Inventory {
 		}
 	}
 
-	// DBÀÇ clan_warehouse·ÎºÎÅÍ »èÁ¦
+	// DBì˜ clan_warehouseë¡œë¶€í„° ì‚­ì œ
 	@Override
 	public synchronized void deleteItem(L1ItemInstance item) {
 		Connection con = null;
@@ -159,7 +159,7 @@ public class L1DwarfForClanInventory extends L1Inventory {
 		_items.remove(_items.indexOf(item));
 	}
 
-	// DBÀÇ Å©¶õ Ã¢°íÀÇ ¾ÆÀÌÅÛÀ» ¸ğµÎ »èÁ¦(Ç÷¸Í ÇØ»ê½Ã¸¸ »ç¿ë)
+	// DBì˜ í¬ë€ ì°½ê³ ì˜ ì•„ì´í…œì„ ëª¨ë‘ ì‚­ì œ(í˜ˆë§¹ í•´ì‚°ì‹œë§Œ ì‚¬ìš©)
 	public synchronized void deleteAllItems() {
 		Connection con = null;
 		PreparedStatement pstm = null;

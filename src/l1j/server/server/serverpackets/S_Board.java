@@ -44,7 +44,7 @@ public class S_Board extends ServerBasePacket {
 	public S_Board(L1NpcInstance board, int number) {
 		buildPacket(board, number);
 	}
-	public S_Board(L1NpcInstance board, boolean ck){ //Ãß°¡
+	public S_Board(L1NpcInstance board, boolean ck){ //ì¶”ê°€
 		  buildPacket(board);
 	}
 
@@ -95,32 +95,32 @@ public class S_Board extends ServerBasePacket {
 			writeS(db[i][2]);
 		}
 	}
-	private void buildPacket(L1NpcInstance board) { // ¹ö°æ ÃâÀü ¼±¼ö »óÅÂ
+	private void buildPacket(L1NpcInstance board) { // ë²„ê²½ ì¶œì „ ì„ ìˆ˜ ìƒíƒœ
 		  writeC(Opcodes.S_OPCODE_SHOWHTML);
 		  writeD(board.getId());
 		  writeS("maeno4");
 		                writeC(0);
 		                                
 		                writeH(15);
-		                writeS(BugRace.getInstance().¸®Æ²¹ö±×º£¾î[0].getName()); //¹ö±×º£¾î ÀÌ¸§
-		                writeS(BugRace.getInstance().»óÅÂ_0); //»óÅÂ
-		                writeS(Double.toString(BugRace.getInstance().½Â·ü1_0) + "%"); //½Â·ü
+		                writeS(BugRace.getInstance().ë¦¬í‹€ë²„ê·¸ë² ì–´[0].getName()); //ë²„ê·¸ë² ì–´ ì´ë¦„
+		                writeS(BugRace.getInstance().ìƒíƒœ_0); //ìƒíƒœ
+		                writeS(Double.toString(BugRace.getInstance().ìŠ¹ë¥ 1_0) + "%"); //ìŠ¹ë¥ 
 		                                
-		                writeS(BugRace.getInstance().¸®Æ²¹ö±×º£¾î[1].getName()); //¹ö±×º£¾î ÀÌ¸§
-		                writeS(BugRace.getInstance().»óÅÂ_1); //»óÅÂ
-		                writeS(Double.toString(BugRace.getInstance().½Â·ü1_1) + "%"); //½Â·ü
+		                writeS(BugRace.getInstance().ë¦¬í‹€ë²„ê·¸ë² ì–´[1].getName()); //ë²„ê·¸ë² ì–´ ì´ë¦„
+		                writeS(BugRace.getInstance().ìƒíƒœ_1); //ìƒíƒœ
+		                writeS(Double.toString(BugRace.getInstance().ìŠ¹ë¥ 1_1) + "%"); //ìŠ¹ë¥ 
 		                                
-		                writeS(BugRace.getInstance().¸®Æ²¹ö±×º£¾î[2].getName()); //¹ö±×º£¾î ÀÌ¸§
-		                writeS(BugRace.getInstance().»óÅÂ_2); //»óÅÂ
-		                writeS(Double.toString(BugRace.getInstance().½Â·ü1_2) + "%"); //½Â·ü
+		                writeS(BugRace.getInstance().ë¦¬í‹€ë²„ê·¸ë² ì–´[2].getName()); //ë²„ê·¸ë² ì–´ ì´ë¦„
+		                writeS(BugRace.getInstance().ìƒíƒœ_2); //ìƒíƒœ
+		                writeS(Double.toString(BugRace.getInstance().ìŠ¹ë¥ 1_2) + "%"); //ìŠ¹ë¥ 
 		                                
-		                writeS(BugRace.getInstance().¸®Æ²¹ö±×º£¾î[3].getName()); //¹ö±×º£¾î ÀÌ¸§
-		                writeS(BugRace.getInstance().»óÅÂ_3); //»óÅÂ
-		                writeS(Double.toString(BugRace.getInstance().½Â·ü1_3) + "%"); //½Â·ü
+		                writeS(BugRace.getInstance().ë¦¬í‹€ë²„ê·¸ë² ì–´[3].getName()); //ë²„ê·¸ë² ì–´ ì´ë¦„
+		                writeS(BugRace.getInstance().ìƒíƒœ_3); //ìƒíƒœ
+		                writeS(Double.toString(BugRace.getInstance().ìŠ¹ë¥ 1_3) + "%"); //ìŠ¹ë¥ 
 		                                
-		                writeS(BugRace.getInstance().¸®Æ²¹ö±×º£¾î[4].getName()); //¹ö±×º£¾î ÀÌ¸§
-		                writeS(BugRace.getInstance().»óÅÂ_4); //»óÅÂ
-		                writeS(Double.toString(BugRace.getInstance().½Â·ü1_4) + "%"); //½Â·ü
+		                writeS(BugRace.getInstance().ë¦¬í‹€ë²„ê·¸ë² ì–´[4].getName()); //ë²„ê·¸ë² ì–´ ì´ë¦„
+		                writeS(BugRace.getInstance().ìƒíƒœ_4); //ìƒíƒœ
+		                writeS(Double.toString(BugRace.getInstance().ìŠ¹ë¥ 1_4) + "%"); //ìŠ¹ë¥ 
 	}
 
 	@Override

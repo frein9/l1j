@@ -41,10 +41,10 @@ public class S_WhoCharinfo extends ServerBasePacket {
 		float winner = 0;
 
 		
-		win = pc.getKills(); //½Â·ü ³Ö±âÀ§ÇÑ º¯¼ö
+		win = pc.getKills(); //ìŠ¹ë¥  ë„£ê¸°ìœ„í•œ ë³€ìˆ˜
 		lose = pc.getDeaths();
 		total = win + lose;
-		winner = ((win*100)/(total)); //½Â·ü °è»êÇÑ º¯¼ö
+		winner = ((win*100)/(total)); //ìŠ¹ë¥  ê³„ì‚°í•œ ë³€ìˆ˜
 
 		if (lawful < 0) {
 			lawfulness = "(Chaotic)";
@@ -67,7 +67,7 @@ public class S_WhoCharinfo extends ServerBasePacket {
 		if (pc.getClanid() > 0) {
 			clan = "\\fY[" + pc.getClanname() + "\\fY]";
 		}
-writeS(title + pc.getName() + " " + lawfulness + " " + clan + "\n\r"/*+"\\fU·¦:"+pc.getLevel()*/+"\\fY Kill:"+pc.getKills()+"\\fW Death:"+pc.getDeaths()+"\\fU ½Â·ü:" + winner + "% ÀÔ´Ï´Ù.");
+writeS(title + pc.getName() + " " + lawfulness + " " + clan + "\n\r"/*+"\\fUëž©:"+pc.getLevel()*/+"\\fY Kill:"+pc.getKills()+"\\fW Death:"+pc.getDeaths()+"\\fU ìŠ¹ë¥ :" + winner + "% ìž…ë‹ˆë‹¤.");
 // writeD(0x80157FE4);
          writeD(0);
         }

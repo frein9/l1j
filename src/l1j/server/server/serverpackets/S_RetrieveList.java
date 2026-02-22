@@ -23,7 +23,7 @@ import java.io.IOException;
 import l1j.server.server.Opcodes;
 import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.serverpackets.S_NPCTalkReturn; /*Ãß°¡*/
+import l1j.server.server.serverpackets.S_NPCTalkReturn; /*ì¶”ê°€*/
 
 public class S_RetrieveList extends ServerBasePacket {
 	public S_RetrieveList(int objid, L1PcInstance pc) {
@@ -33,7 +33,7 @@ public class S_RetrieveList extends ServerBasePacket {
 				writeC(Opcodes.S_OPCODE_SHOWRETRIEVELIST);
 				writeD(objid);
 				writeH(size);
-				writeC(3); // °³ÀÎ Ã¢°í
+				writeC(3); // ê°œì¸ ì°½ê³ 
 				for (Object itemObject : pc.getDwarfInventory().getItems()) {
 					L1ItemInstance item = (L1ItemInstance) itemObject;
 					writeD(item.getId());
@@ -45,13 +45,13 @@ public class S_RetrieveList extends ServerBasePacket {
 					writeS(item.getViewName());
 				}
 			}
-			/*Ãß°¡*/			
+			/*ì¶”ê°€*/			
 			else {
-				pc.sendPackets(new S_NPCTalkReturn(pc.getId(), "noitemret")); // ¸Ã°ÜÁø ¹°°ÇÀº ¾ø´Â..
+				pc.sendPackets(new S_NPCTalkReturn(pc.getId(), "noitemret")); // ë§¡ê²¨ì§„ ë¬¼ê±´ì€ ì—†ëŠ”..
 			}
-			/*Ãß°¡*/			
+			/*ì¶”ê°€*/			
 		} else {
-			pc.sendPackets(new S_ServerMessage(263)); // \f1ÇÑ»ç¶÷ÀÇ Ä³¸¯ÅÍ°¡ °¡Áö°í °ÉÀ» ¼ö ÀÖ´Â ¾ÆÀÌÅÛÀº ÃÖ´ë 180°³±îÁöÀÔ´Ï´Ù.
+			pc.sendPackets(new S_ServerMessage(263)); // \f1í•œì‚¬ëŒì˜ ìºë¦­í„°ê°€ ê°€ì§€ê³  ê±¸ì„ ìˆ˜ ìˆëŠ” ì•„ì´í…œì€ ìµœëŒ€ 180ê°œê¹Œì§€ì…ë‹ˆë‹¤.
 		}
 	}
 

@@ -41,7 +41,7 @@ public class L1HpBar implements L1CommandExecutor {
 
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+		if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 		if (arg.equalsIgnoreCase("on")) {
 			pc.setSkillEffect(L1SkillId.GMSTATUS_HPBAR, 0);
 		} else if (arg.equalsIgnoreCase("off")) {
@@ -53,10 +53,10 @@ public class L1HpBar implements L1CommandExecutor {
 				}
 			}
 		} else {
-			pc.sendPackets(new S_SystemMessage(cmdName + " on ¶Ç´Â off ¶ó°í ÀÔ·ÂÇØ ÁÖ¼¼¿ä."));
+			pc.sendPackets(new S_SystemMessage(cmdName + " on ë˜ëŠ” off ë¼ê³  ì…ë ¥í•´ ì£¼ì„¸ìš”."));
 		}
 		} else {
-			pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+			pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 			return;
 		}
 	}

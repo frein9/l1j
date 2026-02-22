@@ -186,7 +186,7 @@ public class ActionCodes {
 
 	public static final int ACTION_Fishing = 71;
 	
-	public static final int ACTION_QooWalk = 72;  // Ű��ũ
+	public static final int ACTION_QooWalk = 72;  // 키링크
 
 	public static final int ACTION_QooAttack = 73;
 

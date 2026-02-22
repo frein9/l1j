@@ -89,7 +89,7 @@ public class L1PetRace {
 
 
 	/**
-	 * Âü°¡ÀÎ¿øÀ» ´Ù½ÃÇÑ¹ø °Ë»ö Ã³À½¸É¹ö¿¡¼­ ÇöÁ¦¾ø´Ù¸é »èÁ¦
+	 * ì°¸ê°€ì¸ì›ì„ ë‹¤ì‹œí•œë²ˆ ê²€ìƒ‰ ì²˜ìŒë§´ë²„ì—ì„œ í˜„ì œì—†ë‹¤ë©´ ì‚­ì œ
 	 */
 	private void removeRetiredMembers() {
 		L1PcInstance[] temp = getMembersArray();
@@ -101,7 +101,7 @@ public class L1PetRace {
 	}
 
 	/**
-	 * Âü°¡ÀÎ¿ø¿¡°Ô¸¸ ½Ã½ºÅÛ ¸Ş¼¼ÁöÀü¼Û
+	 * ì°¸ê°€ì¸ì›ì—ê²Œë§Œ ì‹œìŠ¤í…œ ë©”ì„¸ì§€ì „ì†¡
 	 *
 	 */
 	private void sendMessage(String msg) {
@@ -110,7 +110,7 @@ public class L1PetRace {
 		}
 	}
 	/**
-	 * ¼­¹ö ¸Ş¼¼ÁöÀü¼Û
+	 * ì„œë²„ ë©”ì„¸ì§€ì „ì†¡
 	 *
 	 */
 	private void sendMessage1(int type, String msg) {
@@ -119,7 +119,7 @@ public class L1PetRace {
 		}
 	}
 	/**
-	 * _YN  ¸Ş¼¼ÁöÀü¼Û
+	 * _YN  ë©”ì„¸ì§€ì „ì†¡
 	 *
 	 */
 	private void sendMessage2(int type, String msg) {
@@ -129,21 +129,21 @@ public class L1PetRace {
 	}
 
 	/**
-	 * constructor¡¡ ¡¡.
+	 * constructorã€€ ã€€.
 	 */
 	public L1PetRace() {
 	}
 
 	class PetThread implements Runnable {
 		/**
-		 * °æ±â½ÃÀÛ Ä«¿îÆ®´Ù¿î¿¡ µé¾î°£´Ù
+		 * ê²½ê¸°ì‹œì‘ ì¹´ìš´íŠ¸ë‹¤ìš´ì— ë“¤ì–´ê°„ë‹¤
 		 */
 		private void countDown() throws InterruptedException {
 			final int MSGID_A = 1258;
 			final int MSGID_C = 1264;
 
 
-			sendMessage1(MSGID_A, ""); // 2¸íÀÌ»ó
+			sendMessage1(MSGID_A, ""); // 2ëª…ì´ìƒ
 
 			Thread.sleep(3000);
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
@@ -152,19 +152,19 @@ public class L1PetRace {
 					int chance = random.nextInt(5);
 					switch (chance) {
 						case 0:
-							L1PolyMorph.doPoly(pc, 29, 1000, L1PolyMorph.MORPH_BY_NPC); //±«¹°´«
+							L1PolyMorph.doPoly(pc, 29, 1000, L1PolyMorph.MORPH_BY_NPC); //ê´´ë¬¼ëˆˆ
 							break;
 						case 1:
-							L1PolyMorph.doPoly(pc, 3184, 1000, L1PolyMorph.MORPH_BY_NPC); //ÇÏÀÌ¼¼ÆÛµå
+							L1PolyMorph.doPoly(pc, 3184, 1000, L1PolyMorph.MORPH_BY_NPC); //í•˜ì´ì„¸í¼ë“œ
 							break;
 						case 2:
-							L1PolyMorph.doPoly(pc, 5065, 1000, L1PolyMorph.MORPH_BY_NPC); //¾Æ±â Áøµ¾
+							L1PolyMorph.doPoly(pc, 5065, 1000, L1PolyMorph.MORPH_BY_NPC); //ì•„ê¸° ì§„ë—
 							break;
 						case 3:
-							L1PolyMorph.doPoly(pc, 938, 1000, L1PolyMorph.MORPH_BY_NPC); //ºñ±Û
+							L1PolyMorph.doPoly(pc, 938, 1000, L1PolyMorph.MORPH_BY_NPC); //ë¹„ê¸€
 							break;
 						case 4:
-							L1PolyMorph.doPoly(pc, 4168, 1000, L1PolyMorph.MORPH_BY_NPC); //¸¾º¸Åä³¢
+							L1PolyMorph.doPoly(pc, 4168, 1000, L1PolyMorph.MORPH_BY_NPC); //ë§˜ë³´í† ë¼
 							break;
 					}
 					pc.sendPackets(new S_GameStart(pc));
@@ -179,7 +179,7 @@ public class L1PetRace {
 		}
 
 		/**
-		 * thread ÇÁ·Î½ÃÀú.
+		 * thread í”„ë¡œì‹œì €.
 		 */
 		@Override
 		public void run() {
@@ -191,16 +191,16 @@ public class L1PetRace {
 						if (obj instanceof L1NpcInstance) {
 							L1NpcInstance npc = (L1NpcInstance) obj;
 							if(npc.getNpcTemplate().get_npcId() == 200022) {
-								//String chat = "Æê ·¹ÀÌ½Ì! ½ÃÀÛÇÑ´Ù!"; 
+								//String chat = "í« ë ˆì´ì‹±! ì‹œì‘í•œë‹¤!"; 
 								//pc.sendPackets(new S_NpcChatPacket(npc, chat, 0));
 							}
 						}
 					}
 				}
-				//L1World.getInstance().broadcastServerMessage("Àá½Ã ÈÄ Æê ·¹ÀÌ½º¸¦ ÁøÇàÇÏ°Ú½À´Ï´Ù.");
+				//L1World.getInstance().broadcastServerMessage("ì ì‹œ í›„ í« ë ˆì´ìŠ¤ë¥¼ ì§„í–‰í•˜ê² ìŠµë‹ˆë‹¤.");
 				Thread.sleep(60000);
 				final int MSGID_F = 1256;
-				if (getMembersCount() >= 1){ // 5¸í ÀÌ»óÀÌ¾î¾ß ÀÔÀå¸Ş¼¼Áö º¸³»±â
+				if (getMembersCount() >= 1){ // 5ëª… ì´ìƒì´ì–´ì•¼ ì…ì¥ë©”ì„¸ì§€ ë³´ë‚´ê¸°
 					sendMessage2(MSGID_F, "");
 				}
 
@@ -212,7 +212,7 @@ public class L1PetRace {
 					}
 				}
 
-				setInTime(true); // 1ºĞµ¿¾È ±×³É ÀÔÀåÀ» ¹Ş±âÀ§ÇØ..
+				setInTime(true); // 1ë¶„ë™ì•ˆ ê·¸ëƒ¥ ì…ì¥ì„ ë°›ê¸°ìœ„í•´..
 				Thread.sleep(60000);
 				setInTime(false);
 
@@ -228,7 +228,7 @@ public class L1PetRace {
 								L1CDA.CDA(lcd);
 								setNowPet(true);
 								Thread.sleep(20000);
-								removeRetiredMembers(); //°ÔÀÓ¿¡ Âü°¡ÀÎ¿ø È®ÀÎ
+								removeRetiredMembers(); //ê²Œì„ì— ì°¸ê°€ì¸ì› í™•ì¸
 								countDown();
 								Thread.sleep(5000);
 								GameTime();
@@ -242,10 +242,10 @@ public class L1PetRace {
 					addMember0(pc);
 				}
 
-				Thread.sleep(300000); //5ºĞ 00ÃÊ°¡·®ÈÄ¿¡
+				Thread.sleep(300000); //5ë¶„ 00ì´ˆê°€ëŸ‰í›„ì—
 
 				removeRetiredMembers();
-				for (L1PcInstance pc : getMembersArray()){ //°ÔÀÓÁ¾·á À¯Àú¸¦ ¹ÛÀ¸·Î ³½´Ù
+				for (L1PcInstance pc : getMembersArray()){ //ê²Œì„ì¢…ë£Œ ìœ ì €ë¥¼ ë°–ìœ¼ë¡œ ë‚¸ë‹¤
 
 					pc.sendPackets(new S_GameOver(pc));
 					Thread.sleep(12000); 
@@ -258,7 +258,7 @@ public class L1PetRace {
 					int locy = 32774 + rndy;
 					short mapid = 4;
 					L1Teleport.teleport(pc, locx, locy, mapid, 5, true);
-					L1PolyMorph.undoPoly(pc); // º¯½Å Ç®±â
+					L1PolyMorph.undoPoly(pc); // ë³€ì‹  í’€ê¸°
 					AllclearMembers();
 				}
 				setNowPet(false);
@@ -270,7 +270,7 @@ public class L1PetRace {
 	}
 
 	public void start(int petId) {
-		if (petId == 1) // Æê·¹ÀÌ½Ì
+		if (petId == 1) // í«ë ˆì´ì‹±
 		{
 			_locX = 32767;
 			_locY = 32848;
@@ -288,119 +288,119 @@ public class L1PetRace {
 
 
 	public void PetRaceSendPacket(ServerBasePacket packet){
-		for (L1PcInstance pc : getMembersArray()){ //°ÔÀÓÁ¾·á À¯Àú¸¦ ¹ÛÀ¸·Î ³½´Ù
+		for (L1PcInstance pc : getMembersArray()){ //ê²Œì„ì¢…ë£Œ ìœ ì €ë¥¼ ë°–ìœ¼ë¡œ ë‚¸ë‹¤
 			pc.sendPackets(packet);
 		}
 	}
 
 	public void GameTime(){
-		for (L1PcInstance pc : getMembersArray()){ //°ÔÀÓÁ¾·á À¯Àú¸¦ ¹ÛÀ¸·Î ³½´Ù
+		for (L1PcInstance pc : getMembersArray()){ //ê²Œì„ì¢…ë£Œ ìœ ì €ë¥¼ ë°–ìœ¼ë¡œ ë‚¸ë‹¤
 			pc.sendPackets(new S_GameTime1(pc));
 		}
 	}
 
 	public void GameRap(){
-		for (L1PcInstance pc : getMembersArray()){ //°ÔÀÓÁ¾·á À¯Àú¸¦ ¹ÛÀ¸·Î ³½´Ù
+		for (L1PcInstance pc : getMembersArray()){ //ê²Œì„ì¢…ë£Œ ìœ ì €ë¥¼ ë°–ìœ¼ë¡œ ë‚¸ë‹¤
 			pc.sendPackets(new S_GameRap(pc, 1));
 		}
 	}
 
 	/**
-	 * ÇÃ·¹ÀÌ¾î¸¦ Âü°¡ ¸â¹ö ¸®½ºÆ®¿¡ Ãß°¡ÇÑ´Ù.
+	 * í”Œë ˆì´ì–´ë¥¼ ì°¸ê°€ ë©¤ë²„ ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€í•œë‹¤.
 	 * 
 	 * @param pc
-	 *            »õ·Ó°Ô Âü°¡ÇÏ´Â ÇÃ·¹ÀÌ¾î
+	 *            ìƒˆë¡­ê²Œ ì°¸ê°€í•˜ëŠ” í”Œë ˆì´ì–´
 	 */
-	public void addMember(L1PcInstance pc) { // ÀÏ¹İ
+	public void addMember(L1PcInstance pc) { // ì¼ë°˜
 		if (!_members.contains(pc)) {
 			_members.add(pc);
 		}
 	}
 
-	public void addMember0(L1PcInstance pc) { // ÀÏ¹İ
+	public void addMember0(L1PcInstance pc) { // ì¼ë°˜
 		if (!_members0.contains(pc)) {
 			_members0.add(pc);
 		}
 	}
 
-	public void addMember1(L1PcInstance pc) { // 1¹ÙÄû
+	public void addMember1(L1PcInstance pc) { // 1ë°”í€´
 		if (!_members1.contains(pc)) {
 			_members1.add(pc);
 		}
 	}
 
-	public void addMember2(L1PcInstance pc) { // 1¹ÙÄû
+	public void addMember2(L1PcInstance pc) { // 1ë°”í€´
 		if (!_members2.contains(pc)) {
 			_members2.add(pc);
 		}
 	}
 
-	public void addMember3(L1PcInstance pc) { // 2¹ÙÄû
+	public void addMember3(L1PcInstance pc) { // 2ë°”í€´
 		if (!_members3.contains(pc)) {
 			_members3.add(pc);
 		}
 	}
-	public void addMember4(L1PcInstance pc) { // 2¹ÙÄû?
+	public void addMember4(L1PcInstance pc) { // 2ë°”í€´?
 		if (!_members4.contains(pc)) {
 			_members4.add(pc);
 		}
 	}
-	public void addMember5(L1PcInstance pc) { // 3¹ÙÄû
+	public void addMember5(L1PcInstance pc) { // 3ë°”í€´
 		if (!_members5.contains(pc)) {
 			_members5.add(pc);
 		}
 	}
-	public void addMember6(L1PcInstance pc) { // 3¹ÙÄû
+	public void addMember6(L1PcInstance pc) { // 3ë°”í€´
 		if (!_members6.contains(pc)) {
 			_members6.add(pc);
 		}
 	}
-	public void addMember7(L1PcInstance pc) { // 4¹ÙÄû
+	public void addMember7(L1PcInstance pc) { // 4ë°”í€´
 		if (!_members7.contains(pc)) {
 			_members7.add(pc);
 		}
 	}
-	public void addMember8(L1PcInstance pc) { // 4¹ÙÄû
+	public void addMember8(L1PcInstance pc) { // 4ë°”í€´
 		if (!_members8.contains(pc)) {
 			_members8.add(pc);
 		}
 	}
-	public void addMember9(L1PcInstance pc) { // 4¹ÙÄû
+	public void addMember9(L1PcInstance pc) { // 4ë°”í€´
 		if (!_members9.contains(pc)) {
 			_members9.add(pc);
 		}
 	}
-	public void addMember10(L1PcInstance pc) { // 4¹ÙÄû
+	public void addMember10(L1PcInstance pc) { // 4ë°”í€´
 		if (!_members10.contains(pc)) {
 			_members10.add(pc);
 		}
 	}
-	public void addMember11(L1PcInstance pc) { // 4¹ÙÄû
+	public void addMember11(L1PcInstance pc) { // 4ë°”í€´
 		if (!_members11.contains(pc)) {
 			_members11.add(pc);
 		}
 	}
-	public void addMember12(L1PcInstance pc) { // 4¹ÙÄû
+	public void addMember12(L1PcInstance pc) { // 4ë°”í€´
 		if (!_members12.contains(pc)) {
 			_members12.add(pc);
 		}
 	}
-	public void addMember13(L1PcInstance pc) { // 4¹ÙÄû
+	public void addMember13(L1PcInstance pc) { // 4ë°”í€´
 		if (!_members13.contains(pc)) {
 			_members13.add(pc);
 		}
 	}
-	public void addMember14(L1PcInstance pc) { // 4¹ÙÄû
+	public void addMember14(L1PcInstance pc) { // 4ë°”í€´
 		if (!_members14.contains(pc)) {
 			_members14.add(pc);
 		}
 	}
-	public void addMember15(L1PcInstance pc) { // 4¹ÙÄû
+	public void addMember15(L1PcInstance pc) { // 4ë°”í€´
 		if (!_members15.contains(pc)) {
 			_members15.add(pc);
 		}
 	}
-	public void addMember16(L1PcInstance pc) { // 4¹ÙÄû
+	public void addMember16(L1PcInstance pc) { // 4ë°”í€´
 		if (!_members16.contains(pc)) {
 			_members16.add(pc);
 		}
@@ -408,10 +408,10 @@ public class L1PetRace {
 
 
 	/**
-	 * ÇÃ·¹ÀÌ¾î¸¦ Âü°¡ ¸â¹ö ¸®½ºÆ®·ÎºÎÅÍ »èÁ¦ÇÑ´Ù.
+	 * í”Œë ˆì´ì–´ë¥¼ ì°¸ê°€ ë©¤ë²„ ë¦¬ìŠ¤íŠ¸ë¡œë¶€í„° ì‚­ì œí•œë‹¤.
 	 * 
 	 * @param pc
-	 *            »èÁ¦ÇÏ´Â ÇÃ·¹ÀÌ¾î
+	 *            ì‚­ì œí•˜ëŠ” í”Œë ˆì´ì–´
 	 */
 	public void removeMember(L1PcInstance pc) {
 		_members.remove(pc);
@@ -472,7 +472,7 @@ public class L1PetRace {
 
 
 	/**
-	 * Âü°¡ ¸â¹ö ¸®½ºÆ®¸¦ Å¬¸®¾î ÇÑ´Ù.
+	 * ì°¸ê°€ ë©¤ë²„ ë¦¬ìŠ¤íŠ¸ë¥¼ í´ë¦¬ì–´ í•œë‹¤.
 	 */
 	public void clearMembers() {
 		_members.clear();
@@ -520,11 +520,11 @@ public class L1PetRace {
 	}
 
 	/**
-	 * ÇÃ·¹ÀÌ¾î°¡, Âü°¡ ¸â¹öÀÎÁö¸¦ µ¹·ÁÁØ´Ù.
+	 * í”Œë ˆì´ì–´ê°€, ì°¸ê°€ ë©¤ë²„ì¸ì§€ë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 * 
 	 * @param pc
-	 *            Á¶»çÇÏ´Â ÇÃ·¹ÀÌ¾î
-	 * @return Âü°¡ ¸â¹öÀÌ¸é true, ±×·¸Áö ¾ÊÀ¸¸é false.
+	 *            ì¡°ì‚¬í•˜ëŠ” í”Œë ˆì´ì–´
+	 * @return ì°¸ê°€ ë©¤ë²„ì´ë©´ true, ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ false.
 	 */
 	public boolean isMember(L1PcInstance pc) {
 		return _members.contains(pc);
@@ -582,17 +582,17 @@ public class L1PetRace {
 	}
 
 	/**
-	 * Âü°¡ ¸â¹öÀÇ ¹è¿­À» ÀÛ¼ºÇØ, µ¹·ÁÁØ´Ù.
+	 * ì°¸ê°€ ë©¤ë²„ì˜ ë°°ì—´ì„ ì‘ì„±í•´, ëŒë ¤ì¤€ë‹¤.
 	 * 
-	 * @return Âü°¡ ¸â¹öÀÇ ¹è¿­
+	 * @return ì°¸ê°€ ë©¤ë²„ì˜ ë°°ì—´
 	 */
 	public L1PcInstance[] getMembersArray() {
 		return _members.toArray(new L1PcInstance[_members.size()]);
 	}
 	/**
-	 * Âü°¡ ¸â¹ö¼ö¸¦ µ¹·ÁÁØ´Ù.
+	 * ì°¸ê°€ ë©¤ë²„ìˆ˜ë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 * 
-	 * @return Âü°¡ ¸â¹ö¼ö
+	 * @return ì°¸ê°€ ë©¤ë²„ìˆ˜
 	 */
 	public int getMembersCount() {
 		return _members.size();
@@ -649,7 +649,7 @@ public class L1PetRace {
 		return _members16.size();
 	}
 	/**
-	 * UBÁßÀÎÁö¸¦ ¼³Á¤ÇÑ´Ù.
+	 * UBì¤‘ì¸ì§€ë¥¼ ì„¤ì •í•œë‹¤.
 	 * 
 	 * @param i
 	 *            true/false
@@ -660,9 +660,9 @@ public class L1PetRace {
 	}
 
 	/**
-	 * °æ±â ÁßÀÎÁö¸¦ µ¹·ÁÁØ´Ù.
+	 * ê²½ê¸° ì¤‘ì¸ì§€ë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 * 
-	 * @return °æ±â ÁßÀÌ¸é true, ±×·¸Áö ¾ÊÀ¸¸é false.
+	 * @return ê²½ê¸° ì¤‘ì´ë©´ true, ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ false.
 	 */
 	public boolean isNowPet() {
 		return _isNowPet;

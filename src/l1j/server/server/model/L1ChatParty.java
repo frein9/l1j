@@ -49,7 +49,7 @@ public class L1ChatParty {
 		}
 
 		if (_membersList.isEmpty()) {
-			// ÃÖÃÊÀÇ PT¸â¹öÀÌ¸é ¸®´õ·Î ÇÑ´Ù
+			// ìµœì´ˆì˜ PTë©¤ë²„ì´ë©´ ë¦¬ë”ë¡œ í•œë‹¤
 			setLeader(pc);
 		}
 
@@ -103,19 +103,19 @@ public class L1ChatParty {
 
 		for (L1PcInstance member : members) {
 			removeMember(member);
-			member.sendPackets(new S_ServerMessage(418)); // ÆÄÆ¼¸¦ ÇØ»êÇß½À´Ï´Ù.
+			member.sendPackets(new S_ServerMessage(418)); // íŒŒí‹°ë¥¼ í•´ì‚°í–ˆìŠµë‹ˆë‹¤.
 		}
 	}
 
 	public void leaveMember(L1PcInstance pc) {
 		L1PcInstance[] members = getMembers();
 		if (isLeader(pc)) {
-			// ÆÄÆ¼ ¸®´õÀÇ °æ¿ì
+			// íŒŒí‹° ë¦¬ë”ì˜ ê²½ìš°
 			breakup();
 		} else {
-			// ÆÄÆ¼ ¸®´õ°¡ ¾Æ´Ñ °æ¿ì
+			// íŒŒí‹° ë¦¬ë”ê°€ ì•„ë‹Œ ê²½ìš°
 			if (getNumOfMembers() == 2) {
-				// ÆÄÆ¼ ¸â¹ö°¡ ÀÚ½Å°ú ¸®´õ¸¸
+				// íŒŒí‹° ë©¤ë²„ê°€ ìì‹ ê³¼ ë¦¬ë”ë§Œ
 				removeMember(pc);
 				L1PcInstance leader = getLeader();
 				removeMember(leader);
@@ -123,7 +123,7 @@ public class L1ChatParty {
 				sendLeftMessage(pc, pc);
 				sendLeftMessage(leader, pc);
 			} else {
-				// ³ª¸ÓÁöÀÇ ÆÄÆ¼ ¸â¹ö°¡ 2¸í ÀÌ»ó ÀÖ´Ù
+				// ë‚˜ë¨¸ì§€ì˜ íŒŒí‹° ë©¤ë²„ê°€ 2ëª… ì´ìƒ ìˆë‹¤
 				removeMember(pc);
 				for (L1PcInstance member : members) {
 					sendLeftMessage(member, pc);
@@ -135,15 +135,15 @@ public class L1ChatParty {
 
 	public void kickMember(L1PcInstance pc) {
 		if (getNumOfMembers() == 2) {
-			// ÆÄÆ¼ ¸â¹ö°¡ ÀÚ½Å°ú ¸®´õ¸¸
+			// íŒŒí‹° ë©¤ë²„ê°€ ìì‹ ê³¼ ë¦¬ë”ë§Œ
 			removeMember(pc);
 			L1PcInstance leader = getLeader();
 			removeMember(leader);
 		} else {
-			// ³ª¸ÓÁöÀÇ ÆÄÆ¼ ¸â¹ö°¡ 2¸í ÀÌ»ó ÀÖ´Ù
+			// ë‚˜ë¨¸ì§€ì˜ íŒŒí‹° ë©¤ë²„ê°€ 2ëª… ì´ìƒ ìˆë‹¤
 			removeMember(pc);
 		}
-		pc.sendPackets(new S_ServerMessage(419)); // ÆÄÆ¼·ÎºÎÅÍ Ãß¹æµÇ¾ú½À´Ï´Ù.
+		pc.sendPackets(new S_ServerMessage(419)); // íŒŒí‹°ë¡œë¶€í„° ì¶”ë°©ë˜ì—ˆìŠµë‹ˆë‹¤.
 	}
 
 	public L1PcInstance[] getMembers() {
@@ -155,7 +155,7 @@ public class L1ChatParty {
 	}
 
 	private void sendLeftMessage(L1PcInstance sendTo, L1PcInstance left) {
-		// %0°¡ ÆÄÆ¼·ÎºÎÅÍ ¶°³µ½À´Ï´Ù.
+		// %0ê°€ íŒŒí‹°ë¡œë¶€í„° ë– ë‚¬ìŠµë‹ˆë‹¤.
 		sendTo.sendPackets(new S_ServerMessage(420, left.getName()));
 	}
 

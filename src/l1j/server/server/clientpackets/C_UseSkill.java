@@ -26,8 +26,8 @@ import l1j.server.server.ActionCodes;
 import l1j.server.server.ClientThread;
 import l1j.server.server.datatables.SkillsTable;
 import l1j.server.server.model.AcceleratorChecker;   
-import l1j.server.server.model.L1Character; // Ãß°¡
-import l1j.server.server.model.L1Object; // Ãß°¡
+import l1j.server.server.model.L1Character; // ì¶”ê°€
+import l1j.server.server.model.L1Object; // ì¶”ê°€
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.skill.L1SkillUse;
@@ -52,7 +52,7 @@ public class C_UseSkill extends ClientBasePacket {
 		int targetX = 0;
 		int targetY = 0;
 		L1PcInstance pc = client.getActiveChar();
-		L1Object target2 = L1World.getInstance().findObject(targetId); // Ãß°¡
+		L1Object target2 = L1World.getInstance().findObject(targetId); // ì¶”ê°€
 		if (pc == null) {
 			return;
 		}
@@ -60,20 +60,20 @@ public class C_UseSkill extends ClientBasePacket {
 			return;
 		}
 		if (!pc.getMap().isUsableSkill()) {
-			pc.sendPackets(new S_ServerMessage(563)); // \f1 ¿©±â¿¡¼­´Â »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.
+			pc.sendPackets(new S_ServerMessage(563)); // \f1 ì—¬ê¸°ì—ì„œëŠ” ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 			return;
 		}
 		
-		if (target2 instanceof L1Character) { // Ãß°¡
+		if (target2 instanceof L1Character) { // ì¶”ê°€
 			if (target2.getMapId() != pc.getMapId()
-					|| pc.getLocation().getLineDistance(target2.getLocation()) > 20D) { // Å¸°ÙÀÌ ÀÌ»óÇÑ Àå¼Ò¿¡ ÀÖÀ¸¸é Á¾·á
+					|| pc.getLocation().getLineDistance(target2.getLocation()) > 20D) { // íƒ€ê²Ÿì´ ì´ìƒí•œ ì¥ì†Œì— ìˆìœ¼ë©´ ì¢…ë£Œ
 				return;
 			}
 		}
-        // ¿ä±¸ °£°İÀ» Ã¼Å©ÇÑ´Ù
+        // ìš”êµ¬ ê°„ê²©ì„ ì²´í¬í•œë‹¤
 		if (Config.CHECK_SPELL_INTERVAL) {
 			int result;
-			// FIXME ¾î´À ½ºÅ³ÀÌ dir/no dirÀÏ±îÀÇ ÆÇ´ÜÀÌ Àû´ç
+			// FIXME ì–´ëŠ ìŠ¤í‚¬ì´ dir/no dirì¼ê¹Œì˜ íŒë‹¨ì´ ì ë‹¹
 			if (SkillsTable.getInstance(). getTemplate(skillId). getActionId() ==
 						ActionCodes.ACTION_SkillAttack) {
 				result = pc.getAcceleratorChecker(). checkInterval(
@@ -89,17 +89,17 @@ public class C_UseSkill extends ClientBasePacket {
 
 		if (abyte0.length > 4) {
 			try {
-				if (skillId == CALL_CLAN || skillId == RUN_CLAN) { // Äİ Å©¶õ, ·©Å© ·±
+				if (skillId == CALL_CLAN || skillId == RUN_CLAN) { // ì½œ í¬ë€, ë­í¬ ëŸ°
 					charName = readS();
-				} else if (skillId == TRUE_TARGET) { // Æ®·ç Å¸°Ù
+				} else if (skillId == TRUE_TARGET) { // íŠ¸ë£¨ íƒ€ê²Ÿ
 					targetId = readD();
 					targetX = readH();
 					targetY = readH();
 					message = readS();
-				} else if (skillId == TELEPORT || skillId == MASS_TELEPORT) { // ÅÚ·¹Æ÷Æ®, ¸Å½º ÅÚ·¹Æ÷Æ®
+				} else if (skillId == TELEPORT || skillId == MASS_TELEPORT) { // í…”ë ˆí¬íŠ¸, ë§¤ìŠ¤ í…”ë ˆí¬íŠ¸
 					readH(); // MapID
 					targetId = readD(); // Bookmark ID
-				} else if (skillId == FIRE_WALL || skillId == LIFE_STREAM) { // ÆÄÀÌ¾î¿ù, ¶óÀÌÇÁ ½Ã³Á¹°
+				} else if (skillId == FIRE_WALL || skillId == LIFE_STREAM) { // íŒŒì´ì–´ì›”, ë¼ì´í”„ ì‹œëƒ‡ë¬¼
 					targetX = readH();
 					targetY = readH();
 				} else {
@@ -112,7 +112,7 @@ public class C_UseSkill extends ClientBasePacket {
 			}
 		}
 
-		if (pc.hasSkillEffect(ABSOLUTE_BARRIER)) { // ¿¦¼Ö·çÅõº£¸®¾î
+		if (pc.hasSkillEffect(ABSOLUTE_BARRIER)) { // ì—¡ì†”ë£¨íˆ¬ë² ë¦¬ì–´
 			pc.killSkillEffectTimer(ABSOLUTE_BARRIER);
 			pc.startHpRegeneration();
 			pc.startMpRegeneration();
@@ -121,26 +121,26 @@ public class C_UseSkill extends ClientBasePacket {
 		pc.killSkillEffectTimer(MEDITATION);
 
 		try {
-			if (skillId == CALL_CLAN || skillId == RUN_CLAN) { // ÄİÅ¬·£,·±Å¬·£
+			if (skillId == CALL_CLAN || skillId == RUN_CLAN) { // ì½œí´ëœ,ëŸ°í´ëœ
 				if (charName.isEmpty()) {
-					// ÀÌ¸§ÀÌ ÇÏ´ÃÀÇ °æ¿ì Å¬¶óÀÌ¾ğÆ®·Î ¿¬ÁÖÇØÁú °Í
+					// ì´ë¦„ì´ í•˜ëŠ˜ì˜ ê²½ìš° í´ë¼ì´ì–¸íŠ¸ë¡œ ì—°ì£¼í•´ì§ˆ ê²ƒ
 					return;
 				}
 
 				L1PcInstance target = L1World.getInstance().getPlayer(charName);
 
 				if (target == null) {
-					// ¸Ş¼¼Áö°¡ Á¤È®ÇÑ°¡ ¹ÌÁ¶»ç
-					pc.sendPackets(new S_ServerMessage(73, charName)); // \f1%0Àº °ÔÀÓÀ» ÇÏ°í ÀÖÁö ¾Ê½À´Ï´Ù.
+					// ë©”ì„¸ì§€ê°€ ì •í™•í•œê°€ ë¯¸ì¡°ì‚¬
+					pc.sendPackets(new S_ServerMessage(73, charName)); // \f1%0ì€ ê²Œì„ì„ í•˜ê³  ìˆì§€ ì•ŠìŠµë‹ˆë‹¤.
 					return;
 				}
 				if (pc.getClanid() != target.getClanid()) {
-					pc.sendPackets(new S_ServerMessage(414)); // °°Àº Ç÷¸Í¿øÀÌ ¾Æ´Õ´Ï´Ù.
+					pc.sendPackets(new S_ServerMessage(414)); // ê°™ì€ í˜ˆë§¹ì›ì´ ì•„ë‹™ë‹ˆë‹¤.
 					return;
 				}
 				targetId = target.getId();
 				if (skillId == CALL_CLAN) {
-					// ÀÌµ¿ÇÏÁö ¾Ê°í ¿¬¼ÓÇØ °°Àº Å©¶õ¿ø¿¡°Ô Äİ Å©¶õ ÇßÀ» °æ¿ì, ¹æÇâÀº ÀüÈ¸°¡ ÈïºĞÇÑ´Ù
+					// ì´ë™í•˜ì§€ ì•Šê³  ì—°ì†í•´ ê°™ì€ í¬ë€ì›ì—ê²Œ ì½œ í¬ë€ í–ˆì„ ê²½ìš°, ë°©í–¥ì€ ì „íšŒê°€ í¥ë¶„í•œë‹¤
 					int callClanId = pc.getCallClanId();
 					if (callClanId == 0 || callClanId != targetId) {
 						pc.setCallClanId(targetId);

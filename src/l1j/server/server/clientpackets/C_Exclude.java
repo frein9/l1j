@@ -37,7 +37,7 @@ public class C_Exclude extends ClientBasePacket {
 	private static Logger _log = Logger.getLogger(C_Exclude.class.getName());
 
 	/**
-	 * C_1 /exclude Ä¿¸àµå¸¦ ÃÆÀ» ¶§¿¡ º¸³»Áø´Ù
+	 * C_1 /exclude ì»¤ë©˜ë“œë¥¼ ì³¤ì„ ë•Œì— ë³´ë‚´ì§„ë‹¤
 	 */
 	public C_Exclude(byte[] decrypt, ClientThread client) {
 		super(decrypt);
@@ -49,7 +49,7 @@ public class C_Exclude extends ClientBasePacket {
 		try {
 			L1ExcludingList exList = pc.getExcludingList();
 			if (exList.isFull()) {
-				pc.sendPackets(new S_ServerMessage(472)); // \f1Â÷´ÜµÈ À¯Àú°¡ ³Ê¹« ¸¹½À´Ï´Ù.
+				pc.sendPackets(new S_ServerMessage(472)); // \f1ì°¨ë‹¨ëœ ìœ ì €ê°€ ë„ˆë¬´ ë§ìŠµë‹ˆë‹¤.
 				return;
 			}
 			if (exList.contains(name)) {

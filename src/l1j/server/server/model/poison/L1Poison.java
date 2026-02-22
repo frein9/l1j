@@ -28,7 +28,7 @@ public abstract class L1Poison {
 		if (cha == null) {
 			return false;
 		}
-		// µ¶Àº Áßº¹ ÇÏÁö ¾Ê´Â´Ù
+		// ë…ì€ ì¤‘ë³µ í•˜ì§€ ì•ŠëŠ”ë‹¤
 		if (cha.getPoison() != null) {
 			return false;
 		}
@@ -38,21 +38,21 @@ public abstract class L1Poison {
 		}
 
 		L1PcInstance player = (L1PcInstance) cha;
-		// Á¦´Ï½º¸µ ÀåºñÁß, ¹ÙÆ÷¸äÆ®¾Æ¸¶ ÀåºñÁß , º£³ğ·¹Áö½ºÆ®Áß
+		// ì œë‹ˆìŠ¤ë§ ì¥ë¹„ì¤‘, ë°”í¬ë©§íŠ¸ì•„ë§ˆ ì¥ë¹„ì¤‘ , ë² ë†ˆë ˆì§€ìŠ¤íŠ¸ì¤‘
 		if (player.getInventory().checkEquipped(20298)
 				|| player.getInventory().checkEquipped(20117)
-			    || player.getInventory().checkEquipped(20700)  // ¾ÈÅ¸ ÀÎ³»·Â
-                || player.getInventory().checkEquipped(20704) // ¾ÈÅ¸ ¿Ï·Â
-                || player.getInventory().checkEquipped(20708) // ¾ÈÅ¸ ¿¹Áö·Â
-                || player.getInventory().checkEquipped(20712) // ¾ÈÅ¸ ¸¶·Â
-                || player.hasSkillEffect(7678)		// »ı¸íÀÇ ¸¶¾È
+			    || player.getInventory().checkEquipped(20700)  // ì•ˆíƒ€ ì¸ë‚´ë ¥
+                || player.getInventory().checkEquipped(20704) // ì•ˆíƒ€ ì™„ë ¥
+                || player.getInventory().checkEquipped(20708) // ì•ˆíƒ€ ì˜ˆì§€ë ¥
+                || player.getInventory().checkEquipped(20712) // ì•ˆíƒ€ ë§ˆë ¥
+                || player.hasSkillEffect(7678)		// ìƒëª…ì˜ ë§ˆì•ˆ
 				|| player.hasSkillEffect(104)) {
 			return false;
 		}
 		return true;
 	}
 
-	// ¹Ì¹¦¡¤¡¤¡¤¼ÖÁ÷ÇÏ°Ô sendPackets¸¦ L1Character¿¡ ²ø¾î¿Ã·Á¾ßÇÒ °ÍÀÎ°¡µµ ¸ğ¸¥´Ù
+	// ë¯¸ë¬˜Â·Â·Â·ì†”ì§í•˜ê²Œ sendPacketsë¥¼ L1Characterì— ëŒì–´ì˜¬ë ¤ì•¼í•  ê²ƒì¸ê°€ë„ ëª¨ë¥¸ë‹¤
 	protected static void sendMessageIfPlayer(L1Character cha, int msgId) {
 		if (!(cha instanceof L1PcInstance)) {
 			return;
@@ -63,16 +63,16 @@ public abstract class L1Poison {
 	}
 
 	/**
-	 * ÀÌ µ¶ÀÇ È¿°ú ID¸¦ µ¹·ÁÁØ´Ù.
+	 * ì´ ë…ì˜ íš¨ê³¼ IDë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 * 
 	 * @see S_Poison#S_Poison(int, int)
 	 * 
-	 * @return S_Poison·Î »ç¿ëµÇ´Â È¿°ú ID
+	 * @return S_Poisonë¡œ ì‚¬ìš©ë˜ëŠ” íš¨ê³¼ ID
 	 */
 	public abstract int getEffectId();
 
 	/**
-	 * ÀÌ µ¶ÀÇ È¿°ú¸¦ ¾ø¾Ø´Ù.<br>
+	 * ì´ ë…ì˜ íš¨ê³¼ë¥¼ ì—†ì•¤ë‹¤.<br>
 	 * 
 	 * @see L1Character#curePoison()
 	 */

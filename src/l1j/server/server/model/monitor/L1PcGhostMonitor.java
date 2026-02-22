@@ -29,7 +29,7 @@ public class L1PcGhostMonitor extends L1PcMonitor {
 
 	@Override
 	public void execTask(L1PcInstance pc) {
-		// endGhostÀÇ ½ÇÇà ½Ã°£ÀÌ ¿µÇâ ¾ø°Ô
+		// endGhostì˜ ì‹¤í–‰ ì‹œê°„ì´ ì˜í–¥ ì—†ê²Œ
 		Runnable r = new L1PcMonitor(pc.getId()) {
 			@Override
 			public void execTask(L1PcInstance pc) {

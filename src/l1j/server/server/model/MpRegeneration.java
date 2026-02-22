@@ -4,7 +4,7 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import l1j.server.server.model.Instance.L1ItemInstance;  //»ó´Ü¿¡ ÀÓÆ÷Æ®
+import l1j.server.server.model.Instance.L1ItemInstance;  //ìƒë‹¨ì— ì„í¬íŠ¸
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.types.Point;
@@ -59,16 +59,16 @@ public class MpRegeneration extends TimerTask {
 			baseMpr = 3;
 		}
 
-		if (_pc.hasSkillEffect(L1SkillId.STATUS_BLUE_POTION) == true) { // ºí·ç ÀÏºÎ »ç¿ëÁß
-			if (wis < 11) { // WIS11 ¹Ì¸¸¿¡¼­µµ MPR+1
+		if (_pc.hasSkillEffect(L1SkillId.STATUS_BLUE_POTION) == true) { // ë¸”ë£¨ ì¼ë¶€ ì‚¬ìš©ì¤‘
+			if (wis < 11) { // WIS11 ë¯¸ë§Œì—ì„œë„ MPR+1
 				wis = 11;
 			}
 			baseMpr += wis - 10;
 		}
-		if (_pc.hasSkillEffect(L1SkillId.MEDITATION) == true) { // ¹¬»óÁß
+		if (_pc.hasSkillEffect(L1SkillId.MEDITATION) == true) { // ë¬µìƒì¤‘
 			baseMpr += 5;
 		}
-		if (_pc.hasSkillEffect(L1SkillId.CONSENTRATION)) { // ÁıÁßÁß
+		if (_pc.hasSkillEffect(L1SkillId.CONSENTRATION)) { // ì§‘ì¤‘ì¤‘
 			baseMpr += 2;
 		}
 		if (L1HouseLocation.isInHouse(_pc.getX(), _pc.getY(), _pc.getMapId())) {
@@ -82,7 +82,7 @@ public class MpRegeneration extends TimerTask {
 				|| _pc.getMapId() == 21504 || _pc.getMapId() == 22016
 				|| _pc.getMapId() == 22528 || _pc.getMapId() == 23040
 				|| _pc.getMapId() == 23552 || _pc.getMapId() == 24064
-				|| _pc.getMapId() == 24576 || _pc.getMapId() == 25088) { // ¿©ÀÎ¼÷
+				|| _pc.getMapId() == 24576 || _pc.getMapId() == 25088) { // ì—¬ì¸ìˆ™
 			baseMpr += 3;
 		}
 		if ((_pc.getLocation(). isInScreen(new Point(33055,32336))
@@ -99,7 +99,7 @@ public class MpRegeneration extends TimerTask {
 				|| _pc.hasSkillEffect(L1SkillId.COOKING_3_5_S)) {
 			baseMpr += 2;
 		}
-		if (_pc.getOriginalMpr() > 0) { // ¿À¸®Áö³¯ WIS MPR º¸Á¤
+		if (_pc.getOriginalMpr() > 0) { // ì˜¤ë¦¬ì§€ë‚  WIS MPR ë³´ì •
  			baseMpr += _pc.getOriginalMpr();
  		}
 		int itemMpr = _pc.getInventory().mpRegenPerTick();
@@ -120,8 +120,8 @@ public class MpRegeneration extends TimerTask {
 	}
 
 	private boolean isOverWeight(L1PcInstance pc) {
-		// ¿¡Å°Á¶Æ½Å©¹ÙÀÌÅ¸¶óÀÌÁî »óÅÂ, ¾Æµğ¼î³ª¸£ÆÄÀÌ¾Æ »óÅÂÀÌ¸é,
-		// Áß·® ¿À¹öÀÌÁö ¾ÊÀ¸¸é °£ÁÖÇÑ´Ù.
+		// ì—í‚¤ì¡°í‹±í¬ë°”ì´íƒ€ë¼ì´ì¦ˆ ìƒíƒœ, ì•„ë””ì‡¼ë‚˜ë¥´íŒŒì´ì•„ ìƒíƒœì´ë©´,
+		// ì¤‘ëŸ‰ ì˜¤ë²„ì´ì§€ ì•Šìœ¼ë©´ ê°„ì£¼í•œë‹¤.
 		if (pc.hasSkillEffect(L1SkillId.EXOTIC_VITALIZE)
 				|| _pc.getMapId() == 16384 || _pc.getMapId() == 17408 || _pc.getMapId() == 18432 
 				|| _pc.getMapId() == 20480 || _pc.getMapId() == 21504 || _pc.getMapId() == 22528

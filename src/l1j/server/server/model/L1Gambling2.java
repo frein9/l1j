@@ -52,7 +52,7 @@ public class L1Gambling2 {
 			    if (Npc.getNpcTemplate().get_npcId() == 300026){
 			    	L1NpcInstance dealer = Npc;
 			    	if(bettingmoney == 20000){
-			    	String chat = "Á¤»ó ÀÔ±İ µÇ¾ú½À´Ï´Ù! °¨»çÇÕ´Ï´Ù. ¶Ç¿À¼¼¿ä~";
+			    	String chat = "ì •ìƒ ì…ê¸ˆ ë˜ì—ˆìŠµë‹ˆë‹¤! ê°ì‚¬í•©ë‹ˆë‹¤. ë˜ì˜¤ì„¸ìš”~";
 					player.sendPackets(new S_NpcChatPacket(dealer, chat, 0));
 					player.broadcastPacket(new S_NpcChatPacket(dealer, chat, 0));
 					Thread.sleep(800);
@@ -62,7 +62,7 @@ public class L1Gambling2 {
 					new L1SkillUse().handleCommands(player, 48, player.getId(), player.getX(), player.getY(), null,0, L1SkillUse.TYPE_GMBUFF);
 					new L1SkillUse().handleCommands(player, 79, player.getId(), player.getX(), player.getY(), null,0, L1SkillUse.TYPE_GMBUFF);
 					new L1SkillUse().handleCommands(player, 151, player.getId(), player.getX(), player.getY(), null,0, L1SkillUse.TYPE_GMBUFF);
-					//ºí·¹½º,¾îº¥,¾î½º½ºÅ²
+					//ë¸”ë ˆìŠ¤,ì–´ë²¤,ì–´ìŠ¤ìŠ¤í‚¨
 					Thread.sleep(300);
 					for (L1Object l1object2 : L1World.getInstance().getObject()) {
 						   if (l1object2 instanceof L1NpcInstance) {
@@ -77,7 +77,7 @@ public class L1Gambling2 {
 					}
 				     player.setBuffnoch(0);
 			    	}else if(bettingmoney > 99999){
-			    	String chat = "°¨»çÇÕ´Ï´Ù. Çàº¹ÇÑ ÇÏ·çµÇ¼¼¿ä.";
+			    	String chat = "ê°ì‚¬í•©ë‹ˆë‹¤. í–‰ë³µí•œ í•˜ë£¨ë˜ì„¸ìš”.";
 					player.sendPackets(new S_NpcChatPacket(dealer, chat, 0));
 					player.broadcastPacket(new S_NpcChatPacket(dealer, chat, 0));
 					Thread.sleep(800);
@@ -112,7 +112,7 @@ public class L1Gambling2 {
 					}
 				     player.setBuffnoch(0);
 			    	}else if(bettingmoney < 20000){
-			    	String chat = "¾Æµ§ÀÌ ¸ğÀÚ¸£³×¿ä..." + bettingmoney + "¾Æµ§Àº Á¦°¡¸Ô½À´Ï´Ù!";
+			    	String chat = "ì•„ë´ì´ ëª¨ìë¥´ë„¤ìš”..." + bettingmoney + "ì•„ë´ì€ ì œê°€ë¨¹ìŠµë‹ˆë‹¤!";
 					player.sendPackets(new S_NpcChatPacket(dealer, chat, 0));
 					player.broadcastPacket(new S_NpcChatPacket(dealer, chat, 0));
 			    	}
@@ -135,13 +135,13 @@ public class L1Gambling2 {
 				    L1NpcInstance Npc = (L1NpcInstance) l1object;
 				    if (Npc.getNpcTemplate().get_npcId() == 300026){
 				    	L1NpcInstance dealer = Npc;
-				    	String chat = "ÀÌ¿ë·á´Â °ÅÁö´Â 2¸¸, ºÎÀÚ´ÔÀº 10¸¸ÀÔ´Ï´Ù.~!";
+				    	String chat = "ì´ìš©ë£ŒëŠ” ê±°ì§€ëŠ” 2ë§Œ, ë¶€ìë‹˜ì€ 10ë§Œì…ë‹ˆë‹¤.~!";
 						player.sendPackets(new S_NpcChatPacket(dealer, chat, 0));
 						player.broadcastPacket(new S_NpcChatPacket(dealer, chat, 0));
 				    }
 				   }
 			}
-			player.sendPackets(new S_Message_YN(252, npc.get_name())); // %0%s°¡ ´ç½Å°ú ¾ÆÀÌÅÛÀÇ °Å·¡¸¦ ¹Ù¶ó°í ÀÖ½À´Ï´Ù. °Å·¡ÇÕ´Ï±î? (Y/N)	
+			player.sendPackets(new S_Message_YN(252, npc.get_name())); // %0%sê°€ ë‹¹ì‹ ê³¼ ì•„ì´í…œì˜ ê±°ë˜ë¥¼ ë°”ë¼ê³  ìˆìŠµë‹ˆë‹¤. ê±°ë˜í•©ë‹ˆê¹Œ? (Y/N)	
 		}
 	}	
 }

@@ -54,7 +54,7 @@ public class IdFactory {
 	}
 
 	private void loadState() {
-		// DB·ÎºÎÅÍ MAXID¸¦ ¿ä±¸ÇÑ´Ù
+		// DBë¡œë¶€í„° MAXIDë¥¼ ìš”êµ¬í•œë‹¤
 		Connection con = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;

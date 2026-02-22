@@ -27,7 +27,7 @@ public class L1Armor extends L1Item {
 	public L1Armor() {
 	}
 
-	private int _ac = 0; // ¡Ü AC
+	private int _ac = 0; // â— AC
 
 	@Override
 	public int get_ac() {
@@ -38,7 +38,7 @@ public class L1Armor extends L1Item {
 		this._ac = i;
 	}
 
-	private int _damageReduction = 0; // ¡Ü µ¥¹ÌÁö °æ°¨
+	private int _damageReduction = 0; // â— ë°ë¯¸ì§€ ê²½ê°
 
 	@Override
 	public int getDamageReduction() {
@@ -49,7 +49,7 @@ public class L1Armor extends L1Item {
 		_damageReduction = i;
 	}
 
-	private int _weightReduction = 0; // ¡Ü Áß·® °æ°¨
+	private int _weightReduction = 0; // â— ì¤‘ëŸ‰ ê²½ê°
 
 	@Override
 	public int getWeightReduction() {
@@ -60,7 +60,7 @@ public class L1Armor extends L1Item {
 		_weightReduction = i;
 	}
 
-	private int _bowHitRate = 0; // ¡Ü È°ÀÇ ¸íÁßÀ²
+	private int _bowHitRate = 0; // â— í™œì˜ ëª…ì¤‘ìœ¨
 
 	@Override
 	public int getBowHitRate() {
@@ -71,7 +71,7 @@ public class L1Armor extends L1Item {
 		_bowHitRate = i;
 	}
 
-	private int _defense_water = 0; // ¡Ü ¼öÀÇ ¼Ó¼º ¹æ¾î
+	private int _defense_water = 0; // â— ìˆ˜ì˜ ì†ì„± ë°©ì–´
 
 	public void set_defense_water(int i) {
 		_defense_water = i;
@@ -82,7 +82,7 @@ public class L1Armor extends L1Item {
 		return this._defense_water;
 	}
 
-	private int _defense_wind = 0; // ¡Ü Ç³ÀÇ ¼Ó¼º ¹æ¾î
+	private int _defense_wind = 0; // â— í’ì˜ ì†ì„± ë°©ì–´
 
 	public void set_defense_wind(int i) {
 		_defense_wind = i;
@@ -93,7 +93,7 @@ public class L1Armor extends L1Item {
 		return this._defense_wind;
 	}
 
-	private int _defense_fire = 0; // ¡Ü ºÒÀÇ ¼Ó¼º ¹æ¾î
+	private int _defense_fire = 0; // â— ë¶ˆì˜ ì†ì„± ë°©ì–´
 
 	public void set_defense_fire(int i) {
 		_defense_fire = i;
@@ -104,7 +104,7 @@ public class L1Armor extends L1Item {
 		return this._defense_fire;
 	}
 
-	private int _defense_earth = 0; // ¡Ü ÈëÀÇ ¼Ó¼º ¹æ¾î
+	private int _defense_earth = 0; // â— í™ì˜ ì†ì„± ë°©ì–´
 
 	public void set_defense_earth(int i) {
 		_defense_earth = i;
@@ -115,7 +115,7 @@ public class L1Armor extends L1Item {
 		return this._defense_earth;
 	}
 
-	private int _regist_stun = 0; // ¡Ü ½ºÅÄ ³»¼º
+	private int _regist_stun = 0; // â— ìŠ¤íƒ  ë‚´ì„±
 
 	public void set_regist_stun(int i) {
 		_regist_stun = i;
@@ -126,7 +126,7 @@ public class L1Armor extends L1Item {
 		return this._regist_stun;
 	}
 
-	private int _regist_stone = 0; // ¡Ü ¼®À¯È­ÇĞ ³»¼º
+	private int _regist_stone = 0; // â— ì„ìœ í™”í•™ ë‚´ì„±
 
 	public void set_regist_stone(int i) {
 		_regist_stone = i;
@@ -137,7 +137,7 @@ public class L1Armor extends L1Item {
 		return this._regist_stone;
 	}
 
-	private int _regist_sleep = 0; // ¡Ü ¼ö¸é ³»¼º
+	private int _regist_sleep = 0; // â— ìˆ˜ë©´ ë‚´ì„±
 
 	public void set_regist_sleep(int i) {
 		_regist_sleep = i;
@@ -148,7 +148,7 @@ public class L1Armor extends L1Item {
 		return this._regist_sleep;
 	}
 
-	private int _regist_freeze = 0; // ¡Ü µ¿°á ³»¼º
+	private int _regist_freeze = 0; // â— ë™ê²° ë‚´ì„±
 
 	public void set_regist_freeze(int i) {
 		_regist_freeze = i;
@@ -159,7 +159,7 @@ public class L1Armor extends L1Item {
 		return this._regist_freeze;
 	}
 
-	private int _regist_sustain = 0; // ¡Ü hold ³»¼º
+	private int _regist_sustain = 0; // â— hold ë‚´ì„±
 
 	public void set_regist_sustain(int i) {
 		_regist_sustain = i;
@@ -170,7 +170,7 @@ public class L1Armor extends L1Item {
 		return this._regist_sustain;
 	}
 
-	private int _regist_blind = 0; // ¡Ü ¾îµÎ¿î °÷ ³»¼º
+	private int _regist_blind = 0; // â— ì–´ë‘ìš´ ê³³ ë‚´ì„±
 
 	public void set_regist_blind(int i) {
 		_regist_blind = i;
@@ -180,7 +180,7 @@ public class L1Armor extends L1Item {
 	public int get_regist_blind() {
 		return this._regist_blind;
 	}
-	private int _hitModifier = 0; // ¡Ü ¸íÁßÀ² º¸Á¤
+	private int _hitModifier = 0; // â— ëª…ì¤‘ìœ¨ ë³´ì •
 
 	@Override
 	public int getHitModifier() {
@@ -191,7 +191,7 @@ public class L1Armor extends L1Item {
 		_hitModifier = i;
 	}
 
-	private int _dmgModifier = 0; // ¡Ü µ¥¹ÌÁö º¸Á¤
+	private int _dmgModifier = 0; // â— ë°ë¯¸ì§€ ë³´ì •
 
 	@Override
 	public int getDmgModifier() {
@@ -202,7 +202,7 @@ public class L1Armor extends L1Item {
 		_dmgModifier = i;
 	}
 	
-	private int _bowDmgModifier = 0; // ¡Ü È°Ãß°¡ Å¸°İÄ¡ by.¸ù
+	private int _bowDmgModifier = 0; // â— í™œì¶”ê°€ íƒ€ê²©ì¹˜ by.ëª½
 
 	 @Override
 	 public int getBowDmgModifier() {

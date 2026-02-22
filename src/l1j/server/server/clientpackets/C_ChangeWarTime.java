@@ -48,7 +48,7 @@ public class C_ChangeWarTime extends ClientBasePacket {
 		L1Clan clan = L1World.getInstance().getClan(player.getClanname());
 		if (clan != null) {
 			int castle_id = clan.getCastleId();
-			if (castle_id != 0) { // º∫¡÷ ≈©∂ı
+			if (castle_id != 0) { // ÏÑ±Ï£º ÌÅ¨ÎûÄ
 				L1Castle l1castle = CastleTable.getInstance().getCastleTable(
 						castle_id);
 				Calendar cal = l1castle.getWarTime();

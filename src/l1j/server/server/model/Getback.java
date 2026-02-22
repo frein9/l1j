@@ -54,7 +54,7 @@ public class Getback {
 	private int _getbackTownId;
 	private int _getbackTownIdForElf;
 	private int _getbackTownIdForDarkelf;
-	private boolean _escapable; // ¹Ì»ç¿ë(mapids¿¡ °¡Áö°í ÀÖ°í, ¿©±â¿¡ ¿À±â Àü¿¡ Ã¼Å©µÇ°í ÀÖ´Ù)
+	private boolean _escapable; // ë¯¸ì‚¬ìš©(mapidsì— ê°€ì§€ê³  ìˆê³ , ì—¬ê¸°ì— ì˜¤ê¸° ì „ì— ì²´í¬ë˜ê³  ìˆë‹¤)
 
 	private Getback() {
 	}
@@ -70,7 +70,7 @@ public class Getback {
 		ResultSet rs = null;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			// µ¿¸ÊÀ¸·Î ¿¡¸®¾î ÁöÁ¤°ú ¹«ÁöÁ¤ÀÌ È¥ÀçÇÏ°í ÀÖÀ¸¸é(ÀÚ), ¿¡¸®¾î ÁöÁ¤À» ¸ÕÀú ÀĞ¾îµéÀÌ±â À§ÇØ area_x1 DESC
+			// ë™ë§µìœ¼ë¡œ ì—ë¦¬ì–´ ì§€ì •ê³¼ ë¬´ì§€ì •ì´ í˜¼ì¬í•˜ê³  ìˆìœ¼ë©´(ì), ì—ë¦¬ì–´ ì§€ì •ì„ ë¨¼ì € ì½ì–´ë“¤ì´ê¸° ìœ„í•´ area_x1 DESC
 			String sSQL = "SELECT * FROM getback ORDER BY area_mapid, area_x1 DESC ";
 			pstm = con.prepareStatement(sSQL);
 			rs = pstm.executeQuery();
@@ -111,11 +111,11 @@ public class Getback {
 	}
 
 	/**
-	 * pcÀÇ ÇöÀçÁö·ÎºÎÅÍ ±ÍÈ¯ Æ÷ÀÎÆ®¸¦ ÃëµæÇÑ´Ù.
+	 * pcì˜ í˜„ì¬ì§€ë¡œë¶€í„° ê·€í™˜ í¬ì¸íŠ¸ë¥¼ ì·¨ë“í•œë‹¤.
 	 * 
 	 * @param pc
-	 * @param bScroll_Escape(¹Ì»ç¿ë)
-	 * @return locx, locy, mapidÀÇ ¼ø¼­¿¡ °İ³³µÇ°í ÀÖ´Â ¹è¿­
+	 * @param bScroll_Escape(ë¯¸ì‚¬ìš©)
+	 * @return locx, locy, mapidì˜ ìˆœì„œì— ê²©ë‚©ë˜ê³  ìˆëŠ” ë°°ì—´
 	 */
 	public static int[] GetBack_Location(L1PcInstance pc, boolean bScroll_Escape) {
 
@@ -145,7 +145,7 @@ public class Getback {
 
 			loc = ReadGetbackInfo(getback, nPosition);
 
-			// town_id°¡ ÁöÁ¤µÇ°í ÀÖ´Â °æ¿ì´Â °Å±â¿¡ ±ÍÈ¯½ÃÅ²´Ù
+			// town_idê°€ ì§€ì •ë˜ê³  ìˆëŠ” ê²½ìš°ëŠ” ê±°ê¸°ì— ê·€í™˜ì‹œí‚¨ë‹¤
 			if (pc.isElf() && getback._getbackTownIdForElf > 0) {
 				loc = L1TownLocation
 						.getGetBackLoc(getback._getbackTownIdForElf);
@@ -156,7 +156,7 @@ public class Getback {
 				loc = L1TownLocation.getGetBackLoc(getback._getbackTownId);
 			}
 		}
-		// getback Å×ÀÌºí¿¡ µ¥ÀÌÅÍ°¡ ¾ø´Â °æ¿ì, SKT¿¡ ±ÍÈ¯
+		// getback í…Œì´ë¸”ì— ë°ì´í„°ê°€ ì—†ëŠ” ê²½ìš°, SKTì— ê·€í™˜
 		else {
 			loc[0] = 33089;
 			loc[1] = 33397;

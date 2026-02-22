@@ -10,18 +10,18 @@ public class GameServerSetting extends Thread{
 		return _instance;
 	}
 
-	/** Server Manager 1 °ü·Ã ºÎºĞ **/
-	public static boolean ÀÏ¹İ = false;
-	public static boolean ±Ó¼Ó¸» = false;
-	public static boolean ±Û·Î¹ú = false;
-	public static boolean Ç÷¸Í = false;
-	public static boolean ÆÄÆ¼ = false;
-	public static boolean Àå»ç = false;	
+	/** Server Manager 1 ê´€ë ¨ ë¶€ë¶„ **/
+	public static boolean ì¼ë°˜ = false;
+	public static boolean ê·“ì†ë§ = false;
+	public static boolean ê¸€ë¡œë²Œ = false;
+	public static boolean í˜ˆë§¹ = false;
+	public static boolean íŒŒí‹° = false;
+	public static boolean ì¥ì‚¬ = false;	
 	public static boolean Att = false;
 	public static boolean NYEvent = false;
 
 	public static int BugRaceDelay = 0;
-	public static int ¹ö°æ = 2;
+	public static int ë²„ê²½ = 2;
 	public static int RaceCount = 0;
 	public static boolean BugRaceRestart = true;
 
@@ -34,7 +34,7 @@ public class GameServerSetting extends Thread{
 	  	while(true){
 	  		try{
 	  			sleep(20000);
-//             System.out.println("´ÜÀÏ ¾²·¹µå ÀÛµ¿Áß .... ");
+//             System.out.println("ë‹¨ì¼ ì“°ë ˆë“œ ì‘ë™ì¤‘ .... ");
 	  		}catch(Exception e){}
 		}
 	}

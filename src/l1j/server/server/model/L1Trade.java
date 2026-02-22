@@ -64,9 +64,9 @@ public class L1Trade {
 					trading_partner.setTradeOk(false);
 					player.setTradeID(0);
 					trading_partner.setTradeID(0);*/
-					L1Trade trade = new L1Trade(); // Ãß°¡
-   			        trade.TradeCancel(player); // Ãß°¡ 
-    			    trade.TradeCancel(trading_partner); // °Å·¡Ã¢ ¹ö±× ¹æÁö ¼öÁ¤ By_Black
+					L1Trade trade = new L1Trade(); // ì¶”ê°€
+   			        trade.TradeCancel(player); // ì¶”ê°€ 
+    			    trade.TradeCancel(trading_partner); // ê±°ë˜ì°½ ë²„ê·¸ ë°©ì§€ ìˆ˜ì • By_Black
 					return;
 				}
 				player.getInventory().tradeItem(l1iteminstance, itemcount,
@@ -76,9 +76,9 @@ public class L1Trade {
 				trading_partner.sendPackets(new S_TradeAddItem(l1iteminstance,
 						itemcount, 1));
 				
-				//** 2Áß ±³È¯ ¹ö±× ¼öÁ¤  **//		Byµµ¿ì³Ê
+				//** 2ì¤‘ êµí™˜ ë²„ê·¸ ìˆ˜ì •  **//		Byë„ìš°ë„ˆ
 				player.setTradeTarget(null);	
-				//** 2Áß ±³È¯ ¹ö±× ¼öÁ¤  **//		Byµµ¿ì³Ê
+				//** 2ì¤‘ êµí™˜ ë²„ê·¸ ìˆ˜ì •  **//		Byë„ìš°ë„ˆ
 				
 		}
 		}
@@ -136,9 +136,9 @@ public class L1Trade {
 			trading_partner.setTradeID(0);
             player.setTrade(false);
 	     	trading_partner.setTrade(false);
-			//** 2Áß ±³È¯ ¹ö±× ¼öÁ¤  **//		Byµµ¿ì³Ê
+			//** 2ì¤‘ êµí™˜ ë²„ê·¸ ìˆ˜ì •  **//		Byë„ìš°ë„ˆ
 			player.setTradeTarget(null);	
-			//** 2Áß ±³È¯ ¹ö±× ¼öÁ¤  **//		Byµµ¿ì³Ê	   
+			//** 2ì¤‘ êµí™˜ ë²„ê·¸ ìˆ˜ì •  **//		Byë„ìš°ë„ˆ	   
 			player.turnOnOffLight();
 			trading_partner.turnOnOffLight();
 		
@@ -152,9 +152,9 @@ public class L1Trade {
 				L1Gambling gambling = new L1Gambling();
 				gambling.Gambling(player, l1iteminstance1.getCount());
 
-				//** 2Áß ±³È¯ ¹ö±× ¼öÁ¤  **//		Byµµ¿ì³Ê
+				//** 2ì¤‘ êµí™˜ ë²„ê·¸ ìˆ˜ì •  **//		Byë„ìš°ë„ˆ
 				player.setTradeTarget(null);	
-				//** 2Áß ±³È¯ ¹ö±× ¼öÁ¤  **//		Byµµ¿ì³Ê
+				//** 2ì¤‘ êµí™˜ ë²„ê·¸ ìˆ˜ì •  **//		Byë„ìš°ë„ˆ
 				
 				}else if(player.getX() == 33420 && player.getY() == 32799 && player.getMapId() == 4){
 				List player_tradelist = player.getTradeWindowInventory().getItems();
@@ -164,9 +164,9 @@ public class L1Trade {
 				player.setTradeOk(false);
 				L1Gambling2 gambling = new L1Gambling2();
 				gambling.Gambling(player, l1iteminstance1.getCount());
-				//** 2Áß ±³È¯ ¹ö±× ¼öÁ¤  **//		Byµµ¿ì³Ê
+				//** 2ì¤‘ êµí™˜ ë²„ê·¸ ìˆ˜ì •  **//		Byë„ìš°ë„ˆ
 				//player.setTradeTarget(null};
-				//** 2Áß ±³È¯ ¹ö±× ¼öÁ¤  **//		Byµµ¿ì³Ê
+				//** 2ì¤‘ êµí™˜ ë²„ê·¸ ìˆ˜ì •  **//		Byë„ìš°ë„ˆ
 				
 				}else if(player.getX() == 33515 && player.getY() == 32851 && player.getMapId() == 4){
 					List player_tradelist = player.getTradeWindowInventory().getItems();
@@ -176,9 +176,9 @@ public class L1Trade {
 					player.setTradeOk(false);
 					L1Gambling3 gambling = new L1Gambling3();
 					gambling.Gambling(player, l1iteminstance1.getCount());
-					//** 2Áß ±³È¯ ¹ö±× ¼öÁ¤  **//		Byµµ¿ì³Ê
+					//** 2ì¤‘ êµí™˜ ë²„ê·¸ ìˆ˜ì •  **//		Byë„ìš°ë„ˆ
 					//player.setTradeTarget(null};
-					//** 2Áß ±³È¯ ¹ö±× ¼öÁ¤  **//		Byµµ¿ì³Ê
+					//** 2ì¤‘ êµí™˜ ë²„ê·¸ ìˆ˜ì •  **//		Byë„ìš°ë„ˆ
 				
 				}
 	        }
@@ -218,9 +218,9 @@ public class L1Trade {
 			trading_partner.setTradeID(0);
 			player.setTrade(false);
 	     	trading_partner.setTrade(false);
-			//** 2Áß ±³È¯ ¹ö±× ¼öÁ¤  **//		Byµµ¿ì³Ê
+			//** 2ì¤‘ êµí™˜ ë²„ê·¸ ìˆ˜ì •  **//		Byë„ìš°ë„ˆ
 			player.setTradeTarget(null);	
-			//** 2Áß ±³È¯ ¹ö±× ¼öÁ¤  **//		Byµµ¿ì³Ê
+			//** 2ì¤‘ êµí™˜ ë²„ê·¸ ìˆ˜ì •  **//		Byë„ìš°ë„ˆ
 		}
 	}
 }

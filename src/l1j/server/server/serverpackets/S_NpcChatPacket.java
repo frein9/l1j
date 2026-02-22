@@ -55,7 +55,7 @@ public class S_NpcChatPacket extends ServerBasePacket {
 
 		case 3: // world chat
 			writeC(Opcodes.S_OPCODE_NPCSHOUT);
-			writeC(type); // XXX ¹é»öÀÌ µÈ´Ù
+			writeC(type); // XXX ë°±ìƒ‰ì´ ëœë‹¤
 			writeD(npc.getId());
 			writeS("[" + npc.getName() + "] " + chat);
 			break;

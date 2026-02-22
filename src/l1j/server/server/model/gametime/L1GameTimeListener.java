@@ -20,53 +20,53 @@ package l1j.server.server.model.gametime;
 
 /**
  * <p>
- * ¿¡µ§ ½Ã°£ÀÇ º¯È­¸¦ ¹Þ±â À§ÇÑ Ã»ÃëÀÚ ÀÎÅÍÆäÀÌ½º.
+ * ì—ë´ ì‹œê°„ì˜ ë³€í™”ë¥¼ ë°›ê¸° ìœ„í•œ ì²­ì·¨ìž ì¸í„°íŽ˜ì´ìŠ¤.
  * </p>
  * <p>
- * ¿¡µ§ ½Ã°£ÀÇ º¯È­¸¦ °¨½ÃÇØ¾ß ÇÒ Å¬·¡½º´Â, ÀÌ ÀÎÅÍÆäÀÌ½º¿¡ Æ÷ÇÔÇÒ ¼ö ÀÖ¾î ¸ðµç ¸Þ¼Òµå¸¦ Á¤ÀÇÇØ ÀÌ ÀÎÅÍÆäÀÌ½º¸¦ ½ÇÀåÇÏ´ÂÁö,
- * °ü·ÃÇÏ´Â ¸Þ¼Òµå¸¸À» ¿À¹ö¶óÀÌµå(override) ÇØ abstract Å¬·¡½º L1GameTimeAdapter¸¦ È®ÀåÇÑ´Ù.
+ * ì—ë´ ì‹œê°„ì˜ ë³€í™”ë¥¼ ê°ì‹œí•´ì•¼ í•  í´ëž˜ìŠ¤ëŠ”, ì´ ì¸í„°íŽ˜ì´ìŠ¤ì— í¬í•¨í•  ìˆ˜ ìžˆì–´ ëª¨ë“  ë©”ì†Œë“œë¥¼ ì •ì˜í•´ ì´ ì¸í„°íŽ˜ì´ìŠ¤ë¥¼ ì‹¤ìž¥í•˜ëŠ”ì§€,
+ * ê´€ë ¨í•˜ëŠ” ë©”ì†Œë“œë§Œì„ ì˜¤ë²„ë¼ì´ë“œ(override) í•´ abstract í´ëž˜ìŠ¤ L1GameTimeAdapterë¥¼ í™•ìž¥í•œë‹¤.
  * </p>
  * <p>
- * ±×·¯ÇÑ Å¬·¡½º·ÎºÎÅÍ ÀÛ¼ºµÈ Ã»ÃëÀÚ ¿ÀºêÁ§Æ®´Â, L1GameTimeClockÀÇ addListener ¸Þ¼Òµå¸¦ »ç¿ëÇØ L1GameTimeClock¿¡ µî·ÏµÈ´Ù.
- * ¿¡µ§ ½Ã°£ º¯È­ÀÇ ÅëÁö´Â, ¼¼¿ù ½ÃºÐÀÌ °¢°¢ ¹Ù²î¾úÀ» ¶§¿¡ ÇàÇØÁø´Ù.
+ * ê·¸ëŸ¬í•œ í´ëž˜ìŠ¤ë¡œë¶€í„° ìž‘ì„±ëœ ì²­ì·¨ìž ì˜¤ë¸Œì íŠ¸ëŠ”, L1GameTimeClockì˜ addListener ë©”ì†Œë“œë¥¼ ì‚¬ìš©í•´ L1GameTimeClockì— ë“±ë¡ëœë‹¤.
+ * ì—ë´ ì‹œê°„ ë³€í™”ì˜ í†µì§€ëŠ”, ì„¸ì›” ì‹œë¶„ì´ ê°ê° ë°”ë€Œì—ˆì„ ë•Œì— í–‰í•´ì§„ë‹¤.
  * </p>
  * <p>
- * ÀÌ·¯ÇÑ ¸Þ¼Òµå´Â, L1GameTimeClockÀÇ thread»ó¿¡¼­ µ¿ÀÛÇÑ´Ù.
- * ÀÌ·¯ÇÑ ¸Þ¼ÒµåÀÇ Ã³¸®¿¡ ½Ã°£ÀÌ °É·ÈÀ» °æ¿ì, ´Ù¸¥ Ã»ÃëÀÚ¿¡°Ô·ÎÀÇ ÅëÁö°¡ ´ÊÀ» °¡´É¼ºÀÌ ÀÖ´Ù.
- * ¿Ï·á±îÁö ½Ã°£À» ÇÊ¿ä·Î ÇÏ´Â Ã³¸®³ª, thread¸¦ ºí·Ï ÇÏ´Â ¸Þ¼ÒµåÀÇ È£ÃâÀÌ Æ÷ÇÔµÇ´Â Ã³¸®¸¦ ½Ç½ÃÇÏ´Â °æ¿ì´Â, ³»ºÎ¿¡¼­ »õ·Ó°Ô thread¸¦ ÀÛ¼ºÇØ Ã³¸®¸¦ ½Ç½ÃÇØ¾ß ÇÏ´Â °ÍÀÌ´Ù.
+ * ì´ëŸ¬í•œ ë©”ì†Œë“œëŠ”, L1GameTimeClockì˜ threadìƒì—ì„œ ë™ìž‘í•œë‹¤.
+ * ì´ëŸ¬í•œ ë©”ì†Œë“œì˜ ì²˜ë¦¬ì— ì‹œê°„ì´ ê±¸ë ¸ì„ ê²½ìš°, ë‹¤ë¥¸ ì²­ì·¨ìžì—ê²Œë¡œì˜ í†µì§€ê°€ ëŠ¦ì„ ê°€ëŠ¥ì„±ì´ ìžˆë‹¤.
+ * ì™„ë£Œê¹Œì§€ ì‹œê°„ì„ í•„ìš”ë¡œ í•˜ëŠ” ì²˜ë¦¬ë‚˜, threadë¥¼ ë¸”ë¡ í•˜ëŠ” ë©”ì†Œë“œì˜ í˜¸ì¶œì´ í¬í•¨ë˜ëŠ” ì²˜ë¦¬ë¥¼ ì‹¤ì‹œí•˜ëŠ” ê²½ìš°ëŠ”, ë‚´ë¶€ì—ì„œ ìƒˆë¡­ê²Œ threadë¥¼ ìž‘ì„±í•´ ì²˜ë¦¬ë¥¼ ì‹¤ì‹œí•´ì•¼ í•˜ëŠ” ê²ƒì´ë‹¤.
  * </p>
  * 
  */
 public interface L1GameTimeListener {
 	/**
-	 * ¿¡µ§ ½Ã°£¿¡ ´ÞÀÌ ¹Ù²î¾úÀ» ¶§¿¡ ºÒ·Á °£´Ù.
+	 * ì—ë´ ì‹œê°„ì— ë‹¬ì´ ë°”ë€Œì—ˆì„ ë•Œì— ë¶ˆë ¤ ê°„ë‹¤.
 	 * 
 	 * @param time
-	 *            ÃÖ½ÅÀÇ ¿¡µ§ ½Ã°£
+	 *            ìµœì‹ ì˜ ì—ë´ ì‹œê°„
 	 */
 	public void onMonthChanged(L1GameTime time);
 
 	/**
-	 * ¿¡µ§ ½Ã°£¿¡ ³¯ÀÌ ¹Ù²î¾úÀ» ¶§¿¡ ºÒ·Á °£´Ù.
+	 * ì—ë´ ì‹œê°„ì— ë‚ ì´ ë°”ë€Œì—ˆì„ ë•Œì— ë¶ˆë ¤ ê°„ë‹¤.
 	 * 
 	 * @param time
-	 *            ÃÖ½ÅÀÇ ¿¡µ§ ½Ã°£
+	 *            ìµœì‹ ì˜ ì—ë´ ì‹œê°„
 	 */
 	public void onDayChanged(L1GameTime time);
 
 	/**
-	 * ¿¡µ§ ½Ã°£¿¡ ½Ã°£ÀÌ ¹Ù²î¾úÀ» ¶§¿¡ ºÒ·Á °£´Ù.
+	 * ì—ë´ ì‹œê°„ì— ì‹œê°„ì´ ë°”ë€Œì—ˆì„ ë•Œì— ë¶ˆë ¤ ê°„ë‹¤.
 	 * 
 	 * @param time
-	 *            ÃÖ½ÅÀÇ ¿¡µ§ ½Ã°£
+	 *            ìµœì‹ ì˜ ì—ë´ ì‹œê°„
 	 */
 	public void onHourChanged(L1GameTime time);
 
 	/**
-	 * ¿¡µ§ ½Ã°£¿¡ ºÐÀÌ ¹Ù²î¾úÀ» ¶§¿¡ ºÒ·Á °£´Ù.
+	 * ì—ë´ ì‹œê°„ì— ë¶„ì´ ë°”ë€Œì—ˆì„ ë•Œì— ë¶ˆë ¤ ê°„ë‹¤.
 	 * 
 	 * @param time
-	 *            ÃÖ½ÅÀÇ ¿¡µ§ ½Ã°£
+	 *            ìµœì‹ ì˜ ì—ë´ ì‹œê°„
 	 */
 	public void onMinuteChanged(L1GameTime time);
 }

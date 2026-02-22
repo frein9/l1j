@@ -62,7 +62,7 @@ public class S_AttackMissPacket extends ServerBasePacket {
 		writeD(targetId);
 		writeC(0);
 		writeC(0);
-	//	writeC(0); //Âü°í ÀÌ¹ø ¿Ã¶ó¿ÂÀÚ·á¿¡ ÁÖ¼®µÊ(10.02,26)
+	//	writeC(0); //ì°¸ê³  ì´ë²ˆ ì˜¬ë¼ì˜¨ìë£Œì— ì£¼ì„ë¨(10.02,26)
 		writeD(0);
 	}
 
@@ -73,7 +73,7 @@ public class S_AttackMissPacket extends ServerBasePacket {
 		writeD(targetId);
 		writeC(0); 
 		writeC(0);
-	//	writeC(0); //Âü°í ÀÌ¹ø ¿Ã¶ó¿ÂÀÚ·á¿¡ ÁÖ¼®µÊ(10.02,26)
+	//	writeC(0); //ì°¸ê³  ì´ë²ˆ ì˜¬ë¼ì˜¨ìë£Œì— ì£¼ì„ë¨(10.02,26)
 		writeD(0); 
 	}
 

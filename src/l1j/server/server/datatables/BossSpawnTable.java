@@ -100,6 +100,6 @@ public class BossSpawnTable {
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);
 		}
-		_log.log(Level.FINE, "ÃÑº¸½º monster¼ö " + spawnCount + "¸¶¸®");
+		_log.log(Level.FINE, "ì´ë³´ìŠ¤ monsterìˆ˜ " + spawnCount + "ë§ˆë¦¬");
 	}
 }

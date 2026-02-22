@@ -76,7 +76,7 @@ public class L1TrapInstance extends L1Object {
 
 		for (int i = 0; i < 50; i++) {
 			int rndX = _random.nextInt(_rndPt.getX() + 1)
-					* (_random.nextInt(2) == 1 ?  1 : -1); // 1/2ÀÇ È®·ü·Î ¸¶ÀÌ³Ê½º·Î ÇÑ´Ù
+					* (_random.nextInt(2) == 1 ?  1 : -1); // 1/2ì˜ í™•ë¥ ë¡œ ë§ˆì´ë„ˆìŠ¤ë¡œ í•œë‹¤
 			int rndY = _random.nextInt(_rndPt.getY() + 1)
 					* (_random.nextInt(2) == 1 ?  1 : -1);
 
@@ -89,7 +89,7 @@ public class L1TrapInstance extends L1Object {
 				break;
 			}
 		}
-		// ·çÇÁ³»¿¡¼­ À§Ä¡°¡ È®Á¤ÇÏÁö ¾Ê´Â °æ¿ì, ÀüÈ¸¿Í °°Àº À§Ä¡°¡ µÈ´Ù.
+		// ë£¨í”„ë‚´ì—ì„œ ìœ„ì¹˜ê°€ í™•ì •í•˜ì§€ ì•ŠëŠ” ê²½ìš°, ì „íšŒì™€ ê°™ì€ ìœ„ì¹˜ê°€ ëœë‹¤.
 	}
 
 	public void enableTrap() {

@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 import l1j.server.Config;
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.model.event.BugRace;//¹ö°æ
+import l1j.server.server.model.event.BugRace;//ë²„ê²½
 
 public class BugRaceTimeControl implements Runnable {
 	private static Logger _log = Logger.getLogger(BugRaceTimeControl.class
@@ -58,8 +58,8 @@ public class BugRaceTimeControl implements Runnable {
 		  return cal;
 		 }
 
-// ¹ö±×·¹ÀÌ½º½ÃÀÛºÎºĞ
-   private void checkBugRaceTime() {   // ¹ö°æ½Ã°£Ã¼Å©
+// ë²„ê·¸ë ˆì´ìŠ¤ì‹œì‘ë¶€ë¶„
+   private void checkBugRaceTime() {   // ë²„ê²½ì‹œê°„ì²´í¬
    SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
     int nowtime = Integer.valueOf(sdf.format(getRealTime().getTime()));
 	int BugRaceTime = Config.RATE_BUGRACE_TIME;

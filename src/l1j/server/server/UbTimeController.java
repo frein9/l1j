@@ -46,7 +46,7 @@ public class UbTimeController implements Runnable {
 	public void run() {
 		try {
 			while (true) {
-				checkUbTime(); // UB°³½Ã ½Ã°£À» Ã¼Å©
+				checkUbTime(); // UBê°œì‹œ ì‹œê°„ì„ ì²´í¬
 				Thread.sleep(15000);
 				}
 		} catch (Exception e1) {
@@ -57,27 +57,27 @@ public class UbTimeController implements Runnable {
 	private void checkUbTime() {
 		for (L1UltimateBattle ub : UBTable.getInstance().getAllUb()) {
 			if (ub.checkUbTime() && !ub.isActive()) {
-				ub.start(); // UB°³½Ã
+				ub.start(); // UBê°œì‹œ
 				switch (ub.getUbId()) {
-				case 1: // ±â¶õ
-					Announcements.getInstance().announceToAll("[******] Àá½ÃÈÄ ±â¶õ ¹«ÇÑ´ëÀüÀÌ ½ÃÀÛµË´Ï´Ù.");
-					Announcements.getInstance().announceToAll("Âü°¡¸¦ ¿øÇÏ½Ã´Â ºĞµéÀº Áö±İ ÀÔÀåÇÏ¿© ÁÖ½Ê½Ã¿À.");
+				case 1: // ê¸°ë€
+					Announcements.getInstance().announceToAll("[******] ì ì‹œí›„ ê¸°ë€ ë¬´í•œëŒ€ì „ì´ ì‹œì‘ë©ë‹ˆë‹¤.");
+					Announcements.getInstance().announceToAll("ì°¸ê°€ë¥¼ ì›í•˜ì‹œëŠ” ë¶„ë“¤ì€ ì§€ê¸ˆ ì…ì¥í•˜ì—¬ ì£¼ì‹­ì‹œì˜¤.");
 					break;
-				case 2: // À£´ø
-					Announcements.getInstance().announceToAll("[******] Àá½ÃÈÄ À£´ø ¹«ÇÑ´ëÀüÀÌ ½ÃÀÛµË´Ï´Ù.");
-					Announcements.getInstance().announceToAll("Âü°¡¸¦ ¿øÇÏ½Ã´Â ºĞµéÀº Áö±İ ÀÔÀåÇÏ¿© ÁÖ½Ê½Ã¿À.");
+				case 2: // ì›°ë˜
+					Announcements.getInstance().announceToAll("[******] ì ì‹œí›„ ì›°ë˜ ë¬´í•œëŒ€ì „ì´ ì‹œì‘ë©ë‹ˆë‹¤.");
+					Announcements.getInstance().announceToAll("ì°¸ê°€ë¥¼ ì›í•˜ì‹œëŠ” ë¶„ë“¤ì€ ì§€ê¸ˆ ì…ì¥í•˜ì—¬ ì£¼ì‹­ì‹œì˜¤.");
 					break;
-				case 3: // ±Û¸»
-					Announcements.getInstance().announceToAll("[******] Àá½ÃÈÄ ±Û·çµò ¹«ÇÑ´ëÀüÀÌ ½ÃÀÛµË´Ï´Ù.");
-					Announcements.getInstance().announceToAll("Âü°¡¸¦ ¿øÇÏ½Ã´Â ºĞµéÀº Áö±İ ÀÔÀåÇÏ¿© ÁÖ½Ê½Ã¿À.");
+				case 3: // ê¸€ë§
+					Announcements.getInstance().announceToAll("[******] ì ì‹œí›„ ê¸€ë£¨ë”˜ ë¬´í•œëŒ€ì „ì´ ì‹œì‘ë©ë‹ˆë‹¤.");
+					Announcements.getInstance().announceToAll("ì°¸ê°€ë¥¼ ì›í•˜ì‹œëŠ” ë¶„ë“¤ì€ ì§€ê¸ˆ ì…ì¥í•˜ì—¬ ì£¼ì‹­ì‹œì˜¤.");
 					break;
-				case 4: // ¸»¼¶
-					Announcements.getInstance().announceToAll("[******] Àá½ÃÈÄ ¸»ÇÏ´Â¼¶ ¹«ÇÑ´ëÀüÀÌ ½ÃÀÛµË´Ï´Ù.");
-					Announcements.getInstance().announceToAll("Âü°¡¸¦ ¿øÇÏ½Ã´Â ºĞµéÀº Áö±İ ÀÔÀåÇÏ¿© ÁÖ½Ê½Ã¿À.");
+				case 4: // ë§ì„¬
+					Announcements.getInstance().announceToAll("[******] ì ì‹œí›„ ë§í•˜ëŠ”ì„¬ ë¬´í•œëŒ€ì „ì´ ì‹œì‘ë©ë‹ˆë‹¤.");
+					Announcements.getInstance().announceToAll("ì°¸ê°€ë¥¼ ì›í•˜ì‹œëŠ” ë¶„ë“¤ì€ ì§€ê¸ˆ ì…ì¥í•˜ì—¬ ì£¼ì‹­ì‹œì˜¤.");
 					break;
-				case 5: // Àº¸»
-					Announcements.getInstance().announceToAll("[******] Àá½ÃÈÄ Àº±â»ç ¸¶À» ¹«ÇÑ´ëÀüÀÌ ½ÃÀÛµË´Ï´Ù.");
-					Announcements.getInstance().announceToAll("Âü°¡¸¦ ¿øÇÏ½Ã´Â ºĞµéÀº Áö±İ ÀÔÀåÇÏ¿© ÁÖ½Ê½Ã¿À.");
+				case 5: // ì€ë§
+					Announcements.getInstance().announceToAll("[******] ì ì‹œí›„ ì€ê¸°ì‚¬ ë§ˆì„ ë¬´í•œëŒ€ì „ì´ ì‹œì‘ë©ë‹ˆë‹¤.");
+					Announcements.getInstance().announceToAll("ì°¸ê°€ë¥¼ ì›í•˜ì‹œëŠ” ë¶„ë“¤ì€ ì§€ê¸ˆ ì…ì¥í•˜ì—¬ ì£¼ì‹­ì‹œì˜¤.");
 					break;					
 				}	
 			}

@@ -26,7 +26,7 @@ public class L1ScarecrowInstance extends L1NpcInstance {
 			
 		} else { 
 		if (attack.calcHit()) {
-			if (player.getLevel() < 5) { // LVÁ¦ÇÑ ¹ö´Â °æ¿ì´Â ¿©±â¸¦ º¯°æ
+			if (player.getLevel() < 5) { // LVì œí•œ ë²„ëŠ” ê²½ìš°ëŠ” ì—¬ê¸°ë¥¼ ë³€ê²½
 				ArrayList<L1PcInstance> targetList = new ArrayList<L1PcInstance>();
 
 				targetList.add(player);
@@ -35,12 +35,12 @@ public class L1ScarecrowInstance extends L1NpcInstance {
 				CalcExp.calcExp(player, getId(),
 						targetList, hateList, getExp());
 			}
-			if (getHeading() < 7) { // Áö±ÝÀÇ ¹æÇâÀ» Ãëµæ
-				setHeading(getHeading() + 1); // Áö±ÝÀÇ ¹æÇâÀ» ¼³Á¤
+			if (getHeading() < 7) { // ì§€ê¸ˆì˜ ë°©í–¥ì„ ì·¨ë“
+				setHeading(getHeading() + 1); // ì§€ê¸ˆì˜ ë°©í–¥ì„ ì„¤ì •
 			} else {
-				setHeading(0); // Áö±ÝÀÇ ¹æÇâÀÌ 7 ÀÌ»óÀÌ µÇ¸é(ÀÚ) Áö±ÝÀÇ ¹æÇâÀ» 0¿¡ µÇµ¹¸°´Ù
+				setHeading(0); // ì§€ê¸ˆì˜ ë°©í–¥ì´ 7 ì´ìƒì´ ë˜ë©´(ìž) ì§€ê¸ˆì˜ ë°©í–¥ì„ 0ì— ë˜ëŒë¦°ë‹¤
 			}
-			broadcastPacket(new S_ChangeHeading(this)); // ¹æÇâÀÇ º¯°æ
+			broadcastPacket(new S_ChangeHeading(this)); // ë°©í–¥ì˜ ë³€ê²½
 		}
 		attack.action();
 	}

@@ -69,19 +69,19 @@ public class L1Shop {
 	}
 
 	/**
-	 * ÀÌ »óÁ¡¿¡¼­, ÁöÁ¤µÈ ¾ÆÀÌÅÛÀÌ ¸ÅÀÔ °¡´ÉÇÑ »óÅÂÀÏ±î¸¦ µ¹·ÁÁØ´Ù.
+	 * ì´ ìƒì ì—ì„œ, ì§€ì •ëœ ì•„ì´í…œì´ ë§¤ì… ê°€ëŠ¥í•œ ìƒíƒœì¼ê¹Œë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 * 
 	 * @param item
-	 * @return ¾ÆÀÌÅÛÀÌ ¸ÅÀÔ °¡´ÉÇÏ¸é true
+	 * @return ì•„ì´í…œì´ ë§¤ì… ê°€ëŠ¥í•˜ë©´ true
 	 */
 	private boolean isPurchaseableItem(L1ItemInstance item) {
 		if (item == null) {
 			return false;
 		}
-		if (item.isEquipped()) { // ÀåºñÁßÀÌ¸é ºÒ°¡
+		if (item.isEquipped()) { // ì¥ë¹„ì¤‘ì´ë©´ ë¶ˆê°€
 			return false;
 		}
-		if (item.getEnchantLevel() != 0) { // °­È­(or¾àÈ­)µÇ°í ÀÖÀ¸¸é ºÒ°¡
+		if (item.getEnchantLevel() != 0) { // ê°•í™”(orì•½í™”)ë˜ê³  ìˆìœ¼ë©´ ë¶ˆê°€
 			return false;
 		}
 
@@ -111,11 +111,11 @@ public class L1Shop {
 	}
 
 	/**
-	 * ¸ñ·Ï³»ÀÇ ¸ÅÀÔ °¡´É ¾ÆÀÌÅÛÀ» »çÁ¤ÇÑ´Ù.
+	 * ëª©ë¡ë‚´ì˜ ë§¤ì… ê°€ëŠ¥ ì•„ì´í…œì„ ì‚¬ì •í•œë‹¤.
 	 * 
 	 * @param inv
-	 *            »çÁ¤ ´ë»óÀÇ ¸ñ·Ï
-	 * @return »çÁ¤µÈ ¸ÅÀÔ °¡´É ¾ÆÀÌÅÛÀÇ ¸®½ºÆ®
+	 *            ì‚¬ì • ëŒ€ìƒì˜ ëª©ë¡
+	 * @return ì‚¬ì •ëœ ë§¤ì… ê°€ëŠ¥ ì•„ì´í…œì˜ ë¦¬ìŠ¤íŠ¸
 	 */
 	public List<L1AssessedItem> assessItems(L1PcInventory inv) {
 		List<L1AssessedItem> result = new ArrayList<L1AssessedItem>();
@@ -133,33 +133,33 @@ public class L1Shop {
 	}
 
 	/**
-	 * ÇÃ·¹ÀÌ¾î¿¡ ¾ÆÀÌÅÛÀ» ÆÇ¸ÅÇÒ ¼ö ÀÖ´Â °ÍÀ» º¸ÁõÇÑ´Ù.
+	 * í”Œë ˆì´ì–´ì— ì•„ì´í…œì„ íŒë§¤í•  ìˆ˜ ìˆëŠ” ê²ƒì„ ë³´ì¦í•œë‹¤.
 	 * 
-	 * @return ¾î¶°ÇÑ ÀÌÀ¯·Î½á ¾ÆÀÌÅÛÀ» ÆÇ¸ÅÇÒ ¼ö ¾ø´Â °æ¿ì, false
+	 * @return ì–´ë– í•œ ì´ìœ ë¡œì¨ ì•„ì´í…œì„ íŒë§¤í•  ìˆ˜ ì—†ëŠ” ê²½ìš°, false
 	 */
 	private boolean ensureSell(L1PcInstance pc, L1ShopBuyOrderList orderList) {
 		int price = orderList.getTotalPriceTaxIncluded();
-		// ¿À¹öÇÃ·Î¿ì Ã¼Å©
+		// ì˜¤ë²„í”Œë¡œìš° ì²´í¬
 		if (!IntRange.includes(price, 0, 2000000000)) {
-			// ÃÑÆÇ ¸Å°¡°İÀº%d¾Æµ¥³ª¸¦ ÃÊ°úÇÒ ¼ö ¾ø½À´Ï´Ù.
+			// ì´íŒ ë§¤ê°€ê²©ì€%dì•„ë°ë‚˜ë¥¼ ì´ˆê³¼í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 			pc.sendPackets(new S_ServerMessage(904, "2000000000"));
 			return false;
 		}
-		// ±¸ÀÔÇÒ ¼ö ÀÖÀ»±î Ã¼Å©
+		// êµ¬ì…í•  ìˆ˜ ìˆì„ê¹Œ ì²´í¬
 		if (!pc.getInventory().checkItem(L1ItemId.ADENA, price)) {
 			System.out.println(price);
-			// \f1¾Æµ¥³ª°¡ ºÎÁ·ÇÕ´Ï´Ù.
+			// \f1ì•„ë°ë‚˜ê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.
 			pc.sendPackets(new S_ServerMessage(189));
 			return false;
 		}
-		// Áß·® Ã¼Å©
+		// ì¤‘ëŸ‰ ì²´í¬
 		int currentWeight = pc.getInventory().getWeight() * 1000;
 		if (currentWeight + orderList.getTotalWeight() > pc.getMaxWeight() * 1000) {
-			// ¾ÆÀÌÅÛÀÌ ³Ê¹« ¹«°Å¿ö, ´õ ÀÌ»ó °¡Áú ¼ö ¾ø½À´Ï´Ù.
+			// ì•„ì´í…œì´ ë„ˆë¬´ ë¬´ê±°ì›Œ, ë” ì´ìƒ ê°€ì§ˆ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 			pc.sendPackets(new S_ServerMessage(82));
 			return false;
 		}
-		// °³¼ö Ã¼Å©
+		// ê°œìˆ˜ ì²´í¬
 		int totalCount = pc.getInventory().getSize();
 		for (L1ShopBuyOrder order : orderList.getList()) {
 			L1Item temp = order.getItem().getItem();
@@ -172,19 +172,19 @@ public class L1Shop {
 			}
 		}
 		if (totalCount > 180) {
-			// \f1ÇÑ»ç¶÷ÀÇ Ä³¸¯ÅÍ°¡ °¡Áö°í °ÉÀ» ¼ö ÀÖ´Â ¾ÆÀÌÅÛÀº ÃÖ´ë 180°³±îÁöÀÔ´Ï´Ù.
+			// \f1í•œì‚¬ëŒì˜ ìºë¦­í„°ê°€ ê°€ì§€ê³  ê±¸ì„ ìˆ˜ ìˆëŠ” ì•„ì´í…œì€ ìµœëŒ€ 180ê°œê¹Œì§€ì…ë‹ˆë‹¤.
 			pc.sendPackets(new S_ServerMessage(263));
 			return false;
 		}
-//		 ########## (¹ö±× ¹æÁö) »óÁ¡ ¹ö±× ¹æÁö
+//		 ########## (ë²„ê·¸ ë°©ì§€) ìƒì  ë²„ê·¸ ë°©ì§€
 		if (price <= 0 || price > 2000000000) {
 			pc.sendPackets(new S_Disconnect());
             return false;
         }
-		  //±¸¸Å¼ö·®ÇÑ°è by
-		  int Count = 0;//±¸¸Å¼ö·®
-		  int new_price = 0;//±¸¸Å ±İ¾×
-		  int set_count = 0;//°¡´É ±¸¸Å¼ö·®
+		  //êµ¬ë§¤ìˆ˜ëŸ‰í•œê³„ by
+		  int Count = 0;//êµ¬ë§¤ìˆ˜ëŸ‰
+		  int new_price = 0;//êµ¬ë§¤ ê¸ˆì•¡
+		  int set_count = 0;//ê°€ëŠ¥ êµ¬ë§¤ìˆ˜ëŸ‰
 		  for (L1ShopBuyOrder order : orderList.getList()) {
 		   L1Item temp = order.getItem().getItem();
 		    Count += 1;
@@ -195,14 +195,14 @@ public class L1Shop {
 		   pc.sendPackets(new S_ServerMessage(936));
 		   return false;
 		  }
-		  //±¸¸Å¼ö·®ÇÑ°è by end
-		//(½´Å©¸²)¹ö±× ¹æÁö
-// ########## (¹ö±× ¹æÁö) »óÁ¡ ¹ö±× ¹æÁö
+		  //êµ¬ë§¤ìˆ˜ëŸ‰í•œê³„ by end
+		//(ìŠˆí¬ë¦¼)ë²„ê·¸ ë°©ì§€
+// ########## (ë²„ê·¸ ë°©ì§€) ìƒì  ë²„ê·¸ ë°©ì§€
 		return true;
 	}
 
 	/**
-	 * Áö¿ª¼¼ ³³¼¼ Ã³¸® ¿¡µ§¼º¡¤µğ¾Æµå ¿ä»õ¸¦ Á¦¿ÜÇÑ ¼ºÀº ¿¡µ§¼º¿¡ ±¹¼¼·Î ÇØ¼­10% ³³¼¼ÇÑ´Ù
+	 * ì§€ì—­ì„¸ ë‚©ì„¸ ì²˜ë¦¬ ì—ë´ì„±Â·ë””ì•„ë“œ ìš”ìƒˆë¥¼ ì œì™¸í•œ ì„±ì€ ì—ë´ì„±ì— êµ­ì„¸ë¡œ í•´ì„œ10% ë‚©ì„¸í•œë‹¤
 	 * 
 	 * @param orderList
 	 */
@@ -214,7 +214,7 @@ public class L1Shop {
 		int castleId = L1CastleLocation.getCastleIdByNpcid(_npcId);
 		int castleTax = calc.calcCastleTaxPrice(price);
 		int nationalTax = calc.calcNationalTaxPrice(price);
-		// ¿¡µ§¼º¡¤µğ¾Æµå¼ºÀÇ °æ¿ì´Â ±¹¼¼ ¾øÀ½
+		// ì—ë´ì„±Â·ë””ì•„ë“œì„±ì˜ ê²½ìš°ëŠ” êµ­ì„¸ ì—†ìŒ
 		if (castleId == L1CastleLocation.ADEN_CASTLE_ID
 				|| castleId == L1CastleLocation.DIAD_CASTLE_ID) {
 			castleTax += nationalTax;
@@ -250,7 +250,7 @@ public class L1Shop {
 	}
 
 	/**
-	 * µğ¾Æµå¼¼ ³³¼¼ Ã³¸® ÀüÀï¼¼ÀÇ10%°¡ µğ¾Æµå ¿ä»õÀÇ °ø±İÀÌ µÈ´Ù.
+	 * ë””ì•„ë“œì„¸ ë‚©ì„¸ ì²˜ë¦¬ ì „ìŸì„¸ì˜10%ê°€ ë””ì•„ë“œ ìš”ìƒˆì˜ ê³µê¸ˆì´ ëœë‹¤.
 	 * 
 	 * @param orderList
 	 */
@@ -259,7 +259,7 @@ public class L1Shop {
 
 		int price = orderList.getTotalPrice();
 
-		// µğ¾Æµå¼¼
+		// ë””ì•„ë“œì„¸
 		int diadTax = calc.calcDiadTaxPrice(price);
 		if (diadTax <= 0) {
 			return;
@@ -278,14 +278,14 @@ public class L1Shop {
 	}
 
 	/**
-	 * Á¶¼¼ ³³¼¼ Ã³¸®
+	 * ì¡°ì„¸ ë‚©ì„¸ ì²˜ë¦¬
 	 * 
 	 * @param orderList
 	 */
 	private void payTownTax(L1ShopBuyOrderList orderList) {
 		int price = orderList.getTotalPrice();
 
-		// ¸¶À»ÀÇ ¸Å»ó
+		// ë§ˆì„ì˜ ë§¤ìƒ
 		if (!L1World.getInstance().isProcessingContributionTotal()) {
 			int town_id = L1TownLocation.getTownIdByNpcid(_npcId);
 			if (town_id >= 1 && town_id <= 10) {
@@ -294,7 +294,7 @@ public class L1Shop {
 		}
 	}
 
-	// XXX ³³¼¼ Ã³¸®´Â ÀÌ Å¬·¡½ºÀÇ Ã¥¹«´Â ¾Æ´Ñ »ı°¢ÀÌ µéÁö¸¸ ¿ì¼±
+	// XXX ë‚©ì„¸ ì²˜ë¦¬ëŠ” ì´ í´ë˜ìŠ¤ì˜ ì±…ë¬´ëŠ” ì•„ë‹Œ ìƒê°ì´ ë“¤ì§€ë§Œ ìš°ì„ 
 	private void payTax(L1ShopBuyOrderList orderList) {
 		payCastleTax(orderList);
 		payTownTax(orderList);
@@ -302,12 +302,12 @@ public class L1Shop {
 	}
 
 	/**
-	 * ÆÇ¸Å °Å·¡
+	 * íŒë§¤ ê±°ë˜
 	 */
 	private void sellItems(L1PcInventory inv, L1ShopBuyOrderList orderList) {
 		if (!inv.consumeItem(L1ItemId.ADENA, orderList
 				.getTotalPriceTaxIncluded())) {
-			throw new IllegalStateException("±¸ÀÔ¿¡ ÇÊ¿äÇÑ ¾Æµ¥³ª¸¦ ¼ÒºñÇÒ ¼ö ¾ø¾ú½À´Ï´Ù.");
+			throw new IllegalStateException("êµ¬ì…ì— í•„ìš”í•œ ì•„ë°ë‚˜ë¥¼ ì†Œë¹„í•  ìˆ˜ ì—†ì—ˆìŠµë‹ˆë‹¤.");
 		}
 		for (L1ShopBuyOrder order : orderList.getList()) {
 			int itemId = order.getItem().getItemId();
@@ -343,16 +343,16 @@ public class L1Shop {
 	}
 
 	/**
-	 * ÇÃ·¹ÀÌ¾î¿¡, L1ShopBuyOrderList¿¡ ±âÀçµÈ ¾ÆÀÌÅÛÀ» ÆÇ¸ÅÇÑ´Ù.
+	 * í”Œë ˆì´ì–´ì—, L1ShopBuyOrderListì— ê¸°ì¬ëœ ì•„ì´í…œì„ íŒë§¤í•œë‹¤.
 	 * 
 	 * @param pc
-	 *            ÆÇ¸ÅÇÏ´Â ÇÃ·¹ÀÌ¾î
+	 *            íŒë§¤í•˜ëŠ” í”Œë ˆì´ì–´
 	 * @param orderList
-	 *            ÆÇ¸ÅÇØ¾ß ÇÒ ¾ÆÀÌÅÛÀÌ ±âÀçµÈ L1ShopBuyOrderList
+	 *            íŒë§¤í•´ì•¼ í•  ì•„ì´í…œì´ ê¸°ì¬ëœ L1ShopBuyOrderList
 	 */
 	public void sellItems(L1PcInstance pc, L1ShopBuyOrderList orderList) {
 		if(getNpcId()!= 200000 && getNpcId()!= 200001
-				&& getNpcId()!= 200002 && getNpcId() != 200004){ //Æ¯Á¤ npc°¡ ¾Æ´Ñ »óÈ²(Áï ÇÁ¸®¹Ì¾ö »óÀÎÀÌ ¾Æ´Ñ»óÈ²)ÇÁ¸®¹Ì¾ö »óÀÎ ±¸Çö 
+				&& getNpcId()!= 200002 && getNpcId() != 200004){ //íŠ¹ì • npcê°€ ì•„ë‹Œ ìƒí™©(ì¦‰ í”„ë¦¬ë¯¸ì—„ ìƒì¸ì´ ì•„ë‹Œìƒí™©)í”„ë¦¬ë¯¸ì—„ ìƒì¸ êµ¬í˜„ 
 		if (!ensureSell(pc, orderList)) {
 			return;
 		}
@@ -360,7 +360,7 @@ public class L1Shop {
 		sellItems(pc.getInventory(), orderList);
 		payTax(orderList);
 	}
-		else{	//ÇÁ¸®¹Ì¾ö »óÀÎÀÎ °æ¿ì
+		else{	//í”„ë¦¬ë¯¸ì—„ ìƒì¸ì¸ ê²½ìš°
 			if (!ensurePrimiumSell(pc, orderList)) {
 			return; 
 			} 
@@ -369,10 +369,10 @@ public class L1Shop {
 	}
 
 	/**
-	 * L1ShopSellOrderList¿¡ ±âÀçµÈ ¾ÆÀÌÅÛÀ» ¸ÅÀÔÇÑ´Ù.
+	 * L1ShopSellOrderListì— ê¸°ì¬ëœ ì•„ì´í…œì„ ë§¤ì…í•œë‹¤.
 	 * 
 	 * @param orderList
-	 *            ¸ÅÀÔÇØ¾ß ÇÒ ¾ÆÀÌÅÛ°ú °¡°İÀÌ ±âÀçµÈ L1ShopSellOrderList
+	 *            ë§¤ì…í•´ì•¼ í•  ì•„ì´í…œê³¼ ê°€ê²©ì´ ê¸°ì¬ëœ L1ShopSellOrderList
 	 */
 	public void buyItems(L1ShopSellOrderList orderList) {
 		L1PcInventory inv = orderList.getPc().getInventory();
@@ -380,7 +380,7 @@ public class L1Shop {
 		for (L1ShopSellOrder order : orderList.getList()) {
 			L1Object object = inv.getItem(order.getItem().getTargetId());
 			L1ItemInstance item = (L1ItemInstance) object;
-			// ºÀÀÎµÅÁö ¾Ê¾Ò´Ù¸é..
+			// ë´‰ì¸ë¼ì§€ ì•Šì•˜ë‹¤ë©´..
 			if(item.getItem().getBless() < 128){
 				int count = inv.removeItem(order.getItem().getTargetId(), order.getCount());
 			totalPrice += order.getItem().getAssessedPrice() * count;
@@ -389,10 +389,10 @@ public class L1Shop {
 
 		totalPrice = IntRange.ensure(totalPrice, 0, 2000000000);
 		
-		//	** »óÁ¡ ÆÇ¸Å ºñ¼Å½º ¹æ¾î **//   by µµ¿ì³Ê
+		//	** ìƒì  íŒë§¤ ë¹„ì…”ìŠ¤ ë°©ì–´ **//   by ë„ìš°ë„ˆ
 		if (totalPrice <= 0) {
 			return;} 
-		//** »óÁ¡ ÆÇ¸Å ºñ¼Å½º ¹æ¾î **//   by µµ¿ì³Ê	
+		//** ìƒì  íŒë§¤ ë¹„ì…”ìŠ¤ ë°©ì–´ **//   by ë„ìš°ë„ˆ	
 		
 		if (0 < totalPrice) {
 			inv.storeItem(L1ItemId.ADENA, totalPrice);
@@ -407,12 +407,12 @@ public class L1Shop {
 		return new L1ShopSellOrderList(this, pc);
 	}
 
-// ÇÁ¸®¹Ì¾ö »óÀÎ ±¸Çö 
-	//ÇÁ¸®¹Ì¾ö ¾ÆÀÌÅÛÀ» »ç´Â ºÎºĞ//
+// í”„ë¦¬ë¯¸ì—„ ìƒì¸ êµ¬í˜„ 
+	//í”„ë¦¬ë¯¸ì—„ ì•„ì´í…œì„ ì‚¬ëŠ” ë¶€ë¶„//
 	private void sellPrimiumItems(L1PcInventory inv, L1ShopBuyOrderList orderList) {
 		if (!inv.consumeItem(41159, orderList
 				.getTotalPriceTaxIncluded())) {
-			throw new IllegalStateException("±¸ÀÔ¿¡ ÇÊ¿äÇÑ ½ÅºñÇÑ ±êÅĞÀ» ¼ÒºñÇÒ ¼ö ¾ø¾ú½À´Ï´Ù.");
+			throw new IllegalStateException("êµ¬ì…ì— í•„ìš”í•œ ì‹ ë¹„í•œ ê¹ƒí„¸ì„ ì†Œë¹„í•  ìˆ˜ ì—†ì—ˆìŠµë‹ˆë‹¤.");
 		}
 		for (L1ShopBuyOrder order : orderList.getList()) {
 			int itemId = order.getItem().getItemId();
@@ -423,30 +423,30 @@ public class L1Shop {
 		}
 	}
 
-	//ÇÁ¸®¹Ì¾ö »óÀÎÀ¸·Î ºÎÅÍ ¾ÆÀÌÅÛÀ» »ì¼ö ÀÖ´ÂÁö Ã¼Å©//
+	//í”„ë¦¬ë¯¸ì—„ ìƒì¸ìœ¼ë¡œ ë¶€í„° ì•„ì´í…œì„ ì‚´ìˆ˜ ìˆëŠ”ì§€ ì²´í¬//
 	private boolean ensurePrimiumSell(L1PcInstance pc, L1ShopBuyOrderList orderList) {
 		int price = orderList.getTotalPrice();
-		// ¿À¹öÇÃ·Î¿ì Ã¼Å©
+		// ì˜¤ë²„í”Œë¡œìš° ì²´í¬
 		if (!IntRange.includes(price, 0, 60000)) {
-			// ÃÑÆÇ ¸Å°¡°İÀº ÇÁ¸®¹Ì¾ö±êÅĞ 60000°³¸¦ ÃÊ°úÇÒ ¼ö ¾ø½À´Ï´Ù.
-			pc.sendPackets(new S_SystemMessage("½ÅºñÇÑ ³¯°³±êÅĞÀº ÇÑ¹ø¿¡ 60000°³ ÀÌ»ó »ç¿ëÇÒ¼ö ¾ø½À´Ï´Ù."));
+			// ì´íŒ ë§¤ê°€ê²©ì€ í”„ë¦¬ë¯¸ì—„ê¹ƒí„¸ 60000ê°œë¥¼ ì´ˆê³¼í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
+			pc.sendPackets(new S_SystemMessage("ì‹ ë¹„í•œ ë‚ ê°œê¹ƒí„¸ì€ í•œë²ˆì— 60000ê°œ ì´ìƒ ì‚¬ìš©í• ìˆ˜ ì—†ìŠµë‹ˆë‹¤."));
 			return false;
 		}
-		// ±¸ÀÔÇÒ ¼ö ÀÖÀ»±î Ã¼Å©
+		// êµ¬ì…í•  ìˆ˜ ìˆì„ê¹Œ ì²´í¬
 		if (!pc.getInventory().checkItem(41159, price)) {
 			//System.out.println(price);
-			// \f1¾Æµ¥³ª°¡ ºÎÁ·ÇÕ´Ï´Ù.
-			pc.sendPackets(new S_SystemMessage("½ÅºñÇÑ ³¯°³±êÅĞÀÌ ºÎÁ·ÇÕ´Ï´Ù."));
+			// \f1ì•„ë°ë‚˜ê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.
+			pc.sendPackets(new S_SystemMessage("ì‹ ë¹„í•œ ë‚ ê°œê¹ƒí„¸ì´ ë¶€ì¡±í•©ë‹ˆë‹¤."));
 			return false;
 		}
-		// Áß·® Ã¼Å©
+		// ì¤‘ëŸ‰ ì²´í¬
 		int currentWeight = pc.getInventory().getWeight() * 1000;
 		if (currentWeight + orderList.getTotalWeight() > pc.getMaxWeight() * 1000) {
-			// ¾ÆÀÌÅÛÀÌ ³Ê¹« ¹«°Å¿ö, ´õ ÀÌ»ó °¡Áú ¼ö ¾ø½À´Ï´Ù.
+			// ì•„ì´í…œì´ ë„ˆë¬´ ë¬´ê±°ì›Œ, ë” ì´ìƒ ê°€ì§ˆ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 			pc.sendPackets(new S_ServerMessage(82));
 			return false;
 		}
-		// °³¼ö Ã¼Å©
+		// ê°œìˆ˜ ì²´í¬
 		int totalCount = pc.getInventory().getSize();
 		for (L1ShopBuyOrder order : orderList.getList()) {
 			L1Item temp = order.getItem().getItem();
@@ -459,7 +459,7 @@ public class L1Shop {
 			}
 		}
 		if (totalCount > 180) {
-			// \f1ÇÑ»ç¶÷ÀÇ Ä³¸¯ÅÍ°¡ °¡Áö°í °ÉÀ» ¼ö ÀÖ´Â ¾ÆÀÌÅÛÀº ÃÖ´ë 180°³±îÁöÀÔ´Ï´Ù.
+			// \f1í•œì‚¬ëŒì˜ ìºë¦­í„°ê°€ ê°€ì§€ê³  ê±¸ì„ ìˆ˜ ìˆëŠ” ì•„ì´í…œì€ ìµœëŒ€ 180ê°œê¹Œì§€ì…ë‹ˆë‹¤.
 			pc.sendPackets(new S_ServerMessage(263));
 			return false;
 		}

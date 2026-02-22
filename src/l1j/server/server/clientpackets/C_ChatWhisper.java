@@ -45,39 +45,39 @@ public class C_ChatWhisper extends ClientBasePacket {
 		String targetName = readS();
 		String text = readS();
 		L1PcInstance whisperFrom = client.getActiveChar();
-		//System.out.println("ÅØ½ºÆ® ±æÀÌ : "+text.length()); 
+		//System.out.println("í…ìŠ¤íŠ¸ ê¸¸ì´ : "+text.length()); 
 		if (text.length() > 25) {
-			whisperFrom.sendPackets(new S_SystemMessage("±Ó¸»·Î º¸³¾ ¼ö ÀÖ´Â ±ÛÀÚ¼ö¸¦ ÃÊ°úÇÏ¿´½À´Ï´Ù."));
+			whisperFrom.sendPackets(new S_SystemMessage("ê·“ë§ë¡œ ë³´ë‚¼ ìˆ˜ ìˆëŠ” ê¸€ììˆ˜ë¥¼ ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤."));
 			return;
 		}
-		// Ã¤ÆÃ ±İÁöÁßÀÇ °æ¿ì
+		// ì±„íŒ… ê¸ˆì§€ì¤‘ì˜ ê²½ìš°
 		if (whisperFrom.hasSkillEffect(1005)) {
-			whisperFrom.sendPackets(new S_ServerMessage(242)); // ÇöÀç Ã¤ÆÃ ±İÁöÁßÀÔ´Ï´Ù.
+			whisperFrom.sendPackets(new S_ServerMessage(242)); // í˜„ì¬ ì±„íŒ… ê¸ˆì§€ì¤‘ì…ë‹ˆë‹¤.
 			return;
 		}
-		// À§½ºÆÄ °¡´ÉÇÑ Lv¹Ì¸¸ÀÇ °æ¿ì
+		// ìœ„ìŠ¤íŒŒ ê°€ëŠ¥í•œ Lvë¯¸ë§Œì˜ ê²½ìš°
 		if (whisperFrom.getLevel() < Config.WHISPER_CHAT_LEVEL) {
 			whisperFrom.sendPackets(new S_ServerMessage(404, String
-					. valueOf(Config.WHISPER_CHAT_LEVEL))); // %0·¹º§ ÀÌÇÏ¿¡¼­´Â À§½ºÆÄ, ÆÄÆ¼ Ã¤ÆÃÀº »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.
+					. valueOf(Config.WHISPER_CHAT_LEVEL))); // %0ë ˆë²¨ ì´í•˜ì—ì„œëŠ” ìœ„ìŠ¤íŒŒ, íŒŒí‹° ì±„íŒ…ì€ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 			return;
 		}
 		L1PcInstance whisperTo = L1World.getInstance().getPlayer(targetName);
-		// ¿ùµå¿¡ ¾ø´Â °æ¿ì
+		// ì›”ë“œì— ì—†ëŠ” ê²½ìš°
 		if (whisperTo == null) {
-			whisperFrom.sendPackets(new S_ServerMessage(73, targetName)); // \f1%0Àº °ÔÀÓÀ» ÇÏ°í ÀÖÁö ¾Ê½À´Ï´Ù.
+			whisperFrom.sendPackets(new S_ServerMessage(73, targetName)); // \f1%0ì€ ê²Œì„ì„ í•˜ê³  ìˆì§€ ì•ŠìŠµë‹ˆë‹¤.
 			return;
 		}
-		// ÀÚ±â ÀÚ½Å¿¡ ´ëÇÑ wisÀÇ °æ¿ì
+		// ìê¸° ìì‹ ì— ëŒ€í•œ wisì˜ ê²½ìš°
 		if (whisperTo.equals(whisperFrom)) {
 			return;
 		}
-		// Â÷´ÜµÇ°í ÀÖ´Â °æ¿ì
+		// ì°¨ë‹¨ë˜ê³  ìˆëŠ” ê²½ìš°
 		if (whisperTo.getExcludingList(). contains(whisperFrom.getName())) {
 			whisperFrom.sendPackets(new S_ServerMessage(117, whisperTo
-					. getName())); // %0°¡ ´ç½ÅÀ» Â÷´ÜÇß½À´Ï´Ù.
+					. getName())); // %0ê°€ ë‹¹ì‹ ì„ ì°¨ë‹¨í–ˆìŠµë‹ˆë‹¤.
 			return;
 		}
-		// °ÔÀÓ ¿É¼ÇÀ¸·Î OFF·Î ÇÏ°í ÀÖ´Â °æ¿ì
+		// ê²Œì„ ì˜µì…˜ìœ¼ë¡œ OFFë¡œ í•˜ê³  ìˆëŠ” ê²½ìš°
 		if (!whisperTo.isCanWhisper()) {
 			whisperFrom.sendPackets(new S_ServerMessage(205, whisperTo
 					. getName()));
@@ -89,9 +89,9 @@ public class C_ChatWhisper extends ClientBasePacket {
 				Opcodes.S_OPCODE_GLOBALCHAT, 9));
 		whisperTo.sendPackets(new S_ChatPacket(whisperFrom, text,
 				Opcodes.S_OPCODE_WHISPERCHAT, 16));
-		if(Config.±Ó¼Ó¸» == true){ //  // Æí¸®¼ºÀ» À§ÇØ cÆĞÅ¶À¸·Î ÀÌµ¿
-           l1j.server.Leaf.chatlog.append("\r\n[±Ó¼Ó¸»] "+whisperFrom.getName()+"->"+whisperTo.getName()+" : "+text+""); // ##### Ãß°¡
-        } // ##### Ãß°¡
+		if(Config.ê·“ì†ë§ == true){ //  // í¸ë¦¬ì„±ì„ ìœ„í•´ cíŒ¨í‚·ìœ¼ë¡œ ì´ë™
+           l1j.server.Leaf.chatlog.append("\r\n[ê·“ì†ë§] "+whisperFrom.getName()+"->"+whisperTo.getName()+" : "+text+""); // ##### ì¶”ê°€
+        } // ##### ì¶”ê°€
 	}
 
 	@Override

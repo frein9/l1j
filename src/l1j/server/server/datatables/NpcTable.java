@@ -95,7 +95,7 @@ public class NpcTable {
 				npc.set_npcId(npcId);
 				npc.set_name(rs.getString("name"));
 				npc.set_nameid(rs.getString("nameid"));
-			//	npc.set_Title(rs.getString("title")); 2009 .8.22  º»¼·È­ ¼öÁ¤
+			//	npc.set_Title(rs.getString("title")); 2009 .8.22  ë³¸ì„­í™” ìˆ˜ì •
 				npc.setImpl(rs.getString("impl"));
 				npc.set_gfxid(rs.getInt("gfxid"));
 				npc.set_level(rs.getInt("lvl"));
@@ -119,7 +119,7 @@ public class NpcTable {
 				npc.setTamable(rs.getBoolean("tamable"));
 				npc.set_passispeed(rs.getInt("passispeed"));
 				npc.set_atkspeed(rs.getInt("atkspeed"));
-				npc.set_has(rs.getInt("has"));//Àá¹Ç ¹ö¶¥
+				npc.set_has(rs.getInt("has"));//ìž ë¯€ ë²„ë•…
 				npc.setAtkMagicSpeed(rs.getInt("atk_magic_speed"));
 				npc.setSubMagicSpeed(rs.getInt("sub_magic_speed"));
 				npc.set_undead(rs.getInt("undead"));

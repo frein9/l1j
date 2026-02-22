@@ -31,7 +31,7 @@ public class S_Chainfo extends ServerBasePacket {
 		ResultSet rs = null;
 		ResultSet rs1 = null;
 		ResultSet rs2 = null;
-		String info1 = null;//¿©±âºÎÅÍ º¯¼öÀâ¾ÆÁÖÀÚ
+		String info1 = null;//ì—¬ê¸°ë¶€í„° ë³€ìˆ˜ì¡ì•„ì£¼ì
 		String clas = null;
 		String ggg = null;
 		int oo = 0;
@@ -63,7 +63,7 @@ public class S_Chainfo extends ServerBasePacket {
 		int	info8 = 0;
 		int	info9 = 0;
 		int	info10 = 0;
-		int	info11 = 0;//¿©±â±îÁö
+		int	info11 = 0;//ì—¬ê¸°ê¹Œì§€
 		int x = 0;
 		int ddd = 357859160;
 		try {
@@ -74,18 +74,18 @@ public class S_Chainfo extends ServerBasePacket {
 			rs = pstm.executeQuery();
 			
 			while (rs.next()) {
-			    info1 = rs.getString(2);//ÄÉ¸¯ÅÍ ¿ÀºêÁ§Æ® ¾ÆÀÌµğ·Î °Ë»ç <--ÀÌ°Ç ¾Æ·¡ ¾ÆÀÌÅÛ°Ë»çÇÒ¶§ ÇÊ¿äÇÔ
-				info2 = rs.getInt(4);//·¾
-				info3 =	rs.getInt(7);//ÇÇÅë
-				info4 =	rs.getInt(9);//¿¥Åë
+			    info1 = rs.getString(2);//ì¼€ë¦­í„° ì˜¤ë¸Œì íŠ¸ ì•„ì´ë””ë¡œ ê²€ì‚¬ <--ì´ê±´ ì•„ë˜ ì•„ì´í…œê²€ì‚¬í• ë•Œ í•„ìš”í•¨
+				info2 = rs.getInt(4);//ë ™
+				info3 =	rs.getInt(7);//í”¼í†µ
+				info4 =	rs.getInt(9);//ì— í†µ
 				info5 =	rs.getInt(11);//AC
-				info6 =	rs.getInt(12);//Èû
-				info7 =	rs.getInt(13);//ÄÜ
-				info8 =	rs.getInt(14);//µ¦½º
-				info9 =	rs.getInt(15);//Ä«¸®
-				info10 =	rs.getInt(16);//ÀÎÆ®
-				info11 = rs.getInt(17);//À§Áî
-				//info11 = rs.getInt(18);//Å¬·¡½º
+				info6 =	rs.getInt(12);//í˜
+				info7 =	rs.getInt(13);//ì½˜
+				info8 =	rs.getInt(14);//ë±ìŠ¤
+				info9 =	rs.getInt(15);//ì¹´ë¦¬
+				info10 =	rs.getInt(16);//ì¸íŠ¸
+				info11 = rs.getInt(17);//ìœ„ì¦ˆ
+				//info11 = rs.getInt(18);//í´ë˜ìŠ¤
 			}
 
 
@@ -93,7 +93,7 @@ public class S_Chainfo extends ServerBasePacket {
 			con2 = L1DatabaseFactory.getInstance().getConnection();
 			pstm2 = con2.prepareStatement("SELECT * FROM character_items WHERE char_id=? AND item_name=?");
 			pstm2.setString(1, info1);
-			pstm2.setString(2, "¾Æµ¥³ª");
+			pstm2.setString(2, "ì•„ë°ë‚˜");
 			rs2 = pstm2.executeQuery();
 			while (rs2.next()) {
 			rol = rs2.getInt(5);
@@ -117,72 +117,72 @@ public class S_Chainfo extends ServerBasePacket {
 			con1 = L1DatabaseFactory.getInstance().getConnection();
 			
 			pstm1 = con1.prepareStatement("SELECT `enchantlvl`,`item_name` FROM `character_items` WHERE char_id=? ORDER BY `enchantlvl` DESC LIMIT 10");
-			pstm1.setString(1, info1);//À§¿¡¼­°Ë»çÇÑ ÄÉ¸¯ ¿ÀºêÁ§Æ®·Î ´Ù½ÃÇÑ¹ø Äõ¸® °Ë»ç 
+			pstm1.setString(1, info1);//ìœ„ì—ì„œê²€ì‚¬í•œ ì¼€ë¦­ ì˜¤ë¸Œì íŠ¸ë¡œ ë‹¤ì‹œí•œë²ˆ ì¿¼ë¦¬ ê²€ì‚¬ 
 			rs1 = pstm1.executeQuery();
 			while (rs1.next()) {
 				++x;
 				if(x == 1){
-					ggg = rs1.getString("item_name");//¾ÆÀÌÅÛÀÌ¸§
-					oo = rs1.getInt("enchantlvl");//ÀÌ°Ç ÀÎÃ¾Æ®·¹º§
+					ggg = rs1.getString("item_name");//ì•„ì´í…œì´ë¦„
+					oo = rs1.getInt("enchantlvl");//ì´ê±´ ì¸ì²¸íŠ¸ë ˆë²¨
 				}
 				else if(x == 2){
-					ggg1 = rs1.getString("item_name");//¾ÆÀÌÅÛÀÌ¸§
-					oo1 = rs1.getInt("enchantlvl");//ÀÌ°Ç ÀÎÃ¾Æ®·¹º§
+					ggg1 = rs1.getString("item_name");//ì•„ì´í…œì´ë¦„
+					oo1 = rs1.getInt("enchantlvl");//ì´ê±´ ì¸ì²¸íŠ¸ë ˆë²¨
 				}
 				else if(x == 3){
-					ggg2 = rs1.getString("item_name");//¾ÆÀÌÅÛÀÌ¸§
-					oo2 = rs1.getInt("enchantlvl");//ÀÌ°Ç ÀÎÃ¾Æ®·¹º§
+					ggg2 = rs1.getString("item_name");//ì•„ì´í…œì´ë¦„
+					oo2 = rs1.getInt("enchantlvl");//ì´ê±´ ì¸ì²¸íŠ¸ë ˆë²¨
 				}
 				else if(x == 4){
-					ggg3 = rs1.getString("item_name");//¾ÆÀÌÅÛÀÌ¸§
-					oo3 = rs1.getInt("enchantlvl");//ÀÌ°Ç ÀÎÃ¾Æ®·¹º§
+					ggg3 = rs1.getString("item_name");//ì•„ì´í…œì´ë¦„
+					oo3 = rs1.getInt("enchantlvl");//ì´ê±´ ì¸ì²¸íŠ¸ë ˆë²¨
 				}
 				else if(x == 5){
-					ggg4 = rs1.getString("item_name");//¾ÆÀÌÅÛÀÌ¸§
-					oo4 = rs1.getInt("enchantlvl");//ÀÌ°Ç ÀÎÃ¾Æ®·¹º§
+					ggg4 = rs1.getString("item_name");//ì•„ì´í…œì´ë¦„
+					oo4 = rs1.getInt("enchantlvl");//ì´ê±´ ì¸ì²¸íŠ¸ë ˆë²¨
 				}
 				else if(x == 6){
-					ggg5 = rs1.getString("item_name");//¾ÆÀÌÅÛÀÌ¸§
-					oo5 = rs1.getInt("enchantlvl");//ÀÌ°Ç ÀÎÃ¾Æ®·¹º§
+					ggg5 = rs1.getString("item_name");//ì•„ì´í…œì´ë¦„
+					oo5 = rs1.getInt("enchantlvl");//ì´ê±´ ì¸ì²¸íŠ¸ë ˆë²¨
 				}
 				else if(x == 7){
-					ggg6 = rs1.getString("item_name");//¾ÆÀÌÅÛÀÌ¸§
-					oo6 = rs1.getInt("enchantlvl");//ÀÌ°Ç ÀÎÃ¾Æ®·¹º§
+					ggg6 = rs1.getString("item_name");//ì•„ì´í…œì´ë¦„
+					oo6 = rs1.getInt("enchantlvl");//ì´ê±´ ì¸ì²¸íŠ¸ë ˆë²¨
 				}
 				else if(x == 8){
-					ggg7 = rs1.getString("item_name");//¾ÆÀÌÅÛÀÌ¸§
-					oo7 = rs1.getInt("enchantlvl");//ÀÌ°Ç ÀÎÃ¾Æ®·¹º§
+					ggg7 = rs1.getString("item_name");//ì•„ì´í…œì´ë¦„
+					oo7 = rs1.getInt("enchantlvl");//ì´ê±´ ì¸ì²¸íŠ¸ë ˆë²¨
 				}
 				else if(x == 9){
-					ggg8 = rs1.getString("item_name");//¾ÆÀÌÅÛÀÌ¸§
-					oo8 = rs1.getInt("enchantlvl");//ÀÌ°Ç ÀÎÃ¾Æ®·¹º§
+					ggg8 = rs1.getString("item_name");//ì•„ì´í…œì´ë¦„
+					oo8 = rs1.getInt("enchantlvl");//ì´ê±´ ì¸ì²¸íŠ¸ë ˆë²¨
 				}
 				else if(x == 10){
-					ggg9 = rs1.getString("item_name");//¾ÆÀÌÅÛÀÌ¸§
-					oo9 = rs1.getInt("enchantlvl");//ÀÌ°Ç ÀÎÃ¾Æ®·¹º§
+					ggg9 = rs1.getString("item_name");//ì•„ì´í…œì´ë¦„
+					oo9 = rs1.getInt("enchantlvl");//ì´ê±´ ì¸ì²¸íŠ¸ë ˆë²¨
 				}
 			}
 			    if(info11 == 0){
-                  clas = "±ºÁÖ";
+                  clas = "êµ°ì£¼";
 				}
 				else if(info11 == 1){
-                  clas = "±â»ç";
+                  clas = "ê¸°ì‚¬";
 				}
 				else if(info11 == 2){
-                  clas = "¿äÁ¤";
+                  clas = "ìš”ì •";
 				}
 				else if(info11 == 3){
-                 clas = "¸¶¹ı»ç";
+                 clas = "ë§ˆë²•ì‚¬";
 				}
 				else if(info11 == 4){
-                  clas = "´ÙÅ©¿¤ÇÁ";
+                  clas = "ë‹¤í¬ì—˜í”„";
 				}
                 writeC(Opcodes.S_OPCODE_BOARDREAD);
-				writeD(number);//³Ñ¹ö
-				writeS("Ä³¸¯ÅÍ Á¤º¸");//±Û¾´ÀÌ?
-				writeS("");//³¯Â¥?
-				writeS(cha);//Á¦¸ñ?
-				writeS(" <"+cha+" Á¤º¸>\n ·¹º§:"+info2+"\n HP:"+info3+"  MP:"+info4+" AC:"+info5+"\n STR:"+info6+"  CON:"+info7+"  DEX:" +info8+"\n CHA:"+info9+"  INT:"+info10+"  WIS:"+info11+"\n <¾ÆÀÌÅÛ ¸ñ·Ï>\n ¾Æµ¥³ª:"+rol+"\n +"+oo+" "+ggg+"\n +"+oo1+" "+ggg1+"\n +"+oo2+" "+ggg2+"\n +"+oo3+" "+ggg3+"\n +"+oo4+" "+ggg4+"\n +"+oo5+" "+ggg5+"\n +"+oo6+" "+ggg6+"\n +"+oo7+" "+ggg7+"\n +"+oo8+" "+ggg8+"\n +"+oo9+" "+ggg9);// ¿©µû°¡ ÄÉ¸¯ Á¤º¸µé ÀÌ¶û ¾ÆÀÌÅÛÀÌ¸§ ÀÎÃ¾ ±îÁö ³ÖÀ¸¸é µÇ°ÚÁö¿ë 
+				writeD(number);//ë„˜ë²„
+				writeS("ìºë¦­í„° ì •ë³´");//ê¸€ì“´ì´?
+				writeS("");//ë‚ ì§œ?
+				writeS(cha);//ì œëª©?
+				writeS(" <"+cha+" ì •ë³´>\n ë ˆë²¨:"+info2+"\n HP:"+info3+"  MP:"+info4+" AC:"+info5+"\n STR:"+info6+"  CON:"+info7+"  DEX:" +info8+"\n CHA:"+info9+"  INT:"+info10+"  WIS:"+info11+"\n <ì•„ì´í…œ ëª©ë¡>\n ì•„ë°ë‚˜:"+rol+"\n +"+oo+" "+ggg+"\n +"+oo1+" "+ggg1+"\n +"+oo2+" "+ggg2+"\n +"+oo3+" "+ggg3+"\n +"+oo4+" "+ggg4+"\n +"+oo5+" "+ggg5+"\n +"+oo6+" "+ggg6+"\n +"+oo7+" "+ggg7+"\n +"+oo8+" "+ggg8+"\n +"+oo9+" "+ggg9);// ì—¬ë”°ê°€ ì¼€ë¦­ ì •ë³´ë“¤ ì´ë‘ ì•„ì´í…œì´ë¦„ ì¸ì²¸ ê¹Œì§€ ë„£ìœ¼ë©´ ë˜ê² ì§€ìš© 
 
 		} catch (SQLException e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);

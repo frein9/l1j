@@ -108,7 +108,7 @@ public class ClanTable {
 				SQLUtil.close(con);
 			}
 		}
-		// Å©¶õ Ã¢°íÀÇ ·Îµå
+		// í¬ë€ ì°½ê³ ì˜ ë¡œë“œ
 		for (L1Clan clan : AllClan) {
 			clan.getDwarfForClanInventory().loadItems();
 		}
@@ -156,7 +156,7 @@ public class ClanTable {
 		player.setClanRank(L1Clan.CLAN_RANK_PRINCE);
 		clan.addMemberName(player.getName());
 		try {
-			// DB¿¡ Ä³¸¯ÅÍ Á¤º¸¸¦ ±âÀÔÇÑ´Ù
+			// DBì— ìºë¦­í„° ì •ë³´ë¥¼ ê¸°ì…í•œë‹¤
 			player.save();
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);

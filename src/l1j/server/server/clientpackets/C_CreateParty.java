@@ -43,7 +43,7 @@ public class C_CreateParty extends ClientBasePacket {
 		L1PcInstance pc = client.getActiveChar();
 
 		int type = readC();
-		if (type == 0 || type == 1) { // ÆÄÆ¼(ÆÄÆ¼ ÀÚµ¿ ºĞ¹è ON/OFF·Î ´Ù¸£´Ù)
+		if (type == 0 || type == 1) { // íŒŒí‹°(íŒŒí‹° ìë™ ë¶„ë°° ON/OFFë¡œ ë‹¤ë¥´ë‹¤)
 			int targetId = readD();
 			L1Object temp = L1World.getInstance().findObject(targetId);
 			if (temp instanceof L1PcInstance) {
@@ -52,55 +52,55 @@ public class C_CreateParty extends ClientBasePacket {
 					return;
 				}
 				if (targetPc.isInParty()) {
-					// ¹ú½á ´Ù¸¥ ÆÄÆ¼¿¡ ¼Ò¼ÓÇØ ÀÖ±â (À§ÇØ)¶§¹®¿¡ ÃÊ´ëÇÒ ¼ö ¾ø½À´Ï´Ù
+					// ë²Œì¨ ë‹¤ë¥¸ íŒŒí‹°ì— ì†Œì†í•´ ìˆê¸° (ìœ„í•´)ë•Œë¬¸ì— ì´ˆëŒ€í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤
 					pc.sendPackets(new S_ServerMessage(415));
 					return;
 				}
-				if (type == 0) { // ÆÄÆ¼±¸º°¸àÆ® - ACE
+				if (type == 0) { // íŒŒí‹°êµ¬ë³„ë©˜íŠ¸ - ACE
 				if (pc.isInParty()) {
 					if (pc.getParty().isLeader(pc)) {
 						targetPc.setPartyID(pc.getId());
-						// \f2%0\f>%s·ÎºÎÅÍ \fUÆÄÆ¼ \f> ¿¡ ÃÊ´ëµÇ¾ú½À´Ï´Ù.ÀÀÇÕ´Ï±î? (Y/N)
+						// \f2%0\f>%së¡œë¶€í„° \fUíŒŒí‹° \f> ì— ì´ˆëŒ€ë˜ì—ˆìŠµë‹ˆë‹¤.ì‘í•©ë‹ˆê¹Œ? (Y/N)
 						targetPc.sendPackets(new S_Message_YN(953, pc
 								.getName()));
 					} else {
-						// ÆÄÆ¼ÀÇ ¸®´õ¸¸À» ÃÊ´ëÇÒ ¼ö ÀÖ½À´Ï´Ù.
+						// íŒŒí‹°ì˜ ë¦¬ë”ë§Œì„ ì´ˆëŒ€í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 						pc.sendPackets(new S_ServerMessage(416));
 					}
 				} else {
 					targetPc.setPartyID(pc.getId());
-					// \f2%0\f>%s·ÎºÎÅÍ \fUÆÄÆ¼ \f> ¿¡ ÃÊ´ëµÇ¾ú½À´Ï´Ù.ÀÀÇÕ´Ï±î? (Y/N)
+					// \f2%0\f>%së¡œë¶€í„° \fUíŒŒí‹° \f> ì— ì´ˆëŒ€ë˜ì—ˆìŠµë‹ˆë‹¤.ì‘í•©ë‹ˆê¹Œ? (Y/N)
 					targetPc.sendPackets(new S_Message_YN(953, pc.getName()));
 				}
 			}
-				if (type == 1) { // ÆÄÆ¼±¸º°¸àÆ® - ACE
+				if (type == 1) { // íŒŒí‹°êµ¬ë³„ë©˜íŠ¸ - ACE
 					if (pc.isInParty()) {
 						if (pc.getParty().isLeader(pc)) {
 							if (pc.getAutoDivision()) {
 							targetPc.setPartyID(pc.getId());
-							// \f2%0\f>%s·ÎºÎÅÍ \fUÆÄÆ¼ \f> ¿¡ ÃÊ´ëµÇ¾ú½À´Ï´Ù.ÀÀÇÕ´Ï±î? (Y/N)
+							// \f2%0\f>%së¡œë¶€í„° \fUíŒŒí‹° \f> ì— ì´ˆëŒ€ë˜ì—ˆìŠµë‹ˆë‹¤.ì‘í•©ë‹ˆê¹Œ? (Y/N)
 							targetPc.sendPackets(new S_Message_YN(954, pc.getName()));
 							} else {
 							targetPc.setPartyID(pc.getId());
-							// \f2%0\f>%s·ÎºÎÅÍ \fUÆÄÆ¼ \f> ¿¡ ÃÊ´ëµÇ¾ú½À´Ï´Ù.ÀÀÇÕ´Ï±î? (Y/N)
+							// \f2%0\f>%së¡œë¶€í„° \fUíŒŒí‹° \f> ì— ì´ˆëŒ€ë˜ì—ˆìŠµë‹ˆë‹¤.ì‘í•©ë‹ˆê¹Œ? (Y/N)
 							targetPc.sendPackets(new S_Message_YN(953, pc.getName()));
 							}
 						} else {
-							// ÆÄÆ¼ÀÇ ¸®´õ¸¸À» ÃÊ´ëÇÒ ¼ö ÀÖ½À´Ï´Ù.
+							// íŒŒí‹°ì˜ ë¦¬ë”ë§Œì„ ì´ˆëŒ€í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 							pc.sendPackets(new S_ServerMessage(416));
 						}
 					} else {
 						targetPc.setPartyID(pc.getId());
-						// \f2%0\f>%s·ÎºÎÅÍ \fUÆÄÆ¼ \f> ¿¡ ÃÊ´ëµÇ¾ú½À´Ï´Ù.ÀÀÇÕ´Ï±î? (Y/N)
+						// \f2%0\f>%së¡œë¶€í„° \fUíŒŒí‹° \f> ì— ì´ˆëŒ€ë˜ì—ˆìŠµë‹ˆë‹¤.ì‘í•©ë‹ˆê¹Œ? (Y/N)
 						targetPc.sendPackets(new S_Message_YN(954, pc.getName()));
 					}
 				}			
 				}
-		} else if (type == 2) { // Ã¤ÆÃ ÆÄÆ¼
+		} else if (type == 2) { // ì±„íŒ… íŒŒí‹°
 			String name = readS();
 			L1PcInstance targetPc = L1World.getInstance().getPlayer(name);
 			if (targetPc == null) {
-				// %0¶ó´Â ÀÌ¸§ÀÇ »ç¶÷Àº ¾ø½À´Ï´Ù.
+				// %0ë¼ëŠ” ì´ë¦„ì˜ ì‚¬ëŒì€ ì—†ìŠµë‹ˆë‹¤.
 				pc.sendPackets(new S_ServerMessage(109));
 				return;
 			}
@@ -108,7 +108,7 @@ public class C_CreateParty extends ClientBasePacket {
 				return;
 			}
 			if (targetPc.isInChatParty()) {
-				// ¹ú½á ´Ù¸¥ ÆÄÆ¼¿¡ ¼Ò¼ÓÇØ ÀÖ±â (À§ÇØ)¶§¹®¿¡ ÃÊ´ëÇÒ ¼ö ¾ø½À´Ï´Ù
+				// ë²Œì¨ ë‹¤ë¥¸ íŒŒí‹°ì— ì†Œì†í•´ ìˆê¸° (ìœ„í•´)ë•Œë¬¸ì— ì´ˆëŒ€í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤
 				pc.sendPackets(new S_ServerMessage(415));
 				return;
 			}
@@ -116,18 +116,18 @@ public class C_CreateParty extends ClientBasePacket {
 			if (pc.isInChatParty()) {
 				if (pc.getChatParty().isLeader(pc)) {
 					targetPc.setPartyID(pc.getId());
-					// \f2%0\f>%s·ÎºÎÅÍ\fUÃ¤ÆÃ ÆÄÆ¼ \f>¿¡ ÃÊ´ëµÇ¾ú½À´Ï´Ù.ÀÀÇÕ´Ï±î? (Y/N)
+					// \f2%0\f>%së¡œë¶€í„°\fUì±„íŒ… íŒŒí‹° \f>ì— ì´ˆëŒ€ë˜ì—ˆìŠµë‹ˆë‹¤.ì‘í•©ë‹ˆê¹Œ? (Y/N)
 					targetPc.sendPackets(new S_Message_YN(951, pc.getName()));
 				} else {
-					// ÆÄÆ¼ÀÇ ¸®´õ¸¸À» ÃÊ´ëÇÒ ¼ö ÀÖ½À´Ï´Ù.
+					// íŒŒí‹°ì˜ ë¦¬ë”ë§Œì„ ì´ˆëŒ€í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 					pc.sendPackets(new S_ServerMessage(416));
 				}
 			} else {
 				targetPc.setPartyID(pc.getId());
-				// \f2%0\f>%s·ÎºÎÅÍ\fUÃ¤ÆÃ ÆÄÆ¼ \f>¿¡ ÃÊ´ëµÇ¾ú½À´Ï´Ù.ÀÀÇÕ´Ï±î? (Y/N)
+				// \f2%0\f>%së¡œë¶€í„°\fUì±„íŒ… íŒŒí‹° \f>ì— ì´ˆëŒ€ë˜ì—ˆìŠµë‹ˆë‹¤.ì‘í•©ë‹ˆê¹Œ? (Y/N)
 				targetPc.sendPackets(new S_Message_YN(951, pc.getName()));
 			}
-		} else if (type == 3) { // ÆÄÆ¼Àå À§ÀÓ - ACE
+		} else if (type == 3) { // íŒŒí‹°ì¥ ìœ„ì„ - ACE
 			int targetId = readD();
 			L1Object temp = L1World.getInstance().findObject(targetId);
 			if (temp instanceof L1PcInstance) {
@@ -141,15 +141,15 @@ public class C_CreateParty extends ClientBasePacket {
 							if (pc.getLocation().getTileLineDistance(targetPc.getLocation()) < 16) {
 								pc.getParty().passLeader(targetPc);
 							} else {
-								// ÆÄÆ¼ÀåÀ» À§ÀÓ½ÃÅ³ µ¿·á°¡ ±ÙÃ³¿¡ ¾ø½À´Ï´Ù
+								// íŒŒí‹°ì¥ì„ ìœ„ì„ì‹œí‚¬ ë™ë£Œê°€ ê·¼ì²˜ì— ì—†ìŠµë‹ˆë‹¤
 								pc.sendPackets(new S_ServerMessage(1695));
 							}
 						} else {
-							// ÆÄÆ¼ÀåÀÌ ¾Æ´Ï¾î¼­ ±ÇÇÑÀ» Çà»çÇÒ ¼ö ¾ø½À´Ï´Ù
+							// íŒŒí‹°ì¥ì´ ì•„ë‹ˆì–´ì„œ ê¶Œí•œì„ í–‰ì‚¬í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤
 							pc.sendPackets(new S_ServerMessage(1697));
 						}
 					} else {
-							// ÇöÀç ÆÄÆ¼¿¡ ÀÖ´Â ±¸¼º¿øÀÌ ¾Æ´Õ´Ï´Ù
+							// í˜„ì¬ íŒŒí‹°ì— ìˆëŠ” êµ¬ì„±ì›ì´ ì•„ë‹™ë‹ˆë‹¤
 							pc.sendPackets(new S_ServerMessage(1696));
 					}
 				}

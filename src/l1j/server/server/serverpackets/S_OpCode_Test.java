@@ -16,7 +16,7 @@ public class S_OpCode_Test extends ServerBasePacket {
 	@Override
 	public byte[] getContent() {
 		writeC(_opcode[_testlevel][_opcodeid]);
-		// ¡á¡á¡á¡á jump°íµî¾îµîÀ¸·Î Á¶»çÇÑ Å×½ºÆ®¿ë µ¥ÀÌÅÍ ¡á¡á¡á¡á
+		// â– â– â– â–  jumpê³ ë“±ì–´ë“±ìœ¼ë¡œ ì¡°ì‚¬í•œ í…ŒìŠ¤íŠ¸ìš© ë°ì´í„° â– â– â– â– 
 		int objid = 0;
 		Object[] petList = _gm.getPetList().values().toArray();
 		for (Object pet : petList) {
@@ -28,19 +28,19 @@ public class S_OpCode_Test extends ServerBasePacket {
 		}
 		writeD(objid);
 		writeC(25);
-		// ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á
+		// â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– â– 
 		return getBytes();
 	}
 
 	public String getInfo() {
 		StringBuilder info = new StringBuilder();
-		info.append(".opc ¿ÀÆÛ·¹ÀÌ¼Ç ÄÚµå ID ¶ó°í ÀÔ·ÂÇØ ÁÖ¼¼¿ä.\n");
+		info.append(".opc ì˜¤í¼ë ˆì´ì…˜ ì½”ë“œ ID ë¼ê³  ì…ë ¥í•´ ì£¼ì„¸ìš”.\n");
 		info.append("[Ver] ").append(_version);
 		info.append(" [Level] ").append(_testlevel);
 		info.append(" [IdRange] 0 - ").append(_opcode[_testlevel].length - 1)
 				.append("\n");
-		info.append("[Á÷Àü¿¡ ÀÖ´Â Çàµ¿] ").append(_action).append("\n");
-		info.append("[¿¹»óµÇ´Â »óÅÂ] ").append(_status).append("\n");
+		info.append("[ì§ì „ì— ìˆëŠ” í–‰ë™] ").append(_action).append("\n");
+		info.append("[ì˜ˆìƒë˜ëŠ” ìƒíƒœ] ").append(_status).append("\n");
 		return info.toString();
 	}
 
@@ -53,9 +53,9 @@ public class S_OpCode_Test extends ServerBasePacket {
 
 	public String getCodeList() {
 		StringBuilder info = new StringBuilder();
-		info.append(".opcid ¿ÀÆÛ·¹ÀÌ¼Ç ÄÚµå ID ¶ó°í ÀÔ·ÂÇØ ÁÖ¼¼¿ä.\n");
+		info.append(".opcid ì˜¤í¼ë ˆì´ì…˜ ì½”ë“œ ID ë¼ê³  ì…ë ¥í•´ ì£¼ì„¸ìš”.\n");
 		info.append("Lv").append(_testlevel).append(
-				"¡¡0¡¡¡¡1¡¡¡¡2¡¡¡¡3¡¡¡¡4¡¡¡¡5¡¡¡¡6¡¡¡¡7¡¡¡¡8¡¡¡¡9\n");
+				"ã€€0ã€€ã€€1ã€€ã€€2ã€€ã€€3ã€€ã€€4ã€€ã€€5ã€€ã€€6ã€€ã€€7ã€€ã€€8ã€€ã€€9\n");
 		int t = 0;
 		int tc = 10;
 		for (int i = 0; i < _opcode[_testlevel].length; i++) {
@@ -102,22 +102,22 @@ public class S_OpCode_Test extends ServerBasePacket {
 	private int _testlevel;
 	private L1PcInstance _gm;
 
-	// ¡á¡á¡á¡á º¸°í°¡ °¨»ö ¿Í¸£¸£ ¾ø°Ô ÇÏ±â ¶§¹®¿¡(À§ÇØ)ÀÇ ¹öÁ¯ ¡á¡á¡á¡á
+	// â– â– â– â–  ë³´ê³ ê°€ ê°ìƒ‰ ì™€ë¥´ë¥´ ì—†ê²Œ í•˜ê¸° ë•Œë¬¸ì—(ìœ„í•´)ì˜ ë²„ì ¼ â– â– â– â– 
 	private final String _version = "S_HPMeter1.0";
 
-	// ¡á¡á¡á¡á Á÷Àü¿¡ ÀÖ¾î µÎ´Â Çàµ¿ ¡á¡á¡á¡á
-	private final String _action = "»ç¸óÀ» 1¸¶¸®¸¸ ³» µĞ´Ù";
+	// â– â– â– â–  ì§ì „ì— ìˆì–´ ë‘ëŠ” í–‰ë™ â– â– â– â– 
+	private final String _action = "ì‚¬ëª¬ì„ 1ë§ˆë¦¬ë§Œ ë‚´ ë‘”ë‹¤";
 
-	// ¡á¡á¡á¡á ¿Ã¹Ù¸¥ ¿ÀÆÛ·¹ÀÌ¼Ç ÄÚµå¸¦ º¸³¾ ¼ö ÀÖ¾úÀ» ¶§¿¡ ¿¹»óµÇ´Â »óÅÂ ¡á¡á¡á¡á
-	private final String _status = "»ç¸óÀÇ HP¹ÌÅÍ°¡25%¿¡ º¯µ¿ÇÑ´Ù";
+	// â– â– â– â–  ì˜¬ë°”ë¥¸ ì˜¤í¼ë ˆì´ì…˜ ì½”ë“œë¥¼ ë³´ë‚¼ ìˆ˜ ìˆì—ˆì„ ë•Œì— ì˜ˆìƒë˜ëŠ” ìƒíƒœ â– â– â– â– 
+	private final String _status = "ì‚¬ëª¬ì˜ HPë¯¸í„°ê°€25%ì— ë³€ë™í•œë‹¤";
 
-	// ÀÌ¹Ì ÇØ¸í ³¡³­ ¿ÀÆÛ·¹ÀÌ¼Ç ÄÚµå´Â ÇÏ´ÜÀ¸·Î ¼³Á¤
-	// »ó´Ü(Level0) ÇöÀç 137°íµî¾î·Î ÀüÇô »ç¿ëµÇÁö ¾ÊÀº ÄÚµå .opc .opcid ¿ë
-	// Áß´Ü(Level1) ÇöÀç 137°íµî¾î·Î Á¤ÀÇ´Â µÇ°í ÀÖÁö¸¸ Á¤¸»·Î ±×°Í¿ëÀÇ ÄÚµåÀÎ°¡ È®ÀÎÇÏ°í ÀÖÁö ¾Ê´Â ÄÚµå¿Í
-	// "etc/ÀÛµ¿ÄÚµå Âü°í ÀÚ·á.txt"¿¡ ½á ÀÖµ¥ ¿Í ¾ø°í ¹Û¿¡ ¾ËÁö ¾ÊÀº °Í°ú
-	// 130~139(0~129ÀÇ »çÀÌ°¡ °¡´É¼º ³ô´Ù°í »ı°¢ÇÏ¹Ç·Î)ÀÇ ¿µ¿ª .opc2 .opcid2 ¿ë
-	// ÇÏ´Ü(Level2) ÇöÀç 137°íµî¾î·Î ÀÌ¿ëµÇ°í ÀÖ¾î µ¿ÀÛµµ ÇÏ°í ÀÖ´Â °Í(¸¸ÀÏÀ» À§ÇØ¿¡ ÁØºñ) .opc3 .opcid3 ¿ë
-	// »ó´Ü¿¡¼­ ¾ÈµÇ¾ú´ø °æ¿ì´Â Áß´Ü, Áß´Ü¿¡¼­µµ ¾ÈµÇ¾ú´ø °æ¿ì´Â ÇÏ´ÜÀÌ¶ó´Â ´À³¦À¸·Î
+	// ì´ë¯¸ í•´ëª… ëë‚œ ì˜¤í¼ë ˆì´ì…˜ ì½”ë“œëŠ” í•˜ë‹¨ìœ¼ë¡œ ì„¤ì •
+	// ìƒë‹¨(Level0) í˜„ì¬ 137ê³ ë“±ì–´ë¡œ ì „í˜€ ì‚¬ìš©ë˜ì§€ ì•Šì€ ì½”ë“œ .opc .opcid ìš©
+	// ì¤‘ë‹¨(Level1) í˜„ì¬ 137ê³ ë“±ì–´ë¡œ ì •ì˜ëŠ” ë˜ê³  ìˆì§€ë§Œ ì •ë§ë¡œ ê·¸ê²ƒìš©ì˜ ì½”ë“œì¸ê°€ í™•ì¸í•˜ê³  ìˆì§€ ì•ŠëŠ” ì½”ë“œì™€
+	// "etc/ì‘ë™ì½”ë“œ ì°¸ê³  ìë£Œ.txt"ì— ì¨ ìˆë° ì™€ ì—†ê³  ë°–ì— ì•Œì§€ ì•Šì€ ê²ƒê³¼
+	// 130~139(0~129ì˜ ì‚¬ì´ê°€ ê°€ëŠ¥ì„± ë†’ë‹¤ê³  ìƒê°í•˜ë¯€ë¡œ)ì˜ ì˜ì—­ .opc2 .opcid2 ìš©
+	// í•˜ë‹¨(Level2) í˜„ì¬ 137ê³ ë“±ì–´ë¡œ ì´ìš©ë˜ê³  ìˆì–´ ë™ì‘ë„ í•˜ê³  ìˆëŠ” ê²ƒ(ë§Œì¼ì„ ìœ„í•´ì— ì¤€ë¹„) .opc3 .opcid3 ìš©
+	// ìƒë‹¨ì—ì„œ ì•ˆë˜ì—ˆë˜ ê²½ìš°ëŠ” ì¤‘ë‹¨, ì¤‘ë‹¨ì—ì„œë„ ì•ˆë˜ì—ˆë˜ ê²½ìš°ëŠ” í•˜ë‹¨ì´ë¼ëŠ” ëŠë‚Œìœ¼ë¡œ
 	int[][] _opcode = {
 			{ 2, 3, 4, 6, 8, 16, 17, 18, 19, 22, 24, 27, 31, 33, 34, 35, 37,
 					38, 40, 43, 47, 48, 49, 52, 54, 62, 65, 70, 72, 73, 74, 75,

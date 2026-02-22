@@ -23,8 +23,8 @@ import java.util.logging.Logger;
 
 import l1j.server.server.ClientThread;
 import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.serverpackets.S_Unknown2; // ¸®½º¹öÆ° ±¸Á¶º¯°æÀ» À§ÇÑ Ãß°¡ // ########## A96 EPU ##########
-import l1j.server.server.serverpackets.S_Unknown3; // ¸®½º¹öÆ° ±¸Á¶º¯°æÀ» À§ÇÑ Ãß°¡ // ########## A96 EPU ##########
+import l1j.server.server.serverpackets.S_Unknown2; // ë¦¬ìŠ¤ë²„íŠ¼ êµ¬ì¡°ë³€ê²½ì„ ìœ„í•œ ì¶”ê°€ // ########## A96 EPU ##########
+import l1j.server.server.serverpackets.S_Unknown3; // ë¦¬ìŠ¤ë²„íŠ¼ êµ¬ì¡°ë³€ê²½ì„ ìœ„í•œ ì¶”ê°€ // ########## A96 EPU ##########
 
 
 public class C_NewCharSelect extends ClientBasePacket {
@@ -35,16 +35,16 @@ public class C_NewCharSelect extends ClientBasePacket {
     public C_NewCharSelect(byte[] decrypt, ClientThread client) {
         super(decrypt);
         client.CharReStart(true);
-        client.sendPacket(new S_Unknown3()); // ¸®½º ½ÃÁğ3
-        // client.sendPacket(new S_Unknown2(2)); //¸®½º¹öÆ°À» À§ÇÑ ±¸Á¶º¯°æ 
-        // CT ¿Í ¿¬°áµÈ Pc °´Ã¼°¡ ÀÖ´Ù¸é
+        client.sendPacket(new S_Unknown3()); // ë¦¬ìŠ¤ ì‹œì¦Œ3
+        // client.sendPacket(new S_Unknown2(2)); //ë¦¬ìŠ¤ë²„íŠ¼ì„ ìœ„í•œ êµ¬ì¡°ë³€ê²½ 
+        // CT ì™€ ì—°ê²°ëœ Pc ê°ì²´ê°€ ìˆë‹¤ë©´
         if (client.getActiveChar() != null) {
             L1PcInstance pc = client.getActiveChar();
 
-            // °³ÀÎ »óÁ¡ÀÌ ¾Æ´Ï¶ó¸é
+            // ê°œì¸ ìƒì ì´ ì•„ë‹ˆë¼ë©´
             if (!pc.isPrivateShop()) {
-                // ±âÁ¸ ¼Ò½º ±×´ë·Î ..
-                l1j.server.Leaf.list.remove(pc.getName()); // ########## A22 ¼¼ÀÌ¹ö Ã¤ÆÃ¸Å´ÏÀú Ãß°¡ ######
+                // ê¸°ì¡´ ì†ŒìŠ¤ ê·¸ëŒ€ë¡œ ..
+                l1j.server.Leaf.list.remove(pc.getName()); // ########## A22 ì„¸ì´ë²„ ì±„íŒ…ë§¤ë‹ˆì € ì¶”ê°€ ######
                 _log.fine("Disconnect from: " + pc.getName());
                 ClientThread.quitGame(pc);
                 synchronized (pc) {
@@ -55,8 +55,8 @@ public class C_NewCharSelect extends ClientBasePacket {
             } else {
             	l1j.server.Leaf.list.remove(pc.getName()); 
                 synchronized (pc) {
-                    // ¼ÒÄÏ / Thread ºÎºĞ¸¸ ÇØÁ¦..
-                    PcSave(pc); // <Ãß°¡
+                    // ì†Œì¼“ / Thread ë¶€ë¶„ë§Œ í•´ì œ..
+                    PcSave(pc); // <ì¶”ê°€
                     pc.saveInventory();
                     pc.setNetConnection(null);
                     pc.setPacketOutput(null);
@@ -75,23 +75,23 @@ public class C_NewCharSelect extends ClientBasePacket {
         }
     }
 
-    /** ÀúÀå±¸¹® **/
+    /** ì €ì¥êµ¬ë¬¸ **/
     private void PcSave(L1PcInstance pc) {
         try {
 
-            /** ÇÇ¾¾ÀúÀåÇÏ°í**/
+            /** í”¼ì”¨ì €ì¥í•˜ê³ **/
             pc.save();
 
-            /** ÇÇ¾¾ ÀÎº¥Åä¸®µµÀúÀåÇØÁÖ°í**/
+            /** í”¼ì”¨ ì¸ë²¤í† ë¦¬ë„ì €ì¥í•´ì£¼ê³ **/
             pc.saveInventory();
         } catch (Exception ex) {
 
-            /** ¿¹¿ÜÃ³¸®? ÀÎº¥ ÀúÀå**/
+            /** ì˜ˆì™¸ì²˜ë¦¬? ì¸ë²¤ ì €ì¥**/
             pc.saveInventory();
         }
     }
 
-    /** ÀúÀå±¸¹® **/
+    /** ì €ì¥êµ¬ë¬¸ **/
     @Override
     public String getType() {
         return C_NEW_CHAR_SELECT;

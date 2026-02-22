@@ -74,7 +74,7 @@ public class L1HauntedHouse {
 		}
 		for (L1PcInstance pc : getMembersArray()) {
 			if (membersCount <= 2) {
-				pc.sendPackets(new S_SystemMessage("À¯·ÉÀÇ ÁýÀº 3¸íÀÌ»óÀÏ¶§¸¸ °¡´ÉÇÕ´Ï´Ù.")); 
+				pc.sendPackets(new S_SystemMessage("ìœ ë ¹ì˜ ì§‘ì€ 3ëª…ì´ìƒì¼ë•Œë§Œ ê°€ëŠ¥í•©ë‹ˆë‹¤.")); 
 				L1Teleport.teleport(pc, 32624, 32813, (short) 4, 5, true);
 			}
 			L1SkillUse l1skilluse = new L1SkillUse();
@@ -202,7 +202,7 @@ public class L1HauntedHouseReadyTimer extends TimerTask {
 
 	public void begin() {
 		Timer timer = new Timer();
-		timer.schedule(this, 120000); // 90ÃÊ Á¤µµ?
+		timer.schedule(this, 120000); // 90ì´ˆ ì •ë„?
 	}
 
 }
@@ -220,7 +220,7 @@ public class L1HauntedHouseTimer extends TimerTask {
 
 	public void begin() {
 		Timer timer = new Timer();
-		timer.schedule(this, 300000); // 5ºÐ
+		timer.schedule(this, 300000); // 5ë¶„
 	}
 
 }

@@ -34,7 +34,7 @@ public class S_ItemStatus extends ServerBasePacket {
 	private static final String S_ITEM_STATUS = "[S] S_ItemStatus";
 
 	/**
-	 * ¾ÆÀÌÅÛÀÇ ÀÌ¸§, »óÅÂ, Æ¯¼º, Áß·®µîÀÇ Ç¥½Ã¸¦ º¯°æÇÑ´Ù
+	 * ì•„ì´í…œì˜ ì´ë¦„, ìƒíƒœ, íŠ¹ì„±, ì¤‘ëŸ‰ë“±ì˜ í‘œì‹œë¥¼ ë³€ê²½í•œë‹¤
 	 */
 	public S_ItemStatus(L1ItemInstance item) {
 		writeC(Opcodes.S_OPCODE_ITEMSTATUS);
@@ -42,7 +42,7 @@ public class S_ItemStatus extends ServerBasePacket {
 		writeS(item.getViewName());
 		writeD(item.getCount());
 		if (!item.isIdentified()) {
-			// ¹Ì°¨Á¤ÀÇ °æ¿ì ½ºÅ×ÀÌÅÍ½º¸¦ º¸³¾ ÇÊ¿ä´Â ¾ø´Ù
+			// ë¯¸ê°ì •ì˜ ê²½ìš° ìŠ¤í…Œì´í„°ìŠ¤ë¥¼ ë³´ë‚¼ í•„ìš”ëŠ” ì—†ë‹¤
 			writeC(0);
 		} else {
 			byte[] status = item.getStatusBytes();

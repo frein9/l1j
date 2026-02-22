@@ -77,7 +77,7 @@ public class L1NpcMakeItemAction extends L1NpcXmlAction {
 	}
 
 	private boolean makeItems(L1PcInstance pc, String npcName, int amount) {
-		if (amount <= 0 || amount >= 1000 ){  //Ãß°¡
+		if (amount <= 0 || amount >= 1000 ){  //ì¶”ê°€
 			return false;
 		}
 		if (amount <= 0) {
@@ -92,7 +92,7 @@ public class L1NpcMakeItemAction extends L1NpcXmlAction {
 						material.getObject());
 				pc.sendPackets(new S_ServerMessage(337, temp.getName() + "("
 						+ ((material.getAmount() * amount) - pc.getInventory()
-						.countItems(temp.getItemId())) + ")")); // \f1%0ÀÌ ºÎÁ·ÇÕ´Ï´Ù.
+						.countItems(temp.getItemId())) + ")")); // \f1%0ì´ ë¶€ì¡±í•©ë‹ˆë‹¤.
 				isEnoughMaterials = false;
 			}
 		}
@@ -100,8 +100,8 @@ public class L1NpcMakeItemAction extends L1NpcXmlAction {
 			return false;
 		}
 
-		// ¿ë·®°ú Áß·®ÀÇ °è»ê
-		int countToCreate = 0; // ¾ÆÀÌÅÛÀÇ °³¼ö(Àü¸¸¹°Àº 1°³)
+		// ìš©ëŸ‰ê³¼ ì¤‘ëŸ‰ì˜ ê³„ì‚°
+		int countToCreate = 0; // ì•„ì´í…œì˜ ê°œìˆ˜(ì „ë§Œë¬¼ì€ 1ê°œ)
 		int weight = 0;
 
 		for (L1ObjectAmount<Integer> makingItem : _items) {
@@ -117,23 +117,23 @@ public class L1NpcMakeItemAction extends L1NpcXmlAction {
 			weight += temp.getWeight() * (makingItem.getAmount() * amount)
 					/ 1000;
 		}
-		// ¿ë·® È®ÀÎ
+		// ìš©ëŸ‰ í™•ì¸
 		long _countToCreate = countToCreate;
 		if(_countToCreate  < 0 || _countToCreate > 1000 ){
            return false;
 		}
 		if (pc.getInventory().getSize() + countToCreate > 180) {
-			pc.sendPackets(new S_ServerMessage(263)); // \f1ÇÑ»ç¶÷ÀÇ Ä³¸¯ÅÍ°¡ °¡Áö°í °ÉÀ» ¼ö ÀÖ´Â ¾ÆÀÌÅÛÀº ÃÖ´ë 180°³±îÁöÀÔ´Ï´Ù.
+			pc.sendPackets(new S_ServerMessage(263)); // \f1í•œì‚¬ëŒì˜ ìºë¦­í„°ê°€ ê°€ì§€ê³  ê±¸ì„ ìˆ˜ ìˆëŠ” ì•„ì´í…œì€ ìµœëŒ€ 180ê°œê¹Œì§€ì…ë‹ˆë‹¤.
 			return false;
 		}
-		// Áß·® È®ÀÎ
+		// ì¤‘ëŸ‰ í™•ì¸
 		if (pc.getMaxWeight() < pc.getInventory().getWeight() + weight) {
-			pc.sendPackets(new S_ServerMessage(82)); // ¾ÆÀÌÅÛÀÌ ³Ê¹« ¹«°Å¿ö, ´õ ÀÌ»ó °¡Áú ¼ö ¾ø½À´Ï´Ù.
+			pc.sendPackets(new S_ServerMessage(82)); // ì•„ì´í…œì´ ë„ˆë¬´ ë¬´ê±°ì›Œ, ë” ì´ìƒ ê°€ì§ˆ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 			return false;
 		}
 
 		for (L1ObjectAmount<Integer> material : _materials) {
-			// Àç·á ¼Òºñ
+			// ì¬ë£Œ ì†Œë¹„
 			pc.getInventory().consumeItem(material.getObject(),
 					material.getAmount() * amount);
 		}
@@ -149,14 +149,14 @@ public class L1NpcMakeItemAction extends L1NpcXmlAction {
 					itemName = itemName + " (" + makingItem.getAmount()
 							* amount + ")";
 				}
-				pc.sendPackets(new S_ServerMessage(143, npcName, itemName)); // \f1%0ÀÌ%1¸¦ ÁÖ¾ú½À´Ï´Ù.
+				pc.sendPackets(new S_ServerMessage(143, npcName, itemName)); // \f1%0ì´%1ë¥¼ ì£¼ì—ˆìŠµë‹ˆë‹¤.
 			}
 		}
 		return true;
 	}
 
 	/**
-	 * ÁöÁ¤µÈ ¸ñ·Ï³»¿¡, ¼ÒÀç°¡ ¸î ¼¼Æ® ÀÖÀ»±î ¼¾´Ù
+	 * ì§€ì •ëœ ëª©ë¡ë‚´ì—, ì†Œì¬ê°€ ëª‡ ì„¸íŠ¸ ìˆì„ê¹Œ ì„¼ë‹¤
 	 */
 	private int countNumOfMaterials(L1PcInventory inv) {
 		int count = Integer.MAX_VALUE;

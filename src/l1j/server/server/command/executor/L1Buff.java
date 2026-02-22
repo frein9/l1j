@@ -43,7 +43,7 @@ public class L1Buff implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 			StringTokenizer tok = new StringTokenizer(arg);
 			Collection<L1PcInstance> players = null;
 			String s = tok.nextToken();
@@ -79,15 +79,15 @@ public class L1Buff implements L1CommandExecutor {
 							L1SkillUse.TYPE_GMBUFF);
 				}
 			} else {
-				pc.sendPackets(new S_SystemMessage("¹öÇÁ°èÀÇ ½ºÅ³ÀÌ ¾Æ´Õ´Ï´Ù. "));
+				pc.sendPackets(new S_SystemMessage("ë²„í”„ê³„ì˜ ìŠ¤í‚¬ì´ ì•„ë‹™ë‹ˆë‹¤. "));
 			}
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
 			pc.sendPackets(new S_SystemMessage(cmdName
-					+ " [all|me] skillId time ¶ó°í ÀÔ·ÂÇØ ÁÖ¼¼¿ä. "));
+					+ " [all|me] skillId time ë¼ê³  ì…ë ¥í•´ ì£¼ì„¸ìš”. "));
 		}
 	}
 }

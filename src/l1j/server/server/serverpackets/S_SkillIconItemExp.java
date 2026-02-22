@@ -4,7 +4,7 @@ import l1j.server.server.Opcodes;
 
 public class S_SkillIconItemExp extends ServerBasePacket {
 
-	public S_SkillIconItemExp(int paramInt){  // Ãµ»óÀÇ¹°¾à
+	public S_SkillIconItemExp(int paramInt){  // ì²œìƒì˜ë¬¼ì•½
 		int i = 0;
 		writeC(Opcodes.S_OPCODE_SKILLICONGFX);
 		writeC(20);

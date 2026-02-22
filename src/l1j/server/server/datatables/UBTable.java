@@ -74,8 +74,8 @@ public class UBTable {
 				ub.setEnterMage(rs.getBoolean("enter_mage"));
 				ub.setEnterElf(rs.getBoolean("enter_elf"));
 				ub.setEnterDarkelf(rs.getBoolean("enter_darkelf"));
-				ub.setEnterDragonKnight(rs.getBoolean("enter_dragonknight")); // ¿ë±â»ç Ãß°¡
-				ub.setEnterBlackWizard(rs.getBoolean("enter_blackwizard"));   // È¯¼ú»ç Ãß°¡
+				ub.setEnterDragonKnight(rs.getBoolean("enter_dragonknight")); // ìš©ê¸°ì‚¬ ì¶”ê°€
+				ub.setEnterBlackWizard(rs.getBoolean("enter_blackwizard"));   // í™˜ìˆ ì‚¬ ì¶”ê°€
 				ub.setEnterMale(rs.getBoolean("enter_male"));
 				ub.setEnterFemale(rs.getBoolean("enter_female"));
 				ub.setUsePot(rs.getBoolean("use_pot"));
@@ -126,7 +126,7 @@ public class UBTable {
 		} finally {
 			SQLUtil.close(rs, pstm, con);
 		}
-		_log.config("UB¸®½ºÆ® " + _ub.size() + "°Ç·Îµå");
+		_log.config("UBë¦¬ìŠ¤íŠ¸ " + _ub.size() + "ê±´ë¡œë“œ");
 	}
 
 	public L1UltimateBattle getUb(int ubId) {
@@ -147,11 +147,11 @@ public class UBTable {
 	}
 
 	/**
-	 * ÁöÁ¤µÈ UBID¿¡ ´ëÇÑ ÆĞÅÏÀÇ ÃÖ´ë¼ö¸¦ µ¹·ÁÁØ´Ù.
+	 * ì§€ì •ëœ UBIDì— ëŒ€í•œ íŒ¨í„´ì˜ ìµœëŒ€ìˆ˜ë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 * 
 	 * @param ubId
-	 *            Á¶»çÇÏ´Â UBID.
-	 * @return ÆĞÅÏÀÇ ÃÖ´ë¼ö.
+	 *            ì¡°ì‚¬í•˜ëŠ” UBID.
+	 * @return íŒ¨í„´ì˜ ìµœëŒ€ìˆ˜.
 	 */
 	public int getMaxPattern(int ubId) {
 		int n = 0;

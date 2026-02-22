@@ -27,9 +27,9 @@ import l1j.server.server.serverpackets.S_BoardRead;
 import l1j.server.server.serverpackets.S_Chainfo;
 import l1j.server.server.serverpackets.S_ChoBoard;
 import l1j.server.server.serverpackets.S_ChoBoardRead;
-import l1j.server.server.serverpackets.S_Ranking; // ·©Å· °Ô½ÃÆÇ
-import l1j.server.server.serverpackets.S_Ranking2; // ¿ë±â»ç È¯¼ú»ç ·©Å· °Ô½ÃÆÇ
-import l1j.server.server.serverpackets.S_EnchantRanking; // ÀÎÃ¦·©Å· °Ô½ÃÆÇ
+import l1j.server.server.serverpackets.S_Ranking; // ë­í‚¹ ê²Œì‹œíŒ
+import l1j.server.server.serverpackets.S_Ranking2; // ìš©ê¸°ì‚¬ í™˜ìˆ ì‚¬ ë­í‚¹ ê²Œì‹œíŒ
+import l1j.server.server.serverpackets.S_EnchantRanking; // ì¸ì±ˆë­í‚¹ ê²Œì‹œíŒ
 import l1j.server.server.templates.L1Npc;
 import l1j.server.server.GameServerSetting;
 import l1j.server.server.serverpackets.S_SystemMessage;
@@ -49,14 +49,14 @@ public class L1BoardInstance extends L1NpcInstance {
 
 	@Override
 	public void onAction(L1PcInstance player) {
-		 if(this.getNpcTemplate().get_npcId() == 200021){//¹ö±×º£¾î ½Â·ü °Ô½ÃÆÇ //»¡°­°Í¸¸ Ãß°¡.
+		 if(this.getNpcTemplate().get_npcId() == 200021){//ë²„ê·¸ë² ì–´ ìŠ¹ë¥  ê²Œì‹œíŒ //ë¹¨ê°•ê²ƒë§Œ ì¶”ê°€.
 			   _GameServerSetting = GameServerSetting.getInstance();
-			   if(_GameServerSetting.getInstance().¹ö°æ == 0){ //Ç¥ÆÇ¸ÅÁß
+			   if(_GameServerSetting.getInstance().ë²„ê²½ == 0){ //í‘œíŒë§¤ì¤‘
 			    player.sendPackets(new S_Board(this, true));
-			   }else if(_GameServerSetting.getInstance().¹ö°æ == 1){ //°æ±âÁß
-			    player.sendPackets(new S_SystemMessage("°æ±â Áß¿¡´Â º¸½Ç ¼ö ¾ø½À´Ï´Ù."));
-			   }else if(_GameServerSetting.getInstance().¹ö°æ == 2){ //´ÙÀ½°æ±âÁØºñÁß
-			    player.sendPackets(new S_SystemMessage("´ÙÀ½ °æ±â¸¦ ÁØºñ Áß ÀÔ´Ï´Ù."));
+			   }else if(_GameServerSetting.getInstance().ë²„ê²½ == 1){ //ê²½ê¸°ì¤‘
+			    player.sendPackets(new S_SystemMessage("ê²½ê¸° ì¤‘ì—ëŠ” ë³´ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤."));
+			   }else if(_GameServerSetting.getInstance().ë²„ê²½ == 2){ //ë‹¤ìŒê²½ê¸°ì¤€ë¹„ì¤‘
+			    player.sendPackets(new S_SystemMessage("ë‹¤ìŒ ê²½ê¸°ë¥¼ ì¤€ë¹„ ì¤‘ ì…ë‹ˆë‹¤."));
 			   }
 			  }else{
 		player.sendPackets(new S_Board(this));

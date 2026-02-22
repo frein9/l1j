@@ -49,7 +49,7 @@ public class AinTimeController implements Runnable {
 	public void run() {
 		try {
 			while (true) {
-				checkAinTime();     // Ãß°¡
+				checkAinTime();     // ì¶”ê°€
 				Thread.sleep(60000);
 			}
 		} catch (Exception e1) {
@@ -70,8 +70,8 @@ public class AinTimeController implements Runnable {
 		
 		if (nowtime % ainTime == 0) {
 		for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
-			 if (pc.getLevel() >= 49) {  // Ãß°¡
-             if (pc.getAinPoint() < 200 && pc.getMap().isSafetyZone(pc.getLocation())) {  // ¾ÆÀÎÇÏ»çµåÀÇ Ãàº¹ ÃæÀü
+			 if (pc.getLevel() >= 49) {  // ì¶”ê°€
+             if (pc.getAinPoint() < 200 && pc.getMap().isSafetyZone(pc.getLocation())) {  // ì•„ì¸í•˜ì‚¬ë“œì˜ ì¶•ë³µ ì¶©ì „
 				pc.setAinPoint(pc.getAinPoint() + 1);
 				pc.sendPackets(new S_SkillIconExp(pc.getAinPoint()));
 			 }
@@ -82,8 +82,8 @@ public class AinTimeController implements Runnable {
 		}
 	 if (nowtime % ainTime1 == 0) {
 		for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
-			 if (pc.getLevel() >= 49) {  // Ãß°¡
-             if (pc.getAinPoint() < 200 && pc.getMap().isSafetyZone(pc.getLocation())) {  // ¾ÆÀÎÇÏ»çµåÀÇ Ãàº¹ ÃæÀü
+			 if (pc.getLevel() >= 49) {  // ì¶”ê°€
+             if (pc.getAinPoint() < 200 && pc.getMap().isSafetyZone(pc.getLocation())) {  // ì•„ì¸í•˜ì‚¬ë“œì˜ ì¶•ë³µ ì¶©ì „
 				pc.setAinPoint(pc.getAinPoint() + 1);
 				pc.sendPackets(new S_SkillIconExp(pc.getAinPoint()));
 		    }

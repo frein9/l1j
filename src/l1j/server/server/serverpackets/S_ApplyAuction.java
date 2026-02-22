@@ -57,14 +57,14 @@ public class S_ApplyAuction extends ServerBasePacket {
 				writeC(Opcodes.S_OPCODE_INPUTAMOUNT);
 				writeD(objectId);
 				writeD(0); // ?
-				if (bidderId == 0) { // ÀÔÂûÀÚ ¾øÀ½
-					writeD(nowPrice); // ½ºÇÉ ÄÁÆ®·ÑÀÇ ÃÊ±â °¡°İ
-					writeD(nowPrice); // °¡°İÀÇ ÇÏÇÑ
-				} else { // ÀÔÂûÀÚ ÀÖ¾î
-					writeD(nowPrice + 1); // ½ºÇÉ ÄÁÆ®·ÑÀÇ ÃÊ±â °¡°İ
-					writeD(nowPrice + 1); // °¡°İÀÇ ÇÏÇÑ
+				if (bidderId == 0) { // ì…ì°°ì ì—†ìŒ
+					writeD(nowPrice); // ìŠ¤í•€ ì»¨íŠ¸ë¡¤ì˜ ì´ˆê¸° ê°€ê²©
+					writeD(nowPrice); // ê°€ê²©ì˜ í•˜í•œ
+				} else { // ì…ì°°ì ìˆì–´
+					writeD(nowPrice + 1); // ìŠ¤í•€ ì»¨íŠ¸ë¡¤ì˜ ì´ˆê¸° ê°€ê²©
+					writeD(nowPrice + 1); // ê°€ê²©ì˜ í•˜í•œ
 				}
-				writeD(2000000000); // °¡°İÀÇ »óÇÑ
+				writeD(2000000000); // ê°€ê²©ì˜ ìƒí•œ
 				writeH(0); // ?
 				writeS("agapply");
 				writeS("agapply " + houseNumber);

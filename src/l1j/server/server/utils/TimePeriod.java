@@ -46,9 +46,9 @@ public class TimePeriod {
 
 	public boolean includes(L1GameTime time) {
 		/*
-		 * ¾Ë±â Èûµç ³í¸®¡¤¡¤¡¤ timeStart after timeEnd ¶§(¿¹:18:00~06:00)
-		 * timeEnd~timeStart(06:00~18:00)ÀÇ ¹üÀ§³»°¡ ¾Æ´Ï¸é,
-		 * timeStart~timeEnd(18:00~06:00)ÀÇ ¹üÀ§³»¶ó°í º¼ ¼ö ÀÖ´Ù
+		 * ì•Œê¸° í˜ë“  ë…¼ë¦¬Â·Â·Â· timeStart after timeEnd ë•Œ(ì˜ˆ:18:00~06:00)
+		 * timeEnd~timeStart(06:00~18:00)ì˜ ë²”ìœ„ë‚´ê°€ ì•„ë‹ˆë©´,
+		 * timeStart~timeEnd(18:00~06:00)ì˜ ë²”ìœ„ë‚´ë¼ê³  ë³¼ ìˆ˜ ìˆë‹¤
 		 */
 		return _timeStart.after(_timeEnd) ?  ! includes(time, _timeEnd,
 				_timeStart) : includes(time, _timeStart, _timeEnd);

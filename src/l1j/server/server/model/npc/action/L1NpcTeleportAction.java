@@ -53,16 +53,16 @@ public class L1NpcTeleportAction extends L1NpcXmlAction {
 	public L1NpcHtml execute(String actionName, L1PcInstance pc, L1Object obj,
 			byte[] args) {
 		 if ((_loc.getMapId() == 68 || _loc.getMapId() == 69 || _loc.getMapId() == 2005) && pc.getLevel() >=13){
-			 pc.sendPackets(new S_SystemMessage("13·¹º§ ÀÌ»óÀº ¼û°ÜÁø °è°îÀ¸·Î ÅÚ·¹Æ÷Æ® ÇÒ ¼ö ¾ø½À´Ï´Ù."));// ³ë¼¶, ¼û°è
+			 pc.sendPackets(new S_SystemMessage("13ë ˆë²¨ ì´ìƒì€ ìˆ¨ê²¨ì§„ ê³„ê³¡ìœ¼ë¡œ í…”ë ˆí¬íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤."));// ë…¸ì„¬, ìˆ¨ê³„
 		     return L1NpcHtml.HTML_CLOSE;
 		     }
-		  if ((pc.getLevel() <45 && pc.getLevel() > 52) &&                //ÀÌºÎºĞºÎÅÍ Ãß°¡
+		  if ((pc.getLevel() <45 && pc.getLevel() > 52) &&                //ì´ë¶€ë¶„ë¶€í„° ì¶”ê°€
 		       (_loc.getMapId() == 777 || _loc.getMapId() == 778 || _loc.getMapId() == 779)) {
-		       // ¹ö¶¥ ÀÌµ¿ºÎºĞ
+		       // ë²„ë•… ì´ë™ë¶€ë¶„
 		       return L1NpcHtml.HTML_CLOSE;
 		      }
 		if (!pc.getInventory().checkItem(L1ItemId.ADENA, _price)) {
-			pc.sendPackets(new S_ServerMessage(337, "$4")); // ¾Æµ¥³ª°¡ ºÎÁ·ÇÕ´Ï´Ù.
+			pc.sendPackets(new S_ServerMessage(337, "$4")); // ì•„ë°ë‚˜ê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.
 			return L1NpcHtml.HTML_CLOSE;
 		}
 		pc.getInventory().consumeItem(L1ItemId.ADENA, _price);

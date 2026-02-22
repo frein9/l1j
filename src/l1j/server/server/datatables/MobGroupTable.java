@@ -76,7 +76,7 @@ public class MobGroupTable {
 						minions, isRemoveGroup);
 				_mobGroupIndex.put(mobGroupId, mobGroup);
 			}
-			_log.config("MOB ±×·ì ¸®½ºÆ® " + _mobGroupIndex.size() + "°Ç·Îµå");
+			_log.config("MOB ê·¸ë£¹ ë¦¬ìŠ¤íŠ¸ " + _mobGroupIndex.size() + "ê±´ë¡œë“œ");
 		} catch (SQLException e) {
 			_log.log(Level.SEVERE, "error while creating mobgroup table", e);
 		} finally {

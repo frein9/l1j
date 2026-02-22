@@ -41,7 +41,7 @@ public class S_OwnCharStatus extends ServerBasePacket {
 		int time = L1GameTimeClock.getInstance(). currentTime(). getSeconds();
 		time = time - (time % 300);
 		// _log.warning((new
-		// StringBuilder()).append("¼Û½Å ½Ã°£:").append(i).toString());
+		// StringBuilder()).append("ì†¡ì‹  ì‹œê°„:").append(i).toString());
 		writeC(Opcodes.S_OPCODE_OWNCHARSTATUS);
 		writeD(pc.getId());
 		if (pc.getLevel() < 1) {
@@ -55,7 +55,7 @@ public class S_OwnCharStatus extends ServerBasePacket {
 				||pc.getCon() >= 60 || pc.getCha() >= 60 ||pc.getWis() >= 60) { 
 			if (!pc.isGm()) { 
 			pc.sendPackets(new S_Disconnect()); 
-			L1World.getInstance().broadcastServerMessage("\\fY½ºÅİ ¹ö±× »ç¿ëÀÚ: ["+pc.getName()+"] ²¨Á®~");
+			L1World.getInstance().broadcastServerMessage("\\fYìŠ¤í…Ÿ ë²„ê·¸ ì‚¬ìš©ì: ["+pc.getName()+"] êº¼ì ¸~");
 			}
 		} 
 		writeD(pc.getExp());

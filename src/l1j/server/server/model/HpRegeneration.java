@@ -24,7 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Random;
 
-import l1j.server.server.model.Instance.L1ItemInstance;  //»ó´Ü¿¡ ÀÓÆ÷Æ®
+import l1j.server.server.model.Instance.L1ItemInstance;  //ìƒë‹¨ì— ì„í¬íŠ¸
 import l1j.server.server.model.Instance.L1EffectInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.skill.L1SkillId;
@@ -100,7 +100,7 @@ public class HpRegeneration extends TimerTask {
 		}
 
 		int maxBonus = 1;
-		// CON º¸³Ê½º
+		// CON ë³´ë„ˆìŠ¤
 		if (11 < _pc.getLevel() && 14 <= _pc.getCon()) {
 			maxBonus = _pc.getCon() - 12;
 			if (25 < _pc.getCon()) {
@@ -126,7 +126,7 @@ public class HpRegeneration extends TimerTask {
 				|| _pc.getMapId() == 21504 || _pc.getMapId() == 22016
 				|| _pc.getMapId() == 22528 || _pc.getMapId() == 23040
 				|| _pc.getMapId() == 23552 || _pc.getMapId() == 24064
-				|| _pc.getMapId() == 24576 || _pc.getMapId() == 25088) { // ¿©ÀÎ¼÷
+				|| _pc.getMapId() == 24576 || _pc.getMapId() == 25088) { // ì—¬ì¸ìˆ™
 			bonus += 5;
 		}
 		if ((_pc.getLocation(). isInScreen(new Point(33055,32336))
@@ -143,21 +143,21 @@ public class HpRegeneration extends TimerTask {
 				|| _pc.hasSkillEffect(L1SkillId.COOKING_3_6_S)) {
 			bonus += 2;
 		}
- 		if (_pc.getOriginalHpr() > 0) { // ¿À¸®Áö³¯ CON HPR º¸Á¤
+ 		if (_pc.getOriginalHpr() > 0) { // ì˜¤ë¦¬ì§€ë‚  CON HPR ë³´ì •
  			bonus += _pc.getOriginalHpr();
  		}
 		boolean inLifeStream = false;
 		if (isPlayerInLifeStream(_pc)) {
 			inLifeStream = true;
-			// °í´ëÀÇ °ø°£, ¸¶Á·ÀÇ ½ÅÀü¿¡¼­´Â HPR+3Àº ¾ø¾îÁ®?
+			// ê³ ëŒ€ì˜ ê³µê°„, ë§ˆì¡±ì˜ ì‹ ì „ì—ì„œëŠ” HPR+3ì€ ì—†ì–´ì ¸?
 			bonus += 3;
 		}
 
-		// °øº¹°ú Áß·®ÀÇ Ã¼Å©
+		// ê³µë³µê³¼ ì¤‘ëŸ‰ì˜ ì²´í¬
 		if (_pc.get_food() < 24 || isOverWeight(_pc)
 				|| _pc.hasSkillEffect(L1SkillId.BERSERKERS)) {
 			bonus = 0;
-			// Àåºñ¿¡ ÀÇÇÑ HPR Áõ°¡´Â ¸¸º¹µµ, Áß·®¿¡ ÀÇÇØ ¾ø¾îÁöÁö¸¸, °¨¼ÒÀÎ °æ¿ì´Â ¸¸º¹µµ, Áß·®¿¡ °ü°è¾øÀÌ È¿°ú°¡ ³²´Â´Ù
+			// ì¥ë¹„ì— ì˜í•œ HPR ì¦ê°€ëŠ” ë§Œë³µë„, ì¤‘ëŸ‰ì— ì˜í•´ ì—†ì–´ì§€ì§€ë§Œ, ê°ì†Œì¸ ê²½ìš°ëŠ” ë§Œë³µë„, ì¤‘ëŸ‰ì— ê´€ê³„ì—†ì´ íš¨ê³¼ê°€ ë‚¨ëŠ”ë‹¤
 			if (equipHpr > 0) {
 				equipHpr = 0;
 			}
@@ -167,39 +167,39 @@ public class HpRegeneration extends TimerTask {
 		newHp += bonus + equipHpr;
 
 		if (newHp < 1) {
-			newHp = 1; // HPR °¨¼Ò Àåºñ¿¡ ÀÇÇØ »ç¸ÁÀº ÇÏÁö ¾Ê´Â´Ù
+			newHp = 1; // HPR ê°ì†Œ ì¥ë¹„ì— ì˜í•´ ì‚¬ë§ì€ í•˜ì§€ ì•ŠëŠ”ë‹¤
 		}
-		// ¼öÁß¿¡¼­ÀÇ °¨¼Ò Ã³¸®
-		// ¶óÀÌÇÁ ½Ã³Á¹°·Î °¨¼Ò¸¦ ¾ø¾Ù ¼ö ÀÖÀ»±î ºÒ¸í
+		// ìˆ˜ì¤‘ì—ì„œì˜ ê°ì†Œ ì²˜ë¦¬
+		// ë¼ì´í”„ ì‹œëƒ‡ë¬¼ë¡œ ê°ì†Œë¥¼ ì—†ì•¨ ìˆ˜ ìˆì„ê¹Œ ë¶ˆëª…
 		if (isUnderwater(_pc)) {
 			newHp -= 20;
 			if (newHp < 1) {
 				if (_pc.isGm() && _pc.getInventory().checkEquipped(300000)) {
 					newHp = 1;
 				} else {
-					_pc.death(null); // Áú½Ä¿¡ ÀÇÇØ HP°¡ 0ÀÌ µÇ¾úÀ» °æ¿ì´Â »ç¸ÁÇÑ´Ù.
+					_pc.death(null); // ì§ˆì‹ì— ì˜í•´ HPê°€ 0ì´ ë˜ì—ˆì„ ê²½ìš°ëŠ” ì‚¬ë§í•œë‹¤.
 				}
 			}
 		}
-		// Lv50 Äù½ºÆ®ÀÇ °í´ëÀÇ °ø°£ 1 F2F¿¡¼­ÀÇ °¨¼Ò Ã³¸®
+		// Lv50 í€˜ìŠ¤íŠ¸ì˜ ê³ ëŒ€ì˜ ê³µê°„ 1 F2Fì—ì„œì˜ ê°ì†Œ ì²˜ë¦¬
 		if (isLv50Quest(_pc) && !inLifeStream) {
 			newHp -= 10;
 			if (newHp < 1) {
 				if (_pc.isGm() && _pc.getInventory().checkEquipped(300000)) {
 					newHp = 1;
 				} else {
-					_pc.death(null); // HP°¡ 0ÀÌ µÇ¾úÀ» °æ¿ì´Â »ç¸ÁÇÑ´Ù.
+					_pc.death(null); // HPê°€ 0ì´ ë˜ì—ˆì„ ê²½ìš°ëŠ” ì‚¬ë§í•œë‹¤.
 				}
 			}
 		}
-		// ¸¶Á·ÀÇ ½ÅÀü¿¡¼­ÀÇ °¨¼Ò Ã³¸®
+		// ë§ˆì¡±ì˜ ì‹ ì „ì—ì„œì˜ ê°ì†Œ ì²˜ë¦¬
 		if (_pc.getMapId() == 410 && !inLifeStream) {
 			newHp -= 10;
 			if (newHp < 1) {
 				if (_pc.isGm() && _pc.getInventory().checkEquipped(300000)) {
 					newHp = 1;
 				} else {
-					_pc.death(null); // HP°¡ 0ÀÌ µÇ¾úÀ» °æ¿ì´Â »ç¸ÁÇÑ´Ù.
+					_pc.death(null); // HPê°€ 0ì´ ë˜ì—ˆì„ ê²½ìš°ëŠ” ì‚¬ë§í•œë‹¤.
 				}
 			}
 		}
@@ -210,7 +210,7 @@ public class HpRegeneration extends TimerTask {
 	}
 
 	private boolean isUnderwater(L1PcInstance pc) {
-		// ¿öÅÍ ºÎÃ÷ Àåºñ½ÃÀÎ°¡, ¿¡¹ÙÀÇ Ãàº¹ »óÅÂ, ¼ö¸®µÈ Àåºñ ¼¼Æ®ÀÌ¸é ¼öÁßÀº ¾Æ´Ï¸é °£ÁÖÇÑ´Ù.
+		// ì›Œí„° ë¶€ì¸  ì¥ë¹„ì‹œì¸ê°€, ì—ë°”ì˜ ì¶•ë³µ ìƒíƒœ, ìˆ˜ë¦¬ëœ ì¥ë¹„ ì„¸íŠ¸ì´ë©´ ìˆ˜ì¤‘ì€ ì•„ë‹ˆë©´ ê°„ì£¼í•œë‹¤.
 		if (pc.getInventory().checkEquipped(20207)) {
 			return false;
 		}
@@ -227,8 +227,8 @@ public class HpRegeneration extends TimerTask {
 	}
 
 	private boolean isOverWeight(L1PcInstance pc) {
-		// ¿¡Å°Á¶Æ½Å©¹ÙÀÌÅ¸¶óÀÌÁî »óÅÂ, ¾Æµğ¼î³ª¸£ÆÄÀÌ¾Æ »óÅÂÀÎ°¡
-		// °ñµç À® Àåºñ½ÃÀÌ¸é, Áß·® ¿À¹öÀÌÁö ¾ÊÀ¸¸é °£ÁÖÇÑ´Ù.
+		// ì—í‚¤ì¡°í‹±í¬ë°”ì´íƒ€ë¼ì´ì¦ˆ ìƒíƒœ, ì•„ë””ì‡¼ë‚˜ë¥´íŒŒì´ì•„ ìƒíƒœì¸ê°€
+		// ê³¨ë“  ìœ™ ì¥ë¹„ì‹œì´ë©´, ì¤‘ëŸ‰ ì˜¤ë²„ì´ì§€ ì•Šìœ¼ë©´ ê°„ì£¼í•œë‹¤.
 		if (pc.hasSkillEffect(L1SkillId.EXOTIC_VITALIZE)
 				|| _pc.getMapId() == 16384 || _pc.getMapId() == 17408 || _pc.getMapId() == 18432  
 				|| _pc.getMapId() == 20480 || _pc.getMapId() == 21504 || _pc.getMapId() == 22528
@@ -250,11 +250,11 @@ public class HpRegeneration extends TimerTask {
 	}
 
 	/**
-	 * ÁöÁ¤ÇÑ PC°¡ ¶óÀÌÇÁ ½Ã³Á¹°ÀÇ ¹üÀ§³»¿¡ ÀÖ´ÂÁö Ã¼Å©ÇÑ´Ù
+	 * ì§€ì •í•œ PCê°€ ë¼ì´í”„ ì‹œëƒ‡ë¬¼ì˜ ë²”ìœ„ë‚´ì— ìˆëŠ”ì§€ ì²´í¬í•œë‹¤
 	 * 
 	 * @param pc
 	 *            PC
-	 * @return true PC°¡ ¶óÀÌÇÁ ½Ã³Á¹°ÀÇ ¹üÀ§³»¿¡ ÀÖ´Â °æ¿ì
+	 * @return true PCê°€ ë¼ì´í”„ ì‹œëƒ‡ë¬¼ì˜ ë²”ìœ„ë‚´ì— ìˆëŠ” ê²½ìš°
 	 */
 	private static boolean isPlayerInLifeStream(L1PcInstance pc) {
 		for (L1Object object : pc.getKnownObjects()) {

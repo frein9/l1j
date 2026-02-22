@@ -12,13 +12,13 @@ public class S_Racing extends ServerBasePacket{
 
 	public S_Racing(int type){
 		switch(type){
-			// ½ÃÀÛ
+			// ì‹œìž‘
 			case 0:
 				writeC(126);
 				writeC(71);
 				writeC(500);
 				break;
-			// Á¾·á
+			// ì¢…ë£Œ
 			case 1:
 				writeC(126);
 				writeC(0x46);
@@ -29,7 +29,7 @@ public class S_Racing extends ServerBasePacket{
 				writeC(42);
 				writeC(74);
 				break;
-			// ¿· ¸®½ºÆ®
+			// ì˜† ë¦¬ìŠ¤íŠ¸
 			case 2:
 				writeC(126);
 				writeC(66);
@@ -39,7 +39,7 @@ public class S_Racing extends ServerBasePacket{
 					writeS(player.getName());
 				}
 				break;
-			// °ÔÀÓ½ÃÀÛ
+			// ê²Œìž„ì‹œìž‘
 			case 3:
 				writeC(126);
 				writeC(64);
@@ -50,7 +50,7 @@ public class S_Racing extends ServerBasePacket{
 				writeC(110);
 				writeC(17);
 				break;
-			// °ÔÀÓ ½Ã°£
+			// ê²Œìž„ ì‹œê°„
 			case 4:
 				writeC(126);
 				writeC(0x41);
@@ -61,7 +61,7 @@ public class S_Racing extends ServerBasePacket{
 				writeC(0);
 				writeC(0);
 				break;
-			// ½Ã°£ÆÐÅ¶ »èÁ¦
+			// ì‹œê°„íŒ¨í‚· ì‚­ì œ
 			case 5:
 				writeC(126);
 				writeC(72);

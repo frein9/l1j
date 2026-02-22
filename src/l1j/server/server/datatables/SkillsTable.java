@@ -29,7 +29,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import l1j.server.L1DatabaseFactory;
-import l1j.server.server.SkillCheck; //** ½ºÅ³ ¹ö±× ¹æÁö Ãß°¡ **// By µµ¿ì³Ê
+import l1j.server.server.SkillCheck; //** ìŠ¤í‚¬ ë²„ê·¸ ë°©ì§€ ì¶”ê°€ **// By ë„ìš°ë„ˆ
 import l1j.server.server.templates.L1Skills;
 import l1j.server.server.utils.SQLUtil;
 
@@ -114,7 +114,7 @@ public class SkillsTable {
 
 			_skills.put(new Integer(skill_id), l1skills);
 		}
-		_log.config("½ºÅ³ " + _skills.size() + "°Ç·Îµå");
+		_log.config("ìŠ¤í‚¬ " + _skills.size() + "ê±´ë¡œë“œ");
 	}
 
 	public void spellMastery(int playerobjid, int skillid, String skillname,
@@ -143,9 +143,9 @@ public class SkillsTable {
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);
 		}
-        //** ½ºÅ³¹ö±× ¹æÁö ½ºÅ³  ¸¶½ºÅÍ½Ã ¸Ş¸ğ¸®¿¡ ·Îµå **//  By µµ¿ì³Ê
+        //** ìŠ¤í‚¬ë²„ê·¸ ë°©ì§€ ìŠ¤í‚¬  ë§ˆìŠ¤í„°ì‹œ ë©”ëª¨ë¦¬ì— ë¡œë“œ **//  By ë„ìš°ë„ˆ
         SkillCheck.getInstance().AddSkill(playerobjid, skillid);//
-        //** ½ºÅ³¹ö±× ¹æÁö ½ºÅ³  ¸¶½ºÅÍ½Ã ¸Ş¸ğ¸®¿¡ ·Îµå **//  By µµ¿ì³Ê 
+        //** ìŠ¤í‚¬ë²„ê·¸ ë°©ì§€ ìŠ¤í‚¬  ë§ˆìŠ¤í„°ì‹œ ë©”ëª¨ë¦¬ì— ë¡œë“œ **//  By ë„ìš°ë„ˆ 
 	}
 
 	public void spellLost(int playerobjid, int skillid) {
@@ -167,9 +167,9 @@ public class SkillsTable {
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);
 		}
-        //** ½ºÅ³¹ö±× ¹æÁö ½ºÅ³  »èÁ¦½Ã ¸Ş¸ğ¸®¿¡ »èÁ¦ **//  By µµ¿ì³Ê
+        //** ìŠ¤í‚¬ë²„ê·¸ ë°©ì§€ ìŠ¤í‚¬  ì‚­ì œì‹œ ë©”ëª¨ë¦¬ì— ì‚­ì œ **//  By ë„ìš°ë„ˆ
         SkillCheck.getInstance().DelSkill(playerobjid, skillid);//
-        //** ½ºÅ³¹ö±× ¹æÁö ½ºÅ³ »èÁ¦½Ã ¸Ş¸ğ¸®¿¡ »èÁ¦ **//  By µµ¿ì³Ê 
+        //** ìŠ¤í‚¬ë²„ê·¸ ë°©ì§€ ìŠ¤í‚¬ ì‚­ì œì‹œ ë©”ëª¨ë¦¬ì— ì‚­ì œ **//  By ë„ìš°ë„ˆ 
 	}
 
 	public boolean spellCheck(int playerobjid, int skillid) {

@@ -78,9 +78,9 @@ public class C_DeleteChar extends ClientBasePacket {
 						pc.setType(38); 
 					}
 					Timestamp deleteTime = new Timestamp(System
-							.currentTimeMillis() + 604800000); // 7ÀÏ ÈÄ
+							.currentTimeMillis() + 604800000); // 7ì¼ í›„
 					pc.setDeleteTime(deleteTime);
-					pc.save(); // DB¿¡ Ä³¸¯ÅÍ Á¤º¸¸¦ ±âÀÔÇÑ´Ù
+					pc.save(); // DBì— ìºë¦­í„° ì •ë³´ë¥¼ ê¸°ì…í•œë‹¤
 				} else {
 					if (pc.isCrown()) {
 						pc.setType(0);
@@ -98,7 +98,7 @@ public class C_DeleteChar extends ClientBasePacket {
 						pc.setType(6); 
 					}
 					pc.setDeleteTime(null);
-					pc.save(); // DB¿¡ Ä³¸¯ÅÍ Á¤º¸¸¦ ±âÀÔÇÑ´Ù
+					pc.save(); // DBì— ìºë¦­í„° ì •ë³´ë¥¼ ê¸°ì…í•œë‹¤
 				}
 				client.sendPacket(new S_DeleteCharOK(S_DeleteCharOK
 						.DELETE_CHAR_AFTER_7DAYS));

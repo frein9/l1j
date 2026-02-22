@@ -66,7 +66,7 @@ public abstract class CharactersItemStorage {
 	public abstract void updateItemAttrEnchantLevel(L1ItemInstance item)
 	        throws Exception;
 	 
-	//Àå½Å±¸¾÷±×·¹ÀÌµå ByÃß¾ï
+	//ì¥ì‹ êµ¬ì—…ê·¸ë ˆì´ë“œ Byì¶”ì–µ
     public abstract void updateItemUpacse(L1ItemInstance item)
 	        throws Exception;
 

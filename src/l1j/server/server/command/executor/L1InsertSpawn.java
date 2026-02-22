@@ -46,35 +46,35 @@ public class L1InsertSpawn implements L1CommandExecutor {
 		String msg = null;
 
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 			StringTokenizer tok = new StringTokenizer(arg);
 			String type = tok.nextToken();
 			int npcId = Integer.parseInt(tok.nextToken(). trim());
 			L1Npc template = NpcTable.getInstance(). getTemplate(npcId);
 
 			if (template == null) {
-				msg = "ÇØ´çÇÏ´Â NPC°¡ ¹ß°ßµÇÁö ¾Ê½À´Ï´Ù. ";
+				msg = "í•´ë‹¹í•˜ëŠ” NPCê°€ ë°œê²¬ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ";
 				return;
 			}
-			if (type.equals("¸ó½ºÅÍ")) {
+			if (type.equals("ëª¬ìŠ¤í„°")) {
 				if (! template.getImpl(). equals("L1Monster")) {
-					msg = "ÁöÁ¤ÇÑ NPC´Â L1Monster°¡ ¾Æ´Õ´Ï´Ù. ";
+					msg = "ì§€ì •í•œ NPCëŠ” L1Monsterê°€ ì•„ë‹™ë‹ˆë‹¤. ";
 					return;
 				}
 				SpawnTable.storeSpawn(pc, template);
-			} else if (type.equals("¿£ÇÇ¾¾")) {
+			} else if (type.equals("ì—”í”¼ì”¨")) {
 				NpcSpawnTable.getInstance(). storeSpawn(pc, template);
 			}
 			L1SpawnUtil.spawn(pc, npcId, 0, 0);
 			msg = new StringBuilder(). append(template.get_name()). append(
-					" (" + npcId + ") "). append("¸¦ Ãß°¡Çß½À´Ï´Ù. "). toString();
+					" (" + npcId + ") "). append("ë¥¼ ì¶”ê°€í–ˆìŠµë‹ˆë‹¤. "). toString();
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, "", e);
-			msg = cmdName + " ¸ó½ºÅÍ ¶Ç´Â ¿£ÇÇ¾¾ NPCID ¶ó°í ÀÔ·ÂÇØ ÁÖ¼¼¿ä. ";
+			msg = cmdName + " ëª¬ìŠ¤í„° ë˜ëŠ” ì—”í”¼ì”¨ NPCID ë¼ê³  ì…ë ¥í•´ ì£¼ì„¸ìš”. ";
 		} finally {
 			if (msg != null) {
 				pc.sendPackets(new S_SystemMessage(msg));

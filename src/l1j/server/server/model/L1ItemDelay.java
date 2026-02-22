@@ -65,19 +65,19 @@ public class L1ItemDelay {
 		L1PcInstance pc = client.getActiveChar();
 
 		if (item.getItem().getType2() == 0) {
-			// Á¾º°£º±× ¿ÜÀÇ ¾ÆÀÌÅÛ
+			// ì¢…ë³„ï¼šê·¸ ì™¸ì˜ ì•„ì´í…œ
 			delayId = ((L1EtcItem) item.getItem()).get_delayid();
 			delayTime = ((L1EtcItem) item.getItem()).get_delaytime();
 		} else if (item.getItem().getType2() == 1) {
-			// Á¾º°£º¹«±â
+			// ì¢…ë³„ï¼šë¬´ê¸°
 			return;
 		} else if (item.getItem().getType2() == 2) {
-			// Á¾º°£º¹æ¾î¿ë ±â±¸
+			// ì¢…ë³„ï¼šë°©ì–´ìš© ê¸°êµ¬
 
 			if (item.getItem().getItemId() == 20077
 					|| item.getItem().getItemId() == 20062
 					|| item.getItem().getItemId() == 120077) {
-				// ÀÎºñÁöºñ¸®Æ¼Å©·ÎÅ©, ¹Ù¸£·Î±×ºê¶ùµğÅ©·ÎÅ©
+				// ì¸ë¹„ì§€ë¹„ë¦¬í‹°í¬ë¡œí¬, ë°”ë¥´ë¡œê·¸ë¸Œëë””í¬ë¡œí¬
 				if (item.isEquipped() && !pc.isInvisble()) {
 					pc.beginInvisTimer();
 				}

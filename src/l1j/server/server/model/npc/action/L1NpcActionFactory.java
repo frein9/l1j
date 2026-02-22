@@ -48,7 +48,7 @@ public class L1NpcActionFactory {
 			_actions
 					.put("Teleport", loadConstructor(L1NpcTeleportAction.class));
 		} catch (NoSuchMethodException e) {
-			_log.log(Level.SEVERE, "NpcActionÀÇ Å¬·¡½º ·Îµå¿¡ ½ÇÆĞ", e);
+			_log.log(Level.SEVERE, "NpcActionì˜ í´ë˜ìŠ¤ ë¡œë“œì— ì‹¤íŒ¨", e);
 		}
 	}
 
@@ -57,9 +57,9 @@ public class L1NpcActionFactory {
 			Constructor<L1NpcAction> con = _actions.get(element.getNodeName());
 			return con.newInstance(element);
 		} catch (NullPointerException e) {
-			_log.warning(element.getNodeName() + " ¹ÌÁ¤µµ¸®ÀÇ NPC ¾×¼ÇÀÔ´Ï´Ù");
+			_log.warning(element.getNodeName() + " ë¯¸ì •ë„ë¦¬ì˜ NPC ì•¡ì…˜ì…ë‹ˆë‹¤");
 		} catch (Exception e) {
-			_log.log(Level.SEVERE, "NpcActionÀÇ Å¬·¡½º ·Îµå¿¡ ½ÇÆĞ", e);
+			_log.log(Level.SEVERE, "NpcActionì˜ í´ë˜ìŠ¤ ë¡œë“œì— ì‹¤íŒ¨", e);
 		}
 		return null;
 	}

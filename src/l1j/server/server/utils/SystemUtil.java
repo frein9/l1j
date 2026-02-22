@@ -20,10 +20,10 @@ package l1j.server.server.utils;
 
 public class SystemUtil {
 	/**
-	 * ½Ã½ºÅÛÀÌ ÀÌ¿ëÁßÀÇ heap »çÀÌÁî¸¦ ¸Ş°¡¹ÙÀÌÆ® ´ÜÀ§·Î µ¹·ÁÁØ´Ù.<br>
-	 * ÀÌ °ª¿¡ ½ºÅÃÀÇ »çÀÌÁî´Â Æ÷ÇÔµÇÁö ¾Ê´Â´Ù.
+	 * ì‹œìŠ¤í…œì´ ì´ìš©ì¤‘ì˜ heap ì‚¬ì´ì¦ˆë¥¼ ë©”ê°€ë°”ì´íŠ¸ ë‹¨ìœ„ë¡œ ëŒë ¤ì¤€ë‹¤.<br>
+	 * ì´ ê°’ì— ìŠ¤íƒì˜ ì‚¬ì´ì¦ˆëŠ” í¬í•¨ë˜ì§€ ì•ŠëŠ”ë‹¤.
 	 * 
-	 * @return ÀÌ¿ëÁßÀÇ heap »çÀÌÁî
+	 * @return ì´ìš©ì¤‘ì˜ heap ì‚¬ì´ì¦ˆ
 	 */
 	public static long getUsedMemoryMB() {
 		return (Runtime.getRuntime().totalMemory() - Runtime.getRuntime()

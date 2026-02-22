@@ -49,7 +49,7 @@ public class PrimiumTimeController implements Runnable {
 	public void run() {
 		try {
 			while (true) {
-				checkPrimiumTime();     // Ãß°¡
+				checkPrimiumTime();     // ì¶”ê°€
 				Thread.sleep(60000);
 				   for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 					     Object[] dollList = pc.getDollList().values().toArray();
@@ -74,56 +74,56 @@ public class PrimiumTimeController implements Runnable {
 
 		  int primiumTime = Config.RATE_PRIMIUM_TIME;
 		  int primiumNumber = Config.RATE_PRIMIUM_NUMBER;
-		  /** ¹ö±× ¹æÁö **/
+		  /** ë²„ê·¸ ë°©ì§€ **/
 		   if (primiumNumber >= 1000) { 
 			  return;
 		  }
-		  /** ¹ö±× ¹æÁö **/
+		  /** ë²„ê·¸ ë°©ì§€ **/
 		   if (nowtime % primiumTime == 0) {	
 		      for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 		      int AccessLevel = pc.getLevel();					
                     if (!pc.isDead() && !pc.isPrivateShop()) { 
-			            pc.getInventory().storeItem(41159,primiumNumber); // ½ÅºñÇÑ ³¯°³±êÅĞ Áö±Ş 
-			            pc.sendPackets(new S_SystemMessage("½ÅºñÇÑ ³¯°³ ±êÅĞ ["+primiumNumber+"]À» ¾ò¾ú½À´Ï´Ù.")); 				   
-             } else if (pc.isPrivateShop()) { // Á×Áö ¾Ê°í »óÁ¡ÀÏ°æ¿ì                       
-            	//		pc.getInventory().storeItem(41159, 3); // ½ÅºñÇÑ ³¯°³±êÅĞ Áö±Ş 
-            	//		pc.sendPackets(new S_SystemMessage("\\fU[ÀÌº¥Æ®] ½ÅºñÇÑ ³¯°³±êÅĞ [3]°³¸¦ ¾ò¾ú½À´Ï´Ù!."));
+			            pc.getInventory().storeItem(41159,primiumNumber); // ì‹ ë¹„í•œ ë‚ ê°œê¹ƒí„¸ ì§€ê¸‰ 
+			            pc.sendPackets(new S_SystemMessage("ì‹ ë¹„í•œ ë‚ ê°œ ê¹ƒí„¸ ["+primiumNumber+"]ì„ ì–»ì—ˆìŠµë‹ˆë‹¤.")); 				   
+             } else if (pc.isPrivateShop()) { // ì£½ì§€ ì•Šê³  ìƒì ì¼ê²½ìš°                       
+            	//		pc.getInventory().storeItem(41159, 3); // ì‹ ë¹„í•œ ë‚ ê°œê¹ƒí„¸ ì§€ê¸‰ 
+            	//		pc.sendPackets(new S_SystemMessage("\\fU[ì´ë²¤íŠ¸] ì‹ ë¹„í•œ ë‚ ê°œê¹ƒí„¸ [3]ê°œë¥¼ ì–»ì—ˆìŠµë‹ˆë‹¤!."));
             			} 
-				    if (AccessLevel < 70 && !pc.isPrivateShop()) { // ¾ï¼¼½º·¹º§ 70¹Ì¸¸ÀÏ¶§
-                        pc.getInventory().storeItem(41159, 1); // ½ÅºñÇÑ ³¯°³±êÅĞ Áö±Ş
-                        pc.sendPackets(new S_SystemMessage("\\fU[°ß½À»ı] "+ pc.getName()+ " ´Ô ±êÅĞ [1]°³ Ãß°¡Áö±Ş!."));
+				    if (AccessLevel < 70 && !pc.isPrivateShop()) { // ì–µì„¸ìŠ¤ë ˆë²¨ 70ë¯¸ë§Œì¼ë•Œ
+                        pc.getInventory().storeItem(41159, 1); // ì‹ ë¹„í•œ ë‚ ê°œê¹ƒí„¸ ì§€ê¸‰
+                        pc.sendPackets(new S_SystemMessage("\\fU[ê²¬ìŠµìƒ] "+ pc.getName()+ " ë‹˜ ê¹ƒí„¸ [1]ê°œ ì¶”ê°€ì§€ê¸‰!."));
 				        }
-			   else if (AccessLevel < 80 && !pc.isPrivateShop()) { // ¾ï¼¼½º·¹º§ 80¹Ì¸¸ÀÏ¶§
-                        pc.getInventory().storeItem(41159, 2); // ½ÅºñÇÑ ³¯°³±êÅĞ Áö±Ş
-                        pc.sendPackets(new S_SystemMessage("\\fU[¼÷·ÃÀÚ] "+ pc.getName()+ " ´Ô ±êÅĞ [2]°³ Ãß°¡Áö±Ş!."));
+			   else if (AccessLevel < 80 && !pc.isPrivateShop()) { // ì–µì„¸ìŠ¤ë ˆë²¨ 80ë¯¸ë§Œì¼ë•Œ
+                        pc.getInventory().storeItem(41159, 2); // ì‹ ë¹„í•œ ë‚ ê°œê¹ƒí„¸ ì§€ê¸‰
+                        pc.sendPackets(new S_SystemMessage("\\fU[ìˆ™ë ¨ì] "+ pc.getName()+ " ë‹˜ ê¹ƒí„¸ [2]ê°œ ì¶”ê°€ì§€ê¸‰!."));
 				        }                          
-			   else if (AccessLevel < 83 && !pc.isPrivateShop()) { // ¾ï¼¼½º·¹º§ 83¹Ì¸¸ÀÏ¶§
-                        pc.getInventory().storeItem(41159, 3); // ½ÅºñÇÑ ³¯°³±êÅĞ Áö±Ş 
-                        pc.sendPackets(new S_SystemMessage("\\fU[°í¼ö] "+ pc.getName()+ " ´Ô ±êÅĞ [3]°³ Ãß°¡Áö±Ş!.")); 
+			   else if (AccessLevel < 83 && !pc.isPrivateShop()) { // ì–µì„¸ìŠ¤ë ˆë²¨ 83ë¯¸ë§Œì¼ë•Œ
+                        pc.getInventory().storeItem(41159, 3); // ì‹ ë¹„í•œ ë‚ ê°œê¹ƒí„¸ ì§€ê¸‰ 
+                        pc.sendPackets(new S_SystemMessage("\\fU[ê³ ìˆ˜] "+ pc.getName()+ " ë‹˜ ê¹ƒí„¸ [3]ê°œ ì¶”ê°€ì§€ê¸‰!.")); 
 				        }
-               else if (AccessLevel < 85 && !pc.isPrivateShop()) { // ¾ï¼¼½º·¹º§ 85¹Ì¸¸ÀÏ¶§
-                        pc.getInventory().storeItem(41159, 4); // ½ÅºñÇÑ ³¯°³±êÅĞ Áö±Ş 
-                        pc.sendPackets(new S_SystemMessage("\\fU[¿µ¿õ] "+ pc.getName()+ " ´Ô ±êÅĞ [4]°³ Ãß°¡Áö±Ş!.")); 
+               else if (AccessLevel < 85 && !pc.isPrivateShop()) { // ì–µì„¸ìŠ¤ë ˆë²¨ 85ë¯¸ë§Œì¼ë•Œ
+                        pc.getInventory().storeItem(41159, 4); // ì‹ ë¹„í•œ ë‚ ê°œê¹ƒí„¸ ì§€ê¸‰ 
+                        pc.sendPackets(new S_SystemMessage("\\fU[ì˜ì›…] "+ pc.getName()+ " ë‹˜ ê¹ƒí„¸ [4]ê°œ ì¶”ê°€ì§€ê¸‰!.")); 
 				        }
-			   else if (AccessLevel < 90 && !pc.isPrivateShop()) { // ¾ï¼¼½º·¹º§ 90¹Ì¸¸ÀÏ¶§
-                        pc.getInventory().storeItem(41159, 5); // ½ÅºñÇÑ ³¯°³±êÅĞ Áö±Ş
-                        pc.sendPackets(new S_SystemMessage("\\fU[ÁöÁ¸] "+ pc.getName()+ " ´Ô ±êÅĞ [5]°³ Ãß°¡Áö±Ş!.")); 
+			   else if (AccessLevel < 90 && !pc.isPrivateShop()) { // ì–µì„¸ìŠ¤ë ˆë²¨ 90ë¯¸ë§Œì¼ë•Œ
+                        pc.getInventory().storeItem(41159, 5); // ì‹ ë¹„í•œ ë‚ ê°œê¹ƒí„¸ ì§€ê¸‰
+                        pc.sendPackets(new S_SystemMessage("\\fU[ì§€ì¡´] "+ pc.getName()+ " ë‹˜ ê¹ƒí„¸ [5]ê°œ ì¶”ê°€ì§€ê¸‰!.")); 
 				        }                          
-               else if (AccessLevel < 100 && !pc.isPrivateShop()) { // ¾ï¼¼½º·¹º§ 99¹Ì¸¸ÀÏ¶§
-                        pc.getInventory().storeItem(41159, 6); // ½ÅºñÇÑ ³¯°³±êÅĞ Áö±Ş
-                        pc.sendPackets(new S_SystemMessage("\\fU[½Å] "+ pc.getName()+ " ´Ô ±êÅĞ [6]°³ Ãß°¡Áö±Ş!.")); 
+               else if (AccessLevel < 100 && !pc.isPrivateShop()) { // ì–µì„¸ìŠ¤ë ˆë²¨ 99ë¯¸ë§Œì¼ë•Œ
+                        pc.getInventory().storeItem(41159, 6); // ì‹ ë¹„í•œ ë‚ ê°œê¹ƒí„¸ ì§€ê¸‰
+                        pc.sendPackets(new S_SystemMessage("\\fU[ì‹ ] "+ pc.getName()+ " ë‹˜ ê¹ƒí„¸ [6]ê°œ ì¶”ê°€ì§€ê¸‰!.")); 
 				        }
                         L1Clan clan = pc.getClan();
-                    if (clan != null && !pc.isPrivateShop()){ // Å¬·£ÀÌ ÀÖ´Ù¸é
-                   // Ç÷¸Í °¡ÀÔÀÚ¿¡°Ô ±êÅĞ º¸³Ê½º Áö±Ş
-                    if (clan.getClanId() != 561644842){ // ÀÓ½ÃÇ÷¸ÍÀÌ ¾Æ´Ï¶ó¸é
-                        pc.getInventory().storeItem(41159, 2); // ½ÅºñÇÑ ³¯°³±êÅĞ Áö±Ş 
-                        pc.sendPackets(new S_SystemMessage("\\fUÇ÷¸Í °¡ÀÔ º¸³Ê½º ±êÅĞ [2]°³ Ãß°¡Áö±Ş!"));
+                    if (clan != null && !pc.isPrivateShop()){ // í´ëœì´ ìˆë‹¤ë©´
+                   // í˜ˆë§¹ ê°€ì…ìì—ê²Œ ê¹ƒí„¸ ë³´ë„ˆìŠ¤ ì§€ê¸‰
+                    if (clan.getClanId() != 561644842){ // ì„ì‹œí˜ˆë§¹ì´ ì•„ë‹ˆë¼ë©´
+                        pc.getInventory().storeItem(41159, 2); // ì‹ ë¹„í•œ ë‚ ê°œê¹ƒí„¸ ì§€ê¸‰ 
+                        pc.sendPackets(new S_SystemMessage("\\fUí˜ˆë§¹ ê°€ì… ë³´ë„ˆìŠ¤ ê¹ƒí„¸ [2]ê°œ ì¶”ê°€ì§€ê¸‰!"));
                         }
-                   // ¼ºÇ÷¿¡°Ô º¸³Ê½º Áö±Ş
-                    if (clan.getCastleId() != 0 && !pc.isPrivateShop()){ // Å¬·£ÀÌ ¼ÒÀ¯ÇÑ Ç÷¸ÍÀÌ ÀÖ´Ù¸é
+                   // ì„±í˜ˆì—ê²Œ ë³´ë„ˆìŠ¤ ì§€ê¸‰
+                    if (clan.getCastleId() != 0 && !pc.isPrivateShop()){ // í´ëœì´ ì†Œìœ í•œ í˜ˆë§¹ì´ ìˆë‹¤ë©´
                         pc.getInventory().storeItem(41159, 3);
-                        pc.sendPackets(new S_SystemMessage("\\fU¼ºÇ÷ º¸³Ê½º ±êÅĞ [3]°³ Ãß°¡Áö±Ş!"));
+                        pc.sendPackets(new S_SystemMessage("\\fUì„±í˜ˆ ë³´ë„ˆìŠ¤ ê¹ƒí„¸ [3]ê°œ ì¶”ê°€ì§€ê¸‰!"));
                         }
                        }
                       }

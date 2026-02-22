@@ -61,37 +61,37 @@ public class C_Drawal extends ClientBasePacket {
 		L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 		if (clan != null) {
 			int castle_id = clan.getCastleId();
-			if (WarTimeController.getInstance().isNowWar(castle_id)) { // ÀüÀïÁß¿¡´Â ¼º ¼¼±İ Ã£Áö ¸øÇÏµµ·Ï ¼öÁ¤ by Äí¿ì
-				pc.sendPackets(new S_SystemMessage("ÀüÀïÁß¿¡´Â ÀÌ¿ë ÇÒ ¼ö ¾ø½À´Ï´Ù."));
+			if (WarTimeController.getInstance().isNowWar(castle_id)) { // ì „ìŸì¤‘ì—ëŠ” ì„± ì„¸ê¸ˆ ì°¾ì§€ ëª»í•˜ë„ë¡ ìˆ˜ì • by ì¿ ìš°
+				pc.sendPackets(new S_SystemMessage("ì „ìŸì¤‘ì—ëŠ” ì´ìš© í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤."));
 				return;
 			}
-		/*¼º¼¼±İ ¹ö±×*/
+		/*ì„±ì„¸ê¸ˆ ë²„ê·¸*/
 			if (castle_id == 0 || !pc.isCrown()){
 				return;
 			}
-		/*¼º¼¼±İ ¹ö±×*/
+		/*ì„±ì„¸ê¸ˆ ë²„ê·¸*/
 			if (castle_id != 0) {
 				L1Castle l1castle = CastleTable.getInstance().getCastleTable(
 						castle_id);
-		/*¼º¼¼±İ ¹ö±×*/
+		/*ì„±ì„¸ê¸ˆ ë²„ê·¸*/
 				if (j <= 0 || l1castle.getPublicMoney() < j || j > 2000000000) {
-					pc.sendPackets(new S_SystemMessage("("+j+")¾Æµ¥³ª´Â Á¤»óÀûÀÎ ±İ¾×ÀÌ ¾Æ´Õ´Ï´Ù."));
+					pc.sendPackets(new S_SystemMessage("("+j+")ì•„ë°ë‚˜ëŠ” ì •ìƒì ì¸ ê¸ˆì•¡ì´ ì•„ë‹™ë‹ˆë‹¤."));
 					return;
 				}
-		/*¼º¼¼±İ ¹ö±×*/
+		/*ì„±ì„¸ê¸ˆ ë²„ê·¸*/
 				int money = l1castle.getPublicMoney();
 				money -= j;
-		/*¼º¼¼±İ ¹ö±×*/
+		/*ì„±ì„¸ê¸ˆ ë²„ê·¸*/
 				L1ItemInstance aden = pc.getInventory().findItemId(L1ItemId.ADENA);
 				if(money <= 0 || money > 2000000000 || aden == null){
 					money = 0;
 				}
 				if (aden.getCount() < 0 || aden.getCount() > 2000000000
 					|| (aden.getCount() + j <= 0) || (aden.getCount() + j > 2000000000)){
-					pc.sendPackets(new S_SystemMessage("("+j+")¾Æµ¥³ª´Â Á¤»óÀûÀÎ ±İ¾×ÀÌ ¾Æ´Õ´Ï´Ù."));
+					pc.sendPackets(new S_SystemMessage("("+j+")ì•„ë°ë‚˜ëŠ” ì •ìƒì ì¸ ê¸ˆì•¡ì´ ì•„ë‹™ë‹ˆë‹¤."));
 					return;
 				}
-		/*¼º¼¼±İ ¹ö±×*/
+		/*ì„±ì„¸ê¸ˆ ë²„ê·¸*/
 				L1ItemInstance item = ItemTable.getInstance().createItem(
 						L1ItemId.ADENA);
 				if (item != null) {

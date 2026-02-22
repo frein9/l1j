@@ -31,7 +31,7 @@ import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.model.trap.L1WorldTraps;
 import l1j.server.server.serverpackets.S_MoveCharPacket;
 import l1j.server.server.serverpackets.S_SystemMessage;
-import l1j.server.server.serverpackets.S_OwnCharPack; //¶Õ¾îÇÙ
+import l1j.server.server.serverpackets.S_OwnCharPack; //ëš«ì–´í•µ
 import l1j.server.server.CrockController;
 import l1j.server.server.model.L1Racing;
 import l1j.server.server.model.L1Teleport;
@@ -53,13 +53,13 @@ public class C_MoveChar extends ClientBasePacket {
 		
 	private static final int CLIENT_LANGUAGE = Config.CLIENT_LANGUAGE;
 
-	// ¸Ê Å¸ÀÏ Á¶»ç¿ë
+	// ë§µ íƒ€ì¼ ì¡°ì‚¬ìš©
 	private void sendMapTileLog(L1PcInstance pc) {
 		pc.sendPackets(new S_SystemMessage(pc.getMap().toString(
 				pc.getLocation())));
 	}
 
-	// ÀÌµ¿
+	// ì´ë™
 	public C_MoveChar(byte decrypt[], ClientThread client)
 			throws Exception {
 		super(decrypt);
@@ -68,21 +68,21 @@ public class C_MoveChar extends ClientBasePacket {
 		int heading = readC();
 
 		L1PcInstance pc = client.getActiveChar();
-	/*	//¶Õ¾îÇÙ
-		if (pc == null) { // Ãß°¡
+	/*	//ëš«ì–´í•µ
+		if (pc == null) { // ì¶”ê°€
 	        return;
 	    } */
-		//¶Õ¾îÇÙ
-		if (pc.isTeleport()) { // ÅÚ·¹Æ÷Æ® Ã³¸®Áß
+		//ëš«ì–´í•µ
+		if (pc.isTeleport()) { // í…”ë ˆí¬íŠ¸ ì²˜ë¦¬ì¤‘
 			return;
 		}
-	    ////Áßº¹ Á¢¼Ó ¹ö±×¹æÁö by ¸¶Æ®¹«»ç for only Æ÷´õ¼­¹ö¸¸!
+	    ////ì¤‘ë³µ ì ‘ì† ë²„ê·¸ë°©ì§€ by ë§ˆíŠ¸ë¬´ì‚¬ for only í¬ë”ì„œë²„ë§Œ!
         if(pc.getOnlineStatus() == 0){
            client.kick();
            return;
         }
-        ////Áßº¹ Á¢¼Ó ¹ö±×¹æÁö by ¸¶Æ®¹«»ç for only Æ÷´õ¼­¹ö¸¸!
-		// ÀÌµ¿ ¿ä±¸ °£°İÀ» Ã¼Å©ÇÑ´Ù
+        ////ì¤‘ë³µ ì ‘ì† ë²„ê·¸ë°©ì§€ by ë§ˆíŠ¸ë¬´ì‚¬ for only í¬ë”ì„œë²„ë§Œ!
+		// ì´ë™ ìš”êµ¬ ê°„ê²©ì„ ì²´í¬í•œë‹¤
 		if (Config.CHECK_MOVE_INTERVAL) {
 			int result;
 			result = pc.getAcceleratorChecker()
@@ -94,24 +94,24 @@ public class C_MoveChar extends ClientBasePacket {
 
 		//pc.killSkillEffectTimer(L1SkillId.MEDITATION);
 		pc.killSkillEffectTimer(MEDITATION);
-		pc.setCallClanId(0); // Äİ Å©¶õÀ» ÁÖÃ¢ÇÑ ÈÄ·Î ÀÌµ¿ÇÏ¸é(ÀÚ) ¼ÒÈ¯ ¹«È¿
+		pc.setCallClanId(0); // ì½œ í¬ë€ì„ ì£¼ì°½í•œ í›„ë¡œ ì´ë™í•˜ë©´(ì) ì†Œí™˜ ë¬´íš¨
 
-		//if (!pc.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)) { // ¾Æºê¼Ò¸£Æ®¹Ù¸®¾ÆÁßÀº ¾Æ´Ï´Ù
+		//if (!pc.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)) { // ì•„ë¸Œì†Œë¥´íŠ¸ë°”ë¦¬ì•„ì¤‘ì€ ì•„ë‹ˆë‹¤
 		//	pc.setRegenState(REGENSTATE_MOVE);
 		if (!pc.hasSkillEffect(ABSOLUTE_BARRIER)) { //
 		}
 		pc.getMap().setPassable(pc.getLocation(), true);
-		//¶Õ¾îÇÙ
+		//ëš«ì–´í•µ
 	/*	if (pc.checkMove() == 0){
         pc.sendPackets(new S_OwnCharPack(pc));
         pc.removeAllKnownObjects();
         pc.updateObject();
         L1Teleport.teleport(pc, pc.getX(), pc.getY(), pc.getMapId(), pc.getHeading(), false);
         } 
-		//¶Õ¾îÇÙ
+		//ëš«ì–´í•µ
 		  if (pc.checkMove() == 0){
-        //  pc.sendPackets(new S_SystemMessage("¶Õ¾î."));
-        pc.bkteleport();//È¿°úºÎ¿© ~Â¯µ¹ 2009 - 08 -26
+        //  pc.sendPackets(new S_SystemMessage("ëš«ì–´."));
+        pc.bkteleport();//íš¨ê³¼ë¶€ì—¬ ~ì§±ëŒ 2009 - 08 -26
         }  */
 
 		if (CLIENT_LANGUAGE == 3) { // Taiwan Only
@@ -122,15 +122,15 @@ public class C_MoveChar extends ClientBasePacket {
 		locx += HEADING_TABLE_X[heading];
 		locy += HEADING_TABLE_Y[heading];
 		
-		  /** ½Ã°£ÀÇ ±Õ¿­ */
-		//---------------------------¼öÁ¤ ½ÃÀÛ by neodis-------------------------------------//
-		/** ½Ã°£ÀÇ ±Õ¿­ */
+		  /** ì‹œê°„ì˜ ê· ì—´ */
+		//---------------------------ìˆ˜ì • ì‹œì‘ by neodis-------------------------------------//
+		/** ì‹œê°„ì˜ ê· ì—´ */
 		if(CrockController.getInstance().isMove())
 		{
 		 int[] loc = CrockController.getInstance().loc();
-		 /* pc ÁÂÇ¥¿Í ½Ã°£ÀÇ ±Õ¿­ÀÇ ÁÂÇ¥°¡ ÀÏÄ¡ÇÏ´Ù¸é */
+		 /* pc ì¢Œí‘œì™€ ì‹œê°„ì˜ ê· ì—´ì˜ ì¢Œí‘œê°€ ì¼ì¹˜í•˜ë‹¤ë©´ */
 		 if(Math.abs(loc[0]-pc.getX())<=1 && Math.abs(loc[1] - pc.getY())<=1 && loc[2] == pc.getMap().getId()) 
-			//½Ã°£ÀÇ ±Õ¿­ ÁÖÀ§ 1px¿¡ µé¾î°¡¸é ÅÚ·¹Æ÷Æ®
+			//ì‹œê°„ì˜ ê· ì—´ ì£¼ìœ„ 1pxì— ë“¤ì–´ê°€ë©´ í…”ë ˆí¬íŠ¸
 	//   if(loc[0] == pc.getX() && loc[1] == pc.getY() && loc[2] == pc.getMap().getId()) 
 
 		 {
@@ -140,16 +140,16 @@ public class C_MoveChar extends ClientBasePacket {
 		  
 		  if(CrockController.getInstance().isTebeOsiris() == true)
 		  {
-		   L1Teleport.teleport(pc, 32638, 32876, (short)780,4,false);    //Å×º£   
+		   L1Teleport.teleport(pc, 32638, 32876, (short)780,4,false);    //í…Œë²    
 		  }
 		  else
 		  {
-		   L1Teleport.teleport(pc, 32793, 32753, (short)783,4,false);    //Æ¼Ä®   
+		   L1Teleport.teleport(pc, 32793, 32753, (short)783,4,false);    //í‹°ì¹¼   
 		  }
 		 }
 		}
-		//---------------------------¼öÁ¤ ³¡ by neodis-------------------------------------//
-		/*	// µå·¡°ïÆ÷Å» ½ÃÀÛ - ACE
+		//---------------------------ìˆ˜ì • ë by neodis-------------------------------------//
+		/*	// ë“œë˜ê³¤í¬íƒˆ ì‹œì‘ - ACE
 		if(!(L1World.getInstance().findNpc(777781)==null)){
 			L1NpcInstance npc = L1World.getInstance().findNpc(777781);
 			if(npc.getX()-pc.getX() == 1 && npc.getY() - pc.getY() == 0 
@@ -158,12 +158,12 @@ public class C_MoveChar extends ClientBasePacket {
 					return;
 			}
 		} 
-		// µå·¡°ïÆ÷Å» ³¡ - ACE*/
+		// ë“œë˜ê³¤í¬íƒˆ ë - ACE*/
 
-		if (Dungeon.getInstance().dg(locx, locy, pc.getMap().getId(), pc)) { // ÁöÇÏ °¨¿Á¿¡ ÅÚ·¹Æ÷Æ® ÇßÀ» °æ¿ì
+		if (Dungeon.getInstance().dg(locx, locy, pc.getMap().getId(), pc)) { // ì§€í•˜ ê°ì˜¥ì— í…”ë ˆí¬íŠ¸ í–ˆì„ ê²½ìš°
 			return;
 		}
-		if (DungeonRandom.getInstance().dg(locx, locy, pc.getMap().getId(), pc)) { // ÅÚ·¹Æ÷Æ®Ã³°¡ ·£´ıÀÎ ÅÚ·¹Æ÷Æ® ÁöÁ¡
+		if (DungeonRandom.getInstance().dg(locx, locy, pc.getMap().getId(), pc)) { // í…”ë ˆí¬íŠ¸ì²˜ê°€ ëœë¤ì¸ í…”ë ˆí¬íŠ¸ ì§€ì 
 			return;
 		}
 		pc.getLocation().set(locx, locy);
@@ -171,6 +171,6 @@ public class C_MoveChar extends ClientBasePacket {
 		pc.broadcastPacket(new S_MoveCharPacket(pc));
 		L1WorldTraps.getInstance().onPlayerMoved(pc);
 		pc.getMap().setPassable(pc.getLocation(), false);
-		// user.UpdateObject(); // °¡½Ã ¹üÀ§³»ÀÇ Àü¿ÀºêÁ§Æ® °»½Å
+		// user.UpdateObject(); // ê°€ì‹œ ë²”ìœ„ë‚´ì˜ ì „ì˜¤ë¸Œì íŠ¸ ê°±ì‹ 
 	}
 }

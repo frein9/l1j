@@ -40,17 +40,17 @@ public class S_Unknown2 extends ServerBasePacket{
 	public S_Unknown2(int type){
 		writeC(Opcodes.S_OPCODE_UNKNOWN2);
 		switch(type){
-			case 0: // °èÁ¤ ³²Àº ½Ã°£, µû·Î Ã³¸®
+			case 0: // ê³„ì • ë‚¨ì€ ì‹œê°„, ë”°ë¡œ ì²˜ë¦¬
 			/*	writeC(0x3d);
-				writeD(0x009283cb); // ³²Àº½Ã°£
-				writeC(0x00); // ³²Àº°áÁ¦
+				writeD(0x009283cb); // ë‚¨ì€ì‹œê°„
+				writeC(0x00); // ë‚¨ì€ê²°ì œ
 				writeC(0x23); */
-				writeC(0x3d); //Âü°í ÀÌ¹ø¿¡ ¿Ã¶ó¿Â ÆĞÅ¶(10,02,26)
-			    writeD(0x00); // ³²Àº½Ã°£
-			    writeC(0x00); // °áÁ¦³²Àº °¹¼ö
+				writeC(0x3d); //ì°¸ê³  ì´ë²ˆì— ì˜¬ë¼ì˜¨ íŒ¨í‚·(10,02,26)
+			    writeD(0x00); // ë‚¨ì€ì‹œê°„
+			    writeC(0x00); // ê²°ì œë‚¨ì€ ê°¯ìˆ˜
 			    writeC(0x00); 
 	    		break;
-			case 1: // Á¡ÆÑ¿ë / ÀÏÆÑ ¹Ì»ç¿ë
+			case 1: // ì íŒ©ìš© / ì¼íŒ© ë¯¸ì‚¬ìš©
 				writeC(0x2E); // 46
 				writeC(0x42);
 				writeC(0x01);
@@ -75,12 +75,12 @@ public class S_Unknown2 extends ServerBasePacket{
 				writeC(0x93);
 				writeC(0x17);
 				break;
-			case 2: // ¸®½º
+			case 2: // ë¦¬ìŠ¤
 				writeC(0x2a);
 				writeD(0);
 				writeH(0);
 				break;
-			case 3: // ÄÉ¸¯Á¢¼Ó // ·Î±äÅõ¼­¹ö
+			case 3: // ì¼€ë¦­ì ‘ì† // ë¡œê¸´íˆ¬ì„œë²„
 				writeC(0x2E); // 46
 				writeC(0x7A);
 				writeC(0x00);
@@ -107,7 +107,7 @@ public class S_Unknown2 extends ServerBasePacket{
 				writeD(0); //
 				writeH(0); //						
 				break;
-			case 4: // 3´Ü °¡¼Ó
+			case 4: // 3ë‹¨ ê°€ì†
 				writeC(0x0A);
 				writeC(0x87);
 				writeC(0xC9);

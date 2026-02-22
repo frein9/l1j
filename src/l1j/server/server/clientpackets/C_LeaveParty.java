@@ -37,7 +37,7 @@ public class C_LeaveParty extends ClientBasePacket {
 		super(decrypt);
 
 		L1PcInstance player = client.getActiveChar();
-		if (player.isInParty()) // ÆÄÆ¼Áß
+		if (player.isInParty()) // íŒŒí‹°ì¤‘
 		{
 			player.getParty().leaveMember(player);
 		}

@@ -4,8 +4,8 @@ import l1j.server.server.model.L1Object;
 
 public class L1Racer {
         private int num;
-        private int ½Â¸®È½¼ö;
-        private int ÆĞÈ½¼ö;
+        private int ìŠ¹ë¦¬íšŸìˆ˜;
+        private int íŒ¨íšŸìˆ˜;
         
 	public int getNum(){
 		return num;
@@ -13,16 +13,16 @@ public class L1Racer {
 		this.num = num;
 	}
 
-	public int get_½Â¸®È½¼ö() {
-		return ½Â¸®È½¼ö;
-	}public void set_½Â¸®È½¼ö(int ½Â¸®È½¼ö) {
-		this.½Â¸®È½¼ö = ½Â¸®È½¼ö;
+	public int get_ìŠ¹ë¦¬íšŸìˆ˜() {
+		return ìŠ¹ë¦¬íšŸìˆ˜;
+	}public void set_ìŠ¹ë¦¬íšŸìˆ˜(int ìŠ¹ë¦¬íšŸìˆ˜) {
+		this.ìŠ¹ë¦¬íšŸìˆ˜ = ìŠ¹ë¦¬íšŸìˆ˜;
 	}
 
-        public int get_ÆĞÈ½¼ö() {
-		return ÆĞÈ½¼ö;
-	}public void set_ÆĞÈ½¼ö(int ÆĞÈ½¼ö) {
-		this.ÆĞÈ½¼ö = ÆĞÈ½¼ö;
+        public int get_íŒ¨íšŸìˆ˜() {
+		return íŒ¨íšŸìˆ˜;
+	}public void set_íŒ¨íšŸìˆ˜(int íŒ¨íšŸìˆ˜) {
+		this.íŒ¨íšŸìˆ˜ = íŒ¨íšŸìˆ˜;
 	}
 }
 

@@ -210,9 +210,9 @@ public class PacketHandler {
 			new C_Attack(abyte0, _client);
 			break;
 
-		// Ä³¸¯ÅÍÀÇ ¼îÆ® ÄÆÀÌ³ª ¸ñ·Ï »óÅÂ°¡ ÇÃ·¹ÀÌÁß¿¡ º¯µ¿ÇßÀ» °æ¿ì¿¡
-		// ¼îÆ® ÄÆÀÌ³ª ¸ñ·Ï »óÅÂ¸¦ ºÎ°¡ÇØ Å¬¶óÀÌ¾ğÆ®·ÎºÎÅÍ ¼Û½ÅµÇ¾î ¿Â´Ù
-		// º¸³»Á® ¿À´Â Å¸ÀÌ¹ÖÀº Å¬¶óÀÌ¾ğÆ® Á¾·á½Ã
+		// ìºë¦­í„°ì˜ ì‡¼íŠ¸ ì»·ì´ë‚˜ ëª©ë¡ ìƒíƒœê°€ í”Œë ˆì´ì¤‘ì— ë³€ë™í–ˆì„ ê²½ìš°ì—
+		// ì‡¼íŠ¸ ì»·ì´ë‚˜ ëª©ë¡ ìƒíƒœë¥¼ ë¶€ê°€í•´ í´ë¼ì´ì–¸íŠ¸ë¡œë¶€í„° ì†¡ì‹ ë˜ì–´ ì˜¨ë‹¤
+		// ë³´ë‚´ì ¸ ì˜¤ëŠ” íƒ€ì´ë°ì€ í´ë¼ì´ì–¸íŠ¸ ì¢…ë£Œì‹œ
 		case C_OPCODE_QUITGAME:
 			break;
 
@@ -387,19 +387,19 @@ public class PacketHandler {
 			new C_MailBox(abyte0, _client);
 			break;	
 
-        case C_OPCODE_BASERESET: //½ºÅİÃÊ±âÈ­
+        case C_OPCODE_BASERESET: //ìŠ¤í…Ÿì´ˆê¸°í™”
 			new C_ReturnStaus(abyte0, _client);
 	        break;
 
 		default:
 			 //String s = Integer.toHexString(abyte0[0] & 0xff);
-			 //_log.warning("¿ëµµ ºÒ¸í ÀÛµ¿ÄÚµå:µ¥ÀÌÅÍ ³»¿ë");
-			 //_log.warning((new StringBuilder()).append("ÀÛµ¿ÄÚµå ").append(s)
+			 //_log.warning("ìš©ë„ ë¶ˆëª… ì‘ë™ì½”ë“œ:ë°ì´í„° ë‚´ìš©");
+			 //_log.warning((new StringBuilder()).append("ì‘ë™ì½”ë“œ ").append(s)
 			 //.toString());
 			 //_log.warning(new ByteArrayUtil(abyte0).dumpToString());
 			break;
 		}
-		// _log.warning((new StringBuilder()).append("ÀÛµ¿ÄÚµå
+		// _log.warning((new StringBuilder()).append("ì‘ë™ì½”ë“œ
 		// ").append(i).toString());
 	}
 

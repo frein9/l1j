@@ -51,20 +51,20 @@ import l1j.server.server.GameServer;
 import l1j.server.telnet.TelnetServer;
 
 /**
- * l1j-jpÀÇ ¼­¹ö¸¦ ±âµ¿ÇÑ´Ù.
+ * l1j-jpì˜ ì„œë²„ë¥¼ ê¸°ë™í•œë‹¤.
  */
 public class Server {
-	/** ¸Ş¼¼Áö ·Î±×¿ë. */
+	/** ë©”ì„¸ì§€ ë¡œê·¸ìš©. */
 	private static Logger _log = Logger.getLogger(Server.class.getName());
 
-	/** ·Î±× ¼³Á¤ ÆÄÀÏÀÇ Æú´õ. */
+	/** ë¡œê·¸ ì„¤ì • íŒŒì¼ì˜ í´ë”. */
 	private static final String LOG_PROP = "./config/log.properties";
 
 	/**
-	 * ¼­¹ö ¸ŞÀÎ.
+	 * ì„œë²„ ë©”ì¸.
 	 *
 	 * @param args
-	 *            Ä¿¸àµå ¶óÀÎ ÀÎ¼ö
+	 *            ì»¤ë©˜ë“œ ë¼ì¸ ì¸ìˆ˜
 	 * @throws Exception
 	 */
 	public static void main(final String[] args) throws Exception {
@@ -87,7 +87,7 @@ public class Server {
 			System.exit(0);
 		}
 
-		// L1DatabaseFactory ÃÊ±â¼³Á¤
+		// L1DatabaseFactory ì´ˆê¸°ì„¤ì •
 		L1DatabaseFactory.setDatabaseSettings(Config.DB_DRIVER, Config.DB_URL,
 				Config.DB_LOGIN, Config.DB_PASSWORD);
 		L1DatabaseFactory.getInstance();

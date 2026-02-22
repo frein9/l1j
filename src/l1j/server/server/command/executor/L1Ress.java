@@ -39,7 +39,7 @@ public class L1Ress implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 
 			int objid = pc.getId();
 			pc.sendPackets(new S_SkillSound(objid, 759));
@@ -48,14 +48,14 @@ public class L1Ress implements L1CommandExecutor {
 			pc.setCurrentMp(pc.getMaxMp()); 
 			for (L1PcInstance tg : L1World.getInstance(). getVisiblePlayer(pc)) {
 				if (tg.getCurrentHp() == 0 && tg.isDead()) {
-					tg.sendPackets(new S_SystemMessage("¿î¿µÀÚ¿¡ ÀÇÇØ ºÎÈ°µÇ¾ú½À´Ï´Ù."));
+					tg.sendPackets(new S_SystemMessage("ìš´ì˜ìì— ì˜í•´ ë¶€í™œë˜ì—ˆìŠµë‹ˆë‹¤."));
 					tg.broadcastPacket(new S_SkillSound(tg.getId(), 3944));
 					tg.sendPackets(new S_SkillSound(tg.getId(), 3944));
-					// Ãàº¹µÈ ºÎÈ° ½ºÅ©·Ñ°ú °°Àº È¿°ú
+					// ì¶•ë³µëœ ë¶€í™œ ìŠ¤í¬ë¡¤ê³¼ ê°™ì€ íš¨ê³¼
 					tg.setTempID(objid);
-					tg.sendPackets(new S_Message_YN(322, "")); // ¶Ç ºÎÈ°ÇÏ°í ½Í½À´Ï±î? (Y/N)
+					tg.sendPackets(new S_Message_YN(322, "")); // ë˜ ë¶€í™œí•˜ê³  ì‹¶ìŠµë‹ˆê¹Œ? (Y/N)
 				} else {
-					tg.sendPackets(new S_SystemMessage("¿î¿µÀÚ°¡ ºÎÈ°ÇØÁÖ¾ú½À´Ï´Ù."));
+					tg.sendPackets(new S_SystemMessage("ìš´ì˜ìê°€ ë¶€í™œí•´ì£¼ì—ˆìŠµë‹ˆë‹¤."));
 					tg.broadcastPacket(new S_SkillSound(tg.getId(), 832));
 					tg.sendPackets(new S_SkillSound(tg.getId(), 832));
 					tg.setCurrentHp(tg.getMaxHp());
@@ -63,11 +63,11 @@ public class L1Ress implements L1CommandExecutor {
 				}
 			}
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " Ä¿¸àµå ¿¡·¯"));
+			pc.sendPackets(new S_SystemMessage(cmdName + " ì»¤ë©˜ë“œ ì—ëŸ¬"));
 		}
 	}
 }

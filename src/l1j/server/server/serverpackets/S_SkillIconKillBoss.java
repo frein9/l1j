@@ -13,8 +13,8 @@ public class S_SkillIconKillBoss extends ServerBasePacket{
   writeC(Opcodes.S_OPCODE_SKILLICONGFX);
   writeC(0x16);
   writeC(0xdd);
-  writeH(time); // ±âº»½Ã°£Àº 1020ÃÊ
-  writeC(type); // 1: ¹ß·Ï, 2: ¾ßÈ÷
+  writeH(time); // ê¸°ë³¸ì‹œê°„ì€ 1020ì´ˆ
+  writeC(type); // 1: ë°œë¡, 2: ì•¼íˆ
  }
 
  @Override

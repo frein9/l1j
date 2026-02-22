@@ -36,11 +36,11 @@ public class L1ReloadTrap implements L1CommandExecutor {
 
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+		if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 		L1WorldTraps.reloadTraps();
-		pc.sendPackets(new S_SystemMessage("Æ®·¦ÀÌ Àç¼³Á¤ µÇ¾ú½À´Ï´Ù."));
+		pc.sendPackets(new S_SystemMessage("íŠ¸ë©ì´ ì¬ì„¤ì • ë˜ì—ˆìŠµë‹ˆë‹¤."));
 		} else {
-			pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+			pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 			return;
 		}
 	}

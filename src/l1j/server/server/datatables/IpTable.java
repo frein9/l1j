@@ -94,14 +94,14 @@ public class IpTable {
 		}
 	}
 /*
- * ¸ğµç ¸®½ºÆ® Á¦°Å BY Â¯µ¹
+ * ëª¨ë“  ë¦¬ìŠ¤íŠ¸ ì œê±° BY ì§±ëŒ
  */
  public void clear() {
   _banip.clear();
  }
 
  /**
-  *  ban_ip Å×ÀÌºí ºñ¿ì±â BY Â¯µ¹
+  *  ban_ip í…Œì´ë¸” ë¹„ìš°ê¸° BY ì§±ëŒ
   * */
  public void Ipreset() {
   Connection con = null;
@@ -113,7 +113,7 @@ public class IpTable {
    pstm.execute();
 
   } catch (SQLException e) {
-   _log.info("¾ÆÀÌÇÇ Ä«¿îÅÍ º£µå ¾ÆÀÌÇÇ ¸®¼Â ¿¡·¯4!");
+   _log.info("ì•„ì´í”¼ ì¹´ìš´í„° ë² ë“œ ì•„ì´í”¼ ë¦¬ì…‹ ì—ëŸ¬4!");
   } finally {
 
    SQLUtil.close(pstm);

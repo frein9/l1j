@@ -24,7 +24,7 @@ public class L1DwarfForElfInventory extends L1Inventory {
 		_owner = owner;
 	}
 
-	// DBÀÇ character_itemsÀÇ µ¶ÀÔ
+	// DBì˜ character_itemsì˜ ë…ì…
 	@Override
 	public void loadItems() {
 		Connection con = null;
@@ -66,7 +66,7 @@ public class L1DwarfForElfInventory extends L1Inventory {
 		}
 	}
 
-	// DBÀÇ character_elf_warehouse¿¡ µî·Ï
+	// DBì˜ character_elf_warehouseì— ë“±ë¡
 	@Override
 	public void insertItem(L1ItemInstance item) {
 		Connection con = null;
@@ -97,7 +97,7 @@ public class L1DwarfForElfInventory extends L1Inventory {
 
 	}
 
-	// DBÀÇ character_elf_warehouse¸¦ °»½Å
+	// DBì˜ character_elf_warehouseë¥¼ ê°±ì‹ 
 	@Override
 	public void updateItem(L1ItemInstance item) {
 		Connection con = null;
@@ -117,7 +117,7 @@ public class L1DwarfForElfInventory extends L1Inventory {
 		}
 	}
 
-	// DBÀÇ character_elf_warehouse·ÎºÎÅÍ »èÁ¦
+	// DBì˜ character_elf_warehouseë¡œë¶€í„° ì‚­ì œ
 	@Override
 	public void deleteItem(L1ItemInstance item) {
 		Connection con = null;

@@ -43,7 +43,7 @@ public class L1CreateItem implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 			StringTokenizer st = new StringTokenizer(arg);
 			String nameid = st.nextToken();
 			int count = 1;
@@ -65,7 +65,7 @@ public class L1CreateItem implements L1CommandExecutor {
 				itemid = ItemTable.getInstance(). findItemIdByNameWithoutSpace(
 						nameid);
 				if (itemid == 0) {
-					pc.sendPackets(new S_SystemMessage("ÇØ´ç ¾ÆÀÌÅÛÀÌ ¹ß°ßµÇÁö ¾Ê½À´Ï´Ù. "));
+					pc.sendPackets(new S_SystemMessage("í•´ë‹¹ ì•„ì´í…œì´ ë°œê²¬ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤. "));
 					return;
 				}
 			}
@@ -81,7 +81,7 @@ public class L1CreateItem implements L1CommandExecutor {
 					}
 					if (pc.getInventory(). checkAddItem(item, count) == L1Inventory.OK) {
 						pc.getInventory(). storeItem(item);
-						pc.sendPackets(new S_ServerMessage(403, // %0¸¦ ¼Õ¿¡ ³Ö¾ú½À´Ï´Ù.
+						pc.sendPackets(new S_ServerMessage(403, // %0ë¥¼ ì†ì— ë„£ì—ˆìŠµë‹ˆë‹¤.
 								item.getLogName() + "(ID:" + itemid + ")"));
 					}
 				} else {
@@ -100,21 +100,21 @@ public class L1CreateItem implements L1CommandExecutor {
 						}
 					}
 					if (createCount > 0) {
-						pc.sendPackets(new S_ServerMessage(403, // %0¸¦ ¼Õ¿¡ ³Ö¾ú½À´Ï´Ù.
+						pc.sendPackets(new S_ServerMessage(403, // %0ë¥¼ ì†ì— ë„£ì—ˆìŠµë‹ˆë‹¤.
 								item.getLogName() + "(ID:" + itemid + ")"));
 					}
 				}
 			} else {
-				pc.sendPackets(new S_SystemMessage("ÁöÁ¤ IDÀÇ ¾ÆÀÌÅÛÀº Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù"));
+				pc.sendPackets(new S_SystemMessage("ì§€ì • IDì˜ ì•„ì´í…œì€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤"));
 			}
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 			pc.sendPackets(new S_SystemMessage(
-					".¾ÆÀÌÅÛ itemid|name [°³¼ö] [ÀÎÃ¦Æ®¼ö] [È®ÀÎ »óÅÂ] ¶ó°í ÀÔ·ÂÇØ ÁÖ¼¼¿ä. "));
+					".ì•„ì´í…œ itemid|name [ê°œìˆ˜] [ì¸ì±ˆíŠ¸ìˆ˜] [í™•ì¸ ìƒíƒœ] ë¼ê³  ì…ë ¥í•´ ì£¼ì„¸ìš”. "));
 		}
 	}
 }

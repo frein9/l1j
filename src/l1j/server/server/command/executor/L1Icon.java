@@ -43,7 +43,7 @@ public class L1Icon implements L1CommandExecutor {
     int iconId = Integer.parseInt(stringtokenizer.nextToken());
     pc.sendPackets(new S_SkillIconGFX(iconId, 1000));
     } catch (Exception e) {
-   pc.sendPackets(new S_SystemMessage(cmdName + " ¼ıÀÚ¶ó°í ÀÔ·ÂÇØ ÁÖ¼¼¿ä."));
+   pc.sendPackets(new S_SystemMessage(cmdName + " ìˆ«ìë¼ê³  ì…ë ¥í•´ ì£¼ì„¸ìš”."));
   }
  }
 }

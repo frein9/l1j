@@ -41,9 +41,9 @@ public class S_SellHouse extends ServerBasePacket {
 		writeC(Opcodes.S_OPCODE_INPUTAMOUNT);
 		writeD(objectId);
 		writeD(0); // ?
-		writeD(100000); // ½ºÇÉ ÄÁÆ®·ÑÀÇ ÃÊ±â °¡°İ
-		writeD(100000); // °¡°İÀÇ ÇÏÇÑ
-		writeD(2000000000); // °¡°İÀÇ »óÇÑ
+		writeD(100000); // ìŠ¤í•€ ì»¨íŠ¸ë¡¤ì˜ ì´ˆê¸° ê°€ê²©
+		writeD(100000); // ê°€ê²©ì˜ í•˜í•œ
+		writeD(2000000000); // ê°€ê²©ì˜ ìƒí•œ
 		writeH(0); // ?
 		writeS("agsell");
 		writeS("agsell " + houseNumber);

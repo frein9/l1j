@@ -26,7 +26,7 @@ import java.util.Random;
 import l1j.server.Config;
 import l1j.server.server.GeneralThreadPool;
 import l1j.server.server.templates.L1Npc;
-import l1j.server.server.serverpackets.S_SystemMessage; //º¸½º ÃâÇö ¾Ë¸² ¸Ş¼¼Áö      
+import l1j.server.server.serverpackets.S_SystemMessage; //ë³´ìŠ¤ ì¶œí˜„ ì•Œë¦¼ ë©”ì„¸ì§€      
 
 
 public class L1BossSpawn extends L1Spawn {
@@ -44,9 +44,9 @@ public class L1BossSpawn extends L1Spawn {
 		@Override
 		public void run() {
 			doSpawn(_spawnNumber, _objectId); 
-			//////////////º¸½º¸÷ ¸àÆ® ¶ç¿ì±â////////////////       
+			//////////////ë³´ìŠ¤ëª¹ ë©˜íŠ¸ ë„ìš°ê¸°////////////////       
 			//L1World.getInstance().broadcastPacketToAll(
-			//new S_SystemMessage(""+ getName() + " °¡ ³ªÅ¸³µ½À´Ï´Ù."));
+			//new S_SystemMessage(""+ getName() + " ê°€ ë‚˜íƒ€ë‚¬ìŠµë‹ˆë‹¤."));
 		}
 	}
 
@@ -55,27 +55,27 @@ public class L1BossSpawn extends L1Spawn {
 	}
 
 	/**
-	 * SpawnTask¸¦ ±âµ¿ÇÑ´Ù.
-	 * @param spawnNumber L1Spawn·Î °ü¸®µÇ°í ÀÖ´Â ¹øÈ£.È¨ Æ÷ÀÎÆ®°¡ ¾øÀ¸¸é ¹«¾ùÀ» ÁöÁ¤ÇØµµ ÁÁ´Ù.
+	 * SpawnTaskë¥¼ ê¸°ë™í•œë‹¤.
+	 * @param spawnNumber L1Spawnë¡œ ê´€ë¦¬ë˜ê³  ìˆëŠ” ë²ˆí˜¸.í™ˆ í¬ì¸íŠ¸ê°€ ì—†ìœ¼ë©´ ë¬´ì—‡ì„ ì§€ì •í•´ë„ ì¢‹ë‹¤.
 	 */
 	@Override
 	public void executeSpawnTask(int spawnNumber, int objectId) {
-		// count¸¦ °¨¼Ò ÇØ ÀüºÎ Á×¾ú´ÂÁö Ã¼Å©
+		// countë¥¼ ê°ì†Œ í•´ ì „ë¶€ ì£½ì—ˆëŠ”ì§€ ì²´í¬
 		if (subAndGetCount() != 0) {
-			return; // ÀüºÎ Á×Áö ¾Ê´Ù
+			return; // ì „ë¶€ ì£½ì§€ ì•Šë‹¤
 		}
-		// ÀüÈ¸ ÃâÇö ½Ã°£¿¡ ´ëÇØ¼­, ´ÙÀ½ÀÇ ÃâÇö ½Ã°£À» »êÃâ
+		// ì „íšŒ ì¶œí˜„ ì‹œê°„ì— ëŒ€í•´ì„œ, ë‹¤ìŒì˜ ì¶œí˜„ ì‹œê°„ì„ ì‚°ì¶œ
 		Calendar spawnTime;
-		Calendar now = Calendar.getInstance(); // Áö±İ°¢
-		Calendar latestStart = _cycle.getLatestStartTime(now); // Áö±İ°¢¿¡ ´ëÇÑ ÃÖ±ÙÀÇ ÁÖ±âÀÇ °³½Ã ½Ã°£
+		Calendar now = Calendar.getInstance(); // ì§€ê¸ˆê°
+		Calendar latestStart = _cycle.getLatestStartTime(now); // ì§€ê¸ˆê°ì— ëŒ€í•œ ìµœê·¼ì˜ ì£¼ê¸°ì˜ ê°œì‹œ ì‹œê°„
 
-		Calendar activeStart = _cycle.getSpawnStartTime(_activeSpawnTime); // ¾×Æ¼ºêÇß´ø ÁÖ±âÀÇ °³½Ã ½Ã°£
-		// ¾×Æ¼ºêÇß´ø ÁÖ±âÀÇ °³½Ã ½Ã°£ >= ÃÖ±ÙÀÇ ÁÖ±â °³½Ã ½Ã°£ÀÇ °æ¿ì, ´ÙÀ½ÀÇ ÃâÇö
+		Calendar activeStart = _cycle.getSpawnStartTime(_activeSpawnTime); // ì•¡í‹°ë¸Œí–ˆë˜ ì£¼ê¸°ì˜ ê°œì‹œ ì‹œê°„
+		// ì•¡í‹°ë¸Œí–ˆë˜ ì£¼ê¸°ì˜ ê°œì‹œ ì‹œê°„ >= ìµœê·¼ì˜ ì£¼ê¸° ê°œì‹œ ì‹œê°„ì˜ ê²½ìš°, ë‹¤ìŒì˜ ì¶œí˜„
 		if (!activeStart.before(latestStart)) {
 			spawnTime = calcNextSpawnTime(activeStart);
 		} else {
-			// ¾×Æ¼ºêÇß´ø ÁÖ±âÀÇ °³½Ã ½Ã°£ < ÃÖ±ÙÀÇ ÁÖ±â °³½Ã ½Ã°£ÀÇ °æ¿ì´Â, ÃÖ±ÙÀÇ ÁÖ±â¿¡ ÃâÇö
-			// ¾Ë±â ÈûµéÁö¸¸ È®·ü °è»êÇÏ±â À§ÇØ, ¾ïÁö·Î calcNextSpawnTime¸¦ ÅëÇÏ°í ÀÖ´Ù.
+			// ì•¡í‹°ë¸Œí–ˆë˜ ì£¼ê¸°ì˜ ê°œì‹œ ì‹œê°„ < ìµœê·¼ì˜ ì£¼ê¸° ê°œì‹œ ì‹œê°„ì˜ ê²½ìš°ëŠ”, ìµœê·¼ì˜ ì£¼ê¸°ì— ì¶œí˜„
+			// ì•Œê¸° í˜ë“¤ì§€ë§Œ í™•ë¥  ê³„ì‚°í•˜ê¸° ìœ„í•´, ì–µì§€ë¡œ calcNextSpawnTimeë¥¼ í†µí•˜ê³  ìˆë‹¤.
 			latestStart.add(Calendar.SECOND, -1);
 			spawnTime = calcNextSpawnTime(_cycle
 					.getLatestStartTime(latestStart));
@@ -117,7 +117,7 @@ public class L1BossSpawn extends L1Spawn {
 			throw new RuntimeException(_cycleType + " not found");
 		}
 		Calendar now = Calendar.getInstance();
-		// ÃâÇö ½Ã°£
+		// ì¶œí˜„ ì‹œê°„
 		Calendar spawnTime;
 		if (Config.INIT_BOSS_SPAWN && _percentage > _rnd.nextInt(100)) {
 			spawnTime = _cycle.calcSpawnTime(now);
@@ -128,7 +128,7 @@ public class L1BossSpawn extends L1Spawn {
 		spawnBoss(spawnTime, 0);
 	}
 
-	// È®·ü °è»êÇØ ´ÙÀ½ÀÇ ÃâÇö ½Ã°£À» »êÃâ
+	// í™•ë¥  ê³„ì‚°í•´ ë‹¤ìŒì˜ ì¶œí˜„ ì‹œê°„ì„ ì‚°ì¶œ
 	private Calendar calcNextSpawnTime(Calendar cal) {
 		do {
 			cal = _cycle.nextSpawnTime(cal);
@@ -136,9 +136,9 @@ public class L1BossSpawn extends L1Spawn {
 		return cal;
 	}
 
-	// ÁöÁ¤µÈ ½Ã°£¿¡ º¸½º ÃâÇöÀ» ½ºÄÉÁÙ
+	// ì§€ì •ëœ ì‹œê°„ì— ë³´ìŠ¤ ì¶œí˜„ì„ ìŠ¤ì¼€ì¤„
 	
-		// ÀÌ¹ø ÃâÇö ½Ã°£À» º¸Á¸ÇØ µĞ´Ù.°°Àº ±Û¾¾, ±Û±Í°¡ ´Ù¸¥ °÷¿¡µµ  Áö±İ¿¡ »ç¿ë.
+		// ì´ë²ˆ ì¶œí˜„ ì‹œê°„ì„ ë³´ì¡´í•´ ë‘”ë‹¤.ê°™ì€ ê¸€ì”¨, ê¸€ê·€ê°€ ë‹¤ë¥¸ ê³³ì—ë„  ì§€ê¸ˆì— ì‚¬ìš©.
 	private void spawnBoss(Calendar spawnTime, int objectId) {
 		_activeSpawnTime = spawnTime;
 		long delay = spawnTime.getTimeInMillis() - System.currentTimeMillis();
@@ -154,7 +154,7 @@ public class L1BossSpawn extends L1Spawn {
 	}
 
 	/**
-	 * ÇöÀç ¾×Æ¼ºêÇÑ º¸½º¿¡ ´ëÇÑ ÁÖ±â¿Í ÃâÇö ½Ã°£À» ³ªÅ¸³½´Ù.
+	 * í˜„ì¬ ì•¡í‹°ë¸Œí•œ ë³´ìŠ¤ì— ëŒ€í•œ ì£¼ê¸°ì™€ ì¶œí˜„ ì‹œê°„ì„ ë‚˜íƒ€ë‚¸ë‹¤.
 	 */
 	@Override
 	public String toString() {
@@ -162,11 +162,11 @@ public class L1BossSpawn extends L1Spawn {
 		builder.append("[MOB]npcid:" + getNpcId());
 		builder.append(" name:" + getName());
 		builder.append("[Type]" + _cycle.getName());
-		builder.append("[ÇöÀçÀÇ ÁÖ±â]");
+		builder.append("[í˜„ì¬ì˜ ì£¼ê¸°]");
 		builder.append(_cycle.getSpawnStartTime(_activeSpawnTime).getTime());
 		builder.append(" - ");
 		builder.append(_cycle.getSpawnEndTime(_activeSpawnTime).getTime());
-		builder.append("[ÃâÇö ½Ã°£]");
+		builder.append("[ì¶œí˜„ ì‹œê°„]");
 		builder.append(_activeSpawnTime.getTime());
 		return builder.toString();
 	}

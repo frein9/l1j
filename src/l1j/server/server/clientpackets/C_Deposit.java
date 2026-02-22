@@ -59,40 +59,40 @@ public class C_Deposit extends ClientBasePacket {
 			L1Clan clan = L1World.getInstance().getClan(player.getClanname());
 			if (clan != null) {
 				int castle_id = clan.getCastleId();
-			/*¼º¼¼±İ ¹ö±×*/
+			/*ì„±ì„¸ê¸ˆ ë²„ê·¸*/
 			if (castle_id == 0 || !player.isCrown()){
 				return;
 			}
-			/*¼º¼¼±İ ¹ö±×*/
-				if (castle_id != 0) { // ¼ºÁÖ Å©¶õ
+			/*ì„±ì„¸ê¸ˆ ë²„ê·¸*/
+				if (castle_id != 0) { // ì„±ì£¼ í¬ë€
 					L1Castle l1castle = CastleTable.getInstance()
 							.getCastleTable(castle_id);
-			/*¼º¼¼±İ ¹ö±×*/
+			/*ì„±ì„¸ê¸ˆ ë²„ê·¸*/
 					L1ItemInstance aden = player.getInventory().findItemId(L1ItemId.ADENA);
 					if (j <= 0 || aden.getCount() < j || aden.getCount() <= 0
 						|| j > 2000000000) {
-						player.sendPackets(new S_SystemMessage("("+j+")¾Æµ¥³ª´Â Á¤»óÀûÀÎ ÀÔ±İ¾×ÀÌ ¾Æ´Õ´Ï´Ù."));
+						player.sendPackets(new S_SystemMessage("("+j+")ì•„ë°ë‚˜ëŠ” ì •ìƒì ì¸ ì…ê¸ˆì•¡ì´ ì•„ë‹™ë‹ˆë‹¤."));
 						return;
 					}
 					if (aden.getCount() < 0 || aden.getCount() > 2000000000
 						|| (aden.getCount() - j <= 0) || (aden.getCount() - j > 2000000000)){
-						player.sendPackets(new S_SystemMessage("("+j+")¾Æµ¥³ª´Â Á¤»óÀûÀÎ ÀÔ±İ¾×ÀÌ ¾Æ´Õ´Ï´Ù."));
+						player.sendPackets(new S_SystemMessage("("+j+")ì•„ë°ë‚˜ëŠ” ì •ìƒì ì¸ ì…ê¸ˆì•¡ì´ ì•„ë‹™ë‹ˆë‹¤."));
 						return;
 					}
-			/*¼º¼¼±İ ¹ö±×*/
+			/*ì„±ì„¸ê¸ˆ ë²„ê·¸*/
 					synchronized (l1castle) {
 						int money = l1castle.getPublicMoney();
 						if (player.getInventory()
 								.consumeItem(L1ItemId.ADENA, j)) {
 							money += j;
-							/*¼º¼¼±İ ¹ö±×*/
+							/*ì„±ì„¸ê¸ˆ ë²„ê·¸*/
 							if (money > 2000000000 || money <= 0){
 								money = 0;
 							}
-							/*¼º¼¼±İ ¹ö±×*/
+							/*ì„±ì„¸ê¸ˆ ë²„ê·¸*/
 							l1castle.setPublicMoney(money);
 							CastleTable.getInstance().updateCastle(l1castle);
-							player.sendPackets(new S_SystemMessage("°ø±İ "	+ j + " ¾Æµ¥³ª¸¦ ÀÔ±İÇÏ¿´½À´Ï´Ù."));
+							player.sendPackets(new S_SystemMessage("ê³µê¸ˆ "	+ j + " ì•„ë°ë‚˜ë¥¼ ì…ê¸ˆí•˜ì˜€ìŠµë‹ˆë‹¤."));
 						}
 					}
 				}

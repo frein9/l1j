@@ -47,7 +47,7 @@ public class C_TaxRate extends ClientBasePacket {
 			L1Clan clan = L1World.getInstance().getClan(player.getClanname());
 			if (clan != null) {
 				int castle_id = clan.getCastleId();
-				if (castle_id != 0 && player.isCrown()) { // ¼ºÁÖ Å©¶õ , ±ºÁÖÀÏ°æ¿ì
+				if (castle_id != 0 && player.isCrown()) { // ì„±ì£¼ í¬ëž€ , êµ°ì£¼ì¼ê²½ìš°
 					L1Castle l1castle = CastleTable.getInstance()
 							.getCastleTable(castle_id);
 					if (j >= 10 && j <= 50) {

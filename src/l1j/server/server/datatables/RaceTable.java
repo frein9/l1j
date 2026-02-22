@@ -53,14 +53,14 @@ public class RaceTable{
 		while (Data.next()){
 			name = new L1Racer();
 			name.setNum			(Data.getInt(1));
-                        name.set_½Â¸®È½¼ö		(Data.getInt(2));
-                        name.set_ÆĞÈ½¼ö		(Data.getInt(3));
+                        name.set_ìŠ¹ë¦¬íšŸìˆ˜		(Data.getInt(2));
+                        name.set_íŒ¨íšŸìˆ˜		(Data.getInt(3));
 			
 			_namelist.put		(name.getNum(), name);
 		}
 		//Data.close();
-//		System.out.println("[::::::] util_racer: "+_namelist.size()+"°³ÀÇ Á¤º¸°¡ ·ÎµåµÇ¾ú½À´Ï´Ù.");
-//                eros.tarea.append("\n[::::::] util_racer: "+_namelist.size()+"°³ÀÇ Á¤º¸°¡ ·ÎµåµÇ¾ú½À´Ï´Ù.");
+//		System.out.println("[::::::] util_racer: "+_namelist.size()+"ê°œì˜ ì •ë³´ê°€ ë¡œë“œë˜ì—ˆìŠµë‹ˆë‹¤.");
+//                eros.tarea.append("\n[::::::] util_racer: "+_namelist.size()+"ê°œì˜ ì •ë³´ê°€ ë¡œë“œë˜ì—ˆìŠµë‹ˆë‹¤.");
 	}
 
 	public L1Racer getTemplate(int name)

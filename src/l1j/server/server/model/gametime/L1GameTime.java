@@ -26,7 +26,7 @@ import java.util.TimeZone;
 import l1j.server.server.utils.IntRange;
 
 public class L1GameTime {
-	// 2003³â 7¿ù 3ÀÏ 12:00(UTC)ÀÌ 1¿ù 1ÀÏ00:00
+	// 2003ë…„ 7ì›” 3ì¼ 12:00(UTC)ì´ 1ì›” 1ì¼00:00
 	private static final long BASE_TIME_IN_MILLIS_REAL = 1057233600000L;
 
 	private final int _time;
@@ -51,7 +51,7 @@ public class L1GameTime {
 			throw new IllegalArgumentException();
 		}
 		int t2 = (int) ((t1 * 6) / 1000L);
-		int t3 = t2 % 3; // ½Ã°£ÀÌ 3ÀÇ ¹è¼ö°¡ µÇµµ·Ï(µíÀÌ) Á¶Á¤
+		int t3 = t2 % 3; // ì‹œê°„ì´ 3ì˜ ë°°ìˆ˜ê°€ ë˜ë„ë¡(ë“¯ì´) ì¡°ì •
 		return new L1GameTime(t2 - t3);
 	}
 
@@ -65,7 +65,7 @@ public class L1GameTime {
 	}
 
 	public Time toTime() {
-		int t = _time % (24 * 3600); // ÀÏÀÚ Á¤º¸ºĞÀ» Àß¶ó¼­ ¹ö¸²
+		int t = _time % (24 * 3600); // ì¼ì ì •ë³´ë¶„ì„ ì˜ë¼ì„œ ë²„ë¦¼
 		return new Time(t * 1000L - TimeZone.getDefault(). getRawOffset());
 	}
 
@@ -83,7 +83,7 @@ public class L1GameTime {
 
 	public boolean isNight() {
 		int hour = _calendar.get(Calendar.HOUR_OF_DAY);
-		return !IntRange.includes(hour, 6, 17); // 6:00-17:59(³·)·Î ¾øÀ¸¸é true
+		return !IntRange.includes(hour, 6, 17); // 6:00-17:59(ë‚®)ë¡œ ì—†ìœ¼ë©´ true
 	}
 
 	@Override

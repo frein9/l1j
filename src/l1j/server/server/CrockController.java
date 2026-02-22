@@ -15,54 +15,54 @@ import l1j.server.server.serverpackets.S_DoActionGFX;
 import l1j.server.server.serverpackets.S_RemoveObject;
 import l1j.server.server.templates.L1Npc; 
 
-import java.util.Random;   // ÀÓÆ÷Æ® Ãß°¡ by neodis
+import java.util.Random;   // ì„í¬íŠ¸ ì¶”ê°€ by neodis
 
 public class CrockController extends Thread{
 
- /** ½Ã°£ÀÇ ±Õ¿­ ¿ÀÇÂ ½Ã°¢(ms) */
+ /** ì‹œê°„ì˜ ê· ì—´ ì˜¤í”ˆ ì‹œê°(ms) */
  private static long sTime = 0;
 
- /** ½Ã°£ÀÇ ±Õ¿­ ÀÓ½Ã ·£´ı °ª */
+ /** ì‹œê°„ì˜ ê· ì—´ ì„ì‹œ ëœë¤ ê°’ */
  private static int rnd = 0;
 
- /** ½Ã°£ÀÇ ±Õ¿­ º¸½º È½¼ö */
+ /** ì‹œê°„ì˜ ê· ì—´ ë³´ìŠ¤ íšŸìˆ˜ */
  private static int dieCount = 0;
 
- /** ½Ã°£ÀÇ ±Õ¿­ÀÌ ¿­¸®´Â ½Ã°£ °£°İ */
+ /** ì‹œê°„ì˜ ê· ì—´ì´ ì—´ë¦¬ëŠ” ì‹œê°„ ê°„ê²© */
  private static final int LOOP = (int)(Math.random()*10+1);
 
- /** ½Ã°£ÀÇ ±Õ¿­ º¸½º °ø·« ÆÇ´Ü */
+ /** ì‹œê°„ì˜ ê· ì—´ ë³´ìŠ¤ ê³µëµ íŒë‹¨ */
  private boolean boss = false;
 
- /** ½Ã°£ÀÇ ±Õ¿­ ÀÌµ¿ ½Ã°£ ÆÇ´Ü */
+ /** ì‹œê°„ì˜ ê· ì—´ ì´ë™ ì‹œê°„ íŒë‹¨ */
  private boolean move = false;
 
- /** ÇöÀç ½Ã°£À» ÀÓ½Ã·Î ´ã±â */
+ /** í˜„ì¬ ì‹œê°„ì„ ì„ì‹œë¡œ ë‹´ê¸° */
  private String NowTime = "";
 
- /** Ä«¿îÆ® ½Ã°£ : 30ºĞ */  //°Ë»ö
- private static final long TIME = 1800000L; //º¸½ºÀâ´Â½Ã°£  30ºĞ
+ /** ì¹´ìš´íŠ¸ ì‹œê°„ : 30ë¶„ */  //ê²€ìƒ‰
+ private static final long TIME = 1800000L; //ë³´ìŠ¤ì¡ëŠ”ì‹œê°„  30ë¶„
 
- /** Ä«¿îÆ® ½Ã°£ : 1½Ã°£ */
- private static final long DAY = 3600000L; //º¸½ºÀâÀ»½Ã 1½Ã°£ À¯Áö
+ /** ì¹´ìš´íŠ¸ ì‹œê°„ : 1ì‹œê°„ */
+ private static final long DAY = 3600000L; //ë³´ìŠ¤ì¡ì„ì‹œ 1ì‹œê°„ ìœ ì§€
  
- /** Ä«¿îÆ® ½Ã°£ : 2½Ã°£30ºĞ */
- private static final long DELAY = 9000000L; //¹®Áö±â ¿­¸®±âÀü±îÁöÀÇ ½Ã°£ 2½Ã°£ 30ºĞ
+ /** ì¹´ìš´íŠ¸ ì‹œê°„ : 2ì‹œê°„30ë¶„ */
+ private static final long DELAY = 9000000L; //ë¬¸ì§€ê¸° ì—´ë¦¬ê¸°ì „ê¹Œì§€ì˜ ì‹œê°„ 2ì‹œê°„ 30ë¶„
 
- /** ½Ì±ÛÅæ ´ÜÀÏ °´Ã¼ */
+ /** ì‹±ê¸€í†¤ ë‹¨ì¼ ê°ì²´ */
  private static CrockController instance;
 
- /** ½Ã°£ÀÇ ±Õ¿­ °´Ã¼ ¾ÆÀÌµğ */
- private static final int[] ID = { 200, 201, 202, 203, 204, 205, 206, 207, 209 }; //209 ÇÏ³ª Ãß°¡
+ /** ì‹œê°„ì˜ ê· ì—´ ê°ì²´ ì•„ì´ë”” */
+ private static final int[] ID = { 200, 201, 202, 203, 204, 205, 206, 207, 209 }; //209 í•˜ë‚˜ ì¶”ê°€
  /*private static final int[] ID = { 2000035, 2000036, 2000037, 2000038, 2000039,
  /           2000077, 2000078, 2000079, 2000108};*/ 
-// ±Õ¿­ ¿­¸², ´İÈû
- private boolean TicalC = false; // Æ¼Ä®´Ş·ÂÃß°¡
+// ê· ì—´ ì—´ë¦¼, ë‹«í˜
+ private boolean TicalC = false; // í‹°ì¹¼ë‹¬ë ¥ì¶”ê°€
 
  public static boolean openck = false;
- /** ½Ã°£ÀÇ ±Õ¿­ ÁÂÇ¥ */
-//1.Ä«¿ÀÆ½½ÅÀü ¹ØÂÊ  2.±Û·çµğ¿À À§ÂÊ  3.¿À¾Æ½Ã½º ¿ŞÂÊ  4.¿À¾Æ½Ã½º ¿À¸¥ÂÊ  5.¿À¸¸´Ù¸®±ÙÃ³  6.ÀÚÀÌ¾ğÆ®¹ç  7.Àº¸» ¿ŞÂÊ  8.¿À¸¸ÀÇÅ¾ ±ÙÃ³  9.Ä«¿ÀÆ½½ÅÀü ¿ŞÂÊ
-private static final int[][] loc = { //º¯È¯½Ã DB spwanlist_npc¿¡¼­ ÁÂÇ¥¼öÁ¤
+ /** ì‹œê°„ì˜ ê· ì—´ ì¢Œí‘œ */
+//1.ì¹´ì˜¤í‹±ì‹ ì „ ë°‘ìª½  2.ê¸€ë£¨ë””ì˜¤ ìœ„ìª½  3.ì˜¤ì•„ì‹œìŠ¤ ì™¼ìª½  4.ì˜¤ì•„ì‹œìŠ¤ ì˜¤ë¥¸ìª½  5.ì˜¤ë§Œë‹¤ë¦¬ê·¼ì²˜  6.ìì´ì–¸íŠ¸ë°­  7.ì€ë§ ì™¼ìª½  8.ì˜¤ë§Œì˜íƒ‘ ê·¼ì²˜  9.ì¹´ì˜¤í‹±ì‹ ì „ ì™¼ìª½
+private static final int[][] loc = { //ë³€í™˜ì‹œ DB spwanlist_npcì—ì„œ ì¢Œí‘œìˆ˜ì •
 	  { 32852, 32709, 4 }, 
 	  { 32729, 32702, 4 }, 
 	  { 32906, 33174, 4 }, 
@@ -72,41 +72,41 @@ private static final int[][] loc = { //º¯È¯½Ã DB spwanlist_npc¿¡¼­ ÁÂÇ¥¼öÁ¤
 	  { 32912, 33429, 4 },
 	  { 34266, 33367, 4 },
 	  { 32832, 32650, 4 }};
-	 //---------------------------Ãß°¡ ½ÃÀÛ by neodis------------------------//
+	 //---------------------------ì¶”ê°€ ì‹œì‘ by neodis------------------------//
 	 private static String [] locName = {
-	   "Ä«¿ÀÆ½½ÅÀü ¹ØÂÊ"
-	  ,"±Û·çµğ¿À À§ÂÊ"
-	  ,"¿À¾Æ½Ã½º ¿ŞÂÊ"
-	  ,"¿À¾Æ½Ã½º ¿À¸¥ÂÊ"
-	  ,"¿À¸¸´Ù¸®"
-	  ,"ÀÚÀÌ¾ğÆ® ¹ç"
-	  ,"Àº¸» ¿ŞÂÊ"
-	  ,"¿À¸¸ÀÇÅ¾ ±ÙÃ³"
-	  ,"Ä«¿ÀÆ½½ÅÀü ¿ŞÂÊ"};
+	   "ì¹´ì˜¤í‹±ì‹ ì „ ë°‘ìª½"
+	  ,"ê¸€ë£¨ë””ì˜¤ ìœ„ìª½"
+	  ,"ì˜¤ì•„ì‹œìŠ¤ ì™¼ìª½"
+	  ,"ì˜¤ì•„ì‹œìŠ¤ ì˜¤ë¥¸ìª½"
+	  ,"ì˜¤ë§Œë‹¤ë¦¬"
+	  ,"ìì´ì–¸íŠ¸ ë°­"
+	  ,"ì€ë§ ì™¼ìª½"
+	  ,"ì˜¤ë§Œì˜íƒ‘ ê·¼ì²˜"
+	  ,"ì¹´ì˜¤í‹±ì‹ ì „ ì™¼ìª½"};
  public static L1NpcInstance ClockInstance; 
- private boolean   isTebeosiris = false; // Å×º£ ÀÏ°æ¿ì true ¾Æ´Ò°æ¿ì Æ¼Ä®
- private String divide;  //Æ¼º£»ç¸·, Æ¼Ä®»ç¿ø ¸Ş½ÃÁö ºĞÇÒ
- //---------------------------Ãß°¡ ³¡ by neodis----------------------------//
+ private boolean   isTebeosiris = false; // í…Œë²  ì¼ê²½ìš° true ì•„ë‹ê²½ìš° í‹°ì¹¼
+ private String divide;  //í‹°ë² ì‚¬ë§‰, í‹°ì¹¼ì‚¬ì› ë©”ì‹œì§€ ë¶„í• 
+ //---------------------------ì¶”ê°€ ë by neodis----------------------------//
 
- /** º¸½º¹æ ¼±Âø¼ø 20¸íÀ» ´ã±â À§ÇÑ ¸®½ºÆ® */
+ /** ë³´ìŠ¤ë°© ì„ ì°©ìˆœ 20ëª…ì„ ë‹´ê¸° ìœ„í•œ ë¦¬ìŠ¤íŠ¸ */
  private static final ArrayList<L1PcInstance> sList = new ArrayList<L1PcInstance>();
 
- /** ½Ã°¢ µ¥ÀÌÅÍ Æ÷¸Ë */
+ /** ì‹œê° ë°ì´í„° í¬ë§· */
  private static final SimpleDateFormat s = new SimpleDateFormat("HH", Locale.KOREA);
 
- /** ½Ã°¢ µ¥ÀÌÅÍ Æ÷¸Ë */
+ /** ì‹œê° ë°ì´í„° í¬ë§· */
  private static final SimpleDateFormat ss = new SimpleDateFormat("MM-dd HH:mm", Locale.KOREA);
 
  /**
-  * CrockController °´Ã¼ ¸®ÅÏ
-  * @return (CrockController) ´ÜÀÏ°´Ã¼
+  * CrockController ê°ì²´ ë¦¬í„´
+  * @return (CrockController) ë‹¨ì¼ê°ì²´
  */
  public static CrockController getInstance(){
   if(instance == null) instance = new CrockController();
   return instance;
  }
  /**
-  * ±âº» »ı¼ºÀÚ - ½Ì±ÛÅæ±¸ÇöÀ¸·Î private
+  * ê¸°ë³¸ ìƒì„±ì - ì‹±ê¸€í†¤êµ¬í˜„ìœ¼ë¡œ private
  */
  private CrockController(){
   super("CrockController");
@@ -115,59 +115,59 @@ private static final int[][] loc = { //º¯È¯½Ã DB spwanlist_npc¿¡¼­ ÁÂÇ¥¼öÁ¤
  /**
   * Super class abstract method
  */
- //---------------------------¼öÁ¤ by neodis------------------------//
+ //---------------------------ìˆ˜ì • by neodis------------------------//
  @Override
  public void run(){
   try{
    while(true){
-    sleep(600000L);//½Ã°£ÀÇ±Õ¿­ ´Ù½Ã ¿­¸± Á¶°Ç °Ë»ö ´ë±â ½Ã°£(10ºĞ¸¶´Ù °Ë»ö)//sleep(1000L);  // 1ÃÊ 
+    sleep(600000L);//ì‹œê°„ì˜ê· ì—´ ë‹¤ì‹œ ì—´ë¦´ ì¡°ê±´ ê²€ìƒ‰ ëŒ€ê¸° ì‹œê°„(10ë¶„ë§ˆë‹¤ ê²€ìƒ‰)//sleep(1000L);  // 1ì´ˆ 
     if(!isOpen()) 
      continue;
-    if(L1World.getInstance().getAllPlayers().size() <= 0)//À½...size()    e
+    if(L1World.getInstance().getAllPlayers().size() <= 0)//ìŒ...size()    e
      continue;
-    L1World.getInstance().broadcastServerMessage("Àá½ÃÈÄ ½Ã°£ÀÇ ±Õ¿­ÀÌ ¿­¸³´Ï´Ù.");
-    sleep(15000L);     // 15ÃÊ    //°Ë»ö
+    L1World.getInstance().broadcastServerMessage("ì ì‹œí›„ ì‹œê°„ì˜ ê· ì—´ì´ ì—´ë¦½ë‹ˆë‹¤.");
+    sleep(15000L);     // 15ì´ˆ    //ê²€ìƒ‰
     npcId();
     ready(ID[rnd]);
-    L1World.getInstance().broadcastServerMessage("½Ã°£ÀÇ ±Õ¿­ÀÌ "+locName[rnd]+" ±ÙÃ³¿¡¼­ ¿­·È½À´Ï´Ù.\n"+divide+"À¸·ÎºÎÅÍ ÀÌ°èÀÇ Ä§°øÀÌ ½ÃÀÛµË´Ï´Ù.");
+    L1World.getInstance().broadcastServerMessage("ì‹œê°„ì˜ ê· ì—´ì´ "+locName[rnd]+" ê·¼ì²˜ì—ì„œ ì—´ë ¸ìŠµë‹ˆë‹¤.\n"+divide+"ìœ¼ë¡œë¶€í„° ì´ê³„ì˜ ì¹¨ê³µì´ ì‹œì‘ë©ë‹ˆë‹¤.");
     setBoss(false);
-    setTicalC(true); // Æ¼Ä® ´Ş·Â Ãß°¡
+    setTicalC(true); // í‹°ì¹¼ ë‹¬ë ¥ ì¶”ê°€
     sleep(DELAY);
-       L1World.getInstance().broadcastServerMessage("½Ã°£ÀÇ ±Õ¿­ÀÌ »ı¼ºµÈ Áö 2½Ã°£ 30ºĞÀÌ Áö³µ½À´Ï´Ù.\nÀÌ°èÀÇ º¸½º ¸ó½ºÅÍ¸¦ ÀâÀ» ¼ö ÀÖ½À´Ï´Ù.");
-       setBoss(true);   // º¸½º °ø·« ½ÃÀÛ
-       sleep(TIME);     //30ºĞ½Ã°£
-    /** º¸½º °ø·«ÀÌ ½ÇÆĞ Çß´Ù¸é Àü¿ø ¹Ù·Î ÅÚ */
+       L1World.getInstance().broadcastServerMessage("ì‹œê°„ì˜ ê· ì—´ì´ ìƒì„±ëœ ì§€ 2ì‹œê°„ 30ë¶„ì´ ì§€ë‚¬ìŠµë‹ˆë‹¤.\nì´ê³„ì˜ ë³´ìŠ¤ ëª¬ìŠ¤í„°ë¥¼ ì¡ì„ ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
+       setBoss(true);   // ë³´ìŠ¤ ê³µëµ ì‹œì‘
+       sleep(TIME);     //30ë¶„ì‹œê°„
+    /** ë³´ìŠ¤ ê³µëµì´ ì‹¤íŒ¨ í–ˆë‹¤ë©´ ì „ì› ë°”ë¡œ í…” */
     if(isTeleport())
     {
-     L1World.getInstance().broadcastServerMessage(divide+"ÀÇ º¸½º°ø·«¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+     L1World.getInstance().broadcastServerMessage(divide+"ì˜ ë³´ìŠ¤ê³µëµì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
      TelePort();
-    /** º¸½º °ø·«ÀÌ ¼º°øÇß´Ù¸é 24½Ã°£ ÈÄ ÅÚ */
+    /** ë³´ìŠ¤ ê³µëµì´ ì„±ê³µí–ˆë‹¤ë©´ 24ì‹œê°„ í›„ í…” */
     }else{
-     L1World.getInstance().broadcastServerMessage(divide+"ÀÇ º¸½º°ø·«¿¡ ¼º°øÇÏ¿´½À´Ï´Ù. ¾ÕÀ¸·Î 1½Ã°£ ´õ »ç³ÉÀÌ °¡´ÉÇÕ´Ï´Ù.");
-     sleep(DAY);    //24½Ã°£
+     L1World.getInstance().broadcastServerMessage(divide+"ì˜ ë³´ìŠ¤ê³µëµì— ì„±ê³µí•˜ì˜€ìŠµë‹ˆë‹¤. ì•ìœ¼ë¡œ 1ì‹œê°„ ë” ì‚¬ëƒ¥ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+     sleep(DAY);    //24ì‹œê°„
      TelePort();
     }
-    L1World.getInstance().broadcastServerMessage(divide+"À¸·Î ÅëÇÏ´Â ½Ã°£ÀÇ ±Õ¿­ÀÌ ´İÇû½À´Ï´Ù.");
+    L1World.getInstance().broadcastServerMessage(divide+"ìœ¼ë¡œ í†µí•˜ëŠ” ì‹œê°„ì˜ ê· ì—´ì´ ë‹«í˜”ìŠµë‹ˆë‹¤.");
     clear();
    }
   }catch(Exception e){
    e.printStackTrace();
   }
  }
- //---------------------------¼öÁ¤ ³¡ by neodis---------------------//
+ //---------------------------ìˆ˜ì • ë by neodis---------------------//
 
  /**
-  * ½Ã°£ÀÇ ±Õ¿­ ¿­¸®±â ÁØºñ»óÅÂ ¹× ±Õ¿­ ½ÃÀÛ
+  * ì‹œê°„ì˜ ê· ì—´ ì—´ë¦¬ê¸° ì¤€ë¹„ìƒíƒœ ë° ê· ì—´ ì‹œì‘
  */
- //---------------------------¼öÁ¤ ½ÃÀÛ by neodis-------------------------------------//
+ //---------------------------ìˆ˜ì • ì‹œì‘ by neodis-------------------------------------//
 
- // ÇÔ¼ö Ãß°¡ by neodis
+ // í•¨ìˆ˜ ì¶”ê°€ by neodis
  public boolean isTebeOsiris()
  {
   return isTebeosiris;
  }
  /**
- * ½Ã°£ÀÇ ±Õ¿­ ¿­¸®±â ÁØºñ»óÅÂ ¹× ±Õ¿­ ½ÃÀÛ
+ * ì‹œê°„ì˜ ê· ì—´ ì—´ë¦¬ê¸° ì¤€ë¹„ìƒíƒœ ë° ê· ì—´ ì‹œì‘
  */
  private void ready(int npcId)
  {
@@ -175,10 +175,10 @@ private static final int[][] loc = { //º¯È¯½Ã DB spwanlist_npc¿¡¼­ ÁÂÇ¥¼öÁ¤
   Random _rnd = new Random();
   if(_rnd.nextInt(10)<4){
    isTebeosiris = true;
-   divide = "Å×º£ »ç¸·"; //ÀÔÀåÁö¿ª ºĞÇÒ ¹× Ç¥½ÃÁöÁ¤
+   divide = "í…Œë²  ì‚¬ë§‰"; //ì…ì¥ì§€ì—­ ë¶„í•  ë° í‘œì‹œì§€ì •
   } else {
    isTebeosiris = false;
-   divide = "Æ¼Ä® »ç¿ø";
+   divide = "í‹°ì¹¼ ì‚¬ì›";
   }
   L1Npc npc;
   npc = new L1Npc();
@@ -229,12 +229,12 @@ private static final int[][] loc = { //º¯È¯½Ã DB spwanlist_npc¿¡¼­ ÁÂÇ¥¼öÁ¤
   sTime = System.currentTimeMillis();
  }
 
- //---------------------------¼öÁ¤ ³¡ by neodis-------------------------------------//
+ //---------------------------ìˆ˜ì • ë by neodis-------------------------------------//
 
  /**
-  * Àü¿ø ¾Æµ§ ¸¶À»·Î ÅÚ
+  * ì „ì› ì•„ë´ ë§ˆì„ë¡œ í…”
  */
- //---------------------------¼öÁ¤ ½ÃÀÛ by neodis-------------------------------------//
+ //---------------------------ìˆ˜ì • ì‹œì‘ by neodis-------------------------------------//
  private void TelePort()
  {
   
@@ -277,12 +277,12 @@ private static final int[][] loc = { //º¯È¯½Ã DB spwanlist_npc¿¡¼­ ÁÂÇ¥¼öÁ¤
    }
   }
  }
- //---------------------------¼öÁ¤ ³¡ by neodis-------------------------------------//
+ //---------------------------ìˆ˜ì • ë by neodis-------------------------------------//
 
 
  /**
-  * ¿ÀÇÂ ½Ã°¢À» °¡Á®¿Â´Ù
-  * @return (String) ¿ÀÇÂ ½Ã°¢(MM-dd HH:mm)
+  * ì˜¤í”ˆ ì‹œê°ì„ ê°€ì ¸ì˜¨ë‹¤
+  * @return (String) ì˜¤í”ˆ ì‹œê°(MM-dd HH:mm)
  */
  public String OpenTime(){
   Calendar c = Calendar.getInstance();
@@ -291,17 +291,17 @@ private static final int[][] loc = { //º¯È¯½Ã DB spwanlist_npc¿¡¼­ ÁÂÇ¥¼öÁ¤
  }
 
  /**
-  * ÇöÀç½Ã°¢À» °¡Á®¿Â´Ù
-  * @return (String) ÇöÀç ½Ã°¢(HH:mm)
+  * í˜„ì¬ì‹œê°ì„ ê°€ì ¸ì˜¨ë‹¤
+  * @return (String) í˜„ì¬ ì‹œê°(HH:mm)
  */
  private String getTime(){
   return s.format(Calendar.getInstance().getTime());
  }
 
  /**
-  * Æ¯Á¤½Ã°¢À» °¡Á®¿Â´Ù
-  * @param (long)  Æ¯Á¤ÇÑ ½Ã°¢(ms)
-  * @return (String) Æ¯Á¤ ½Ã°¢(HH:mm)
+  * íŠ¹ì •ì‹œê°ì„ ê°€ì ¸ì˜¨ë‹¤
+  * @param (long)  íŠ¹ì •í•œ ì‹œê°(ms)
+  * @return (String) íŠ¹ì • ì‹œê°(HH:mm)
  */
  private String getTime(long time){
   Calendar c = Calendar.getInstance();
@@ -310,33 +310,33 @@ private static final int[][] loc = { //º¯È¯½Ã DB spwanlist_npc¿¡¼­ ÁÂÇ¥¼öÁ¤
  }
 
  /**
-  * ½Ã°£ÀÇ ±Õ¿­ÀÌ ÇöÀç ¿­·ÁÀÖ´ÂÁö ÆÇ´Ü
-  * @return (boolean) ¿­·ÁÀÖ´Ù¸é true ´İÇôÀÖ´Ù¸é false
+  * ì‹œê°„ì˜ ê· ì—´ì´ í˜„ì¬ ì—´ë ¤ìˆëŠ”ì§€ íŒë‹¨
+  * @return (boolean) ì—´ë ¤ìˆë‹¤ë©´ true ë‹«í˜€ìˆë‹¤ë©´ false
  */
  private boolean isOpen(){
   NowTime = getTime();
-  if((Integer.parseInt(NowTime) % LOOP) == 0) return true;//NowTimeÀº ½Ã°£À» ºÒ·¯¿È. ½Ã°£À» LOOP·Î ³ª´® 
+  if((Integer.parseInt(NowTime) % LOOP) == 0) return true;//NowTimeì€ ì‹œê°„ì„ ë¶ˆëŸ¬ì˜´. ì‹œê°„ì„ LOOPë¡œ ë‚˜ëˆ” 
   return false;
  }
 
  /**
-  * ½Ã°£ÀÇ ±Õ¿­ ÀÌµ¿ »óÅÂ
-  * @return (boolean) move ÀÌµ¿ ¿©ºÎ
+  * ì‹œê°„ì˜ ê· ì—´ ì´ë™ ìƒíƒœ
+  * @return (boolean) move ì´ë™ ì—¬ë¶€
  */
  public boolean isMove(){
   return move;
  }
 
  /**
-  * ½Ã°£ÀÇ ±Õ¿­ ÀÌµ¿ »óÅÂ ¼ÂÆÃ
-  * @param (boolean) move ÀÌµ¿ ¿©ºÎ
+  * ì‹œê°„ì˜ ê· ì—´ ì´ë™ ìƒíƒœ ì…‹íŒ…
+  * @param (boolean) move ì´ë™ ì—¬ë¶€
  */
  private void setMove(boolean move){
   this.move = move;
  }
  /*
- Æ¼Ä® ´Ş·Â
- ¿­¸²/´İÈû ¿©ºÎ
+ í‹°ì¹¼ ë‹¬ë ¥
+ ì—´ë¦¼/ë‹«í˜ ì—¬ë¶€
  */
 
  public boolean TicalC(){
@@ -349,42 +349,42 @@ private static final int[][] loc = { //º¯È¯½Ã DB spwanlist_npc¿¡¼­ ÁÂÇ¥¼öÁ¤
   }
 
  /**
-  * ½Ã°£ÀÇ ±Õ¿­ º¸½º°ø·« ½Ã°£»óÅÂ
-  * @return (boolean) boss °ø·« ¿©ºÎ
+  * ì‹œê°„ì˜ ê· ì—´ ë³´ìŠ¤ê³µëµ ì‹œê°„ìƒíƒœ
+  * @return (boolean) boss ê³µëµ ì—¬ë¶€
  */
  public boolean isBoss(){
   return boss;
  }
 
  /**
-  * ½Ã°£ÀÇ ±Õ¿­ º¸½º°ø·« ½Ã°£ ¾Ë¸²
-  * @param (boolean) boss °ø·« ¿©ºÎ
+  * ì‹œê°„ì˜ ê· ì—´ ë³´ìŠ¤ê³µëµ ì‹œê°„ ì•Œë¦¼
+  * @param (boolean) boss ê³µëµ ì—¬ë¶€
  */
  private void setBoss(boolean boss){
   this.boss = boss;
  }
 
  /**
-  * ¼±Âø¼ø 20¸í µî·Ï
+  * ì„ ì°©ìˆœ 20ëª… ë“±ë¡
  */
  public synchronized void add(L1PcInstance c){
-  /** µî·ÏµÇ¾î ÀÖÁö ¾Ê°í */
+  /** ë“±ë¡ë˜ì–´ ìˆì§€ ì•Šê³  */
   if(!sList.contains(c)){
-   /** ¼±Âø¼ø 20¸í ÀÌÇÏ¶ó¸é */
+   /** ì„ ì°©ìˆœ 20ëª… ì´í•˜ë¼ë©´ */
    if(sList.size() < 20) sList.add(c);
   }
  }
 
  /**
-  * ¼±Âø¼ø ¸®½ºÆ® »çÀÌÁî ¹İ³³
-  * @return (int) sList ÀÇ »çÀÌÁî
+  * ì„ ì°©ìˆœ ë¦¬ìŠ¤íŠ¸ ì‚¬ì´ì¦ˆ ë°˜ë‚©
+  * @return (int) sList ì˜ ì‚¬ì´ì¦ˆ
  */
  public int size(){
   return sList.size();
  }
 
  /**
-  * Å¬¸®¾î(ÃÊ±âÈ­) : ½Ã½ºÅÛÀÌ ÇÑ¹ÙÄû ³¡³¯¶§ Àç ¼ÂÆÃÀ» À§ÇØ ¾²ÀÎ´Ù.
+  * í´ë¦¬ì–´(ì´ˆê¸°í™”) : ì‹œìŠ¤í…œì´ í•œë°”í€´ ëë‚ ë•Œ ì¬ ì…‹íŒ…ì„ ìœ„í•´ ì“°ì¸ë‹¤.
  */
  private void clear(){
   sList.clear();
@@ -395,7 +395,7 @@ private static final int[][] loc = { //º¯È¯½Ã DB spwanlist_npc¿¡¼­ ÁÂÇ¥¼öÁ¤
   for(int npcId : ID){
    L1NpcInstance npc = L1World.getInstance().findNpc(npcId);
    // for only open image is seeing...
-   if(npc==null) //´İÈù ÀÌ¹ÌÁö·Î º¹±Í
+   if(npc==null) //ë‹«íŒ ì´ë¯¸ì§€ë¡œ ë³µê·€
    continue;
    npc.setTempCharGfx(6920);   
    npc.setGfxId(6920);
@@ -408,15 +408,15 @@ private static final int[][] loc = { //º¯È¯½Ã DB spwanlist_npc¿¡¼­ ÁÂÇ¥¼öÁ¤
  }
 
  /**
-  * ¼±Âø¼ø 20¸í¿¡°Ô ¾ÆÀÌÅÛ Áö±Ş
+  * ì„ ì°©ìˆœ 20ëª…ì—ê²Œ ì•„ì´í…œ ì§€ê¸‰
  */
  public void send(){
   //for(L1PcInstance c : sList.toArray(new L1PcInstance[sList.size()])) c.getInventory().storeItem(400073, 1);
  }
 
  /**
-  * ½Ã°£ÀÇ ±Õ¿­Áß ÇÏ³ªÀÇ ·£´ıÀÇ ¾ÆÀÌµğ¸¦ ¹İ³³
-  * @return (int) npcId ¿£ÇÇ¾¾ ¾ÆÀÌµğ
+  * ì‹œê°„ì˜ ê· ì—´ì¤‘ í•˜ë‚˜ì˜ ëœë¤ì˜ ì•„ì´ë””ë¥¼ ë°˜ë‚©
+  * @return (int) npcId ì—”í”¼ì”¨ ì•„ì´ë””
  */
  private int npcId(){
   rnd = (int)(Math.random() * ID.length);  
@@ -424,18 +424,18 @@ private static final int[][] loc = { //º¯È¯½Ã DB spwanlist_npc¿¡¼­ ÁÂÇ¥¼öÁ¤
  }
 
  /**
-  * ÁöÁ¤µÈ npcId ¿¡ ´ëÇÑ loc À» ¹İ³³
-  * @return (int[]) loc  ÁÂÇ¥ ¹è¿­
+  * ì§€ì •ëœ npcId ì— ëŒ€í•œ loc ì„ ë°˜ë‚©
+  * @return (int[]) loc  ì¢Œí‘œ ë°°ì—´
  */
  public int[] loc(){  
   return loc[rnd];
  }
 
  /**
-  * ½Ã°£ÀÇ ±Õ¿­ º¸½º°ø·« È®ÀÎ
-  * @return (boolean) 2º¸½º´Ù Á×¾ú´Ù¸é false 1º¸½º ÀÌÇÏ Á×¿´´Ù¸é true
+  * ì‹œê°„ì˜ ê· ì—´ ë³´ìŠ¤ê³µëµ í™•ì¸
+  * @return (boolean) 2ë³´ìŠ¤ë‹¤ ì£½ì—ˆë‹¤ë©´ false 1ë³´ìŠ¤ ì´í•˜ ì£½ì˜€ë‹¤ë©´ true
  */
- private boolean isTeleport(){ //L1MonsterInstance¿¡ Æ¼Ä® º¸½º Ãß°¡
+ private boolean isTeleport(){ //L1MonsterInstanceì— í‹°ì¹¼ ë³´ìŠ¤ ì¶”ê°€
   boolean sTemp = true;
   switch(dieCount()){
    case 2:
@@ -449,16 +449,16 @@ private static final int[][] loc = { //º¯È¯½Ã DB spwanlist_npc¿¡¼­ ÁÂÇ¥¼öÁ¤
  }
 
  /**
-  * ½Ã°£ÀÇ ±Õ¿­ º¸½º ´ÙÀÌ ¹İ³³
-  * @return (int) dieCount º¸½º ´ÙÀÌ È½¼ö
+  * ì‹œê°„ì˜ ê· ì—´ ë³´ìŠ¤ ë‹¤ì´ ë°˜ë‚©
+  * @return (int) dieCount ë³´ìŠ¤ ë‹¤ì´ íšŸìˆ˜
  */
  public int dieCount(){
   return dieCount;
  }
 
  /**
-  * ½Ã°£ÀÇ ±Õ¿­ º¸½º ´ÙÀÌ ¼³Á¤
-  * @param (int) dieCount º¸½º ´ÙÀÌ È½¼ö
+  * ì‹œê°„ì˜ ê· ì—´ ë³´ìŠ¤ ë‹¤ì´ ì„¤ì •
+  * @param (int) dieCount ë³´ìŠ¤ ë‹¤ì´ íšŸìˆ˜
  */
  public void dieCount(int dieCount){
   this.dieCount = dieCount;

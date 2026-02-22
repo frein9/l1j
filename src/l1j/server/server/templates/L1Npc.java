@@ -312,7 +312,7 @@ public class L1Npc extends L1Object implements Cloneable {
 	public void set_atkspeed(int i) {
 		_atkspeed = i;
 	}
-	//Àá¹Ç ¹ö¶¥
+	//ì ë¯€ ë²„ë•…
 	private int _has;
 
 	public int get_has() {
@@ -322,7 +322,7 @@ public class L1Npc extends L1Object implements Cloneable {
 	public void set_has(int i) {
 	     _has = i;
 	}
-	//Àá¹Ç ¹ö¶¥
+	//ì ë¯€ ë²„ë•…
 
 	private boolean _agro;
 
@@ -687,9 +687,9 @@ public class L1Npc extends L1Object implements Cloneable {
 	private boolean _amountFixed;
 	
 	/**
-	 * mapids Å×ÀÌºí·Î ¼³Á¤µÈ monster·® ¹èÀ²ÀÇ ¿µÇâÀ» ¹ŞÀ»Áö ¾î¶³Áö¸¦ µ¹·ÁÁØ´Ù.
+	 * mapids í…Œì´ë¸”ë¡œ ì„¤ì •ëœ monsterëŸ‰ ë°°ìœ¨ì˜ ì˜í–¥ì„ ë°›ì„ì§€ ì–´ë–¨ì§€ë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 * 
-	 * @return ¿µÇâÀ» ¹ŞÁö ¾Ê°Ô ¼³Á¤µÇ¾î ÀÖ´Â °æ¿ì´Â true¸¦ µ¹·ÁÁØ´Ù.
+	 * @return ì˜í–¥ì„ ë°›ì§€ ì•Šê²Œ ì„¤ì •ë˜ì–´ ìˆëŠ” ê²½ìš°ëŠ” trueë¥¼ ëŒë ¤ì¤€ë‹¤.
 	 */
 	public boolean isAmountFixed() {
 		return _amountFixed;

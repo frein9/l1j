@@ -40,16 +40,16 @@ public class S_PrivateShop extends ServerBasePacket {
 		if (shopPc == null) {
 			return;
 		}
-		/** ¹«ÀÎ»óÁ¡ÀÏ¶§´Â ¸®ÅÏ **/
+		/** ë¬´ì¸ìƒì ì¼ë•ŒëŠ” ë¦¬í„´ **/
 		/*if (pc.getAccountName() == shopPc.getAccountName()) {
-			 pc.sendPackets(new S_SystemMessage("°°Àº °èÁ¤ÀÇ ÄÉ¸¯ÅÍ³¢¸® °³ÀÎ»óÁ¡ ÀÌ¿ë ºÒ°¡´ÉÇÕ´Ï´Ù."));
+			 pc.sendPackets(new S_SystemMessage("ê°™ì€ ê³„ì •ì˜ ì¼€ë¦­í„°ë¼ë¦¬ ê°œì¸ìƒì  ì´ìš© ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤."));
 			 return;
 		}
 		if (pc.getAccountName().equalsIgnoreCase(shopPc.getAccountName())) {
-			 pc.sendPackets(new S_SystemMessage("°°Àº °èÁ¤ÀÇ ÄÉ¸¯ÅÍ³¢¸® °³ÀÎ»óÁ¡ ÀÌ¿ë ºÒ°¡´ÉÇÕ´Ï´Ù."));
+			 pc.sendPackets(new S_SystemMessage("ê°™ì€ ê³„ì •ì˜ ì¼€ë¦­í„°ë¼ë¦¬ ê°œì¸ìƒì  ì´ìš© ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤."));
 			 return;
 		}*/
-		/** ¹«ÀÎ»óÁ¡ÀÏ¶§´Â ¸®ÅÏ **/
+		/** ë¬´ì¸ìƒì ì¼ë•ŒëŠ” ë¦¬í„´ **/
 		writeC(Opcodes.S_OPCODE_PRIVATESHOPLIST);
 		writeC(type);
 		writeD(objectId);

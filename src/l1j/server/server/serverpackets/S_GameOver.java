@@ -21,7 +21,7 @@ public class S_GameOver extends ServerBasePacket {
 
 	//0000 : 7e 45 0a d0 bb 83 09 35                            ~E.....5
 
-    /*°ÔÀÓÁ¾·á ³¡*/
+    /*ê²Œì„ì¢…ë£Œ ë*/
 	private void buildPacket(L1PcInstance pc) {
 		writeC(Opcodes.S_OPCODE_UNKNOWN2);
 		writeC(0x45);

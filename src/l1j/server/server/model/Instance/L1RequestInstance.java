@@ -45,7 +45,7 @@ public class L1RequestInstance extends L1NpcInstance {
 				getNpcTemplate().get_npcId());
 
 		if (talking != null) {
-			if (player.getLawful() < -1000) { // �÷��̾ ī��ƽ
+			if (player.getLawful() < -1000) { // 플레이어가 카오틱
 				player.sendPackets(new S_NPCTalkReturn(talking, objid, 2));
 			} else {
 				player.sendPackets(new S_NPCTalkReturn(talking, objid, 1));

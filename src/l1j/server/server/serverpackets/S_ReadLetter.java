@@ -40,15 +40,15 @@ public class S_ReadLetter extends ServerBasePacket{
 			
 			
 			writeC(Opcodes.S_OPCODE_MAIL);
-		     writeC(type); // 16:¸ŞÀÏÇÔ 17:Ç÷¸Í¸ŞÀÏ
+		     writeC(type); // 16:ë©”ì¼í•¨ 17:í˜ˆë§¹ë©”ì¼
 
 		     if (rs.next())
 		     {
-		    	 writeD(rs.getInt(1));   // °Ô½Ã±Û ³Ñ¹ö
-		    	 writeSS(rs.getString(8)); // ³»¿ë
-		    	 writeC(id); // ÀÏ
-		    	 writeS(rs.getString(3)); // º¸³½»ç¶÷
-		    	 writeSS(rs.getString(7)); // Á¦¸ñ
+		    	 writeD(rs.getInt(1));   // ê²Œì‹œê¸€ ë„˜ë²„
+		    	 writeSS(rs.getString(8)); // ë‚´ìš©
+		    	 writeC(id); // ì¼
+		    	 writeS(rs.getString(3)); // ë³´ë‚¸ì‚¬ëŒ
+		    	 writeSS(rs.getString(7)); // ì œëª©
 		     } 
 		} catch (SQLException e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);

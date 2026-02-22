@@ -63,7 +63,7 @@ public class L1HousekeeperInstance extends L1NpcInstance {
 		boolean isOwner = false;
 
 		if (talking != null) {
-			// ¸»À» °Ç³Ù PC°¡ ¼ÒÀ¯ÀÚ¿Í ±× Å©¶õ¿øÀÎ°¡ ¾î¶²°¡ Á¶»çÇÑ´Ù
+			// ë§ì„ ê±´ë„¨ PCê°€ ì†Œìœ ìì™€ ê·¸ í¬ë€ì›ì¸ê°€ ì–´ë–¤ê°€ ì¡°ì‚¬í•œë‹¤
 			L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 			if (clan != null) {
 				int houseId = clan.getHouseId();
@@ -76,9 +76,9 @@ public class L1HousekeeperInstance extends L1NpcInstance {
 				}
 			}
 
-			// ¼ÒÀ¯ÀÚ¿Í ±× Å©¶õ¿ø ÀÌ¿Ü¶ó¸é È¸È­ ³»¿ëÀ» ¹Ù²Û´Ù
+			// ì†Œìœ ìì™€ ê·¸ í¬ë€ì› ì´ì™¸ë¼ë©´ íšŒí™” ë‚´ìš©ì„ ë°”ê¾¼ë‹¤
 			if (!isOwner) {
-				// Housekeeper°¡ ¼ÓÇÏ´Â ¾ÆÁöÆ®¸¦ ÃëµæÇÑ´Ù
+				// Housekeeperê°€ ì†í•˜ëŠ” ì•„ì§€íŠ¸ë¥¼ ì·¨ë“í•œë‹¤
 				L1House targetHouse = null;
 				for (L1House house : HouseTable.getInstance()
 						.getHouseTableList()) {
@@ -88,7 +88,7 @@ public class L1HousekeeperInstance extends L1NpcInstance {
 					}
 				}
 
-				// ¾ÆÁöÆ®°¡¿¡ ¼ÒÀ¯ÀÚ°¡ ÀÖÀ»Áö ¾î¶³Áö Á¶»çÇÑ´Ù
+				// ì•„ì§€íŠ¸ê°€ì— ì†Œìœ ìê°€ ìˆì„ì§€ ì–´ë–¨ì§€ ì¡°ì‚¬í•œë‹¤
 				boolean isOccupy = false;
 				String clanName = null;
 				String leaderName = null;
@@ -101,20 +101,20 @@ public class L1HousekeeperInstance extends L1NpcInstance {
 					}
 				}
 
-				// È¸È­ ³»¿ëÀ» ¼³Á¤ÇÑ´Ù
-				if (isOccupy) { // ¼ÒÀ¯ÀÚ ÀÖ¾î
+				// íšŒí™” ë‚´ìš©ì„ ì„¤ì •í•œë‹¤
+				if (isOccupy) { // ì†Œìœ ì ìˆì–´
 					htmlid = "agname";
 					htmldata = new String[] { clanName, leaderName,
 							targetHouse.getHouseName() };
-				} else { // ¼ÒÀ¯ÀÚ ¾øÀ½(°æ¸ÅÁß)
+				} else { // ì†Œìœ ì ì—†ìŒ(ê²½ë§¤ì¤‘)
 					htmlid = "agnoname";
 					htmldata = new String[] { targetHouse.getHouseName() };
 				}
 			}
 
-			// html Ç¥½Ã ÆĞÅ¶ ¼Û½Å
-			if (htmlid != null) { // htmlid°¡ ÁöÁ¤µÇ°í ÀÖ´Â °æ¿ì
-				if (htmldata != null) { // html ÁöÁ¤ÀÌ ÀÖ´Â °æ¿ì´Â Ç¥½Ã
+			// html í‘œì‹œ íŒ¨í‚· ì†¡ì‹ 
+			if (htmlid != null) { // htmlidê°€ ì§€ì •ë˜ê³  ìˆëŠ” ê²½ìš°
+				if (htmldata != null) { // html ì§€ì •ì´ ìˆëŠ” ê²½ìš°ëŠ” í‘œì‹œ
 					pc
 							.sendPackets(new S_NPCTalkReturn(objid, htmlid,
 									htmldata));
@@ -122,7 +122,7 @@ public class L1HousekeeperInstance extends L1NpcInstance {
 					pc.sendPackets(new S_NPCTalkReturn(objid, htmlid));
 				}
 			} else {
-				if (pc.getLawful() < -1000) { // ÇÃ·¹ÀÌ¾î°¡ Ä«¿ÀÆ½
+				if (pc.getLawful() < -1000) { // í”Œë ˆì´ì–´ê°€ ì¹´ì˜¤í‹±
 					pc.sendPackets(new S_NPCTalkReturn(talking, objid, 2));
 				} else {
 					pc.sendPackets(new S_NPCTalkReturn(talking, objid, 1));

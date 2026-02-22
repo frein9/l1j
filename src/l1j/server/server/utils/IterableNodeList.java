@@ -25,9 +25,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * org.w3c.dom.NodeList¿¡ Iterable¸¦ ºÎ°¡ÇÏ±â À§ÇÑ ¾î´ğÅÍ.
+ * org.w3c.dom.NodeListì— Iterableë¥¼ ë¶€ê°€í•˜ê¸° ìœ„í•œ ì–´ëŒ‘í„°.
  */
-// Ç¥ÁØ ¶óÀÌºê·¯¸®¿¡ °°Àº °ÍÀÌ ÁØºñµÇ¾î ÀÖ´Â °Í °°À¸¸é Ä¡È¯ÇØ ÁÖ¼¼¿ä.
+// í‘œì¤€ ë¼ì´ë¸ŒëŸ¬ë¦¬ì— ê°™ì€ ê²ƒì´ ì¤€ë¹„ë˜ì–´ ìˆëŠ” ê²ƒ ê°™ìœ¼ë©´ ì¹˜í™˜í•´ ì£¼ì„¸ìš”.
 public class IterableNodeList implements Iterable<Node> {
 	private final NodeList _list;
 

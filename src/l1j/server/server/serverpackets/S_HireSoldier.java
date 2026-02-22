@@ -36,16 +36,16 @@ public class S_HireSoldier extends ServerBasePacket {
 
 	private byte[] _byte = null;
 
-	// HTML¸¦ ¿­°í ÀÖÀ» ¶§ ÀÌ ÆÐÅ¶À» º¸³»¸é(ÀÚ) npcdeloy-j.html°¡ Ç¥½ÃµÈ´Ù
-	// OK¹öÆ°À» ´©¸£¸é(ÀÚ) C_127ÀÌ ³­´Ù
+	// HTMLë¥¼ ì—´ê³  ìžˆì„ ë•Œ ì´ íŒ¨í‚·ì„ ë³´ë‚´ë©´(ìž) npcdeloy-j.htmlê°€ í‘œì‹œëœë‹¤
+	// OKë²„íŠ¼ì„ ëˆ„ë¥´ë©´(ìž) C_127ì´ ë‚œë‹¤
 	public S_HireSoldier(L1PcInstance pc) {
 		writeC(Opcodes.S_OPCODE_HIRESOLDIER);
-		writeH(0); // ?  Å¬¶óÀÌ¾ðÆ®°¡ µ¹·ÁÁÖ´Â ÆÐÅ¶¿¡ Æ÷ÇÔµÈ´Ù
-		writeH(0); // ?  Å¬¶óÀÌ¾ðÆ®°¡ µ¹·ÁÁÖ´Â ÆÐÅ¶¿¡ Æ÷ÇÔµÈ´Ù
-		writeH(0); // °í¿ëµÈ ¿ëº´ÀÇ ÃÑ¼ö
+		writeH(0); // ?  í´ë¼ì´ì–¸íŠ¸ê°€ ëŒë ¤ì£¼ëŠ” íŒ¨í‚·ì— í¬í•¨ëœë‹¤
+		writeH(0); // ?  í´ë¼ì´ì–¸íŠ¸ê°€ ëŒë ¤ì£¼ëŠ” íŒ¨í‚·ì— í¬í•¨ëœë‹¤
+		writeH(0); // ê³ ìš©ëœ ìš©ë³‘ì˜ ì´ìˆ˜
 		writeS(pc.getName());
-		writeD(0); // ?  Å¬¶óÀÌ¾ðÆ®°¡ µ¹·ÁÁÖ´Â ÆÐÅ¶¿¡ Æ÷ÇÔµÈ´Ù
-		writeH(0); // ¹èÄ¡ °¡´ÉÇÑ ¿ëº´¼ö
+		writeD(0); // ?  í´ë¼ì´ì–¸íŠ¸ê°€ ëŒë ¤ì£¼ëŠ” íŒ¨í‚·ì— í¬í•¨ëœë‹¤
+		writeH(0); // ë°°ì¹˜ ê°€ëŠ¥í•œ ìš©ë³‘ìˆ˜
 	}
 
 	@Override

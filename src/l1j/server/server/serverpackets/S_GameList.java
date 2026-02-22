@@ -75,7 +75,7 @@ public class S_GameList extends ServerBasePacket {
 		buildPacket1(pc, i);
 	}
 
-    /*½ºÅ¸Æ®*/
+    /*ìŠ¤íƒ€íŠ¸*/
 	private void buildPacket1(L1PcInstance pc, int i) {
 		
 		L1PetRace pe = L1World.getInstance().getPetRace();
@@ -100,8 +100,8 @@ public class S_GameList extends ServerBasePacket {
 
 		writeC(Opcodes.S_OPCODE_UNKNOWN2);
 		writeC(0x42);
-        writeH(pe.getMembersCount()); // Âü¿©ÀÚ¼ö
-        writeH(i); // µî¼ö
+        writeH(pe.getMembersCount()); // ì°¸ì—¬ììˆ˜
+        writeH(i); // ë“±ìˆ˜
 		for(int j = 0; j < member.size() ; j++){
         writeS(member.get(j).getName());
 		}

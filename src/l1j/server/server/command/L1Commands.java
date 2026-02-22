@@ -35,7 +35,7 @@ public class L1Commands {
 
 	public static L1Command get(String name) {
 		/*
-		 * µğ¹ö±×³ª Å×½ºÆ® ¿ëÀÌ¼ºÀ» À§ÇØ ¸ÅÈ¸ DB¿¡ ÀĞÀ¸·¯ °©´Ï´Ù.  Ä³½¬ÇÏ´Â °Íº¸´Ù ÀÌ·Ğ»ó ÆÛÆ÷¸Õ½º´Â ³»¸³´Ï´Ù¸¸, ¹«½ÃÇÒ ¼ö ÀÖ´Â ¹üÀ§ÀÔ´Ï´Ù.
+		 * ë””ë²„ê·¸ë‚˜ í…ŒìŠ¤íŠ¸ ìš©ì´ì„±ì„ ìœ„í•´ ë§¤íšŒ DBì— ì½ìœ¼ëŸ¬ ê°‘ë‹ˆë‹¤.  ìºì‰¬í•˜ëŠ” ê²ƒë³´ë‹¤ ì´ë¡ ìƒ í¼í¬ë¨¼ìŠ¤ëŠ” ë‚´ë¦½ë‹ˆë‹¤ë§Œ, ë¬´ì‹œí•  ìˆ˜ ìˆëŠ” ë²”ìœ„ì…ë‹ˆë‹¤.
 		 */
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -51,7 +51,7 @@ public class L1Commands {
 			return new L1Command(rs.getString("name"), rs
 					. getInt("access_level"), rs.getString("class_name"));
 		} catch (SQLException e) {
-			_log.log(Level.SEVERE, "Ä¿¸àµå Ãëµæ ¿¡·¯", e);
+			_log.log(Level.SEVERE, "ì»¤ë©˜ë“œ ì·¨ë“ ì—ëŸ¬", e);
 		} finally {
 			SQLUtil.close(rs);
 			SQLUtil.close(pstm);

@@ -49,15 +49,15 @@ public class C_Fight extends ClientBasePacket {
   if (target != null) {
    if (!target.isParalyzed()) {
     if (pc.getFightId() != 0) {
-     pc.sendPackets(new S_ServerMessage(633)); // \f1´ç½ÅÀº ¹ú½á ´Ù¸¥ »ç¶÷°ú °áÅõÁßÀÔ´Ï´Ù.
+     pc.sendPackets(new S_ServerMessage(633)); // \f1ë‹¹ì‹ ì€ ë²Œì¨ ë‹¤ë¥¸ ì‚¬ëŒê³¼ ê²°íˆ¬ì¤‘ì…ë‹ˆë‹¤.
      return;
     } else if (target.getFightId() != 0) {
-     target.sendPackets(new S_ServerMessage(634)); // \f1 ¹ú½á ´Ù¸¥ »ç¶÷°ú °áÅõÁßÀÔ´Ï´Ù.
+     target.sendPackets(new S_ServerMessage(634)); // \f1 ë²Œì¨ ë‹¤ë¥¸ ì‚¬ëŒê³¼ ê²°íˆ¬ì¤‘ì…ë‹ˆë‹¤.
      return;
     }
     pc.setFightId(target.getId());
     target.setFightId(pc.getId());
-    target.sendPackets(new S_Message_YN(630, pc.getName())); // %0%s°¡ ´ç½Å°ú °áÅõ¸¦ ¹Ù¶ó°í ÀÖ½À´Ï´Ù.ÀÀÇÕ´Ï±î? (Y/N)
+    target.sendPackets(new S_Message_YN(630, pc.getName())); // %0%sê°€ ë‹¹ì‹ ê³¼ ê²°íˆ¬ë¥¼ ë°”ë¼ê³  ìˆìŠµë‹ˆë‹¤.ì‘í•©ë‹ˆê¹Œ? (Y/N)
    }
   }
  }

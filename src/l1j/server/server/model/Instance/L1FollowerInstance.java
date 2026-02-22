@@ -54,8 +54,8 @@ public class L1FollowerInstance extends L1NpcInstance {
 		for (L1Object object : L1World.getInstance().getVisibleObjects(this)) {
 			if (object instanceof L1NpcInstance) {
 				L1NpcInstance npc = (L1NpcInstance) object;
-				if (npc.getNpcTemplate().get_npcId() == 70740 // µğÄ«¸£µ§¼Ò¸£Àğ
-						&& getNpcTemplate().get_npcId() == 71093) { // Á¶»ç¿ø
+				if (npc.getNpcTemplate().get_npcId() == 70740 // ë””ì¹´ë¥´ë´ì†Œë¥´ìŸˆ
+						&& getNpcTemplate().get_npcId() == 71093) { // ì¡°ì‚¬ì›
 					setParalyzed(true);
 					L1PcInstance pc = (L1PcInstance) _master;
 					if (!pc.getInventory().checkItem(40593)) {
@@ -63,8 +63,8 @@ public class L1FollowerInstance extends L1NpcInstance {
 					}
 					deleteMe();
 					return true;
-				} else if (npc.getNpcTemplate().get_npcId() == 70811 // ¶óÀÌ¶ó
-						&& getNpcTemplate().get_npcId() == 71094) { // ¿£µğ¾Æ
+				} else if (npc.getNpcTemplate().get_npcId() == 70811 // ë¼ì´ë¼
+						&& getNpcTemplate().get_npcId() == 71094) { // ì—”ë””ì•„
 					setParalyzed(true);
 					L1PcInstance pc = (L1PcInstance) _master;
 					if (!pc.getInventory().checkItem(40582)) {
@@ -72,11 +72,11 @@ public class L1FollowerInstance extends L1NpcInstance {
 					}
 					deleteMe();
 					return true;
-				} else if (npc.getNpcTemplate(). get_npcId() == 71061 // ¸ğÅüÀÌ ¸ğ½º
-						&& getNpcTemplate(). get_npcId() == 71062) { // Ä«¹ÔÆ®
+				} else if (npc.getNpcTemplate(). get_npcId() == 71061 // ëª¨í‰ì´ ëª¨ìŠ¤
+						&& getNpcTemplate(). get_npcId() == 71062) { // ì¹´ë°‹íŠ¸
 					if (getLocation(). getTileLineDistance(_master.getLocation()) < 3) {
 						L1PcInstance pc = (L1PcInstance) _master;	
-						if((pc.getX() >= 32448 && pc.getX() <= 32452) // ¸ğÅüÀÌ ¸ğ½º ÁÖº¯ ÁÂÇ¥
+						if((pc.getX() >= 32448 && pc.getX() <= 32452) // ëª¨í‰ì´ ëª¨ìŠ¤ ì£¼ë³€ ì¢Œí‘œ
 								&& (pc.getY() >= 33048 && pc.getY() <= 33052)
 								&& (pc.getMapId() == 440)) {						
 					setParalyzed(true);
@@ -88,12 +88,12 @@ public class L1FollowerInstance extends L1NpcInstance {
 					return true;
 						}
 					}
-				} else if (npc.getNpcTemplate(). get_npcId() == 71074 // ¸®ÀÚµå¸¸ÀÇ Àå·Î
+				} else if (npc.getNpcTemplate(). get_npcId() == 71074 // ë¦¬ìë“œë§Œì˜ ì¥ë¡œ
 						&& getNpcTemplate(). get_npcId() == 71075) { 
-					// ¿ÏÀüÈ÷ ÁöÃÄ ¹ö¸° ¸®ÀÚµå¸¸ÆÄÀÌÅ¸
+					// ì™„ì „íˆ ì§€ì³ ë²„ë¦° ë¦¬ìë“œë§ŒíŒŒì´íƒ€
 					if (getLocation(). getTileLineDistance(_master.getLocation()) < 3) {
 					L1PcInstance pc = (L1PcInstance) _master;
-						if((pc.getX() >= 32731 && pc.getX() <= 32735) // ¸®ÀÚµå¸¸ Àå·Î ÁÖº¯ ÁÂÇ¥
+						if((pc.getX() >= 32731 && pc.getX() <= 32735) // ë¦¬ìë“œë§Œ ì¥ë¡œ ì£¼ë³€ ì¢Œí‘œ
 								&& (pc.getY() >= 32854 && pc.getY() <= 32858)
 								&& (pc.getMapId() == 480)) {
 							setParalyzed(true);
@@ -105,11 +105,11 @@ public class L1FollowerInstance extends L1NpcInstance {
 					return true;
 				}
 			}
-				} else if (npc.getNpcTemplate(). get_npcId() == 70964 // ¹å½´
-						&& getNpcTemplate(). get_npcId() == 70957) { // ·ÎÀÌ
+				} else if (npc.getNpcTemplate(). get_npcId() == 70964 // ë°§ìŠˆ
+						&& getNpcTemplate(). get_npcId() == 70957) { // ë¡œì´
 					if (getLocation(). getTileLineDistance(_master.getLocation()) < 3){
 						L1PcInstance pc = (L1PcInstance) _master;	
-						if((pc.getX() >= 32917 && pc.getX() <= 32921) // ¹å½´ ÁÖº¯ ÁÂÇ¥
+						if((pc.getX() >= 32917 && pc.getX() <= 32921) // ë°§ìŠˆ ì£¼ë³€ ì¢Œí‘œ
 								&& (pc.getY() >= 32974 && pc.getY() <= 32978)
 								&& (pc.getMapId() == 410)) {
 							setParalyzed(true);
@@ -269,7 +269,7 @@ public class L1FollowerInstance extends L1NpcInstance {
 				L1QuestInstance newnpc = (L1QuestInstance) object;
 				newnpc.onNpcAI();
 				newnpc.turnOnOffLight();   
-				newnpc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // Ã¤ÆÃ °³½Ã
+				newnpc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // ì±„íŒ… ê°œì‹œ
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

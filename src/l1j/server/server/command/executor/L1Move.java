@@ -38,7 +38,7 @@ public class L1Move implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 			StringTokenizer st = new StringTokenizer(arg);
 			int locx = Integer.parseInt(st.nextToken());
 			int locy = Integer.parseInt(st.nextToken());
@@ -49,15 +49,15 @@ public class L1Move implements L1CommandExecutor {
 				mapid = pc.getMapId();
 			}
 			L1Teleport.teleport(pc, locx, locy, mapid, 5, false);
-			pc.sendPackets(new S_SystemMessage("ÁÂÇ¥ " + locx + ", " + locy
-					+ ", " + mapid + "·Î ÀÌµ¿Çß½À´Ï´Ù. "));
+			pc.sendPackets(new S_SystemMessage("ì¢Œí‘œ " + locx + ", " + locy
+					+ ", " + mapid + "ë¡œ ì´ë™í–ˆìŠµë‹ˆë‹¤. "));
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
 			pc.sendPackets(new S_SystemMessage(cmdName
-					+ " XÁÂÇ¥ YÁÂÇ¥ [¸Ê ID] ¶ó°í ÀÔ·ÂÇØ ÁÖ¼¼¿ä. "));
+					+ " Xì¢Œí‘œ Yì¢Œí‘œ [ë§µ ID] ë¼ê³  ì…ë ¥í•´ ì£¼ì„¸ìš”. "));
 		}
 	}
 }

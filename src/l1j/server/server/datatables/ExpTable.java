@@ -22,7 +22,7 @@ package l1j.server.server.datatables;
 import l1j.server.Config;
 
 /**
- * °æÇèÄ¡ Å×ÀÌºíÀ» Á¦°øÇÏ´Â Å¬·¡½º
+ * ê²½í—˜ì¹˜ í…Œì´ë¸”ì„ ì œê³µí•˜ëŠ” í´ë˜ìŠ¤
  */
 public final class ExpTable {
 	private ExpTable() {
@@ -33,39 +33,39 @@ public final class ExpTable {
 	public static final int MAX_EXP = 0x6fde16de;
 
 	/**
-	 * ÁöÁ¤µÈ ·¹º§ÀÌ µÇ´Âµ¥ ÇÊ¿äÇÑ ´©Àû °æÇèÄ¡¸¦ ¿ä±¸ÇÑ´Ù.
+	 * ì§€ì •ëœ ë ˆë²¨ì´ ë˜ëŠ”ë° í•„ìš”í•œ ëˆ„ì  ê²½í—˜ì¹˜ë¥¼ ìš”êµ¬í•œë‹¤.
 	 * 
 	 * @param level
-	 *            ·¹º§
-	 * @return ÇÊ¿äÇÑ ´©Àû °æÇèÄ¡
+	 *            ë ˆë²¨
+	 * @return í•„ìš”í•œ ëˆ„ì  ê²½í—˜ì¹˜
 	 */
 	public static int getExpByLevel(int level) {
 		return _expTable[level - 1];
 	}
 
 	/**
-	 * ´ÙÀ½ÀÇ ·¹º§ÀÌ µÇ´Âµ¥ ÇÊ¿äÇÑ °æÇèÄ¡¸¦ ¿ä±¸ÇÑ´Ù.
+	 * ë‹¤ìŒì˜ ë ˆë²¨ì´ ë˜ëŠ”ë° í•„ìš”í•œ ê²½í—˜ì¹˜ë¥¼ ìš”êµ¬í•œë‹¤.
 	 * 
 	 * @param level
-	 *            ÇöÀçÀÇ ·¹º§
-	 * @return ÇÊ¿äÇÑ °æÇèÄ¡
+	 *            í˜„ì¬ì˜ ë ˆë²¨
+	 * @return í•„ìš”í•œ ê²½í—˜ì¹˜
 	 */
 	public static int getNeedExpNextLevel(int level) {
 		return getExpByLevel(level + 1) - getExpByLevel(level);
 	}
 
 	/**
-	 * ´©Àû °æÇèÄ¡·ÎºÎÅÍ ·¹º§À» ¿ä±¸ÇÑ´Ù.
+	 * ëˆ„ì  ê²½í—˜ì¹˜ë¡œë¶€í„° ë ˆë²¨ì„ ìš”êµ¬í•œë‹¤.
 	 * 
 	 * @param exp
-	 *            ´©Àû °æÇèÄ¡
-	 * @return ¿ä±¸µÈ ·¹º§
+	 *            ëˆ„ì  ê²½í—˜ì¹˜
+	 * @return ìš”êµ¬ëœ ë ˆë²¨
 	 */
 	public static int getLevelByExp(int exp) {
 
 		int level;
 		for (level = 1; level < _expTable.length; level++) {
-			// Æ®¸®Å°ÀÏÁöµµ ¸ğ¸¥´Ù¡¤¡¤¡¤
+			// íŠ¸ë¦¬í‚¤ì¼ì§€ë„ ëª¨ë¥¸ë‹¤Â·Â·Â·
 			if (exp < _expTable[level]) {
 				break;
 			}
@@ -78,11 +78,11 @@ public final class ExpTable {
 	}
 
 	/**
-	 * ÇöÀçÀÇ ·¹º§·ÎºÎÅÍ, °æÇèÄ¡ÀÇ Æä³ÎÆ¼ ·¹ÀÌÆ®¸¦ ¿ä±¸ÇÑ´Ù
+	 * í˜„ì¬ì˜ ë ˆë²¨ë¡œë¶€í„°, ê²½í—˜ì¹˜ì˜ í˜ë„í‹° ë ˆì´íŠ¸ë¥¼ ìš”êµ¬í•œë‹¤
 	 * 
 	 * @param level
-	 *            ÇöÀçÀÇ ·¹º§
-	 * @return ¿ä±¸µÈ °æÇèÄ¡ÀÇ Æä³ÎÆ¼ ·¹ÀÌÆ®
+	 *            í˜„ì¬ì˜ ë ˆë²¨
+	 * @return ìš”êµ¬ëœ ê²½í—˜ì¹˜ì˜ í˜ë„í‹° ë ˆì´íŠ¸
 	 */
 	public static double getPenaltyRate(int level) {
 		
@@ -294,7 +294,7 @@ public final class ExpTable {
 	}
 
 	/**
-	 * °æÇèÄ¡ Å×ÀÌºí(´©ÀûÄ¡) Lv0-110
+	 * ê²½í—˜ì¹˜ í…Œì´ë¸”(ëˆ„ì ì¹˜) Lv0-110
 	 */
 	private static final int _expTable[] = { 0, 125, 300, 500, 750, 1296, 2401,
 			4096, 6581, 10000, 14661, 20756, 28581, 38436, 50645, 0x10014,

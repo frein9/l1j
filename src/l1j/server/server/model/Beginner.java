@@ -63,9 +63,9 @@ public class Beginner {
 		  short m;
 		  try {
 		    con = L1DatabaseFactory.getInstance().getConnection();
-		    //begin_teleportÅ×ÀÌºí¿¡¼­ µ¥ÀÌÅ¸ ÀĞ±â
+		    //begin_teleportí…Œì´ë¸”ì—ì„œ ë°ì´íƒ€ ì½ê¸°
 		    pstm = con.prepareStatement("SELECT * FROM begin_teleport");
-		    //character_teleportÅ×ÀÌºí¿¡ »ğÀÔÇÏ±â
+		    //character_teleportí…Œì´ë¸”ì— ì‚½ì…í•˜ê¸°
 		    pstm2 = con.prepareStatement("INSERT INTO character_teleport SET id = ?, char_id = ?, name = ?, locx = ?, locy = ?, mapid = ?");
 		    rs = pstm.executeQuery();
 
@@ -128,7 +128,7 @@ public class Beginner {
 			} else if (pc.isBlackWizard()) {
 				pstm1.setString(2, "B");
 			} else {
-				pstm1.setString(2, "A");// ¸¸ÀÏ ¾î¶² °Íµµ ¾Æ´Ï¾ú´ø °æ¿ìÀÇ ¿¡·¯ È¸ÇÇ¿ë
+				pstm1.setString(2, "A");// ë§Œì¼ ì–´ë–¤ ê²ƒë„ ì•„ë‹ˆì—ˆë˜ ê²½ìš°ì˜ ì—ëŸ¬ íšŒí”¼ìš©
 			}
 			rs = pstm1.executeQuery();
 

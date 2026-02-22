@@ -86,9 +86,9 @@ public class ShopTable {
 	
 	
 	/**
-	 * ¸àÆ® ÃßÃâ
-	 * @param npcId ¹øÈ£
-	 * @return ¸àÆ®
+	 * ë©˜íŠ¸ ì¶”ì¶œ
+	 * @param npcId ë²ˆí˜¸
+	 * @return ë©˜íŠ¸
 	 */
 	private String getMessage(int npcId){
 		String sData = "";
@@ -146,7 +146,7 @@ public class ShopTable {
 		}
 		return new L1Shop(npcId, sellingList, purchasingList);
 	}
-	/*¹ö°æ °ü·Ã*/
+	/*ë²„ê²½ ê´€ë ¨*/
 	 public void addShop(int npcId, L1Shop shop){  
 		 	_allShops.put(npcId, shop);
 	 		}

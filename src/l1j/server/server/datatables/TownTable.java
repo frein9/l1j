@@ -138,11 +138,11 @@ public class TownTable {
 			town.set_sales_money(town.get_sales_money() + salesMoney);
 			town.set_town_tax(town.get_town_tax() + townTax);
 			town.set_town_fix_tax(town.get_town_fix_tax() + townFixTax);
-			//##### Npc �ľ� �ȵǰ� 20�� �̻��Ͻ� 100�Ƶ����� �����Ѵ�. ####// by õ��
+			//##### Npc 파업 안되게 20억 이상일시 100아덴으로 셋팅한다. ####// by 천국
 			if (town.get_sales_money() > 2000000000) {
 				town.set_sales_money(100);
 			}
-			//##### Npc �ľ� �ȵǰ� 20�� �̻��Ͻ� 100�Ƶ����� �����Ѵ�. ####// by õ��
+			//##### Npc 파업 안되게 20억 이상일시 100아덴으로 셋팅한다. ####// by 천국
 
 		} catch (SQLException e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);

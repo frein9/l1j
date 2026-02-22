@@ -31,7 +31,7 @@ public class S_ItemColor extends ServerBasePacket {
 			.getName());
 
 	/**
-	 * ¾ÆÀÌÅÛÀÇ »öÀ» º¯°æÇÑ´Ù.Ãàº¹¡¤ÀúÁÖ »óÅÂ°¡ º¯È­ÇßÀ» ¶§ µî¿¡ º¸³½´Ù
+	 * ì•„ì´í…œì˜ ìƒ‰ì„ ë³€ê²½í•œë‹¤.ì¶•ë³µÂ·ì €ì£¼ ìƒíƒœê°€ ë³€í™”í–ˆì„ ë•Œ ë“±ì— ë³´ë‚¸ë‹¤
 	 */
 	public S_ItemColor(L1ItemInstance item) {
 		if (item == null) {
@@ -46,7 +46,7 @@ public class S_ItemColor extends ServerBasePacket {
 		if (item.getLockitem() > 100) {
 			  writeC(item.getLockitem());
 		} else {
-			  writeC(item.getItem().getBless()); // 0:b 1:n 2:c -ÀÇ °ª:¾ÆÀÌÅÛÀÌ ºÀÀÎµÇ¾î?
+			  writeC(item.getItem().getBless()); // 0:b 1:n 2:c -ì˜ ê°’:ì•„ì´í…œì´ ë´‰ì¸ë˜ì–´?
 		}
 	}
 

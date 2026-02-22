@@ -29,12 +29,12 @@ public class L1PcHellMonitor extends L1PcMonitor {
 
 	@Override
 	public void execTask(L1PcInstance pc) {
-		if (pc.isDead()) { // Á×¾î ÀÖÀ¸¸é(ÀÚ) Ä«¿îÆ®´Ù¿î ÇÏÁö ¾Ê´Â´Ù
+		if (pc.isDead()) { // ì£½ì–´ ìˆìœ¼ë©´(ì) ì¹´ìš´íŠ¸ë‹¤ìš´ í•˜ì§€ ì•ŠëŠ”ë‹¤
 			return;
 		}
 		pc.setHellTime(pc.getHellTime() - 1);
 		if (pc.getHellTime() <= 0) {
-			// endHellÀÇ ½ÇÇà ½Ã°£ÀÌ ¿µÇâ ¾ø°Ô
+			// endHellì˜ ì‹¤í–‰ ì‹œê°„ì´ ì˜í–¥ ì—†ê²Œ
 			Runnable r = new L1PcMonitor(pc.getId()) {
 				@Override
 				public void execTask(L1PcInstance pc) {

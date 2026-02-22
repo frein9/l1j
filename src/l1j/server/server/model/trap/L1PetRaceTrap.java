@@ -99,133 +99,133 @@ public class L1PetRaceTrap extends L1Trap {
 	public void onTrod(L1PcInstance c, L1Object trapObj) {
 		sendEffect(trapObj);
 
-		if(_type.equals("f")) { //°á½ÂÁ¡
+		if(_type.equals("f")) { //ê²°ìŠ¹ì 
 			L1Racing racing = L1Racing.getInstance();
-			// ÃÊ±â ¸ñ·Ï¿¡ ÀÖ´Ù¸é ÀÌ¹Ì 1¹ÙÄû
-			// 1¹ÙÄûÂ° ÀÖ´Ù¸é 2¹ÙÄû
-			// 2¹ÙÄûÂ° ÀÖ´Ù¸é 3¹ÙÄû
-			// 3¹ÙÄûÂ° ÀÖ´Ù¸é 4¹ÙÄû(°ñÀÎ)
-			if(racing.contains(racing.Ã¼Å©1, c) && racing.contains(racing.Ã¼Å©2, c) && racing.contains(racing.Ã¼Å©3, c)){
-				if(racing.contains(racing.ÇÑ¹ÙÄû, c)){					// 1¹ÙÄû
-					racing.remove(racing.ÇÑ¹ÙÄû, c);
-					racing.add(racing.µÎ¹ÙÄû, c);
+			// ì´ˆê¸° ëª©ë¡ì— ìˆë‹¤ë©´ ì´ë¯¸ 1ë°”í€´
+			// 1ë°”í€´ì§¸ ìˆë‹¤ë©´ 2ë°”í€´
+			// 2ë°”í€´ì§¸ ìˆë‹¤ë©´ 3ë°”í€´
+			// 3ë°”í€´ì§¸ ìˆë‹¤ë©´ 4ë°”í€´(ê³¨ì¸)
+			if(racing.contains(racing.ì²´í¬1, c) && racing.contains(racing.ì²´í¬2, c) && racing.contains(racing.ì²´í¬3, c)){
+				if(racing.contains(racing.í•œë°”í€´, c)){					// 1ë°”í€´
+					racing.remove(racing.í•œë°”í€´, c);
+					racing.add(racing.ë‘ë°”í€´, c);
 					c.sendPackets(new S_GameRap(c, 2));
-					racing.remove(racing.Ã¼Å©1, c);									// Æ®·¢ µ· Ã¼Å© ÃÊ±âÈ­
-					racing.remove(racing.Ã¼Å©2, c);									// 
-					racing.remove(racing.Ã¼Å©3, c);									//
-				}else if(racing.contains(racing.µÎ¹ÙÄû, c)){					// 2¹ÙÄû
-					racing.remove(racing.µÎ¹ÙÄû, c);
-					racing.add(racing.¼¼¹ÙÄû, c);
+					racing.remove(racing.ì²´í¬1, c);									// íŠ¸ë™ ëˆ ì²´í¬ ì´ˆê¸°í™”
+					racing.remove(racing.ì²´í¬2, c);									// 
+					racing.remove(racing.ì²´í¬3, c);									//
+				}else if(racing.contains(racing.ë‘ë°”í€´, c)){					// 2ë°”í€´
+					racing.remove(racing.ë‘ë°”í€´, c);
+					racing.add(racing.ì„¸ë°”í€´, c);
 					c.sendPackets(new S_GameRap(c, 3));
-					racing.remove(racing.Ã¼Å©1, c);									// Æ®·¢ µ· Ã¼Å© ÃÊ±âÈ­
-					racing.remove(racing.Ã¼Å©2, c);									// 
-					racing.remove(racing.Ã¼Å©3, c);									//
-				}else if(racing.contains(racing.¼¼¹ÙÄû, c)){					// 3¹ÙÄû
-					racing.remove(racing.¼¼¹ÙÄû, c);
-					racing.add(racing.³×¹ÙÄû, c);
+					racing.remove(racing.ì²´í¬1, c);									// íŠ¸ë™ ëˆ ì²´í¬ ì´ˆê¸°í™”
+					racing.remove(racing.ì²´í¬2, c);									// 
+					racing.remove(racing.ì²´í¬3, c);									//
+				}else if(racing.contains(racing.ì„¸ë°”í€´, c)){					// 3ë°”í€´
+					racing.remove(racing.ì„¸ë°”í€´, c);
+					racing.add(racing.ë„¤ë°”í€´, c);
 					c.sendPackets(new S_GameRap(c, 4));
-					racing.remove(racing.Ã¼Å©1, c);									// Æ®·¢ µ· Ã¼Å© ÃÊ±âÈ­
-					racing.remove(racing.Ã¼Å©2, c);									// 
-					racing.remove(racing.Ã¼Å©3, c);									//
-				}else if(racing.contains(racing.³×¹ÙÄû, c)){					// 3¹ÙÄû
-					// 1µî ÃßÃâ 
-					if(c.getId() == racing.toArray(racing.³×¹ÙÄû, 0).getId()){
-						c.sendPackets(new S_SystemMessage("1µî ÇÏ¼Ì½À´Ï´Ù."));
+					racing.remove(racing.ì²´í¬1, c);									// íŠ¸ë™ ëˆ ì²´í¬ ì´ˆê¸°í™”
+					racing.remove(racing.ì²´í¬2, c);									// 
+					racing.remove(racing.ì²´í¬3, c);									//
+				}else if(racing.contains(racing.ë„¤ë°”í€´, c)){					// 3ë°”í€´
+					// 1ë“± ì¶”ì¶œ 
+					if(c.getId() == racing.toArray(racing.ë„¤ë°”í€´, 0).getId()){
+						c.sendPackets(new S_SystemMessage("1ë“± í•˜ì…¨ìŠµë‹ˆë‹¤."));
 						c.sendPackets(new S_GameRanking(c));
 						c.getInventory().storeItem(500013, 1);
 					}else{
-						for(int i = 1; i < racing.arrayList(racing.³×¹ÙÄû).size(); i++){
-							racing.toArray(racing.³×¹ÙÄû, i).sendPackets(new S_SystemMessage((i+1) + "µî ÇÏ¼Ì½À´Ï´Ù."));
+						for(int i = 1; i < racing.arrayList(racing.ë„¤ë°”í€´).size(); i++){
+							racing.toArray(racing.ë„¤ë°”í€´, i).sendPackets(new S_SystemMessage((i+1) + "ë“± í•˜ì…¨ìŠµë‹ˆë‹¤."));
 						}
 					}
-					racing.remove(racing.Ã¼Å©1, c);									// Æ®·¢ µ· Ã¼Å© ÃÊ±âÈ­
-					racing.remove(racing.Ã¼Å©2, c);									// 
-					racing.remove(racing.Ã¼Å©3, c);									//
+					racing.remove(racing.ì²´í¬1, c);									// íŠ¸ë™ ëˆ ì²´í¬ ì´ˆê¸°í™”
+					racing.remove(racing.ì²´í¬2, c);									// 
+					racing.remove(racing.ì²´í¬3, c);									//
 					racing.close();
 				}
 			}else{
-				if(racing.contains(racing.ÀÏ¹İ, c)){				// ÀÏ¹İ
-					racing.remove(racing.ÀÏ¹İ, c);
-					racing.add(racing.ÇÑ¹ÙÄû, c);
+				if(racing.contains(racing.ì¼ë°˜, c)){				// ì¼ë°˜
+					racing.remove(racing.ì¼ë°˜, c);
+					racing.add(racing.í•œë°”í€´, c);
 					c.sendPackets(new S_GameRap(c, 1));
 				}
 			}
-		}else if (_type.equals("g")) { //º¯½ÅÆ®·¦
+		}else if (_type.equals("g")) { //ë³€ì‹ íŠ¸ë©
 			Random random = new Random();
 			int chance = random.nextInt(10);
 			switch (chance) {
 			case 0: 
-				L1PolyMorph.doPoly(c, 29 ,1000, L1PolyMorph.MORPH_BY_NPC); //±«¹°´«
+				L1PolyMorph.doPoly(c, 29 ,1000, L1PolyMorph.MORPH_BY_NPC); //ê´´ë¬¼ëˆˆ
 				break;
 			case 1: 
-				L1PolyMorph.doPoly(c, 3184 ,1000, L1PolyMorph.MORPH_BY_NPC); //ÇÏÀÌ¼¼ÆÛµå
+				L1PolyMorph.doPoly(c, 3184 ,1000, L1PolyMorph.MORPH_BY_NPC); //í•˜ì´ì„¸í¼ë“œ
 				break;
 			case 2: 
-				L1PolyMorph.doPoly(c, 3182 ,1000, L1PolyMorph.MORPH_BY_NPC); //ÇÏÀÌ¼¼ÀÎÆ®
+				L1PolyMorph.doPoly(c, 3182 ,1000, L1PolyMorph.MORPH_BY_NPC); //í•˜ì´ì„¸ì¸íŠ¸
 				break;
 			case 3: 
-				L1PolyMorph.doPoly(c, 938 ,1000, L1PolyMorph.MORPH_BY_NPC); //ºñ±Û
+				L1PolyMorph.doPoly(c, 938 ,1000, L1PolyMorph.MORPH_BY_NPC); //ë¹„ê¸€
 				break;
 			case 4: 
-				L1PolyMorph.doPoly(c, 4168 ,1000, L1PolyMorph.MORPH_BY_NPC); //¸¾º¸Åä³¢
+				L1PolyMorph.doPoly(c, 4168 ,1000, L1PolyMorph.MORPH_BY_NPC); //ë§˜ë³´í† ë¼
 				break;
 			case 5: 
-				L1PolyMorph.doPoly(c, 3156 ,1000, L1PolyMorph.MORPH_BY_NPC); //ÇÏÀÌÆø½º
+				L1PolyMorph.doPoly(c, 3156 ,1000, L1PolyMorph.MORPH_BY_NPC); //í•˜ì´í­ìŠ¤
 				break;
 			case 6: 
-				L1PolyMorph.doPoly(c, 1649 ,1000, L1PolyMorph.MORPH_BY_NPC); //ÅÍÆ²
+				L1PolyMorph.doPoly(c, 1649 ,1000, L1PolyMorph.MORPH_BY_NPC); //í„°í‹€
 				break;
 			case 7: 
-				L1PolyMorph.doPoly(c, 3199 ,1000, L1PolyMorph.MORPH_BY_NPC); //ÇÏÀÌ¿ïÇÁ
+				L1PolyMorph.doPoly(c, 3199 ,1000, L1PolyMorph.MORPH_BY_NPC); //í•˜ì´ìš¸í”„
 				break;
 			case 8: 
-				L1PolyMorph.doPoly(c, 3107 ,1000, L1PolyMorph.MORPH_BY_NPC); //ÇÏÀÌÇã½ºÅ°
+				L1PolyMorph.doPoly(c, 3107 ,1000, L1PolyMorph.MORPH_BY_NPC); //í•˜ì´í—ˆìŠ¤í‚¤
 				break;
 			case 9: 
-				L1PolyMorph.doPoly(c, 29 ,1000, L1PolyMorph.MORPH_BY_NPC); //±«¹°´«
+				L1PolyMorph.doPoly(c, 29 ,1000, L1PolyMorph.MORPH_BY_NPC); //ê´´ë¬¼ëˆˆ
 				break;
 			}
-		}else if (_type.equals("h")) { //º¯½ÅÆ®·¦
+		}else if (_type.equals("h")) { //ë³€ì‹ íŠ¸ë©
 			Random random = new Random();
 			int chance = random.nextInt(10);
 			switch (chance) {
 			case 0: 
-				L1PolyMorph.doPoly(c, 29 ,1000, L1PolyMorph.MORPH_BY_NPC); //±«¹°´«
+				L1PolyMorph.doPoly(c, 29 ,1000, L1PolyMorph.MORPH_BY_NPC); //ê´´ë¬¼ëˆˆ
 				break;
 			case 1: 
-				L1PolyMorph.doPoly(c, 3184 ,1000, L1PolyMorph.MORPH_BY_NPC); //ÇÏÀÌ¼¼ÆÛµå
+				L1PolyMorph.doPoly(c, 3184 ,1000, L1PolyMorph.MORPH_BY_NPC); //í•˜ì´ì„¸í¼ë“œ
 				break;
 			case 2: 
-				L1PolyMorph.doPoly(c, 3182 ,1000, L1PolyMorph.MORPH_BY_NPC); //ÇÏÀÌ¼¼ÀÎÆ®
+				L1PolyMorph.doPoly(c, 3182 ,1000, L1PolyMorph.MORPH_BY_NPC); //í•˜ì´ì„¸ì¸íŠ¸
 				break;
 			case 3: 
-				L1PolyMorph.doPoly(c, 938 ,1000, L1PolyMorph.MORPH_BY_NPC); //ºñ±Û
+				L1PolyMorph.doPoly(c, 938 ,1000, L1PolyMorph.MORPH_BY_NPC); //ë¹„ê¸€
 				break;
 			case 4: 
-				L1PolyMorph.doPoly(c, 4168 ,1000, L1PolyMorph.MORPH_BY_NPC); //¸¾º¸Åä³¢
+				L1PolyMorph.doPoly(c, 4168 ,1000, L1PolyMorph.MORPH_BY_NPC); //ë§˜ë³´í† ë¼
 				break;
 			case 5: 
-				L1PolyMorph.doPoly(c, 3156 ,1000, L1PolyMorph.MORPH_BY_NPC); //ÇÏÀÌÆø½º
+				L1PolyMorph.doPoly(c, 3156 ,1000, L1PolyMorph.MORPH_BY_NPC); //í•˜ì´í­ìŠ¤
 				break;
 			case 6: 
-				L1PolyMorph.doPoly(c, 1649 ,1000, L1PolyMorph.MORPH_BY_NPC); //ÅÍÆ²
+				L1PolyMorph.doPoly(c, 1649 ,1000, L1PolyMorph.MORPH_BY_NPC); //í„°í‹€
 				break;
 			case 7: 
-				L1PolyMorph.doPoly(c, 3199 ,1000, L1PolyMorph.MORPH_BY_NPC); //ÇÏÀÌ¿ïÇÁ
+				L1PolyMorph.doPoly(c, 3199 ,1000, L1PolyMorph.MORPH_BY_NPC); //í•˜ì´ìš¸í”„
 				break;
 			case 8: 
-				L1PolyMorph.doPoly(c, 3107 ,1000, L1PolyMorph.MORPH_BY_NPC); //ÇÏÀÌÇã½ºÅ°
+				L1PolyMorph.doPoly(c, 3107 ,1000, L1PolyMorph.MORPH_BY_NPC); //í•˜ì´í—ˆìŠ¤í‚¤
 				break;
 			case 9: 
-				L1PolyMorph.doPoly(c, 29 ,1000, L1PolyMorph.MORPH_BY_NPC); //±«¹°´«
+				L1PolyMorph.doPoly(c, 29 ,1000, L1PolyMorph.MORPH_BY_NPC); //ê´´ë¬¼ëˆˆ
 				break;
 			}
-		}else if (_type.equals("i")) { //¼ÓµµÆ®·¦ 1
+		}else if (_type.equals("i")) { //ì†ë„íŠ¸ë© 1
 			c.sendPackets(new S_SkillHaste(c.getId(), 1, 120));
 			c.sendPackets(new S_SkillBrave(c.getId(), 1, 8));
 			c.setSkillEffect(43, 1000 * 120);
 			c.setSkillEffect(1000, 1000 * 8);
-		}else if (_type.equals("j")) { //¼ÓµµÆ®·¦ 2
+		}else if (_type.equals("j")) { //ì†ë„íŠ¸ë© 2
 			c.sendPackets(new S_SkillHaste(c.getId(), 1, 120));
 			c.sendPackets(new S_SkillBrave(c.getId(), 1, 8));
 			c.setSkillEffect(43, 1000 * 120);

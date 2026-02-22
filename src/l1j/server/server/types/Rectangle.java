@@ -19,7 +19,7 @@
 package l1j.server.server.types;
 
 /**
- * ÁÂÇ¥ ÁÂ»óÀÇ Á¡(left, top), ¹× ¿ìÇÏÀÇ Á¡(right, bottom)¿¡ ÀÇÇØ µÑ·¯½ÎÀÌ´Â ÁÂÇ¥ÀÇ ¿µ¿ªÀ» ÁöÁ¤ÇÏ´Â Å¬·¡½º.
+ * ì¢Œí‘œ ì¢Œìƒì˜ ì (left, top), ë° ìš°í•˜ì˜ ì (right, bottom)ì— ì˜í•´ ë‘˜ëŸ¬ì‹¸ì´ëŠ” ì¢Œí‘œì˜ ì˜ì—­ì„ ì§€ì •í•˜ëŠ” í´ë˜ìŠ¤.
  */
 public class Rectangle {
 	private int _left;
@@ -75,24 +75,24 @@ public class Rectangle {
 	}
 
 	/**
-	 * ÁöÁ¤µÈ Á¡(x, y)ÀÌ, ÀÌ RectangleÀÇ ¹üÀ§³»¿¡ ÀÖ´ÂÁö¸¦ ÆÇÁ¤ÇÑ´Ù.
+	 * ì§€ì •ëœ ì (x, y)ì´, ì´ Rectangleì˜ ë²”ìœ„ë‚´ì— ìˆëŠ”ì§€ë¥¼ íŒì •í•œë‹¤.
 	 * 
 	 * @param x
-	 *            ÆÇÁ¤ÇÏ´Â Á¡ÀÇ XÁÂÇ¥
+	 *            íŒì •í•˜ëŠ” ì ì˜ Xì¢Œí‘œ
 	 * @param y
-	 *            ÆÇÁ¤ÇÏ´Â Á¡ÀÇ YÁÂÇ¥
-	 * @return Á¡(x, y)ÀÌ ÀÌ RectangleÀÇ ¹üÀ§³»¿¡ ÀÖ´Â °æ¿ì, true.
+	 *            íŒì •í•˜ëŠ” ì ì˜ Yì¢Œí‘œ
+	 * @return ì (x, y)ì´ ì´ Rectangleì˜ ë²”ìœ„ë‚´ì— ìˆëŠ” ê²½ìš°, true.
 	 */
 	public boolean contains(int x, int y) {
 		return (_left <= x && x <= _right) && (_top <= y && y <= _bottom);
 	}
 
 	/**
-	 * ÁöÁ¤µÈ Point°¡, ÀÌ RectangleÀÇ ¹üÀ§³»¿¡ ÀÖ´ÂÁö¸¦ ÆÇÁ¤ÇÑ´Ù.
+	 * ì§€ì •ëœ Pointê°€, ì´ Rectangleì˜ ë²”ìœ„ë‚´ì— ìˆëŠ”ì§€ë¥¼ íŒì •í•œë‹¤.
 	 * 
 	 * @param pt
-	 *            ÆÇÁ¤ÇÏ´Â Point
-	 * @return pt°¡ ÀÌ RectangleÀÇ ¹üÀ§³»¿¡ ÀÖ´Â °æ¿ì, true.
+	 *            íŒì •í•˜ëŠ” Point
+	 * @return ptê°€ ì´ Rectangleì˜ ë²”ìœ„ë‚´ì— ìˆëŠ” ê²½ìš°, true.
 	 */
 	public boolean contains(Point pt) {
 		return contains(pt.getX(), pt.getY());

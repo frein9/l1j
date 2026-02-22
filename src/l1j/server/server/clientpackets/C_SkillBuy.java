@@ -47,13 +47,13 @@ public class C_SkillBuy extends ClientBasePacket {
 		/*
 		 * int type = player.get_type(); int lvl = player.get_level();
 		 * 
-		 * switch(type) { case 0: // ±ºÁÖ if(lvl >= 10) { player.sendPackets(new
+		 * switch(type) { case 0: // êµ°ì£¼ if(lvl >= 10) { player.sendPackets(new
 		 * S_SkillBuy(i, player)); } break;
 		 * 
-		 * case 1: // ³ªÀÌÆ® if(lvl >= 50) { player.sendPackets(new S_SkillBuy(i,
+		 * case 1: // ë‚˜ì´íŠ¸ if(lvl >= 50) { player.sendPackets(new S_SkillBuy(i,
 		 * player)); } break;
 		 * 
-		 * case 2: // ¿¡¸£ÇÁ if(lvl >= 8) { player.sendPackets(new S_SkillBuy(i,
+		 * case 2: // ì—ë¥´í”„ if(lvl >= 8) { player.sendPackets(new S_SkillBuy(i,
 		 * player)); } break;
 		 * 
 		 * case 3: // WIZ if(lvl >= 4) { player.sendPackets(new S_SkillBuy(i,

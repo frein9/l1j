@@ -96,7 +96,7 @@ public class L1EffectInstance extends L1NpcInstance {
 							if (pc.isDead()) {
 								continue;
 							}
-							if (pc.getId() == pc.getId()) { // ÆÄÀÌ¾î¿ù ÀÚ±âÀÚ½ÅÀº ¾È¸Âµµ·Ï Qoo
+							if (pc.getId() == pc.getId()) { // íŒŒì´ì–´ì›” ìê¸°ìì‹ ì€ ì•ˆë§ë„ë¡ Qoo
 								continue;
 							}
 							if (pc.getZoneType() == 1) {

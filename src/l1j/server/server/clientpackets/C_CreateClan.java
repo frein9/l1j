@@ -43,34 +43,34 @@ public class C_CreateClan extends ClientBasePacket {
 		int i = s.length();
 
 		L1PcInstance l1pcinstance = clientthread.getActiveChar();
-		if (l1pcinstance.isCrown()) { // ÇÁ¸°½º ¶Ç´Â ÇÁ¸°¼¼½º
+		if (l1pcinstance.isCrown()) { // í”„ë¦°ìŠ¤ ë˜ëŠ” í”„ë¦°ì„¸ìŠ¤
 			if (l1pcinstance.getClanid() == 0) {
 				
-				//** Ç÷¸Í Ã¢¼³½Ã ¾Æ·¡ 2°³ ¹®ÀÚ ¸ø¾²°Ô **//	By Ãµ±¹
+				//** í˜ˆë§¹ ì°½ì„¤ì‹œ ì•„ë˜ 2ê°œ ë¬¸ì ëª»ì“°ê²Œ **//	By ì²œêµ­
 				for (int o = 0; o < s.length(); o++) {
-					   if (s.charAt(o) == '/' || s.charAt(o) == ' ') { // Æ¯¼ö¹®ÀÚ°¡ ¾Æ´Ï¶ó¸é.. 
+					   if (s.charAt(o) == '/' || s.charAt(o) == ' ') { // íŠ¹ìˆ˜ë¬¸ìê°€ ì•„ë‹ˆë¼ë©´.. 
 							  return;				  
 					   }
 				}
-				//** Ç÷¸Í Ã¢¼³½Ã ¾Æ·¡ 2°³ ¹®ÀÚ ¸ø¾²°Ô **//	By Ãµ±¹
+				//** í˜ˆë§¹ ì°½ì„¤ì‹œ ì•„ë˜ 2ê°œ ë¬¸ì ëª»ì“°ê²Œ **//	By ì²œêµ­
 
-				for (L1Clan clan : L1World.getInstance().getAllClans()) { // °°Àº Å©¶õ¸íÀ» Ã¼Å©
+				for (L1Clan clan : L1World.getInstance().getAllClans()) { // ê°™ì€ í¬ë€ëª…ì„ ì²´í¬
 					if (clan.getClanName().toLowerCase()
 							.equals(s.toLowerCase())) {
-						l1pcinstance.sendPackets(new S_ServerMessage(99)); // \f1 °°Àº ÀÌ¸§ÀÇ Ç÷¸ÍÀÌ Á¸ÀçÇÕ´Ï´Ù.
+						l1pcinstance.sendPackets(new S_ServerMessage(99)); // \f1 ê°™ì€ ì´ë¦„ì˜ í˜ˆë§¹ì´ ì¡´ì¬í•©ë‹ˆë‹¤.
 						return;
 					}
 				}
 				L1Clan clan = ClanTable.getInstance().createClan(l1pcinstance,
-						s); // Å©¶õ Ã¢¼³
+						s); // í¬ë€ ì°½ì„¤
 				if (clan != null) {
-					l1pcinstance.sendPackets(new S_ServerMessage(84, s)); // \f1%0 Ç÷¸ÍÀÌ Ã¢¼³µÇ¾ú½À´Ï´Ù.
+					l1pcinstance.sendPackets(new S_ServerMessage(84, s)); // \f1%0 í˜ˆë§¹ì´ ì°½ì„¤ë˜ì—ˆìŠµë‹ˆë‹¤.
 				}
 			} else {
-				l1pcinstance.sendPackets(new S_ServerMessage(86)); // \f1 ¹ú½á Ç÷¸ÍÀÌ °á¼ºµÇ°í ÀÖÀ¸¹Ç·Î ÀÛ¼ºÇÒ ¼ö ¾ø½À´Ï´Ù.
+				l1pcinstance.sendPackets(new S_ServerMessage(86)); // \f1 ë²Œì¨ í˜ˆë§¹ì´ ê²°ì„±ë˜ê³  ìˆìœ¼ë¯€ë¡œ ì‘ì„±í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 			}
 		} else {
-			l1pcinstance.sendPackets(new S_ServerMessage(85)); // \f1ÇÁ¸°½º¿Í ÇÁ¸°¼¼½º¸¸ÀÌ Ç÷¸ÍÀ» Ã¢¼³ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+			l1pcinstance.sendPackets(new S_ServerMessage(85)); // \f1í”„ë¦°ìŠ¤ì™€ í”„ë¦°ì„¸ìŠ¤ë§Œì´ í˜ˆë§¹ì„ ì°½ì„¤í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 		}
 	}
 

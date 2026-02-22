@@ -99,7 +99,7 @@ public class L1MobGroupSpawn {
 
 			mob.setX(leader.getX() + _random.nextInt(5) - 2);
 			mob.setY(leader.getY() + _random.nextInt(5) - 2);
-			// ¸Ê¿Ü, Àå¾Ö¹°»ó, È­¸é³» ²ú¾î ºÒ°¡·Î È­¸é³»¿¡ PC°¡ ÀÖ´Â °æ¿ì, ¸®´õ¿Í °°Àº ÁÂÇ¥
+			// ë§µì™¸, ì¥ì• ë¬¼ìƒ, í™”ë©´ë‚´ ë“ì–´ ë¶ˆê°€ë¡œ í™”ë©´ë‚´ì— PCê°€ ìˆëŠ” ê²½ìš°, ë¦¬ë”ì™€ ê°™ì€ ì¢Œí‘œ
 			if (! canSpawn(mob)) {
 				mob.setX(leader.getX());
 				mob.setY(leader.getY());
@@ -126,11 +126,11 @@ public class L1MobGroupSpawn {
 
 			if (mob instanceof L1MonsterInstance) {
 				if (!_isInitSpawn && mob.getHiddenStatus() == 0) {
-					mob.onNpcAI(); // monsterÀÇ AI¸¦ °³½Ã
+					mob.onNpcAI(); // monsterì˜ AIë¥¼ ê°œì‹œ
 				}
 			}
 			mob.turnOnOffLight();  
-			mob.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // Ã¤ÆÃ °³½Ã
+			mob.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // ì±„íŒ… ê°œì‹œ
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 		}

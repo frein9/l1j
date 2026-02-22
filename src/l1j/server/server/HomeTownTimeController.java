@@ -82,20 +82,20 @@ public class HomeTownTimeController {
 	}
 
 	public void dailyProc() {
-		_log.info("È¨ Å¸¿î ½Ã½ºÅÛ£ºÀÏ½Ã Ã³¸® °³½Ã");
+		_log.info("í™ˆ íƒ€ìš´ ì‹œìŠ¤í…œï¼šì¼ì‹œ ì²˜ë¦¬ ê°œì‹œ");
 		TownTable.getInstance().updateTaxRate();
 		TownTable.getInstance().updateSalesMoneyYesterday();
 		TownTable.getInstance().load();
 	}
 
 	public void monthlyProc() {
-		_log.info("È¨ Å¸¿î ½Ã½ºÅÛ£º¿ù½Ã Ã³¸® °³½Ã");
+		_log.info("í™ˆ íƒ€ìš´ ì‹œìŠ¤í…œï¼šì›”ì‹œ ì²˜ë¦¬ ê°œì‹œ");
 		L1World.getInstance().setProcessingContributionTotal(true);
 		Collection<L1PcInstance> players = L1World.getInstance()
 				.getAllPlayers();
 		for (L1PcInstance pc : players) {
 			try {
-				// DB¿¡ Ä³¸¯ÅÍ Á¤º¸¸¦ ±âÀÔÇÑ´Ù
+				// DBì— ìºë¦­í„° ì •ë³´ë¥¼ ê¸°ì…í•œë‹¤
 				pc.save();
 			} catch (Exception e) {
 				_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
@@ -123,7 +123,7 @@ public class HomeTownTimeController {
 			}
 			pc.setContribution(0);
 			try {
-				// DB¿¡ Ä³¸¯ÅÍ Á¤º¸¸¦ ±âÀÔÇÑ´Ù
+				// DBì— ìºë¦­í„° ì •ë³´ë¥¼ ê¸°ì…í•œë‹¤
 				pc.save();
 			} catch (Exception e) {
 				_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
@@ -230,9 +230,9 @@ public class HomeTownTimeController {
 	}
 
 	/**
-	 * º¸¼ö¸¦ ÃëµæÇØ Å¬¸®¾î ÇÑ´Ù
+	 * ë³´ìˆ˜ë¥¼ ì·¨ë“í•´ í´ë¦¬ì–´ í•œë‹¤
 	 * 
-	 * @return º¸¼ö
+	 * @return ë³´ìˆ˜
 	 */
 	public static int getPay(int objid) {
 		Connection con = null;

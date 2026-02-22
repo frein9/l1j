@@ -38,7 +38,7 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 import l1j.server.Config;
-import l1j.server.server.SkillCheck; //** ½ºÅ³ ¹ö±× ¹æÁö Ãß°¡ 
+import l1j.server.server.SkillCheck; //** ìŠ¤í‚¬ ë²„ê·¸ ë°©ì§€ ì¶”ê°€ 
 import l1j.server.L1DatabaseFactory; 
 import l1j.server.server.datatables.CharBuffTable;
 import l1j.server.server.encryptions.ClientIdExistsException;
@@ -66,7 +66,7 @@ import l1j.server.L1DatabaseFactory;
 import l1j.server.server.utils.SQLUtil;
 import l1j.server.server.serverpackets.S_CommonNews;
 import l1j.server.server.datatables.IpTable;
-// µ¿ÀÏ ¾ÆÀÌÇÇ 3È¸ÀÌ»ó Á¢¼Ó½Ã º¥
+// ë™ì¼ ì•„ì´í”¼ 3íšŒì´ìƒ ì ‘ì†ì‹œ ë²¤
 
 // Referenced classes of package l1j.server.server:
 // PacketHandler, Logins, IpTable, LoginController,
@@ -92,13 +92,13 @@ public class ClientThread implements Runnable, PacketOutput {
 
 	private Socket _csocket; 
 	  
-	private int _bullshitip; /*¼·Æø¹æÁö1*/	  
+	private int _bullshitip; /*ì„­í­ë°©ì§€1*/	  
 
-    public int IpTimeOk = 0;   //** ¾ÆÀÌÇÇ Å¸ÀÌ¸Ó Ãß°¡ **//  by µµ¿ì³Ê
+    public int IpTimeOk = 0;   //** ì•„ì´í”¼ íƒ€ì´ë¨¸ ì¶”ê°€ **//  by ë„ìš°ë„ˆ
 
 	private int _loginStatus = 0;
 	
-	public int ReturnToLogin = 0; // ########## A121 Ä³¸¯ÅÍ Áßº¹ ·Î±×ÀÎ ¹ö±× ¼öÁ¤ [By µµ¿ì³Ê] ##########
+	public int ReturnToLogin = 0; // ########## A121 ìºë¦­í„° ì¤‘ë³µ ë¡œê·¸ì¸ ë²„ê·¸ ìˆ˜ì • [By ë„ìš°ë„ˆ] ##########
 
 	private static final byte[] FIRST_PACKET = {
 
@@ -124,7 +124,7 @@ public class ClientThread implements Runnable, PacketOutput {
 	public ClientThread(Socket socket) throws IOException {
 		_csocket = socket;
 		_ip = socket.getInetAddress().getHostAddress();
-		_bullshitip = socket.getPort(); /*¼·Æø¹æÁö1*/
+		_bullshitip = socket.getPort(); /*ì„­í­ë°©ì§€1*/
 		if (Config.HOSTNAME_LOOKUPS) {
 			_hostname = socket.getInetAddress().getHostName();
 		} else {
@@ -133,7 +133,7 @@ public class ClientThread implements Runnable, PacketOutput {
 		_in = socket.getInputStream();
 		_out = new BufferedOutputStream(socket.getOutputStream());
 
-		// PacketHandler ÃÊ±â¼³Á¤
+		// PacketHandler ì´ˆê¸°ì„¤ì •
 		_handler = new PacketHandler(this);
 	}
 
@@ -145,9 +145,9 @@ public class ClientThread implements Runnable, PacketOutput {
 		return _hostname;
 	}
 
-	// ClientThread¿¡ ÀÇÇÑ ÀÏÁ¤ °£°İ ÀÚµ¿ ¼¼ÀÌºê¸¦ Á¦ÇÑÇÏ±â ¶§¹®¿¡(À§ÇØ)ÀÇ ÇÃ·¡±×(true:Á¦ÇÑ false:Á¦ÇÑ ¾øÀ½)
-	// ÇöÀç´Â C_LoginToServer°¡ ½ÇÇàµÇ¾úÀ» ¶§¿¡ false°¡ µÇ¾î,
-	// C_NewCharSelect°¡ ½ÇÇàµÇ¾úÀ» ¶§¿¡ true°¡ µÈ´Ù
+	// ClientThreadì— ì˜í•œ ì¼ì • ê°„ê²© ìë™ ì„¸ì´ë¸Œë¥¼ ì œí•œí•˜ê¸° ë•Œë¬¸ì—(ìœ„í•´)ì˜ í”Œë˜ê·¸(true:ì œí•œ false:ì œí•œ ì—†ìŒ)
+	// í˜„ì¬ëŠ” C_LoginToServerê°€ ì‹¤í–‰ë˜ì—ˆì„ ë•Œì— falseê°€ ë˜ì–´,
+	// C_NewCharSelectê°€ ì‹¤í–‰ë˜ì—ˆì„ ë•Œì— trueê°€ ëœë‹¤
 	private boolean _charRestart = true;
 
 	public void CharReStart(boolean flag) {
@@ -189,11 +189,11 @@ public class ClientThread implements Runnable, PacketOutput {
 	
 	private int i=0;
 	   
-	private int ÀúÀå½Ã°£ = -1;
+	private int ì €ì¥ì‹œê°„ = -1;
    
-	private int Çö½Ã°£ = -1;
+	private int í˜„ì‹œê°„ = -1;
    
-	private int ½Ã°£´çÇÁ·¹ÀÓ = 0;
+	private int ì‹œê°„ë‹¹í”„ë ˆì„ = 0;
 
 	private long _lastSavedTime_inventory = System.currentTimeMillis();
 
@@ -202,14 +202,14 @@ public class ClientThread implements Runnable, PacketOutput {
 			return;
 		}
 		try {
-			// Ä³¸¯ÅÍ Á¤º¸
+			// ìºë¦­í„° ì •ë³´
 			if (Config.AUTOSAVE_INTERVAL * 1000
 					< System.currentTimeMillis() - _lastSavedTime) {
 				_activeChar.save();
 				_lastSavedTime = System.currentTimeMillis();
 			}
 
-			// ¼ÒÁö ¾ÆÀÌÅÛ Á¤º¸
+			// ì†Œì§€ ì•„ì´í…œ ì •ë³´
 			if (Config.AUTOSAVE_INTERVAL_INVENTORY * 1000
 					< System.currentTimeMillis() - _lastSavedTime_inventory) {
 				_activeChar.saveInventory();
@@ -224,26 +224,26 @@ public class ClientThread implements Runnable, PacketOutput {
 
 	@Override
 	public void run() {
-		/*¼·Æø¹æÁö2*/
+		/*ì„­í­ë°©ì§€2*/
 		ipcount(_hostname);
 		ipcountban(_hostname);
 		IpTimer iptimer = new IpTimer();
 		GeneralThreadPool.getInstance().execute(iptimer);
-		/*¼·Æø¹æÁö2*/
+		/*ì„­í­ë°©ì§€2*/
 		_log.info("Server connection host:(" + _hostname + ")");
-		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		System.out.println("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€");
 		System.out.println("Used Memory: " + SystemUtil.getUsedMemoryMB() + "MB");
 		System.out.println("Waiting for client ...");
-		System.out.println("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		System.out.println("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€");
 		
 		Socket socket = _csocket;
 		/*
-		 * Å¬¶óÀÌ¾ğÆ®·ÎºÎÅÍÀÇ ÆĞÅ¶À» ¾î´À Á¤µµ Á¦ÇÑÇÑ´Ù.ÀÌÀ¯£ººÎÁ¤ÀÇ ¿À·ù °ËÃâÀÌ ´Ù¹ßÇÒ ¿ì·Á°¡ ÀÖ±â ¶§¹®¿¡
-		 * ex1.¼­¹ö¿¡ °úºÎÇÏ°¡ °É·ÁÀÖ´Â °æ¿ì, ºÎÇÏ°¡ ¶³¾îÁ³À» ¶§¿¡ Å¬¶óÀÌ¾ğÆ® ÆĞÅ¶À» ´Ü¹ø¿¡ Ã³¸®ÇØ, °á°úÀûÀ¸·Î ºÎÁ¤ Ãë±ŞÀÌ µÈ´Ù.
-		 * ex2.¼­¹öÃøÀÇ ³×Æ®¿öÅ©(³ª¿À°í)¿¡ ·¡±×°¡ ÀÖ´Â °æ¿ì, Å¬¶óÀÌ¾ğÆ® ÆĞÅ¶ÀÌ ´Ü¹ø¿¡ Èê·¯µé¾î, °á°úÀûÀ¸·Î ºÎÁ¤ Ãë±ŞÀÌ µÈ´Ù.
-		 * ex3.Å¬¶óÀÌ¾ğÆ®ÃøÀÇ ³×Æ®¿öÅ©(¿À¸§)¿¡ ·¡±×°¡ ÀÖ´Â °æ¿ì, ÀÌÇÏ °°ÀÌ.
+		 * í´ë¼ì´ì–¸íŠ¸ë¡œë¶€í„°ì˜ íŒ¨í‚·ì„ ì–´ëŠ ì •ë„ ì œí•œí•œë‹¤.ì´ìœ ï¼šë¶€ì •ì˜ ì˜¤ë¥˜ ê²€ì¶œì´ ë‹¤ë°œí•  ìš°ë ¤ê°€ ìˆê¸° ë•Œë¬¸ì—
+		 * ex1.ì„œë²„ì— ê³¼ë¶€í•˜ê°€ ê±¸ë ¤ìˆëŠ” ê²½ìš°, ë¶€í•˜ê°€ ë–¨ì–´ì¡Œì„ ë•Œì— í´ë¼ì´ì–¸íŠ¸ íŒ¨í‚·ì„ ë‹¨ë²ˆì— ì²˜ë¦¬í•´, ê²°ê³¼ì ìœ¼ë¡œ ë¶€ì • ì·¨ê¸‰ì´ ëœë‹¤.
+		 * ex2.ì„œë²„ì¸¡ì˜ ë„¤íŠ¸ì›Œí¬(ë‚˜ì˜¤ê³ )ì— ë˜ê·¸ê°€ ìˆëŠ” ê²½ìš°, í´ë¼ì´ì–¸íŠ¸ íŒ¨í‚·ì´ ë‹¨ë²ˆì— í˜ëŸ¬ë“¤ì–´, ê²°ê³¼ì ìœ¼ë¡œ ë¶€ì • ì·¨ê¸‰ì´ ëœë‹¤.
+		 * ex3.í´ë¼ì´ì–¸íŠ¸ì¸¡ì˜ ë„¤íŠ¸ì›Œí¬(ì˜¤ë¦„)ì— ë˜ê·¸ê°€ ìˆëŠ” ê²½ìš°, ì´í•˜ ê°™ì´.
 		 * 
-		 * ¹«Á¦ÇÑÇÏ°Ô ÇÏ±â Àü¿¡ ºÎÁ¤ °ËÃâ ¹æ¹ıÀ» ´Ù½Ã º¼ ÇÊ¿ä°¡ ÀÖ´Ù.
+		 * ë¬´ì œí•œí•˜ê²Œ í•˜ê¸° ì „ì— ë¶€ì • ê²€ì¶œ ë°©ë²•ì„ ë‹¤ì‹œ ë³¼ í•„ìš”ê°€ ìˆë‹¤.
 		 */
 		HcPacket movePacket = new HcPacket(M_CAPACITY);
 		HcPacket hcPacket = new HcPacket(H_CAPACITY);
@@ -251,13 +251,13 @@ public class ClientThread implements Runnable, PacketOutput {
 		GeneralThreadPool.getInstance().execute(hcPacket);   
 	
 
-        ClientThreadIpTimer iptimer2 = new ClientThreadIpTimer(); //** ¾ÆÀÌÇÇÅ¸ÀÌ¸Ó Ãß°¡ **//  by µµ¿ì³Ê
-        iptimer2.start();//** ¾ÆÀÌÇÇÅ¸ÀÌ¸Ó Ãß°¡ **//  by µµ¿ì³Ê
+        ClientThreadIpTimer iptimer2 = new ClientThreadIpTimer(); //** ì•„ì´í”¼íƒ€ì´ë¨¸ ì¶”ê°€ **//  by ë„ìš°ë„ˆ
+        iptimer2.start();//** ì•„ì´í”¼íƒ€ì´ë¨¸ ì¶”ê°€ **//  by ë„ìš°ë„ˆ
        
 		ClientThreadObserver observer =
-				new ClientThreadObserver(Config.AUTOMATIC_KICK * 60 * 1000); // ÀÚµ¿ Àı´Ü±îÁöÀÇ ½Ã°£(´ÜÀ§:ms)
+				new ClientThreadObserver(Config.AUTOMATIC_KICK * 60 * 1000); // ìë™ ì ˆë‹¨ê¹Œì§€ì˜ ì‹œê°„(ë‹¨ìœ„:ms)
 
-		// Å¬¶óÀÌ¾ğÆ® threadÀÇ °¨½Ã
+		// í´ë¼ì´ì–¸íŠ¸ threadì˜ ê°ì‹œ
 		if (Config.AUTOMATIC_KICK > 0) {
 			observer.start();
 		}
@@ -287,12 +287,12 @@ public class ClientThread implements Runnable, PacketOutput {
 				int opcode = data[0] & 0xFF;   
 
 
-				  //¾ÆÀÌÇÇ Å¸ÀÌ¸Ó Ãß°¡ **//  by µµ¿ì³Ê 
+				  //ì•„ì´í”¼ íƒ€ì´ë¨¸ ì¶”ê°€ **//  by ë„ìš°ë„ˆ 
                if (opcode == Opcodes.C_OPCODE_CLIENTVERSION) { 
                    IpTimeOk = 1;     
-                  }//¾ÆÀÌÇÇ Å¸ÀÌ¸Ó Ãß°¡ **//  by µµ¿ì³Ê 
+                  }//ì•„ì´í”¼ íƒ€ì´ë¨¸ ì¶”ê°€ **//  by ë„ìš°ë„ˆ 
 
-				// ´ÙÁß ·Î±×ÀÎ ´ëÃ¥
+				// ë‹¤ì¤‘ ë¡œê·¸ì¸ ëŒ€ì±…
 				if (opcode == Opcodes.C_OPCODE_COMMONCLICK
 						|| opcode == Opcodes.C_OPCODE_CHANGECHAR) {
 					_loginStatus = 1;
@@ -307,7 +307,7 @@ public class ClientThread implements Runnable, PacketOutput {
 					_loginStatus = 0;
 				}
 
-	 // ########## A121 Ä³¸¯ÅÍ Áßº¹ ·Î±×ÀÎ ¹ö±× ¼öÁ¤ [By µµ¿ì³Ê] ##########
+	 // ########## A121 ìºë¦­í„° ì¤‘ë³µ ë¡œê·¸ì¸ ë²„ê·¸ ìˆ˜ì • [By ë„ìš°ë„ˆ] ##########
 				if (opcode == Opcodes.C_OPCODE_COMMONCLICK) {
 					ReturnToLogin = 1; 
 				}
@@ -321,214 +321,214 @@ public class ClientThread implements Runnable, PacketOutput {
 						ReturnToLogin = 0;
 					}
 				}
-     // ########## A121 Ä³¸¯ÅÍ Áßº¹ ·Î±×ÀÎ ¹ö±× ¼öÁ¤ [By µµ¿ì³Ê] ##########
+     // ########## A121 ìºë¦­í„° ì¤‘ë³µ ë¡œê·¸ì¸ ë²„ê·¸ ìˆ˜ì • [By ë„ìš°ë„ˆ] ##########
 
 				if (opcode != Opcodes.C_OPCODE_KEEPALIVE) {
-					// C_OPCODE_KEEPALIVE ÀÌ¿ÜÀÇ ¹º°¡ÀÇ ÆĞÅ¶À» ¹ŞÀ¸¸é(ÀÚ) Observer¿¡ ÅëÁö
+					// C_OPCODE_KEEPALIVE ì´ì™¸ì˜ ë­”ê°€ì˜ íŒ¨í‚·ì„ ë°›ìœ¼ë©´(ì) Observerì— í†µì§€
 					observer.packetReceived();
 				}
-				// nullÀÇ °æ¿ì´Â Ä³¸¯ÅÍ ¼±ÅÃÀüÀÌ¹Ç·Î OpcodeÀÇ Ãë»ç ¼±ÅÃÀº ÇÏÁö ¾Ê°í ¸ğµÎ ½ÇÇà
+				// nullì˜ ê²½ìš°ëŠ” ìºë¦­í„° ì„ íƒì „ì´ë¯€ë¡œ Opcodeì˜ ì·¨ì‚¬ ì„ íƒì€ í•˜ì§€ ì•Šê³  ëª¨ë‘ ì‹¤í–‰
 				if (_activeChar == null) {
 					_handler.handlePacket(data, _activeChar);
 					continue;
 				}
 
-				// ÀÌÈÄ, PacketHandlerÀÇ Ã³¸® »óÈ²ÀÌ ClientThread¿¡ ¿µÇâÀ» ÁÖÁö ¾Ê°Ô ÇÏ±â ¶§¹®¿¡(À§ÇØ)ÀÇ Ã³¸®
-				// ¸ñÀûÀº OpcodeÀÇ Ãë»ç ¼±ÅÃ°ú ClientThread¿Í PacketHandlerÀÇ ºĞ¸®
+				// ì´í›„, PacketHandlerì˜ ì²˜ë¦¬ ìƒí™©ì´ ClientThreadì— ì˜í–¥ì„ ì£¼ì§€ ì•Šê²Œ í•˜ê¸° ë•Œë¬¸ì—(ìœ„í•´)ì˜ ì²˜ë¦¬
+				// ëª©ì ì€ Opcodeì˜ ì·¨ì‚¬ ì„ íƒê³¼ ClientThreadì™€ PacketHandlerì˜ ë¶„ë¦¬
 
-				// ÆÄ±âÇØ¼± ¾È µÇ´Â Opecode±º
-				// restart, ¾ÆÀÌÅÛ µå·Ó, ¾ÆÀÌÅÛ »èÁ¦
+				// íŒŒê¸°í•´ì„  ì•ˆ ë˜ëŠ” Opecodeêµ°
+				// restart, ì•„ì´í…œ ë“œë¡­, ì•„ì´í…œ ì‚­ì œ
 				if (opcode == Opcodes.C_OPCODE_CHANGECHAR
 						|| opcode == Opcodes.C_OPCODE_DROPITEM
 						|| opcode == Opcodes.C_OPCODE_DELETEINVENTORYITEM) {
 					_handler.handlePacket(data, _activeChar);
 				} else if (opcode == Opcodes.C_OPCODE_MOVECHAR) {
-					// ÀÌµ¿Àº °¡´ÉÇÑ ÇÑ È®½ÇÈ÷ ½Ç½ÃÇÏ±â ¶§¹®¿¡(À§ÇØ), ÀÌµ¿ Àü¿ë thread¿¡ ÁÖ°í ¹Ş¾Æ
+					// ì´ë™ì€ ê°€ëŠ¥í•œ í•œ í™•ì‹¤íˆ ì‹¤ì‹œí•˜ê¸° ë•Œë¬¸ì—(ìœ„í•´), ì´ë™ ì „ìš© threadì— ì£¼ê³  ë°›ì•„
 					movePacket.requestWork(data);
 				} else {
-					// ÆĞÅ¶ Ã³¸® thread¿¡ ÁÖ°í ¹Ş¾Æ
+					// íŒ¨í‚· ì²˜ë¦¬ threadì— ì£¼ê³  ë°›ì•„
 					hcPacket.requestWork(data);
 				}
-				//½ºÇÙ,³ëµô ¸·¾Æº¸ÀÚ
+				//ìŠ¤í•µ,ë…¸ë”œ ë§‰ì•„ë³´ì
 				 Date now = new Date();
-			/*	 if(opcode == Opcodes.C_OPCODE_USESKILL){ //¹«µô¹ö±× 
-					 switch(_activeChar.getTempCharGfx()) { //Æú¸®¹øÈ£
+			/*	 if(opcode == Opcodes.C_OPCODE_USESKILL){ //ë¬´ë”œë²„ê·¸ 
+					 switch(_activeChar.getTempCharGfx()) { //í´ë¦¬ë²ˆí˜¸
 
-					 case 2177: // »çÀÏ·±½º
-					 case 870: // Äµ½½·¹ÀÌ¼Ç
-					 case 227: // ¸®¹«ºê Ä¿½º
-					 case 2175: // ´ÙÅ©´Ï½º
-					 case 226: // Å©¸®¿¡ÀÌÆ® Á»ºñ
-					 case 751: // ÀÎÃ¦Æ® ¸¶ÀÌÆ¼
-					 case 755: // ÇìÀÌ½ºÆ® 
-					 case 2176: // ºí·¹½º ¿şÆù
-					 case 3936: // È¦¸® ¿öÅ©
-					 case 3104: // ±×·¹ÀÌÅÍ ÇìÀÌ½ºÆ®
-					 case 3943: // ¹ö¼­Ä¿½º
-					 case 2230: // µğÁöÁî
-					 case 3944: // ¸®Àı·º¼Ç
-					 case 231: // ¼ÎÀÌÇÁ Ã¼ÀÎÁö
-					 case 2236: // ¸Å½º ÅÚ·¹Æ÷Æ®
-					 case 3934: // Ä«¿îÅÍ µğÅØ¼Ç
-					 case 763: // Å©¸®¿¡ÀÌÆ® ¸ÅÁöÄÃ ¿şÆù
-					 case 3935: // ¾îµå¹ê½º ½ºÇÇ¸´
-					 case 1819: // ÆÄÀÌ¾î ½ºÅè
-					 case 4155: // ¸°µåºñ¿À¸£ ¹Ù¶÷ ºê·¹½º
-					 case 1783: // È­¿°ÀÇ È¥ ÄÌº£·Î½º ºÒ »Õ±â
-					 ½Ã°£´çÇÁ·¹ÀÓ = 1;
+					 case 2177: // ì‚¬ì¼ëŸ°ìŠ¤
+					 case 870: // ìº”ìŠ¬ë ˆì´ì…˜
+					 case 227: // ë¦¬ë¬´ë¸Œ ì»¤ìŠ¤
+					 case 2175: // ë‹¤í¬ë‹ˆìŠ¤
+					 case 226: // í¬ë¦¬ì—ì´íŠ¸ ì¢€ë¹„
+					 case 751: // ì¸ì±ˆíŠ¸ ë§ˆì´í‹°
+					 case 755: // í—¤ì´ìŠ¤íŠ¸ 
+					 case 2176: // ë¸”ë ˆìŠ¤ ì›¨í°
+					 case 3936: // í™€ë¦¬ ì›Œí¬
+					 case 3104: // ê·¸ë ˆì´í„° í—¤ì´ìŠ¤íŠ¸
+					 case 3943: // ë²„ì„œì»¤ìŠ¤
+					 case 2230: // ë””ì§€ì¦ˆ
+					 case 3944: // ë¦¬ì ˆë ‰ì…˜
+					 case 231: // ì…°ì´í”„ ì²´ì¸ì§€
+					 case 2236: // ë§¤ìŠ¤ í…”ë ˆí¬íŠ¸
+					 case 3934: // ì¹´ìš´í„° ë””í…ì…˜
+					 case 763: // í¬ë¦¬ì—ì´íŠ¸ ë§¤ì§€ì»¬ ì›¨í°
+					 case 3935: // ì–´ë“œë°´ìŠ¤ ìŠ¤í”¼ë¦¿
+					 case 1819: // íŒŒì´ì–´ ìŠ¤í†°
+					 case 4155: // ë¦°ë“œë¹„ì˜¤ë¥´ ë°”ëŒ ë¸Œë ˆìŠ¤
+					 case 1783: // í™”ì—¼ì˜ í˜¼ ì¼ˆë² ë¡œìŠ¤ ë¶ˆ ë¿œê¸°
+					 ì‹œê°„ë‹¹í”„ë ˆì„ = 1;
 					 break;
-					 case 2244: // ºí·¹½Ì
-					 case 744: // Èú
-					 case 2510: // ¶óÀÌÆ®
-					 case 221: // ½Çµå
-					 case 167: // ¿¡³ÊÁö º¼Æ®
-					 case 169: // ÅÚ·¹Æ÷Æ®
-					 case 1797: // ¾ÆÀÌ½º ´ë°Å
-					 case 1799: // À©µå Ä¿ÅÍ
-					 case 236: // ¹ìÆÄÀÌ¾î¸¯ ÅÍÄ¡
-					 case 830: // ±×·¹ÀÌÅÍ Èú
-					 case 1804: // ÇÁ·ÎÁğ Å¬¶ó¿ìµå
-					 case 1805: // ¾î½º ÀçÀÏ
-					 case 1809: // ÄÜ ¿Àºê Äİµå
-					 case 2171: // ¸¶³ª µå·¹ÀÎ
-					 case 129: // ÀÌ·´¼Ç
-					 case 749: // µğÅØ¼Ç
-					 case 746: // Ä¿½º: ºí¶óÀÎµå
-					 case 1811: // ¼± ¹ö½ºÆ®
-					 case 2228: // À§Å©´Ï½º
-					 case 759: // Èú ¿Ã
-					 case 832: // Ç® Èú
-					 case 1812: // ¾î½º ÄùÀÌÅ©
-					 case 3924: // ¶óÀÌÆ®´× ½ºÅè
-					 case 757: // ºí¸®ÀÚµå
-					 case 2232: // µğÄÉÀÌ Æ÷¼Ç
-					 ½Ã°£´çÇÁ·¹ÀÓ = 5;
+					 case 2244: // ë¸”ë ˆì‹±
+					 case 744: // í
+					 case 2510: // ë¼ì´íŠ¸
+					 case 221: // ì‹¤ë“œ
+					 case 167: // ì—ë„ˆì§€ ë³¼íŠ¸
+					 case 169: // í…”ë ˆí¬íŠ¸
+					 case 1797: // ì•„ì´ìŠ¤ ëŒ€ê±°
+					 case 1799: // ìœˆë“œ ì»¤í„°
+					 case 236: // ë±€íŒŒì´ì–´ë¦­ í„°ì¹˜
+					 case 830: // ê·¸ë ˆì´í„° í
+					 case 1804: // í”„ë¡œì¦Œ í´ë¼ìš°ë“œ
+					 case 1805: // ì–´ìŠ¤ ì¬ì¼
+					 case 1809: // ì½˜ ì˜¤ë¸Œ ì½œë“œ
+					 case 2171: // ë§ˆë‚˜ ë“œë ˆì¸
+					 case 129: // ì´ëŸ½ì…˜
+					 case 749: // ë””í…ì…˜
+					 case 746: // ì»¤ìŠ¤: ë¸”ë¼ì¸ë“œ
+					 case 1811: // ì„  ë²„ìŠ¤íŠ¸
+					 case 2228: // ìœ„í¬ë‹ˆìŠ¤
+					 case 759: // í ì˜¬
+					 case 832: // í’€ í
+					 case 1812: // ì–´ìŠ¤ í€˜ì´í¬
+					 case 3924: // ë¼ì´íŠ¸ë‹ ìŠ¤í†°
+					 case 757: // ë¸”ë¦¬ìë“œ
+					 case 2232: // ë””ì¼€ì´ í¬ì…˜
+					 ì‹œê°„ë‹¹í”„ë ˆì„ = 5;
 					 break; 
-					 case 760: // Æ÷±× ¿Àºê ½½¸®ÇÎ
-					 case 228: // ÀÌ¹Ã Åõ ÇÔ
-					 case 762: // ¹ÌÆ¼¾î ½ºÆ®¶óÀÌÅ©
-					 case 4434: // ¼îÅ© ½ºÅÏ
-					 ½Ã°£´çÇÁ·¹ÀÓ = 16;
+					 case 760: // í¬ê·¸ ì˜¤ë¸Œ ìŠ¬ë¦¬í•‘
+					 case 228: // ì´ë®¨ íˆ¬ í•¨
+					 case 762: // ë¯¸í‹°ì–´ ìŠ¤íŠ¸ë¼ì´í¬
+					 case 4434: // ì‡¼í¬ ìŠ¤í„´
+					 ì‹œê°„ë‹¹í”„ë ˆì„ = 16;
 					 break;
-					 case 1815: // µğ½ºÀÎÆ¼±×·¹ÀÌÆ®
-					 case 4648: // ¹Ù¿î½º
-					 case 5831: // ¼Ö¸®µå Ä³¸®Áö
-					 ½Ã°£´çÇÁ·¹ÀÓ = 21;
+					 case 1815: // ë””ìŠ¤ì¸í‹°ê·¸ë ˆì´íŠ¸
+					 case 4648: // ë°”ìš´ìŠ¤
+					 case 5831: // ì†”ë¦¬ë“œ ìºë¦¬ì§€
+					 ì‹œê°„ë‹¹í”„ë ˆì„ = 21;
 					 break;
 					 default:
-					 ½Ã°£´çÇÁ·¹ÀÓ = 4;
+					 ì‹œê°„ë‹¹í”„ë ˆì„ = 4;
 					 break; 
 					 }
-					 if(now.getSeconds() == ÀúÀå½Ã°£)
+					 if(now.getSeconds() == ì €ì¥ì‹œê°„)
 					 {
-					 Çö½Ã°£ = ÀúÀå½Ã°£;
+					 í˜„ì‹œê°„ = ì €ì¥ì‹œê°„;
 					 i++;
 					 }
-					 if(now.getSeconds() != Çö½Ã°£)
+					 if(now.getSeconds() != í˜„ì‹œê°„)
 					 {
 					 i = 0;
-					 Çö½Ã°£ = now.getSeconds();
+					 í˜„ì‹œê°„ = now.getSeconds();
 					 }
-					 if(i >= ½Ã°£´çÇÁ·¹ÀÓ) //º¯½ÅÁ¾·ù º°·Î ÃÖ´ë ÇÁ·¹ÀÓ Á¶°Ç ÆÇ´Ü
+					 if(i >= ì‹œê°„ë‹¹í”„ë ˆì„) //ë³€ì‹ ì¢…ë¥˜ ë³„ë¡œ ìµœëŒ€ í”„ë ˆì„ ì¡°ê±´ íŒë‹¨
 					 {
-					 System.out.print("[³ëµô]: ");
+					 System.out.print("[ë…¸ë”œ]: ");
 					 System.out.println("(" + getAccountName() + ")");
-					 System.out.print("[ÃÊ´ç ÇÁ·¹ÀÓ Ã½Å©]: ");
+					 System.out.print("[ì´ˆë‹¹ í”„ë ˆì„ ì²µí¬]: ");
 					 System.out.println(i+1);
 					 i = 0;
 					 break;
 					 }
-					 ÀúÀå½Ã°£ = now.getSeconds();
+					 ì €ì¥ì‹œê°„ = now.getSeconds();
 					 } */
 
 			            if(opcode == Opcodes.C_OPCODE_ARROWATTACK 
 			             || opcode == Opcodes.C_OPCODE_ATTACK 
-			             || opcode == Opcodes.C_OPCODE_MOVECHAR){//°ø¼Ó ÀÌ¼ÓÇÁ·¹ÀÓÃß°¡
-			            	 switch(_activeChar.getTempCharGfx()) { //Æú¸®¹øÈ£
+			             || opcode == Opcodes.C_OPCODE_MOVECHAR){//ê³µì† ì´ì†í”„ë ˆì„ì¶”ê°€
+			            	 switch(_activeChar.getTempCharGfx()) { //í´ë¦¬ë²ˆí˜¸
 			            	               
-			            	                   case 734: //¹ı»ç
-			                                   case 1186: //¿©¹ı
-			                                   case 61: //³²±â
-			                                   case 48: //¿©±â
-			                                   case 0: //³²±º
-			                                   case 1: //¿©±º
-			                                   case 37: //¿©¿ä
-			                                   case 138: //³²¿ä
-			                                   case 2786: //³²´Ù
-			                                   case 2796: //¿©´Ù
-			                                   case 6658: //¿ë³²
-			                                   case 6661: //¿ë³à
-			                                   case 6671: //È¯³²
-			                                   case 6650: //È¯³à
-			                                   ½Ã°£´çÇÁ·¹ÀÓ = 4;
+			            	                   case 734: //ë²•ì‚¬
+			                                   case 1186: //ì—¬ë²•
+			                                   case 61: //ë‚¨ê¸°
+			                                   case 48: //ì—¬ê¸°
+			                                   case 0: //ë‚¨êµ°
+			                                   case 1: //ì—¬êµ°
+			                                   case 37: //ì—¬ìš”
+			                                   case 138: //ë‚¨ìš”
+			                                   case 2786: //ë‚¨ë‹¤
+			                                   case 2796: //ì—¬ë‹¤
+			                                   case 6658: //ìš©ë‚¨
+			                                   case 6661: //ìš©ë…€
+			                                   case 6671: //í™˜ë‚¨
+			                                   case 6650: //í™˜ë…€
+			                                   ì‹œê°„ë‹¹í”„ë ˆì„ = 4;
 			                                   break;
-                                               case 240: //µ¥½º³ªÀÌÆ®
-			                                   case 2284: //´ÙÅ©¿¤ÇÁ
-			                                   case 3784: //55 µ¥½º³ªÀÌÆ®
-			                                   case 3890: //´ÙÅ©³ªÀÌÆ®
-			                                   case 3891: //ºí·¢À§ÀÚµå
-			                                   case 3892: //´ÙÅ©·¹ÀÎÀú
-			                                   case 3893: //½Ç¹ö³ªÀÌÆ®
-			                                   case 3894: //½Ç¹ö¸ŞÁö½ºÅÍ
-			                                   case 3896: //¼Òµå³ªÀÌÆ®
-			                                   case 3897: //À§ÀÚµå¸¶½ºÅÍ
-			                                   case 3898: //¿¡·Î¿ì¸¶½ºÅÍ
-			                                   case 3899: //¾ÆÅ©³ªÀÌÆ®
-			                                   case 3900: //¾ÆÅ©À§ÀÚµå
-			                                   case 3901: //¾ÆÅ©·¹ÀÎÀú
-			                                   case 3895: //½Ç¹ö¿äÁ¤
-			                                   case 4932: //¾î¼¼½Å¸¶½ºÅÍ
-			                                   case 6698: //ºí·¢À§ÀÚµå 
-			                                   case 7038: //¶ó¹Ì¾Æ½º
-			                                   case 7041: //¿£µğ¾Æ½º
-			                                   case 7044: //ÀÌµ¥¾Æ
-			                                   case 6010: //ºÓÀº¿ÀÅ©
-			                                   ½Ã°£´çÇÁ·¹ÀÓ = 6;
+                                               case 240: //ë°ìŠ¤ë‚˜ì´íŠ¸
+			                                   case 2284: //ë‹¤í¬ì—˜í”„
+			                                   case 3784: //55 ë°ìŠ¤ë‚˜ì´íŠ¸
+			                                   case 3890: //ë‹¤í¬ë‚˜ì´íŠ¸
+			                                   case 3891: //ë¸”ë™ìœ„ìë“œ
+			                                   case 3892: //ë‹¤í¬ë ˆì¸ì €
+			                                   case 3893: //ì‹¤ë²„ë‚˜ì´íŠ¸
+			                                   case 3894: //ì‹¤ë²„ë©”ì§€ìŠ¤í„°
+			                                   case 3896: //ì†Œë“œë‚˜ì´íŠ¸
+			                                   case 3897: //ìœ„ìë“œë§ˆìŠ¤í„°
+			                                   case 3898: //ì—ë¡œìš°ë§ˆìŠ¤í„°
+			                                   case 3899: //ì•„í¬ë‚˜ì´íŠ¸
+			                                   case 3900: //ì•„í¬ìœ„ìë“œ
+			                                   case 3901: //ì•„í¬ë ˆì¸ì €
+			                                   case 3895: //ì‹¤ë²„ìš”ì •
+			                                   case 4932: //ì–´ì„¸ì‹ ë§ˆìŠ¤í„°
+			                                   case 6698: //ë¸”ë™ìœ„ìë“œ 
+			                                   case 7038: //ë¼ë¯¸ì•„ìŠ¤
+			                                   case 7041: //ì—”ë””ì•„ìŠ¤
+			                                   case 7044: //ì´ë°ì•„
+			                                   case 6010: //ë¶‰ì€ì˜¤í¬
+			                                   ì‹œê°„ë‹¹í”„ë ˆì„ = 6;
 			                                   break;
-			                                   case 6137://°Áµ¥½º
-			                                   case 6140://´Ù¿¤
-			                                   case 6267://´ÙÅ©1
-			                                   case 6268://´ÙÅ©2
-			                                   case 6269://´ÙÅ©3
-			                                   case 6279://´ÙÅ©4
-			                                   case 6270://½Ç¹ö1
-			                                   case 6271://½Ç¹ö1
-			                                   case 6272://½Ç¹ö1
-			                                   case 6280://½Ç¹ö1
-			                                   case 6273://¼Òµå1
-			                                   case 6274://¼Òµå1
-			                                   case 6275://¼Òµå1
-			                                   case 6281://¼Òµå1
-			                                   case 6276://¾ÆÅ©1
-			                                   case 6277://¾ÆÅ©1
-			                                   case 6278://¾ÆÅ©1
-			                               case 6282://¾ÆÅ©1
-			                                  ½Ã°£´çÇÁ·¹ÀÓ = 7;
+			                                   case 6137://ê±ë°ìŠ¤
+			                                   case 6140://ë‹¤ì—˜
+			                                   case 6267://ë‹¤í¬1
+			                                   case 6268://ë‹¤í¬2
+			                                   case 6269://ë‹¤í¬3
+			                                   case 6279://ë‹¤í¬4
+			                                   case 6270://ì‹¤ë²„1
+			                                   case 6271://ì‹¤ë²„1
+			                                   case 6272://ì‹¤ë²„1
+			                                   case 6280://ì‹¤ë²„1
+			                                   case 6273://ì†Œë“œ1
+			                                   case 6274://ì†Œë“œ1
+			                                   case 6275://ì†Œë“œ1
+			                                   case 6281://ì†Œë“œ1
+			                                   case 6276://ì•„í¬1
+			                                   case 6277://ì•„í¬1
+			                                   case 6278://ì•„í¬1
+			                               case 6282://ì•„í¬1
+			                                  ì‹œê°„ë‹¹í”„ë ˆì„ = 7;
 			                                   break;
-                                               case 5645: //È£¹Ú
-			                                   case 3479: //¸®Æ²¹ö±×
-			                                   case 3480: //¸®Æ²¹ö±×
-			                                   case 3481: //¸®Æ²¹ö±×
-			                                   case 3482: //¸®Æ²¹ö±×
-			                                   case 7925: //»êÅ¸
-			                                   case 3888: //¹ÙÆ÷
-			                                   case 3905: //º£·¹½º
-			                                   case 4923: //Èæ±â»ç
-			                                   case 4133: //¶óÄï
-			                                   case 146: //¿õ°ñ
-			                                   case 95: //¼¿·Îºê
-			                                   ½Ã°£´çÇÁ·¹ÀÓ = 8;
+                                               case 5645: //í˜¸ë°•
+			                                   case 3479: //ë¦¬í‹€ë²„ê·¸
+			                                   case 3480: //ë¦¬í‹€ë²„ê·¸
+			                                   case 3481: //ë¦¬í‹€ë²„ê·¸
+			                                   case 3482: //ë¦¬í‹€ë²„ê·¸
+			                                   case 7925: //ì‚°íƒ€
+			                                   case 3888: //ë°”í¬
+			                                   case 3905: //ë² ë ˆìŠ¤
+			                                   case 4923: //í‘ê¸°ì‚¬
+			                                   case 4133: //ë¼ì¿¤
+			                                   case 146: //ì›…ê³¨
+			                                   case 95: //ì…€ë¡œë¸Œ
+			                                   ì‹œê°„ë‹¹í”„ë ˆì„ = 8;
 			                                   break;
-			                                   case 2501: //Àè
-			                                   case 6080: //±â¸¶Åõ±¸
-			                                   case 6094: //±â¸¶Åõ±¸
-			                                   case 5641: //»Íµ¥½º
-			                                   case 1080: //¸ŞÆ¼½º
-			                                   case 6227: //µµÆçº¸½º
-			                                   case 6697: //ÇÏÇÇÅÍ¹ø 
-			                                   ½Ã°£´çÇÁ·¹ÀÓ = 9;
+			                                   case 2501: //ì­
+			                                   case 6080: //ê¸°ë§ˆíˆ¬êµ¬
+			                                   case 6094: //ê¸°ë§ˆíˆ¬êµ¬
+			                                   case 5641: //ë½•ë°ìŠ¤
+			                                   case 1080: //ë©”í‹°ìŠ¤
+			                                   case 6227: //ë„í ë³´ìŠ¤
+			                                   case 6697: //í•˜í”¼í„°ë²ˆ 
+			                                   ì‹œê°„ë‹¹í”„ë ˆì„ = 9;
 			                                   break;
-			                                   case 1353: //°æÁÖ°ß
+			                                   case 1353: //ê²½ì£¼ê²¬
 			                                   case 1355:
 			                                   case 1357:
 			                                   case 1359:
@@ -548,32 +548,32 @@ public class ClientThread implements Runnable, PacketOutput {
 			                                   case 1474:
 			                                   case 1475:
 			                                   case 1476:
-			                                   ½Ã°£´çÇÁ·¹ÀÓ = 10; 
+			                                   ì‹œê°„ë‹¹í”„ë ˆì„ = 10; 
 			                                   break;
 			                                   default:
-			                                   ½Ã°£´çÇÁ·¹ÀÓ = 5;
+			                                   ì‹œê°„ë‹¹í”„ë ˆì„ = 5;
 			                                   break; 
 			            	                   }
-			            	 if(now.getSeconds() == ÀúÀå½Ã°£)
+			            	 if(now.getSeconds() == ì €ì¥ì‹œê°„)
 			            	 {
-			            	 Çö½Ã°£ = ÀúÀå½Ã°£;
+			            	 í˜„ì‹œê°„ = ì €ì¥ì‹œê°„;
 			            	 i++;
 			            	 }
-			            	 if(now.getSeconds() != Çö½Ã°£)
+			            	 if(now.getSeconds() != í˜„ì‹œê°„)
 			            	 {
 			            	 i = 0;
-			            	 Çö½Ã°£ = now.getSeconds();
+			            	 í˜„ì‹œê°„ = now.getSeconds();
 			            	 }
-			            	 if(i >= ½Ã°£´çÇÁ·¹ÀÓ) //º¯½ÅÁ¾·ù º°·Î ÃÖ´ë ÇÁ·¹ÀÓ Á¶°Ç ÆÇ´Ü
+			            	 if(i >= ì‹œê°„ë‹¹í”„ë ˆì„) //ë³€ì‹ ì¢…ë¥˜ ë³„ë¡œ ìµœëŒ€ í”„ë ˆì„ ì¡°ê±´ íŒë‹¨
 			            	 {
-			            	 System.out.print("[½ºÇÙ]: ");
+			            	 System.out.print("[ìŠ¤í•µ]: ");
 			            	 System.out.println("(" + getAccountName() + ")");
-			            	 System.out.print("[ÃÊ´ç ÇÁ·¹ÀÓ Ã½Å©]: ");
+			            	 System.out.print("[ì´ˆë‹¹ í”„ë ˆì„ ì²µí¬]: ");
 			            	 System.out.println(i+1);
 			            	 i = 0;
 			            	 break;
 			            	 }
-			            	 ÀúÀå½Ã°£ = now.getSeconds();  
+			            	 ì €ì¥ì‹œê°„ = now.getSeconds();  
 			            	 }
                              }
 		} catch (Throwable e) {
@@ -586,13 +586,13 @@ public class ClientThread implements Runnable, PacketOutput {
 					l1j.server.Leaf.list.remove(pc.getName()); 
 
 					synchronized (_activeChar) {
-						// Ä³¸¯ÅÍ¸¦ ¿ùµå³»·ÎºÎÅÍ Á¦°Å						   
+						// ìºë¦­í„°ë¥¼ ì›”ë“œë‚´ë¡œë¶€í„° ì œê±°						   
 						_activeChar.logout();
 						setActiveChar(null);
 					}
 				}
 
-				// ¸¸¾àÀ» À§ÇØ ¼Û½Å
+				// ë§Œì•½ì„ ìœ„í•´ ì†¡ì‹ 
 				sendPacket(new S_Disconnect());
 
 				StreamUtil.close(_out, _in);
@@ -609,17 +609,17 @@ public class ClientThread implements Runnable, PacketOutput {
 			System.out.println("Used Memory: " + SystemUtil.getUsedMemoryMB() + "MB");
 			System.out.println("Waiting for client...");
 		}
-		/*¼·Æø¹æÁö1 µÉ¶ó³ª*/ 
-		if (_bullshitip == 0) { /*Æ÷Æ®°¡ 0ÀÌ¸é*/
+		/*ì„­í­ë°©ì§€1 ë ë¼ë‚˜*/ 
+		if (_bullshitip == 0) { /*í¬íŠ¸ê°€ 0ì´ë©´*/
 			_log.info("[DDOS] [" + getAccountName() + ":" + _hostname + "]shut down connection. ");
 			System.out.println("Used Memory: " + SystemUtil.getUsedMemoryMB() + "MB");
 			System.out.println("Waiting for client...");
 		}
-		/*¼·Æø¹æÁö1 µÉ¶ó³ª*/ 
+		/*ì„­í­ë°©ì§€1 ë ë¼ë‚˜*/ 
 		return;
 	}			 
 
-	// ±âÁ¸ ¼Ò½º¿Í ¾à°£ ´Ù¸£°Ô ¾ÆÀÌÇÇÄ«¿îÆ®¿¡¼­ »èÁ¦µÇ°ÔÇß½À´Ï´Ù.
+	// ê¸°ì¡´ ì†ŒìŠ¤ì™€ ì•½ê°„ ë‹¤ë¥´ê²Œ ì•„ì´í”¼ì¹´ìš´íŠ¸ì—ì„œ ì‚­ì œë˜ê²Œí–ˆìŠµë‹ˆë‹¤.
     public void ipcountzero(String ip) { 
 	    Connection con = null;
 	    PreparedStatement pstm = null;
@@ -630,7 +630,7 @@ public class ClientThread implements Runnable, PacketOutput {
 	       pstm.setString(1, ip);
 	       pstm.execute();    
 	    } catch (SQLException e) {
-	       _log.info("¾ÆÀÌÇÇ Ä«¿îÅÍ Á¦·Î ¿À·ù");
+	       _log.info("ì•„ì´í”¼ ì¹´ìš´í„° ì œë¡œ ì˜¤ë¥˜");
 	    } finally {
 	       SQLUtil.close(pstm);
 	       SQLUtil.close(con);
@@ -646,7 +646,7 @@ public class ClientThread implements Runnable, PacketOutput {
 		StreamUtil.close(_out, _in);
 	}
 
-	/* ¾ÆÀÌÇÇ Å¸ÀÌ¸Ó Ãß°¡ */
+	/* ì•„ì´í”¼ íƒ€ì´ë¨¸ ì¶”ê°€ */
 	class IpTimer implements Runnable {
 
 		@Override
@@ -655,16 +655,16 @@ public class ClientThread implements Runnable, PacketOutput {
 				Thread.sleep(10 * 1000);
 			} catch (Exception e) {
 				kick();
-				_log.info("¾ÆÀÌÇÇÅ¸ÀÓÄ«¿îÅÍ ¿¡·¯!");
+				_log.info("ì•„ì´í”¼íƒ€ì„ì¹´ìš´í„° ì—ëŸ¬!");
 			}
 			try {  
 				if (IpTimeOk == 0) {
 					kick();
-					_log.info( _hostname+" 10ÃÊµ¿¾È ·Î±×ÀÎÁ¤º¸°¡ ¾ø¾î °­Á¦ Á¾·áÇÕ´Ï´Ù");
+					_log.info( _hostname+" 10ì´ˆë™ì•ˆ ë¡œê·¸ì¸ì •ë³´ê°€ ì—†ì–´ ê°•ì œ ì¢…ë£Œí•©ë‹ˆë‹¤");
 				}  
 			} catch (Exception e) {
 				kick();
-				_log.info("¾ÆÀÌÇÇÅ¸ÀÓÄ«¿îÅÍ ¿¡·¯!");
+				_log.info("ì•„ì´í”¼íƒ€ì„ì¹´ìš´í„° ì—ëŸ¬!");
 			}
 		}
 	}
@@ -686,17 +686,17 @@ public class ClientThread implements Runnable, PacketOutput {
         } 
     
         if (IpTimeOk == 0) {
-			sendPacket(new S_CommonNews("15ÃÊ¾È¿¡ ÀÔ·Â¹Ù¶÷ 3È¸ÀÌ»ó½Ã º¥."));
+			sendPacket(new S_CommonNews("15ì´ˆì•ˆì— ì…ë ¥ë°”ëŒ 3íšŒì´ìƒì‹œ ë²¤."));
             kick();
             cancel();
         } 
    
         } catch (Exception e) {
-           _log.info("¾ÆÀÌÇÇÅ¸ÀÓÄ«¿îÅÍ ¿¡·¯!");
+           _log.info("ì•„ì´í”¼íƒ€ì„ì¹´ìš´í„° ì—ëŸ¬!");
               }
          }
     }
-   //** ¾ÆÀÌÇÇ Å¸ÀÌ¸Ó Ãß°¡ **//  by µµ¿ì³Ê 
+   //** ì•„ì´í”¼ íƒ€ì´ë¨¸ ì¶”ê°€ **//  by ë„ìš°ë„ˆ 
 	
 	private void ipcount(String _hostname) { 
 	    Connection con = null;
@@ -730,7 +730,7 @@ public class ClientThread implements Runnable, PacketOutput {
 	     
 	     }
 	    } catch (SQLException e) {
-	     _log.info("¾ÆÀÌÇÇ Ä«¿îÅÍ Ãß°¡ ¿¡·¯!");
+	     _log.info("ì•„ì´í”¼ ì¹´ìš´í„° ì¶”ê°€ ì—ëŸ¬!");
 	    } finally {
 	     SQLUtil.close(find);
 	     SQLUtil.close(pstm);
@@ -750,7 +750,7 @@ public class ClientThread implements Runnable, PacketOutput {
 	    try {
 	     con = L1DatabaseFactory.getInstance().getConnection();
 	     pstm = con.prepareStatement("SELECT * FROM log_ipcount WHERE ip=? AND count > 5");
-	// ÀÌºÎºĞÀÇ »öÀ» ±¸ºĞÇÑ ÀÌÀ¯´Â ÀÌºÎºĞÀÇ " 10 " ÀÌ¶õ ¼ıÀÚ°¡ ´ÜÀÏ¾ÆÀÌÇÇ·Î Á¢¼ÓÇÑ ¾ÆÀÌÇÇÀÇ ¼ö¸¦ Á¦ÇÑÇÑ°ÍÀÔ´Ï´Ù. 3, 4 ´Â ³Ê¹«Àû°í °øÀ¯±â¸¦ »ç¿ëÇÏ´Â ´ÜÃ¼¿¡¼­ ½Ç¼ö¸¦ ÇÒ¼öÀÖ´ÂºÎºĞÀÌ´Ï'';
+	// ì´ë¶€ë¶„ì˜ ìƒ‰ì„ êµ¬ë¶„í•œ ì´ìœ ëŠ” ì´ë¶€ë¶„ì˜ " 10 " ì´ë€ ìˆ«ìê°€ ë‹¨ì¼ì•„ì´í”¼ë¡œ ì ‘ì†í•œ ì•„ì´í”¼ì˜ ìˆ˜ë¥¼ ì œí•œí•œê²ƒì…ë‹ˆë‹¤. 3, 4 ëŠ” ë„ˆë¬´ì ê³  ê³µìœ ê¸°ë¥¼ ì‚¬ìš©í•˜ëŠ” ë‹¨ì²´ì—ì„œ ì‹¤ìˆ˜ë¥¼ í• ìˆ˜ìˆëŠ”ë¶€ë¶„ì´ë‹ˆ'';
 	     pstm.setString(1, _hostname);
 	     find = pstm.executeQuery();
 	     
@@ -761,10 +761,10 @@ public class ClientThread implements Runnable, PacketOutput {
 	     if ( findip != null ) { 
 	       IpTable iptable = IpTable.getInstance();
 	       iptable.banIp(_hostname);
-	       MiniClient.getInstance().MessageToServer(_hostname); //½ÉÇÃÆÄÀª 1 
+	       MiniClient.getInstance().MessageToServer(_hostname); //ì‹¬í”ŒíŒŒìœŒ 1 
 	     }
 	    } catch (SQLException e) {
-	     _log.info("3È¸ ÀÌ»ó Á¢¼Ó ¾ÆÀÌÇÇ Â÷´Ü ¿¡·¯");
+	     _log.info("3íšŒ ì´ìƒ ì ‘ì† ì•„ì´í”¼ ì°¨ë‹¨ ì—ëŸ¬");
 	    } finally {
 	     SQLUtil.close(find);
 	     SQLUtil.close(pstm);
@@ -772,11 +772,11 @@ public class ClientThread implements Runnable, PacketOutput {
 	    }
 	   } 	
 
-	private static final int M_CAPACITY = 3; // ÀÌµ¿ ¿ä±¸¸¦ ÇÑ º¯¿¡ ¹Ş¾ÆµéÀÌ´Â ÃÖ´ë ¿ë·®
+	private static final int M_CAPACITY = 3; // ì´ë™ ìš”êµ¬ë¥¼ í•œ ë³€ì— ë°›ì•„ë“¤ì´ëŠ” ìµœëŒ€ ìš©ëŸ‰
 
-	private static final int H_CAPACITY = 2;// Çàµ¿ ¿ä±¸¸¦ ÇÑ º¯¿¡ ¹Ş¾ÆµéÀÌ´Â ÃÖ´ë ¿ë·®
+	private static final int H_CAPACITY = 2;// í–‰ë™ ìš”êµ¬ë¥¼ í•œ ë³€ì— ë°›ì•„ë“¤ì´ëŠ” ìµœëŒ€ ìš©ëŸ‰
 
-	// Ä³¸¯ÅÍÀÇ Çàµ¿ Ã³¸® thread
+	// ìºë¦­í„°ì˜ í–‰ë™ ì²˜ë¦¬ thread
 	class HcPacket implements Runnable {
 		private final Queue<byte[]> _queue;
 
@@ -817,7 +817,7 @@ public class ClientThread implements Runnable, PacketOutput {
 
 	private static Timer _observerTimer = new Timer();
 
-	// Å¬¶óÀÌ¾ğÆ® threadÀÇ °¨½Ã Å¸ÀÌ¸Ó
+	// í´ë¼ì´ì–¸íŠ¸ threadì˜ ê°ì‹œ íƒ€ì´ë¨¸
 	class ClientThreadObserver extends TimerTask {
 		private int _checkct = 1;
 
@@ -845,11 +845,11 @@ public class ClientThread implements Runnable, PacketOutput {
 					return;
 				}
 
-				if (_activeChar == null // Ä³¸¯ÅÍ ¼±ÅÃÀü
-						|| _activeChar != null && !_activeChar.isPrivateShop()) { // °³ÀÎ »óÁ¡Áß
+				if (_activeChar == null // ìºë¦­í„° ì„ íƒì „
+						|| _activeChar != null && !_activeChar.isPrivateShop()) { // ê°œì¸ ìƒì ì¤‘
 					kick();
-					_log.warning("ÀÏÁ¤½Ã°£ ÀÀ´äÀ» ¾òÀ» ¼ö  ¾ø¾ú´ø ¶§¹®(" + _hostname
-							+ ")(¿Í)°úÀÇ Á¢¼ÓÀ» °­Á¦ Àı´Ü Çß½À´Ï´Ù.");
+					_log.warning("ì¼ì •ì‹œê°„ ì‘ë‹µì„ ì–»ì„ ìˆ˜  ì—†ì—ˆë˜ ë•Œë¬¸(" + _hostname
+							+ ")(ì™€)ê³¼ì˜ ì ‘ì†ì„ ê°•ì œ ì ˆë‹¨ í–ˆìŠµë‹ˆë‹¤.");
 					cancel();
 					return;
 				}
@@ -871,8 +871,8 @@ public class ClientThread implements Runnable, PacketOutput {
 				byte abyte0[] = packet.getContent();
 				char ac[] = new char[abyte0.length];
 				ac = UChar8.fromArray(abyte0);
-				//System.out.println(packet); // cmdÄÜ¼ÖÃ¢ ÆĞÅ¶ÃßÃâ
-		//		l1j.server.Leaf.ÆĞÅ¶Ãâ·ÂÃ¢.append(packet + "\n");
+				//System.out.println(packet); // cmdì½˜ì†”ì°½ íŒ¨í‚·ì¶”ì¶œ
+		//		l1j.server.Leaf.íŒ¨í‚·ì¶œë ¥ì°½.append(packet + "\n");
 				ac = LineageEncryption.encrypt(ac, _clkey);
 				abyte0 = UByte8.fromArray(ac);
 				int j = abyte0.length + 2;
@@ -913,7 +913,7 @@ public class ClientThread implements Runnable, PacketOutput {
 	}
 
 	public static void quitGame(L1PcInstance pc) {
-		// »ç¸ÁÇÏ°í ÀÖÀ¸¸é(ÀÚ) °Å¸®¿¡ µÇµ¹·Á, °øº¹ »óÅÂ·Î ÇÑ´Ù
+		// ì‚¬ë§í•˜ê³  ìˆìœ¼ë©´(ì) ê±°ë¦¬ì— ë˜ëŒë ¤, ê³µë³µ ìƒíƒœë¡œ í•œë‹¤
 		if (pc.isDead()) {
 			int[] loc = Getback.GetBack_Location(pc, true);
 			pc.setX(loc[0]);
@@ -923,13 +923,13 @@ public class ClientThread implements Runnable, PacketOutput {
 			pc.set_food(40);
 		}
 
-		// Æ®·¹ÀÌµå¸¦ ÁßÁöÇÑ´Ù
-		if (pc.getTradeID() != 0) { // Æ®·¹ÀÌµåÁß
+		// íŠ¸ë ˆì´ë“œë¥¼ ì¤‘ì§€í•œë‹¤
+		if (pc.getTradeID() != 0) { // íŠ¸ë ˆì´ë“œì¤‘
 			L1Trade trade = new L1Trade();
 			trade.TradeCancel(pc);
 		}
 
-		// °áÅõ¸¦ ÁßÁöÇÑ´Ù
+		// ê²°íˆ¬ë¥¼ ì¤‘ì§€í•œë‹¤
 		if (pc.getFightId() != 0) {
 			pc.setFightId(0);
 			L1PcInstance fightPc = (L1PcInstance) L1World.getInstance()
@@ -941,18 +941,18 @@ public class ClientThread implements Runnable, PacketOutput {
 			}
 		}
 
-		// ÆÄÆ¼¸¦ ºüÁø´Ù
-		if (pc.isInParty()) { // ÆÄÆ¼Áß
+		// íŒŒí‹°ë¥¼ ë¹ ì§„ë‹¤
+		if (pc.isInParty()) { // íŒŒí‹°ì¤‘
 			pc.getParty().leaveMember(pc);
 		}
 
-		// Ã¤ÆÃ ÆÄÆ¼¸¦ ºüÁø´Ù
-		if (pc.isInChatParty()) { // Ã¤ÆÃ ÆÄÆ¼Áß
+		// ì±„íŒ… íŒŒí‹°ë¥¼ ë¹ ì§„ë‹¤
+		if (pc.isInChatParty()) { // ì±„íŒ… íŒŒí‹°ì¤‘
 			pc.getChatParty().leaveMember(pc);
 		}
 
-		// ¾Ö¿Ïµ¿¹°À» ¿ùµå ¸Ê»óÀ¸·ÎºÎÅÍ Áö¿î´Ù
-		// »ç¸óÀÇ Ç¥½Ã¸íÀ» º¯°æÇÑ´Ù
+		// ì• ì™„ë™ë¬¼ì„ ì›”ë“œ ë§µìƒìœ¼ë¡œë¶€í„° ì§€ìš´ë‹¤
+		// ì‚¬ëª¬ì˜ í‘œì‹œëª…ì„ ë³€ê²½í•œë‹¤
 		Object[] petList = pc.getPetList().values().toArray();
 		for (Object petObject : petList) {
 			if (petObject instanceof L1PetInstance) {
@@ -971,14 +971,14 @@ public class ClientThread implements Runnable, PacketOutput {
 			}
 		}
 
-		// ¸¶¹ıÀÎÇüÀ» ¿ùµå ¸Ê»óÀ¸·ÎºÎÅÍ Áö¿î´Ù
+		// ë§ˆë²•ì¸í˜•ì„ ì›”ë“œ ë§µìƒìœ¼ë¡œë¶€í„° ì§€ìš´ë‹¤
 		Object[] dollList = pc.getDollList().values().toArray();
 		for (Object dollObject : dollList) {
 			L1DollInstance doll = (L1DollInstance) dollObject;
 			doll.deleteDoll();
 		}
 
-		// Á¾ÀÚ¸¦ ¿ùµå ¸Ê»óÀ¸·ÎºÎÅÍ Áö¿ö, µµ¿ìÁöÁ¡¿¡ °°Àº ±Û¾¾, ±Û±Í°¡ ´Ù¸¥ °÷¿¡µµ  ³ªÅ¸³»°Ô ÇÑ´Ù
+		// ì¢…ìë¥¼ ì›”ë“œ ë§µìƒìœ¼ë¡œë¶€í„° ì§€ì›Œ, ë„ìš°ì§€ì ì— ê°™ì€ ê¸€ì”¨, ê¸€ê·€ê°€ ë‹¤ë¥¸ ê³³ì—ë„  ë‚˜íƒ€ë‚´ê²Œ í•œë‹¤
 		Object[] followerList = pc.getFollowerList().values().toArray();
 		for (Object followerObject : followerList) {
 			L1FollowerInstance follower = (L1FollowerInstance) followerObject;
@@ -989,7 +989,7 @@ public class ClientThread implements Runnable, PacketOutput {
 			follower.deleteMe();
 		}
 
-		// ¿£Ã®Æ®¸¦ DBÀÇ character_buff¿¡ º¸Á¸ÇÑ´Ù
+		// ì—”ì±¤íŠ¸ë¥¼ DBì˜ character_buffì— ë³´ì¡´í•œë‹¤
 		CharBuffTable.DeleteBuff(pc);
 		CharBuffTable.SaveBuff(pc);
 		pc.clearSkillEffectTimer();	 

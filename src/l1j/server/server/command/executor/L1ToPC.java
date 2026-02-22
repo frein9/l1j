@@ -38,24 +38,24 @@ public class L1ToPC implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
 			L1PcInstance target = L1World.getInstance().getPlayer(arg);
 
 			if (target != null) {
 				L1Teleport.teleport(pc, target.getX(), target.getY(), target
 						.getMapId(), 5, false);
 				pc.sendPackets(new S_SystemMessage((new StringBuilder())
-						.append(arg).append("´Ô¿¡°Ô·Î ÀÌµ¿Çß½À´Ï´Ù.").toString()));
+						.append(arg).append("ë‹˜ì—ê²Œë¡œ ì´ë™í–ˆìŠµë‹ˆë‹¤.").toString()));
 			} else {
 				pc.sendPackets(new S_SystemMessage((new StringBuilder())
-						.append(arg).append("´ÔÀº ¾ø½À´Ï´Ù.").toString()));
+						.append(arg).append("ë‹˜ì€ ì—†ìŠµë‹ˆë‹¤.").toString()));
 			}
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " Ä³¸¯ÅÍ¸íÀ¸·Î ÀÔ·ÂÇØ ÁÖ¼¼¿ä."));
+			pc.sendPackets(new S_SystemMessage(cmdName + " ìºë¦­í„°ëª…ìœ¼ë¡œ ì…ë ¥í•´ ì£¼ì„¸ìš”."));
 		}
 	}
 }

@@ -26,7 +26,7 @@ import l1j.server.server.serverpackets.S_Paralysis;
 import l1j.server.server.serverpackets.S_ServerMessage;
 
 /*
- * L1ParalysisPoison¿Í ÀÔ´Â ÄÚµå°¡ ¸¹´Ù.Æ¯È÷ Å¸ÀÌ¸Ó.¾î¶»°Ôµç °øÅëÈ­ÇÏ°í ½ÍÁö¸¸ ¾î·Æ´Ù.
+ * L1ParalysisPoisonì™€ ì…ëŠ” ì½”ë“œê°€ ë§ë‹¤.íŠ¹íˆ íƒ€ì´ë¨¸.ì–´ë–»ê²Œë“  ê³µí†µí™”í•˜ê³  ì‹¶ì§€ë§Œ ì–´ë µë‹¤.
  */
 public class L1CurseParalysis extends L1Paralysis {
 	private final L1Character _target;
@@ -41,7 +41,7 @@ public class L1CurseParalysis extends L1Paralysis {
 			_target.setSkillEffect(L1SkillId.STATUS_CURSE_PARALYZING, 0);
 
 			try {
-				Thread.sleep(_delay); // ¸¶ºñµÉ ¶§±îÁöÀÇ À¯¿¹ ½Ã°£À» ±â´Ù¸°´Ù.
+				Thread.sleep(_delay); // ë§ˆë¹„ë  ë•Œê¹Œì§€ì˜ ìœ ì˜ˆ ì‹œê°„ì„ ê¸°ë‹¤ë¦°ë‹¤.
 			} catch (InterruptedException e) {
 				_target.killSkillEffectTimer(L1SkillId.STATUS_CURSE_PARALYZING);
 				return;
@@ -50,12 +50,12 @@ public class L1CurseParalysis extends L1Paralysis {
 			if (_target instanceof L1PcInstance) {
 				L1PcInstance player = (L1PcInstance) _target;
 				if (!player.isDead()) {
-					player.sendPackets(new S_Paralysis(1, true)); // ¸¶ºñ »óÅÂ·Î ÇÑ´Ù
+					player.sendPackets(new S_Paralysis(1, true)); // ë§ˆë¹„ ìƒíƒœë¡œ í•œë‹¤
 				}
 			}
 			_target.setParalyzed(true);
 			_timer = new ParalysisTimer();
-			GeneralThreadPool.getInstance().execute(_timer); // ¸¶ºñ Å¸ÀÌ¸Ó °³½Ã
+			GeneralThreadPool.getInstance().execute(_timer); // ë§ˆë¹„ íƒ€ì´ë¨¸ ê°œì‹œ
 			if (isInterrupted()) {
 				_timer.interrupt();
 			}
@@ -76,11 +76,11 @@ public class L1CurseParalysis extends L1Paralysis {
 			if (_target instanceof L1PcInstance) {
 				L1PcInstance player = (L1PcInstance) _target;
 				if (!player.isDead()) {
-					player.sendPackets(new S_Paralysis(1, false)); // ¸¶ºñ »óÅÂ¸¦ ÇØÁ¦ÇÑ´Ù
+					player.sendPackets(new S_Paralysis(1, false)); // ë§ˆë¹„ ìƒíƒœë¥¼ í•´ì œí•œë‹¤
 				}
 			}
 			_target.setParalyzed(false);
-			cure(); // ÇØÁÖÃ³¸®
+			cure(); // í•´ì£¼ì²˜ë¦¬
 		}
 	}
 
@@ -110,7 +110,7 @@ public class L1CurseParalysis extends L1Paralysis {
 		}
 		if (cha.hasSkillEffect(L1SkillId.STATUS_CURSE_PARALYZING)
 				|| cha.hasSkillEffect(L1SkillId.STATUS_CURSE_PARALYZED)) {
-			return false; // ÀÌ¹Ì ¸¶ºñµÇ°í ÀÖ´Ù
+			return false; // ì´ë¯¸ ë§ˆë¹„ë˜ê³  ìˆë‹¤
 		}
 
 		cha.setParalaysis(new L1CurseParalysis(cha, delay, time));
@@ -125,7 +125,7 @@ public class L1CurseParalysis extends L1Paralysis {
 	@Override
 	public void cure() {
 		if (_timer != null) {
-			_timer.interrupt(); // ¸¶ºñ Å¸ÀÌ¸Ó ÇØÁ¦
+			_timer.interrupt(); // ë§ˆë¹„ íƒ€ì´ë¨¸ í•´ì œ
 		}
 
 		_target.setPoisonEffect(0);

@@ -110,7 +110,7 @@ public class L1NpcChatTimer extends TimerTask {
 		}
 
 		if (isWorldChat) {
-			// XXX npc´Â sendPackets ÇÒ ¼ö ¾ø±â ¶§¹®¿¡, ¿ùµå³»ÀÇ PC·ÎºÎÅÍ sendPackets ½ÃÅ²´Ù
+			// XXX npcëŠ” sendPackets í•  ìˆ˜ ì—†ê¸° ë•Œë¬¸ì—, ì›”ë“œë‚´ì˜ PCë¡œë¶€í„° sendPackets ì‹œí‚¨ë‹¤
 			for (L1PcInstance pc : L1World.getInstance(). getAllPlayers()) {
 				if (pc != null) {
 					pc.sendPackets(new S_NpcChatPacket(npc, chatId, 3));

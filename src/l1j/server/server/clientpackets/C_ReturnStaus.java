@@ -1,4 +1,4 @@
-/** ½ºÅÈÃÊ±âÈ­ */
+/** ìŠ¤íƒ¯ì´ˆê¸°í™” */
 
 package l1j.server.server.clientpackets;
 
@@ -9,8 +9,8 @@ import l1j.server.server.model.L1Object;
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.L1Teleport;
 import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.model.skill.L1SkillId; // ¹öÇÁÈ¿°ú ÇØÁ¦
-import l1j.server.server.model.skill.L1SkillUse; // ¹öÇÁÈ¿°ú ÇØÁ¦
+import l1j.server.server.model.skill.L1SkillId; // ë²„í”„íš¨ê³¼ í•´ì œ
+import l1j.server.server.model.skill.L1SkillUse; // ë²„í”„íš¨ê³¼ í•´ì œ
 import l1j.server.server.serverpackets.S_HPUpdate;
 import l1j.server.server.serverpackets.S_MPUpdate;
 import l1j.server.server.serverpackets.S_OwnCharStatus;
@@ -36,10 +36,10 @@ public class C_ReturnStaus extends ClientBasePacket {
 		super(decrypt);
         int type = readC();
 		L1PcInstance pc = client.getActiveChar();
-		pc.getInventory().takeoffEquip(945); // ¾ÆÀÌÅÛ ¹ş±â±â
-		L1SkillUse l1skilluse = new L1SkillUse(); // ¹öÇÁÈ¿°ú ÇØÁ¦
+		pc.getInventory().takeoffEquip(945); // ì•„ì´í…œ ë²—ê¸°ê¸°
+		L1SkillUse l1skilluse = new L1SkillUse(); // ë²„í”„íš¨ê³¼ í•´ì œ
 		l1skilluse.handleCommands(pc, L1SkillId.CANCELLATION, pc.getId(), pc.getX(), pc.getY(),
-				null, 0, L1SkillUse.TYPE_LOGIN); // ¹öÇÁÈ¿°ú ÇØÁ¦
+				null, 0, L1SkillUse.TYPE_LOGIN); // ë²„í”„íš¨ê³¼ í•´ì œ
         if(type == 1)
         {
     		short init_hp = 0;
@@ -158,7 +158,7 @@ public class C_ReturnStaus extends ClientBasePacket {
     				init_mp = 3;
     				break;
     			}
-    		} else if (pc.isDragonKnight()) { // ¿ë±â»ç
+    		} else if (pc.isDragonKnight()) { // ìš©ê¸°ì‚¬
     			init_hp = 16;
     			switch (pc.getWis()) {
     			case 10:
@@ -176,7 +176,7 @@ public class C_ReturnStaus extends ClientBasePacket {
     				init_mp = 2;
     				break;
     			}
-    		} else if (pc.isBlackWizard()) { // È¯¼ú»ç
+    		} else if (pc.isBlackWizard()) { // í™˜ìˆ ì‚¬
     			init_hp = 14;
     			switch (pc.getWis()) {
     			case 10:
@@ -201,40 +201,40 @@ public class C_ReturnStaus extends ClientBasePacket {
             pc.setMaxMp(init_mp);
             pc.setAc(10);
             pc.sendPackets(new S_OwnCharStatus(pc));
-    		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.·¹º§¾÷));
+    		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.ë ˆë²¨ì—…));
         } else if(type == 2) {
             int levelup = readC();
             if(levelup == 0) {
             	statup(pc);
-        		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.·¹º§¾÷));
+        		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.ë ˆë²¨ì—…));
             } else if(levelup == 1) {
                 pc.setStr(pc.getStr() + 1);
             	statup(pc);
-        		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.·¹º§¾÷));
+        		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.ë ˆë²¨ì—…));
             } else if(levelup == 2) {
                 pc.setInt(pc.getInt() + 1);
             	statup(pc);
-        		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.·¹º§¾÷));
+        		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.ë ˆë²¨ì—…));
             } else if(levelup == 3) {
                 pc.setWis(pc.getWis() + 1);
             	statup(pc);
-        		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.·¹º§¾÷));
+        		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.ë ˆë²¨ì—…));
             } else if(levelup == 4) {
                 pc.setDex(pc.getDex() + 1);
             	statup(pc);
-        		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.·¹º§¾÷));
+        		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.ë ˆë²¨ì—…));
             } else if(levelup == 5) {
                 pc.setCon(pc.getCon() + 1);
             	statup(pc);
-        		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.·¹º§¾÷));
+        		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.ë ˆë²¨ì—…));
             } else if(levelup == 6) {
                 pc.setCha(pc.getCha() + 1);
             	statup(pc);
-        		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.·¹º§¾÷));
+        		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.ë ˆë²¨ì—…));
             } else if(levelup == 7) {
                 for(int m = 0; m < 10; m++)
                 statup(pc);
-        		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.·¹º§¾÷));
+        		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.ë ˆë²¨ì—…));
             } else if(levelup == 8) {
                 int statusup = readC();
                 if(statusup == 1) {
@@ -251,9 +251,9 @@ public class C_ReturnStaus extends ClientBasePacket {
                     pc.setCha(pc.getCha() + 1);
                 }
                 if(pc.getElixirStats() > 0){
-            		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.Á¾·á));
+            		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.ì¢…ë£Œ));
                 } else {
-            		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.Á¾·á));
+            		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.ì¢…ë£Œ));
 
                     pc.setCurrentHp(pc.getMaxHp());
                     pc.setCurrentMp(pc.getMaxMp());
@@ -264,9 +264,9 @@ public class C_ReturnStaus extends ClientBasePacket {
         			pc.setBaseMaxHp((short) pc.getMaxHp());
         			pc.setBaseMaxMp((short) pc.getMaxMp());
         			pc.setBaseStr((byte) pc.getStr()); 
-        			pc.setBaseDex((byte) pc.getDex()); // ¼ÒÀÇ DEXÄ¡¿¡+1
+        			pc.setBaseDex((byte) pc.getDex()); // ì†Œì˜ DEXì¹˜ì—+1
         			pc.setBaseInt((byte) pc.getInt());
-        			pc.setBaseWis((byte) pc.getWis()); // ¼ÒÀÇ WISÄ¡¿¡+1
+        			pc.setBaseWis((byte) pc.getWis()); // ì†Œì˜ WISì¹˜ì—+1
         			pc.setBaseCha((byte) pc.getCha());
         			pc.setBaseCon((byte) pc.getCon());
         			pc.resetBaseHitup();
@@ -306,9 +306,9 @@ public class C_ReturnStaus extends ClientBasePacket {
 			pc.setBaseMaxHp((short) pc.getMaxHp());
 			pc.setBaseMaxMp((short) pc.getMaxMp());
 			pc.setBaseStr((byte) str); 
-			pc.setBaseDex((byte) dex); // ¼ÒÀÇ DEXÄ¡¿¡+1
+			pc.setBaseDex((byte) dex); // ì†Œì˜ DEXì¹˜ì—+1
 			pc.setBaseInt((byte) intel);
-			pc.setBaseWis((byte) wis); // ¼ÒÀÇ WISÄ¡¿¡+1
+			pc.setBaseWis((byte) wis); // ì†Œì˜ WISì¹˜ì—+1
 			pc.setBaseCha((byte) cha);
 			pc.setBaseCon((byte) con);
 			pc.resetBaseHitup();

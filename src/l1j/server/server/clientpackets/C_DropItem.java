@@ -59,19 +59,19 @@ public class C_DropItem extends ClientBasePacket {
 			return;
 		}
         
-		// ¿ùµå¸Ê»ó ³» °èÁ¤°ú °°Àº µ¿ÀÏ ÇÑ °èÁ¤À» °¡Áø Ä³¸¯ÀÌ Á¢¼ÓÁßÀÌ¶ó¸é
+		// ì›”ë“œë§µìƒ ë‚´ ê³„ì •ê³¼ ê°™ì€ ë™ì¼ í•œ ê³„ì •ì„ ê°€ì§„ ìºë¦­ì´ ì ‘ì†ì¤‘ì´ë¼ë©´
 		if(isTwoLogin(pc)) return;
 		
 		L1ItemInstance item = pc.getInventory().getItem(objectId);
 		if (item != null) {
 			if (!item.getItem().isTradable()) {
-				// \f1%0Àº ¹ö¸®°Å³ª ¶Ç´Â Å¸ÀÎ¿¡°Ô ¾çÀÏÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù.
+				// \f1%0ì€ ë²„ë¦¬ê±°ë‚˜ ë˜ëŠ” íƒ€ì¸ì—ê²Œ ì–‘ì¼ì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 				pc.sendPackets(new S_ServerMessage(210, item.getItem()
 						.getName()));
 				return;
 			}
         if (item.getLockitem() > 100){
-            pc.sendPackets(new S_SystemMessage("ºÀÀÎµÈ ¾ÆÀÌÅÛÀº ¹ö¸± ¼ö ¾ø½À´Ï´Ù."));
+            pc.sendPackets(new S_SystemMessage("ë´‰ì¸ëœ ì•„ì´í…œì€ ë²„ë¦´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤."));
             return;
         }
 			Object[] petlist = pc.getPetList().values().toArray();
@@ -79,7 +79,7 @@ public class C_DropItem extends ClientBasePacket {
 				if (petObject instanceof L1PetInstance) {
 					L1PetInstance pet = (L1PetInstance) petObject;
 					if (item.getId() == pet.getItemObjId()) {
-						// \f1%0Àº ¹ö¸®°Å³ª ¶Ç´Â Å¸ÀÎ¿¡°Ô ¾çÀÏÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù.
+						// \f1%0ì€ ë²„ë¦¬ê±°ë‚˜ ë˜ëŠ” íƒ€ì¸ì—ê²Œ ì–‘ì¼ì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 						pc.sendPackets(new S_ServerMessage(210, item.getItem()
 								.getName()));
 						return;
@@ -87,8 +87,8 @@ public class C_DropItem extends ClientBasePacket {
 				}
 			}
 
-			//** ¾ÆÀÌÅÛÇÈ¾÷¹æÁö **//	by µµ¿ì³Ê
-			if (objectId != item.getId()) {  //¹Ù²¨Ä¡±â ºÎºĞ
+			//** ì•„ì´í…œí”½ì—…ë°©ì§€ **//	by ë„ìš°ë„ˆ
+			if (objectId != item.getId()) {  //ë°”êº¼ì¹˜ê¸° ë¶€ë¶„
 				return; 
 			}
 			
@@ -101,15 +101,15 @@ public class C_DropItem extends ClientBasePacket {
 				return;
 			}
 	        int i9 = item.getItem(). getItemId();
-		          if(!(i9 == 40308  //¾Æµ¥³ª°¡ ¾Æ´Ò¶§
-			          || i9 == 40019 || i9 == 40020 || i9 == 40738 //³óÃà ¹°¾àÀÌ ¾Æ´Ò¶§
-			          || i9 == 40022 || i9 == 40023 || i9 == 40023 //°í´ëÀÇ ¹°¾àÀÌ ¾Æ´Ò¶§
-			          || i9 == 40059 || i9 == 40060 || i9 == 40061 //Ãà?°í´ëÀÇ ¹°¾àÀÌ ¾Æ´Ò¶§
-			          || i9 == 40010 || i9 == 40011 || i9 == 40012 //»¡,ÁÖ,¸¼ ¹°¾àÀÌ ¾Æ´Ò¶§
-			          || i9 == 40494 || i9 == 40743 || i9 == 40744 //¹Ì½º¸±, ¹Ì¾²¸±È­»ì, ÀºÈ­»ìÀÌ ¾Æ´Ò¶§
-			          || i9 == 40748 || i9 == 70022 || i9 == 40507 //°áÁ¤Ã¼°¡ ¾Æ´Ò¶§ 
+		          if(!(i9 == 40308  //ì•„ë°ë‚˜ê°€ ì•„ë‹ë•Œ
+			          || i9 == 40019 || i9 == 40020 || i9 == 40738 //ë†ì¶• ë¬¼ì•½ì´ ì•„ë‹ë•Œ
+			          || i9 == 40022 || i9 == 40023 || i9 == 40023 //ê³ ëŒ€ì˜ ë¬¼ì•½ì´ ì•„ë‹ë•Œ
+			          || i9 == 40059 || i9 == 40060 || i9 == 40061 //ì¶•?ê³ ëŒ€ì˜ ë¬¼ì•½ì´ ì•„ë‹ë•Œ
+			          || i9 == 40010 || i9 == 40011 || i9 == 40012 //ë¹¨,ì£¼,ë§‘ ë¬¼ì•½ì´ ì•„ë‹ë•Œ
+			          || i9 == 40494 || i9 == 40743 || i9 == 40744 //ë¯¸ìŠ¤ë¦´, ë¯¸ì“°ë¦´í™”ì‚´, ì€í™”ì‚´ì´ ì•„ë‹ë•Œ
+			          || i9 == 40748 || i9 == 70022 || i9 == 40507 //ê²°ì •ì²´ê°€ ì•„ë‹ë•Œ 
 			          || i9 == 40318 || i9 == 40319 || i9 == 40320
-                      || i9 == 40062 || i9 == 41159)) {  // ½ÅºñÇÑ ³¯°³ ±êÅĞ
+                      || i9 == 40062 || i9 == 41159)) {  // ì‹ ë¹„í•œ ë‚ ê°œ ê¹ƒí„¸
 		          if(count > 2000 ||item.getCount() > 2000 || item.getCount() <= 0) { 
 			          pc.sendPackets(new S_Disconnect());
 			          return;
@@ -121,38 +121,38 @@ public class C_DropItem extends ClientBasePacket {
                  return;
              } 
 						 
-			 if (pc.getLevel() < 1) { // ¾ÆÀÌÅÛ µå·Ó °¡´É ·¹º§ ¼³Á¤
-                pc.sendPackets(new S_SystemMessage("\\fY80·¹º§ºÎÅÍ ¾ÆÀÌÅÛÀ» ¹ö¸± ¼ö ÀÖ½À´Ï´Ù."));
+			 if (pc.getLevel() < 1) { // ì•„ì´í…œ ë“œë¡­ ê°€ëŠ¥ ë ˆë²¨ ì„¤ì •
+                pc.sendPackets(new S_SystemMessage("\\fY80ë ˆë²¨ë¶€í„° ì•„ì´í…œì„ ë²„ë¦´ ìˆ˜ ìˆìŠµë‹ˆë‹¤."));
 				return;
 			 }
 			 if (!pc.isGm() && item.getItem().getItemId() == 40308 )  {
-	            pc.sendPackets(new S_SystemMessage("¾Æµ¥³ª¸¦ ¹ö¸± ¼ö ¾ø½À´Ï´Ù."));
+	            pc.sendPackets(new S_SystemMessage("ì•„ë°ë‚˜ë¥¼ ë²„ë¦´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤."));
 	            return;
 	         }  
 	             
 	         if (!pc.isGm() && item.getItem().getItemId() == 41159 )  {
-	            pc.sendPackets(new S_SystemMessage("½ÅºñÇÑ ³¯°³ ±êÅĞÀ» ¹ö¸± ¼ö ¾ø½À´Ï´Ù."));
+	            pc.sendPackets(new S_SystemMessage("ì‹ ë¹„í•œ ë‚ ê°œ ê¹ƒí„¸ì„ ë²„ë¦´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤."));
 	            return;
 	         }
 			 if (item.isEquipped()) {
-				// \f1»èÁ¦ÇÒ ¼ö ¾ø´Â ¾ÆÀÌÅÛÀÌ³ª Àåºñ ÇÏ°í ÀÖ´Â ¾ÆÀÌÅÛÀº ¹ö¸± ¼ö ¾ø½À´Ï´Ù.
+				// \f1ì‚­ì œí•  ìˆ˜ ì—†ëŠ” ì•„ì´í…œì´ë‚˜ ì¥ë¹„ í•˜ê³  ìˆëŠ” ì•„ì´í…œì€ ë²„ë¦´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 				pc.sendPackets(new S_ServerMessage(125));
 				return;
 			 }
 			 if (item.getEnchantLevel() >= 4 && !pc.isGm()){
-		        pc.sendPackets(new S_SystemMessage("+4ÀÌ»ó ÀÎÃ¾Æ®µÈ ¾ÆÀÌÅÛÀº ¹ö¸±¼ö¾ø½À´Ï´Ù."));
+		        pc.sendPackets(new S_SystemMessage("+4ì´ìƒ ì¸ì²¸íŠ¸ëœ ì•„ì´í…œì€ ë²„ë¦´ìˆ˜ì—†ìŠµë‹ˆë‹¤."));
 			    return;
 			 }
 
-			/**ÀÎÇü Áßº¹ ¹æÁö**/
+			/**ì¸í˜• ì¤‘ë³µ ë°©ì§€**/
 			  Object[] dollList = pc.getDollList().values().toArray();
 			   for (Object dollObject : dollList) {
 				   L1DollInstance doll = (L1DollInstance) dollObject;
-			   if (doll.getItemObjId() == item.getId()) { // ÀÌ¹Ì ²¨³»°í ÀÖ´Â ¸¶¹ı ÀÎÇü
+			   if (doll.getItemObjId() == item.getId()) { // ì´ë¯¸ êº¼ë‚´ê³  ìˆëŠ” ë§ˆë²• ì¸í˜•
 			       return;
 			      }
 		       }
-		    /**ÀÎÇü Áßº¹ ¹æÁö**/
+		    /**ì¸í˜• ì¤‘ë³µ ë°©ì§€**/
 
 			pc.getInventory().tradeItem(item, count, L1World.getInstance().getInventory(x, y, pc.getMapId()));
 			pc.turnOnOffLight();
@@ -160,9 +160,9 @@ public class C_DropItem extends ClientBasePacket {
 	}
 	
 	/**
-	 * ¿ùµå»ó¿¡ ÀÖ´Â ¸ğµç Ä³¸¯ÀÇ °èÁ¤À» ºñ±³ÇØ °°Àº °èÁ¤ÀÌ ÀÖ´Ù¸é true ¾ø´Ù¸é false
+	 * ì›”ë“œìƒì— ìˆëŠ” ëª¨ë“  ìºë¦­ì˜ ê³„ì •ì„ ë¹„êµí•´ ê°™ì€ ê³„ì •ì´ ìˆë‹¤ë©´ true ì—†ë‹¤ë©´ false
 	 * @param c L1PcInstance
-	 * @return ÀÖ´Ù¸é true
+	 * @return ìˆë‹¤ë©´ true
 	 */
 	private boolean isTwoLogin(L1PcInstance c) {
 		boolean bool = false;

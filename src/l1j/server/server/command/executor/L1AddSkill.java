@@ -40,146 +40,146 @@ public class L1AddSkill implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (pc.getInventory().checkEquipped(300000)){   // ¿î¿µÀÚÀÇ ¹İÁö Âø¿ëÇßÀ»¶§ ¿î¿µÀÚ ¸í·É¾î »ç¿ë°¡´É
-			int cnt = 0; // ·çÇÁ Ä«¿îÅÍ
-			String skill_name = ""; // ½ºÅ³¸í
-			int skill_id = 0; // ½ºÅ³ ID
+			if (pc.getInventory().checkEquipped(300000)){   // ìš´ì˜ìì˜ ë°˜ì§€ ì°©ìš©í–ˆì„ë•Œ ìš´ì˜ì ëª…ë ¹ì–´ ì‚¬ìš©ê°€ëŠ¥
+			int cnt = 0; // ë£¨í”„ ì¹´ìš´í„°
+			String skill_name = ""; // ìŠ¤í‚¬ëª…
+			int skill_id = 0; // ìŠ¤í‚¬ ID
 
-			int object_id = pc.getId(); // Ä³¸¯ÅÍÀÇ objectid¸¦ Ãëµæ
-			pc.sendPackets(new S_SkillSound(object_id, '\343')); // ¸¶¹ı ½ÀµæÀÇ È¿°úÀ½À» ¿ï¸°´Ù
+			int object_id = pc.getId(); // ìºë¦­í„°ì˜ objectidë¥¼ ì·¨ë“
+			pc.sendPackets(new S_SkillSound(object_id, '\343')); // ë§ˆë²• ìŠµë“ì˜ íš¨ê³¼ìŒì„ ìš¸ë¦°ë‹¤
 			pc.broadcastPacket(new S_SkillSound(object_id, '\343'));
 
 			if (pc.isCrown()) {
 				pc.sendPackets(new S_AddSkill(255, 255, 0, 0, 0, 0, 0, 0, 0, 0,
 						0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-				for (cnt = 1; cnt <= 16; cnt++) // LV1~2 ¸¶¹ı
+				for (cnt = 1; cnt <= 16; cnt++) // LV1~2 ë§ˆë²•
 				{
 					L1Skills l1skills = SkillsTable.getInstance().getTemplate(
-							cnt); // ½ºÅ³ Á¤º¸¸¦ Ãëµæ
+							cnt); // ìŠ¤í‚¬ ì •ë³´ë¥¼ ì·¨ë“
 					skill_name = l1skills.getName();
 					skill_id = l1skills.getSkillId();
 					SkillsTable.getInstance().spellMastery(object_id, skill_id,
-							skill_name, 0, 0); // DB¿¡ µî·Ï
+							skill_name, 0, 0); // DBì— ë“±ë¡
 				}
-				for (cnt = 113; cnt <= 120; cnt++) // ÇÁ¸® ¸¶¹ı
+				for (cnt = 113; cnt <= 120; cnt++) // í”„ë¦¬ ë§ˆë²•
 				{
 					L1Skills l1skills = SkillsTable.getInstance().getTemplate(
-							cnt); // ½ºÅ³ Á¤º¸¸¦ Ãëµæ
+							cnt); // ìŠ¤í‚¬ ì •ë³´ë¥¼ ì·¨ë“
 					skill_name = l1skills.getName();
 					skill_id = l1skills.getSkillId();
 					SkillsTable.getInstance().spellMastery(object_id, skill_id,
-							skill_name, 0, 0); // DB¿¡ µî·Ï
+							skill_name, 0, 0); // DBì— ë“±ë¡
 				}
 			} else if (pc.isKnight()) {
 				pc.sendPackets(new S_AddSkill(255, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 						192, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-				for (cnt = 1; cnt <= 8; cnt++) // LV1 ¸¶¹ı
+				for (cnt = 1; cnt <= 8; cnt++) // LV1 ë§ˆë²•
 				{
 					L1Skills l1skills = SkillsTable.getInstance().getTemplate(
-							cnt); // ½ºÅ³ Á¤º¸¸¦ Ãëµæ
+							cnt); // ìŠ¤í‚¬ ì •ë³´ë¥¼ ì·¨ë“
 					skill_name = l1skills.getName();
 					skill_id = l1skills.getSkillId();
 					SkillsTable.getInstance().spellMastery(object_id, skill_id,
-							skill_name, 0, 0); // DB¿¡ µî·Ï
+							skill_name, 0, 0); // DBì— ë“±ë¡
 				}
-				for (cnt = 87; cnt <= 91; cnt++) // ³ªÀÌÆ® ¸¶¹ı
+				for (cnt = 87; cnt <= 91; cnt++) // ë‚˜ì´íŠ¸ ë§ˆë²•
 				{
 					L1Skills l1skills = SkillsTable.getInstance().getTemplate(
-							cnt); // ½ºÅ³ Á¤º¸¸¦ Ãëµæ
+							cnt); // ìŠ¤í‚¬ ì •ë³´ë¥¼ ì·¨ë“
 					skill_name = l1skills.getName();
 					skill_id = l1skills.getSkillId();
 					SkillsTable.getInstance().spellMastery(object_id, skill_id,
-							skill_name, 0, 0); // DB¿¡ µî·Ï
+							skill_name, 0, 0); // DBì— ë“±ë¡
 				}
 			} else if (pc.isElf()) {
 				pc.sendPackets(new S_AddSkill(255, 255, 127, 255, 255, 255, 0,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 127, 3, 255, 255, 255, 255,
 						0, 0, 0, 0, 0, 0));
-				for (cnt = 1; cnt <= 48; cnt++) // LV1~6 ¸¶¹ı
+				for (cnt = 1; cnt <= 48; cnt++) // LV1~6 ë§ˆë²•
 				{
 					L1Skills l1skills = SkillsTable.getInstance().getTemplate(
-							cnt); // ½ºÅ³ Á¤º¸¸¦ Ãëµæ
+							cnt); // ìŠ¤í‚¬ ì •ë³´ë¥¼ ì·¨ë“
 					skill_name = l1skills.getName();
 					skill_id = l1skills.getSkillId();
 					SkillsTable.getInstance().spellMastery(object_id, skill_id,
-							skill_name, 0, 0); // DB¿¡ µî·Ï
+							skill_name, 0, 0); // DBì— ë“±ë¡
 				}
-				for (cnt = 129; cnt <= 176; cnt++) // ¿¡¸£ÇÁ ¸¶¹ı
+				for (cnt = 129; cnt <= 176; cnt++) // ì—ë¥´í”„ ë§ˆë²•
 				{
 					L1Skills l1skills = SkillsTable.getInstance().getTemplate(
-							cnt); // ½ºÅ³ Á¤º¸¸¦ Ãëµæ
+							cnt); // ìŠ¤í‚¬ ì •ë³´ë¥¼ ì·¨ë“
 					skill_name = l1skills.getName();
 					skill_id = l1skills.getSkillId();
 					SkillsTable.getInstance().spellMastery(object_id, skill_id,
-							skill_name, 0, 0); // DB¿¡ µî·Ï
+							skill_name, 0, 0); // DBì— ë“±ë¡
 				}
 			} else if (pc.isWizard()) {
 				pc.sendPackets(new S_AddSkill(255, 255, 127, 255, 255, 255,
 						255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 						0, 0, 0, 0, 0, 0));
-				for (cnt = 1; cnt <= 80; cnt++) // LV1~10 ¸¶¹ı
+				for (cnt = 1; cnt <= 80; cnt++) // LV1~10 ë§ˆë²•
 				{
 					L1Skills l1skills = SkillsTable.getInstance().getTemplate(
-							cnt); // ½ºÅ³ Á¤º¸¸¦ Ãëµæ
+							cnt); // ìŠ¤í‚¬ ì •ë³´ë¥¼ ì·¨ë“
 					skill_name = l1skills.getName();
 					skill_id = l1skills.getSkillId();
 					SkillsTable.getInstance().spellMastery(object_id, skill_id,
-							skill_name, 0, 0); // DB¿¡ µî·Ï
+							skill_name, 0, 0); // DBì— ë“±ë¡
 				}
 			} else if (pc.isDarkelf()) {
 				pc.sendPackets(new S_AddSkill(255, 255, 0, 0, 0, 0, 0, 0, 0, 0,
 						0, 0, 255, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-				for (cnt = 1; cnt <= 16; cnt++) // LV1~2 ¸¶¹ı
+				for (cnt = 1; cnt <= 16; cnt++) // LV1~2 ë§ˆë²•
 				{
 					L1Skills l1skills = SkillsTable.getInstance().getTemplate(
-							cnt); // ½ºÅ³ Á¤º¸¸¦ Ãëµæ
+							cnt); // ìŠ¤í‚¬ ì •ë³´ë¥¼ ì·¨ë“
 					skill_name = l1skills.getName();
 					skill_id = l1skills.getSkillId();
 					SkillsTable.getInstance().spellMastery(object_id, skill_id,
-							skill_name, 0, 0); // DB¿¡ µî·Ï
+							skill_name, 0, 0); // DBì— ë“±ë¡
 				}
-				for (cnt = 97; cnt <= 111; cnt++) // DE¸¶¹ı
+				for (cnt = 97; cnt <= 111; cnt++) // DEë§ˆë²•
 				{
 					L1Skills l1skills = SkillsTable.getInstance().getTemplate(
-							cnt); // ½ºÅ³ Á¤º¸¸¦ Ãëµæ
+							cnt); // ìŠ¤í‚¬ ì •ë³´ë¥¼ ì·¨ë“
 					skill_name = l1skills.getName();
 					skill_id = l1skills.getSkillId();
 					SkillsTable.getInstance().spellMastery(object_id, skill_id,
-							skill_name, 0, 0); // DB¿¡ µî·Ï
+							skill_name, 0, 0); // DBì— ë“±ë¡
 				}
 			} else if (pc.isDragonKnight()) {
 				pc.sendPackets(new S_AddSkill(0, 0, 0, 0, 0, 0,
 					      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 					      255, 255, 255, 0, 0, 0));
-				for (cnt = 181; cnt <= 195; cnt++) //# DragonKnight¸¶¹ı
+				for (cnt = 181; cnt <= 195; cnt++) //# DragonKnightë§ˆë²•
 			    {
 			     L1Skills l1skills = SkillsTable.getInstance().getTemplate(
-			       cnt); // ½ºÅ³ Á¤º¸¸¦ Ãëµæ
+			       cnt); // ìŠ¤í‚¬ ì •ë³´ë¥¼ ì·¨ë“
 			     skill_name = l1skills.getName();
 			     skill_id = l1skills.getSkillId();   
 			     SkillsTable.getInstance().spellMastery(object_id, skill_id,
-			       skill_name, 0, 0); // DB¿¡ µî·Ï
+			       skill_name, 0, 0); // DBì— ë“±ë¡
 			    }
 			} else if (pc.isBlackWizard()) {
 				 pc.sendPackets(new S_AddSkill(0, 0, 0, 0, 0, 0,
 					      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 					      0, 0, 0, 255, 255, 255));
-				 for (cnt = 201; cnt <= 220; cnt++) //# BlackWizard¸¶¹ı
+				 for (cnt = 201; cnt <= 220; cnt++) //# BlackWizardë§ˆë²•
 				    {
 				     L1Skills l1skills = SkillsTable.getInstance().getTemplate(
-				       cnt); // ½ºÅ³ Á¤º¸¸¦ Ãëµæ
+				       cnt); // ìŠ¤í‚¬ ì •ë³´ë¥¼ ì·¨ë“
 				     skill_name = l1skills.getName();
 				     skill_id = l1skills.getSkillId();   
 				     SkillsTable.getInstance().spellMastery(object_id, skill_id,
-				       skill_name, 0, 0); // DB¿¡ µî·Ï
+				       skill_name, 0, 0); // DBì— ë“±ë¡
 				    }
 			    }
 			} else {
-				pc.sendPackets(new S_SystemMessage("´ç½ÅÀº ¿î¿µÀÚ°¡ µÉ Á¶°ÇÀÌ µÇÁö ¾Ê½À´Ï´Ù."));
+				pc.sendPackets(new S_SystemMessage("ë‹¹ì‹ ì€ ìš´ì˜ìê°€ ë  ì¡°ê±´ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤."));
 				return;
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".½ºÅ³Ãß°¡ Ä¿¸àµå ¿¡·¯"));
+			pc.sendPackets(new S_SystemMessage(".ìŠ¤í‚¬ì¶”ê°€ ì»¤ë©˜ë“œ ì—ëŸ¬"));
 		}
 	}
 }

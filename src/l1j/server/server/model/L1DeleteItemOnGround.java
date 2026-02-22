@@ -55,7 +55,7 @@ public class L1DeleteItemOnGround {
      break;
     }
     L1World.getInstance().broadcastPacketToAll(
-      new S_SystemMessage("[******] ¿ùµå¸Ê»óÀÇ ¾ÆÀÌÅÛÀÌ 30ÃÊ ÈÄ¿¡ »èÁ¦µË´Ï´Ù.")); 
+      new S_SystemMessage("[******] ì›”ë“œë§µìƒì˜ ì•„ì´í…œì´ 30ì´ˆ í›„ì— ì‚­ì œë©ë‹ˆë‹¤.")); 
     try {
      Thread.sleep(30000);
     } catch (Exception exception) {
@@ -63,13 +63,13 @@ public class L1DeleteItemOnGround {
      break;
     }
     deleteItem();
-    //#################### ¿©±â ºÎÅÍ Ãß°¡ #################
-       ÇöÀç½Ã°£();
+    //#################### ì—¬ê¸° ë¶€í„° ì¶”ê°€ #################
+       í˜„ì¬ì‹œê°„();
        L1World.getInstance().broadcastPacketToAll(
-         new S_SystemMessage("[******] ¿ùµå¸ÊÀÌ ±ú²ıÇÏ°Ô Ã»¼ÒµÇ¾ú½À´Ï´Ù")); 
+         new S_SystemMessage("[******] ì›”ë“œë§µì´ ê¹¨ë—í•˜ê²Œ ì²­ì†Œë˜ì—ˆìŠµë‹ˆë‹¤")); 
        // %2
       try {    
-       Thread.sleep(50000); // ¿ùµå¸Ê »èÁ¦ ¸àÆ®ÈÄ ½Ã°£ ¼³Á¤ 50000ÀÌ¸é 50ÃÊ ÈÄ¿¡ ÀÌ¸Ş¼¼Áö°¡ ¶ä
+       Thread.sleep(50000); // ì›”ë“œë§µ ì‚­ì œ ë©˜íŠ¸í›„ ì‹œê°„ ì„¤ì • 50000ì´ë©´ 50ì´ˆ í›„ì— ì´ë©”ì„¸ì§€ê°€ ëœ¸
         } catch (Exception exception) {
              _log.warning("L1DeleteItemOnGround error: " + exception);
              break;
@@ -80,23 +80,23 @@ public class L1DeleteItemOnGround {
                    }
                        }
                        }
-           private void ÇöÀç½Ã°£(){ 
+           private void í˜„ì¬ì‹œê°„(){ 
            Calendar calender;     
-           calender = Calendar.getInstance(); //´Ş·Â Å¬·¡½ºÀÇ ÀÎ½ºÅÏ½º¸¦ »ı¼º 
-           int hour, minute, sec, ampm;//½Ã°£,ºĞ, ÃÊ, ¿ÀÀü¿ÀÈÄÀÇ º¯¼ö ¼±¾ğ ¹× ÃÊ±âÈ­..
+           calender = Calendar.getInstance(); //ë‹¬ë ¥ í´ë˜ìŠ¤ì˜ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ìƒì„± 
+           int hour, minute, sec, ampm;//ì‹œê°„,ë¶„, ì´ˆ, ì˜¤ì „ì˜¤í›„ì˜ ë³€ìˆ˜ ì„ ì–¸ ë° ì´ˆê¸°í™”..
            hour = calender.get(Calendar.HOUR);  
            minute = calender.get(Calendar.MINUTE);
            sec = calender.get(Calendar.SECOND);
            ampm = calender.get(Calendar.AM_PM);
            String ampmm = ""; 
 
-           if(0 == ampm){ //0ÀÏ°æ¿ì ¿ÀÀü
-           ampmm = "¿ÀÀü";                    
-         }else if(1 == ampm) {// 1ÀÏ °æ¿ì ¿ÀÈÄ 
-           ampmm = "¿ÀÈÄ";
+           if(0 == ampm){ //0ì¼ê²½ìš° ì˜¤ì „
+           ampmm = "ì˜¤ì „";                    
+         }else if(1 == ampm) {// 1ì¼ ê²½ìš° ì˜¤í›„ 
+           ampmm = "ì˜¤í›„";
           }
-      // ½ÇÁ¦ Á¢¼Ó ÁßÀÎ À¯Àú¿¡°Ô ½Ã°£ »Ñ·ÁÁà ¹úÀå...
-           L1World.getInstance().broadcastPacketToAll(new S_SystemMessage("ÇöÀç ½Ã°£Àº " +ampmm+" " + hour +"½Ã " + minute + "ºĞ " + sec+ "ÃÊ " ));
+      // ì‹¤ì œ ì ‘ì† ì¤‘ì¸ ìœ ì €ì—ê²Œ ì‹œê°„ ë¿Œë ¤ì¤˜ ë²Œì¥...
+           L1World.getInstance().broadcastPacketToAll(new S_SystemMessage("í˜„ì¬ ì‹œê°„ì€ " +ampmm+" " + hour +"ì‹œ " + minute + "ë¶„ " + sec+ "ì´ˆ " ));
  }
 
  public void initialize() {
@@ -105,7 +105,7 @@ public class L1DeleteItemOnGround {
   }
 
    _deleteTimer = new DeleteTimer();
-   GeneralThreadPool.getInstance().execute(_deleteTimer); // Å¸ÀÌ¸Ó °³½Ã
+   GeneralThreadPool.getInstance().execute(_deleteTimer); // íƒ€ì´ë¨¸ ê°œì‹œ
   }
 
  private void deleteItem() {
@@ -116,20 +116,20 @@ public class L1DeleteItemOnGround {
    }
 
    L1ItemInstance item = (L1ItemInstance) obj;
-    if (item.getX() == 0 && item.getY() == 0) { // Áö¸é»óÀÇ ¾ÆÀÌÅÛÀº ¾Æ´Ï°í, ´©±º°¡ÀÇ ¼ÒÀ¯¹°
+    if (item.getX() == 0 && item.getY() == 0) { // ì§€ë©´ìƒì˜ ì•„ì´í…œì€ ì•„ë‹ˆê³ , ëˆ„êµ°ê°€ì˜ ì†Œìœ ë¬¼
      continue;
     }
-    if (item.getItem().getItemId() == 40515) { // Á¤·ÉÀÇ µ¹
+    if (item.getItem().getItemId() == 40515) { // ì •ë ¹ì˜ ëŒ
      continue;
     }
     if (L1HouseLocation.isInHouse(item.getX(), item.getY(), item
-      .getMapId())) { // ¾ÆÁöÆ®³»
+      .getMapId())) { // ì•„ì§€íŠ¸ë‚´
      continue;
     }
 
     List<L1PcInstance> players = L1World.getInstance()
      . getVisiblePlayer(item, Config.ALT_ITEM_DELETION_RANGE);
-   if (players.isEmpty()) { // ÁöÁ¤ ¹üÀ§³»¿¡ ÇÃ·¹ÀÌ¾î°¡ ¾øÀ¸¸é »èÁ¦
+   if (players.isEmpty()) { // ì§€ì • ë²”ìœ„ë‚´ì— í”Œë ˆì´ì–´ê°€ ì—†ìœ¼ë©´ ì‚­ì œ
     L1Inventory groundInventory = L1World
       . getInstance()
       . getInventory(item.getX(), item.getY(), item.getMapId());
@@ -137,7 +137,7 @@ public class L1DeleteItemOnGround {
     numOfDeleted++;
    }
   }
-  _log.fine("¿ùµå ¸Ê»óÀÇ ¾ÆÀÌÅÛÀ» ÀÚµ¿ »èÁ¦. »èÁ¦¼ö: " + numOfDeleted);
+  _log.fine("ì›”ë“œ ë§µìƒì˜ ì•„ì´í…œì„ ìë™ ì‚­ì œ. ì‚­ì œìˆ˜: " + numOfDeleted);
  }
 }
 

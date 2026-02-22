@@ -47,12 +47,12 @@ public class S_OtherCharPacks extends ServerBasePacket {
 	public S_OtherCharPacks(L1PcInstance pc) {
 		int status = STATUS_PC;
 
-		if (pc.getPoison() != null) { // µ¶»óÅÂ
+		if (pc.getPoison() != null) { // ë…ìƒíƒœ
 			if (pc.getPoison().getEffectId() == 1) {
 				status |= STATUS_POISON;
 			}
 		}
-		if (pc.isInvisble()  || pc.isGmInvis() || pc.isGhost()) { // ¹«ÇÑ´ëÀü °üÀü¸ğµå¿Í gmÀÎºñÁöÀÏ°æ¿ìµµ ÀÎºñÁö·Î º¯°æÀ» Ãß°¡
+		if (pc.isInvisble()  || pc.isGmInvis() || pc.isGhost()) { // ë¬´í•œëŒ€ì „ ê´€ì „ëª¨ë“œì™€ gmì¸ë¹„ì§€ì¼ê²½ìš°ë„ ì¸ë¹„ì§€ë¡œ ë³€ê²½ì„ ì¶”ê°€
 			status |= STATUS_INVISIBLE;
 		}
 		if (pc.isBrave()) {
@@ -93,16 +93,16 @@ public class S_OtherCharPacks extends ServerBasePacket {
 		writeS(pc.getTitle());
 		writeC(status);
 		writeD(pc.getClanid());
-		writeS(pc.getClanname()); // Å©¶õ¸í
-		writeS(null); // ÆêÈ£ÆÃ?
+		writeS(pc.getClanname()); // í¬ë€ëª…
+		writeS(null); // í«í˜¸íŒ…?
 		writeC(0); // ?
 		/*
-		 * if(pc.is_isInParty()) // ÆÄÆ¼Áß { writeC(100 * pc.get_currentHp() /
+		 * if(pc.is_isInParty()) // íŒŒí‹°ì¤‘ { writeC(100 * pc.get_currentHp() /
 		 * pc.get_maxHp()); } else { writeC(0xFF); }
 		 */
 
 		writeC(0xFF);
-		writeC(0); // Å¸¸£ÄîÅ© °Å¸®(´ë·Î)
+		writeC(0); // íƒ€ë¥´ì¿¡í¬ ê±°ë¦¬(ëŒ€ë¡œ)
 		writeC(0); // PC = 0, Mon = Lv
 		writeC(0); // ?
 		writeC(0xFF);

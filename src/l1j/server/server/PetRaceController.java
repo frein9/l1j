@@ -15,8 +15,8 @@
  * 02111-1307, USA.
  *
  * http://www.gnu.org/copyleft/gpl.html
- *  LinFreedom   by ÀÕ»Í
- *  À¯·ÉÀÇÁı
+ *  LinFreedom   by ì‡ë½•
+ *  ìœ ë ¹ì˜ì§‘
  */
 
 package l1j.server.server;
@@ -68,7 +68,7 @@ public class PetRaceController implements Runnable {
 
 			L1PetRace pe11 = new L1PetRace();
 			if(!pe11.isStartGame()){
-				pe11.start(1); // ½ºÅ¸Æ®
+				pe11.start(1); // ìŠ¤íƒ€íŠ¸
 				L1World.getInstance().setPetRace(pe11);
 			}
 	} 

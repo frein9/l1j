@@ -32,7 +32,7 @@ public class CalcStat {
 	}
 
 	/**
-	 * ACº¸³Ê½º¸¦ µ¹·ÁÁØ´Ù
+	 * ACë³´ë„ˆìŠ¤ë¥¼ ëŒë ¤ì¤€ë‹¤
 	 * 
 	 * @param level
 	 * @param dex
@@ -41,7 +41,7 @@ public class CalcStat {
 	 */
 	public static int calcAc(int level, int dex) 
 	{
-	// ¹ö±×»ç¿ëÀÚÀÌ´Ù. º¸³Ê½º À¾´Ù.
+	// ë²„ê·¸ì‚¬ìš©ìì´ë‹¤. ë³´ë„ˆìŠ¤ ìë‹¤.
 	if(dex < 0) return 0;
 	int acBonus = 10;
 
@@ -68,13 +68,13 @@ public class CalcStat {
 	}
 
 	/**
-	* ÀÎ¼öÀÇ WIS¿¡ ´ëÀÀÇÏ´Â MRº¸³Ê½º¸¦ µ¹·ÁÁØ´Ù
+	* ì¸ìˆ˜ì˜ WISì— ëŒ€ì‘í•˜ëŠ” MRë³´ë„ˆìŠ¤ë¥¼ ëŒë ¤ì¤€ë‹¤
 	* 
 	* @param wis
 	* @return mrBonus
 	*/
 	public static int calcStatMr(int wis) {
-	// ¹ö±× »ç¿ëÀÚ
+	// ë²„ê·¸ ì‚¬ìš©ì
 	if(wis < 0) return 0;
 	int mrBonus = 0;
 	switch(wis)
@@ -107,12 +107,12 @@ public class CalcStat {
 	}
 
 	/**
-	* °¢ Å¬·¡½ºÀÇ LVUP½ÃÀÇ HP»ó½ÂÄ¡¸¦ µ¹·ÁÁØ´Ù
+	* ê° í´ë˜ìŠ¤ì˜ LVUPì‹œì˜ HPìƒìŠ¹ì¹˜ë¥¼ ëŒë ¤ì¤€ë‹¤
 	* 
 	* @param charType
 	* @param baseMaxHp
 	* @param baseCon
-	* @return HP»ó½ÂÄ¡
+	* @return HPìƒìŠ¹ì¹˜
 	*/
 	public static short calcStatHp(int charType, int baseMaxHp, byte baseCon) {
 	short randomhp = 0;
@@ -121,63 +121,63 @@ public class CalcStat {
 	}
 	switch(charType)
 	{
-	case 0 : // ±ºÁÖ
-	randomhp += (short) (9 + rnd.nextInt(6)); // ÃÊ±âÄ¡ºĞÃß°¡
+	case 0 : // êµ°ì£¼
+	randomhp += (short) (9 + rnd.nextInt(6)); // ì´ˆê¸°ì¹˜ë¶„ì¶”ê°€
 
 	if (baseMaxHp + randomhp > Config.PRINCE_MAX_HP) 
 	{
 	randomhp = (short) (Config.PRINCE_MAX_HP - baseMaxHp);
 	}
 	break;
-	case 1 : // ±â»ç
-	randomhp += (short) (12 + rnd.nextInt(7)); // ÃÊ±âÄ¡ºĞÃß°¡
+	case 1 : // ê¸°ì‚¬
+	randomhp += (short) (12 + rnd.nextInt(7)); // ì´ˆê¸°ì¹˜ë¶„ì¶”ê°€
 
 	if (baseMaxHp + randomhp > Config.KNIGHT_MAX_HP) 
 	{
 	randomhp = (short) (Config.KNIGHT_MAX_HP - baseMaxHp);
 	}
 	break;
-	case 2 : // ¿äÁ¤
-	randomhp += (short) (8 + rnd.nextInt(6)); // ÃÊ±âÄ¡ºĞÃß°¡
+	case 2 : // ìš”ì •
+	randomhp += (short) (8 + rnd.nextInt(6)); // ì´ˆê¸°ì¹˜ë¶„ì¶”ê°€
 
 	if (baseMaxHp + randomhp > Config.ELF_MAX_HP)
 	{
 	randomhp = (short) (Config.ELF_MAX_HP - baseMaxHp);
 	}
 	break;
-	case 3 : // ¹ı»ç
-	randomhp += (short) (5 + rnd.nextInt(4)); // ÃÊ±âÄ¡ºĞÃß°¡
+	case 3 : // ë²•ì‚¬
+	randomhp += (short) (5 + rnd.nextInt(4)); // ì´ˆê¸°ì¹˜ë¶„ì¶”ê°€
 
 	if (baseMaxHp + randomhp > Config.WIZARD_MAX_HP)
 	{
 	randomhp = (short) (Config.WIZARD_MAX_HP - baseMaxHp);
 	}
 	break;
-	case 4 : // ´ÙÅ©¿¤ÇÁ
-	randomhp += (short) (9 + rnd.nextInt(6)); // ÃÊ±âÄ¡ºĞÃß°¡
+	case 4 : // ë‹¤í¬ì—˜í”„
+	randomhp += (short) (9 + rnd.nextInt(6)); // ì´ˆê¸°ì¹˜ë¶„ì¶”ê°€
 
 	if (baseMaxHp + randomhp > Config.DARKELF_MAX_HP) 
 	{
 	randomhp = (short) (Config.DARKELF_MAX_HP - baseMaxHp);
 	}
 	break;
-	case 5 : // ¿ë±â»ç
-	randomhp += (short) (10 + rnd.nextInt(6)); // ÃÊ±âÄ¡ºĞÃß°¡
+	case 5 : // ìš©ê¸°ì‚¬
+	randomhp += (short) (10 + rnd.nextInt(6)); // ì´ˆê¸°ì¹˜ë¶„ì¶”ê°€
 
 	if (baseMaxHp + randomhp > Config.DRAGONKNIGHT_MAX_HP)
 	{
 	randomhp = (short) (Config.DRAGONKNIGHT_MAX_HP - baseMaxHp);
 	}
 	break;
-	case 6 : // È¯¼ú»ç
-	randomhp += (short) (6 + rnd.nextInt(5)); // ÃÊ±âÄ¡ºĞÃß°¡
+	case 6 : // í™˜ìˆ ì‚¬
+	randomhp += (short) (6 + rnd.nextInt(5)); // ì´ˆê¸°ì¹˜ë¶„ì¶”ê°€
 
 	if (baseMaxHp + randomhp > Config.BLACKWIZARD_MAX_HP)
 	{
 	randomhp = (short) (Config.BLACKWIZARD_MAX_HP - baseMaxHp);
 	}
 	break;
-	default : // ¾ø´ÂÄ³¸¯ÅÍ
+	default : // ì—†ëŠ”ìºë¦­í„°
 	randomhp = 0;
 	break;
 	}
@@ -189,12 +189,12 @@ public class CalcStat {
 	}
 
 	/**
-	* °¢ Å¬·¡½ºÀÇ LVUP½ÃÀÇ MP»ó½ÂÄ¡¸¦ µ¹·ÁÁØ´Ù
+	* ê° í´ë˜ìŠ¤ì˜ LVUPì‹œì˜ MPìƒìŠ¹ì¹˜ë¥¼ ëŒë ¤ì¤€ë‹¤
 	* 
 	* @param charType
 	* @param baseMaxMp
 	* @param baseWis
-	* @return MP»ó½ÂÄ¡
+	* @return MPìƒìŠ¹ì¹˜
 	*/
 	public static short calcStatMp(int charType, int baseMaxMp, byte baseWis) {
 	int randommp = 0;

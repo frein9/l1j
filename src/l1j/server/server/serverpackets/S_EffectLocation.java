@@ -27,31 +27,31 @@ public class S_EffectLocation extends ServerBasePacket {
 	private byte[] _byte = null;
 
 	/**
-	 * ������ ��ġ�� ȿ���� ǥ���ϴ� ��Ŷ�� �����Ѵ�.
+	 * 지정된 위치에 효과를 표시하는 패킷을 구축한다.
 	 * 
-	 * @param pt - ȿ���� ǥ���ϴ� ��ġ�� �ݳ��� Point ������Ʈ
-	 * @param gfxId - ǥ���ϴ� ȿ���� ID
+	 * @param pt - 효과를 표시하는 위치를 격납한 Point 오브젝트
+	 * @param gfxId - 표시하는 효과의 ID
 	 */
 	public S_EffectLocation(Point pt, int gfxId) {
 		this(pt.getX(), pt.getY(), gfxId);
 	}
 
 	/**
-	 * ������ ��ġ�� ȿ���� ǥ���ϴ� ��Ŷ�� �����Ѵ�.
+	 * 지정된 위치에 효과를 표시하는 패킷을 구축한다.
 	 * 
-	 * @param loc - ȿ���� ǥ���ϴ� ��ġ�� �ݳ��� L1Location ������Ʈ
-	 * @param gfxId - ǥ���ϴ� ȿ���� ID
+	 * @param loc - 효과를 표시하는 위치를 격납한 L1Location 오브젝트
+	 * @param gfxId - 표시하는 효과의 ID
 	 */
 	public S_EffectLocation(L1Location loc, int gfxId) {
 		this(loc.getX(), loc.getY(), gfxId);
 	}
 
 	/**
-	 * ������ ��ġ�� ȿ���� ǥ���ϴ� ��Ŷ�� �����Ѵ�.
+	 * 지정된 위치에 효과를 표시하는 패킷을 구축한다.
 	 * 
-	 * @param x - ȿ���� ǥ���ϴ� ��ġ�� X��ǥ
-	 * @param y - ȿ���� ǥ���ϴ� ��ġ�� Y��ǥ
-	 * @param gfxId - ǥ���ϴ� ȿ���� ID
+	 * @param x - 효과를 표시하는 위치의 X좌표
+	 * @param y - 효과를 표시하는 위치의 Y좌표
+	 * @param gfxId - 표시하는 효과의 ID
 	 */
 	public S_EffectLocation(int x, int y, int gfxId) {
 		writeC(Opcodes.S_OPCODE_EFFECTLOCATION);
