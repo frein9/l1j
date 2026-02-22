@@ -1,0 +1,113 @@
+【내용】GM커멘드를 사용하도록(듯이) 한다
+【변경 개소】characters 테이블→AccessLevel
+【값】200
+【비고】채팅란에 「.help」라고 입력해 헬프가 표시되면 성공.
+　　　　accounts 테이블의 AccessLevel는 현재(rev948) 로그인시에 인원수 제한으로 걸릴지 어떨지 밖에 영향을 주지 않는다.
+　　　　0보다 크게 하면 인원수 제한으로 걸리지 않게 된다.
+
+【내용】PvP/NonPvP 설정을 바꾼다
+【변경 개소】config/altsettings.properties 파일→NonPvP
+【값】True:NonPvP 무효(PvP 가능)　False:NonPvP 유효(PvP 불가)
+【비고】서버 기동시에 윈도우로 설정이 표시된다.
+
+【내용】에르프의 속성을 무효로 해, 전에르프 마법을 습득할 수 있도록(듯이) 한다
+【변경 개소】characters 테이블→ElfAttr
+【값】0,1,2,4,8이외의 값
+【비고】
+
+【내용】가질 수 있는 아이템의 중량을 변경한다
+【변경 개소】config/rates.properties 파일→Weightrate
+【값】0:항상 중량 게이지0%　1:중량 게이지 디폴트　2:중량 게이지가1/2가 된다　3~:중량 게이지가1/3~가 된다
+【비고】
+
+【내용】monster의 추가
+【변경 개소】npc 테이블, spawnlist 테이블
+【값】·npc 테이블
+　　　type→L1Monster
+　　　ranged→1이라면 통상 공격,2~이라면 2 셀 이상의 공격, 10이라면 활에 의한 공격
+　　　agro·agrososc·agrocoi→1이라면 통상·변신·투명상태로 공격적
+　　　passispeed·atkspeed→보행·공격 속도(값이 작을 수록 빠르다)
+　　　gfxid→sprite.pak에 격납되고 있는 그래픽
+　　　·spawnlist 테이블
+　　　count→수
+　　　heading→방향
+　　　respawn_dilay→같은 글씨, 글귀가 다른 곳에도 현까지의 시간
+
+【내용】NPC 숍의 추가
+【변경 개소】npc 테이블, spawnlist_npc 테이블, npcaction 테이블, shop_buylist 테이블
+【값】·npc 테이블
+　　　type→L1Merchant
+　　　·spawnlist_npc 테이블
+　　　spawnlist와 같이
+　　　·npcaction 테이블
+　　　action1→text.pak에 격납되고 있는 대사(판도라라면 pandora)
+　　　·shop_buylist 테이블
+　　　order→상품의 줄 순서(선두는 0)
+
+【내용】UB에 출현하는 monster를 추가·변경한다
+【변경 개소】spawnlist_ub테이블
+【치】
+　　　id
+　　　　연번이 되도록(듯이) 설정한다.
+
+　　　ub_id
+　　　　UB의 장소.
+　　　　기란 UB:1　완숙 UB:2　그르딘 UB:3　SKTUB:4　TIUB:5
+　　　　현상, 기란 UB:1만 유효.
+
+　　　pattern
+　　　　출현하는 적의 패턴.
+　　　　본서버와 같이, 랜덤에 선택된다.
+　　　　초기 DB에서는 1~6까지 설정되어 있지만,  7이후나 설정할 수 있다.
+
+　　　group
+　　　　monster의 그룹
+　　　　본서버와 같은 1~3, BOSS(4)의 그룹 나누기.
+　　　　pattern내에는 반드시, 1~4의 그룹이 설정되어 있지 않으면 안 된다.
+　　　　그룹 4는 BOSS이지만, 그룹 4에 복수의 monster를 설정할 수도 있다.
+
+　　　location
+　　　　monster명.
+
+　　　npc_templateid
+　　　　npc 테이블의 npcid와 같은 값을 설정한다.
+　　　　다만, tyep가 L1Monster 이외의 것을 설정해선 안 된다.
+
+　　　count
+　　　　monster의 출현수.
+
+　　　spawn_delay
+　　　　다음의 monster가 출현할 때까지의 시간(초)
+
+【비고】monster의 설정수를 너무 늘려 , 다음의 UB시간이 되어도 종료하지 않는 경우
+　　　　거동이 이상해질 가능성이 있으므로 주의가 필요.
+
+【내용】아이템 지연을 추가·변경한다
+【변경 개소】etcitem 테이블
+【값】delay_id
+　　　　같은 값의 아이템은 지연이 발생한다.
+　　　　디폴트의 delay_id는 이하와 같지만, 그 이외의 값도 설정 가능.
+　　　　1：인비지비리티크로크, 바르로그브랏디크로크(DB에서의 변경 불가)
+　　　　2：HP회복계 일부
+　　　　3：마법서
+　　　　4：텔레포트 스크롤
+　　　delay_time
+　　　　단위는 ms.
+
+【내용】양손, 한 손 무기의 설정
+【변경 개소】weapon 테이블
+【값】weapon의 type를 singlebow, singlespear, tohandblunt, tohandstaff로 변경한다
+【비고】한 손 무기는 방패 장비시에도 장비가능, 양손 무기는 방패 장비시에 장비 불가.
+　　　　양손활=bow　→　한 손활=singlebow　
+　　　　양손 스피아 =spear　→　한 손 스피아 =singlespear
+　　　　양손도끼 =tohandblunt　→　한 손도끼 =blunt　　
+　　　　양손 스탭 =tohandstaff　→　한 손 스탭 =staff
+
+【내용】아이템의 트레이드 불가 설정
+【변경 개소】armor 테이블, etcitem 테이블, weapon 테이블
+【값】trade를  0이외에 변경한다
+
+
+【내용】MOB 스킬의 설정
+【변경 개소】mobskill 테이블
+　MobSkill 테이블의 사용법.txt를 참조해 주세요.
