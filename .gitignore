@@ -4,6 +4,8 @@ out/
 !**/src/test/**/out/
 .kotlin
 /target/
+/log/
+/Leaf_Log/
 
 ### Eclipse ###
 .apt_generated

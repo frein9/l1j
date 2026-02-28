@@ -149,5 +149,5 @@ AI가 코드 변경을 수행할 경우 반드시 다음을 수행한다:
 10. 현재 활성 작업 목록
 ------------------------------------------------------------
 
-- 2026-02-28 dbms-selectable-filedb-migration (Planned)
+- 2026-02-28 dbms-selectable-filedb-migration (In Progress)
 - 마지막 완료 작업: 2026-02-28 leaf-log-properties-load-fix

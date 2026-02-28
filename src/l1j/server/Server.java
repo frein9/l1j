@@ -37,6 +37,9 @@
  */
 package l1j.server;
 
+import l1j.server.server.GameServer;
+import l1j.server.telnet.TelnetServer;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -46,55 +49,53 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import l1j.server.Config;
-import l1j.server.server.GameServer;
-import l1j.server.telnet.TelnetServer;
-
 /**
  * l1j-jp의 서버를 기동한다.
  */
 public class Server {
-	/** 메세지 로그용. */
-	private static Logger _log = Logger.getLogger(Server.class.getName());
+    /**
+     * 메세지 로그용.
+     */
+    private static Logger _log = Logger.getLogger(Server.class.getName());
 
-	/** 로그 설정 파일의 폴더. */
-	private static final String LOG_PROP = "./config/log.properties";
+    /**
+     * 로그 설정 파일의 폴더.
+     */
+    private static final String LOG_PROP = "./config/log.properties";
 
-	/**
-	 * 서버 메인.
-	 *
-	 * @param args
-	 *            커멘드 라인 인수
-	 * @throws Exception
-	 */
-	public static void main(final String[] args) throws Exception {
-		File logFolder = new File("log");
-		logFolder.mkdir();
+    /**
+     * 서버 메인.
+     *
+     * @param args 커멘드 라인 인수
+     * @throws Exception
+     */
+    public static void main(final String[] args) throws Exception {
+        File logFolder = new File("log");
+        logFolder.mkdir();
 
-		try {
-			InputStream is = new BufferedInputStream(new FileInputStream(
-					LOG_PROP));
-			LogManager.getLogManager().readConfiguration(is);
-			is.close();
-		} catch (IOException e) {
-			_log.log(Level.SEVERE, "Failed to Load " + LOG_PROP + " File.", e);
-			System.exit(0);
-		}
-		try {
-		Config.load();
-		} catch (Exception e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-			System.exit(0);
-		}
+        try {
+            InputStream is = new BufferedInputStream(new FileInputStream(LOG_PROP));
+            LogManager.getLogManager().readConfiguration(is);
+        } catch (IOException e) {
+            _log.log(Level.SEVERE, "Failed to Load " + LOG_PROP + " File.", e);
+            System.exit(0);
+        }
+        try {
+            Config.load();
+        } catch (Exception e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+            System.exit(0);
+        }
 
-		// L1DatabaseFactory 초기설정
-		L1DatabaseFactory.setDatabaseSettings(Config.DB_DRIVER, Config.DB_URL,
-				Config.DB_LOGIN, Config.DB_PASSWORD);
-		L1DatabaseFactory.getInstance();
+        // L1DatabaseFactory 초기설정
+        L1DatabaseFactory.setDatabaseSettings(Config.DB_DRIVER, Config.DB_URL,
+                Config.DB_LOGIN, Config.DB_PASSWORD);
+        L1DatabaseFactory.getInstance();
+        FileDbInitializer.initializeIfNeeded();
 
-		GameServer.getInstance().initialize();
-		if (Config.TELNET_SERVER) {
-			TelnetServer.getInstance().start();
-		}
-	}
+        GameServer.getInstance().initialize();
+        if (Config.TELNET_SERVER) {
+            TelnetServer.getInstance().start();
+        }
+    }
 }

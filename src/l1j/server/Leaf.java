@@ -57,32 +57,32 @@ import static l1j.server.server.model.skill.L1SkillId.PHYSICAL_ENCHANT_STR;
 import static l1j.server.server.model.skill.L1SkillId.SOUL_OF_FLAME;
 
 public class Leaf extends Frame implements ActionListener, ItemListener, MouseListener {
-    public static boolean 가동 = false;
+    public static boolean startup = false;
 
-    public static Checkbox noticeCheckbox, 채팅파티, 외침채팅, 장사채팅, 파티채팅, 혈맹채팅, 글로벌채팅, 귓속말채팅, 일반채팅;
+    public static Checkbox noticeCheckbox, cbChatChat, cbChatShout, cbChatTrade, cbChatParty, cbChatClan, cbChatGlobal, cbChatWhisper, cbChatNormal;
 
-    Button 선물주기 = new Button("선물주기");
-    Button 이동시키기 = new Button("이동시키기");
-    Button 변신시키기 = new Button("변신시키기");
-    Button allBuffButton = new Button("전체버프시전");
-    Button allPresentButton1 = new Button("모든유저선물");
-    Button allPresentButton2 = new Button("모든유저선물주기");
-    Button 배율적용 = new Button("배율적용");
-    Button 인첸적용 = new Button("인첸적용");
-    Button 나머지적용 = new Button("나머지적용");
+    Button btGift = new Button("선물주기");
+    Button btShift = new Button("이동시키기");
+    Button btTansformation = new Button("변신시키기");
+    Button btAllBuff = new Button("전체버프시전");
+    Button btAllGift1 = new Button("모든유저선물");
+    Button btAllGift2 = new Button("모든유저선물주기");
+    Button btRate = new Button("배율적용");
+    Button btEnchan = new Button("인첸적용");
+    Button btOther = new Button("나머지적용");
 
     //account make
-    public static Button 생성 = new Button("계정생성");
-    public static Label 아이디 = new Label("　아이디");
-    public static Label 비밀번호 = new Label("비밀번호");
-    public static Label 계정레벨 = new Label("계정레벨");
-    public static TextField 아이디2 = new TextField("", 10);
-    public static TextField 비밀번호2 = new TextField("", 10);
-    public static TextField 계정레벨2 = new TextField("", 10);
+    public static Button btCreateAcc = new Button("계정생성");
+    public static Label lbID = new Label("　아이디");
+    public static Label lbPwd = new Label("비밀번호");
+    public static Label lbAccLv = new Label("계정레벨");
+    public static TextField tfID = new TextField("", 10);
+    public static TextField tfPwd = new TextField("", 10);
+    public static TextField tfAccLv = new TextField("", 10);
 
-    public static Button 삭제 = new Button("계정삭제");
-    public static Label 삭제아이디 = new Label("    아이디");
-    public static TextField 삭제아이디2 = new TextField("", 10);
+    public static Button btDelAcc = new Button("계정삭제");
+    public static Label lbDelID = new Label("    아이디");
+    public static TextField tfDelID = new TextField("", 10);
 
     static MemoryMonitor memorymonitor;
 
@@ -153,14 +153,14 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
         // Checkbox 생성
         noticeCheckbox = new Checkbox("공지");
 
-        채팅파티 = new Checkbox("채팅파티", true);
-        외침채팅 = new Checkbox("외침", true);
-        장사채팅 = new Checkbox("장사", true);
-        파티채팅 = new Checkbox("파티", true);
-        혈맹채팅 = new Checkbox("혈맹", true);
-        글로벌채팅 = new Checkbox("글로벌", true);
-        귓속말채팅 = new Checkbox("귓속말", true);
-        일반채팅 = new Checkbox("일반", true);
+        cbChatChat = new Checkbox("채팅파티", true);
+        cbChatShout = new Checkbox("외침", true);
+        cbChatTrade = new Checkbox("장사", true);
+        cbChatParty = new Checkbox("파티", true);
+        cbChatClan = new Checkbox("혈맹", true);
+        cbChatGlobal = new Checkbox("글로벌", true);
+        cbChatWhisper = new Checkbox("귓속말", true);
+        cbChatNormal = new Checkbox("일반", true);
 
         // Checkbox 설정
         noticeCheckbox.setBounds(582, 518, 45, 20);
@@ -240,18 +240,18 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
         memberMonitorPanel.setBounds(635, 475, 150, 120);
 
         //Panel에 추가하기
-        chatCheckboxPanel.add(채팅파티);
-        chatCheckboxPanel.add(외침채팅);
-        chatCheckboxPanel.add(장사채팅);
-        chatCheckboxPanel.add(파티채팅);
-        chatCheckboxPanel.add(혈맹채팅);
-        chatCheckboxPanel.add(글로벌채팅);
-        chatCheckboxPanel.add(귓속말채팅);
-        chatCheckboxPanel.add(일반채팅);
+        chatCheckboxPanel.add(cbChatChat);
+        chatCheckboxPanel.add(cbChatShout);
+        chatCheckboxPanel.add(cbChatTrade);
+        chatCheckboxPanel.add(cbChatParty);
+        chatCheckboxPanel.add(cbChatClan);
+        chatCheckboxPanel.add(cbChatGlobal);
+        chatCheckboxPanel.add(cbChatWhisper);
+        chatCheckboxPanel.add(cbChatNormal);
         memberMonitorPanel.add(memorymonitor);
 
-        servicePanel.add(allBuffButton);
-        servicePanel.add(allPresentButton1);
+        servicePanel.add(btAllBuff);
+        servicePanel.add(btAllGift1);
 
         // 메뉴바에 추가하기
         mb.add(serverMenu);
@@ -274,18 +274,18 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
         this.add(memberMonitorPanel);
 
         // 계정생성에 추가
-        계정생성2.add(아이디);
-        계정생성2.add(아이디2);
-        계정생성2.add(비밀번호);
-        계정생성2.add(비밀번호2);
-        계정생성2.add(계정레벨);
-        계정생성2.add(계정레벨2);
-        계정생성2.add(생성);
+        계정생성2.add(lbID);
+        계정생성2.add(tfID);
+        계정생성2.add(lbPwd);
+        계정생성2.add(tfPwd);
+        계정생성2.add(lbAccLv);
+        계정생성2.add(tfAccLv);
+        계정생성2.add(btCreateAcc);
 
         // 계정생성에 추가
-        계정삭제2.add(삭제아이디);
-        계정삭제2.add(삭제아이디2);
-        계정삭제2.add(삭제);
+        계정삭제2.add(lbDelID);
+        계정삭제2.add(tfDelID);
+        계정삭제2.add(btDelAcc);
 
         // 패킷출력창에 추가
         패킷출력JFrame.add(패킷출력창);
@@ -303,23 +303,23 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
         끄기.addActionListener(this);
         다시시작.addActionListener(this);
 
-        선물주기.addActionListener(this);
-        이동시키기.addActionListener(this);
-        변신시키기.addActionListener(this);
-        allBuffButton.addActionListener(this);
-        allPresentButton1.addActionListener(this);
-        allPresentButton2.addActionListener(this);
+        btGift.addActionListener(this);
+        btShift.addActionListener(this);
+        btTansformation.addActionListener(this);
+        btAllBuff.addActionListener(this);
+        btAllGift1.addActionListener(this);
+        btAllGift2.addActionListener(this);
 
         배율설정.addActionListener(this);
-        배율적용.addActionListener(this);
+        btRate.addActionListener(this);
         인첸설정.addActionListener(this);
-        인첸적용.addActionListener(this);
+        btEnchan.addActionListener(this);
         나머지설정.addActionListener(this);
-        나머지적용.addActionListener(this);
+        btOther.addActionListener(this);
         달빛프로그램.addActionListener(this);
         나비켓실행.addActionListener(this);
-        생성.addActionListener(this);
-        삭제.addActionListener(this);
+        btCreateAcc.addActionListener(this);
+        btDelAcc.addActionListener(this);
         계정생성하기.addActionListener(this);
         계정삭제하기.addActionListener(this);
         도구.addActionListener(this);
@@ -328,14 +328,14 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
         // 아이템 리스너 등록
         noticeCheckbox.addItemListener(this);
 
-        채팅파티.addItemListener(this);
-        외침채팅.addItemListener(this);
-        장사채팅.addItemListener(this);
-        파티채팅.addItemListener(this);
-        혈맹채팅.addItemListener(this);
-        글로벌채팅.addItemListener(this);
-        귓속말채팅.addItemListener(this);
-        일반채팅.addItemListener(this);
+        cbChatChat.addItemListener(this);
+        cbChatShout.addItemListener(this);
+        cbChatTrade.addItemListener(this);
+        cbChatParty.addItemListener(this);
+        cbChatClan.addItemListener(this);
+        cbChatGlobal.addItemListener(this);
+        cbChatWhisper.addItemListener(this);
+        cbChatNormal.addItemListener(this);
 
         // 키이벤트 리스너 등록
         EnterKey enterKey = new EnterKey();
@@ -384,12 +384,13 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
     }
 
     public void serverStart() {
-        if (가동 == false) {
-            가동 = true;
+        if (startup == false) {
+            startup = true;
             tarea.setText("※서버가 가동 되었습니다.※");
 
             File logFolder = new File("Leaf_Log");
             logFolder.mkdir();
+            new File("log").mkdir();
 
             InputStream is = new Server().getClass().getResourceAsStream("/config/log.properties");
             if (is == null) {
@@ -413,6 +414,7 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
                 //int maxConnections = Math.min(Math.max(100, Config.DB_MAX_CONNECTIONS),	1000);
                 L1DatabaseFactory.setDatabaseSettings(Config.DB_DRIVER, Config.DB_URL, Config.DB_LOGIN, Config.DB_PASSWORD);
                 L1DatabaseFactory.getInstance();
+                FileDbInitializer.initializeIfNeeded();
 
             } catch (SQLException ex) {
 
@@ -428,13 +430,13 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
     }
 
     public void serverDown() {
-        if (가동 == true) {
+        if (startup == true) {
             tarea.append("\n모든플레이어 연결을 종료하는 중..");
             disconnectAllCharacters();
             tarea.append("- 완료");
             tarea.append("\n수고하셨습니다 ^^");
             try {
-                if (가동 == true) {
+                if (startup == true) {
                     BufferedWriter bw = new BufferedWriter(new FileWriter("Leaf_Log/Leaf.Log" + date + " (Server Log).txt"));
                     bw.write(tarea.getText() + "\r\n");
                     bw.close();
@@ -513,7 +515,7 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
         선물주기JFrame.add(인첸트레벨);
         선물주기JFrame.add(new Label("아이템갯수"));
         선물주기JFrame.add(아이템갯수);
-        선물주기JFrame.add(선물주기);
+        선물주기JFrame.add(btGift);
         선물주기JFrame.setTitle(선물주기닉네임.getText() + "에게 선물주기");
         선물주기JFrame.setIconImage(im);
         선물주기JFrame.setLayout(new FlowLayout(1));
@@ -581,7 +583,7 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
         이동시키기Frame.add(Y좌표);
         이동시키기Frame.add(new Label("   맵번호"));
         이동시키기Frame.add(맵번호);
-        이동시키기Frame.add(이동시키기);
+        이동시키기Frame.add(btShift);
 
         이동시키기Frame.setLayout(new FlowLayout(1));
         이동시키기Frame.setTitle(이동닉네임.getText() + "를 이동");
@@ -619,7 +621,7 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
         변신시키기Frame.add(변신닉네임);
         변신시키기Frame.add(new Label(" 몬스터번호"));
         변신시키기Frame.add(몬스터번호);
-        변신시키기Frame.add(변신시키기);
+        변신시키기Frame.add(btTansformation);
 
         변신시키기Frame.setLayout(new FlowLayout(1));
         변신시키기Frame.setTitle(변신닉네임.getText() + "을 변신");
@@ -702,7 +704,7 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
         allPresentJFrame.add(인첸트레벨);
         allPresentJFrame.add(new Label("아이템갯수"));
         allPresentJFrame.add(아이템갯수);
-        allPresentJFrame.add(allPresentButton2);
+        allPresentJFrame.add(btAllGift2);
 
         allPresentJFrame.setLayout(new FlowLayout(1));
         allPresentJFrame.setSize(250, 150);
@@ -771,7 +773,7 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
         배율설정JFrame.add(라우풀);
         배율설정JFrame.add(new Label("펫경험치"));
         배율설정JFrame.add(펫경험치);
-        배율설정JFrame.add(배율적용);
+        배율설정JFrame.add(btRate);
 
         배율설정JFrame.setLayout(new FlowLayout(1));
         배율설정JFrame.setTitle("배율설정");
@@ -826,7 +828,7 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
         인첸설정JFrame.add(아머인첸);
         인첸설정JFrame.add(new Label("악세속성인첸"));
         인첸설정JFrame.add(악세속성인첸);
-        인첸설정JFrame.add(인첸적용);
+        인첸설정JFrame.add(btEnchan);
 
         인첸설정JFrame.setLayout(new FlowLayout(1));
         인첸설정JFrame.setTitle("인첸설정");
@@ -870,7 +872,7 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
         나머지설정JFrame.add(지급시간);
         나머지설정JFrame.add(new Label("깃털지급갯수"));
         나머지설정JFrame.add(지급갯수);
-        나머지설정JFrame.add(나머지적용);
+        나머지설정JFrame.add(btOther);
 
         나머지설정JFrame.setLayout(new FlowLayout(1));
         나머지설정JFrame.setTitle("나머지설정");
@@ -976,9 +978,9 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
 
             try {
                 //Lead account =  new Account();
-                String _name = 아이디2.getText();
-                String _password = encodePassword2(비밀번호2.getText());
-                int _level = Integer.parseInt(계정레벨2.getText());//추가해야됨
+                String _name = tfID.getText();
+                String _password = encodePassword2(tfPwd.getText());
+                int _level = Integer.parseInt(tfAccLv.getText());//추가해야됨
                 Timestamp lastactive = new Timestamp(System.currentTimeMillis());
 
                 String _ip = "000.000.000.000";
@@ -1156,53 +1158,53 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
             }
         }
 
-        boolean a = 일반채팅.getState();
-        boolean b = 귓속말채팅.getState();
-        boolean c = 글로벌채팅.getState();
-        boolean d = 혈맹채팅.getState();
-        boolean e = 파티채팅.getState();
-        boolean f = 장사채팅.getState();
-        boolean g = 외침채팅.getState();
-        boolean e2 = 채팅파티.getState();  // 채팅파티 추가 [힘요정] 5월 26일
+        boolean a = cbChatNormal.getState();
+        boolean b = cbChatWhisper.getState();
+        boolean c = cbChatGlobal.getState();
+        boolean d = cbChatClan.getState();
+        boolean e = cbChatParty.getState();
+        boolean f = cbChatTrade.getState();
+        boolean g = cbChatShout.getState();
+        boolean e2 = cbChatChat.getState();  // 채팅파티 추가 [힘요정] 5월 26일
 
-        if (ie.getSource() == 일반채팅) {
+        if (ie.getSource() == cbChatNormal) {
             Config.일반 = true;
             if (a == false) {
                 Config.일반 = false;
             }
-        } else if (ie.getSource() == 귓속말채팅) {
+        } else if (ie.getSource() == cbChatWhisper) {
             Config.귓속말 = true;
             if (b == false) {
                 Config.귓속말 = false;
             }
-        } else if (ie.getSource() == 글로벌채팅) {
+        } else if (ie.getSource() == cbChatGlobal) {
             Config.글로벌 = true;
             if (c == false) {
                 Config.글로벌 = false;
             }
-        } else if (ie.getSource() == 혈맹채팅) {
+        } else if (ie.getSource() == cbChatClan) {
             Config.혈맹 = true;
             if (d == false) {
                 Config.혈맹 = false;
             }
-        } else if (ie.getSource() == 파티채팅) {
+        } else if (ie.getSource() == cbChatParty) {
             Config.파티 = true;
             if (e == false) {
                 Config.파티 = false;
             }
-        } else if (ie.getSource() == 장사채팅) {
+        } else if (ie.getSource() == cbChatTrade) {
             Config.장사 = true;
             if (f == false) {
                 Config.장사 = false;
             }
 
-        } else if (ie.getSource() == 외침채팅) {
+        } else if (ie.getSource() == cbChatShout) {
             Config.외침 = true;
             if (g == false) {
                 Config.외침 = false;
             }
 
-        } else if (ie.getSource() == 채팅파티) {  // 채팅파티 추가 [힘요정] 5월 26일
+        } else if (ie.getSource() == cbChatChat) {  // 채팅파티 추가 [힘요정] 5월 26일
             Config.채팅파티 = true;
             if (e2 == false) {
                 Config.채팅파티 = false;

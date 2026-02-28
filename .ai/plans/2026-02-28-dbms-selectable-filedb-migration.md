@@ -1,7 +1,7 @@
 # Plan: DBMS Selectable FileDB Migration
 
 Date: 2026-02-28  
-Status: Planned
+Status: In Progress
 
 ## Goal
 - 기존 비즈니스 로직/SQL 호출 흐름은 최대한 유지하면서, DBMS를 `mysql` 또는 `filedb`로 선택해 실행할 수 있게 만든다.
@@ -34,7 +34,7 @@ Status: Planned
 
 ## Option Design
 1. `config/server.properties`에 아래 키 추가
-   - `DBMS=mysql` (기본값)
+   - `DBMS=mysql|filedb`
    - `FileDBPath=./data/filedb/l1jdb`
    - `FileDBAutoInit=true`
 2. 동작 규칙
@@ -96,3 +96,16 @@ Status: Planned
 - 동일 바이너리에서 `DBMS=mysql`/`DBMS=filedb` 선택 기동 가능
 - `DBMS=mysql`에서 기존 동작 회귀 없음
 - `DBMS=filedb`에서 핵심 시나리오(기동/로그인/저장/재기동) 통과
+
+## Progress
+- 완료:
+  - `Config`에 `DBMS`, `FileDBPath`, `FileDBLogin`, `FileDBPassword` 반영
+  - `Config`에 `FileDBAutoInit` 반영
+  - `DBMS=filedb`일 때 H2 File URL 자동 구성 로직 추가
+  - `pom.xml`에 H2 의존성 추가
+  - `config/server.properties`에 DBMS 선택 옵션 추가 및 기본값을 `filedb`로 설정
+  - `data/filedb` 경로 준비
+  - `db/filedb/init.sql` 생성 (`db/l1jdb.sql` 기반 H2 호환 변환본)
+  - `Server`/`Leaf` 기동 시 FileDB 자동 초기화(`FileDbInitializer`) 연결
+- 미완료:
+  - 핵심 시나리오 검증 및 호환 SQL 보정
