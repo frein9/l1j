@@ -19,38 +19,37 @@
 
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.ClientThread;
-import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.Instance.L1PetInstance;
+import l1j.server.server.model.L1World;
 import l1j.server.server.serverpackets.S_PetInventory;
+
+import java.util.logging.Logger;
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
 
 public class C_PetMenu extends ClientBasePacket {
 
-	private static final String C_PET_MENU = "[C] C_PetMenu";
-	private static Logger _log = Logger.getLogger(C_PetMenu.class.getName());
+    private static final String C_PET_MENU = "[C] C_PetMenu";
+    private static Logger _log = Logger.getLogger(C_PetMenu.class.getName());
 
-	public C_PetMenu(byte abyte0[], ClientThread clientthread)
-			throws Exception {
-		super(abyte0);
+    public C_PetMenu(byte abyte0[], ClientThread clientthread) throws Exception {
+        super(abyte0);
 
-		int petId = readD();
+        int petId = readD();
 
-		L1PetInstance pet = (L1PetInstance) L1World.getInstance().findObject(petId);
-		L1PcInstance pc = clientthread.getActiveChar();
+        L1PetInstance pet = (L1PetInstance) L1World.getInstance().findObject(petId);
+        L1PcInstance pc = clientthread.getActiveChar();
 
-		if (pet != null && pc != null) {
-			pc.sendPackets(new S_PetInventory(pet));
-		}
-	}
+        if (pet != null && pc != null) {
+            pc.sendPackets(new S_PetInventory(pet));
+        }
+    }
 
-	@Override
-	public String getType() {
-		return C_PET_MENU;
-	}
+    @Override
+    public String getType() {
+        return C_PET_MENU;
+    }
 }

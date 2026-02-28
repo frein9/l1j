@@ -20,60 +20,59 @@
 
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.ClientThread;
 import l1j.server.server.datatables.NpcActionTable;
 import l1j.server.server.datatables.ShopTable;
-import l1j.server.server.model.L1Object;
-import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1NpcInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.L1Object;
+import l1j.server.server.model.L1World;
 import l1j.server.server.model.npc.L1NpcHtml;
 import l1j.server.server.model.npc.action.L1NpcAction;
 import l1j.server.server.serverpackets.S_NPCTalkReturn;
 import l1j.server.server.templates.L1ShopItem;
+
+import java.util.logging.Logger;
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket, C_NPCTalk
 
 public class C_NPCTalk extends ClientBasePacket {
 
-	private static final String C_NPC_TALK = "[C] C_NPCTalk";
-	private static Logger _log = Logger.getLogger(C_NPCTalk.class.getName());
+    private static final String C_NPC_TALK = "[C] C_NPCTalk";
+    private static Logger _log = Logger.getLogger(C_NPCTalk.class.getName());
 
-	public C_NPCTalk(byte abyte0[], ClientThread client)
-			throws Exception {
-		super(abyte0);
-		int objid = readD();
-		L1Object obj = L1World.getInstance().findObject(objid);
-		L1PcInstance pc = client.getActiveChar();
-		
-		if(obj instanceof L1NpcInstance){
-			L1NpcInstance n = (L1NpcInstance) obj;
-			L1ShopItem shop = ShopTable.getInstance().getShop(n.getNpcTemplate().get_npcId());
-			// 개인상점 npc 라면
-			if(shop != null && shop.getMessage() != null){
-				return;
-			}
-		}		
-		if (obj != null && pc != null) {
-			L1NpcAction action = NpcActionTable.getInstance().get(pc, obj);
-			if (action != null) {
-				L1NpcHtml html = action.execute("", pc, obj, new byte[0]);
-				if (html != null) {
-					pc.sendPackets(new S_NPCTalkReturn(obj.getId(), html));
-				}
-				return;
-			}
-			obj.onTalkAction(pc);
-		} else {
-			_log.severe("오브젝트가 발견되지 않습니다 objid=" + objid);
-		}
-	}
+    public C_NPCTalk(byte abyte0[], ClientThread client) throws Exception {
+        super(abyte0);
+        int objid = readD();
+        L1Object obj = L1World.getInstance().findObject(objid);
+        L1PcInstance pc = client.getActiveChar();
 
-	@Override
-	public String getType() {
-		return C_NPC_TALK;
-	}
+        if (obj instanceof L1NpcInstance) {
+            L1NpcInstance n = (L1NpcInstance) obj;
+            L1ShopItem shop = ShopTable.getInstance().getShop(n.getNpcTemplate().get_npcId());
+            // 개인상점 npc 라면
+            if (shop != null && shop.getMessage() != null) {
+                return;
+            }
+        }
+        if (obj != null && pc != null) {
+            L1NpcAction action = NpcActionTable.getInstance().get(pc, obj);
+            if (action != null) {
+                L1NpcHtml html = action.execute("", pc, obj, new byte[0]);
+                if (html != null) {
+                    pc.sendPackets(new S_NPCTalkReturn(obj.getId(), html));
+                }
+                return;
+            }
+            obj.onTalkAction(pc);
+        } else {
+            _log.severe("오브젝트가 발견되지 않습니다 objid=" + objid);
+        }
+    }
+
+    @Override
+    public String getType() {
+        return C_NPC_TALK;
+    }
 }

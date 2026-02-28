@@ -19,45 +19,45 @@
 
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
-
 import l1j.server.Config;
 import l1j.server.server.ClientThread;
-import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.L1World;
 import l1j.server.server.serverpackets.S_WhoAmount;
 import l1j.server.server.serverpackets.S_WhoCharinfo;
+
+import java.util.logging.Logger;
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
 
 public class C_Who extends ClientBasePacket {
 
-	private static final String C_WHO = "[C] C_Who";
-	private static Logger _log = Logger.getLogger(C_Who.class.getName());
+    private static final String C_WHO = "[C] C_Who";
+    private static Logger _log = Logger.getLogger(C_Who.class.getName());
 
-	public C_Who(byte[] decrypt, ClientThread client) {
-		super(decrypt);
-		String s = readS();
-		L1PcInstance find = L1World.getInstance().getPlayer(s);
-		L1PcInstance pc = client.getActiveChar();
+    public C_Who(byte[] decrypt, ClientThread client) {
+        super(decrypt);
+        String s = readS();
+        L1PcInstance find = L1World.getInstance().getPlayer(s);
+        L1PcInstance pc = client.getActiveChar();
 
-		if (find != null) {
-			S_WhoCharinfo s_whocharinfo = new S_WhoCharinfo(find);
-			pc.sendPackets(s_whocharinfo);
-		} else {
-			if (Config.ALT_WHO_COMMAND) {
-				String amount = String.valueOf(L1World.getInstance()
-						.getAllPlayers().size() + Config.WHOIS_CONTER);
-				S_WhoAmount s_whoamount = new S_WhoAmount(amount);
-				pc.sendPackets(s_whoamount);
-			}
-			// 대상이 없는 경우는 메세지 표시해? 아는 (분)편 수정 부탁합니다.
-		}
-	}
+        if (find != null) {
+            S_WhoCharinfo s_whocharinfo = new S_WhoCharinfo(find);
+            pc.sendPackets(s_whocharinfo);
+        } else {
+            if (Config.ALT_WHO_COMMAND) {
+                String amount = String.valueOf(L1World.getInstance()
+                        .getAllPlayers().size() + Config.WHOIS_CONTER);
+                S_WhoAmount s_whoamount = new S_WhoAmount(amount);
+                pc.sendPackets(s_whoamount);
+            }
+            // 대상이 없는 경우는 메세지 표시해? 아는 (분)편 수정 부탁합니다.
+        }
+    }
 
-	@Override
-	public String getType() {
-		return C_WHO;
-	}
+    @Override
+    public String getType() {
+        return C_WHO;
+    }
 }

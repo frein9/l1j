@@ -19,31 +19,29 @@ b * This program is free software; you can redistribute it and/or modify
 
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
 import l1j.server.server.ClientThread;
 import l1j.server.server.LoginController;
+
+import java.util.logging.Logger;
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
 
 public class C_ReturnToLogin extends ClientBasePacket {
 
-	private static final String C_RETURN_TO_LOGIN = "[C] C_ReturnToLogin";
-	private static Logger _log = Logger.getLogger(C_ReturnToLogin.class
-			.getName());
+    private static final String C_RETURN_TO_LOGIN = "[C] C_ReturnToLogin";
+    private static Logger _log = Logger.getLogger(C_ReturnToLogin.class.getName());
 
-	public C_ReturnToLogin(byte decrypt[], ClientThread client)
-			throws Exception {
-		super(decrypt);
-		String account = client.getAccountName();
-		_log.finest((new StringBuilder()).append("account : ").append(account)
-				.toString());
-		LoginController.getInstance().logout(client);
-	}
+    public C_ReturnToLogin(byte decrypt[], ClientThread client) throws Exception {
+        super(decrypt);
+        String account = client.getAccountName();
+        _log.finest((new StringBuilder()).append("account : ").append(account).toString());
+        LoginController.getInstance().logout(client);
+    }
 
-	@Override
-	public String getType() {
-		return "[C] C_ReturnToLogin";
-	}
+    @Override
+    public String getType() {
+        return "[C] C_ReturnToLogin";
+    }
 
 }
