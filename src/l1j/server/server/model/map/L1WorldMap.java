@@ -26,51 +26,50 @@ import l1j.server.MapReader;
 import l1j.server.server.utils.PerformanceTimer;
 
 public class L1WorldMap {
-	private static Logger _log = Logger.getLogger(L1WorldMap.class.getName());
+    private static Logger _log = Logger.getLogger(L1WorldMap.class.getName());
 
-	private static L1WorldMap _instance;
-	private Map<Integer, L1Map> _maps;
+    private static L1WorldMap _instance;
+    private Map<Integer, L1Map> _maps;
 
-	public static L1WorldMap getInstance() {
-		if (_instance == null) {
-			_instance = new L1WorldMap();
-		}
-		return _instance;
-	}
+    public static L1WorldMap getInstance() {
+        if (_instance == null) {
+            _instance = new L1WorldMap();
+        }
+        return _instance;
+    }
 
-	private L1WorldMap() {
-		PerformanceTimer timer = new PerformanceTimer();
-		System.out.print("loading world map...");
+    private L1WorldMap() {
+        PerformanceTimer timer = new PerformanceTimer();
+        System.out.print("loading world map...");
 
-		MapReader in = MapReader.getDefaultReader();
+        MapReader in = MapReader.getDefaultReader();
 
-		try {
-			_maps = in.read();
-			if (_maps == null) {
-				throw new RuntimeException("맵의 read에 실패");
-			}
-		} catch (Exception e) {
-			// 복귀 불능
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        try {
+            _maps = in.read();
+            if (_maps == null) {
+                throw new RuntimeException("맵의 read에 실패");
+            }
+        } catch (Exception e) {
+            // 복귀 불능
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 
-			System.exit(0);
-		}
+            System.exit(0);
+        }
 
-		System.out.println("OK! " + timer.get() + "ms");
-	}
+        System.out.println("OK! " + timer.get() + "ms");
+    }
 
-	/**
-	 * 지정된 맵의 정보를 보관 유지하는 L1Map를 돌려준다.
-	 * 
-	 * @param mapId
-	 *            맵 ID
-	 * @return 맵 정보를 보관 유지하는, L1Map 오브젝트.
-	 */
-	public L1Map getMap(short mapId) {
-		L1Map map = _maps.get((int) mapId);
-		if (map == null) { // 맵 정보가 없다
-			map = L1Map.newNull(); // 아무것도 하지 않는 Map를 돌려준다.
-		}
-		return map;
-	}
+    /**
+     * 지정된 맵의 정보를 보관 유지하는 L1Map를 돌려준다.
+     *
+     * @param mapId 맵 ID
+     * @return 맵 정보를 보관 유지하는, L1Map 오브젝트.
+     */
+    public L1Map getMap(short mapId) {
+        L1Map map = _maps.get((int) mapId);
+        if (map == null) { // 맵 정보가 없다
+            map = L1Map.newNull(); // 아무것도 하지 않는 Map를 돌려준다.
+        }
+        return map;
+    }
 }

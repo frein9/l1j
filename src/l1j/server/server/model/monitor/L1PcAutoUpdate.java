@@ -22,12 +22,12 @@ import l1j.server.server.model.Instance.L1PcInstance;
 
 public class L1PcAutoUpdate extends L1PcMonitor {
 
-	public L1PcAutoUpdate(int oId) {
-		super(oId);
-	}
+    public L1PcAutoUpdate(int oId) {
+        super(oId);
+    }
 
-	@Override
-	public void execTask(L1PcInstance pc) {
-		pc.updateObject();
-	}
+    @Override
+    public void execTask(L1PcInstance pc) {
+        pc.updateObject();
+    }
 }

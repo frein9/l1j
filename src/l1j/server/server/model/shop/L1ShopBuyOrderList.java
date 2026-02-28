@@ -26,135 +26,137 @@ import l1j.server.server.model.L1TaxCalculator;
 import l1j.server.server.templates.L1ShopItem;
 import l1j.server.server.model.Instance.L1PcInstance;
 //** 버그쟁이 처단 **//	By 도우너
-import l1j.server.server.BugKick;	
-import l1j.server.server.serverpackets.S_SystemMessage; 
+import l1j.server.server.BugKick;
+import l1j.server.server.serverpackets.S_SystemMessage;
 //** 버그쟁이 처단 **//	By 도우너
 
 class L1ShopBuyOrder {
-	private final L1ShopItem _item;
-	private final int _count;
+    private final L1ShopItem _item;
+    private final int _count;
 
-	public L1ShopBuyOrder(L1ShopItem item, int count) {
-		_item = item;
-		_count = count;
-	}
+    public L1ShopBuyOrder(L1ShopItem item, int count) {
+        _item = item;
+        _count = count;
+    }
 
-	public L1ShopItem getItem() {
-		return _item;
-	}
+    public L1ShopItem getItem() {
+        return _item;
+    }
 
-	public int getCount() {
-		return _count;
-	}
+    public int getCount() {
+        return _count;
+    }
 }
 
 public class L1ShopBuyOrderList {
-	private final L1Shop _shop;
-	private final List<L1ShopBuyOrder> _list = new ArrayList<L1ShopBuyOrder>();
-	private final L1TaxCalculator _taxCalc;
+    private final L1Shop _shop;
+    private final List<L1ShopBuyOrder> _list = new ArrayList<L1ShopBuyOrder>();
+    private final L1TaxCalculator _taxCalc;
 
-	private int _totalWeight = 0;
-	private int _totalPrice = 0;
-	private int _totalPriceTaxIncluded = 0;
-	private int bugok  = 0;	//** 상점 구입 비셔스 방어 **//  by 도우너	
+    private int _totalWeight = 0;
+    private int _totalPrice = 0;
+    private int _totalPriceTaxIncluded = 0;
+    private int bugok = 0;    //** 상점 구입 비셔스 방어 **//  by 도우너
 
-	L1ShopBuyOrderList(L1Shop shop) {
-		_shop = shop;
-		_taxCalc = new L1TaxCalculator(shop.getNpcId());
-	}
+    L1ShopBuyOrderList(L1Shop shop) {
+        _shop = shop;
+        _taxCalc = new L1TaxCalculator(shop.getNpcId());
+    }
 
-	public void add(int orderNumber, int count, L1PcInstance pc) {
+    public void add(int orderNumber, int count, L1PcInstance pc) {
 
-		if (_shop.getSellingItems().size() < orderNumber) {
-			return;
-		}
-		L1ShopItem shopItem = _shop.getSellingItems().get(orderNumber);
+        if (_shop.getSellingItems().size() < orderNumber) {
+            return;
+        }
+        L1ShopItem shopItem = _shop.getSellingItems().get(orderNumber);
 
-		int price = (int) (shopItem.getPrice() * Config.RATE_SHOP_SELLING_PRICE);
-		// 오버플로우 체크
-		for (int j = 0; j < count; j++) {
-			if (price * j < 0) {
-				return;
-			}
-		}
+        int price = (int) (shopItem.getPrice() * Config.RATE_SHOP_SELLING_PRICE);
+        // 오버플로우 체크
+        for (int j = 0; j < count; j++) {
+            if (price * j < 0) {
+                return;
+            }
+        }
 
-		if (price >= 10000 && count > 50 ) { //43억 버그방지 By_Black
+        if (price >= 10000 && count > 50) { //43억 버그방지 By_Black
             pc.sendPackets(new S_SystemMessage("\\fV1만원이상의 물품은 50개이상 구입할수없습니다."));
-			return;
-		}
+            return;
+        }
 
         if (price > 10000000 && count > 1) { // ########### 상점 버그방지 추가
             pc.sendPackets(new S_SystemMessage("\\fV10000000원이상의 물품은 1개이상 구입할수없습니다."));
             return;
-        } 
+        }
 
-		long totalPrice = _totalPrice;	//** 엔진방어 추가 **//		By 도우너
-		_totalPrice += price * count;
-			   _totalPriceTaxIncluded += _taxCalc.layTax(price) * count;
-		_totalWeight += shopItem.getItem().getWeight() * count
-				* shopItem.getPackCount();
+        long totalPrice = _totalPrice;    //** 엔진방어 추가 **//		By 도우너
+        _totalPrice += price * count;
+        _totalPriceTaxIncluded += _taxCalc.layTax(price) * count;
+        _totalWeight += shopItem.getItem().getWeight() * count
+                * shopItem.getPackCount();
 
-		//** 상점 구입 비셔스 방어 **//  by 도우너		
-		if( totalPrice >100000000){	// 구입 금액 총금액은 1억이다!!
-	   	 bugok =1;         //42억 버그 막아보장 
-			return;
-			}
-		
-	     if( totalPrice < 0 || price < 0 ){
-	      bugok =1;
-	      	return;
-	       }
-			
-		if( totalPrice >50000000 &&_totalWeight >19&&count >500){ //이런 경우 나올수 없다 ㅋ
-	       BugKick.getInstance().KickPlayer(pc);
-	   	 bugok =1;
-			return;
-			}   
-	       
-		if (count <= 0){		
-			BugKick.getInstance().KickPlayer(pc);
-	   	 bugok =1;
-			return;}	
-		
-		if (count > 1000 ) {	
-	   	 bugok =1;
-			return;}
-			//** 상점 구입 비셔스 방어 **//  by 도우너	
+        //** 상점 구입 비셔스 방어 **//  by 도우너
+        if (totalPrice > 100000000) {    // 구입 금액 총금액은 1억이다!!
+            bugok = 1;         //42억 버그 막아보장
+            return;
+        }
 
-		if (shopItem.getItem().isStackable()) {
-			_list.add(new L1ShopBuyOrder(shopItem, count
-					* shopItem.getPackCount()));
-			return;
-		}
+        if (totalPrice < 0 || price < 0) {
+            bugok = 1;
+            return;
+        }
 
-		for (int i = 0; i < (count * shopItem.getPackCount()); i++) {
-			_list.add(new L1ShopBuyOrder(shopItem, 1));
-		}
-	}
+        if (totalPrice > 50000000 && _totalWeight > 19 && count > 500) { //이런 경우 나올수 없다 ㅋ
+            BugKick.getInstance().KickPlayer(pc);
+            bugok = 1;
+            return;
+        }
 
-	List<L1ShopBuyOrder> getList() {
-		return _list;
-	}
-	
-	//** 상점 구입 비셔스 방어 **//  by 도우너	
-	public int BugOk() {
-		return bugok;
-	}	
-	//** 상점 구입 비셔스 방어 **//  by 도우너	
+        if (count <= 0) {
+            BugKick.getInstance().KickPlayer(pc);
+            bugok = 1;
+            return;
+        }
 
-	public int getTotalWeight() {
-		return _totalWeight;
-	}
+        if (count > 1000) {
+            bugok = 1;
+            return;
+        }
+        //** 상점 구입 비셔스 방어 **//  by 도우너
 
-	public int getTotalPrice() {
-		return _totalPrice;
-	}
+        if (shopItem.getItem().isStackable()) {
+            _list.add(new L1ShopBuyOrder(shopItem, count
+                    * shopItem.getPackCount()));
+            return;
+        }
 
-	public int getTotalPriceTaxIncluded() {
-		return _totalPriceTaxIncluded;
-	}
+        for (int i = 0; i < (count * shopItem.getPackCount()); i++) {
+            _list.add(new L1ShopBuyOrder(shopItem, 1));
+        }
+    }
 
-	L1TaxCalculator getTaxCalculator() {
-		return _taxCalc;
-	}
+    List<L1ShopBuyOrder> getList() {
+        return _list;
+    }
+
+    //** 상점 구입 비셔스 방어 **//  by 도우너
+    public int BugOk() {
+        return bugok;
+    }
+    //** 상점 구입 비셔스 방어 **//  by 도우너
+
+    public int getTotalWeight() {
+        return _totalWeight;
+    }
+
+    public int getTotalPrice() {
+        return _totalPrice;
+    }
+
+    public int getTotalPriceTaxIncluded() {
+        return _totalPriceTaxIncluded;
+    }
+
+    L1TaxCalculator getTaxCalculator() {
+        return _taxCalc;
+    }
 }

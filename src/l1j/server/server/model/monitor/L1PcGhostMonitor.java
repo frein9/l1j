@@ -23,19 +23,19 @@ import l1j.server.server.model.Instance.L1PcInstance;
 
 public class L1PcGhostMonitor extends L1PcMonitor {
 
-	public L1PcGhostMonitor(int oId) {
-		super(oId);
-	}
+    public L1PcGhostMonitor(int oId) {
+        super(oId);
+    }
 
-	@Override
-	public void execTask(L1PcInstance pc) {
-		// endGhost의 실행 시간이 영향 없게
-		Runnable r = new L1PcMonitor(pc.getId()) {
-			@Override
-			public void execTask(L1PcInstance pc) {
-				pc.endGhost();
-			}
-		};
-		GeneralThreadPool.getInstance().execute(r);
-	}
+    @Override
+    public void execTask(L1PcInstance pc) {
+        // endGhost의 실행 시간이 영향 없게
+        Runnable r = new L1PcMonitor(pc.getId()) {
+            @Override
+            public void execTask(L1PcInstance pc) {
+                pc.endGhost();
+            }
+        };
+        GeneralThreadPool.getInstance().execute(r);
+    }
 }

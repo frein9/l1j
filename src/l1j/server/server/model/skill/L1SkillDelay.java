@@ -28,35 +28,35 @@ import l1j.server.server.model.L1Character;
 
 public class L1SkillDelay {
 
-	private static final Logger _log = Logger.getLogger(L1SkillDelay.class
-			.getName());
+    private static final Logger _log = Logger.getLogger(L1SkillDelay.class
+            .getName());
 
-	private L1SkillDelay() {
-	}
+    private L1SkillDelay() {
+    }
 
-	static class SkillDelayTimer implements Runnable {
-		private int _delayTime;
-		private L1Character _cha;
+    static class SkillDelayTimer implements Runnable {
+        private int _delayTime;
+        private L1Character _cha;
 
-		public SkillDelayTimer(L1Character cha, int time) {
-			_cha = cha;
-			_delayTime = time;
-		}
+        public SkillDelayTimer(L1Character cha, int time) {
+            _cha = cha;
+            _delayTime = time;
+        }
 
-		@Override
-		public void run() {
-			stopDelayTimer();
-		}
+        @Override
+        public void run() {
+            stopDelayTimer();
+        }
 
-		public void stopDelayTimer() {
-			_cha.setSkillDelay(false);
-		}
-	}
+        public void stopDelayTimer() {
+            _cha.setSkillDelay(false);
+        }
+    }
 
-	public static void onSkillUse(L1Character cha, int time) {
-		cha.setSkillDelay(true);
-		GeneralThreadPool.getInstance().schedule(
-				new SkillDelayTimer(cha, time), time);
-	}
+    public static void onSkillUse(L1Character cha, int time) {
+        cha.setSkillDelay(true);
+        GeneralThreadPool.getInstance().schedule(
+                new SkillDelayTimer(cha, time), time);
+    }
 
 }

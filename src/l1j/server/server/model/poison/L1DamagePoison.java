@@ -27,94 +27,94 @@ import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.skill.L1SkillId;
 
 public class L1DamagePoison extends L1Poison {
-	private static Logger _log = Logger.getLogger(L1DamagePoison.class
-			.getName());
+    private static Logger _log = Logger.getLogger(L1DamagePoison.class
+            .getName());
 
-	private Thread _timer;
-	private final L1Character _attacker;
-	private final L1Character _target;
-	private final int _damageSpan;
-	private final int _damage;
+    private Thread _timer;
+    private final L1Character _attacker;
+    private final L1Character _target;
+    private final int _damageSpan;
+    private final int _damage;
 
-	private L1DamagePoison(L1Character attacker, L1Character cha,
-			int damageSpan, int damage) {
-		_attacker = attacker;
-		_target = cha;
-		_damageSpan = damageSpan;
-		_damage = damage;
+    private L1DamagePoison(L1Character attacker, L1Character cha,
+                           int damageSpan, int damage) {
+        _attacker = attacker;
+        _target = cha;
+        _damageSpan = damageSpan;
+        _damage = damage;
 
-		doInfection();
-	}
+        doInfection();
+    }
 
-	private class NormalPoisonTimer extends Thread {
-		@Override
-		public void run() {
-			while (true) {
-				try {
-					Thread.sleep(_damageSpan);
-				} catch (InterruptedException e) {
-					break;
-				}
+    private class NormalPoisonTimer extends Thread {
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    Thread.sleep(_damageSpan);
+                } catch (InterruptedException e) {
+                    break;
+                }
 
-				if (!_target.hasSkillEffect(L1SkillId.STATUS_POISON)) {
-					break;
-				}
-				if (_target instanceof L1PcInstance) {
-					L1PcInstance player = (L1PcInstance) _target;
-					player.receiveDamage(_attacker, _damage);
-					if (player.isDead()) { // 사망하면(자) 해독 처리
-						break;
-					}
-				} else if (_target instanceof L1MonsterInstance) {
-					L1MonsterInstance mob = (L1MonsterInstance) _target;
-					mob.receiveDamage(_attacker, _damage);
-					if (mob.isDead()) { // 사망해도 해독하지 않는다
-						return;
-					}
-				}
-			}
-			cure(); // 해독 처리
-		}
-	}
+                if (!_target.hasSkillEffect(L1SkillId.STATUS_POISON)) {
+                    break;
+                }
+                if (_target instanceof L1PcInstance) {
+                    L1PcInstance player = (L1PcInstance) _target;
+                    player.receiveDamage(_attacker, _damage);
+                    if (player.isDead()) { // 사망하면(자) 해독 처리
+                        break;
+                    }
+                } else if (_target instanceof L1MonsterInstance) {
+                    L1MonsterInstance mob = (L1MonsterInstance) _target;
+                    mob.receiveDamage(_attacker, _damage);
+                    if (mob.isDead()) { // 사망해도 해독하지 않는다
+                        return;
+                    }
+                }
+            }
+            cure(); // 해독 처리
+        }
+    }
 
-	boolean isDamageTarget(L1Character cha) {
-		return (cha instanceof L1PcInstance)
-				|| (cha instanceof L1MonsterInstance);
-	}
+    boolean isDamageTarget(L1Character cha) {
+        return (cha instanceof L1PcInstance)
+                || (cha instanceof L1MonsterInstance);
+    }
 
-	private void doInfection() {
-		_target.setSkillEffect(L1SkillId.STATUS_POISON, 30000);
-		_target.setPoisonEffect(1);
+    private void doInfection() {
+        _target.setSkillEffect(L1SkillId.STATUS_POISON, 30000);
+        _target.setPoisonEffect(1);
 
-		if (isDamageTarget(_target)) {
-			_timer = new NormalPoisonTimer();
-			GeneralThreadPool.getInstance().execute(_timer); // 통상독타이머 개시
-		}
-	}
+        if (isDamageTarget(_target)) {
+            _timer = new NormalPoisonTimer();
+            GeneralThreadPool.getInstance().execute(_timer); // 통상독타이머 개시
+        }
+    }
 
-	public static boolean doInfection(L1Character attacker, L1Character cha,
-			int damageSpan, int damage) {
-		if (!isValidTarget(cha)) {
-			return false;
-		}
+    public static boolean doInfection(L1Character attacker, L1Character cha,
+                                      int damageSpan, int damage) {
+        if (!isValidTarget(cha)) {
+            return false;
+        }
 
-		cha.setPoison(new L1DamagePoison(attacker, cha, damageSpan, damage));
-		return true;
-	}
+        cha.setPoison(new L1DamagePoison(attacker, cha, damageSpan, damage));
+        return true;
+    }
 
-	@Override
-	public int getEffectId() {
-		return 1;
-	}
+    @Override
+    public int getEffectId() {
+        return 1;
+    }
 
-	@Override
-	public void cure() {
-		if (_timer != null) {
-			_timer.interrupt(); // 독타이머 해제
-		}
+    @Override
+    public void cure() {
+        if (_timer != null) {
+            _timer.interrupt(); // 독타이머 해제
+        }
 
-		_target.setPoisonEffect(0);
-		_target.killSkillEffectTimer(L1SkillId.STATUS_POISON);
-		_target.setPoison(null);
-	}
+        _target.setPoisonEffect(0);
+        _target.killSkillEffectTimer(L1SkillId.STATUS_POISON);
+        _target.setPoison(null);
+    }
 }

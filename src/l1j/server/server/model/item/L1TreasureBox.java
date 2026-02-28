@@ -28,198 +28,198 @@ import l1j.server.server.utils.PerformanceTimer;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class L1TreasureBox {
 
-	private static Logger _log =
-			Logger.getLogger(L1TreasureBox.class.getName());
+    private static Logger _log =
+            Logger.getLogger(L1TreasureBox.class.getName());
 
-	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlRootElement(name = "TreasureBoxList")
-	private static class TreasureBoxList implements Iterable<L1TreasureBox> {
-		@XmlElement(name = "TreasureBox")
-		private List<L1TreasureBox> _list;
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlRootElement(name = "TreasureBoxList")
+    private static class TreasureBoxList implements Iterable<L1TreasureBox> {
+        @XmlElement(name = "TreasureBox")
+        private List<L1TreasureBox> _list;
 
-		public Iterator<L1TreasureBox> iterator() {
-			return _list.iterator();
-		}
-	}
+        public Iterator<L1TreasureBox> iterator() {
+            return _list.iterator();
+        }
+    }
 
-	@XmlAccessorType(XmlAccessType.FIELD)
-	private static class Item {
-		@XmlAttribute(name = "ItemId")
-		private int _itemId;
+    @XmlAccessorType(XmlAccessType.FIELD)
+    private static class Item {
+        @XmlAttribute(name = "ItemId")
+        private int _itemId;
 
-		@XmlAttribute(name = "Count")
-		private int _count;
+        @XmlAttribute(name = "Count")
+        private int _count;
 
-		private int _chance;
-		
-		@XmlAttribute(name = "Chance")
-		private void setChance(double chance) {
-			_chance = (int) (chance * 10000);
-		}
+        private int _chance;
 
-		public int getItemId() {
-			return _itemId;
-		}
+        @XmlAttribute(name = "Chance")
+        private void setChance(double chance) {
+            _chance = (int) (chance * 10000);
+        }
 
-		public int getCount() {
-			return _count;
-		}
+        public int getItemId() {
+            return _itemId;
+        }
 
-		public double getChance() {
-			return _chance;
-		}
-	}
+        public int getCount() {
+            return _count;
+        }
 
-	private static enum TYPE {
-		RANDOM, SPECIFIC
-	}
+        public double getChance() {
+            return _chance;
+        }
+    }
 
-	private static final String PATH = "./data/xml/Item/TreasureBox.xml";
+    private static enum TYPE {
+        RANDOM, SPECIFIC
+    }
 
-	private static final HashMap<Integer, L1TreasureBox> _dataMap =
-			new HashMap<Integer, L1TreasureBox>();
+    private static final String PATH = "./data/xml/Item/TreasureBox.xml";
 
-	/**
-	 * ������ ID�� TreasureBox�� �����ش�.
-	 * 
-	 * @param id - TreasureBox�� ID.������ �������� ItemId�� �ȴ�.
-	 * @return ������ ID�� TreasureBox.�߰ߵ��� �ʾҴ� ���� null.
-	 */
-	public static L1TreasureBox get(int id) {
-		return _dataMap.get(id);
-	}
+    private static final HashMap<Integer, L1TreasureBox> _dataMap =
+            new HashMap<Integer, L1TreasureBox>();
 
-	@XmlAttribute(name = "ItemId")
-	private int _boxId;
+    /**
+     * ������ ID�� TreasureBox�� �����ش�.
+     *
+     * @param id - TreasureBox�� ID.������ �������� ItemId�� �ȴ�.
+     * @return ������ ID�� TreasureBox.�߰ߵ��� �ʾҴ� ���� null.
+     */
+    public static L1TreasureBox get(int id) {
+        return _dataMap.get(id);
+    }
 
-	@XmlAttribute(name = "Type")
-	private TYPE _type;
+    @XmlAttribute(name = "ItemId")
+    private int _boxId;
 
-	private int getBoxId() {
-		return _boxId;
-	}
+    @XmlAttribute(name = "Type")
+    private TYPE _type;
 
-	private TYPE getType() {
-		return _type;
-	}
+    private int getBoxId() {
+        return _boxId;
+    }
 
-	@XmlElement(name = "Item")
-	private CopyOnWriteArrayList<Item> _items;
+    private TYPE getType() {
+        return _type;
+    }
 
-	private List<Item> getItems() {
-		return _items;
-	}
+    @XmlElement(name = "Item")
+    private CopyOnWriteArrayList<Item> _items;
 
-	private int _totalChance;
+    private List<Item> getItems() {
+        return _items;
+    }
 
-	private int getTotalChance() {
-		return _totalChance;
-	}
+    private int _totalChance;
 
-	private void init() {
-		for (Item each : getItems()) {
-			_totalChance += each.getChance();
-			if (ItemTable.getInstance().getTemplate(each.getItemId()) == null) {
-				getItems().remove(each);
-				_log.warning("������ ID " + each.getItemId()
-						+ " �� ���ø��� �߰ߵ��� �ʽ��ϴ�.");
-			}
-		}
-		if (getTotalChance() != 0 && getTotalChance() != 1000000) {
-			_log.warning("ID " + getBoxId() + " �� Ȯ���� �հ谡100%�� ���� �ʽ��ϴ�.");
-		}
-	}
+    private int getTotalChance() {
+        return _totalChance;
+    }
 
-	public static void load() {
-		PerformanceTimer timer = new PerformanceTimer();
-		System.out.print("loading TreasureBox...");
-		try {
-			JAXBContext context =
-					JAXBContext
-							.newInstance(TreasureBoxList.class);
+    private void init() {
+        for (Item each : getItems()) {
+            _totalChance += each.getChance();
+            if (ItemTable.getInstance().getTemplate(each.getItemId()) == null) {
+                getItems().remove(each);
+                _log.warning("������ ID " + each.getItemId()
+                        + " �� ���ø��� �߰ߵ��� �ʽ��ϴ�.");
+            }
+        }
+        if (getTotalChance() != 0 && getTotalChance() != 1000000) {
+            _log.warning("ID " + getBoxId() + " �� Ȯ���� �հ谡100%�� ���� �ʽ��ϴ�.");
+        }
+    }
 
-			Unmarshaller um = context.createUnmarshaller();
+    public static void load() {
+        PerformanceTimer timer = new PerformanceTimer();
+        System.out.print("loading TreasureBox...");
+        try {
+            JAXBContext context =
+                    JAXBContext
+                            .newInstance(TreasureBoxList.class);
 
-			File file = new File(PATH);
-			TreasureBoxList list = (TreasureBoxList) um.unmarshal(file);
+            Unmarshaller um = context.createUnmarshaller();
 
-			for (L1TreasureBox each : list) {
-				each.init();
-				_dataMap.put(each.getBoxId(), each);
-			}
-		} catch (Exception e) {
-			_log.log(Level.SEVERE, PATH + "�� �ε忡 ����.", e);
-			System.exit(0);
-		}
-		System.out.println("OK! " + timer.get() + "ms");
-	}
+            File file = new File(PATH);
+            TreasureBoxList list = (TreasureBoxList) um.unmarshal(file);
 
-	/**
-	 * TreasureBox�� ���� PC�� �������� �Լ���Ų��.PC�� �������� ������ ���ߴ� ����
-	 * �������� ���鿡 ��������.
-	 * 
-	 * @param pc - TreasureBox�� ���� PC
-	 * @return ������ ��� ��� �������� ������ ���� true�� �����ش�.
-	 *         ������ �ʰ� ���鿡 �������� ��쵵 true�� �ȴ�.
-	 */
-	public boolean open(L1PcInstance pc) {
-		L1ItemInstance item = null;
+            for (L1TreasureBox each : list) {
+                each.init();
+                _dataMap.put(each.getBoxId(), each);
+            }
+        } catch (Exception e) {
+            _log.log(Level.SEVERE, PATH + "�� �ε忡 ����.", e);
+            System.exit(0);
+        }
+        System.out.println("OK! " + timer.get() + "ms");
+    }
 
-		if (getType().equals(TYPE.SPECIFIC)) {
-			// ������ �������� ������ �ִ� ��
-			for (Item each : getItems()) {
-				item = ItemTable.getInstance().createItem(each.getItemId());
-				if (item != null) {
-					item.setCount(each.getCount());
-					storeItem(pc, item);
-				}
-			}
+    /**
+     * TreasureBox�� ���� PC�� �������� �Լ���Ų��.PC�� �������� ������ ���ߴ� ����
+     * �������� ���鿡 ��������.
+     *
+     * @param pc - TreasureBox�� ���� PC
+     * @return ������ ��� ��� �������� ������ ���� true�� �����ش�.
+     * ������ �ʰ� ���鿡 �������� ��쵵 true�� �ȴ�.
+     */
+    public boolean open(L1PcInstance pc) {
+        L1ItemInstance item = null;
 
-		} else if (getType().equals(TYPE.RANDOM)) {
-			// ������ �������� �������� �������� ��
-			Random random = new Random();
-			int chance = 0;
+        if (getType().equals(TYPE.SPECIFIC)) {
+            // ������ �������� ������ �ִ� ��
+            for (Item each : getItems()) {
+                item = ItemTable.getInstance().createItem(each.getItemId());
+                if (item != null) {
+                    item.setCount(each.getCount());
+                    storeItem(pc, item);
+                }
+            }
 
-			int r = random.nextInt(getTotalChance());
+        } else if (getType().equals(TYPE.RANDOM)) {
+            // ������ �������� �������� �������� ��
+            Random random = new Random();
+            int chance = 0;
 
-			for (Item each : getItems()) {
-				chance += each.getChance();
+            int r = random.nextInt(getTotalChance());
 
-				if (r < chance) {
-					item = ItemTable.getInstance().createItem(each.getItemId());
-					if (item != null) {
-						item.setCount(each.getCount());
-						storeItem(pc, item);
-					}
-					break;
-				}
-			}
-		}
+            for (Item each : getItems()) {
+                chance += each.getChance();
 
-		if (item == null) {
-			return false;
-		} else {
-			int itemId = getBoxId();
+                if (r < chance) {
+                    item = ItemTable.getInstance().createItem(each.getItemId());
+                    if (item != null) {
+                        item.setCount(each.getCount());
+                        storeItem(pc, item);
+                    }
+                    break;
+                }
+            }
+        }
 
-			// ��ȥ�� ������ ����, ������ ��ũ��, ���ũ��Ʈ�� ����
-			if (itemId == 40576 || itemId == 40577 || itemId == 40578
-					|| itemId == 40411 || itemId == 49013) {
-				pc.death(null); // ĳ���͸� �����Ų��
-			}
-			return true;
-		}
-	}
+        if (item == null) {
+            return false;
+        } else {
+            int itemId = getBoxId();
 
-	private static void storeItem(L1PcInstance pc, L1ItemInstance item) {
-		L1Inventory inventory;
+            // ��ȥ�� ������ ����, ������ ��ũ��, ���ũ��Ʈ�� ����
+            if (itemId == 40576 || itemId == 40577 || itemId == 40578
+                    || itemId == 40411 || itemId == 49013) {
+                pc.death(null); // ĳ���͸� �����Ų��
+            }
+            return true;
+        }
+    }
 
-		if (pc.getInventory().checkAddItem(item, item.getCount()) == L1Inventory.OK) {
-			inventory = pc.getInventory();
-		} else {
-			// ���� ��  ���� ���� ���鿡 ����߸��� ó���� ĵ���� ���� �ʴ´�(���� ����)
-			inventory = L1World.getInstance().getInventory(pc.getLocation());
-		}
-		inventory.storeItem(item);
-		pc.sendPackets(new S_ServerMessage(403, item.getLogName())); // %0�� �տ� �־����ϴ�.
-	}
+    private static void storeItem(L1PcInstance pc, L1ItemInstance item) {
+        L1Inventory inventory;
+
+        if (pc.getInventory().checkAddItem(item, item.getCount()) == L1Inventory.OK) {
+            inventory = pc.getInventory();
+        } else {
+            // ���� ��  ���� ���� ���鿡 ����߸��� ó���� ĵ���� ���� �ʴ´�(���� ����)
+            inventory = L1World.getInstance().getInventory(pc.getLocation());
+        }
+        inventory.storeItem(item);
+        pc.sendPackets(new S_ServerMessage(403, item.getLogName())); // %0�� �տ� �־����ϴ�.
+    }
 }

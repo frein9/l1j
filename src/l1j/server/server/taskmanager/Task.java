@@ -25,25 +25,25 @@ import l1j.server.server.taskmanager.TaskManager.ExecutedTask;
 
 /**
  * @author Layane
- * 
+ *
  */
 public abstract class Task {
-	private static Logger _log = Logger.getLogger(Task.class.getName());
+    private static Logger _log = Logger.getLogger(Task.class.getName());
 
-	public void initializate() {
-		if (Config.DEBUG) {
-			_log.info("Task" + getName() + " inializate");
-		}
-	}
+    public void initializate() {
+        if (Config.DEBUG) {
+            _log.info("Task" + getName() + " inializate");
+        }
+    }
 
-	public ScheduledFuture launchSpecial(ExecutedTask instance) {
-		return null;
-	}
+    public ScheduledFuture launchSpecial(ExecutedTask instance) {
+        return null;
+    }
 
-	public abstract String getName();
+    public abstract String getName();
 
-	public abstract void onTimeElapsed(ExecutedTask task);
+    public abstract void onTimeElapsed(ExecutedTask task);
 
-	public void onDestroy() {
-	}
+    public void onDestroy() {
+    }
 }

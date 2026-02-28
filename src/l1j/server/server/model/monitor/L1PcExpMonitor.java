@@ -24,34 +24,34 @@ import l1j.server.server.serverpackets.S_Lawful;
 
 public class L1PcExpMonitor extends L1PcMonitor {
 
-	private int _old_lawful;
+    private int _old_lawful;
 
-	private int _old_exp;
+    private int _old_exp;
 
-	public L1PcExpMonitor(int oId) {
-		super(oId);
-	}
+    public L1PcExpMonitor(int oId) {
+        super(oId);
+    }
 
-	@Override
-	public void execTask(L1PcInstance pc) {
+    @Override
+    public void execTask(L1PcInstance pc) {
 
-		// 로우훌이 바뀌었을 경우는 S_Lawful를 송신
+        // 로우훌이 바뀌었을 경우는 S_Lawful를 송신
 // // 다만 색이 변함없는 경우는 송신하지 않는다
 // if (_old_lawful != pc.getLawful()
 // && !((IntRange.includes(_old_lawful, 9000, 32767) && IntRange
 // .includes(pc.getLawful(), 9000, 32767)) || (IntRange
 // .includes(_old_lawful, -32768, -2000) && IntRange
 // .includes(pc.getLawful(), -32768, -2000)))) {
-		if (_old_lawful != pc.getLawful()) {
-			_old_lawful = pc.getLawful();
-			S_Lawful s_lawful = new S_Lawful(pc.getId(), _old_lawful);
-			pc.sendPackets(s_lawful);
-			pc.broadcastPacket(s_lawful);
-		}
+        if (_old_lawful != pc.getLawful()) {
+            _old_lawful = pc.getLawful();
+            S_Lawful s_lawful = new S_Lawful(pc.getId(), _old_lawful);
+            pc.sendPackets(s_lawful);
+            pc.broadcastPacket(s_lawful);
+        }
 
-		if (_old_exp != pc.getExp()) {
-			_old_exp = pc.getExp();
-			pc.onChangeExp();
-		}
-	}
+        if (_old_exp != pc.getExp()) {
+            _old_exp = pc.getExp();
+            pc.onChangeExp();
+        }
+    }
 }

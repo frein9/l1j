@@ -25,109 +25,109 @@ import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.serverpackets.S_Paralysis;
 
 public class L1ParalysisPoison extends L1Poison {
-	// 마비독의 성능 일람 유예 지속 (참고가격, 미적용)
-	// 굴 20 45
-	// 아스테 10 60
-	// 의혈지네 14 30
-	// D-굴 39 45
+    // 마비독의 성능 일람 유예 지속 (참고가격, 미적용)
+    // 굴 20 45
+    // 아스테 10 60
+    // 의혈지네 14 30
+    // D-굴 39 45
 
-	private final L1Character _target;
-	private Thread _timer;
-	private final int _delay;
-	private final int _time;
-	private int _effectId = 1;
+    private final L1Character _target;
+    private Thread _timer;
+    private final int _delay;
+    private final int _time;
+    private int _effectId = 1;
 
-	private class ParalysisPoisonTimer extends Thread {
-		@Override
-		public void run() {
-			_target.setSkillEffect(L1SkillId.STATUS_POISON_PARALYZING, 0);
+    private class ParalysisPoisonTimer extends Thread {
+        @Override
+        public void run() {
+            _target.setSkillEffect(L1SkillId.STATUS_POISON_PARALYZING, 0);
 
-			try {
-				Thread.sleep(_delay); // 마비될 때까지의 유예 시간을 기다린다.
-			} catch (InterruptedException e) {
-				_target
-						.killSkillEffectTimer(L1SkillId.STATUS_POISON_PARALYZING);
-				return;
-			}
+            try {
+                Thread.sleep(_delay); // 마비될 때까지의 유예 시간을 기다린다.
+            } catch (InterruptedException e) {
+                _target
+                        .killSkillEffectTimer(L1SkillId.STATUS_POISON_PARALYZING);
+                return;
+            }
 
-			// 효과를 초록으로부터 회색에
-			_effectId = 2;
-			_target.setPoisonEffect(2);
+            // 효과를 초록으로부터 회색에
+            _effectId = 2;
+            _target.setPoisonEffect(2);
 
-			if (_target instanceof L1PcInstance) {
-				L1PcInstance player = (L1PcInstance) _target;
-				if (player.isDead() == false) {
-					player.sendPackets(new S_Paralysis(1, true)); // 마비 상태로 한다
-					_timer = new ParalysisTimer();
-					GeneralThreadPool.getInstance().execute(_timer); // 마비 타이머 개시
-					if (isInterrupted()) {
-						_timer.interrupt();
-					}
-				}
-			}
-		}
-	}
+            if (_target instanceof L1PcInstance) {
+                L1PcInstance player = (L1PcInstance) _target;
+                if (player.isDead() == false) {
+                    player.sendPackets(new S_Paralysis(1, true)); // 마비 상태로 한다
+                    _timer = new ParalysisTimer();
+                    GeneralThreadPool.getInstance().execute(_timer); // 마비 타이머 개시
+                    if (isInterrupted()) {
+                        _timer.interrupt();
+                    }
+                }
+            }
+        }
+    }
 
-	private class ParalysisTimer extends Thread {
-		@Override
-		public void run() {
-			_target.killSkillEffectTimer(L1SkillId.STATUS_POISON_PARALYZING);
-			_target.setSkillEffect(L1SkillId.STATUS_POISON_PARALYZED, 0);
-			try {
-				Thread.sleep(_time);
-			} catch (InterruptedException e) {
-			}
+    private class ParalysisTimer extends Thread {
+        @Override
+        public void run() {
+            _target.killSkillEffectTimer(L1SkillId.STATUS_POISON_PARALYZING);
+            _target.setSkillEffect(L1SkillId.STATUS_POISON_PARALYZED, 0);
+            try {
+                Thread.sleep(_time);
+            } catch (InterruptedException e) {
+            }
 
-			_target.killSkillEffectTimer(L1SkillId.STATUS_POISON_PARALYZED);
-			if (_target instanceof L1PcInstance) {
-				L1PcInstance player = (L1PcInstance) _target;
-				if (!player.isDead()) {
-					player.sendPackets(new S_Paralysis(1, false)); // 마비 상태를 해제한다
-					cure(); // 해독 처리
-				}
-			}
-		}
-	}
+            _target.killSkillEffectTimer(L1SkillId.STATUS_POISON_PARALYZED);
+            if (_target instanceof L1PcInstance) {
+                L1PcInstance player = (L1PcInstance) _target;
+                if (!player.isDead()) {
+                    player.sendPackets(new S_Paralysis(1, false)); // 마비 상태를 해제한다
+                    cure(); // 해독 처리
+                }
+            }
+        }
+    }
 
-	private L1ParalysisPoison(L1Character cha, int delay, int time) {
-		_target = cha;
-		_delay = delay;
-		_time = time;
+    private L1ParalysisPoison(L1Character cha, int delay, int time) {
+        _target = cha;
+        _delay = delay;
+        _time = time;
 
-		doInfection();
-	}
+        doInfection();
+    }
 
-	public static boolean doInfection(L1Character cha, int delay, int time) {
-		if (!L1Poison.isValidTarget(cha)) {
-			return false;
-		}
+    public static boolean doInfection(L1Character cha, int delay, int time) {
+        if (!L1Poison.isValidTarget(cha)) {
+            return false;
+        }
 
-		cha.setPoison(new L1ParalysisPoison(cha, delay, time));
-		return true;
-	}
+        cha.setPoison(new L1ParalysisPoison(cha, delay, time));
+        return true;
+    }
 
-	private void doInfection() {
-		sendMessageIfPlayer(_target, 212);
-		_target.setPoisonEffect(1);
+    private void doInfection() {
+        sendMessageIfPlayer(_target, 212);
+        _target.setPoisonEffect(1);
 
-		if (_target instanceof L1PcInstance) {
-			_timer = new ParalysisPoisonTimer();
-			GeneralThreadPool.getInstance().execute(_timer);
-		}
-	}
+        if (_target instanceof L1PcInstance) {
+            _timer = new ParalysisPoisonTimer();
+            GeneralThreadPool.getInstance().execute(_timer);
+        }
+    }
 
-	@Override
-	public int getEffectId() {
-		return _effectId;
-	}
+    @Override
+    public int getEffectId() {
+        return _effectId;
+    }
 
-	@Override
-	public void cure() {
-		if (_timer != null) {
-			_timer.interrupt(); // 마비독타이머 해제
-		}
+    @Override
+    public void cure() {
+        if (_timer != null) {
+            _timer.interrupt(); // 마비독타이머 해제
+        }
 
-		_target.setPoisonEffect(0);
-		_target.setPoison(null);
-	}
+        _target.setPoisonEffect(0);
+        _target.setPoison(null);
+    }
 }

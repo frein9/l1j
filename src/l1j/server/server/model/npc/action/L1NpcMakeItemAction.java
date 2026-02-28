@@ -38,168 +38,168 @@ import l1j.server.server.templates.L1Item;
 import l1j.server.server.utils.IterableElementList;
 
 public class L1NpcMakeItemAction extends L1NpcXmlAction {
-	private final List<L1ObjectAmount<Integer>> _materials = new ArrayList<L1ObjectAmount<Integer>>();
-	private final List<L1ObjectAmount<Integer>> _items = new ArrayList<L1ObjectAmount<Integer>>();
-	private final boolean _isAmountInputable;
-	private final L1NpcAction _actionOnSucceed;
-	private final L1NpcAction _actionOnFail;
+    private final List<L1ObjectAmount<Integer>> _materials = new ArrayList<L1ObjectAmount<Integer>>();
+    private final List<L1ObjectAmount<Integer>> _items = new ArrayList<L1ObjectAmount<Integer>>();
+    private final boolean _isAmountInputable;
+    private final L1NpcAction _actionOnSucceed;
+    private final L1NpcAction _actionOnFail;
 
-	public L1NpcMakeItemAction(Element element) {
-		super(element);
+    public L1NpcMakeItemAction(Element element) {
+        super(element);
 
-		_isAmountInputable = L1NpcXmlParser.getBoolAttribute(element,
-				"AmountInputable", true);
-		NodeList list = element.getChildNodes();
-		for (Element elem : new IterableElementList(list)) {
-			if (elem.getNodeName().equalsIgnoreCase("Material")) {
-				int id = Integer.valueOf(elem.getAttribute("ItemId"));
-				int amount = Integer.valueOf(elem.getAttribute("Amount"));
-				_materials.add(new L1ObjectAmount<Integer>(id, amount));
-				continue;
-			}
-			if (elem.getNodeName().equalsIgnoreCase("Item")) {
-				int id = Integer.valueOf(elem.getAttribute("ItemId"));
-				int amount = Integer.valueOf(elem.getAttribute("Amount"));
-				_items.add(new L1ObjectAmount<Integer>(id, amount));
-				continue;
-			}
-		}
+        _isAmountInputable = L1NpcXmlParser.getBoolAttribute(element,
+                "AmountInputable", true);
+        NodeList list = element.getChildNodes();
+        for (Element elem : new IterableElementList(list)) {
+            if (elem.getNodeName().equalsIgnoreCase("Material")) {
+                int id = Integer.valueOf(elem.getAttribute("ItemId"));
+                int amount = Integer.valueOf(elem.getAttribute("Amount"));
+                _materials.add(new L1ObjectAmount<Integer>(id, amount));
+                continue;
+            }
+            if (elem.getNodeName().equalsIgnoreCase("Item")) {
+                int id = Integer.valueOf(elem.getAttribute("ItemId"));
+                int amount = Integer.valueOf(elem.getAttribute("Amount"));
+                _items.add(new L1ObjectAmount<Integer>(id, amount));
+                continue;
+            }
+        }
 
-		if (_items.isEmpty() || _materials.isEmpty()) {
-			throw new IllegalArgumentException();
-		}
+        if (_items.isEmpty() || _materials.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
 
-		Element elem = L1NpcXmlParser.getFirstChildElementByTagName(element,
-				"Succeed");
-		_actionOnSucceed = elem == null ?  null : new L1NpcListedAction(elem);
-		elem = L1NpcXmlParser.getFirstChildElementByTagName(element, "Fail");
-		_actionOnFail = elem == null ?  null : new L1NpcListedAction(elem);
-	}
+        Element elem = L1NpcXmlParser.getFirstChildElementByTagName(element,
+                "Succeed");
+        _actionOnSucceed = elem == null ? null : new L1NpcListedAction(elem);
+        elem = L1NpcXmlParser.getFirstChildElementByTagName(element, "Fail");
+        _actionOnFail = elem == null ? null : new L1NpcListedAction(elem);
+    }
 
-	private boolean makeItems(L1PcInstance pc, String npcName, int amount) {
-		if (amount <= 0 || amount >= 1000 ){  //추가
-			return false;
-		}
-		if (amount <= 0) {
-			return false;
-		}
+    private boolean makeItems(L1PcInstance pc, String npcName, int amount) {
+        if (amount <= 0 || amount >= 1000) {  //추가
+            return false;
+        }
+        if (amount <= 0) {
+            return false;
+        }
 
-		boolean isEnoughMaterials = true;
-		for (L1ObjectAmount<Integer> material : _materials) {
-			if (!pc.getInventory().checkItemNotEquipped(material.getObject(),
-					material.getAmount() * amount)) {
-				L1Item temp = ItemTable.getInstance().getTemplate(
-						material.getObject());
-				pc.sendPackets(new S_ServerMessage(337, temp.getName() + "("
-						+ ((material.getAmount() * amount) - pc.getInventory()
-						.countItems(temp.getItemId())) + ")")); // \f1%0이 부족합니다.
-				isEnoughMaterials = false;
-			}
-		}
-		if (!isEnoughMaterials) {
-			return false;
-		}
+        boolean isEnoughMaterials = true;
+        for (L1ObjectAmount<Integer> material : _materials) {
+            if (!pc.getInventory().checkItemNotEquipped(material.getObject(),
+                    material.getAmount() * amount)) {
+                L1Item temp = ItemTable.getInstance().getTemplate(
+                        material.getObject());
+                pc.sendPackets(new S_ServerMessage(337, temp.getName() + "("
+                        + ((material.getAmount() * amount) - pc.getInventory()
+                        .countItems(temp.getItemId())) + ")")); // \f1%0이 부족합니다.
+                isEnoughMaterials = false;
+            }
+        }
+        if (!isEnoughMaterials) {
+            return false;
+        }
 
-		// 용량과 중량의 계산
-		int countToCreate = 0; // 아이템의 개수(전만물은 1개)
-		int weight = 0;
+        // 용량과 중량의 계산
+        int countToCreate = 0; // 아이템의 개수(전만물은 1개)
+        int weight = 0;
 
-		for (L1ObjectAmount<Integer> makingItem : _items) {
-			L1Item temp = ItemTable.getInstance().getTemplate(
-					makingItem.getObject());
-			if (temp.isStackable()) {
-				if (!pc.getInventory().checkItem(makingItem.getObject())) {
-					countToCreate += 1;
-				}
-			} else {
-				countToCreate += makingItem.getAmount() * amount;
-			}
-			weight += temp.getWeight() * (makingItem.getAmount() * amount)
-					/ 1000;
-		}
-		// 용량 확인
-		long _countToCreate = countToCreate;
-		if(_countToCreate  < 0 || _countToCreate > 1000 ){
-           return false;
-		}
-		if (pc.getInventory().getSize() + countToCreate > 180) {
-			pc.sendPackets(new S_ServerMessage(263)); // \f1한사람의 캐릭터가 가지고 걸을 수 있는 아이템은 최대 180개까지입니다.
-			return false;
-		}
-		// 중량 확인
-		if (pc.getMaxWeight() < pc.getInventory().getWeight() + weight) {
-			pc.sendPackets(new S_ServerMessage(82)); // 아이템이 너무 무거워, 더 이상 가질 수 없습니다.
-			return false;
-		}
+        for (L1ObjectAmount<Integer> makingItem : _items) {
+            L1Item temp = ItemTable.getInstance().getTemplate(
+                    makingItem.getObject());
+            if (temp.isStackable()) {
+                if (!pc.getInventory().checkItem(makingItem.getObject())) {
+                    countToCreate += 1;
+                }
+            } else {
+                countToCreate += makingItem.getAmount() * amount;
+            }
+            weight += temp.getWeight() * (makingItem.getAmount() * amount)
+                    / 1000;
+        }
+        // 용량 확인
+        long _countToCreate = countToCreate;
+        if (_countToCreate < 0 || _countToCreate > 1000) {
+            return false;
+        }
+        if (pc.getInventory().getSize() + countToCreate > 180) {
+            pc.sendPackets(new S_ServerMessage(263)); // \f1한사람의 캐릭터가 가지고 걸을 수 있는 아이템은 최대 180개까지입니다.
+            return false;
+        }
+        // 중량 확인
+        if (pc.getMaxWeight() < pc.getInventory().getWeight() + weight) {
+            pc.sendPackets(new S_ServerMessage(82)); // 아이템이 너무 무거워, 더 이상 가질 수 없습니다.
+            return false;
+        }
 
-		for (L1ObjectAmount<Integer> material : _materials) {
-			// 재료 소비
-			pc.getInventory().consumeItem(material.getObject(),
-					material.getAmount() * amount);
-		}
+        for (L1ObjectAmount<Integer> material : _materials) {
+            // 재료 소비
+            pc.getInventory().consumeItem(material.getObject(),
+                    material.getAmount() * amount);
+        }
 
-		for (L1ObjectAmount<Integer> makingItem : _items) {
-			L1ItemInstance item = pc.getInventory().storeItem(
-					makingItem.getObject(), makingItem.getAmount() * amount);
-			if (item != null && (!(item.getCount() < 0 && item.getCount() > 5000))) {
-				String itemName = ItemTable.getInstance().getTemplate(
-						makingItem.getObject()).getName();
-				if (makingItem.getAmount() * amount > 1
-						|| makingItem.getAmount() * amount < 1000) {
-					itemName = itemName + " (" + makingItem.getAmount()
-							* amount + ")";
-				}
-				pc.sendPackets(new S_ServerMessage(143, npcName, itemName)); // \f1%0이%1를 주었습니다.
-			}
-		}
-		return true;
-	}
+        for (L1ObjectAmount<Integer> makingItem : _items) {
+            L1ItemInstance item = pc.getInventory().storeItem(
+                    makingItem.getObject(), makingItem.getAmount() * amount);
+            if (item != null && (!(item.getCount() < 0 && item.getCount() > 5000))) {
+                String itemName = ItemTable.getInstance().getTemplate(
+                        makingItem.getObject()).getName();
+                if (makingItem.getAmount() * amount > 1
+                        || makingItem.getAmount() * amount < 1000) {
+                    itemName = itemName + " (" + makingItem.getAmount()
+                            * amount + ")";
+                }
+                pc.sendPackets(new S_ServerMessage(143, npcName, itemName)); // \f1%0이%1를 주었습니다.
+            }
+        }
+        return true;
+    }
 
-	/**
-	 * 지정된 목록내에, 소재가 몇 세트 있을까 센다
-	 */
-	private int countNumOfMaterials(L1PcInventory inv) {
-		int count = Integer.MAX_VALUE;
-		for (L1ObjectAmount<Integer> material : _materials) {
-			int numOfSet = inv.countItems(material.getObject())
-					/ material.getAmount();
-			count = Math.min(count, numOfSet);
-		}
-			if(count > 0){
+    /**
+     * 지정된 목록내에, 소재가 몇 세트 있을까 센다
+     */
+    private int countNumOfMaterials(L1PcInventory inv) {
+        int count = Integer.MAX_VALUE;
+        for (L1ObjectAmount<Integer> material : _materials) {
+            int numOfSet = inv.countItems(material.getObject())
+                    / material.getAmount();
+            count = Math.min(count, numOfSet);
+        }
+        if (count > 0) {
             return count;
-		}
-		return count;
-	}
+        }
+        return count;
+    }
 
-	@Override
-	public L1NpcHtml execute(String actionName, L1PcInstance pc, L1Object obj,
-			byte[] args) {
-		int numOfMaterials = countNumOfMaterials(pc.getInventory());
-		if (1 < numOfMaterials && _isAmountInputable) {
-			pc.sendPackets(new S_HowManyMake(obj.getId(), numOfMaterials,
-					actionName));
-			return null;
-		}
-		return executeWithAmount(actionName, pc, obj, 1);
-	}
+    @Override
+    public L1NpcHtml execute(String actionName, L1PcInstance pc, L1Object obj,
+                             byte[] args) {
+        int numOfMaterials = countNumOfMaterials(pc.getInventory());
+        if (1 < numOfMaterials && _isAmountInputable) {
+            pc.sendPackets(new S_HowManyMake(obj.getId(), numOfMaterials,
+                    actionName));
+            return null;
+        }
+        return executeWithAmount(actionName, pc, obj, 1);
+    }
 
-	@Override
-	public L1NpcHtml executeWithAmount(String actionName, L1PcInstance pc,
-			L1Object obj, int amount) {
-		L1NpcInstance npc = (L1NpcInstance) obj;
-		L1NpcHtml result = null;
-		if (makeItems(pc, npc.getNpcTemplate().get_name(), amount)) {
-			if (_actionOnSucceed != null) {
-				result = _actionOnSucceed.execute(actionName, pc, obj,
-						new byte[0]);
-			}
-		} else {
-			if (_actionOnFail != null) {
-				result = _actionOnFail
-						.execute(actionName, pc, obj, new byte[0]);
-			}
-		}
-		return result == null ?  L1NpcHtml.HTML_CLOSE : result;
-	}
+    @Override
+    public L1NpcHtml executeWithAmount(String actionName, L1PcInstance pc,
+                                       L1Object obj, int amount) {
+        L1NpcInstance npc = (L1NpcInstance) obj;
+        L1NpcHtml result = null;
+        if (makeItems(pc, npc.getNpcTemplate().get_name(), amount)) {
+            if (_actionOnSucceed != null) {
+                result = _actionOnSucceed.execute(actionName, pc, obj,
+                        new byte[0]);
+            }
+        } else {
+            if (_actionOnFail != null) {
+                result = _actionOnFail
+                        .execute(actionName, pc, obj, new byte[0]);
+            }
+        }
+        return result == null ? L1NpcHtml.HTML_CLOSE : result;
+    }
 
 }

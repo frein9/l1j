@@ -24,57 +24,56 @@ import l1j.server.server.serverpackets.S_Poison;
 import l1j.server.server.serverpackets.S_ServerMessage;
 
 public abstract class L1Poison {
-	protected static boolean isValidTarget(L1Character cha) {
-		if (cha == null) {
-			return false;
-		}
-		// 독은 중복 하지 않는다
-		if (cha.getPoison() != null) {
-			return false;
-		}
+    protected static boolean isValidTarget(L1Character cha) {
+        if (cha == null) {
+            return false;
+        }
+        // 독은 중복 하지 않는다
+        if (cha.getPoison() != null) {
+            return false;
+        }
 
-		if (!(cha instanceof L1PcInstance)) {
-			return true;
-		}
+        if (!(cha instanceof L1PcInstance)) {
+            return true;
+        }
 
-		L1PcInstance player = (L1PcInstance) cha;
-		// 제니스링 장비중, 바포멧트아마 장비중 , 베놈레지스트중
-		if (player.getInventory().checkEquipped(20298)
-				|| player.getInventory().checkEquipped(20117)
-			    || player.getInventory().checkEquipped(20700)  // 안타 인내력
+        L1PcInstance player = (L1PcInstance) cha;
+        // 제니스링 장비중, 바포멧트아마 장비중 , 베놈레지스트중
+        if (player.getInventory().checkEquipped(20298)
+                || player.getInventory().checkEquipped(20117)
+                || player.getInventory().checkEquipped(20700)  // 안타 인내력
                 || player.getInventory().checkEquipped(20704) // 안타 완력
                 || player.getInventory().checkEquipped(20708) // 안타 예지력
                 || player.getInventory().checkEquipped(20712) // 안타 마력
-                || player.hasSkillEffect(7678)		// 생명의 마안
-				|| player.hasSkillEffect(104)) {
-			return false;
-		}
-		return true;
-	}
+                || player.hasSkillEffect(7678)        // 생명의 마안
+                || player.hasSkillEffect(104)) {
+            return false;
+        }
+        return true;
+    }
 
-	// 미묘···솔직하게 sendPackets를 L1Character에 끌어올려야할 것인가도 모른다
-	protected static void sendMessageIfPlayer(L1Character cha, int msgId) {
-		if (!(cha instanceof L1PcInstance)) {
-			return;
-		}
+    // 미묘···솔직하게 sendPackets를 L1Character에 끌어올려야할 것인가도 모른다
+    protected static void sendMessageIfPlayer(L1Character cha, int msgId) {
+        if (!(cha instanceof L1PcInstance)) {
+            return;
+        }
 
-		L1PcInstance player = (L1PcInstance) cha;
-		player.sendPackets(new S_ServerMessage(msgId));
-	}
+        L1PcInstance player = (L1PcInstance) cha;
+        player.sendPackets(new S_ServerMessage(msgId));
+    }
 
-	/**
-	 * 이 독의 효과 ID를 돌려준다.
-	 * 
-	 * @see S_Poison#S_Poison(int, int)
-	 * 
-	 * @return S_Poison로 사용되는 효과 ID
-	 */
-	public abstract int getEffectId();
+    /**
+     * 이 독의 효과 ID를 돌려준다.
+     *
+     * @return S_Poison로 사용되는 효과 ID
+     * @see S_Poison#S_Poison(int, int)
+     */
+    public abstract int getEffectId();
 
-	/**
-	 * 이 독의 효과를 없앤다.<br>
-	 * 
-	 * @see L1Character#curePoison()
-	 */
-	public abstract void cure();
+    /**
+     * 이 독의 효과를 없앤다.<br>
+     *
+     * @see L1Character#curePoison()
+     */
+    public abstract void cure();
 }
