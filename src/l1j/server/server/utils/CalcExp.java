@@ -459,8 +459,10 @@ public class CalcExp {
                 || pc.getMapId() == 783 || pc.getMapId() == 784 || pc.getMapId() == 23 || pc.getMapId() == 24
                 || pc.getMapId() == 240 || pc.getMapId() == 241 || pc.getMapId() == 242 || pc.getMapId() == 243
                 || pc.getMapId() == 248 || pc.getMapId() == 249 || pc.getMapId() == 250 || pc.getMapId() == 251
-                || pc.getMapId() == 257 || pc.getMapId() == 258 || pc.getMapId() == 259)////맵아뒤입니다. {
-            pc.addExp(add_exp * 6 / 5);/// 숫자가 배율입니다.
+                || pc.getMapId() == 257 || pc.getMapId() == 258 || pc.getMapId() == 259) {  ////맵아뒤입니다.
+            pc.addExp(add_exp * 6 / 5);
+
+            /// 숫자가 배율입니다.
             // add_exp += add_exp * 0.5;//
         } else {
 

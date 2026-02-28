@@ -1425,7 +1425,7 @@ public class L1MonsterInstance2 extends L1NpcInstance {
             int npcId = getNpcTemplate().get_npcId();
             if (npcId != 45640
                     || (npcId == 45640 && getTempCharGfx() == 2332)) {
-                DropTable.getInstance().dropShare(L1MonsterInstance.this,
+                DropTable.getInstance().dropShare(L1MonsterInstance2.this,
                         dropTargetList, dropHateList);
             }
         } catch (Exception e) {
