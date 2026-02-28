@@ -18,37 +18,36 @@
  */
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.ClientThread;
 import l1j.server.server.model.Instance.L1PcInstance;
 
+import java.util.logging.Logger;
+
 public class C_Disconnect extends ClientBasePacket {
-	private static final String C_DISCONNECT = "[C] C_Disconnect";
-	private static Logger _log = Logger.getLogger(C_Disconnect.class.getName());
+    private static final String C_DISCONNECT = "[C] C_Disconnect";
+    private static Logger _log = Logger.getLogger(C_Disconnect.class.getName());
 
-	public C_Disconnect(byte[] decrypt, ClientThread client) {
-		super(decrypt);
-		client.CharReStart(true);
-		L1PcInstance pc = client.getActiveChar();
-		if (pc != null) {
+    public C_Disconnect(byte[] decrypt, ClientThread client) {
+        super(decrypt);
+        client.CharReStart(true);
+        L1PcInstance pc = client.getActiveChar();
+        if (pc != null) {
 
-			_log.fine("Disconnect from: " + pc.getName());
+            _log.fine("Disconnect from: " + pc.getName());
 
-			ClientThread.quitGame(pc);
+            ClientThread.quitGame(pc);
 
-			synchronized (pc) {
-				pc.logout();
-				client.setActiveChar(null);
-			}
-		} else {
-			_log.fine("Disconnect Request from Account : "
-					+ client.getAccountName());
-		}
-	}
+            synchronized (pc) {
+                pc.logout();
+                client.setActiveChar(null);
+            }
+        } else {
+            _log.fine("Disconnect Request from Account : " + client.getAccountName());
+        }
+    }
 
-	@Override
-	public String getType() {
-		return C_DISCONNECT;
-	}
+    @Override
+    public String getType() {
+        return C_DISCONNECT;
+    }
 }

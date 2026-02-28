@@ -19,47 +19,46 @@
 
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.ClientThread;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_DoActionGFX;
-import static l1j.server.server.model.skill.L1SkillId.*;
+
+import java.util.logging.Logger;
+
+import static l1j.server.server.model.skill.L1SkillId.SHAPE_CHANGE;
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
 
 public class C_ExtraCommand extends ClientBasePacket {
-	private static final String C_EXTRA_COMMAND = "[C] C_ExtraCommand";
-	private static Logger _log = Logger.getLogger(C_ExtraCommand.class
-			.getName());
+    private static final String C_EXTRA_COMMAND = "[C] C_ExtraCommand";
+    private static Logger _log = Logger.getLogger(C_ExtraCommand.class.getName());
 
-	public C_ExtraCommand(byte abyte0[], ClientThread client)
-			throws Exception {
-		super(abyte0);
-		int actionId = readC();
-		L1PcInstance pc = client.getActiveChar();
-		if (pc.isGhost()) {
-			return;
-		}
-		if (pc.isInvisble()) { // 인비지비리티, 브라인드하이딘그중
-			return;
-		}
-		if (pc.isTeleport()) { // 텔레포트 처리중
-			return;
-		}
-		if (pc.hasSkillEffect(SHAPE_CHANGE)) { // 만일을 위해, 변신중은 타플레이어에 송신하지 않는다
-			int gfxId = pc.getTempCharGfx();
-			if (gfxId != 6080 && gfxId != 6094) { // 기마용 헤룸 변신은 예외
-				return;
-			}
-		}
-		S_DoActionGFX gfx = new S_DoActionGFX(pc.getId(), actionId);
-		pc.broadcastPacket(gfx); // 주위의 플레이어에 송신
-	}
+    public C_ExtraCommand(byte abyte0[], ClientThread client) throws Exception {
+        super(abyte0);
+        int actionId = readC();
+        L1PcInstance pc = client.getActiveChar();
+        if (pc.isGhost()) {
+            return;
+        }
+        if (pc.isInvisble()) { // 인비지비리티, 브라인드하이딘그중
+            return;
+        }
+        if (pc.isTeleport()) { // 텔레포트 처리중
+            return;
+        }
+        if (pc.hasSkillEffect(SHAPE_CHANGE)) { // 만일을 위해, 변신중은 타플레이어에 송신하지 않는다
+            int gfxId = pc.getTempCharGfx();
+            if (gfxId != 6080 && gfxId != 6094) { // 기마용 헤룸 변신은 예외
+                return;
+            }
+        }
+        S_DoActionGFX gfx = new S_DoActionGFX(pc.getId(), actionId);
+        pc.broadcastPacket(gfx); // 주위의 플레이어에 송신
+    }
 
-	@Override
-	public String getType() {
-		return C_EXTRA_COMMAND;
-	}
+    @Override
+    public String getType() {
+        return C_EXTRA_COMMAND;
+    }
 }

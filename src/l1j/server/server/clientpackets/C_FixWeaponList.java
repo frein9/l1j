@@ -19,30 +19,29 @@
 
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.ClientThread;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_FixWeaponList;
+
+import java.util.logging.Logger;
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
 
 public class C_FixWeaponList extends ClientBasePacket {
 
-	private static final String C_FIX_WEAPON_LIST = "[C] C_FixWeaponList";
-	private static Logger _log = Logger.getLogger(C_FixWeaponList.class
-			.getName());
+    private static final String C_FIX_WEAPON_LIST = "[C] C_FixWeaponList";
+    private static Logger _log = Logger.getLogger(C_FixWeaponList.class.getName());
 
-	public C_FixWeaponList(byte abyte0[], ClientThread clientthread) {
-		super(abyte0);
-		L1PcInstance pc = clientthread.getActiveChar();
-		pc.sendPackets(new S_FixWeaponList(pc));
-	}
+    public C_FixWeaponList(byte abyte0[], ClientThread clientthread) {
+        super(abyte0);
+        L1PcInstance pc = clientthread.getActiveChar();
+        pc.sendPackets(new S_FixWeaponList(pc));
+    }
 
-	@Override
-	public String getType() {
-		return C_FIX_WEAPON_LIST;
-	}
+    @Override
+    public String getType() {
+        return C_FIX_WEAPON_LIST;
+    }
 
 }

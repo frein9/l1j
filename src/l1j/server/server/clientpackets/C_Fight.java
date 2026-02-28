@@ -19,52 +19,49 @@
 
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import l1j.server.Config;
 import l1j.server.server.ClientThread;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_Message_YN;
 import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.utils.FaceToFace;
 
+import java.util.logging.Logger;
+
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
 
 public class C_Fight extends ClientBasePacket {
 
- private static final String C_FIGHT = "[C] C_Fight";
- private static Logger _log = Logger.getLogger(C_Fight.class.getName());
+    private static final String C_FIGHT = "[C] C_Fight";
+    private static Logger _log = Logger.getLogger(C_Fight.class.getName());
 
- public C_Fight(byte abyte0[], ClientThread client)
-   throws Exception {
-  super(abyte0);
+    public C_Fight(byte abyte0[], ClientThread client) throws Exception {
+        super(abyte0);
 
-  L1PcInstance pc = client.getActiveChar();
-  if (pc.isGhost()) {
-   return;
-  }
-  L1PcInstance target = FaceToFace.faceToFace(pc);
-  if (target != null) {
-   if (!target.isParalyzed()) {
-    if (pc.getFightId() != 0) {
-     pc.sendPackets(new S_ServerMessage(633)); // \f1당신은 벌써 다른 사람과 결투중입니다.
-     return;
-    } else if (target.getFightId() != 0) {
-     target.sendPackets(new S_ServerMessage(634)); // \f1 벌써 다른 사람과 결투중입니다.
-     return;
+        L1PcInstance pc = client.getActiveChar();
+        if (pc.isGhost()) {
+            return;
+        }
+        L1PcInstance target = FaceToFace.faceToFace(pc);
+        if (target != null) {
+            if (!target.isParalyzed()) {
+                if (pc.getFightId() != 0) {
+                    pc.sendPackets(new S_ServerMessage(633)); // \f1당신은 벌써 다른 사람과 결투중입니다.
+                    return;
+                } else if (target.getFightId() != 0) {
+                    target.sendPackets(new S_ServerMessage(634)); // \f1 벌써 다른 사람과 결투중입니다.
+                    return;
+                }
+                pc.setFightId(target.getId());
+                target.setFightId(pc.getId());
+                target.sendPackets(new S_Message_YN(630, pc.getName())); // %0%s가 당신과 결투를 바라고 있습니다.응합니까? (Y/N)
+            }
+        }
     }
-    pc.setFightId(target.getId());
-    target.setFightId(pc.getId());
-    target.sendPackets(new S_Message_YN(630, pc.getName())); // %0%s가 당신과 결투를 바라고 있습니다.응합니까? (Y/N)
-   }
-  }
- }
 
- @Override
- public String getType() {
-  return C_FIGHT;
- }
+    @Override
+    public String getType() {
+        return C_FIGHT;
+    }
 
 }

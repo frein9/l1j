@@ -19,53 +19,53 @@
 
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
-import java.util.logging.Level;
-
 import l1j.server.server.ClientThread;
-import l1j.server.server.model.L1ExcludingList;
 import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.L1ExcludingList;
 import l1j.server.server.serverpackets.S_PacketBox;
 import l1j.server.server.serverpackets.S_ServerMessage;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
 
 public class C_Exclude extends ClientBasePacket {
 
-	private static final String C_EXCLUDE = "[C] C_Exclude";
-	private static Logger _log = Logger.getLogger(C_Exclude.class.getName());
+    private static final String C_EXCLUDE = "[C] C_Exclude";
+    private static Logger _log = Logger.getLogger(C_Exclude.class.getName());
 
-	/**
-	 * C_1 /exclude 커멘드를 쳤을 때에 보내진다
-	 */
-	public C_Exclude(byte[] decrypt, ClientThread client) {
-		super(decrypt);
-		String name = readS();
-		if (name.isEmpty()) {
-			return;
-		}
-		L1PcInstance pc = client.getActiveChar();
-		try {
-			L1ExcludingList exList = pc.getExcludingList();
-			if (exList.isFull()) {
-				pc.sendPackets(new S_ServerMessage(472)); // \f1차단된 유저가 너무 많습니다.
-				return;
-			}
-			if (exList.contains(name)) {
-				String temp = exList.remove(name);
-				pc.sendPackets(new S_PacketBox(S_PacketBox.REM_EXCLUDE, temp));
-			} else {
-				exList.add(name);
-				pc.sendPackets(new S_PacketBox(S_PacketBox.ADD_EXCLUDE, name));
-			}
-		} catch (Exception e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		}
-	}
+    /**
+     * C_1 /exclude 커멘드를 쳤을 때에 보내진다
+     */
+    public C_Exclude(byte[] decrypt, ClientThread client) {
+        super(decrypt);
+        String name = readS();
+        if (name.isEmpty()) {
+            return;
+        }
+        L1PcInstance pc = client.getActiveChar();
+        try {
+            L1ExcludingList exList = pc.getExcludingList();
+            if (exList.isFull()) {
+                pc.sendPackets(new S_ServerMessage(472)); // \f1차단된 유저가 너무 많습니다.
+                return;
+            }
+            if (exList.contains(name)) {
+                String temp = exList.remove(name);
+                pc.sendPackets(new S_PacketBox(S_PacketBox.REM_EXCLUDE, temp));
+            } else {
+                exList.add(name);
+                pc.sendPackets(new S_PacketBox(S_PacketBox.ADD_EXCLUDE, name));
+            }
+        } catch (Exception e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        }
+    }
 
-	@Override
-	public String getType() {
-		return C_EXCLUDE;
-	}
+    @Override
+    public String getType() {
+        return C_EXCLUDE;
+    }
 }

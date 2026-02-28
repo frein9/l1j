@@ -19,6 +19,16 @@
 
 package l1j.server.server.clientpackets;
 
+import l1j.server.Config;
+import l1j.server.L1DatabaseFactory;
+import l1j.server.server.ClientThread;
+import l1j.server.server.datatables.CharacterTable;
+import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.L1Clan;
+import l1j.server.server.model.L1World;
+import l1j.server.server.serverpackets.S_DeleteCharOK;
+import l1j.server.server.utils.SQLUtil;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,131 +37,111 @@ import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import l1j.server.Config;
-import l1j.server.L1DatabaseFactory;
-import l1j.server.server.ClientThread;
-import l1j.server.server.datatables.CharacterTable;
-import l1j.server.server.model.L1Clan;
-import l1j.server.server.model.L1World;
-import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.serverpackets.S_CharAmount;
-import l1j.server.server.serverpackets.S_CharPacks;
-import l1j.server.server.serverpackets.S_DeleteCharOK;
-import l1j.server.server.serverpackets.S_Disconnect;
-import l1j.server.server.serverpackets.S_SystemMessage;
-import l1j.server.server.serverpackets.S_Unknown2;
-import l1j.server.server.utils.SQLUtil;
-
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket, C_DeleteChar
 
 public class C_DeleteChar extends ClientBasePacket {
 
-	private static final String C_DELETE_CHAR = "[C] RequestDeleteChar";
+    private static final String C_DELETE_CHAR = "[C] RequestDeleteChar";
 
-	private static Logger _log = Logger.getLogger(C_DeleteChar.class.getName());
+    private static Logger _log = Logger.getLogger(C_DeleteChar.class.getName());
 
-	public C_DeleteChar(byte decrypt[], ClientThread client)
-			throws Exception {
-		super(decrypt);
-		String name = readS();
+    public C_DeleteChar(byte decrypt[], ClientThread client) throws Exception {
+        super(decrypt);
+        String name = readS();
 
-		try {
-			L1PcInstance pc = CharacterTable.getInstance()
-					.restoreCharacter(name);
-			if (pc != null && pc.getLevel() >= 30
-					&& Config.DELETE_CHARACTER_AFTER_7DAYS) {
-				if (pc.getType() < 32) {
-					if (pc.isCrown()) {
-						pc.setType(32);
-					} else if (pc.isKnight()) {
-						pc.setType(33);
-					} else if (pc.isElf()) {
-						pc.setType(34);
-					} else if (pc.isWizard()) {
-						pc.setType(35);
-					} else if (pc.isDarkelf()) {
-						pc.setType(36);
-					} else if (pc.isDragonKnight()) {
-						pc.setType(37); 
-					} else if (pc.isBlackWizard()) {
-						pc.setType(38); 
-					}
-					Timestamp deleteTime = new Timestamp(System
-							.currentTimeMillis() + 604800000); // 7일 후
-					pc.setDeleteTime(deleteTime);
-					pc.save(); // DB에 캐릭터 정보를 기입한다
-				} else {
-					if (pc.isCrown()) {
-						pc.setType(0);
-					} else if (pc.isKnight()) {
-						pc.setType(1);
-					} else if (pc.isElf()) {
-						pc.setType(2);
-					} else if (pc.isWizard()) {
-						pc.setType(3);
-					} else if (pc.isDarkelf()) {
-						pc.setType(4);
-					} else if (pc.isDragonKnight()) {
-						pc.setType(5);
-					} else if (pc.isBlackWizard()) {
-						pc.setType(6); 
-					}
-					pc.setDeleteTime(null);
-					pc.save(); // DB에 캐릭터 정보를 기입한다
-				}
-				client.sendPacket(new S_DeleteCharOK(S_DeleteCharOK
-						.DELETE_CHAR_AFTER_7DAYS));
-				return;
-			}
+        try {
+            L1PcInstance pc = CharacterTable.getInstance().restoreCharacter(name);
+            if (pc != null && pc.getLevel() >= 30 && Config.DELETE_CHARACTER_AFTER_7DAYS) {
+                if (pc.getType() < 32) {
+                    if (pc.isCrown()) {
+                        pc.setType(32);
+                    } else if (pc.isKnight()) {
+                        pc.setType(33);
+                    } else if (pc.isElf()) {
+                        pc.setType(34);
+                    } else if (pc.isWizard()) {
+                        pc.setType(35);
+                    } else if (pc.isDarkelf()) {
+                        pc.setType(36);
+                    } else if (pc.isDragonKnight()) {
+                        pc.setType(37);
+                    } else if (pc.isBlackWizard()) {
+                        pc.setType(38);
+                    }
+                    Timestamp deleteTime = new Timestamp(System.currentTimeMillis() + 604800000); // 7일 후
+                    pc.setDeleteTime(deleteTime);
+                    pc.save(); // DB에 캐릭터 정보를 기입한다
+                } else {
+                    if (pc.isCrown()) {
+                        pc.setType(0);
+                    } else if (pc.isKnight()) {
+                        pc.setType(1);
+                    } else if (pc.isElf()) {
+                        pc.setType(2);
+                    } else if (pc.isWizard()) {
+                        pc.setType(3);
+                    } else if (pc.isDarkelf()) {
+                        pc.setType(4);
+                    } else if (pc.isDragonKnight()) {
+                        pc.setType(5);
+                    } else if (pc.isBlackWizard()) {
+                        pc.setType(6);
+                    }
+                    pc.setDeleteTime(null);
+                    pc.save(); // DB에 캐릭터 정보를 기입한다
+                }
+                client.sendPacket(new S_DeleteCharOK(S_DeleteCharOK.DELETE_CHAR_AFTER_7DAYS));
+                return;
+            }
 
-			if (pc != null) {
-				L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
-				if (clan != null) {
-					clan.delMemberName(name);
-				}
-			}
-			CharacterTable.getInstance().deleteCharacter(
-					client.getAccountName(), name);
-		} catch (Exception e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-			client.close();
-			return;
-		}
-		client.sendPacket(new S_DeleteCharOK(S_DeleteCharOK.DELETE_CHAR_NOW));	 
-	}		
-	private String resultName;
-	private String resultClanname;
-	private boolean checkPcinfo = true;
-	private String sealing;
+            if (pc != null) {
+                L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
+                if (clan != null) {
+                    clan.delMemberName(name);
+                }
+            }
+            CharacterTable.getInstance().deleteCharacter(client.getAccountName(), name);
+        } catch (Exception e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+            client.close();
+            return;
+        }
+        client.sendPacket(new S_DeleteCharOK(S_DeleteCharOK.DELETE_CHAR_NOW));
+    }
 
-	public void checkPcInfo(String pcName) { 
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet find = null;
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT char_name, Clanname, sealingPW FROM characters WHERE char_name=? LIMIT 1");
-			pstm.setString(1, pcName);
-			find = pstm.executeQuery();
+    private String resultName;
+    private String resultClanname;
+    private boolean checkPcinfo = true;
+    private String sealing;
 
-			if (!find.next()) {
-				checkPcinfo = false;
-			}
-			resultName = find.getString(1);
-			resultClanname = find.getString(2);
-			sealing = find.getString(3);
-		} catch (SQLException e) {
-		} finally {
-			SQLUtil.close(find);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+    public void checkPcInfo(String pcName) {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet find = null;
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT CHAR_NAME, CLANNAME, SEALINGPW FROM CHARACTERS WHERE CHAR_NAME=? LIMIT 1");
+            pstm.setString(1, pcName);
+            find = pstm.executeQuery();
 
-	@Override
-	public String getType() {
-		return C_DELETE_CHAR;
-	}
+            if (!find.next()) {
+                checkPcinfo = false;
+            }
+            resultName = find.getString(1);
+            resultClanname = find.getString(2);
+            sealing = find.getString(3);
+        } catch (SQLException e) {
+        } finally {
+            SQLUtil.close(find);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
+
+    @Override
+    public String getType() {
+        return C_DELETE_CHAR;
+    }
 
 }

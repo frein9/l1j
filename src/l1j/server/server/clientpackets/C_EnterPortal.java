@@ -19,36 +19,34 @@
 
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.ClientThread;
 import l1j.server.server.model.Dungeon;
 import l1j.server.server.model.Instance.L1PcInstance;
+
+import java.util.logging.Logger;
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
 
 public class C_EnterPortal extends ClientBasePacket {
 
-	private static final String C_ENTER_PORTAL = "[C] C_EnterPortal";
-	private static Logger _log = Logger.getLogger(C_EnterPortal.class
-			.getName());
+    private static final String C_ENTER_PORTAL = "[C] C_EnterPortal";
+    private static Logger _log = Logger.getLogger(C_EnterPortal.class.getName());
 
-	public C_EnterPortal(byte abyte0[], ClientThread client)
-			throws Exception {
-		super(abyte0);
-		int locx = readH();
-		int locy = readH();
-		L1PcInstance pc = client.getActiveChar();
-		if (pc.isTeleport()) { // 텔레포트 처리중
-			return;
-		}
-		// 지하 감옥에 텔레포트
-		Dungeon.getInstance().dg(locx, locy, pc.getMap().getId(), pc);
-	}
+    public C_EnterPortal(byte abyte0[], ClientThread client) throws Exception {
+        super(abyte0);
+        int locx = readH();
+        int locy = readH();
+        L1PcInstance pc = client.getActiveChar();
+        if (pc.isTeleport()) { // 텔레포트 처리중
+            return;
+        }
+        // 지하 감옥에 텔레포트
+        Dungeon.getInstance().dg(locx, locy, pc.getMap().getId(), pc);
+    }
 
-	@Override
-	public String getType() {
-		return C_ENTER_PORTAL;
-	}
+    @Override
+    public String getType() {
+        return C_ENTER_PORTAL;
+    }
 }

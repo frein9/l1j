@@ -17,37 +17,35 @@
  */
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.ClientThread;
 import l1j.server.server.model.Instance.L1PcInstance;
+
+import java.util.logging.Logger;
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
 
 public class C_ExitGhost extends ClientBasePacket {
 
-	private static Logger _log = Logger.getLogger(C_ExitGhost.class
-			.getName());
+    private static Logger _log = Logger.getLogger(C_ExitGhost.class.getName());
 
-	private static final String C_EXIT_GHOST = "[C] C_ExitGhost";
+    private static final String C_EXIT_GHOST = "[C] C_ExitGhost";
 
-	// 이동
-	public C_ExitGhost(byte decrypt[], ClientThread client)
-			throws Exception {
-		super(decrypt);
+    // 이동
+    public C_ExitGhost(byte decrypt[], ClientThread client) throws Exception {
+        super(decrypt);
 
-		L1PcInstance pc = client.getActiveChar();
+        L1PcInstance pc = client.getActiveChar();
 
-		if (!pc.isGhost()) {
-			return;
-		}
+        if (!pc.isGhost()) {
+            return;
+        }
 
-		pc.makeReadyEndGhost();
-	}
+        pc.makeReadyEndGhost();
+    }
 
-	@Override
-	public String getType() {
-		return C_EXIT_GHOST;
-	}
+    @Override
+    public String getType() {
+        return C_EXIT_GHOST;
+    }
 }

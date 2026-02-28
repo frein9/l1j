@@ -17,26 +17,26 @@
  */
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.ClientThread;
+
+import java.util.logging.Logger;
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
 
 public class C_KeepALIVE extends ClientBasePacket {
-	private static Logger _log = Logger.getLogger(C_KeepALIVE.class.getName());
-	private static final String C_KEEP_ALIVE = "[C] C_KeepALIVE";
+    private static Logger _log = Logger.getLogger(C_KeepALIVE.class.getName());
+    private static final String C_KEEP_ALIVE = "[C] C_KeepALIVE";
 
-	public C_KeepALIVE(byte decrypt[], ClientThread client) {
-		super(decrypt);
-		// XXX:GameTime를 송신(3바이트의 데이터를 보내 와 있으므로 그것을 무언가에 이용하지 않으면 안 될지도 모른다)
+    public C_KeepALIVE(byte decrypt[], ClientThread client) {
+        super(decrypt);
+        // XXX:GameTime를 송신(3바이트의 데이터를 보내 와 있으므로 그것을 무언가에 이용하지 않으면 안 될지도 모른다)
 // L1PcInstance pc = client.getActiveChar();
 // pc.sendPackets(new S_GameTime());
-	}
+    }
 
-	@Override
-	public String getType() {
-		return C_KEEP_ALIVE;
-	}
+    @Override
+    public String getType() {
+        return C_KEEP_ALIVE;
+    }
 }

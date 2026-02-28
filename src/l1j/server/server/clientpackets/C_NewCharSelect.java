@@ -19,18 +19,16 @@
 package l1j.server.server.clientpackets;
 
 
-import java.util.logging.Logger;
-
 import l1j.server.server.ClientThread;
 import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.serverpackets.S_Unknown2; // 리스버튼 구조변경을 위한 추가 // ########## A96 EPU ##########
-import l1j.server.server.serverpackets.S_Unknown3; // 리스버튼 구조변경을 위한 추가 // ########## A96 EPU ##########
+import l1j.server.server.serverpackets.S_Unknown3;
+
+import java.util.logging.Logger;
 
 
 public class C_NewCharSelect extends ClientBasePacket {
     private static final String C_NEW_CHAR_SELECT = "[C] C_NewCharSelect";
-    private static Logger _log = Logger.getLogger(
-            C_NewCharSelect.class.getName());
+    private static Logger _log = Logger.getLogger(C_NewCharSelect.class.getName());
 
     public C_NewCharSelect(byte[] decrypt, ClientThread client) {
         super(decrypt);
@@ -48,12 +46,12 @@ public class C_NewCharSelect extends ClientBasePacket {
                 _log.fine("Disconnect from: " + pc.getName());
                 ClientThread.quitGame(pc);
                 synchronized (pc) {
-                	PcSave(pc); 
+                    PcSave(pc);
                     pc.logout();
                     client.setActiveChar(null);
                 }
             } else {
-            	l1j.server.Leaf.list.remove(pc.getName()); 
+                l1j.server.Leaf.list.remove(pc.getName());
                 synchronized (pc) {
                     // 소켓 / Thread 부분만 해제..
                     PcSave(pc); // <추가
@@ -63,19 +61,20 @@ public class C_NewCharSelect extends ClientBasePacket {
                     pc.stopHpRegeneration();
                     pc.stopMpRegeneration();
                     client.setActiveChar(null);
-                    try { 
-                        pc.save(); 
-                    } catch (Exception e) {} 
+                    try {
+                        pc.save();
+                    } catch (Exception e) {
+                    }
                 }
             }
         } else {
-            _log.fine(
-                    "Disconnect Request from Account : "
-                            + client.getAccountName());
+            _log.fine("Disconnect Request from Account : " + client.getAccountName());
         }
     }
 
-    /** 저장구문 **/
+    /**
+     * 저장구문
+     **/
     private void PcSave(L1PcInstance pc) {
         try {
 
@@ -91,7 +90,9 @@ public class C_NewCharSelect extends ClientBasePacket {
         }
     }
 
-    /** 저장구문 **/
+    /**
+     * 저장구문
+     **/
     @Override
     public String getType() {
         return C_NEW_CHAR_SELECT;
