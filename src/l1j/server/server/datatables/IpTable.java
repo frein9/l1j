@@ -18,6 +18,9 @@
  */
 package l1j.server.server.datatables;
 
+import l1j.server.L1DatabaseFactory;
+import l1j.server.server.utils.SQLUtil;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,9 +28,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import l1j.server.L1DatabaseFactory;
-import l1j.server.server.utils.SQLUtil;
 
 public class IpTable {
 
