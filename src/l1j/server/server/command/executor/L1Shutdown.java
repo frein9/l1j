@@ -18,43 +18,43 @@
  */
 package l1j.server.server.command.executor;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.GameServer;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
+import java.util.logging.Logger;
+
 public class L1Shutdown implements L1CommandExecutor {
-	private static Logger _log = Logger.getLogger(L1Shutdown.class.getName());
+    private static Logger _log = Logger.getLogger(L1Shutdown.class.getName());
 
-	private L1Shutdown() {
-	}
+    private L1Shutdown() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1Shutdown();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1Shutdown();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			if (pc.getInventory().checkEquipped(300000)){   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
-			if (arg.equalsIgnoreCase("지금")) {
-				GameServer.getInstance(). shutdown();
-				return;
-			}
-			if (arg.equalsIgnoreCase("취소")) {
-				GameServer.getInstance(). abortShutdown();
-				return;
-			}
-			int sec = Math.max(5, Integer.parseInt(arg));
-			GameServer.getInstance(). shutdownWithCountdown(sec);
-			} else {
-				pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
-				return;
-			}
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(
-					".종료 시간(초) 또는 지금 또는 취소 라고 입력해 주세요. "));
-		}
-	}
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            if (pc.getInventory().checkEquipped(300000)) {   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
+                if (arg.equalsIgnoreCase("지금")) {
+                    GameServer.getInstance().shutdown();
+                    return;
+                }
+                if (arg.equalsIgnoreCase("취소")) {
+                    GameServer.getInstance().abortShutdown();
+                    return;
+                }
+                int sec = Math.max(5, Integer.parseInt(arg));
+                GameServer.getInstance().shutdownWithCountdown(sec);
+            } else {
+                pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
+                return;
+            }
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(
+                    ".종료 시간(초) 또는 지금 또는 취소 라고 입력해 주세요. "));
+        }
+    }
 }

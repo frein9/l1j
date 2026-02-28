@@ -18,56 +18,56 @@
  */
 package l1j.server.server.command.executor;
 
-import java.util.logging.Logger;
-
-import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.L1World;
 import l1j.server.server.serverpackets.S_Message_YN;
 import l1j.server.server.serverpackets.S_SkillSound;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
+import java.util.logging.Logger;
+
 public class L1Ress implements L1CommandExecutor {
-	private static Logger _log = Logger.getLogger(L1Ress.class.getName());
+    private static Logger _log = Logger.getLogger(L1Ress.class.getName());
 
-	private L1Ress() {
-	}
+    private L1Ress() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1Ress();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1Ress();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			if (pc.getInventory().checkEquipped(300000)){   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            if (pc.getInventory().checkEquipped(300000)) {   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
 
-			int objid = pc.getId();
-			pc.sendPackets(new S_SkillSound(objid, 759));
-			pc.broadcastPacket(new S_SkillSound(objid, 759));
-			pc.setCurrentHp(pc.getMaxHp());   
-			pc.setCurrentMp(pc.getMaxMp()); 
-			for (L1PcInstance tg : L1World.getInstance(). getVisiblePlayer(pc)) {
-				if (tg.getCurrentHp() == 0 && tg.isDead()) {
-					tg.sendPackets(new S_SystemMessage("운영자에 의해 부활되었습니다."));
-					tg.broadcastPacket(new S_SkillSound(tg.getId(), 3944));
-					tg.sendPackets(new S_SkillSound(tg.getId(), 3944));
-					// 축복된 부활 스크롤과 같은 효과
-					tg.setTempID(objid);
-					tg.sendPackets(new S_Message_YN(322, "")); // 또 부활하고 싶습니까? (Y/N)
-				} else {
-					tg.sendPackets(new S_SystemMessage("운영자가 부활해주었습니다."));
-					tg.broadcastPacket(new S_SkillSound(tg.getId(), 832));
-					tg.sendPackets(new S_SkillSound(tg.getId(), 832));
-					tg.setCurrentHp(tg.getMaxHp());
-					tg.setCurrentMp(tg.getMaxMp());
-				}
-			}
-			} else {
-				pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
-				return;
-			}
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " 커멘드 에러"));
-		}
-	}
+                int objid = pc.getId();
+                pc.sendPackets(new S_SkillSound(objid, 759));
+                pc.broadcastPacket(new S_SkillSound(objid, 759));
+                pc.setCurrentHp(pc.getMaxHp());
+                pc.setCurrentMp(pc.getMaxMp());
+                for (L1PcInstance tg : L1World.getInstance().getVisiblePlayer(pc)) {
+                    if (tg.getCurrentHp() == 0 && tg.isDead()) {
+                        tg.sendPackets(new S_SystemMessage("운영자에 의해 부활되었습니다."));
+                        tg.broadcastPacket(new S_SkillSound(tg.getId(), 3944));
+                        tg.sendPackets(new S_SkillSound(tg.getId(), 3944));
+                        // 축복된 부활 스크롤과 같은 효과
+                        tg.setTempID(objid);
+                        tg.sendPackets(new S_Message_YN(322, "")); // 또 부활하고 싶습니까? (Y/N)
+                    } else {
+                        tg.sendPackets(new S_SystemMessage("운영자가 부활해주었습니다."));
+                        tg.broadcastPacket(new S_SkillSound(tg.getId(), 832));
+                        tg.sendPackets(new S_SkillSound(tg.getId(), 832));
+                        tg.setCurrentHp(tg.getMaxHp());
+                        tg.setCurrentMp(tg.getMaxMp());
+                    }
+                }
+            } else {
+                pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
+                return;
+            }
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(cmdName + " 커멘드 에러"));
+        }
+    }
 }

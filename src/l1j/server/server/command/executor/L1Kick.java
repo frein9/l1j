@@ -18,44 +18,44 @@
  */
 package l1j.server.server.command.executor;
 
-import java.util.logging.Logger;
-
-import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.L1World;
 import l1j.server.server.serverpackets.S_Disconnect;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
+import java.util.logging.Logger;
+
 public class L1Kick implements L1CommandExecutor {
-	private static Logger _log = Logger.getLogger(L1Kick.class.getName());
+    private static Logger _log = Logger.getLogger(L1Kick.class.getName());
 
-	private L1Kick() {
-	}
+    private L1Kick() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1Kick();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1Kick();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			if (pc.getInventory().checkEquipped(300000)){   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
-			L1PcInstance target = L1World.getInstance(). getPlayer(arg);
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            if (pc.getInventory().checkEquipped(300000)) {   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
+                L1PcInstance target = L1World.getInstance().getPlayer(arg);
 
-			if (target != null) {
-				pc.sendPackets(new S_SystemMessage((new StringBuilder())
-						. append(target.getName()). append("님을 추방 했습니다. ")
-						. toString()));
-				target.sendPackets(new S_Disconnect());
-			} else {
-				pc.sendPackets(new S_SystemMessage(
-						"그러한 이름의 캐릭터는 월드내에는 존재하지 않습니다. "));
-			}
-			} else {
-				pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
-				return;
-			}
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " 캐릭터명으로 입력해 주세요. "));
-		}
-	}
+                if (target != null) {
+                    pc.sendPackets(new S_SystemMessage((new StringBuilder())
+                            .append(target.getName()).append("님을 추방 했습니다. ")
+                            .toString()));
+                    target.sendPackets(new S_Disconnect());
+                } else {
+                    pc.sendPackets(new S_SystemMessage(
+                            "그러한 이름의 캐릭터는 월드내에는 존재하지 않습니다. "));
+                }
+            } else {
+                pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
+                return;
+            }
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(cmdName + " 캐릭터명으로 입력해 주세요. "));
+        }
+    }
 }

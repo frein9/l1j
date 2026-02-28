@@ -18,55 +18,55 @@
  */
 package l1j.server.server.command.executor;
 
-import java.util.StringTokenizer;
-import java.util.logging.Logger;
-
 import l1j.server.server.datatables.ItemTable;
-import l1j.server.server.model.L1DwarfInventory;
 import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.L1DwarfInventory;
 import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.templates.L1Item;
 
+import java.util.StringTokenizer;
+import java.util.logging.Logger;
+
 public class L1LevelPresent implements L1CommandExecutor {
-	private static Logger _log = Logger.getLogger(L1LevelPresent.class
-			. getName());
+    private static Logger _log = Logger.getLogger(L1LevelPresent.class
+            .getName());
 
-	private L1LevelPresent() {
-	}
+    private L1LevelPresent() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1LevelPresent();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1LevelPresent();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
 
-		try {
-			if (pc.getInventory().checkEquipped(300000)){   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
-			StringTokenizer st = new StringTokenizer(arg);
-			int minlvl = Integer.parseInt(st.nextToken(), 10);
-			int maxlvl = Integer.parseInt(st.nextToken(), 10);
-			int itemid = Integer.parseInt(st.nextToken(), 10);
-			int enchant = Integer.parseInt(st.nextToken(), 10);
-			int count = Integer.parseInt(st.nextToken(), 10);
+        try {
+            if (pc.getInventory().checkEquipped(300000)) {   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
+                StringTokenizer st = new StringTokenizer(arg);
+                int minlvl = Integer.parseInt(st.nextToken(), 10);
+                int maxlvl = Integer.parseInt(st.nextToken(), 10);
+                int itemid = Integer.parseInt(st.nextToken(), 10);
+                int enchant = Integer.parseInt(st.nextToken(), 10);
+                int count = Integer.parseInt(st.nextToken(), 10);
 
-			L1Item temp = ItemTable.getInstance(). getTemplate(itemid);
-			if (temp == null) {
-				pc.sendPackets(new S_SystemMessage("존재하지 않는 아이템 ID입니다. "));
-				return;
-			}
+                L1Item temp = ItemTable.getInstance().getTemplate(itemid);
+                if (temp == null) {
+                    pc.sendPackets(new S_SystemMessage("존재하지 않는 아이템 ID입니다. "));
+                    return;
+                }
 
-			L1DwarfInventory.present(minlvl, maxlvl, itemid, enchant, count);
-			pc.sendPackets(new S_SystemMessage(temp.getName() + "를" + count
-					+ "개선물 했습니다. (Lv" + minlvl + "~" + maxlvl + ")"));
-			} else {
-				pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
-				return;
-			}
-		} catch (Exception e) {
-			pc
-					. sendPackets(new S_SystemMessage(
-							".레벨선물 minlvl maxlvl 아이템 ID 인챈트수 아이템수로 입력해주세요."));
-		}
-	}
+                L1DwarfInventory.present(minlvl, maxlvl, itemid, enchant, count);
+                pc.sendPackets(new S_SystemMessage(temp.getName() + "를" + count
+                        + "개선물 했습니다. (Lv" + minlvl + "~" + maxlvl + ")"));
+            } else {
+                pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
+                return;
+            }
+        } catch (Exception e) {
+            pc
+                    .sendPackets(new S_SystemMessage(
+                            ".레벨선물 minlvl maxlvl 아이템 ID 인챈트수 아이템수로 입력해주세요."));
+        }
+    }
 }

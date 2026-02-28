@@ -18,82 +18,82 @@
  */
 package l1j.server.server.command.executor;
 
+import l1j.server.server.datatables.IpTable;
+import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.L1World;
+import l1j.server.server.serverpackets.S_SystemMessage;
+
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import l1j.server.server.datatables.IpTable;
-import l1j.server.server.model.L1World;
-import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.serverpackets.S_SystemMessage;
-
 public class L1BanIp implements L1CommandExecutor {
-	private static Logger _log = Logger.getLogger(L1BanIp.class.getName());
+    private static Logger _log = Logger.getLogger(L1BanIp.class.getName());
 
-	private L1BanIp() {
-	}
+    private L1BanIp() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1BanIp();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1BanIp();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			if (pc.getInventory().checkEquipped(300000)){   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            if (pc.getInventory().checkEquipped(300000)) {   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
 
-			StringTokenizer stringtokenizer = new StringTokenizer(arg);
-			// IP를 지정
-			String s1 = stringtokenizer.nextToken();
+                StringTokenizer stringtokenizer = new StringTokenizer(arg);
+                // IP를 지정
+                String s1 = stringtokenizer.nextToken();
 
-			// add/del를 지정(하지 않아도 OK)
-			String s2 = null;
-			try {
-				s2 = stringtokenizer.nextToken();
-			} catch (Exception e) {
-			}
+                // add/del를 지정(하지 않아도 OK)
+                String s2 = null;
+                try {
+                    s2 = stringtokenizer.nextToken();
+                } catch (Exception e) {
+                }
 
-			IpTable iptable = IpTable.getInstance();
-			boolean isBanned = iptable.isBannedIp(s1);
+                IpTable iptable = IpTable.getInstance();
+                boolean isBanned = iptable.isBannedIp(s1);
 
-			for (L1PcInstance tg : L1World.getInstance(). getAllPlayers()) {
-				if (s1.equals(tg.getNetConnection(). getIp())) {
-					String msg = new StringBuilder(). append("IP:"). append(s1)
-							. append(" 로 접속중의 플레이어:"). append(tg.getName())
-							. toString();
-					pc.sendPackets(new S_SystemMessage(msg));
-				}
-			}
+                for (L1PcInstance tg : L1World.getInstance().getAllPlayers()) {
+                    if (s1.equals(tg.getNetConnection().getIp())) {
+                        String msg = new StringBuilder().append("IP:").append(s1)
+                                .append(" 로 접속중의 플레이어:").append(tg.getName())
+                                .toString();
+                        pc.sendPackets(new S_SystemMessage(msg));
+                    }
+                }
 
-			if ("add". equals(s2) && ! isBanned) {
-				iptable.banIp(s1); // BAN 리스트에 IP를 더한다
-				String msg = new StringBuilder(). append("IP:"). append(s1)
-						. append(" 를 BAN IP에 등록했습니다. "). toString();
-				pc.sendPackets(new S_SystemMessage(msg));
-			} else if ("del". equals(s2) && isBanned) {
-				if (iptable.liftBanIp(s1)) { // BAN 리스트로부터 IP를 삭제한다
-					String msg = new StringBuilder(). append("IP:"). append(s1)
-							. append(" 를 BAN IP로부터 삭제했습니다. "). toString();
-					pc.sendPackets(new S_SystemMessage(msg));
-				}
-			} else {
-				// BAN의 확인
-				if (isBanned) {
-					String msg = new StringBuilder(). append("IP:"). append(s1)
-							. append(" 는 BAN IP에 등록되어 있습니다. "). toString();
-					pc.sendPackets(new S_SystemMessage(msg));
-				} else {
-					String msg = new StringBuilder(). append("IP:"). append(s1)
-							. append(" 는 BAN IP에 등록되어 있지 않습니다. "). toString();
-					pc.sendPackets(new S_SystemMessage(msg));
-				}
-			}
-			} else {
-				pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
-				return;
-			}
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName
-					+ " IP [ add | del ]라고 입력해 주세요. "));
-		}
-	}
+                if ("add".equals(s2) && !isBanned) {
+                    iptable.banIp(s1); // BAN 리스트에 IP를 더한다
+                    String msg = new StringBuilder().append("IP:").append(s1)
+                            .append(" 를 BAN IP에 등록했습니다. ").toString();
+                    pc.sendPackets(new S_SystemMessage(msg));
+                } else if ("del".equals(s2) && isBanned) {
+                    if (iptable.liftBanIp(s1)) { // BAN 리스트로부터 IP를 삭제한다
+                        String msg = new StringBuilder().append("IP:").append(s1)
+                                .append(" 를 BAN IP로부터 삭제했습니다. ").toString();
+                        pc.sendPackets(new S_SystemMessage(msg));
+                    }
+                } else {
+                    // BAN의 확인
+                    if (isBanned) {
+                        String msg = new StringBuilder().append("IP:").append(s1)
+                                .append(" 는 BAN IP에 등록되어 있습니다. ").toString();
+                        pc.sendPackets(new S_SystemMessage(msg));
+                    } else {
+                        String msg = new StringBuilder().append("IP:").append(s1)
+                                .append(" 는 BAN IP에 등록되어 있지 않습니다. ").toString();
+                        pc.sendPackets(new S_SystemMessage(msg));
+                    }
+                }
+            } else {
+                pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
+                return;
+            }
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(cmdName
+                    + " IP [ add | del ]라고 입력해 주세요. "));
+        }
+    }
 }

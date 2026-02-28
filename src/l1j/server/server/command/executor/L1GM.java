@@ -18,24 +18,24 @@
  */
 package l1j.server.server.command.executor;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
+import java.util.logging.Logger;
+
 public class L1GM implements L1CommandExecutor {
-	private static Logger _log = Logger.getLogger(L1GM.class.getName());
+    private static Logger _log = Logger.getLogger(L1GM.class.getName());
 
-	private L1GM() {
-	}
+    private L1GM() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1GM();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1GM();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		pc.setGm(!pc.isGm());
-		pc.sendPackets(new S_SystemMessage("setGm = " + pc.isGm()));
-	}
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        pc.setGm(!pc.isGm());
+        pc.sendPackets(new S_SystemMessage("setGm = " + pc.isGm()));
+    }
 }

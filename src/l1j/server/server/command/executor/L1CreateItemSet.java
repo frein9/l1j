@@ -18,10 +18,6 @@
  */
 package l1j.server.server.command.executor;
 
-import java.util.List;
-import java.util.StringTokenizer;
-import java.util.logging.Logger;
-
 import l1j.server.server.GMCommandsConfig;
 import l1j.server.server.datatables.ItemTable;
 import l1j.server.server.model.Instance.L1ItemInstance;
@@ -30,46 +26,50 @@ import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.templates.L1Item;
 import l1j.server.server.templates.L1ItemSetItem;
 
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.logging.Logger;
+
 public class L1CreateItemSet implements L1CommandExecutor {
-	private static Logger _log = Logger.getLogger(L1CreateItemSet.class
-			. getName());
+    private static Logger _log = Logger.getLogger(L1CreateItemSet.class
+            .getName());
 
-	private L1CreateItemSet() {
-	}
+    private L1CreateItemSet() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1CreateItemSet();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1CreateItemSet();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			if (pc.getInventory().checkEquipped(300000)){   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
-			String name = new StringTokenizer(arg). nextToken();
-			List<L1ItemSetItem> list = GMCommandsConfig.ITEM_SETS.get(name);
-			if (list == null) {
-				pc.sendPackets(new S_SystemMessage(name + " 미정도리세트입니다"));
-				return;
-			}
-			for (L1ItemSetItem item : list) {
-				L1Item temp = ItemTable.getInstance(). getTemplate(item.getId());
-				if (! temp.isStackable() && 0 != item.getEnchant()) {
-					for (int i = 0; i < item.getAmount(); i++) {
-						L1ItemInstance inst = ItemTable.getInstance()
-								. createItem(item.getId());
-						inst.setEnchantLevel(item.getEnchant());
-						pc.getInventory(). storeItem(inst);
-					}
-				} else {
-					pc.getInventory(). storeItem(item.getId(), item.getAmount());
-				}
-			}
-			} else {
-				pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
-				return;
-			}
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".아이템셋트 셋트명으로 입력해 주세요. "));
-		}
-	}
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            if (pc.getInventory().checkEquipped(300000)) {   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
+                String name = new StringTokenizer(arg).nextToken();
+                List<L1ItemSetItem> list = GMCommandsConfig.ITEM_SETS.get(name);
+                if (list == null) {
+                    pc.sendPackets(new S_SystemMessage(name + " 미정도리세트입니다"));
+                    return;
+                }
+                for (L1ItemSetItem item : list) {
+                    L1Item temp = ItemTable.getInstance().getTemplate(item.getId());
+                    if (!temp.isStackable() && 0 != item.getEnchant()) {
+                        for (int i = 0; i < item.getAmount(); i++) {
+                            L1ItemInstance inst = ItemTable.getInstance()
+                                    .createItem(item.getId());
+                            inst.setEnchantLevel(item.getEnchant());
+                            pc.getInventory().storeItem(inst);
+                        }
+                    } else {
+                        pc.getInventory().storeItem(item.getId(), item.getAmount());
+                    }
+                }
+            } else {
+                pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
+                return;
+            }
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(".아이템셋트 셋트명으로 입력해 주세요. "));
+        }
+    }
 }

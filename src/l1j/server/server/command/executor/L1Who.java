@@ -18,56 +18,56 @@
  */
 package l1j.server.server.command.executor;
 
-import java.util.Collection;
-import java.util.logging.Logger;
-
-import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.L1World;
 import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.serverpackets.S_WhoAmount;
 
+import java.util.Collection;
+import java.util.logging.Logger;
+
 public class L1Who implements L1CommandExecutor {
-	private static Logger _log = Logger.getLogger(L1Who.class.getName());
+    private static Logger _log = Logger.getLogger(L1Who.class.getName());
 
-	private L1Who() {
-	}
+    private L1Who() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1Who();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1Who();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			if (pc.getInventory().checkEquipped(300000)){   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
-			Collection<L1PcInstance> players = L1World.getInstance()
-					.getAllPlayers();
-			String amount = String.valueOf(players.size());
-			S_WhoAmount s_whoamount = new S_WhoAmount(amount);
-			pc.sendPackets(s_whoamount);
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            if (pc.getInventory().checkEquipped(300000)) {   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
+                Collection<L1PcInstance> players = L1World.getInstance()
+                        .getAllPlayers();
+                String amount = String.valueOf(players.size());
+                S_WhoAmount s_whoamount = new S_WhoAmount(amount);
+                pc.sendPackets(s_whoamount);
 
-			// 온라인의 플레이어 리스트를 표시
-			if (arg.equalsIgnoreCase("all")) {
-				pc.sendPackets(new S_SystemMessage("-- 온라인의 플레이어 --"));
-				StringBuffer buf = new StringBuffer();
-				for (L1PcInstance each : players) {
-					buf.append(each.getName());
-					buf.append(" / ");
-					if (buf.length() > 50) {
-						pc.sendPackets(new S_SystemMessage(buf.toString()));
-						buf.delete(0, buf.length() - 1);
-					}
-				}
-				if (buf.length() > 0) {
-					pc.sendPackets(new S_SystemMessage(buf.toString()));
-				}
-			}
-			} else {
-				pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
-				return;
-			}
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".who [all] 라고 입력해 주세요."));
-		}
-	}
+                // 온라인의 플레이어 리스트를 표시
+                if (arg.equalsIgnoreCase("all")) {
+                    pc.sendPackets(new S_SystemMessage("-- 온라인의 플레이어 --"));
+                    StringBuffer buf = new StringBuffer();
+                    for (L1PcInstance each : players) {
+                        buf.append(each.getName());
+                        buf.append(" / ");
+                        if (buf.length() > 50) {
+                            pc.sendPackets(new S_SystemMessage(buf.toString()));
+                            buf.delete(0, buf.length() - 1);
+                        }
+                    }
+                    if (buf.length() > 0) {
+                        pc.sendPackets(new S_SystemMessage(buf.toString()));
+                    }
+                }
+            } else {
+                pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
+                return;
+            }
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(".who [all] 라고 입력해 주세요."));
+        }
+    }
 }

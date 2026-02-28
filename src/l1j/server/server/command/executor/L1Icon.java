@@ -18,32 +18,32 @@
  */
 package l1j.server.server.command.executor;
 
-import java.util.StringTokenizer;
-import java.util.logging.Logger;
-
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_SkillIconGFX;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
+import java.util.StringTokenizer;
+import java.util.logging.Logger;
+
 public class L1Icon implements L1CommandExecutor {
- private static Logger _log = Logger.getLogger(L1Icon.class.getName());
+    private static Logger _log = Logger.getLogger(L1Icon.class.getName());
 
- private L1Icon() {
- }
+    private L1Icon() {
+    }
 
- public static L1CommandExecutor getInstance() {
-  return new L1Icon();
- }
+    public static L1CommandExecutor getInstance() {
+        return new L1Icon();
+    }
 
- @Override
- public void execute(L1PcInstance pc, String cmdName, String arg) {
-  try {
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
 
-    StringTokenizer stringtokenizer = new StringTokenizer(arg);
-    int iconId = Integer.parseInt(stringtokenizer.nextToken());
-    pc.sendPackets(new S_SkillIconGFX(iconId, 1000));
-    } catch (Exception e) {
-   pc.sendPackets(new S_SystemMessage(cmdName + " 숫자라고 입력해 주세요."));
-  }
- }
+            StringTokenizer stringtokenizer = new StringTokenizer(arg);
+            int iconId = Integer.parseInt(stringtokenizer.nextToken());
+            pc.sendPackets(new S_SkillIconGFX(iconId, 1000));
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(cmdName + " 숫자라고 입력해 주세요."));
+        }
+    }
 }

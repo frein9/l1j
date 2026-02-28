@@ -18,41 +18,41 @@
  */
 package l1j.server.server.command.executor;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.map.L1WorldMap;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class L1Loc implements L1CommandExecutor {
-	private static Logger _log = Logger.getLogger(L1Loc.class.getName());
+    private static Logger _log = Logger.getLogger(L1Loc.class.getName());
 
-	private L1Loc() {
-	}
+    private L1Loc() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1Loc();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1Loc();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			if (pc.getInventory().checkEquipped(300000)){   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
-			int locx = pc.getX();
-			int locy = pc.getY();
-			short mapid = pc.getMapId();
-			int gab = L1WorldMap.getInstance(). getMap(mapid). getOriginalTile(
-					locx, locy);
-			String msg = String.format("좌표 (%d, %d, %d) %d", locx, locy, mapid,
-					gab);
-			pc.sendPackets(new S_SystemMessage(msg));
-			} else {
-				pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
-				return;
-			}
-		} catch (Exception e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		}
-	}
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            if (pc.getInventory().checkEquipped(300000)) {   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
+                int locx = pc.getX();
+                int locy = pc.getY();
+                short mapid = pc.getMapId();
+                int gab = L1WorldMap.getInstance().getMap(mapid).getOriginalTile(
+                        locx, locy);
+                String msg = String.format("좌표 (%d, %d, %d) %d", locx, locy, mapid,
+                        gab);
+                pc.sendPackets(new S_SystemMessage(msg));
+            } else {
+                pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
+                return;
+            }
+        } catch (Exception e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        }
+    }
 }

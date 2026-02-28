@@ -18,50 +18,50 @@
  */
 package l1j.server.server.command.executor;
 
-import java.util.StringTokenizer;
-import java.util.logging.Logger;
-
-import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.L1World;
 import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.serverpackets.S_SkillIconGFX;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
+import java.util.StringTokenizer;
+import java.util.logging.Logger;
+
 public class L1ChatNG implements L1CommandExecutor {
-	private static Logger _log = Logger.getLogger(L1ChatNG.class.getName());
+    private static Logger _log = Logger.getLogger(L1ChatNG.class.getName());
 
-	private L1ChatNG() {
-	}
+    private L1ChatNG() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1ChatNG();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1ChatNG();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			if (pc.getInventory().checkEquipped(300000)){   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
-			StringTokenizer st = new StringTokenizer(arg);
-			String name = st.nextToken();
-			int time = Integer.parseInt(st.nextToken());
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            if (pc.getInventory().checkEquipped(300000)) {   // 운영자의 반지 착용했을때 운영자 명령어 사용가능
+                StringTokenizer st = new StringTokenizer(arg);
+                String name = st.nextToken();
+                int time = Integer.parseInt(st.nextToken());
 
-			L1PcInstance tg = L1World.getInstance(). getPlayer(name);
+                L1PcInstance tg = L1World.getInstance().getPlayer(name);
 
-			if (tg != null) {
-				tg.setSkillEffect(L1SkillId.STATUS_CHAT_PROHIBITED,
-						time * 60 * 1000);
-				tg.sendPackets(new S_SkillIconGFX(36, time * 60));
-				tg.sendPackets(new S_ServerMessage(286, String.valueOf(time))); // \f3게임에 적합하지 않는 행동이기 (위해)때문에, 향후%0분간 채팅을 금지합니다.
-				pc.sendPackets(new S_ServerMessage(287, name)); // %0의 채팅을 금지했습니다.
-			}
-			} else {
-				pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
-				return;
-			}
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName
-					+ " 캐릭터명 시간(분) 이라고 입력해 주세요. "));
-		}
-	}
+                if (tg != null) {
+                    tg.setSkillEffect(L1SkillId.STATUS_CHAT_PROHIBITED,
+                            time * 60 * 1000);
+                    tg.sendPackets(new S_SkillIconGFX(36, time * 60));
+                    tg.sendPackets(new S_ServerMessage(286, String.valueOf(time))); // \f3게임에 적합하지 않는 행동이기 (위해)때문에, 향후%0분간 채팅을 금지합니다.
+                    pc.sendPackets(new S_ServerMessage(287, name)); // %0의 채팅을 금지했습니다.
+                }
+            } else {
+                pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
+                return;
+            }
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(cmdName
+                    + " 캐릭터명 시간(분) 이라고 입력해 주세요. "));
+        }
+    }
 }
