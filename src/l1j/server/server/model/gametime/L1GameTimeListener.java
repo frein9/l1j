@@ -35,38 +35,34 @@ package l1j.server.server.model.gametime;
  * 이러한 메소드의 처리에 시간이 걸렸을 경우, 다른 청취자에게로의 통지가 늦을 가능성이 있다.
  * 완료까지 시간을 필요로 하는 처리나, thread를 블록 하는 메소드의 호출이 포함되는 처리를 실시하는 경우는, 내부에서 새롭게 thread를 작성해 처리를 실시해야 하는 것이다.
  * </p>
- * 
+ *
  */
 public interface L1GameTimeListener {
-	/**
-	 * 에덴 시간에 달이 바뀌었을 때에 불려 간다.
-	 * 
-	 * @param time
-	 *            최신의 에덴 시간
-	 */
-	public void onMonthChanged(L1GameTime time);
+    /**
+     * 에덴 시간에 달이 바뀌었을 때에 불려 간다.
+     *
+     * @param time 최신의 에덴 시간
+     */
+    public void onMonthChanged(L1GameTime time);
 
-	/**
-	 * 에덴 시간에 날이 바뀌었을 때에 불려 간다.
-	 * 
-	 * @param time
-	 *            최신의 에덴 시간
-	 */
-	public void onDayChanged(L1GameTime time);
+    /**
+     * 에덴 시간에 날이 바뀌었을 때에 불려 간다.
+     *
+     * @param time 최신의 에덴 시간
+     */
+    public void onDayChanged(L1GameTime time);
 
-	/**
-	 * 에덴 시간에 시간이 바뀌었을 때에 불려 간다.
-	 * 
-	 * @param time
-	 *            최신의 에덴 시간
-	 */
-	public void onHourChanged(L1GameTime time);
+    /**
+     * 에덴 시간에 시간이 바뀌었을 때에 불려 간다.
+     *
+     * @param time 최신의 에덴 시간
+     */
+    public void onHourChanged(L1GameTime time);
 
-	/**
-	 * 에덴 시간에 분이 바뀌었을 때에 불려 간다.
-	 * 
-	 * @param time
-	 *            최신의 에덴 시간
-	 */
-	public void onMinuteChanged(L1GameTime time);
+    /**
+     * 에덴 시간에 분이 바뀌었을 때에 불려 간다.
+     *
+     * @param time 최신의 에덴 시간
+     */
+    public void onMinuteChanged(L1GameTime time);
 }
