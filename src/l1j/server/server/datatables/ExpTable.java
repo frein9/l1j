@@ -25,293 +25,289 @@ import l1j.server.Config;
  * 경험치 테이블을 제공하는 클래스
  */
 public final class ExpTable {
-	private ExpTable() {
-	}
+    private ExpTable() {
+    }
 
-	public static final int MAX_LEVEL = 99;
+    public static final int MAX_LEVEL = 99;
 
-	public static final int MAX_EXP = 0x6fde16de;
+    public static final int MAX_EXP = 0x6fde16de;
 
-	/**
-	 * 지정된 레벨이 되는데 필요한 누적 경험치를 요구한다.
-	 * 
-	 * @param level
-	 *            레벨
-	 * @return 필요한 누적 경험치
-	 */
-	public static int getExpByLevel(int level) {
-		return _expTable[level - 1];
-	}
+    /**
+     * 지정된 레벨이 되는데 필요한 누적 경험치를 요구한다.
+     *
+     * @param level 레벨
+     * @return 필요한 누적 경험치
+     */
+    public static int getExpByLevel(int level) {
+        return _expTable[level - 1];
+    }
 
-	/**
-	 * 다음의 레벨이 되는데 필요한 경험치를 요구한다.
-	 * 
-	 * @param level
-	 *            현재의 레벨
-	 * @return 필요한 경험치
-	 */
-	public static int getNeedExpNextLevel(int level) {
-		return getExpByLevel(level + 1) - getExpByLevel(level);
-	}
+    /**
+     * 다음의 레벨이 되는데 필요한 경험치를 요구한다.
+     *
+     * @param level 현재의 레벨
+     * @return 필요한 경험치
+     */
+    public static int getNeedExpNextLevel(int level) {
+        return getExpByLevel(level + 1) - getExpByLevel(level);
+    }
 
-	/**
-	 * 누적 경험치로부터 레벨을 요구한다.
-	 * 
-	 * @param exp
-	 *            누적 경험치
-	 * @return 요구된 레벨
-	 */
-	public static int getLevelByExp(int exp) {
+    /**
+     * 누적 경험치로부터 레벨을 요구한다.
+     *
+     * @param exp 누적 경험치
+     * @return 요구된 레벨
+     */
+    public static int getLevelByExp(int exp) {
 
-		int level;
-		for (level = 1; level < _expTable.length; level++) {
-			// 트리키일지도 모른다···
-			if (exp < _expTable[level]) {
-				break;
-			}
-		}
-		return Math.min(level, MAX_LEVEL);
-	}
+        int level;
+        for (level = 1; level < _expTable.length; level++) {
+            // 트리키일지도 모른다···
+            if (exp < _expTable[level]) {
+                break;
+            }
+        }
+        return Math.min(level, MAX_LEVEL);
+    }
 
-	public static int getExpPercentage(int level, int exp) {
-		return (int) (100.0 * ((double) (exp - getExpByLevel(level)) / (double) getNeedExpNextLevel(level)));
-	}
+    public static int getExpPercentage(int level, int exp) {
+        return (int) (100.0 * ((double) (exp - getExpByLevel(level)) / (double) getNeedExpNextLevel(level)));
+    }
 
-	/**
-	 * 현재의 레벨로부터, 경험치의 페널티 레이트를 요구한다
-	 * 
-	 * @param level
-	 *            현재의 레벨
-	 * @return 요구된 경험치의 페널티 레이트
-	 */
-	public static double getPenaltyRate(int level) {
-		
-		double expPenalty = 1.0;
+    /**
+     * 현재의 레벨로부터, 경험치의 페널티 레이트를 요구한다
+     *
+     * @param level 현재의 레벨
+     * @return 요구된 경험치의 페널티 레이트
+     */
+    public static double getPenaltyRate(int level) {
 
-		if (level == 1) {
-			expPenalty = 1.0 / Config.LV1_EXP;
-		}  else if (level == 2) {
-			expPenalty = 1.0 / Config.LV2_EXP;
-		} else if (level == 3) {
-			expPenalty = 1.0 / Config.LV3_EXP;
-		} else if (level == 4) {
-			expPenalty = 1.0 / Config.LV4_EXP;
-		} else if (level == 5) {
-			expPenalty = 1.0 / Config.LV5_EXP;
-		} else if (level == 6) {
-			expPenalty = 1.0 / Config.LV6_EXP;
-		} else if (level == 7) {
-			expPenalty = 1.0 / Config.LV7_EXP;
-		} else if (level == 8) {
-			expPenalty = 1.0 / Config.LV8_EXP;
-		} else if (level == 9) {
-			expPenalty = 1.0 / Config.LV9_EXP;
-		} else if (level == 10) {
-			expPenalty = 1.0 / Config.LV10_EXP;
-		} else if (level == 11) {
-			expPenalty = 1.0 / Config.LV11_EXP;
-		} else if (level == 12) {
-			expPenalty = 1.0 / Config.LV12_EXP;
-		} else if (level == 13) {
-			expPenalty = 1.0 / Config.LV13_EXP;
-		} else if (level == 14) {
-			expPenalty = 1.0 / Config.LV14_EXP;
-		} else if (level == 15) {
-			expPenalty = 1.0 / Config.LV15_EXP;
-		} else if (level == 16) {
-			expPenalty = 1.0 / Config.LV16_EXP;
-		} else if (level == 17) {
-			expPenalty = 1.0 / Config.LV17_EXP;
-		} else if (level == 18) {
-			expPenalty = 1.0 / Config.LV18_EXP;
-		} else if (level == 19) {
-			expPenalty = 1.0 / Config.LV19_EXP;
-		} else if (level == 20) {
-			expPenalty = 1.0 / Config.LV20_EXP;
-		} else if (level == 21) {
-			expPenalty = 1.0 / Config.LV21_EXP;
-		} else if (level == 22) {
-			expPenalty = 1.0 / Config.LV22_EXP;
-		} else if (level == 23) {
-			expPenalty = 1.0 / Config.LV23_EXP;
-		} else if (level == 24) {
-			expPenalty = 1.0 / Config.LV24_EXP;
-		} else if (level == 25) {
-			expPenalty = 1.0 / Config.LV25_EXP;
-		} else if (level == 26) {
-			expPenalty = 1.0 / Config.LV26_EXP;
-		} else if (level == 27) {
-			expPenalty = 1.0 / Config.LV27_EXP;
-		} else if (level == 28) {
-			expPenalty = 1.0 / Config.LV28_EXP;
-		} else if (level == 29) {
-			expPenalty = 1.0 / Config.LV29_EXP;
-		} else if (level == 30) {
-			expPenalty = 1.0 / Config.LV30_EXP;
-		} else if (level == 31) {
-			expPenalty = 1.0 / Config.LV31_EXP;
-		} else if (level == 32) {
-			expPenalty = 1.0 / Config.LV32_EXP;
-		} else if (level == 33) {
-			expPenalty = 1.0 / Config.LV33_EXP;
-		} else if (level == 34) {
-			expPenalty = 1.0 / Config.LV34_EXP;
-		} else if (level == 35) {
-			expPenalty = 1.0 / Config.LV35_EXP;
-		} else if (level == 36) {
-			expPenalty = 1.0 / Config.LV36_EXP;
-		} else if (level == 37) {
-			expPenalty = 1.0 / Config.LV37_EXP;
-		} else if (level == 38) {
-			expPenalty = 1.0 / Config.LV38_EXP;
-		} else if (level == 39) {
-			expPenalty = 1.0 / Config.LV39_EXP;
-		} else if (level == 40) {
-			expPenalty = 1.0 / Config.LV40_EXP;
-		} else if (level == 41) {
-			expPenalty = 1.0 / Config.LV41_EXP;
-		} else if (level == 42) {
-			expPenalty = 1.0 / Config.LV42_EXP;
-		} else if (level == 43) {
-			expPenalty = 1.0 / Config.LV43_EXP;
-		} else if (level == 44) {
-			expPenalty = 1.0 / Config.LV44_EXP;
-		} else if (level == 45) {
-			expPenalty = 1.0 / Config.LV45_EXP;
-		} else if (level == 46) {
-			expPenalty = 1.0 / Config.LV46_EXP;
-		} else if (level == 47) {
-			expPenalty = 1.0 / Config.LV47_EXP;
-		} else if (level == 48) {
-			expPenalty = 1.0 / Config.LV48_EXP;
-		} else if (level == 49) {
-			expPenalty = 1.0 / Config.LV49_EXP;
-		} else if (level == 50) {
-			expPenalty = 1.0 / Config.LV50_EXP;
-		} else if (level == 51) {
-			expPenalty = 1.0 / Config.LV51_EXP;
-		} else if (level == 52) {
-			expPenalty = 1.0 / Config.LV52_EXP;
-		} else if (level == 53) {
-			expPenalty = 1.0 / Config.LV53_EXP;
-		} else if (level == 54) {
-			expPenalty = 1.0 / Config.LV54_EXP;
-		} else if (level == 55) {
-			expPenalty = 1.0 / Config.LV55_EXP;
-		} else if (level == 56) {
-			expPenalty = 1.0 / Config.LV56_EXP;
-		} else if (level == 57) {
-			expPenalty = 1.0 / Config.LV57_EXP;
-		} else if (level == 58) {
-			expPenalty = 1.0 / Config.LV58_EXP;
-		} else if (level == 59) {
-			expPenalty = 1.0 / Config.LV59_EXP;
-		} else if (level == 60) {
-			expPenalty = 1.0 / Config.LV60_EXP;
-		} else if (level == 61) {
-			expPenalty = 1.0 / Config.LV61_EXP;
-		} else if (level == 62) {
-			expPenalty = 1.0 / Config.LV62_EXP;
-		} else if (level == 63) {
-			expPenalty = 1.0 / Config.LV63_EXP;
-		} else if (level == 64) {
-			expPenalty = 1.0 / Config.LV64_EXP;
-		} else if (level == 65) {
-			expPenalty = 1.0 / Config.LV65_EXP;
-		} else if (level == 66) {
-			expPenalty = 1.0 / Config.LV66_EXP;
-		} else if (level == 67) {
-			expPenalty = 1.0 / Config.LV67_EXP;
-		} else if (level == 68) {
-			expPenalty = 1.0 / Config.LV68_EXP;
-		} else if (level == 69) {
-			expPenalty = 1.0 / Config.LV69_EXP;
-		} else if (level == 70) {
-			expPenalty = 1.0 / Config.LV70_EXP;
-		} else if (level == 71) {
-			expPenalty = 1.0 / Config.LV71_EXP;
-		} else if (level == 72) {
-			expPenalty = 1.0 / Config.LV72_EXP;
-		} else if (level == 73) {
-			expPenalty = 1.0 / Config.LV73_EXP;
-		} else if (level == 74) {
-			expPenalty = 1.0 / Config.LV74_EXP;
-		} else if (level == 75) {
-			expPenalty = 1.0 / Config.LV75_EXP;
-		} else if (level == 76) {
-			expPenalty = 1.0 / Config.LV76_EXP;
-		} else if (level == 77) {
-			expPenalty = 1.0 / Config.LV77_EXP;
-		} else if (level == 78) {
-			expPenalty = 1.0 / Config.LV78_EXP;
-		} else if (level == 79) {
-			expPenalty = 1.0 / Config.LV79_EXP;
-		} else if (level == 80) {
-			expPenalty = 1.0 / Config.LV80_EXP;
-		} else if (level == 81) {
-			expPenalty = 1.0 / Config.LV81_EXP;
-		} else if (level == 82) {
-			expPenalty = 1.0 / Config.LV82_EXP;
-		} else if (level == 83) {
-			expPenalty = 1.0 / Config.LV83_EXP;
-		} else if (level == 84) {
-			expPenalty = 1.0 / Config.LV84_EXP;
-		} else if (level == 85) {
-			expPenalty = 1.0 / Config.LV85_EXP;
-		} else if (level == 86) {
-			expPenalty = 1.0 / Config.LV86_EXP;
-		} else if (level == 87) {
-			expPenalty = 1.0 / Config.LV87_EXP;
-		} else if (level == 88) {
-			expPenalty = 1.0 / Config.LV88_EXP;
-		} else if (level == 89) {
-			expPenalty = 1.0 / Config.LV89_EXP;
-		} else if (level == 90) {
-			expPenalty = 1.0 / Config.LV90_EXP;
-		} else if (level == 91) {
-			expPenalty = 1.0 / Config.LV91_EXP;
-		} else if (level == 92) {
-			expPenalty = 1.0 / Config.LV92_EXP;
-		} else if (level == 93) {
-			expPenalty = 1.0 / Config.LV93_EXP;
-		} else if (level == 94) {
-			expPenalty = 1.0 / Config.LV94_EXP;
-		} else if (level == 95) {
-			expPenalty = 1.0 / Config.LV95_EXP;
-		} else if (level == 96) {
-			expPenalty = 1.0 / Config.LV96_EXP;
-		} else if (level == 97) {
-			expPenalty = 1.0 / Config.LV97_EXP;
-		} else if (level == 98) {
-			expPenalty = 1.0 / Config.LV98_EXP;
-		} else if (level == 99) {
-			expPenalty = 1.0 / Config.LV99_EXP;
-		} else if (level == 100) {
-			expPenalty = 1.0 / Config.LV99_EXP;
-		}
+        double expPenalty = 1.0;
 
-		return expPenalty;
-	}
+        if (level == 1) {
+            expPenalty = 1.0 / Config.LV1_EXP;
+        } else if (level == 2) {
+            expPenalty = 1.0 / Config.LV2_EXP;
+        } else if (level == 3) {
+            expPenalty = 1.0 / Config.LV3_EXP;
+        } else if (level == 4) {
+            expPenalty = 1.0 / Config.LV4_EXP;
+        } else if (level == 5) {
+            expPenalty = 1.0 / Config.LV5_EXP;
+        } else if (level == 6) {
+            expPenalty = 1.0 / Config.LV6_EXP;
+        } else if (level == 7) {
+            expPenalty = 1.0 / Config.LV7_EXP;
+        } else if (level == 8) {
+            expPenalty = 1.0 / Config.LV8_EXP;
+        } else if (level == 9) {
+            expPenalty = 1.0 / Config.LV9_EXP;
+        } else if (level == 10) {
+            expPenalty = 1.0 / Config.LV10_EXP;
+        } else if (level == 11) {
+            expPenalty = 1.0 / Config.LV11_EXP;
+        } else if (level == 12) {
+            expPenalty = 1.0 / Config.LV12_EXP;
+        } else if (level == 13) {
+            expPenalty = 1.0 / Config.LV13_EXP;
+        } else if (level == 14) {
+            expPenalty = 1.0 / Config.LV14_EXP;
+        } else if (level == 15) {
+            expPenalty = 1.0 / Config.LV15_EXP;
+        } else if (level == 16) {
+            expPenalty = 1.0 / Config.LV16_EXP;
+        } else if (level == 17) {
+            expPenalty = 1.0 / Config.LV17_EXP;
+        } else if (level == 18) {
+            expPenalty = 1.0 / Config.LV18_EXP;
+        } else if (level == 19) {
+            expPenalty = 1.0 / Config.LV19_EXP;
+        } else if (level == 20) {
+            expPenalty = 1.0 / Config.LV20_EXP;
+        } else if (level == 21) {
+            expPenalty = 1.0 / Config.LV21_EXP;
+        } else if (level == 22) {
+            expPenalty = 1.0 / Config.LV22_EXP;
+        } else if (level == 23) {
+            expPenalty = 1.0 / Config.LV23_EXP;
+        } else if (level == 24) {
+            expPenalty = 1.0 / Config.LV24_EXP;
+        } else if (level == 25) {
+            expPenalty = 1.0 / Config.LV25_EXP;
+        } else if (level == 26) {
+            expPenalty = 1.0 / Config.LV26_EXP;
+        } else if (level == 27) {
+            expPenalty = 1.0 / Config.LV27_EXP;
+        } else if (level == 28) {
+            expPenalty = 1.0 / Config.LV28_EXP;
+        } else if (level == 29) {
+            expPenalty = 1.0 / Config.LV29_EXP;
+        } else if (level == 30) {
+            expPenalty = 1.0 / Config.LV30_EXP;
+        } else if (level == 31) {
+            expPenalty = 1.0 / Config.LV31_EXP;
+        } else if (level == 32) {
+            expPenalty = 1.0 / Config.LV32_EXP;
+        } else if (level == 33) {
+            expPenalty = 1.0 / Config.LV33_EXP;
+        } else if (level == 34) {
+            expPenalty = 1.0 / Config.LV34_EXP;
+        } else if (level == 35) {
+            expPenalty = 1.0 / Config.LV35_EXP;
+        } else if (level == 36) {
+            expPenalty = 1.0 / Config.LV36_EXP;
+        } else if (level == 37) {
+            expPenalty = 1.0 / Config.LV37_EXP;
+        } else if (level == 38) {
+            expPenalty = 1.0 / Config.LV38_EXP;
+        } else if (level == 39) {
+            expPenalty = 1.0 / Config.LV39_EXP;
+        } else if (level == 40) {
+            expPenalty = 1.0 / Config.LV40_EXP;
+        } else if (level == 41) {
+            expPenalty = 1.0 / Config.LV41_EXP;
+        } else if (level == 42) {
+            expPenalty = 1.0 / Config.LV42_EXP;
+        } else if (level == 43) {
+            expPenalty = 1.0 / Config.LV43_EXP;
+        } else if (level == 44) {
+            expPenalty = 1.0 / Config.LV44_EXP;
+        } else if (level == 45) {
+            expPenalty = 1.0 / Config.LV45_EXP;
+        } else if (level == 46) {
+            expPenalty = 1.0 / Config.LV46_EXP;
+        } else if (level == 47) {
+            expPenalty = 1.0 / Config.LV47_EXP;
+        } else if (level == 48) {
+            expPenalty = 1.0 / Config.LV48_EXP;
+        } else if (level == 49) {
+            expPenalty = 1.0 / Config.LV49_EXP;
+        } else if (level == 50) {
+            expPenalty = 1.0 / Config.LV50_EXP;
+        } else if (level == 51) {
+            expPenalty = 1.0 / Config.LV51_EXP;
+        } else if (level == 52) {
+            expPenalty = 1.0 / Config.LV52_EXP;
+        } else if (level == 53) {
+            expPenalty = 1.0 / Config.LV53_EXP;
+        } else if (level == 54) {
+            expPenalty = 1.0 / Config.LV54_EXP;
+        } else if (level == 55) {
+            expPenalty = 1.0 / Config.LV55_EXP;
+        } else if (level == 56) {
+            expPenalty = 1.0 / Config.LV56_EXP;
+        } else if (level == 57) {
+            expPenalty = 1.0 / Config.LV57_EXP;
+        } else if (level == 58) {
+            expPenalty = 1.0 / Config.LV58_EXP;
+        } else if (level == 59) {
+            expPenalty = 1.0 / Config.LV59_EXP;
+        } else if (level == 60) {
+            expPenalty = 1.0 / Config.LV60_EXP;
+        } else if (level == 61) {
+            expPenalty = 1.0 / Config.LV61_EXP;
+        } else if (level == 62) {
+            expPenalty = 1.0 / Config.LV62_EXP;
+        } else if (level == 63) {
+            expPenalty = 1.0 / Config.LV63_EXP;
+        } else if (level == 64) {
+            expPenalty = 1.0 / Config.LV64_EXP;
+        } else if (level == 65) {
+            expPenalty = 1.0 / Config.LV65_EXP;
+        } else if (level == 66) {
+            expPenalty = 1.0 / Config.LV66_EXP;
+        } else if (level == 67) {
+            expPenalty = 1.0 / Config.LV67_EXP;
+        } else if (level == 68) {
+            expPenalty = 1.0 / Config.LV68_EXP;
+        } else if (level == 69) {
+            expPenalty = 1.0 / Config.LV69_EXP;
+        } else if (level == 70) {
+            expPenalty = 1.0 / Config.LV70_EXP;
+        } else if (level == 71) {
+            expPenalty = 1.0 / Config.LV71_EXP;
+        } else if (level == 72) {
+            expPenalty = 1.0 / Config.LV72_EXP;
+        } else if (level == 73) {
+            expPenalty = 1.0 / Config.LV73_EXP;
+        } else if (level == 74) {
+            expPenalty = 1.0 / Config.LV74_EXP;
+        } else if (level == 75) {
+            expPenalty = 1.0 / Config.LV75_EXP;
+        } else if (level == 76) {
+            expPenalty = 1.0 / Config.LV76_EXP;
+        } else if (level == 77) {
+            expPenalty = 1.0 / Config.LV77_EXP;
+        } else if (level == 78) {
+            expPenalty = 1.0 / Config.LV78_EXP;
+        } else if (level == 79) {
+            expPenalty = 1.0 / Config.LV79_EXP;
+        } else if (level == 80) {
+            expPenalty = 1.0 / Config.LV80_EXP;
+        } else if (level == 81) {
+            expPenalty = 1.0 / Config.LV81_EXP;
+        } else if (level == 82) {
+            expPenalty = 1.0 / Config.LV82_EXP;
+        } else if (level == 83) {
+            expPenalty = 1.0 / Config.LV83_EXP;
+        } else if (level == 84) {
+            expPenalty = 1.0 / Config.LV84_EXP;
+        } else if (level == 85) {
+            expPenalty = 1.0 / Config.LV85_EXP;
+        } else if (level == 86) {
+            expPenalty = 1.0 / Config.LV86_EXP;
+        } else if (level == 87) {
+            expPenalty = 1.0 / Config.LV87_EXP;
+        } else if (level == 88) {
+            expPenalty = 1.0 / Config.LV88_EXP;
+        } else if (level == 89) {
+            expPenalty = 1.0 / Config.LV89_EXP;
+        } else if (level == 90) {
+            expPenalty = 1.0 / Config.LV90_EXP;
+        } else if (level == 91) {
+            expPenalty = 1.0 / Config.LV91_EXP;
+        } else if (level == 92) {
+            expPenalty = 1.0 / Config.LV92_EXP;
+        } else if (level == 93) {
+            expPenalty = 1.0 / Config.LV93_EXP;
+        } else if (level == 94) {
+            expPenalty = 1.0 / Config.LV94_EXP;
+        } else if (level == 95) {
+            expPenalty = 1.0 / Config.LV95_EXP;
+        } else if (level == 96) {
+            expPenalty = 1.0 / Config.LV96_EXP;
+        } else if (level == 97) {
+            expPenalty = 1.0 / Config.LV97_EXP;
+        } else if (level == 98) {
+            expPenalty = 1.0 / Config.LV98_EXP;
+        } else if (level == 99) {
+            expPenalty = 1.0 / Config.LV99_EXP;
+        } else if (level == 100) {
+            expPenalty = 1.0 / Config.LV99_EXP;
+        }
 
-	/**
-	 * 경험치 테이블(누적치) Lv0-110
-	 */
-	private static final int _expTable[] = { 0, 125, 300, 500, 750, 1296, 2401,
-			4096, 6581, 10000, 14661, 20756, 28581, 38436, 50645, 0x10014,
-			0x14655, 0x19a24, 0x1fd25, 0x27114, 0x2f7c5, 0x39324, 0x44535,
-			0x51010, 0x5f5f1, 0x6f920, 0x81c01, 0x96110, 0xacae1, 0xc5c20,
-			0xe1791, 0x100010, 0x121891, 0x146420, 0x16e5e1, 0x19a110,
-			0x1c9901, 0x1fd120, 0x234cf1, 0x271010, 0x2b1e31, 0x2f7b21,
-			0x342ac2, 0x393111, 0x3e9222, 0x49b332, 0x60b772, 0x960cd1,
-			0x12d4c4e, 0x3539b92, 0x579ead6, 0x7a03a1a, 0x9c6895e, 0xbecd8a2,
-			0xe1327e6, 0x1039772a, 0x125fc66e, 0x148615b2, 0x16ac64f6,
-			0x18d2b43a, 0x1af9037e, 0x1d1f52c2, 0x1f45a206, 0x216bf14a,
-			0x2392408e, 0x25b88fd2, 0x27dedf16, 0x2a052e5a, 0x2c2b7d9e,
-			0x2e51cce2, 0x30781c26, 0x329e6b6a, 0x34c4baae, 0x36eb09f2,
-			0x39115936, 0x3b37a87a, 0x3d5df7be, 0x3f844702, 0x41aa9646,
-			0x43d0e58a, 0x45f734ce, 0x481d8412, 0x4a43d356, 0x4c6a229a,
-			0x4e9071de, 0x50b6c122, 0x52dd1066, 0x55035faa, 0x5729aeee,
-			0x594ffe32, 0x5b764d76, 0x5d9c9cba, 0x5fc2ebfe, 0x61e93b42,
-			0x640f8a86, 0x6635d9ca, 0x685c290e, 0x6a827852, 0x6ca8c796,
-			0x6ecf16da, 0x6fde16da};
+        return expPenalty;
+    }
+
+    /**
+     * 경험치 테이블(누적치) Lv0-110
+     */
+    private static final int _expTable[] = {0, 125, 300, 500, 750, 1296, 2401,
+            4096, 6581, 10000, 14661, 20756, 28581, 38436, 50645, 0x10014,
+            0x14655, 0x19a24, 0x1fd25, 0x27114, 0x2f7c5, 0x39324, 0x44535,
+            0x51010, 0x5f5f1, 0x6f920, 0x81c01, 0x96110, 0xacae1, 0xc5c20,
+            0xe1791, 0x100010, 0x121891, 0x146420, 0x16e5e1, 0x19a110,
+            0x1c9901, 0x1fd120, 0x234cf1, 0x271010, 0x2b1e31, 0x2f7b21,
+            0x342ac2, 0x393111, 0x3e9222, 0x49b332, 0x60b772, 0x960cd1,
+            0x12d4c4e, 0x3539b92, 0x579ead6, 0x7a03a1a, 0x9c6895e, 0xbecd8a2,
+            0xe1327e6, 0x1039772a, 0x125fc66e, 0x148615b2, 0x16ac64f6,
+            0x18d2b43a, 0x1af9037e, 0x1d1f52c2, 0x1f45a206, 0x216bf14a,
+            0x2392408e, 0x25b88fd2, 0x27dedf16, 0x2a052e5a, 0x2c2b7d9e,
+            0x2e51cce2, 0x30781c26, 0x329e6b6a, 0x34c4baae, 0x36eb09f2,
+            0x39115936, 0x3b37a87a, 0x3d5df7be, 0x3f844702, 0x41aa9646,
+            0x43d0e58a, 0x45f734ce, 0x481d8412, 0x4a43d356, 0x4c6a229a,
+            0x4e9071de, 0x50b6c122, 0x52dd1066, 0x55035faa, 0x5729aeee,
+            0x594ffe32, 0x5b764d76, 0x5d9c9cba, 0x5fc2ebfe, 0x61e93b42,
+            0x640f8a86, 0x6635d9ca, 0x685c290e, 0x6a827852, 0x6ca8c796,
+            0x6ecf16da, 0x6fde16da};
 }

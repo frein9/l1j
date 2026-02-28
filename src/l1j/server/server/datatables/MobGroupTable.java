@@ -35,59 +35,59 @@ import l1j.server.server.utils.SQLUtil;
 import l1j.server.server.utils.collections.Lists;
 
 public class MobGroupTable {
-	private static Logger _log = Logger
-			. getLogger(MobGroupTable.class.getName());
+    private static Logger _log = Logger
+            .getLogger(MobGroupTable.class.getName());
 
-	private static MobGroupTable _instance;
+    private static MobGroupTable _instance;
 
-	private final HashMap<Integer, L1MobGroup> _mobGroupIndex = new HashMap<Integer, L1MobGroup>();
+    private final HashMap<Integer, L1MobGroup> _mobGroupIndex = new HashMap<Integer, L1MobGroup>();
 
-	public static MobGroupTable getInstance() {
-		if (_instance == null) {
-			_instance = new MobGroupTable();
-		}
-		return _instance;
-	}
+    public static MobGroupTable getInstance() {
+        if (_instance == null) {
+            _instance = new MobGroupTable();
+        }
+        return _instance;
+    }
 
-	private MobGroupTable() {
-		loadMobGroup();
-	}
+    private MobGroupTable() {
+        loadMobGroup();
+    }
 
-	private void loadMobGroup() {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT * FROM mobgroup");
-			rs = pstm.executeQuery();
-			while (rs.next()) {
-				int mobGroupId = rs.getInt("id");
-				boolean isRemoveGroup = (rs
-						.getBoolean("remove_group_if_leader_die"));
-				int leaderId = rs.getInt("leader_id");
-				List<L1NpcCount> minions = Lists.newArrayList();
-				for (int i = 1; i <= 7; i++) {
-					int id = rs.getInt("minion" + i + "_id");
-					int count = rs.getInt("minion" + i + "_count");
-					minions.add(new L1NpcCount(id, count));
-				}
-				L1MobGroup mobGroup = new L1MobGroup(mobGroupId, leaderId,
-						minions, isRemoveGroup);
-				_mobGroupIndex.put(mobGroupId, mobGroup);
-			}
-			_log.config("MOB 그룹 리스트 " + _mobGroupIndex.size() + "건로드");
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, "error while creating mobgroup table", e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+    private void loadMobGroup() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT * FROM MOBGROUP");
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                int mobGroupId = rs.getInt("id");
+                boolean isRemoveGroup = (rs
+                        .getBoolean("remove_group_if_leader_die"));
+                int leaderId = rs.getInt("leader_id");
+                List<L1NpcCount> minions = Lists.newArrayList();
+                for (int i = 1; i <= 7; i++) {
+                    int id = rs.getInt("minion" + i + "_id");
+                    int count = rs.getInt("minion" + i + "_count");
+                    minions.add(new L1NpcCount(id, count));
+                }
+                L1MobGroup mobGroup = new L1MobGroup(mobGroupId, leaderId,
+                        minions, isRemoveGroup);
+                _mobGroupIndex.put(mobGroupId, mobGroup);
+            }
+            _log.config("MOB 그룹 리스트 " + _mobGroupIndex.size() + "건로드");
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, "error while creating mobgroup table", e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
-	public L1MobGroup getTemplate(int mobGroupId) {
-		return _mobGroupIndex.get(mobGroupId);
-	}
+    public L1MobGroup getTemplate(int mobGroupId) {
+        return _mobGroupIndex.get(mobGroupId);
+    }
 
 }

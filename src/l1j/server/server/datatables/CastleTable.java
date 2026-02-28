@@ -40,90 +40,90 @@ import l1j.server.server.utils.SQLUtil;
 
 public class CastleTable {
 
-	private static Logger _log = Logger.getLogger(CastleTable.class.getName());
+    private static Logger _log = Logger.getLogger(CastleTable.class.getName());
 
-	private static CastleTable _instance;
+    private static CastleTable _instance;
 
-	private final Map<Integer, L1Castle> _castles = new ConcurrentHashMap<Integer, L1Castle>();
+    private final Map<Integer, L1Castle> _castles = new ConcurrentHashMap<Integer, L1Castle>();
 
-	public static CastleTable getInstance() {
-		if (_instance == null) {
-			_instance = new CastleTable();
-		}
-		return _instance;
-	}
+    public static CastleTable getInstance() {
+        if (_instance == null) {
+            _instance = new CastleTable();
+        }
+        return _instance;
+    }
 
-	private CastleTable() {
-		load();
-	}
+    private CastleTable() {
+        load();
+    }
 
-	private Calendar timestampToCalendar(Timestamp ts) {
-		Calendar cal = Calendar.getInstance();
-		cal.setTimeInMillis(ts.getTime());
-		return cal;
-	}
+    private Calendar timestampToCalendar(Timestamp ts) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(ts.getTime());
+        return cal;
+    }
 
-	private void load() {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT * FROM castle");
+    private void load() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT * FROM CASTLE");
 
-			rs = pstm.executeQuery();
+            rs = pstm.executeQuery();
 
-			while (rs.next()) {
-				L1Castle castle = new L1Castle(rs.getInt(1), rs.getString(2));
-				castle.setWarTime(timestampToCalendar((Timestamp) rs
-						.getObject(3)));
-				castle.setTaxRate(rs.getInt(4));
-				castle.setPublicMoney(rs.getInt(5));
+            while (rs.next()) {
+                L1Castle castle = new L1Castle(rs.getInt(1), rs.getString(2));
+                castle.setWarTime(timestampToCalendar((Timestamp) rs
+                        .getObject(3)));
+                castle.setTaxRate(rs.getInt(4));
+                castle.setPublicMoney(rs.getInt(5));
 
-				_castles.put(castle.getId(), castle);
-			}
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+                _castles.put(castle.getId(), castle);
+            }
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
-	public L1Castle[] getCastleTableList() {
-		return _castles.values().toArray(new L1Castle[_castles.size()]);
-	}
+    public L1Castle[] getCastleTableList() {
+        return _castles.values().toArray(new L1Castle[_castles.size()]);
+    }
 
-	public L1Castle getCastleTable(int id) {
-		return _castles.get(id);
-	}
+    public L1Castle getCastleTable(int id) {
+        return _castles.get(id);
+    }
 
-	public void updateCastle(L1Castle castle) {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con
-					.prepareStatement("UPDATE castle SET name=?, war_time=?, tax_rate=?, public_money=? WHERE castle_id=?");
-			pstm.setString(1, castle.getName());
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
-			String fm = formatter.format(castle.getWarTime().getTime());
-			//	String fm = DateFormat.getDateTimeInstance().format(  
-			//	castle.getWarTime().getTime()); 
-			pstm.setString(2, fm);
-			pstm.setInt(3, castle.getTaxRate());
-			pstm.setInt(4, castle.getPublicMoney());
-			pstm.setInt(5, castle.getId());
-			pstm.execute();
+    public void updateCastle(L1Castle castle) {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con
+                    .prepareStatement("UPDATE CASTLE SET NAME=?, WAR_TIME=?, TAX_RATE=?, PUBLIC_MONEY=? WHERE CASTLE_ID=?");
+            pstm.setString(1, castle.getName());
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String fm = formatter.format(castle.getWarTime().getTime());
+            //	String fm = DateFormat.getDateTimeInstance().format(
+            //	castle.getWarTime().getTime());
+            pstm.setString(2, fm);
+            pstm.setInt(3, castle.getTaxRate());
+            pstm.setInt(4, castle.getPublicMoney());
+            pstm.setInt(5, castle.getId());
+            pstm.execute();
 
-			_castles.put(castle.getId(), castle);
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+            _castles.put(castle.getId(), castle);
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
 }

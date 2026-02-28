@@ -32,54 +32,54 @@ import l1j.server.server.templates.L1SpawnTime;
 import l1j.server.server.utils.SQLUtil;
 
 public class SpawnTimeTable {
-	private static Logger _log = Logger.getLogger(SpawnTimeTable.class
-			.getName());
+    private static Logger _log = Logger.getLogger(SpawnTimeTable.class
+            .getName());
 
-	private static SpawnTimeTable _instance;
+    private static SpawnTimeTable _instance;
 
-	private final Map<Integer, L1SpawnTime> _times = new HashMap<Integer, L1SpawnTime>();
+    private final Map<Integer, L1SpawnTime> _times = new HashMap<Integer, L1SpawnTime>();
 
-	public static SpawnTimeTable getInstance() {
-		if (_instance == null) {
-			_instance = new SpawnTimeTable();
-		}
-		return _instance;
-	}
+    public static SpawnTimeTable getInstance() {
+        if (_instance == null) {
+            _instance = new SpawnTimeTable();
+        }
+        return _instance;
+    }
 
-	private SpawnTimeTable() {
-		load();
-	}
+    private SpawnTimeTable() {
+        load();
+    }
 
-	public L1SpawnTime get(int id) {
-		return _times.get(id);
-	}
+    public L1SpawnTime get(int id) {
+        return _times.get(id);
+    }
 
-	private void load() {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT * FROM spawnlist_time");
-			rs = pstm.executeQuery();
-			while (rs.next()) {
-				int id = rs.getInt("spawn_id");
-				L1SpawnTime.L1SpawnTimeBuilder builder = new L1SpawnTime.L1SpawnTimeBuilder(
-						id);
-				builder.setTimeStart(rs.getTime("time_start"));
-				builder.setTimeEnd(rs.getTime("time_end"));
-				// builder.setPeriodStart(rs.getTimestamp("period_start"));
-				// builder.setPeriodEnd(rs.getTimestamp("period_end"));
-				builder.setDeleteAtEndTime(rs.getBoolean("delete_at_endtime"));
+    private void load() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT * FROM SPAWNLIST_TIME");
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("spawn_id");
+                L1SpawnTime.L1SpawnTimeBuilder builder = new L1SpawnTime.L1SpawnTimeBuilder(
+                        id);
+                builder.setTimeStart(rs.getTime("time_start"));
+                builder.setTimeEnd(rs.getTime("time_end"));
+                // builder.setPeriodStart(rs.getTimestamp("period_start"));
+                // builder.setPeriodEnd(rs.getTimestamp("period_end"));
+                builder.setDeleteAtEndTime(rs.getBoolean("delete_at_endtime"));
 
-				_times.put(id, builder.build());
-			}
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+                _times.put(id, builder.build());
+            }
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 }

@@ -40,150 +40,150 @@ import l1j.server.server.utils.SQLUtil;
 
 public class NpcSpawnTable {
 
-	private static Logger _log = Logger
-			.getLogger(NpcSpawnTable.class.getName());
+    private static Logger _log = Logger
+            .getLogger(NpcSpawnTable.class.getName());
 
-	private static NpcSpawnTable _instance;
+    private static NpcSpawnTable _instance;
 
-	private Map<Integer, L1Spawn> _spawntable = new HashMap<Integer, L1Spawn>();
+    private Map<Integer, L1Spawn> _spawntable = new HashMap<Integer, L1Spawn>();
 
-	private int _highestId;
+    private int _highestId;
 
-	public static NpcSpawnTable getInstance() {
-		if (_instance == null) {
-			_instance = new NpcSpawnTable();
-		}
-		return _instance;
-	}
+    public static NpcSpawnTable getInstance() {
+        if (_instance == null) {
+            _instance = new NpcSpawnTable();
+        }
+        return _instance;
+    }
 
-	private NpcSpawnTable() {
-		fillNpcSpawnTable();
-	}
+    private NpcSpawnTable() {
+        fillNpcSpawnTable();
+    }
 
-	private void fillNpcSpawnTable() {
+    private void fillNpcSpawnTable() {
 
-		int spawnCount = 0;
+        int spawnCount = 0;
 
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		try {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
 
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT * FROM spawnlist_npc");
-			rs = pstm.executeQuery();
-			while (rs.next()) {
-				if (Config.ALT_GMSHOP == false) {
-					int npcid = rs.getInt(1);
-					if (npcid >= Config.ALT_GMSHOP_MIN_ID
-							&& npcid <= Config.ALT_GMSHOP_MAX_ID) {
-						continue;
-					}
-				}
-				if (Config.ALT_HALLOWEENIVENT == false) {
-					int npcid = rs.getInt("id");
-					if (npcid >= 130852 && npcid <= 130862 || npcid >= 26656
-							&& npcid <= 26734) {
-						continue;
-					}
-				}			
-				if (Config.ALT_TALKINGSCROLLQUEST == false) {
-					int npcid = rs.getInt("id");
-					if (npcid >= 87537 && npcid <= 87551 || npcid >= 1310387
-							&& npcid <= 1310389) {
-						continue;
-					}
-				}
-				if (Config.ALT_TALKINGSCROLLQUEST == true) {
-					int npcid = rs.getInt("id");
-					if (npcid >= 90066 && npcid <= 90069) {
-						continue;
-					}
-				}
-				int npcTemplateid = rs.getInt("npc_templateid");
-				L1Npc l1npc = NpcTable.getInstance().getTemplate(npcTemplateid);
-				L1Spawn l1spawn;
-				if (l1npc == null) {
-					_log.warning("mob data for id:" + npcTemplateid
-							+ " missing in npc table");
-					l1spawn = null;
-				} else {
-					if (rs.getInt("count") == 0) {
-						continue;
-					}
-					l1spawn = new L1Spawn(l1npc);
-					l1spawn.setId(rs.getInt("id"));
-					l1spawn.setAmount(rs.getInt("count"));
-					l1spawn.setLocX(rs.getInt("locx"));
-					l1spawn.setLocY(rs.getInt("locy"));
-					l1spawn.setRandomx(rs.getInt("randomx"));
-					l1spawn.setRandomy(rs.getInt("randomy"));
-					l1spawn.setLocX1(0);
-					l1spawn.setLocY1(0);
-					l1spawn.setLocX2(0);
-					l1spawn.setLocY2(0);
-					l1spawn.setHeading(rs.getInt("heading"));
-					l1spawn.setMinRespawnDelay(rs.getInt("respawn_delay"));
-					l1spawn.setMapId(rs.getShort("mapid"));
-					l1spawn.setMovementDistance(rs.getInt("movement_distance"));
-					l1spawn.setName(l1npc.get_name());
-					l1spawn.init();
-					spawnCount += l1spawn.getAmount();
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT * FROM SPAWNLIST_NPC");
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                if (Config.ALT_GMSHOP == false) {
+                    int npcid = rs.getInt(1);
+                    if (npcid >= Config.ALT_GMSHOP_MIN_ID
+                            && npcid <= Config.ALT_GMSHOP_MAX_ID) {
+                        continue;
+                    }
+                }
+                if (Config.ALT_HALLOWEENIVENT == false) {
+                    int npcid = rs.getInt("id");
+                    if (npcid >= 130852 && npcid <= 130862 || npcid >= 26656
+                            && npcid <= 26734) {
+                        continue;
+                    }
+                }
+                if (Config.ALT_TALKINGSCROLLQUEST == false) {
+                    int npcid = rs.getInt("id");
+                    if (npcid >= 87537 && npcid <= 87551 || npcid >= 1310387
+                            && npcid <= 1310389) {
+                        continue;
+                    }
+                }
+                if (Config.ALT_TALKINGSCROLLQUEST == true) {
+                    int npcid = rs.getInt("id");
+                    if (npcid >= 90066 && npcid <= 90069) {
+                        continue;
+                    }
+                }
+                int npcTemplateid = rs.getInt("npc_templateid");
+                L1Npc l1npc = NpcTable.getInstance().getTemplate(npcTemplateid);
+                L1Spawn l1spawn;
+                if (l1npc == null) {
+                    _log.warning("mob data for id:" + npcTemplateid
+                            + " missing in npc table");
+                    l1spawn = null;
+                } else {
+                    if (rs.getInt("count") == 0) {
+                        continue;
+                    }
+                    l1spawn = new L1Spawn(l1npc);
+                    l1spawn.setId(rs.getInt("id"));
+                    l1spawn.setAmount(rs.getInt("count"));
+                    l1spawn.setLocX(rs.getInt("locx"));
+                    l1spawn.setLocY(rs.getInt("locy"));
+                    l1spawn.setRandomx(rs.getInt("randomx"));
+                    l1spawn.setRandomy(rs.getInt("randomy"));
+                    l1spawn.setLocX1(0);
+                    l1spawn.setLocY1(0);
+                    l1spawn.setLocX2(0);
+                    l1spawn.setLocY2(0);
+                    l1spawn.setHeading(rs.getInt("heading"));
+                    l1spawn.setMinRespawnDelay(rs.getInt("respawn_delay"));
+                    l1spawn.setMapId(rs.getShort("mapid"));
+                    l1spawn.setMovementDistance(rs.getInt("movement_distance"));
+                    l1spawn.setName(l1npc.get_name());
+                    l1spawn.init();
+                    spawnCount += l1spawn.getAmount();
 
-					_spawntable.put(new Integer(l1spawn.getId()), l1spawn);
-					if (l1spawn.getId() > _highestId) {
-						_highestId = l1spawn.getId();
-					}
-				}
-			}
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
+                    _spawntable.put(new Integer(l1spawn.getId()), l1spawn);
+                    if (l1spawn.getId() > _highestId) {
+                        _highestId = l1spawn.getId();
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
 
-		_log.config("NPC 배치 리스트 " + _spawntable.size() + "건로드");
-		_log.fine("총NPC수 " + spawnCount + "건");
-	}
+        _log.config("NPC 배치 리스트 " + _spawntable.size() + "건로드");
+        _log.fine("총NPC수 " + spawnCount + "건");
+    }
 
-	public void storeSpawn(L1PcInstance pc, L1Npc npc) {
-		Connection con = null;
-		PreparedStatement pstm = null;
+    public void storeSpawn(L1PcInstance pc, L1Npc npc) {
+        Connection con = null;
+        PreparedStatement pstm = null;
 
-		try {
-			int count = 1;
-			String note = npc.get_name();
+        try {
+            int count = 1;
+            String note = npc.get_name();
 
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con
-					.prepareStatement("INSERT INTO spawnlist_npc SET location=?,count=?,npc_templateid=?,locx=?,locy=?,heading=?,mapid=? ");
-			pstm.setString(1, note);
-			pstm.setInt(2, count);
-			pstm.setInt(3, npc.get_npcId());
-			pstm.setInt(4, pc.getX());
-			pstm.setInt(5, pc.getY());
-			pstm.setInt(6, pc.getHeading());
-			pstm.setInt(7, pc.getMapId());
-			pstm.execute();
-		} catch (Exception e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con
+                    .prepareStatement("INSERT INTO SPAWNLIST_NPC SET location=?,COUNT=?,npc_templateid=?,locx=?,locy=?,heading=?,mapid=? ");
+            pstm.setString(1, note);
+            pstm.setInt(2, count);
+            pstm.setInt(3, npc.get_npcId());
+            pstm.setInt(4, pc.getX());
+            pstm.setInt(5, pc.getY());
+            pstm.setInt(6, pc.getHeading());
+            pstm.setInt(7, pc.getMapId());
+            pstm.execute();
+        } catch (Exception e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 
-		} finally {
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+        } finally {
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
-	public L1Spawn getTemplate(int i) {
-		return _spawntable.get(i);
-	}
+    public L1Spawn getTemplate(int i) {
+        return _spawntable.get(i);
+    }
 
-	public void addNewSpawn(L1Spawn l1spawn) {
-		_highestId++;
-		l1spawn.setId(_highestId);
-		_spawntable.put(l1spawn.getId(), l1spawn);
-	}
+    public void addNewSpawn(L1Spawn l1spawn) {
+        _highestId++;
+        l1spawn.setId(_highestId);
+        _spawntable.put(l1spawn.getId(), l1spawn);
+    }
 
 }

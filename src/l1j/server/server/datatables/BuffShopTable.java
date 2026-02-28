@@ -35,7 +35,8 @@ import l1j.server.server.utils.SQLUtil;
 public class BuffShopTable {
     private static Logger _log = Logger.getLogger(BuffShopTable.class.getName());
 
-    private BuffShopTable() {}
+    private BuffShopTable() {
+    }
 
     private static BuffShopTable _instance;
 
@@ -54,7 +55,7 @@ public class BuffShopTable {
 
         try {
             con = L1DatabaseFactory.getInstance().getConnection();
-            pstm = con.prepareStatement("SELECT skillid FROM buff_shop");
+            pstm = con.prepareStatement("SELECT SKILLID FROM BUFF_SHOP");
             rs = pstm.executeQuery();
             while (rs.next()) {
                 buffList.add(rs.getInt("skillid"));

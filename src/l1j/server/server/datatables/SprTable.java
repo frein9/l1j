@@ -27,162 +27,164 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import l1j.server.L1DatabaseFactory;
+
 import static l1j.server.server.ActionCodes.*;
+
 import l1j.server.server.utils.SQLUtil;
 
 public class SprTable {
 
-	private static Logger _log = Logger.getLogger(SprTable.class.getName());
+    private static Logger _log = Logger.getLogger(SprTable.class.getName());
 
-	private static class Spr {
-		private final HashMap<Integer, Integer> moveSpeed = new HashMap<Integer, Integer>();
+    private static class Spr {
+        private final HashMap<Integer, Integer> moveSpeed = new HashMap<Integer, Integer>();
 
-		private final HashMap<Integer, Integer> attackSpeed = new HashMap<Integer, Integer>();
+        private final HashMap<Integer, Integer> attackSpeed = new HashMap<Integer, Integer>();
 
-		private int nodirSpellSpeed = 1200;
+        private int nodirSpellSpeed = 1200;
 
-		private int dirSpellSpeed = 1200;
-	}
+        private int dirSpellSpeed = 1200;
+    }
 
-	private static final HashMap<Integer, Spr> _dataMap = new HashMap<Integer, Spr>();
+    private static final HashMap<Integer, Spr> _dataMap = new HashMap<Integer, Spr>();
 
-	private static final SprTable _instance = new SprTable();
+    private static final SprTable _instance = new SprTable();
 
-	private SprTable() {
-		loadSprAction();
-	}
+    private SprTable() {
+        loadSprAction();
+    }
 
-	public static SprTable getInstance() {
-		return _instance;
-	}
+    public static SprTable getInstance() {
+        return _instance;
+    }
 
-	/**
-	 * spr_action 테이블을 로드한다.
-	 */
-	public void loadSprAction() {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		Spr spr = null;
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT * FROM spr_action");
-			rs = pstm.executeQuery();
-			while (rs.next()) {
-				int key = rs.getInt("spr_id");
-				if (!_dataMap.containsKey(key)) {
-					spr = new Spr();
-					_dataMap.put(key, spr);
-				} else {
-					spr = _dataMap.get(key);
-				}
+    /**
+     * spr_action 테이블을 로드한다.
+     */
+    public void loadSprAction() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        Spr spr = null;
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT * FROM SPR_ACTION");
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                int key = rs.getInt("spr_id");
+                if (!_dataMap.containsKey(key)) {
+                    spr = new Spr();
+                    _dataMap.put(key, spr);
+                } else {
+                    spr = _dataMap.get(key);
+                }
 
-				int actid = rs.getInt("act_id");
-				int frameCount = rs.getInt("framecount");
-				int frameRate = rs.getInt("framerate");
-				int speed = calcActionSpeed(frameCount, frameRate);
+                int actid = rs.getInt("act_id");
+                int frameCount = rs.getInt("framecount");
+                int frameRate = rs.getInt("framerate");
+                int speed = calcActionSpeed(frameCount, frameRate);
 
-				switch (actid) {
-				case ACTION_Walk:
-				case ACTION_SwordWalk:
-				case ACTION_AxeWalk:
-				case ACTION_BowWalk:
-				case ACTION_SpearWalk:
-				case ACTION_StaffWalk:
-				case ACTION_DaggerWalk:
-				case ACTION_TwoHandSwordWalk:
-				case ACTION_EdoryuWalk:
-				case ACTION_ClawWalk:
-				case ACTION_QooWalk: // 키링크
-				case ACTION_ThrowingKnifeWalk:
-					spr.moveSpeed.put(actid, speed);
-					break;
-				case ACTION_SkillAttack:
-					spr.dirSpellSpeed = speed;
-					break;
-				case ACTION_SkillBuff:
-					spr.nodirSpellSpeed = speed;
-					break;
-				case ACTION_Attack:
-				case ACTION_SwordAttack:
-				case ACTION_AxeAttack:
-				case ACTION_BowAttack:
-				case ACTION_SpearAttack:
-				case ACTION_StaffAttack:
-				case ACTION_DaggerAttack:
-				case ACTION_TwoHandSwordAttack:
-				case ACTION_EdoryuAttack:
-				case ACTION_ClawAttack:
-				case ACTION_QooAttack:  // 키링크
-				case ACTION_ThrowingKnifeAttack:
-					spr.attackSpeed.put(actid, speed);
-				default:
-					break;
-				}
-			}
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-		_log.config("SPR 데이터 " + _dataMap.size() + "건로드");
-	}
-	
-	/**
-	 * 프레임수와 frame rate로부터 액션의 합계 시간(ms)을 계산해 돌려준다.
-	 */
-	private int calcActionSpeed(int frameCount, int frameRate) {
-		return (int) (frameCount * 40 * (24D / frameRate));
-	}
+                switch (actid) {
+                    case ACTION_Walk:
+                    case ACTION_SwordWalk:
+                    case ACTION_AxeWalk:
+                    case ACTION_BowWalk:
+                    case ACTION_SpearWalk:
+                    case ACTION_StaffWalk:
+                    case ACTION_DaggerWalk:
+                    case ACTION_TwoHandSwordWalk:
+                    case ACTION_EdoryuWalk:
+                    case ACTION_ClawWalk:
+                    case ACTION_QooWalk: // 키링크
+                    case ACTION_ThrowingKnifeWalk:
+                        spr.moveSpeed.put(actid, speed);
+                        break;
+                    case ACTION_SkillAttack:
+                        spr.dirSpellSpeed = speed;
+                        break;
+                    case ACTION_SkillBuff:
+                        spr.nodirSpellSpeed = speed;
+                        break;
+                    case ACTION_Attack:
+                    case ACTION_SwordAttack:
+                    case ACTION_AxeAttack:
+                    case ACTION_BowAttack:
+                    case ACTION_SpearAttack:
+                    case ACTION_StaffAttack:
+                    case ACTION_DaggerAttack:
+                    case ACTION_TwoHandSwordAttack:
+                    case ACTION_EdoryuAttack:
+                    case ACTION_ClawAttack:
+                    case ACTION_QooAttack:  // 키링크
+                    case ACTION_ThrowingKnifeAttack:
+                        spr.attackSpeed.put(actid, speed);
+                    default:
+                        break;
+                }
+            }
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+        _log.config("SPR 데이터 " + _dataMap.size() + "건로드");
+    }
 
-	/**
-	 * 지정된 spr의 공격 속도를 돌려준다.만약 spr로 지정된 weapon_type의 데이터가 설정되어 있지 않은 경우는, 1.attack의 데이터를 돌려준다.
-	 * 
-	 * @param sprid -
-	 *            조사하는 spr의 ID
-	 * @param actid -
-	 *            무기의 종류를 나타내는 값.L1Item.getType1()의 돌아가 값 + 1 으로 일치한다
-	 * @return 지정된 spr의 공격 속도(ms)
-	 */
-	public int getAttackSpeed(int sprid, int actid) {
-		if (_dataMap.containsKey(sprid)) {
-			if (_dataMap.get(sprid).attackSpeed.containsKey(actid)) {
-				return _dataMap.get(sprid).attackSpeed.get(actid);
-			} else if (actid == ACTION_Attack) {
-				return 0;
-			} else {
-				return _dataMap.get(sprid).attackSpeed.get(ACTION_Attack);
-			}
-		}
-		return 0;
-	}
+    /**
+     * 프레임수와 frame rate로부터 액션의 합계 시간(ms)을 계산해 돌려준다.
+     */
+    private int calcActionSpeed(int frameCount, int frameRate) {
+        return (int) (frameCount * 40 * (24D / frameRate));
+    }
 
-	public int getMoveSpeed(int sprid, int actid) {
-		if (_dataMap.containsKey(sprid)) {
-			if (_dataMap.get(sprid).moveSpeed.containsKey(actid)) {
-				return _dataMap.get(sprid).moveSpeed.get(actid);
-			} else if (actid == ACTION_Walk) {
-				return 0;
-			} else {
-				return _dataMap.get(sprid).moveSpeed.get(ACTION_Walk);
-			}
-		}
-		return 0;
-	}
+    /**
+     * 지정된 spr의 공격 속도를 돌려준다.만약 spr로 지정된 weapon_type의 데이터가 설정되어 있지 않은 경우는, 1.attack의 데이터를 돌려준다.
+     *
+     * @param sprid -
+     *              조사하는 spr의 ID
+     * @param actid -
+     *              무기의 종류를 나타내는 값.L1Item.getType1()의 돌아가 값 + 1 으로 일치한다
+     * @return 지정된 spr의 공격 속도(ms)
+     */
+    public int getAttackSpeed(int sprid, int actid) {
+        if (_dataMap.containsKey(sprid)) {
+            if (_dataMap.get(sprid).attackSpeed.containsKey(actid)) {
+                return _dataMap.get(sprid).attackSpeed.get(actid);
+            } else if (actid == ACTION_Attack) {
+                return 0;
+            } else {
+                return _dataMap.get(sprid).attackSpeed.get(ACTION_Attack);
+            }
+        }
+        return 0;
+    }
 
-	public int getDirSpellSpeed(int sprid) {
-		if (_dataMap.containsKey(sprid)) {
-			return _dataMap.get(sprid).dirSpellSpeed;
-		}
-		return 0;
-	}
+    public int getMoveSpeed(int sprid, int actid) {
+        if (_dataMap.containsKey(sprid)) {
+            if (_dataMap.get(sprid).moveSpeed.containsKey(actid)) {
+                return _dataMap.get(sprid).moveSpeed.get(actid);
+            } else if (actid == ACTION_Walk) {
+                return 0;
+            } else {
+                return _dataMap.get(sprid).moveSpeed.get(ACTION_Walk);
+            }
+        }
+        return 0;
+    }
 
-	public int getNodirSpellSpeed(int sprid) {
-		if (_dataMap.containsKey(sprid)) {
-			return _dataMap.get(sprid).nodirSpellSpeed;
-		}
-		return 0;
-	}
+    public int getDirSpellSpeed(int sprid) {
+        if (_dataMap.containsKey(sprid)) {
+            return _dataMap.get(sprid).dirSpellSpeed;
+        }
+        return 0;
+    }
+
+    public int getNodirSpellSpeed(int sprid) {
+        if (_dataMap.containsKey(sprid)) {
+            return _dataMap.get(sprid).nodirSpellSpeed;
+        }
+        return 0;
+    }
 }

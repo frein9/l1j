@@ -36,89 +36,89 @@ import l1j.server.server.templates.L1Npc;
 import l1j.server.server.utils.SQLUtil;
 
 public class CastleDoorSpawnTable {
-	private static Logger _log = Logger.getLogger(CastleDoorSpawnTable.class.getName());
+    private static Logger _log = Logger.getLogger(CastleDoorSpawnTable.class.getName());
 
-	private static CastleDoorSpawnTable _instance;
+    private static CastleDoorSpawnTable _instance;
 
-	private final ArrayList<L1CastleDoorInstance> _castledoorList = new ArrayList<L1CastleDoorInstance>();
+    private final ArrayList<L1CastleDoorInstance> _castledoorList = new ArrayList<L1CastleDoorInstance>();
 
-	public static CastleDoorSpawnTable getInstance() {
-		if (_instance == null) {
-			_instance = new CastleDoorSpawnTable();
-		}
-		return _instance;
-	}
+    public static CastleDoorSpawnTable getInstance() {
+        if (_instance == null) {
+            _instance = new CastleDoorSpawnTable();
+        }
+        return _instance;
+    }
 
-	private CastleDoorSpawnTable() {
-		FillCastleDoorSpawnTable();
-	}
+    private CastleDoorSpawnTable() {
+        FillCastleDoorSpawnTable();
+    }
 
-	private void FillCastleDoorSpawnTable() {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		try {
+    private void FillCastleDoorSpawnTable() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
 
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT * FROM spawnlist_castledoor");
-			rs = pstm.executeQuery();
-			do {
-				if (!rs.next()) {
-					break;
-				}
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT * FROM SPAWNLIST_CASTLEDOOR");
+            rs = pstm.executeQuery();
+            do {
+                if (!rs.next()) {
+                    break;
+                }
 
-				L1Npc l1npc = NpcTable.getInstance().getTemplate(99999);
-				if (l1npc != null) {
-					String s = l1npc.getImpl();
-					Constructor constructor = Class.forName("l1j.server.server.model.Instance." + s + "Instance").getConstructors()[0];
-					Object parameters[] = { l1npc };
-					L1CastleDoorInstance door = (L1CastleDoorInstance) constructor.newInstance(parameters);
-					door = (L1CastleDoorInstance) constructor.newInstance(parameters);
-					door.setId(IdFactory.getInstance().nextId());
+                L1Npc l1npc = NpcTable.getInstance().getTemplate(99999);
+                if (l1npc != null) {
+                    String s = l1npc.getImpl();
+                    Constructor constructor = Class.forName("l1j.server.server.model.Instance." + s + "Instance").getConstructors()[0];
+                    Object parameters[] = {l1npc};
+                    L1CastleDoorInstance door = (L1CastleDoorInstance) constructor.newInstance(parameters);
+                    door = (L1CastleDoorInstance) constructor.newInstance(parameters);
+                    door.setId(IdFactory.getInstance().nextId());
 
-					door.setDoorId(rs.getInt(1));
-					door.setGfxId(rs.getInt(3));
-					door.setX(rs.getInt(4));
-					door.setY(rs.getInt(5));
-					door.setMap((short) rs.getInt(6));
-					door.setHomeX(rs.getInt(4));
-					door.setHomeY(rs.getInt(5));
-					door.setDirection(rs.getInt(7));
-					door.setEntranceX(rs.getInt(8));
-					door.setEntranceY(rs.getInt(9));
-					door.setKeeperId(rs.getInt(11));
+                    door.setDoorId(rs.getInt(1));
+                    door.setGfxId(rs.getInt(3));
+                    door.setX(rs.getInt(4));
+                    door.setY(rs.getInt(5));
+                    door.setMap((short) rs.getInt(6));
+                    door.setHomeX(rs.getInt(4));
+                    door.setHomeY(rs.getInt(5));
+                    door.setDirection(rs.getInt(7));
+                    door.setEntranceX(rs.getInt(8));
+                    door.setEntranceY(rs.getInt(9));
+                    door.setKeeperId(rs.getInt(11));
 
-					L1World.getInstance().storeObject(door);
-					L1World.getInstance().addVisibleObject(door);
+                    L1World.getInstance().storeObject(door);
+                    L1World.getInstance().addVisibleObject(door);
 
-					// 키퍼가 존재하는 문만 격납한다
-					if (door.getKeeperId() != 0) {
-						_castledoorList.add(door);
-					}
-				}
-			} while (true);
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} catch (SecurityException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} catch (ClassNotFoundException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} catch (IllegalArgumentException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} catch (InstantiationException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} catch (IllegalAccessException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} catch (InvocationTargetException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+                    // 키퍼가 존재하는 문만 격납한다
+                    if (door.getKeeperId() != 0) {
+                        _castledoorList.add(door);
+                    }
+                }
+            } while (true);
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } catch (SecurityException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } catch (ClassNotFoundException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } catch (IllegalArgumentException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } catch (InstantiationException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } catch (IllegalAccessException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } catch (InvocationTargetException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
-	public L1CastleDoorInstance[] getCastleDoorList() {
-		return _castledoorList.toArray(new L1CastleDoorInstance[_castledoorList.size()]);
-	}
+    public L1CastleDoorInstance[] getCastleDoorList() {
+        return _castledoorList.toArray(new L1CastleDoorInstance[_castledoorList.size()]);
+    }
 }

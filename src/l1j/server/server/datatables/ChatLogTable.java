@@ -31,105 +31,105 @@ import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.utils.SQLUtil;
 
 public class ChatLogTable {
-	private static Logger _log = Logger.getLogger(ChatLogTable.class.getName());
+    private static Logger _log = Logger.getLogger(ChatLogTable.class.getName());
 
-	/*
-	 * 코드적으로는 HashMap를 이용해야 하지만, 퍼포먼스상의 문제가 있을지도 모르기 때문에, 배열로 타협.
-	 * HashMap에의 변경을 검토하는 경우는, 퍼포먼스상 문제가 없는가 충분히 주의하는 것.
-	 */
-	private final boolean[] loggingConfig = new boolean[15];
+    /*
+     * 코드적으로는 HashMap를 이용해야 하지만, 퍼포먼스상의 문제가 있을지도 모르기 때문에, 배열로 타협.
+     * HashMap에의 변경을 검토하는 경우는, 퍼포먼스상 문제가 없는가 충분히 주의하는 것.
+     */
+    private final boolean[] loggingConfig = new boolean[15];
 
-	private ChatLogTable() {
-		loadConfig();
-	}
+    private ChatLogTable() {
+        loadConfig();
+    }
 
-	private void loadConfig() {
-		loggingConfig[0] = Config.LOGGING_CHAT_NORMAL;
-		loggingConfig[1] = Config.LOGGING_CHAT_WHISPER;
-		loggingConfig[2] = Config.LOGGING_CHAT_SHOUT;
-		loggingConfig[3] = Config.LOGGING_CHAT_WORLD;
-		loggingConfig[4] = Config.LOGGING_CHAT_CLAN;
-		loggingConfig[11] = Config.LOGGING_CHAT_PARTY;
-		loggingConfig[13] = Config.LOGGING_CHAT_COMBINED;
-		loggingConfig[14] = Config.LOGGING_CHAT_CHAT_PARTY;
-	}
+    private void loadConfig() {
+        loggingConfig[0] = Config.LOGGING_CHAT_NORMAL;
+        loggingConfig[1] = Config.LOGGING_CHAT_WHISPER;
+        loggingConfig[2] = Config.LOGGING_CHAT_SHOUT;
+        loggingConfig[3] = Config.LOGGING_CHAT_WORLD;
+        loggingConfig[4] = Config.LOGGING_CHAT_CLAN;
+        loggingConfig[11] = Config.LOGGING_CHAT_PARTY;
+        loggingConfig[13] = Config.LOGGING_CHAT_COMBINED;
+        loggingConfig[14] = Config.LOGGING_CHAT_CHAT_PARTY;
+    }
 
-	private static ChatLogTable _instance;
+    private static ChatLogTable _instance;
 
-	public static ChatLogTable getInstance() {
-		if (_instance == null) {
-			_instance = new ChatLogTable();
-		}
-		return _instance;
-	}
+    public static ChatLogTable getInstance() {
+        if (_instance == null) {
+            _instance = new ChatLogTable();
+        }
+        return _instance;
+    }
 
-	private boolean isLoggingTarget(int type) {
-		return loggingConfig[type];
-	}
+    private boolean isLoggingTarget(int type) {
+        return loggingConfig[type];
+    }
 
-	public void storeChat(L1PcInstance pc, L1PcInstance target, String text,
-			int type) {
-		if (!isLoggingTarget(type)) {
-			return;
-		}
+    public void storeChat(L1PcInstance pc, L1PcInstance target, String text,
+                          int type) {
+        if (!isLoggingTarget(type)) {
+            return;
+        }
 
-		// type
-		// 0:통상 채팅
-		// 1:Whisper
-		// 2:절규
-		// 3:전체 채팅
-		// 4:혈맹 채팅
-		// 11:파티 채팅
-		// 13:연합 채팅
-		// 14:채팅 파티
-		Connection con = null;
-		PreparedStatement pstm = null;
-		try {
+        // type
+        // 0:통상 채팅
+        // 1:Whisper
+        // 2:절규
+        // 3:전체 채팅
+        // 4:혈맹 채팅
+        // 11:파티 채팅
+        // 13:연합 채팅
+        // 14:채팅 파티
+        Connection con = null;
+        PreparedStatement pstm = null;
+        try {
 
-			con = L1DatabaseFactory.getInstance().getConnection();
-			if (target != null) {
-				pstm = con
-						.prepareStatement("INSERT INTO log_chat (account_name, char_id, name, clan_id, clan_name, locx, locy, mapid, type, target_account_name, target_id, target_name, target_clan_id, target_clan_name, target_locx, target_locy, target_mapid, content, datetime) VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE())");
-				pstm.setString(1, pc.getAccountName());
-				pstm.setInt(2, pc.getId());
-				pstm.setString(3, pc.isGm() ?  "******" : pc.getName());
-				pstm.setInt(4, pc.getClanid());
-				pstm.setString(5, pc.getClanname());
-				pstm.setInt(6, pc.getX());
-				pstm.setInt(7, pc.getY());
-				pstm.setInt(8, pc.getMapId());
-				pstm.setInt(9, type);
-				pstm.setString(10, target.getAccountName());
-				pstm.setInt(11, target.getId());
-				pstm.setString(12, target.getName());
-				pstm.setInt(13, target.getClanid());
-				pstm.setString(14, target.getClanname());
-				pstm.setInt(15, target.getX());
-				pstm.setInt(16, target.getY());
-				pstm.setInt(17, target.getMapId());
-				pstm.setString(18, text);
-			} else {
-				pstm = con
-						.prepareStatement("INSERT INTO log_chat (account_name, char_id, name, clan_id, clan_name, locx, locy, mapid, type, content, datetime) VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE())");
-				pstm.setString(1, pc.getAccountName());
-				pstm.setInt(2, pc.getId());
-				pstm.setString(3, pc.isGm() ?  "******" : pc.getName());
-				pstm.setInt(4, pc.getClanid());
-				pstm.setString(5, pc.getClanname());
-				pstm.setInt(6, pc.getX());
-				pstm.setInt(7, pc.getY());
-				pstm.setInt(8, pc.getMapId());
-				pstm.setInt(9, type);
-				pstm.setString(10, text);
-			}
-			pstm.execute();
+            con = L1DatabaseFactory.getInstance().getConnection();
+            if (target != null) {
+                pstm = con
+                        .prepareStatement("INSERT INTO LOG_CHAT (ACCOUNT_NAME, CHAR_ID, NAME, CLAN_ID, CLAN_NAME, LOCX, LOCY, MAPID, TYPE, TARGET_ACCOUNT_NAME, TARGET_ID, TARGET_NAME, TARGET_CLAN_ID, TARGET_CLAN_NAME, TARGET_LOCX, TARGET_LOCY, TARGET_MAPID, CONTENT, DATETIME) VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE())");
+                pstm.setString(1, pc.getAccountName());
+                pstm.setInt(2, pc.getId());
+                pstm.setString(3, pc.isGm() ? "******" : pc.getName());
+                pstm.setInt(4, pc.getClanid());
+                pstm.setString(5, pc.getClanname());
+                pstm.setInt(6, pc.getX());
+                pstm.setInt(7, pc.getY());
+                pstm.setInt(8, pc.getMapId());
+                pstm.setInt(9, type);
+                pstm.setString(10, target.getAccountName());
+                pstm.setInt(11, target.getId());
+                pstm.setString(12, target.getName());
+                pstm.setInt(13, target.getClanid());
+                pstm.setString(14, target.getClanname());
+                pstm.setInt(15, target.getX());
+                pstm.setInt(16, target.getY());
+                pstm.setInt(17, target.getMapId());
+                pstm.setString(18, text);
+            } else {
+                pstm = con
+                        .prepareStatement("INSERT INTO LOG_CHAT (ACCOUNT_NAME, CHAR_ID, NAME, CLAN_ID, CLAN_NAME, LOCX, LOCY, MAPID, TYPE, CONTENT, DATETIME) VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE())");
+                pstm.setString(1, pc.getAccountName());
+                pstm.setInt(2, pc.getId());
+                pstm.setString(3, pc.isGm() ? "******" : pc.getName());
+                pstm.setInt(4, pc.getClanid());
+                pstm.setString(5, pc.getClanname());
+                pstm.setInt(6, pc.getX());
+                pstm.setInt(7, pc.getY());
+                pstm.setInt(8, pc.getMapId());
+                pstm.setInt(9, type);
+                pstm.setString(10, text);
+            }
+            pstm.execute();
 
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
 }

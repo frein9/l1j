@@ -32,68 +32,68 @@ import l1j.server.server.model.L1WeaponSkill;
 import l1j.server.server.utils.SQLUtil;
 
 public class WeaponSkillTable {
-	private static Logger _log = Logger.getLogger(WeaponSkillTable.class
-			.getName());
+    private static Logger _log = Logger.getLogger(WeaponSkillTable.class
+            .getName());
 
-	private static WeaponSkillTable _instance;
+    private static WeaponSkillTable _instance;
 
-	private final HashMap<Integer, L1WeaponSkill> _weaponIdIndex
-			= new HashMap<Integer, L1WeaponSkill>();
+    private final HashMap<Integer, L1WeaponSkill> _weaponIdIndex
+            = new HashMap<Integer, L1WeaponSkill>();
 
-	public static WeaponSkillTable getInstance() {
-		if (_instance == null) {
-			_instance = new WeaponSkillTable();
-		}
-		return _instance;
-	}
+    public static WeaponSkillTable getInstance() {
+        if (_instance == null) {
+            _instance = new WeaponSkillTable();
+        }
+        return _instance;
+    }
 
-	private WeaponSkillTable() {
-		loadWeaponSkill();
-	}
+    private WeaponSkillTable() {
+        loadWeaponSkill();
+    }
 
-	private void loadWeaponSkill() {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		try {
+    private void loadWeaponSkill() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
 
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT * FROM weapon_skill");
-			rs = pstm.executeQuery();
-			fillWeaponSkillTable(rs);
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, "error while creating weapon_skill table",
-					e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT * FROM WEAPON_SKILL");
+            rs = pstm.executeQuery();
+            fillWeaponSkillTable(rs);
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, "error while creating weapon_skill table",
+                    e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
-	private void fillWeaponSkillTable(ResultSet rs) throws SQLException {
-		while (rs.next()) {
-			int weaponId = rs.getInt("weapon_id");
-			int probability = rs.getInt("probability");
-			int fixDamage = rs.getInt("fix_damage");
-			int randomDamage = rs.getInt("random_damage");
-			int area = rs.getInt("area");
-			int skillId = rs.getInt("skill_id");
-			int skillTime = rs.getInt("skill_time");
-			int effectId = rs.getInt("effect_id");
-			int effectTarget = rs.getInt("effect_target");
-			boolean isArrowType = rs.getBoolean("arrow_type");
-			int attr = rs.getInt("attr");
-			L1WeaponSkill weaponSkill = new L1WeaponSkill(weaponId, probability,
-					fixDamage, randomDamage, area, skillId, skillTime, effectId,
-					effectTarget, isArrowType, attr);
-			_weaponIdIndex.put(weaponId, weaponSkill);
-		}
-		_log.config("무기 스킬 리스트 " + _weaponIdIndex.size() + "건로드");
-	}
+    private void fillWeaponSkillTable(ResultSet rs) throws SQLException {
+        while (rs.next()) {
+            int weaponId = rs.getInt("weapon_id");
+            int probability = rs.getInt("probability");
+            int fixDamage = rs.getInt("fix_damage");
+            int randomDamage = rs.getInt("random_damage");
+            int area = rs.getInt("area");
+            int skillId = rs.getInt("skill_id");
+            int skillTime = rs.getInt("skill_time");
+            int effectId = rs.getInt("effect_id");
+            int effectTarget = rs.getInt("effect_target");
+            boolean isArrowType = rs.getBoolean("arrow_type");
+            int attr = rs.getInt("attr");
+            L1WeaponSkill weaponSkill = new L1WeaponSkill(weaponId, probability,
+                    fixDamage, randomDamage, area, skillId, skillTime, effectId,
+                    effectTarget, isArrowType, attr);
+            _weaponIdIndex.put(weaponId, weaponSkill);
+        }
+        _log.config("무기 스킬 리스트 " + _weaponIdIndex.size() + "건로드");
+    }
 
-	public L1WeaponSkill getTemplate(int weaponId) {
-		return _weaponIdIndex.get(weaponId);
-	}
+    public L1WeaponSkill getTemplate(int weaponId) {
+        return _weaponIdIndex.get(weaponId);
+    }
 
 }

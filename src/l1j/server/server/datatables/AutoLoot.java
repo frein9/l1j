@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import l1j.server.L1DatabaseFactory;
 import l1j.server.server.utils.SQLUtil;
 
@@ -67,37 +68,34 @@ public class AutoLoot {
 
     private static AutoLoot _instance;
 
-	private static ArrayList<Integer> _idlist = new ArrayList<Integer>();
+    private static ArrayList<Integer> _idlist = new ArrayList<Integer>();
 
-    public static AutoLoot getInstance()
-    {
+    public static AutoLoot getInstance() {
         if (_instance == null) {
             _instance = new AutoLoot();
         }
         return _instance;
     }
 
-    private AutoLoot()
-    {
+    private AutoLoot() {
         _idlist = allIdList();
     }
 
-	private ArrayList<Integer> allIdList()
-	{
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		
-		ArrayList<Integer> idlist = new ArrayList<Integer>();
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("select * from autoloot");
-			rs = pstm.executeQuery();
-			while (rs.next()) {
-				idlist.add(rs.getInt("item_id"));
-			}
+    private ArrayList<Integer> allIdList() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
 
-		} catch (SQLException e) {
+        ArrayList<Integer> idlist = new ArrayList<Integer>();
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT * FROM AUTOLOOT");
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                idlist.add(rs.getInt("item_id"));
+            }
+
+        } catch (SQLException e) {
             _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
         } finally {
             SQLUtil.close(rs);
@@ -105,71 +103,66 @@ public class AutoLoot {
             SQLUtil.close(con);
         }
 
-		return idlist;
-	}
-	
-	public void storeId(int itemid)
-	{
-		int index = _idlist.indexOf(itemid);
-		if (index != -1)
-			return;
+        return idlist;
+    }
+
+    public void storeId(int itemid) {
+        int index = _idlist.indexOf(itemid);
+        if (index != -1)
+            return;
 
         Connection con = null;
         PreparedStatement pstm = null;
 
         try {
             con = L1DatabaseFactory.getInstance().getConnection();
-            pstm = con.prepareStatement("INSERT INTO autoloot SET item_id=?");
+            pstm = con.prepareStatement("INSERT INTO AUTOLOOT SET item_id=?");
             pstm.setInt(1, itemid);
             pstm.execute();
-			_idlist.add(itemid);
+            _idlist.add(itemid);
         } catch (Exception e) {
             NpcTable._log.log(Level.SEVERE, e.getLocalizedMessage(), e);
         } finally {
             SQLUtil.close(pstm);
             SQLUtil.close(con);
         }
-	}
+    }
 
-	public void deleteId(int itemid)
-	{
-		Connection con = null;
-		PreparedStatement pstm = null;
-		int index = _idlist.indexOf(itemid);
-		if (index == -1)
-			return;
-	
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("DELETE FROM autoloot WHERE item_id=?");
-			pstm.setInt(1, itemid);
-			pstm.execute();
-			_idlist.remove(index);
-		} catch (Exception e) {
-		} finally {
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+    public void deleteId(int itemid) {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        int index = _idlist.indexOf(itemid);
+        if (index == -1)
+            return;
 
-	public void reload()
-	{
-		_idlist.clear();
-		_idlist = allIdList();
-	}
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("DELETE FROM AUTOLOOT WHERE ITEM_ID=?");
+            pstm.setInt(1, itemid);
+            pstm.execute();
+            _idlist.remove(index);
+        } catch (Exception e) {
+        } finally {
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
-	public ArrayList<Integer> getIdList()
-	{
-		return _idlist;
-	}
+    public void reload() {
+        _idlist.clear();
+        _idlist = allIdList();
+    }
 
-	public boolean isAutoLoot(int itemId)
-	{
-		for (int id : _idlist) {
-			if (itemId == id) {
-				return true;
-			}
-		}
-		return false;
-	}
+    public ArrayList<Integer> getIdList() {
+        return _idlist;
+    }
+
+    public boolean isAutoLoot(int itemId) {
+        for (int id : _idlist) {
+            if (itemId == id) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
