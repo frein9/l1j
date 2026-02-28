@@ -20,30 +20,29 @@
 
 package l1j.server.server.utils;
 
-import java.util.Random;
-import java.util.ArrayList;
-import java.util.logging.Logger;
-
 import l1j.server.Config;
 import l1j.server.server.Opcodes;
 import l1j.server.server.datatables.ExpTable;
 import l1j.server.server.datatables.PetTable;
-import l1j.server.server.model.L1Character;
-import l1j.server.server.model.L1Clan; // 성혈일경우 경험치 증가 구현
-import l1j.server.server.model.L1Object;
-import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1NpcInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.Instance.L1PetInstance;
+import l1j.server.server.model.Instance.L1ScarecrowInstance;
 import l1j.server.server.model.Instance.L1SummonInstance;
+import l1j.server.server.model.L1Character;
+import l1j.server.server.model.L1Object;
+import l1j.server.server.model.L1World;
 import l1j.server.server.model.skill.L1SkillId;
+import l1j.server.server.serverpackets.S_ChatPacket;
+import l1j.server.server.serverpackets.S_Disconnect;
 import l1j.server.server.serverpackets.S_PetPack;
 import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.serverpackets.S_SkillIconExp;
-import l1j.server.server.serverpackets.S_ChatPacket; //요것두 추가해주세요
-import l1j.server.server.serverpackets.S_Disconnect; //임포트시킵니다.
 import l1j.server.server.templates.L1Pet;
-import l1j.server.server.model.Instance.L1ScarecrowInstance;
+
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.logging.Logger;
 
 // import l1j.server.server.serverpackets.S_bonusstats; // 보류
 
@@ -418,7 +417,7 @@ public class CalcExp {
         /*스텟창*/
 
         /* 폭렙 방지*/
-		
+
 		/* L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
   if (pc.getLevel() == 1 || pc.getLevel() == 2  || pc.getLevel() == 3 || pc.getLevel() == 4 || pc.getLevel() == 5 || pc.getLevel() == 6
 			 || pc.getLevel() == 7 || pc.getLevel() == 8 || pc.getLevel() == 9 || pc.getLevel() == 10 || pc.getLevel() == 11 || pc.getLevel() == 12
@@ -443,15 +442,15 @@ public class CalcExp {
 		if (add_exp < 0){
 			return;
 		}
-  if (clan != null){ 
+  if (clan != null){
   if (clan.getCastleId() != 0) {
    add_exp *= Config.RATE_CCLAN_XP;
-  pc.addExp(add_exp); 
-  } else { 
-   pc.addExp(add_exp); 
+  pc.addExp(add_exp);
+  } else {
+   pc.addExp(add_exp);
   }
-  } else { 
-   pc.addExp(add_exp); 
+  } else {
+   pc.addExp(add_exp);
   }*/
         /* 폭렙 방지 */
 
@@ -529,7 +528,7 @@ public class CalcExp {
         int petItemObjId = pet.getItemObjId();
 
         int levelBefore = pet.getLevel();
-//		int totalExp = (int) (exp * Config.RATE_XP + pet.getExp()); // ########## A116 원본 소스 주석 처리 
+//		int totalExp = (int) (exp * Config.RATE_XP + pet.getExp()); // ########## A116 원본 소스 주석 처리
         int totalExp = (int) (exp * Config.RATE_PET_XP + pet.getExp()); // ########## A137 펫 경험치 배율 설정 외부화 [넬]
         if (totalExp >= ExpTable.getExpByLevel(51)) {
             totalExp = ExpTable.getExpByLevel(51) - 1;

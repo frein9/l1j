@@ -59,14 +59,15 @@ import java.util.logging.Logger;
 import static l1j.server.server.model.skill.L1SkillId.ANTA_BLOOD;
 import static l1j.server.server.model.skill.L1SkillId.SANGABUFF;
 
-public class L1MonsterInstance extends L1NpcInstance {
+public class L1MonsterInstance2 extends L1NpcInstance {
 
     /**
      *
      */
     private static final long serialVersionUID = 1L;
 
-    private static Logger _log = Logger.getLogger(L1MonsterInstance.class.getName());
+    private static Logger _log = Logger.getLogger(L1MonsterInstance.class
+            .getName());
 
     private static Random _random = new Random();
 
@@ -283,7 +284,8 @@ public class L1MonsterInstance extends L1NpcInstance {
                 String chat = "$4884";
                 broadcastPacket(new S_NpcChatPacket(this, chat, 2));
             }
-            if (getNpcTemplate().get_npcId() == 45583 || getNpcTemplate().get_npcId() == 45681) {//베레스.바포
+            if (getNpcTemplate().get_npcId() == 45583
+                    || getNpcTemplate().get_npcId() == 45681) {//베레스.바포
                 String chat = "$825";
                 broadcastPacket(new S_NpcChatPacket(this, chat, 2));
             }
@@ -293,7 +295,9 @@ public class L1MonsterInstance extends L1NpcInstance {
             }
             if (getNpcTemplate().get_npcId() == 777775        // 지룡 안타라스(리뉴얼)
                     || getNpcTemplate().get_npcId() == 45681        //4대용
-                    || getNpcTemplate().get_npcId() == 45682 || getNpcTemplate().get_npcId() == 45683 || getNpcTemplate().get_npcId() == 45684) {
+                    || getNpcTemplate().get_npcId() == 45682
+                    || getNpcTemplate().get_npcId() == 45683
+                    || getNpcTemplate().get_npcId() == 45684) {
                 String chat = "감히 여기가 어디라고! 어리석은 인간들이란...";
                 broadcastPacket(new S_NpcChatPacket(this, chat, 2));
             }
@@ -335,10 +339,13 @@ public class L1MonsterInstance extends L1NpcInstance {
                 perceivedFrom.sendPackets(new S_DoActionGFX(getId(), 4));
             } else if (getHiddenStatus() == HIDDEN_STATUS_SINK_ANTA) {    // 안타라스
                 perceivedFrom.sendPackets(new S_DoActionGFX(getId(), 20));
-            } else if (getHiddenStatus() == HIDDEN_STATUS_SINK_ANTA_NEW || getHiddenStatus() == HIDDEN_STATUS_SINK_ANTA_NEW2 || getHiddenStatus() == HIDDEN_STATUS_SINK_ANTA_NEW3) {   // 안타라스(리뉴얼) - 1,2,3단계
+            } else if (getHiddenStatus() == HIDDEN_STATUS_SINK_ANTA_NEW
+                    || getHiddenStatus() == HIDDEN_STATUS_SINK_ANTA_NEW2
+                    || getHiddenStatus() == HIDDEN_STATUS_SINK_ANTA_NEW3) {   // 안타라스(리뉴얼) - 1,2,3단계
                 perceivedFrom.sendPackets(new S_DoActionGFX(getId(), 8));
             } else if (getHiddenStatus() == HIDDEN_STATUS_FLY_LIND) {    // 린드비오르
-                perceivedFrom.sendPackets(new S_DoActionGFX(getId(), ActionCodes.ACTION_Moveup));
+                perceivedFrom.sendPackets(new S_DoActionGFX(getId(),
+                        ActionCodes.ACTION_Moveup));
             } else if (getHiddenStatus() == HIDDEN_STATUS_MOVEDOWN_START) {    // 드레이크류
                 perceivedFrom.sendPackets(new S_DoActionGFX(getId(), 7));
             }
@@ -366,7 +373,8 @@ public class L1MonsterInstance extends L1NpcInstance {
     }
 
     // 숨겨진 문을 열기 위해 추가 - ACE
-    public void dragonportalspawn(int npcId, int x, int y, short mapid, int heading, int timeMinToDelete) {
+    public void dragonportalspawn(int npcId, int x, int y, short mapid, int heading, int
+            timeMinToDelete) {
         try {
             L1NpcInstance npc = NpcTable.getInstance().newNpcInstance(npcId);
             npc.setId(IdFactory.getInstance().nextId());
@@ -382,7 +390,8 @@ public class L1MonsterInstance extends L1NpcInstance {
 
             npc.turnOnOffLight();
             if (0 < timeMinToDelete) {
-                L1NpcDeleteTimer timer = new L1NpcDeleteTimer(npc, timeMinToDelete * 60 * 1000);
+                L1NpcDeleteTimer timer = new L1NpcDeleteTimer(npc,
+                        timeMinToDelete * 60 * 1000);
                 timer.begin();
             }
         } catch (Exception e) {
@@ -391,7 +400,8 @@ public class L1MonsterInstance extends L1NpcInstance {
     }
 
     // 타겟을 찾는다
-    public static int[][] _classGfxId = {{0, 1}, {48, 61}, {37, 138}, {734, 1186}, {2786, 2796}, {6658, 6661}, {6671, 6650}};  // 용기사,환술사 추가
+    public static int[][] _classGfxId = {{0, 1}, {48, 61}, {37, 138},
+            {734, 1186}, {2786, 2796}, {6658, 6661}, {6671, 6650}};  // 용기사,환술사 추가
 
     @Override
     public void searchTarget() {
@@ -400,20 +410,23 @@ public class L1MonsterInstance extends L1NpcInstance {
         L1MonsterInstance targetMonster = null;
 
         for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(this)) {
-            if (pc.getCurrentHp() <= 0 || pc.isDead() || pc.isGm() && pc.getInventory().checkEquipped(300000) || pc.isMonitor() || pc.isGhost()) {
+            if (pc.getCurrentHp() <= 0 || pc.isDead() || pc.isGm() && pc.getInventory().checkEquipped(300000)
+                    || pc.isMonitor() || pc.isGhost()) {
                 continue;
             }
 
             // 투기 장내는 변신/미변신에 한정하지 않고 모두 액티브
             int mapId = getMapId();
-            if (mapId == 88 || mapId == 98 || mapId == 92 || mapId == 91 || mapId == 95) {
+            if (mapId == 88 || mapId == 98 || mapId == 92 || mapId == 91
+                    || mapId == 95) {
                 if (!pc.isInvisble() || getNpcTemplate().is_agrocoi()) { // 인비지체크
                     targetPlayer = pc;
                     break;
                 }
             }
             if (getNpcId() == 45600) {    // 커츠
-                if (pc.isCrown() || pc.isDarkelf() || pc.getTempCharGfx() != pc.getClassId()) {
+                if (pc.isCrown() || pc.isDarkelf()
+                        || pc.getTempCharGfx() != pc.getClassId()) {
                     targetPlayer = pc;
                     break;
                 }
@@ -421,15 +434,21 @@ public class L1MonsterInstance extends L1NpcInstance {
             // 어느 쪽인가의 조건을 채우는 경우, 우호라고 보여지고 선제 공격받지 않는다.
             // ·monster의 업이 마이너스치(바르로그측 monster)로 PC의 업 레벨이 1이상(바르로그 우호)
             // ·monster의 업이 플러스치(야히측 monster)로 PC의 업 레벨이―1 이하(야히 우호)
-            if ((getNpcTemplate().getKarma() < 0 && pc.getKarmaLevel() >= 1) || (getNpcTemplate().getKarma() > 0 && pc.getKarmaLevel() <= -1)) {
+            if ((getNpcTemplate().getKarma() < 0 && pc.getKarmaLevel() >= 1)
+                    || (getNpcTemplate().getKarma() > 0 && pc.getKarmaLevel() <= -1)) {
                 continue;
             }
             // 버릴 수 있었던 사람들의 땅업 퀘스트의 변신중은, 각 진영의 monster로부터 선제 공격받지 않는다
-            if (pc.getTempCharGfx() == 6034 && getNpcTemplate().getKarma() < 0 || pc.getTempCharGfx() == 6035 && getNpcTemplate().getKarma() > 0 || pc.getTempCharGfx() == 6035 && getNpcTemplate().get_npcId() == 46070 || pc.getTempCharGfx() == 6035 && getNpcTemplate().get_npcId() == 46072) {
+            if (pc.getTempCharGfx() == 6034 && getNpcTemplate().getKarma() < 0
+                    || pc.getTempCharGfx() == 6035 && getNpcTemplate().getKarma() > 0
+                    || pc.getTempCharGfx() == 6035 && getNpcTemplate().get_npcId() == 46070
+                    || pc.getTempCharGfx() == 6035 && getNpcTemplate().get_npcId() == 46072) {
                 continue;
             }
 
-            if (!getNpcTemplate().is_agro() && !getNpcTemplate().is_agrososc() && getNpcTemplate().is_agrogfxid1() < 0 && getNpcTemplate().is_agrogfxid2() < 0) { // 완전한 논아크티브몬스타
+            if (!getNpcTemplate().is_agro() && !getNpcTemplate().is_agrososc()
+                    && getNpcTemplate().is_agrogfxid1() < 0
+                    && getNpcTemplate().is_agrogfxid2() < 0) { // 완전한 논아크티브몬스타
                 if (pc.getLawful() < -1000) { // 플레이어가 카오틱
                     targetPlayer = pc;
                     break;
@@ -449,22 +468,30 @@ public class L1MonsterInstance extends L1NpcInstance {
                 }
 
                 // 특정의 클래스 or그래픽 ID에 액티브
-                if (getNpcTemplate().is_agrogfxid1() >= 0 && getNpcTemplate().is_agrogfxid1() <= 4) { // 클래스 지정
-                    if (_classGfxId[getNpcTemplate().is_agrogfxid1()][0] == pc.getTempCharGfx() || _classGfxId[getNpcTemplate().is_agrogfxid1()][1] == pc.getTempCharGfx()) {
+                if (getNpcTemplate().is_agrogfxid1() >= 0
+                        && getNpcTemplate().is_agrogfxid1() <= 4) { // 클래스 지정
+                    if (_classGfxId[getNpcTemplate().is_agrogfxid1()][0] == pc
+                            .getTempCharGfx()
+                            || _classGfxId[getNpcTemplate().is_agrogfxid1()][1] == pc
+                            .getTempCharGfx()) {
                         targetPlayer = pc;
                         break;
                     }
-                } else if (pc.getTempCharGfx() == getNpcTemplate().is_agrogfxid1()) { // 그래픽 ID지정
+                } else if (pc.getTempCharGfx() == getNpcTemplate()
+                        .is_agrogfxid1()) { // 그래픽 ID지정
                     targetPlayer = pc;
                     break;
                 }
 
-                if (getNpcTemplate().is_agrogfxid2() >= 0 && getNpcTemplate().is_agrogfxid2() <= 4) { // 클래스 지정
-                    if (_classGfxId[getNpcTemplate().is_agrogfxid2()][0] == pc.getTempCharGfx() || _classGfxId[getNpcTemplate().is_agrogfxid2()][1] == pc.getTempCharGfx()) {
+                if (getNpcTemplate().is_agrogfxid2() >= 0
+                        && getNpcTemplate().is_agrogfxid2() <= 4) { // 클래스 지정
+                    if (_classGfxId[getNpcTemplate().is_agrogfxid2()][0] == pc.getTempCharGfx()
+                            || _classGfxId[getNpcTemplate().is_agrogfxid2()][1] == pc.getTempCharGfx()) {
                         targetPlayer = pc;
                         break;
                     }
-                } else if (pc.getTempCharGfx() == getNpcTemplate().is_agrogfxid2()) { // 그래픽 ID지정
+                } else if (pc.getTempCharGfx() == getNpcTemplate()
+                        .is_agrogfxid2()) { // 그래픽 ID지정
                     targetPlayer = pc;
                     break;
                 }
@@ -486,182 +513,281 @@ public class L1MonsterInstance extends L1NpcInstance {
                     continue;
                 }
                 if (this.getNpcTemplate().get_npcId() == 45570) { //적을 인식할 몬스터(사제)
-                    if (mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647) { //적으로 인식될몬스터 (발록의)
+                    if (mon.getNpcTemplate().get_npcId() == 45391
+                            || mon.getNpcTemplate().get_npcId() == 45450
+                            || mon.getNpcTemplate().get_npcId() == 45482
+                            || mon.getNpcTemplate().get_npcId() == 45569
+                            || mon.getNpcTemplate().get_npcId() == 45579
+                            || mon.getNpcTemplate().get_npcId() == 45315
+                            || mon.getNpcTemplate().get_npcId() == 45647) { //적으로 인식될몬스터 (발록의)
                         targetMonster = mon;
                         break;
                     }
                 }
 
                 if (this.getNpcTemplate().get_npcId() == 45571) { //적을 인식할 몬스터(사제)
-                    if (mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647) { //적으로 인식될몬스터 (발록의)
+                    if (mon.getNpcTemplate().get_npcId() == 45391
+                            || mon.getNpcTemplate().get_npcId() == 45450
+                            || mon.getNpcTemplate().get_npcId() == 45482
+                            || mon.getNpcTemplate().get_npcId() == 45569
+                            || mon.getNpcTemplate().get_npcId() == 45579
+                            || mon.getNpcTemplate().get_npcId() == 45315
+                            || mon.getNpcTemplate().get_npcId() == 45647) { //적으로 인식될몬스터 (발록의)
                         targetMonster = mon;
                         break;
                     }
                 }
 
                 if (this.getNpcTemplate().get_npcId() == 45582) { //적을 인식할 몬스터(사제)
-                    if (mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647) { //적으로 인식될몬스터 (발록의)
+                    if (mon.getNpcTemplate().get_npcId() == 45391
+                            || mon.getNpcTemplate().get_npcId() == 45450
+                            || mon.getNpcTemplate().get_npcId() == 45482
+                            || mon.getNpcTemplate().get_npcId() == 45569
+                            || mon.getNpcTemplate().get_npcId() == 45579
+                            || mon.getNpcTemplate().get_npcId() == 45315
+                            || mon.getNpcTemplate().get_npcId() == 45647) { //적으로 인식될몬스터 (발록의)
                         targetMonster = mon;
                         break;
                     }
                 }
 
                 if (this.getNpcTemplate().get_npcId() == 45587) { //적을 인식할 몬스터(사제)
-                    if (mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647) { //적으로 인식될몬스터 (발록의)
+                    if (mon.getNpcTemplate().get_npcId() == 45391
+                            || mon.getNpcTemplate().get_npcId() == 45450
+                            || mon.getNpcTemplate().get_npcId() == 45482
+                            || mon.getNpcTemplate().get_npcId() == 45569
+                            || mon.getNpcTemplate().get_npcId() == 45579
+                            || mon.getNpcTemplate().get_npcId() == 45315
+                            || mon.getNpcTemplate().get_npcId() == 45647) { //적으로 인식될몬스터 (발록의)
                         targetMonster = mon;
                         break;
                     }
                 }
 
                 if (this.getNpcTemplate().get_npcId() == 45605) { //적을 인식할 몬스터(사제)
-                    if (mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647) { //적으로 인식될몬스터 (발록의)
+                    if (mon.getNpcTemplate().get_npcId() == 45391
+                            || mon.getNpcTemplate().get_npcId() == 45450
+                            || mon.getNpcTemplate().get_npcId() == 45482
+                            || mon.getNpcTemplate().get_npcId() == 45569
+                            || mon.getNpcTemplate().get_npcId() == 45579
+                            || mon.getNpcTemplate().get_npcId() == 45315
+                            || mon.getNpcTemplate().get_npcId() == 45647) { //적으로 인식될몬스터 (발록의)
                         targetMonster = mon;
                         break;
                     }
                 }
 
                 if (this.getNpcTemplate().get_npcId() == 45685) { //적을 인식할 몬스터(사제)
-                    if (mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647) { //적으로 인식될몬스터 (발록의)
+                    if (mon.getNpcTemplate().get_npcId() == 45391
+                            || mon.getNpcTemplate().get_npcId() == 45450
+                            || mon.getNpcTemplate().get_npcId() == 45482
+                            || mon.getNpcTemplate().get_npcId() == 45569
+                            || mon.getNpcTemplate().get_npcId() == 45579
+                            || mon.getNpcTemplate().get_npcId() == 45315
+                            || mon.getNpcTemplate().get_npcId() == 45647) { //적으로 인식될몬스터 (발록의)
                         targetMonster = mon;
                         break;
                     }
                 }
 
                 if (this.getNpcTemplate().get_npcId() == 45391) { //적을 인식할 몬스터(발록)
-                    if (mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605) { //적으로 인식될몬스터 (사제)
+                    if (mon.getNpcTemplate().get_npcId() == 45570
+                            || mon.getNpcTemplate().get_npcId() == 45571
+                            || mon.getNpcTemplate().get_npcId() == 45582
+                            || mon.getNpcTemplate().get_npcId() == 45587
+                            || mon.getNpcTemplate().get_npcId() == 45605) { //적으로 인식될몬스터 (사제)
                         targetMonster = mon;
                         break;
                     }
                 }
 
                 if (this.getNpcTemplate().get_npcId() == 45450) { //적을 인식할 몬스터(발록)
-                    if (mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605) { //적으로 인식될몬스터 (사제)
+                    if (mon.getNpcTemplate().get_npcId() == 45570
+                            || mon.getNpcTemplate().get_npcId() == 45571
+                            || mon.getNpcTemplate().get_npcId() == 45582
+                            || mon.getNpcTemplate().get_npcId() == 45587
+                            || mon.getNpcTemplate().get_npcId() == 45605) { //적으로 인식될몬스터 (사제)
                         targetMonster = mon;
                         break;
                     }
                 }
 
                 if (this.getNpcTemplate().get_npcId() == 45482) { //적을 인식할 몬스터(발록)
-                    if (mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605) { //적으로 인식될몬스터 (사제)
+                    if (mon.getNpcTemplate().get_npcId() == 45570
+                            || mon.getNpcTemplate().get_npcId() == 45571
+                            || mon.getNpcTemplate().get_npcId() == 45582
+                            || mon.getNpcTemplate().get_npcId() == 45587
+                            || mon.getNpcTemplate().get_npcId() == 45605) { //적으로 인식될몬스터 (사제)
                         targetMonster = mon;
                         break;
                     }
                 }
 
                 if (this.getNpcTemplate().get_npcId() == 45569) { //적을 인식할 몬스터(발록)
-                    if (mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605) { //적으로 인식될몬스터 (사제)
+                    if (mon.getNpcTemplate().get_npcId() == 45570
+                            || mon.getNpcTemplate().get_npcId() == 45571
+                            || mon.getNpcTemplate().get_npcId() == 45582
+                            || mon.getNpcTemplate().get_npcId() == 45587
+                            || mon.getNpcTemplate().get_npcId() == 45605) { //적으로 인식될몬스터 (사제)
                         targetMonster = mon;
                         break;
                     }
                 }
 
                 if (this.getNpcTemplate().get_npcId() == 45579) { //적을 인식할 몬스터(발록)
-                    if (mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605) { //적으로 인식될몬스터 (사제)
+                    if (mon.getNpcTemplate().get_npcId() == 45570
+                            || mon.getNpcTemplate().get_npcId() == 45571
+                            || mon.getNpcTemplate().get_npcId() == 45582
+                            || mon.getNpcTemplate().get_npcId() == 45587
+                            || mon.getNpcTemplate().get_npcId() == 45605) { //적으로 인식될몬스터 (사제)
                         targetMonster = mon;
                         break;
                     }
                 }
 
                 if (this.getNpcTemplate().get_npcId() == 45315) { //적을 인식할 몬스터(발록)
-                    if (mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605) { //적으로 인식될몬스터 (사제)
+                    if (mon.getNpcTemplate().get_npcId() == 45570
+                            || mon.getNpcTemplate().get_npcId() == 45571
+                            || mon.getNpcTemplate().get_npcId() == 45582
+                            || mon.getNpcTemplate().get_npcId() == 45587
+                            || mon.getNpcTemplate().get_npcId() == 45605) { //적으로 인식될몬스터 (사제)
                         targetMonster = mon;
                         break;
                     }
                 }
 
                 if (this.getNpcTemplate().get_npcId() == 45647) { //적을 인식할 몬스터(발록)
-                    if (mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605) { //적으로 인식될몬스터 (사제)
+                    if (mon.getNpcTemplate().get_npcId() == 45570
+                            || mon.getNpcTemplate().get_npcId() == 45571
+                            || mon.getNpcTemplate().get_npcId() == 45582
+                            || mon.getNpcTemplate().get_npcId() == 45587
+                            || mon.getNpcTemplate().get_npcId() == 45605) { //적으로 인식될몬스터 (사제)
                         targetMonster = mon;
                         break;
                     }
                 }
                 //autopc(자동케릭) 추가 : 시작
                 if (this.getNpcTemplate().get_npcId() == 778782) { // 적을 인식할 몬스터 (이카루스)
-                    if (mon.getNpcTemplate().get_npcId() == 45130 || mon.getNpcTemplate().get_npcId() == 45131 || mon.getNpcTemplate().get_npcId() == 45269 || mon.getNpcTemplate().get_npcId() == 45270 || mon.getNpcTemplate().get_npcId() == 45286 || mon.getNpcTemplate().get_npcId() == 45278 || mon.getNpcTemplate().get_npcId() == 45361 || mon.getNpcTemplate().get_npcId() == 45259 || mon.getNpcTemplate().get_npcId() == 777783) { //적으로 인식될 몬스터 (용뼈 몹들)
+                    if (mon.getNpcTemplate().get_npcId() == 45130 || mon.getNpcTemplate().get_npcId() == 45131
+                            || mon.getNpcTemplate().get_npcId() == 45269 || mon.getNpcTemplate().get_npcId() == 45270
+                            || mon.getNpcTemplate().get_npcId() == 45286 || mon.getNpcTemplate().get_npcId() == 45278
+                            || mon.getNpcTemplate().get_npcId() == 45361 || mon.getNpcTemplate().get_npcId() == 45259
+                            || mon.getNpcTemplate().get_npcId() == 777783) { //적으로 인식될 몬스터 (용뼈 몹들)
                         targetMonster = mon;
                         break;
                     }
                 }
                 if (this.getNpcTemplate().get_npcId() == 778783) { // 적을 인식할 몬스터 (디오니소스)
-                    if (mon.getNpcTemplate().get_npcId() == 45130 || mon.getNpcTemplate().get_npcId() == 45131 || mon.getNpcTemplate().get_npcId() == 45269 || mon.getNpcTemplate().get_npcId() == 45270 || mon.getNpcTemplate().get_npcId() == 45286 || mon.getNpcTemplate().get_npcId() == 45278 || mon.getNpcTemplate().get_npcId() == 45361 || mon.getNpcTemplate().get_npcId() == 45259) { //적으로 인식될 몬스터 (용뼈 몹들)
+                    if (mon.getNpcTemplate().get_npcId() == 45130 || mon.getNpcTemplate().get_npcId() == 45131
+                            || mon.getNpcTemplate().get_npcId() == 45269 || mon.getNpcTemplate().get_npcId() == 45270
+                            || mon.getNpcTemplate().get_npcId() == 45286 || mon.getNpcTemplate().get_npcId() == 45278
+                            || mon.getNpcTemplate().get_npcId() == 45361 || mon.getNpcTemplate().get_npcId() == 45259) { //적으로 인식될 몬스터 (용뼈 몹들)
                         targetMonster = mon;
                         break;
                     }
                 }
                 if (this.getNpcTemplate().get_npcId() == 778784) { // 적을 인식할 몬스터 (헤스티아)
-                    if (mon.getNpcTemplate().get_npcId() == 45130 || mon.getNpcTemplate().get_npcId() == 45131 || mon.getNpcTemplate().get_npcId() == 45269 || mon.getNpcTemplate().get_npcId() == 45270 || mon.getNpcTemplate().get_npcId() == 45286 || mon.getNpcTemplate().get_npcId() == 45278 || mon.getNpcTemplate().get_npcId() == 45259 || mon.getNpcTemplate().get_npcId() == 45361) { //적으로 인식될 몬스터 (용계삼거리 몹들)
+                    if (mon.getNpcTemplate().get_npcId() == 45130 || mon.getNpcTemplate().get_npcId() == 45131
+                            || mon.getNpcTemplate().get_npcId() == 45269 || mon.getNpcTemplate().get_npcId() == 45270
+                            || mon.getNpcTemplate().get_npcId() == 45286 || mon.getNpcTemplate().get_npcId() == 45278
+                            || mon.getNpcTemplate().get_npcId() == 45259
+                            || mon.getNpcTemplate().get_npcId() == 45361) { //적으로 인식될 몬스터 (용계삼거리 몹들)
                         targetMonster = mon;
                         break;
                     }
                 }
                 if (this.getNpcTemplate().get_npcId() == 778785) { // 적을 인식할 몬스터 (아레스)
-                    if (mon.getNpcTemplate().get_npcId() == 45362 || mon.getNpcTemplate().get_npcId() == 45364 || mon.getNpcTemplate().get_npcId() == 45390 || mon.getNpcTemplate().get_npcId() == 45449 || mon.getNpcTemplate().get_npcId() == 45578) { //적으로 인식될 몬스터 (잊섬 몹들)
+                    if (mon.getNpcTemplate().get_npcId() == 45362 || mon.getNpcTemplate().get_npcId() == 45364
+                            || mon.getNpcTemplate().get_npcId() == 45390 || mon.getNpcTemplate().get_npcId() == 45449
+                            || mon.getNpcTemplate().get_npcId() == 45578) { //적으로 인식될 몬스터 (잊섬 몹들)
                         targetMonster = mon;
                         break;
                     }
                 }
                 if (this.getNpcTemplate().get_npcId() == 778786) { // 적을 인식할 몬스터 (아탈란테)
-                    if (mon.getNpcTemplate().get_npcId() == 45402 || mon.getNpcTemplate().get_npcId() == 45403 || mon.getNpcTemplate().get_npcId() == 45493 || mon.getNpcTemplate().get_npcId() == 45494) { //적으로 인식될 몬스터 (오만40층 몹들)
+                    if (mon.getNpcTemplate().get_npcId() == 45402 || mon.getNpcTemplate().get_npcId() == 45403
+                            || mon.getNpcTemplate().get_npcId() == 45493 || mon.getNpcTemplate().get_npcId() == 45494
+                    ) { //적으로 인식될 몬스터 (오만40층 몹들)
                         targetMonster = mon;
                         break;
                     }
                 }
                 if (this.getNpcTemplate().get_npcId() == 778787) { // 적을 인식할 몬스터 (이아손)
-                    if (mon.getNpcTemplate().get_npcId() == 45496 || mon.getNpcTemplate().get_npcId() == 45522 || mon.getNpcTemplate().get_npcId() == 45480) { //적으로 인식될 몬스터 (오만50층 몹들)
+                    if (mon.getNpcTemplate().get_npcId() == 45496 || mon.getNpcTemplate().get_npcId() == 45522
+                            || mon.getNpcTemplate().get_npcId() == 45480) { //적으로 인식될 몬스터 (오만50층 몹들)
                         targetMonster = mon;
                         break;
                     }
                 }
                 if (this.getNpcTemplate().get_npcId() == 778788) { // 적을 인식할 몬스터 (헬리오스)
-                    if (mon.getNpcTemplate().get_npcId() == 45372 || mon.getNpcTemplate().get_npcId() == 45322 || mon.getNpcTemplate().get_npcId() == 45221 || mon.getNpcTemplate().get_npcId() == 45162) { //적으로 인식될 몬스터 (상아탑8층 몹들)
+                    if (mon.getNpcTemplate().get_npcId() == 45372 || mon.getNpcTemplate().get_npcId() == 45322
+                            || mon.getNpcTemplate().get_npcId() == 45221 || mon.getNpcTemplate().get_npcId() == 45162
+                    ) { //적으로 인식될 몬스터 (상아탑8층 몹들)
                         targetMonster = mon;
                         break;
                     }
                 }
                 if (this.getNpcTemplate().get_npcId() == 778789) { // 적을 인식할 몬스터 (셀레네)
-                    if (mon.getNpcTemplate().get_npcId() == 45724 || mon.getNpcTemplate().get_npcId() == 45725 || mon.getNpcTemplate().get_npcId() == 45726 || mon.getNpcTemplate().get_npcId() == 45727 || mon.getNpcTemplate().get_npcId() == 45728 || mon.getNpcTemplate().get_npcId() == 45732 || mon.getNpcTemplate().get_npcId() == 45733) { //적으로 인식될 몬스터 (심해 몹들)
+                    if (mon.getNpcTemplate().get_npcId() == 45724 || mon.getNpcTemplate().get_npcId() == 45725
+                            || mon.getNpcTemplate().get_npcId() == 45726 || mon.getNpcTemplate().get_npcId() == 45727
+                            || mon.getNpcTemplate().get_npcId() == 45728 || mon.getNpcTemplate().get_npcId() == 45732
+                            || mon.getNpcTemplate().get_npcId() == 45733) { //적으로 인식될 몬스터 (심해 몹들)
                         targetMonster = mon;
                         break;
                     }
                 }
                 if (this.getNpcTemplate().get_npcId() == 778790) { // 적을 인식할 몬스터 (아스클레피오스)
-                    if (mon.getNpcTemplate().get_npcId() == 45946 || mon.getNpcTemplate().get_npcId() == 45947 || mon.getNpcTemplate().get_npcId() == 45948 || mon.getNpcTemplate().get_npcId() == 45949 || mon.getNpcTemplate().get_npcId() == 45950 || mon.getNpcTemplate().get_npcId() == 45951 || mon.getNpcTemplate().get_npcId() == 46222 || mon.getNpcTemplate().get_npcId() == 46223) { //적으로 인식될 몬스터 (개던3층 몹들)
+                    if (mon.getNpcTemplate().get_npcId() == 45946 || mon.getNpcTemplate().get_npcId() == 45947
+                            || mon.getNpcTemplate().get_npcId() == 45948 || mon.getNpcTemplate().get_npcId() == 45949
+                            || mon.getNpcTemplate().get_npcId() == 45950 || mon.getNpcTemplate().get_npcId() == 45951
+                            || mon.getNpcTemplate().get_npcId() == 46222 || mon.getNpcTemplate().get_npcId() == 46223) { //적으로 인식될 몬스터 (개던3층 몹들)
                         targetMonster = mon;
                         break;
                     }
                 }
                 if (this.getNpcTemplate().get_npcId() == 778791) { // 적을 인식할 몬스터 (카이론)
-                    if (mon.getNpcTemplate().get_npcId() == 45373 || mon.getNpcTemplate().get_npcId() == 45393 || mon.getNpcTemplate().get_npcId() == 45451 || mon.getNpcTemplate().get_npcId() == 45289) { //적으로 인식될 몬스터 (용던5층 몹들)
+                    if (mon.getNpcTemplate().get_npcId() == 45373 || mon.getNpcTemplate().get_npcId() == 45393
+                            || mon.getNpcTemplate().get_npcId() == 45451 || mon.getNpcTemplate().get_npcId() == 45289
+                    ) { //적으로 인식될 몬스터 (용던5층 몹들)
                         targetMonster = mon;
                         break;
                     }
                 }
                 if (this.getNpcTemplate().get_npcId() == 778792) { // 적을 인식할 몬스터 (니케)
-                    if (mon.getNpcTemplate().get_npcId() == 45644 || mon.getNpcTemplate().get_npcId() == 45549 || mon.getNpcTemplate().get_npcId() == 45554) { //적으로 인식될 몬스터 (몽섬 몹들)
+                    if (mon.getNpcTemplate().get_npcId() == 45644 || mon.getNpcTemplate().get_npcId() == 45549
+                            || mon.getNpcTemplate().get_npcId() == 45554) { //적으로 인식될 몬스터 (몽섬 몹들)
                         targetMonster = mon;
                         break;
                     }
                 }
                 if (this.getNpcTemplate().get_npcId() == 778793) { // 적을 인식할 몬스터 (마르스)
-                    if (mon.getNpcTemplate().get_npcId() == 45223 || mon.getNpcTemplate().get_npcId() == 45298 || mon.getNpcTemplate().get_npcId() == 45241 || mon.getNpcTemplate().get_npcId() == 45184) { //적으로 인식될 몬스터 (본던5층 몹들)
+                    if (mon.getNpcTemplate().get_npcId() == 45223 || mon.getNpcTemplate().get_npcId() == 45298
+                            || mon.getNpcTemplate().get_npcId() == 45241 || mon.getNpcTemplate().get_npcId() == 45184
+                    ) { //적으로 인식될 몬스터 (본던5층 몹들)
                         targetMonster = mon;
                         break;
                     }
                 }
                 if (this.getNpcTemplate().get_npcId() == 778794) { // 적을 인식할 몬스터 (레인져 활)
-                    if (mon.getNpcTemplate().get_npcId() == 45036 || mon.getNpcTemplate().get_npcId() == 45037 || mon.getNpcTemplate().get_npcId() == 45038 || mon.getNpcTemplate().get_npcId() == 45056 || mon.getNpcTemplate().get_npcId() == 45313) { //적으로 인식될 몬스터 (숨계 몹들)
+                    if (mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571
+                            || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587
+                            || mon.getNpcTemplate().get_npcId() == 45605 || mon.getNpcTemplate().get_npcId() == 45685) { //적으로 인식될 몬스터 (숨계 몹들)
                         targetMonster = mon;
                         break;
                     }
                 }
                 if (this.getNpcTemplate().get_npcId() == 778795) { // 적을 인식할 몬스터 (레인져 검)
-                    if (mon.getNpcTemplate().get_npcId() == 45036 || mon.getNpcTemplate().get_npcId() == 45037 || mon.getNpcTemplate().get_npcId() == 45038 || mon.getNpcTemplate().get_npcId() == 45056 || mon.getNpcTemplate().get_npcId() == 45313) { //적으로 인식될 몬스터 (숨계 몹들)
+                    if (mon.getNpcTemplate().get_npcId() == 45036 || mon.getNpcTemplate().get_npcId() == 45037
+                            || mon.getNpcTemplate().get_npcId() == 45038 || mon.getNpcTemplate().get_npcId() == 45056
+                            || mon.getNpcTemplate().get_npcId() == 45313) { //적으로 인식될 몬스터 (숨계 몹들)
                         targetMonster = mon;
                         break;
                     }
                 }
                 if (this.getNpcTemplate().get_npcId() == 778796) { // 적을 인식할 몬스터 (레토)
-                    if (mon.getNpcTemplate().get_npcId() == 45669 || mon.getNpcTemplate().get_npcId() == 45838 || mon.getNpcTemplate().get_npcId() == 45839 || mon.getNpcTemplate().get_npcId() == 45842 || mon.getNpcTemplate().get_npcId() == 45533) { //적으로 인식될 몬스터 (라던 몹들)
+                    if (mon.getNpcTemplate().get_npcId() == 45669 || mon.getNpcTemplate().get_npcId() == 45838
+                            || mon.getNpcTemplate().get_npcId() == 45839 || mon.getNpcTemplate().get_npcId() == 45842
+                            || mon.getNpcTemplate().get_npcId() == 45533) { //적으로 인식될 몬스터 (라던 몹들)
                         targetMonster = mon;
                         break;
                     }
@@ -689,7 +815,7 @@ public class L1MonsterInstance extends L1NpcInstance {
         }
     }
 
-    public L1MonsterInstance(L1Npc template) {
+    public L1MonsterInstance2(L1Npc template) {
         super(template);
         _storeDroped = false;
     }
@@ -712,14 +838,16 @@ public class L1MonsterInstance extends L1NpcInstance {
     @Override
     public void onTalkAction(L1PcInstance pc) {
         int objid = getId();
-        L1NpcTalkData talking = NPCTalkDataTable.getInstance().getTemplate(getNpcTemplate().get_npcId());
+        L1NpcTalkData talking = NPCTalkDataTable.getInstance().getTemplate(
+                getNpcTemplate().get_npcId());
         String htmlid = null;
         String[] htmldata = null;
 
         // html 표시 패킷 송신
         if (htmlid != null) { // htmlid가 지정되고 있는 경우
             if (htmldata != null) { // html 지정이 있는 경우는 표시
-                pc.sendPackets(new S_NPCTalkReturn(objid, htmlid, htmldata));
+                pc.sendPackets(new S_NPCTalkReturn(objid, htmlid,
+                        htmldata));
             } else {
                 pc.sendPackets(new S_NPCTalkReturn(objid, htmlid));
             }
@@ -771,7 +899,8 @@ public class L1MonsterInstance extends L1NpcInstance {
     @Override
     public void receiveDamage(L1Character attacker, int damage) { // 공격으로 HP를 줄일 때는 여기를 사용
         if (getCurrentHp() > 0 && !isDead()) {
-            if (getHiddenStatus() == HIDDEN_STATUS_SINK || getHiddenStatus() == HIDDEN_STATUS_FLY) {
+            if (getHiddenStatus() == HIDDEN_STATUS_SINK
+                    || getHiddenStatus() == HIDDEN_STATUS_FLY) {
                 return;
             }
             if (damage >= 0) {
@@ -852,7 +981,7 @@ public class L1MonsterInstance extends L1NpcInstance {
                     }
                 }
                 // pk멘트 뜨기
-				/*     if (npcid == 777778 || npcid == 777779 || npcid == 2000054 || npcid == 81163 || npcid == 200070  //##보스몹 아이디 
+				/*     if (npcid == 777778 || npcid == 777779 || npcid == 2000054 || npcid == 81163 || npcid == 200070  //##보스몹 아이디
 				    		 || npcid == 45513 || npcid == 45546 || npcid == 45547 || npcid == 45609
 				    		 || npcid == 45583 || npcid == 45584 || npcid == 45600 || npcid == 45573
 				    		 || npcid == 45601 || npcid == 45606 || npcid == 45610 || npcid == 45614
@@ -924,11 +1053,27 @@ public class L1MonsterInstance extends L1NpcInstance {
     private static void openDoorWhenNpcDied(L1NpcInstance npc) {
         int[] npcId = {/* 46143, 46144, 46145, 46146, 46147, 46148, //얼음성 안타동굴 열쇠로 열게끔
 				46149, 46150, 46151, 46152, 74001, 74000, 74002, */
-                201024, 201025, 201026, 201027, 201028, 201029, 201030, 201031, 201032, 201033, 201034, 201035, 201036, 201037, 201038, 201039, 201040, 201041, 201042, 201043, 201044, 201045, 201046, 201047, 201048, 201049, 201050, 201051, 201052, 201053, 201054, 201055, 201056, 201057, 201058, 201059, 201060, 201061, 201062, 201063, 201064, 201065, 201066, 201067, 201068, 201069, 201070, 201071, 201072, 201073, 201074, 46153, 46154, 46155, 46156, 46157, 46158, 46159, 46160};
+                201024, 201025, 201026, 201027, 201028, 201029, 201030,
+                201031, 201032, 201033, 201034, 201035, 201036, 201037,
+                201038, 201039, 201040, 201041, 201042, 201043, 201044,
+                201045, 201046, 201047, 201048, 201049, 201050, 201051,
+                201052, 201053, 201054, 201055, 201056, 201057, 201058,
+                201059, 201060, 201061, 201062, 201063, 201064, 201065,
+                201066, 201067, 201068, 201069, 201070, 201071, 201072,
+                201073, 201074, 46153, 46154, 46155, 46156, 46157,
+                46158, 46159, 46160};
 
         int[] doorId = {/* 5001, 5002, 5003, 5004, 5005, 5006,      //얼음성 안타동굴 열쇠로 열게끔
 				5007, 5008, 5009, 5010, 5100, 5101, 5102, */
-                4005, 4006, 4007, 4008, 4009, 4010, 4011, 4012, 4013, 4014, 4015, 4016, 4017, 4018, 4019, 4020, 4021, 4022, 4023, 4024, 4025, 4026, 4027, 4028, 4029, 4030, 4031, 4032, 4033, 4034, 4035, 4036, 4037, 4038, 4039, 4040, 4041, 4042, 4043, 4044, 4045, 4046, 4047, 4048, 4049, 4050, 4051, 4052, 4053, 4054, 4055, 5050, 5051, 5052, 5053, 5054, 5055, 5056, 5057};
+                4005, 4006, 4007, 4008, 4009, 4010, 4011,
+                4012, 4013, 4014, 4015, 4016, 4017, 4018,
+                4019, 4020, 4021, 4022, 4023, 4024, 4025,
+                4026, 4027, 4028, 4029, 4030, 4031, 4032,
+                4033, 4034, 4035, 4036, 4037, 4038, 4039,
+                4040, 4041, 4042, 4043, 4044, 4045, 4046,
+                4047, 4048, 4049, 4050, 4051, 4052, 4053,
+                4054, 4055, 5050, 5051, 5052, 5053, 5054,
+                5055, 5056, 5057};
 
 
         for (int i = 0; i < npcId.length; i++) {
@@ -962,7 +1107,8 @@ public class L1MonsterInstance extends L1NpcInstance {
             for (int count = 0; count < 10; count++) {
                 L1Location newLoc = getLocation().randomLocation(3, 4, false);
                 if (glanceCheck(newLoc.getX(), newLoc.getY())) {
-                    L1Teleport.teleport(pc, newLoc.getX(), newLoc.getY(), getMapId(), 5, true);
+                    L1Teleport.teleport(pc, newLoc.getX(), newLoc.getY(),
+                            getMapId(), 5, true);
                     break;
                 }
             }
@@ -1118,7 +1264,10 @@ public class L1MonsterInstance extends L1NpcInstance {
                 }
             }
             //보스공략조건에 티칼 보스 추가
-            if (getNpcTemplate().get_npcId() == 400016 || getNpcTemplate().get_npcId() == 400017 || getNpcTemplate().get_npcId() == 2000053 || getNpcTemplate().get_npcId() == 2000054) {
+            if (getNpcTemplate().get_npcId() == 400016
+                    || getNpcTemplate().get_npcId() == 400017
+                    || getNpcTemplate().get_npcId() == 2000053
+                    || getNpcTemplate().get_npcId() == 2000054) {
                 int dieCount = CrockController.getInstance().dieCount();
                 switch (dieCount) {
                     // 2명의 보스중 한명도 죽이지 않았을때 둘중 하나를 죽였다면 +1
@@ -1149,12 +1298,14 @@ public class L1MonsterInstance extends L1NpcInstance {
                 L1PcInstance pc = (L1PcInstance) _lastAttacker;
                 //		if (pc.getMapId() == 1005) {
                 if (pc.getLocation().getTileLineDistance(pc.getLocation()) <= 20) {
-                    pc.sendPackets(new S_SystemMessage("안타라스 : 어리석은 자여! 나의 분노를 자극하는 구나."));
+                    pc.sendPackets(new S_SystemMessage
+                            ("안타라스 : 어리석은 자여! 나의 분노를 자극하는 구나."));
                     try {
                         Thread.sleep(30000);
                     } catch (Exception e) {
                     }
-                    pc.sendPackets(new S_SystemMessage("안타라스 : 이제 맛있는 식사를 해볼까? 너희 피냄새가 나를 미치게 하는구나."));
+                    pc.sendPackets(new S_SystemMessage
+                            ("안타라스 : 이제 맛있는 식사를 해볼까? 너희 피냄새가 나를 미치게 하는구나."));
                     try {
                         Thread.sleep(10000);
                     } catch (Exception e) {
@@ -1167,12 +1318,14 @@ public class L1MonsterInstance extends L1NpcInstance {
                 L1PcInstance pc = (L1PcInstance) _lastAttacker;
                 //	if (pc.getMapId() == 1005) {
                 if (pc.getLocation().getTileLineDistance(pc.getLocation()) <= 20) {
-                    pc.sendPackets(new S_SystemMessage("안타라스 : 감히 나를 상대하려 하다니..그러고도 너희가 살길 바라느냐?"));
+                    pc.sendPackets(new S_SystemMessage
+                            ("안타라스 : 감히 나를 상대하려 하다니..그러고도 너희가 살길 바라느냐?"));
                     try {
                         Thread.sleep(30000);
                     } catch (Exception e) {
                     }
-                    pc.sendPackets(new S_SystemMessage("안타라스 : 나의 분노가 하늘에 닿았다. 이제 곧 나의 아버지가 나설 것이다."));
+                    pc.sendPackets(new S_SystemMessage
+                            ("안타라스 : 나의 분노가 하늘에 닿았다. 이제 곧 나의 아버지가 나설 것이다."));
                     try {
                         Thread.sleep(10000);
                     } catch (Exception e) {
@@ -1185,14 +1338,18 @@ public class L1MonsterInstance extends L1NpcInstance {
                 for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
                     //	if (pc.getMapId() == 1005) {
                     if (pc.getLocation().getTileLineDistance(pc.getLocation()) <= 20) {
-                        pc.sendPackets(new S_SystemMessage("안타라스 : 황혼의 저주가 그대들에게 있을 지어다! 실렌이여. 나의 어머니여. 나의 숨을.. 거두소서..."));
-                        pc.sendPackets(new S_SystemMessage("크레이 : 오오.. 최강의 용사임을 증명한 최고의 기사여! 엄청난 시련을 이겨내고 당신의 손에 안타라스의 피를 묻혔는가! 드디어 이 원한을 풀겠구나. 으하하하하!! 고맙다. 땅 위에 가장 강한 용사들이여!"));
+                        pc.sendPackets(new S_SystemMessage
+                                ("안타라스 : 황혼의 저주가 그대들에게 있을 지어다! 실렌이여. 나의 어머니여. 나의 숨을.. 거두소서..."));
+                        pc.sendPackets(new S_SystemMessage
+                                ("크레이 : 오오.. 최강의 용사임을 증명한 최고의 기사여! 엄청난 시련을 이겨내고 당신의 손에 안타라스의 피를 묻혔는가! 드디어 이 원한을 풀겠구나. 으하하하하!! 고맙다. 땅 위에 가장 강한 용사들이여!"));
                         try {
                             Thread.sleep(30000);
                         } catch (Exception e) {
                         }
-                        pc.sendPackets(new S_SystemMessage("난쟁이의 외침 : 웰던 마을에 숨겨진 용들의 땅으로 가는 문이 열렸습니다."));
-                        pc.sendPackets(new S_SystemMessage("시스템 메시지 : 10초 후에 마을로 텔레포트 됩니다."));
+                        pc.sendPackets(new S_SystemMessage
+                                ("난쟁이의 외침 : 웰던 마을에 숨겨진 용들의 땅으로 가는 문이 열렸습니다."));
+                        pc.sendPackets(new S_SystemMessage
+                                ("시스템 메시지 : 10초 후에 마을로 텔레포트 됩니다."));
                     }
                     try {
                         Thread.sleep(10000);
@@ -1243,9 +1400,11 @@ public class L1MonsterInstance extends L1NpcInstance {
                 if (lastAttacker instanceof L1PcInstance) {
                     pc = (L1PcInstance) lastAttacker;
                 } else if (lastAttacker instanceof L1PetInstance) {
-                    pc = (L1PcInstance) ((L1PetInstance) lastAttacker).getMaster();
+                    pc = (L1PcInstance) ((L1PetInstance) lastAttacker)
+                            .getMaster();
                 } else if (lastAttacker instanceof L1SummonInstance) {
-                    pc = (L1PcInstance) ((L1SummonInstance) lastAttacker).getMaster();
+                    pc = (L1PcInstance) ((L1SummonInstance)
+                            lastAttacker).getMaster();
                 }
                 int exp = getExp();
                 CalcExp.calcExp(pc, getId(), targetList, hateList, exp);
@@ -1259,12 +1418,15 @@ public class L1MonsterInstance extends L1NpcInstance {
     }
 
     private void distributeDrop() {
-        ArrayList<L1Character> dropTargetList = _dropHateList.toTargetArrayList();
+        ArrayList<L1Character> dropTargetList = _dropHateList
+                .toTargetArrayList();
         ArrayList<Integer> dropHateList = _dropHateList.toHateArrayList();
         try {
             int npcId = getNpcTemplate().get_npcId();
-            if (npcId != 45640 || (npcId == 45640 && getTempCharGfx() == 2332)) {
-                DropTable.getInstance().dropShare(L1MonsterInstance.this, dropTargetList, dropHateList);
+            if (npcId != 45640
+                    || (npcId == 45640 && getTempCharGfx() == 2332)) {
+                DropTable.getInstance().dropShare(L1MonsterInstance.this,
+                        dropTargetList, dropHateList);
             }
         } catch (Exception e) {
             _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
@@ -1292,8 +1454,10 @@ public class L1MonsterInstance extends L1NpcInstance {
             if (ub != null) {
                 for (L1PcInstance pc : ub.getMembersArray()) {
                     if (pc != null && !pc.isDead() && !pc.isGhost()) {
-                        L1ItemInstance item = pc.getInventory().storeItem(41402, getUbSealCount());
-                        pc.sendPackets(new S_ServerMessage(403, item.getLogName())); // %0를 손에 넣었습니다.
+                        L1ItemInstance item = pc.getInventory()
+                                .storeItem(41402, getUbSealCount());
+                        pc.sendPackets(new S_ServerMessage(403, item
+                                .getLogName())); // %0를 손에 넣었습니다.
                     }
                 }
             }
@@ -1339,7 +1503,8 @@ public class L1MonsterInstance extends L1NpcInstance {
                 if (2 > rnd) {
                     allTargetClear();
                     setHiddenStatus(HIDDEN_STATUS_SINK);
-                    broadcastPacket(new S_DoActionGFX(getId(), ActionCodes.ACTION_Hide));
+                    broadcastPacket(new S_DoActionGFX(getId(),
+                            ActionCodes.ACTION_Hide));
                     setStatus(13);
                     broadcastPacket(new S_NPCPack(this));
                 }
@@ -1350,7 +1515,8 @@ public class L1MonsterInstance extends L1NpcInstance {
                 if (2 > rnd) {
                     allTargetClear();
                     setHiddenStatus(HIDDEN_STATUS_SINK_ANTA);
-                    broadcastPacket(new S_DoActionGFX(getId(), ActionCodes.ACTION_AntharasHide));
+                    broadcastPacket(new S_DoActionGFX(getId(),
+                            ActionCodes.ACTION_AntharasHide));
                     setStatus(20);
                     broadcastPacket(new S_NPCPack(this));
                 }
@@ -1362,7 +1528,8 @@ public class L1MonsterInstance extends L1NpcInstance {
                 if (3 > rnd) {
                     allTargetClear();
                     setHiddenStatus(HIDDEN_STATUS_STOM);
-                    broadcastPacket(new S_DoActionGFX(getId(), ActionCodes.ACTION_AntharasHide));
+                    broadcastPacket(new S_DoActionGFX(getId(),
+                            ActionCodes.ACTION_AntharasHide));
                     setStatus(4);
                     broadcastPacket(new S_NPCPack(this));
                 }
@@ -1373,7 +1540,8 @@ public class L1MonsterInstance extends L1NpcInstance {
                 if (2 > rnd) {
                     allTargetClear();
                     setHiddenStatus(HIDDEN_STATUS_SINK_ITEM);
-                    broadcastPacket(new S_DoActionGFX(getId(), ActionCodes.ACTION_AntharasHide));
+                    broadcastPacket(new S_DoActionGFX(getId(),
+                            ActionCodes.ACTION_AntharasHide));
                     setStatus(4);
                     broadcastPacket(new S_NPCPack(this));
                 }
@@ -1384,7 +1552,8 @@ public class L1MonsterInstance extends L1NpcInstance {
                 if (1 > rnd) {
                     allTargetClear();
                     setHiddenStatus(HIDDEN_STATUS_SINK);
-                    broadcastPacket(new S_DoActionGFX(getId(), ActionCodes.ACTION_Hide));
+                    broadcastPacket(new S_DoActionGFX(getId(),
+                            ActionCodes.ACTION_Hide));
                     setStatus(13);
                     broadcastPacket(new S_NPCPack(this));
                 }
@@ -1400,7 +1569,8 @@ public class L1MonsterInstance extends L1NpcInstance {
                 if (2 > rnd) {
                     allTargetClear();
                     setHiddenStatus(HIDDEN_STATUS_FLY);
-                    broadcastPacket(new S_DoActionGFX(getId(), ActionCodes.ACTION_Moveup));
+                    broadcastPacket(new S_DoActionGFX(getId(),
+                            ActionCodes.ACTION_Moveup));
                     setStatus(4);
                     broadcastPacket(new S_NPCPack(this));
                 }
@@ -1411,7 +1581,8 @@ public class L1MonsterInstance extends L1NpcInstance {
                 if (1 > rnd) {
                     allTargetClear();
                     setHiddenStatus(HIDDEN_STATUS_FLY_LIND);
-                    broadcastPacket(new S_DoActionGFX(getId(), ActionCodes.ACTION_Moveup));
+                    broadcastPacket(new S_DoActionGFX(getId(),
+                            ActionCodes.ACTION_Moveup));
                     setStatus(11);
                     broadcastPacket(new S_NPCPack(this));
                 }
@@ -1507,7 +1678,8 @@ public class L1MonsterInstance extends L1NpcInstance {
                 setHiddenStatus(L1NpcInstance.HIDDEN_STATUS_DOLGOLLEM);
                 setStatus(4);
             }
-        } else if (leader.getHiddenStatus() == L1NpcInstance.HIDDEN_STATUS_FLY) {
+        } else if (leader.getHiddenStatus() == L1NpcInstance
+                .HIDDEN_STATUS_FLY) {
             if (npcid == 45067 // 바레이하피
                     || npcid == 45264 // 하피
                     || npcid == 45452 // 하피

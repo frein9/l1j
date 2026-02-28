@@ -18,116 +18,113 @@
  */
 package l1j.server.server.model.Instance;
 
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import l1j.server.server.model.L1Location;
 import l1j.server.server.model.L1Object;
 import l1j.server.server.model.map.L1Map;
-import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.model.trap.L1Trap;
 import l1j.server.server.serverpackets.S_RemoveObject;
 import l1j.server.server.serverpackets.S_Trap;
 import l1j.server.server.types.Point;
-import static l1j.server.server.model.skill.L1SkillId.*;
+
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import static l1j.server.server.model.skill.L1SkillId.GMSTATUS_SHOWTRAPS;
 
 public class L1TrapInstance extends L1Object {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private final L1Trap _trap;
-	private final Point _baseLoc = new Point();
-	private final Point _rndPt = new Point();
-	private final int _span;
-	private boolean _isEnable = true;
-	private final String _nameForView;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    private final L1Trap _trap;
+    private final Point _baseLoc = new Point();
+    private final Point _rndPt = new Point();
+    private final int _span;
+    private boolean _isEnable = true;
+    private final String _nameForView;
 
-	private List<L1PcInstance> _knownPlayers = new CopyOnWriteArrayList<L1PcInstance>();
+    private List<L1PcInstance> _knownPlayers = new CopyOnWriteArrayList<L1PcInstance>();
 
-	private static final Random _random = new Random();
+    private static final Random _random = new Random();
 
-	public L1TrapInstance(int id, L1Trap trap, L1Location loc, Point rndPt,
-			int span) {
-		setId(id);
-		_trap = trap;
-		getLocation().set(loc);
-		_baseLoc.set(loc);
-		_rndPt.set(rndPt);
-		_span = span;
-		_nameForView = "trap";
+    public L1TrapInstance(int id, L1Trap trap, L1Location loc, Point rndPt, int span) {
+        setId(id);
+        _trap = trap;
+        getLocation().set(loc);
+        _baseLoc.set(loc);
+        _rndPt.set(rndPt);
+        _span = span;
+        _nameForView = "trap";
 
-		resetLocation();
-	}
+        resetLocation();
+    }
 
-	public L1TrapInstance(int id, L1Location loc) {
-		setId(id);
-		_trap = L1Trap.newNull();
-		getLocation().set(loc);
-		_span = 0;
-		_nameForView = "trap base";
-	}
+    public L1TrapInstance(int id, L1Location loc) {
+        setId(id);
+        _trap = L1Trap.newNull();
+        getLocation().set(loc);
+        _span = 0;
+        _nameForView = "trap base";
+    }
 
-	public void resetLocation() {
-		if (_rndPt.getX() == 0 && _rndPt.getY() == 0) {
-			return;
-		}
+    public void resetLocation() {
+        if (_rndPt.getX() == 0 && _rndPt.getY() == 0) {
+            return;
+        }
 
-		for (int i = 0; i < 50; i++) {
-			int rndX = _random.nextInt(_rndPt.getX() + 1)
-					* (_random.nextInt(2) == 1 ?  1 : -1); // 1/2의 확률로 마이너스로 한다
-			int rndY = _random.nextInt(_rndPt.getY() + 1)
-					* (_random.nextInt(2) == 1 ?  1 : -1);
+        for (int i = 0; i < 50; i++) {
+            int rndX = _random.nextInt(_rndPt.getX() + 1) * (_random.nextInt(2) == 1 ? 1 : -1); // 1/2의 확률로 마이너스로 한다
+            int rndY = _random.nextInt(_rndPt.getY() + 1) * (_random.nextInt(2) == 1 ? 1 : -1);
 
-			rndX += _baseLoc.getX();
-			rndY += _baseLoc.getY();
+            rndX += _baseLoc.getX();
+            rndY += _baseLoc.getY();
 
-			L1Map map = getLocation().getMap();
-			if (map.isInMap(rndX, rndY) && map.isPassable(rndX, rndY)) {
-				getLocation().set(rndX, rndY);
-				break;
-			}
-		}
-		// 루프내에서 위치가 확정하지 않는 경우, 전회와 같은 위치가 된다.
-	}
+            L1Map map = getLocation().getMap();
+            if (map.isInMap(rndX, rndY) && map.isPassable(rndX, rndY)) {
+                getLocation().set(rndX, rndY);
+                break;
+            }
+        }
+        // 루프내에서 위치가 확정하지 않는 경우, 전회와 같은 위치가 된다.
+    }
 
-	public void enableTrap() {
-		_isEnable = true;
-	}
+    public void enableTrap() {
+        _isEnable = true;
+    }
 
-	public void disableTrap() {
-		_isEnable = false;
+    public void disableTrap() {
+        _isEnable = false;
 
-		for (L1PcInstance pc : _knownPlayers) {
-			pc.removeKnownObject(this);
-			pc.sendPackets(new S_RemoveObject(this));
-		}
-		_knownPlayers.clear();
-	}
+        for (L1PcInstance pc : _knownPlayers) {
+            pc.removeKnownObject(this);
+            pc.sendPackets(new S_RemoveObject(this));
+        }
+        _knownPlayers.clear();
+    }
 
-	public boolean isEnable() {
-		return _isEnable;
-	}
+    public boolean isEnable() {
+        return _isEnable;
+    }
 
-	public int getSpan() {
-		return _span;
-	}
+    public int getSpan() {
+        return _span;
+    }
 
-	public void onTrod(L1PcInstance trodFrom) {
-		_trap.onTrod(trodFrom, this);
-	}
+    public void onTrod(L1PcInstance trodFrom) {
+        _trap.onTrod(trodFrom, this);
+    }
 
-	public void onDetection(L1PcInstance caster) {
-		_trap.onDetection(caster, this);
-	}
+    public void onDetection(L1PcInstance caster) {
+        _trap.onDetection(caster, this);
+    }
 
-	@Override
-	public void onPerceive(L1PcInstance perceivedFrom) {
-		if (perceivedFrom.hasSkillEffect(GMSTATUS_SHOWTRAPS)) {
-			perceivedFrom.addKnownObject(this);
-			perceivedFrom.sendPackets(new S_Trap(this, _nameForView));
-			_knownPlayers.add(perceivedFrom);
-		}
-	}
+    @Override
+    public void onPerceive(L1PcInstance perceivedFrom) {
+        if (perceivedFrom.hasSkillEffect(GMSTATUS_SHOWTRAPS)) {
+            perceivedFrom.addKnownObject(this);
+            perceivedFrom.sendPackets(new S_Trap(this, _nameForView));
+            _knownPlayers.add(perceivedFrom);
+        }
+    }
 }
