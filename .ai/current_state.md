@@ -1,12 +1,13 @@
 # Current State
 
-Last verified: 2026-02-22
+Last verified: 2026-02-28
 
 ## Repository facts
 - `.ai` governance directory exists and is now composed of `README.md`, `current_state.md`, `current_task.md`, `decisions.md`, `plans/`, and `tasks/`.
 - Root build/start files include `build.xml` and `ServerStart.bat`.
 - Root also includes `pom.xml` for Maven build.
-- `src/Main.java` exists and contains a standalone sample `main` function that prints hello text.
+- `src/Main.java` defines `public class Main` with `public static void main(String[] args)`.
+- `src/Main.java` uses `System.out.println` for sample output.
 
 ## Build and runtime facts
 - `build.xml` defines an Ant project named `L1J` with default target `all` -> `clean`, `compile`, `jar`, `clean2`.
@@ -25,6 +26,7 @@ Last verified: 2026-02-22
 ## Source code facts
 - `src/l1j/server/Server.java` contains `public static void main(final String[] args)` and initializes `Config`, `L1DatabaseFactory`, and `GameServer`.
 - `src/l1j/server/Leaf.java` also contains a `public static void main(String args[])` entry point and AWT/Swing UI code.
+- `src/l1j/server/Leaf.java` loads logging config from classpath `/config/log.properties` and falls back to `./config/log.properties` when classpath resource is unavailable.
 - A recursive count reports `674` Java files under `src/l1j`.
 - A recursive count reports `654` Java files under `src/l1j/server/server`.
 - `src/l1j/server/server` contains these top-level subpackages: `clientpackets`, `command`, `datatables`, `encryptions`, `model`, `serverpackets`, `storage`, `taskmanager`, `templates`, `types`, `utils`.

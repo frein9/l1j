@@ -26,8 +26,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -390,18 +392,21 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
             logFolder.mkdir();
 
             InputStream is = new Server().getClass().getResourceAsStream("/config/log.properties");
-            try {
-                LogManager.getLogManager().readConfiguration(is);
-
-            } catch (SecurityException ex) {
-                ex.printStackTrace();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            if (is == null) {
+                try {
+                    is = new BufferedInputStream(new FileInputStream("./config/log.properties"));
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
-            try {
-                is.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            if (is != null) {
+                try (InputStream configStream = is) {
+                    LogManager.getLogManager().readConfiguration(configStream);
+                } catch (SecurityException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
             try {
                 Config.load();
@@ -982,7 +987,7 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
 
 
                 con = L1DatabaseFactory.getInstance().getConnection();
-                pstm = con.prepareStatement("INSERT INTO accounts SET login=?,password=?,lastactive=?,access_level=?,ip=?,host=?,banned=?");
+                pstm = con.prepareStatement("INSERT INTO ACCOUNTS SET login=?,password=?,lastactive=?,access_level=?,ip=?,host=?,banned=?");
                 pstm.setString(1, _name);
                 pstm.setString(2, _password);
                 pstm.setTimestamp(3, lastactive);
@@ -1026,52 +1031,52 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
 
             try {
                 c = L1DatabaseFactory.getInstance().getConnection();
-                p = c.prepareStatement("select login as uID from accounts where date_add(lastactive, interval 7 day) <= curdate()");
+                p = c.prepareStatement("SELECT LOGIN AS UID FROM ACCOUNTS WHERE DATE_ADD(LASTACTIVE, INTERVAL 7 DAY) <= CURDATE()");
                 r = p.executeQuery();
                 // 있다면
                 while (r.next()) {
                     uAccuntName = r.getString(1);
                     // 오브젝트 아이디를 검색
-                    pp = c.prepareStatement("select objid as oID from characters where account_name=?");
+                    pp = c.prepareStatement("SELECT OBJID AS OID FROM CHARACTERS WHERE ACCOUNT_NAME=?");
                     pp.setString(1, uAccuntName);
                     rr = pp.executeQuery();
                     // 보유한 캐릭 만큼 아이템, 창고 등 삭제
                     while (rr.next()) {
                         objId = rr.getInt(1);
                         // 창고
-                        warehouse = c.prepareStatement("delete from character_warehouse where account_name=?");
+                        warehouse = c.prepareStatement("DELETE FROM CHARACTER_WAREHOUSE WHERE ACCOUNT_NAME=?");
                         warehouse.setString(1, uAccuntName);
                         warehouse.execute();
                         // 텔
-                        teleport = c.prepareStatement("delete from character_teleport where char_id=?");
+                        teleport = c.prepareStatement("DELETE FROM CHARACTER_TELEPORT WHERE CHAR_ID=?");
                         teleport.setInt(1, objId);
                         teleport.execute();
                         // 스킬
-                        skills = c.prepareStatement("delete from character_skills where char_obj_id=?");
+                        skills = c.prepareStatement("DELETE FROM CHARACTER_SKILLS WHERE CHAR_OBJ_ID=?");
                         skills.setInt(1, objId);
                         skills.execute();
                         // 퀘스트
-                        quests = c.prepareStatement("delete from character_quests where char_id=?");
+                        quests = c.prepareStatement("DELETE FROM CHARACTER_QUESTS WHERE CHAR_ID=?");
                         quests.setInt(1, objId);
                         quests.execute();
                         //아이탬
-                        items = c.prepareStatement("delete from character_items where char_id=?");
+                        items = c.prepareStatement("DELETE FROM CHARACTER_ITEMS WHERE CHAR_ID=?");
                         items.setInt(1, objId);
                         items.execute();
                         //요정 창고
-                        elf_warehouse = c.prepareStatement("delete from character_elf_warehouse where account_name=?");
+                        elf_warehouse = c.prepareStatement("DELETE FROM CHARACTER_ELF_WAREHOUSE WHERE ACCOUNT_NAME=?");
                         elf_warehouse.setString(1, uAccuntName);
                         elf_warehouse.execute();
                         //모름 -ㅅ-
-                        config = c.prepareStatement("delete from character_config where object_id=?");
+                        config = c.prepareStatement("DELETE FROM CHARACTER_CONFIG WHERE OBJECT_ID=?");
                         config.setInt(1, objId);
                         config.execute();
                         //버프
-                        buff = c.prepareStatement("delete from character_buff where char_obj_id=?");
+                        buff = c.prepareStatement("DELETE FROM CHARACTER_BUFF WHERE CHAR_OBJ_ID=?");
                         buff.setInt(1, objId);
                         buff.execute();
                         // 친구
-                        buddys = c.prepareStatement("delete from character_buddys where char_id=?");
+                        buddys = c.prepareStatement("DELETE FROM CHARACTER_BUDDYS WHERE CHAR_ID=?");
                         buddys.setInt(1, objId);
                         buddys.execute();
 
@@ -1087,11 +1092,11 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
                         SQLUtil.close(buddys);
                     }
                     // 오브젝트 아이디를 검색
-                    ppp = c.prepareStatement("delete from characters where objid=?");
+                    ppp = c.prepareStatement("DELETE FROM CHARACTERS WHERE OBJID=?");
                     ppp.setInt(1, objId);
                     ppp.execute();
                     SQLUtil.close(ppp);
-                    pppp = c.prepareStatement("delete from accounts where login=?");
+                    pppp = c.prepareStatement("DELETE FROM ACCOUNTS WHERE LOGIN=?");
                     pppp.setString(1, uAccuntName);
                     pppp.execute();
                     SQLUtil.close(pppp);
