@@ -19,66 +19,65 @@
 
 package l1j.server.server.clientpackets;
 
-import java.io.FileNotFoundException; // 랭킹 게시판
-import java.util.logging.Logger;
-
 import l1j.server.server.ClientThread;
-import l1j.server.server.model.L1Object;
-import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1AuctionBoardInstance;
 import l1j.server.server.model.Instance.L1BoardInstance;
-import l1j.server.server.model.Instance.L1PcInstance; // 랭킹 게시판  
+import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.L1Object;
+import l1j.server.server.model.L1World;
+
+import java.io.FileNotFoundException;
+import java.util.logging.Logger;
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket, C_Board
 
 public class C_Board extends ClientBasePacket {
 
-	private static final String C_BOARD = "[C] C_Board";
-	private static Logger _log = Logger.getLogger(C_Board.class.getName());
+    private static final String C_BOARD = "[C] C_Board";
+    private static Logger _log = Logger.getLogger(C_Board.class.getName());
 
 
-/*	private boolean isBoardInstance(L1Object obj) {
-		return (obj instanceof L1BoardInstance || obj instanceof L1AuctionBoardInstance);
-	}
+    /*	private boolean isBoardInstance(L1Object obj) {
+            return (obj instanceof L1BoardInstance || obj instanceof L1AuctionBoardInstance);
+        }
 
-	public C_Board(byte abyte0[], ClientThread client) {
-		super(abyte0);
-		int objectId = readD();
-		L1Object obj = L1World.getInstance().findObject(objectId);
-		if (!isBoardInstance(obj)) {
-			return; // 부정 클라이언트가 아니면 있을 수  없겠지만···
-		}
-		obj.onAction(client.getActiveChar());
-	} */
-	public C_Board(byte abyte0[], ClientThread clientthread)
-	throws FileNotFoundException, Exception {
-		super(abyte0);
-		int objectId = readD();
-		L1Object obj = L1World.getInstance().findObject(objectId);
-		L1PcInstance pc = clientthread.getActiveChar();
-		if (obj instanceof L1BoardInstance) {
-			L1BoardInstance board = (L1BoardInstance) obj;
-			board.onAction(pc);
-			if(board.getNpcTemplate().get_npcId() == 81129){ // 랭킹 게시판 코드 입력 
-				board.onRanking(pc); 
-			}
-			else if(board.getNpcTemplate().get_npcId() == 200042){ // 환술사 용기사 랭킹 게시판
-				board.onRanking2(pc);
-			}
-			else if(board.getNpcTemplate().get_npcId() == 81130){ // 인챈 랭킹 게시판 코드 입력  
-			    board.onEnchantRanking(pc); 
-			}else if(board.getNpcTemplate().get_npcId()==81241){
-				board.onChoboList(pc);
-			}
-		} else if (obj instanceof L1AuctionBoardInstance) {
-			L1AuctionBoardInstance auctionboard = (L1AuctionBoardInstance) obj;
-			auctionboard.onAction(pc);
-		}
-	}
-	@Override
-	public String getType() {
-		return C_BOARD;
-	}
+        public C_Board(byte abyte0[], ClientThread client) {
+            super(abyte0);
+            int objectId = readD();
+            L1Object obj = L1World.getInstance().findObject(objectId);
+            if (!isBoardInstance(obj)) {
+                return; // 부정 클라이언트가 아니면 있을 수  없겠지만···
+            }
+            obj.onAction(client.getActiveChar());
+        } */
+    public C_Board(byte abyte0[], ClientThread clientthread)
+            throws FileNotFoundException, Exception {
+        super(abyte0);
+        int objectId = readD();
+        L1Object obj = L1World.getInstance().findObject(objectId);
+        L1PcInstance pc = clientthread.getActiveChar();
+        if (obj instanceof L1BoardInstance) {
+            L1BoardInstance board = (L1BoardInstance) obj;
+            board.onAction(pc);
+            if (board.getNpcTemplate().get_npcId() == 81129) { // 랭킹 게시판 코드 입력
+                board.onRanking(pc);
+            } else if (board.getNpcTemplate().get_npcId() == 200042) { // 환술사 용기사 랭킹 게시판
+                board.onRanking2(pc);
+            } else if (board.getNpcTemplate().get_npcId() == 81130) { // 인챈 랭킹 게시판 코드 입력
+                board.onEnchantRanking(pc);
+            } else if (board.getNpcTemplate().get_npcId() == 81241) {
+                board.onChoboList(pc);
+            }
+        } else if (obj instanceof L1AuctionBoardInstance) {
+            L1AuctionBoardInstance auctionboard = (L1AuctionBoardInstance) obj;
+            auctionboard.onAction(pc);
+        }
+    }
+
+    @Override
+    public String getType() {
+        return C_BOARD;
+    }
 
 }

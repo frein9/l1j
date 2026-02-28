@@ -19,51 +19,51 @@
 
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.ClientThread;
+import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.L1CastleLocation;
 import l1j.server.server.model.L1HouseLocation;
-import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.templates.L1BookMark;
+
+import java.util.logging.Logger;
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
 
 public class C_AddBookmark extends ClientBasePacket {
 
-	private static final String C_ADD_BOOKMARK = "[C] C_AddBookmark";
-	private static Logger _log = Logger.getLogger(C_AddBookmark.class
-			.getName());
+    private static final String C_ADD_BOOKMARK = "[C] C_AddBookmark";
+    private static Logger _log = Logger.getLogger(C_AddBookmark.class
+            .getName());
 
-	public C_AddBookmark(byte[] decrypt, ClientThread client) {
-		super(decrypt);
-		String s = readS();
+    public C_AddBookmark(byte[] decrypt, ClientThread client) {
+        super(decrypt);
+        String s = readS();
 
-		L1PcInstance pc = client.getActiveChar();
-		if (pc.isGhost()) {
-			return;
-		}
+        L1PcInstance pc = client.getActiveChar();
+        if (pc.isGhost()) {
+            return;
+        }
 
-		if (pc.getMap().isMarkable() || pc.isGm()) {
-			if ((L1CastleLocation.checkInAllWarArea(pc.getX(), pc.getY(), pc
-					.getMapId()) || L1HouseLocation.isInHouse(pc.getX(), pc
-					.getY(), pc.getMapId()))
-					&& !pc.isGm()) {
-				// \f1여기를 기억할 수가 없습니다.
-				pc.sendPackets(new S_ServerMessage(214));
-			} else {
-				L1BookMark.addBookmark(pc, s);
-			}
-		} else {
-			// \f1여기를 기억할 수가 없습니다.
-			pc.sendPackets(new S_ServerMessage(214));
-		}
-	}
+        if (pc.getMap().isMarkable() || pc.isGm()) {
+            if ((L1CastleLocation.checkInAllWarArea(pc.getX(), pc.getY(), pc
+                    .getMapId()) || L1HouseLocation.isInHouse(pc.getX(), pc
+                    .getY(), pc.getMapId()))
+                    && !pc.isGm()) {
+                // \f1여기를 기억할 수가 없습니다.
+                pc.sendPackets(new S_ServerMessage(214));
+            } else {
+                L1BookMark.addBookmark(pc, s);
+            }
+        } else {
+            // \f1여기를 기억할 수가 없습니다.
+            pc.sendPackets(new S_ServerMessage(214));
+        }
+    }
 
-	@Override
-	public String getType() {
-		return C_ADD_BOOKMARK;
-	}
+    @Override
+    public String getType() {
+        return C_ADD_BOOKMARK;
+    }
 }

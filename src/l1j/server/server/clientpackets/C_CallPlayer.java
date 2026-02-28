@@ -19,50 +19,50 @@
 
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.ClientThread;
+import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.L1Location;
 import l1j.server.server.model.L1Teleport;
 import l1j.server.server.model.L1World;
-import l1j.server.server.model.Instance.L1PcInstance;
+
+import java.util.logging.Logger;
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
 
 public class C_CallPlayer extends ClientBasePacket {
 
-	private static final String C_CALL = "[C] C_Call";
+    private static final String C_CALL = "[C] C_Call";
 
-	private static Logger _log = Logger.getLogger(C_CallPlayer.class.getName());
+    private static Logger _log = Logger.getLogger(C_CallPlayer.class.getName());
 
-	public C_CallPlayer(byte[] decrypt, ClientThread client) {
-		super(decrypt);
-		L1PcInstance pc = client.getActiveChar();
+    public C_CallPlayer(byte[] decrypt, ClientThread client) {
+        super(decrypt);
+        L1PcInstance pc = client.getActiveChar();
 
-		if (!pc.isGm()) {
-			return;
-		}
+        if (!pc.isGm()) {
+            return;
+        }
 
-		String name = readS();
-		if (name.isEmpty()) {
-			return;
-		}
+        String name = readS();
+        if (name.isEmpty()) {
+            return;
+        }
 
-		L1PcInstance target = L1World.getInstance().getPlayer(name);
+        L1PcInstance target = L1World.getInstance().getPlayer(name);
 
-		if (target == null) {
-			return;
-		}
+        if (target == null) {
+            return;
+        }
 
-		L1Location loc =
-				L1Location.randomLocation(target.getLocation(), 1, 2, false);
-		L1Teleport.teleport(pc, loc.getX(), loc.getY(), target.getMapId(), pc
-				.getHeading(), false);
-	}
+        L1Location loc =
+                L1Location.randomLocation(target.getLocation(), 1, 2, false);
+        L1Teleport.teleport(pc, loc.getX(), loc.getY(), target.getMapId(), pc
+                .getHeading(), false);
+    }
 
-	@Override
-	public String getType() {
-		return C_CALL;
-	}
+    @Override
+    public String getType() {
+        return C_CALL;
+    }
 }

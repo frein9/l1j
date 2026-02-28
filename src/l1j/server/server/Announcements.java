@@ -18,6 +18,11 @@
  */
 package l1j.server.server;
 
+import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.L1World;
+import l1j.server.server.serverpackets.S_SystemMessage;
+import l1j.server.server.utils.StreamUtil;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -30,103 +35,104 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import l1j.server.server.model.L1World;
-import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.serverpackets.S_SystemMessage;
-import l1j.server.server.utils.StreamUtil;
-
 public class Announcements {
-	private static Logger _log = Logger
-			.getLogger(Announcements.class.getName());
+    private static Logger _log = Logger
+            .getLogger(Announcements.class.getName());
 
-	private static Announcements _instance;
+    private static Announcements _instance;
 
-	private final List<String> _announcements = new ArrayList<String>();
+    private final List<String> _announcements = new ArrayList<String>();
 
-	private Announcements() {
-		loadAnnouncements();
-	}
+    private Announcements() {
+        loadAnnouncements();
+    }
 
-	public static Announcements getInstance() {
-		if (_instance == null) {
-			_instance = new Announcements();
-		}
+    public static Announcements getInstance() {
+        if (_instance == null) {
+            _instance = new Announcements();
+        }
 
-		return _instance;
-	}
+        return _instance;
+    }
 
-	private void loadAnnouncements() {
-		_announcements.clear();
-		File file = new File("data/announcements.txt");
-		if (file.exists()) {
-			readFromDisk(file);
-		} else {
-			_log.config("data/announcements.txt doesn't exist");
-		}
-	}
+    private void loadAnnouncements() {
+        _announcements.clear();
+        File file = new File("data/announcements.txt");
+        if (file.exists()) {
+            readFromDisk(file);
+        } else {
+            _log.config("data/announcements.txt doesn't exist");
+        }
+    }
 
-	public void showAnnouncements(L1PcInstance showTo) {
-		for (String msg : _announcements) {
-			showTo.sendPackets(new S_SystemMessage(msg));
-		}
-	}
-/**  2007.12. 31 공지사항 추가 삭제) */
- public void addAnnouncement(String text) {
-  _announcements.add(text);
-  saveToDisk();
- }
+    public void showAnnouncements(L1PcInstance showTo) {
+        for (String msg : _announcements) {
+            showTo.sendPackets(new S_SystemMessage(msg));
+        }
+    }
 
- public void delAnnouncement(int line) {
-  _announcements.remove(line);
-  saveToDisk();
- }
-/**  end */
+    /**
+     * 2007.12. 31 공지사항 추가 삭제)
+     */
+    public void addAnnouncement(String text) {
+        _announcements.add(text);
+        saveToDisk();
+    }
 
-	private void readFromDisk(File file) {
-		LineNumberReader lnr = null;
-		try {
-			int i = 0;
-			String line = null;
-			lnr = new LineNumberReader(new FileReader(file));
-			while ((line = lnr.readLine()) != null) {
-				StringTokenizer st = new StringTokenizer(line, "\n\r");
-				if (st.hasMoreTokens()) {
-					String announcement = st.nextToken();
-					_announcements.add(announcement);
+    public void delAnnouncement(int line) {
+        _announcements.remove(line);
+        saveToDisk();
+    }
 
-					i++;
-				}
-			}
+    /**
+     * end
+     */
 
-			_log.config("공지사항 " + i + "건로드");
-		} catch (FileNotFoundException e) {
-			// 파일이 없는 경우는, 공지사항 없음
-		} catch (IOException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			StreamUtil.close(lnr);
-		}
-	}
+    private void readFromDisk(File file) {
+        LineNumberReader lnr = null;
+        try {
+            int i = 0;
+            String line = null;
+            lnr = new LineNumberReader(new FileReader(file));
+            while ((line = lnr.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(line, "\n\r");
+                if (st.hasMoreTokens()) {
+                    String announcement = st.nextToken();
+                    _announcements.add(announcement);
 
-	private void saveToDisk() {
-		File file = new File("data/announcements.txt");
-		FileWriter save = null;
+                    i++;
+                }
+            }
 
-		try {
-			save = new FileWriter(file);
-			for (String msg : _announcements) {
-				save.write(msg);
-				save.write("\r\n");
-			}
-		} catch (IOException e) {
-			_log.log(Level.SEVERE, "saving the announcements file has failed",
-					e);
-		} finally {
-			StreamUtil.close(save);
-		}
-	}
+            _log.config("공지사항 " + i + "건로드");
+        } catch (FileNotFoundException e) {
+            // 파일이 없는 경우는, 공지사항 없음
+        } catch (IOException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            StreamUtil.close(lnr);
+        }
+    }
 
-	public void announceToAll(String msg) {
-		L1World.getInstance().broadcastServerMessage(msg);
-	}
+    private void saveToDisk() {
+        File file = new File("data/announcements.txt");
+        FileWriter save = null;
+
+        try {
+            save = new FileWriter(file);
+            for (String msg : _announcements) {
+                save.write(msg);
+                save.write("\r\n");
+            }
+        } catch (IOException e) {
+            _log.log(Level.SEVERE, "saving the announcements file has failed",
+                    e);
+        } finally {
+            StreamUtil.close(save);
+        }
+    }
+
+    public void announceToAll(String msg) {
+        L1World.getInstance().broadcastServerMessage(msg);
+    }
 }

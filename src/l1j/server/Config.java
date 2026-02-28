@@ -31,8 +31,30 @@ import java.util.logging.Logger;
 
 public final class Config {
 
-    private static final Logger _log = Logger.getLogger(Config.class.getName());
+    /**
+     * Debug/release mode
+     */
+    public static final boolean DEBUG = false;
+    /**
+     * Configuration files
+     */
+    public static final String SERVER_CONFIG_FILE = "./config/server.properties";
+    public static final String RATES_CONFIG_FILE = "./config/rates.properties";
+    public static final String ALT_SETTINGS_FILE = "./config/altsettings.properties";
+    public static final String CHAR_SETTINGS_CONFIG_FILE = "./config/charsettings.properties";
+    /**
+     * 그 외의 설정
+     */
 
+    // NPC로부터 들이마실 수 있는 MP한계
+    public static final int MANA_DRAIN_LIMIT_PER_NPC = 40;
+    // 1회의 공격으로 들이마실 수 있는 MP한계(SOM, 강철 SOM)
+    public static final int MANA_DRAIN_LIMIT_PER_SOM_ATTACK = 9;
+    // NPC로부터 들이마실 수 있는 HP한계 // (파멸의 대검)
+    public static final int HP_DRAIN_LIMIT_PER_NPC = 30;
+    // 1회의 공격으로 들이마실 수 있는 HP한계 (파멸의 대검)
+    public static final int HP_DRAIN_LIMIT_PER_HP_ATTACK = 15;
+    private static final Logger _log = Logger.getLogger(Config.class.getName());
     public static boolean 일반 = false;//매니저 때문에 추가부분
     public static boolean 귓속말 = false;
     public static boolean 글로벌 = false;
@@ -40,8 +62,11 @@ public final class Config {
     public static boolean 파티 = false;
     public static boolean 장사 = false;//여기까지.
     public static boolean 외침 = false;
-    public static boolean 채팅파티 = false; // 채팅파티 서버매니저 추가
 
+    /**
+     * 매크로 끝
+     **/
+    public static boolean 채팅파티 = false; // 채팅파티 서버매니저 추가
     /**
      * 매크로
      **/
@@ -55,538 +80,268 @@ public final class Config {
     public static String sys5;
     public static String sys6;
     public static String sys7;
-
-    /** 매크로 끝 **/
-
-
-    /**
-     * Debug/release mode
-     */
-    public static final boolean DEBUG = false;
-
     /**
      * Thread pools size
      */
     public static int THREAD_P_EFFECTS;
-
     public static int THREAD_P_GENERAL;
-
     public static int AI_MAX_THREAD;
-
     public static int THREAD_P_TYPE_GENERAL;
-
     public static int THREAD_P_SIZE_GENERAL;
-
     /**
      * Server control
      */
     public static String GAME_SERVER_HOST_NAME;
-
     public static int GAME_SERVER_PORT;
-
     public static String DB_DRIVER;
-
     public static String DB_URL;
-
     public static String DB_LOGIN;
-
     public static String DB_PASSWORD;
-
     public static String DBMS;
-
     public static String FILE_DB_PATH;
-
     public static boolean FILE_DB_AUTO_INIT;
-
     public static String TIME_ZONE;
-
     public static int CLIENT_LANGUAGE;
-
     public static boolean HOSTNAME_LOOKUPS;
-
     public static int AUTOMATIC_KICK;
-
     public static boolean AUTO_CREATE_ACCOUNTS;
-
     public static short MAX_ONLINE_USERS;
-
     public static boolean CACHE_MAP_FILES;
-
     public static boolean LOAD_V2_MAP_FILES;
-
     public static boolean CHECK_MOVE_INTERVAL;
-
     public static boolean CHECK_ATTACK_INTERVAL;
-
     public static boolean CHECK_SPELL_INTERVAL;
-
     public static short INJUSTICE_COUNT;
-
     public static int JUSTICE_COUNT;
-
     public static int CHECK_STRICTNESS;
-
     public static byte LOGGING_WEAPON_ENCHANT;
-
     public static byte LOGGING_ARMOR_ENCHANT;
-
     public static boolean LOGGING_CHAT_NORMAL;
-
     public static boolean LOGGING_CHAT_WHISPER;
-
     public static boolean LOGGING_CHAT_SHOUT;
-
     public static boolean LOGGING_CHAT_WORLD;
-
     public static boolean LOGGING_CHAT_CLAN;
-
     public static boolean LOGGING_CHAT_PARTY;
-
     public static boolean LOGGING_CHAT_COMBINED;
-
     public static boolean LOGGING_CHAT_CHAT_PARTY;
-
     public static int AUTOSAVE_INTERVAL;
-
     public static int AUTOSAVE_INTERVAL_INVENTORY;
-
     public static int SKILLTIMER_IMPLTYPE;
-
     public static int NPCAI_IMPLTYPE;
-
     public static boolean TELNET_SERVER;
-
     public static int TELNET_SERVER_PORT;
-
     public static int PC_RECOGNIZE_RANGE;
-
     public static boolean CHARACTER_CONFIG_IN_SERVER_SIDE;
-
     public static boolean ALLOW_2PC;
-
     public static int LEVEL_DOWN_RANGE;
-
     public static boolean SEND_PACKET_BEFORE_TELEPORT;
-
     public static boolean DETECT_DB_RESOURCE_LEAKS;
-
     public static int ACCOUNT_LIMIT; // IP당 계정 생성 개수 외부화
-
     /**
      * Rate control
      */
     public static double RATE_XP;
-
     public static double RATE_PET_XP; // ########## A137 펫 경험치 배율 설정 외부화 [넬]
-
     public static double RATE_CCLAN_XP;
     /// 성혈경험치 외부화
 
     public static double RATE_LA;
-
     public static double RATE_KARMA;
-
     public static double RATE_DROP_ADENA;
-
     public static double RATE_DROP_ITEMS;
-
     public static int ENCHANT_CHANCE_WEAPON;
-
     public static int ENCHANT_CHANCE_ARMOR;
-
     public static int MAX_WEAPON_ENCHANT;  // 무기 인챈 외부화
-
     public static int MAX_ARMOR_ENCHANT;   //방어구 인챈 외부화
     //장신구업그레이드 By추억
     public static int UPACSE_CHANCE;
-
     public static double RATE_WEIGHT_LIMIT;
-
     public static double RATE_WEIGHT_LIMIT_PET;
-
     public static double RATE_SHOP_SELLING_PRICE;
-
     public static double RATE_SHOP_PURCHASING_PRICE;
-
     public static int CREATE_CHANCE_DIARY;
-
     public static int CREATE_CHANCE_RECOLLECTION;
-
     public static int CREATE_CHANCE_MYSTERIOUS;
-
     public static int CREATE_CHANCE_PROCESSING;
-
     public static int CREATE_CHANCE_PROCESSING_DIAMOND;
-
     public static int CREATE_CHANCE_DANTES;
-
     public static int CREATE_CHANCE_ANCIENT_AMULET;
-
     public static int CREATE_CHANCE_HISTORY_BOOK;
-
     public static int RATE_PRIMIUM_TIME; // 프리미엄 상인
-
     public static int RATE_PRIMIUM_NUMBER; // 프리미엄 상인
-
     public static int RATE_AIN_TIME; // 아인하사드 축복 시간
-
     public static int RATE_AIN_OUTTIME;
-
     public static int RATE_BUGRACE_TIME; //버경
-
     public static int RATE_EITEM;  //모든 몹 아이템 드랍
-
     /**
      * AltSettings control
      */
 
     public static short GLOBAL_CHAT_LEVEL;
-
     public static short WHISPER_CHAT_LEVEL;
-
     public static byte AUTO_LOOT;
-
     public static int LOOTING_RANGE;
-
     public static boolean ALT_NONPVP;
-
     public static boolean ALT_ATKMSG;
-
     public static boolean CHANGE_TITLE_BY_ONESELF;
-
     public static int MAX_CLAN_MEMBER;
-
     public static boolean CLAN_ALLIANCE;
-
     public static int MAX_PT;
-
     public static int MAX_CHAT_PT;
-
     public static boolean SIM_WAR_PENALTY;
-
     public static boolean GET_BACK;
-
     public static String ALT_ITEM_DELETION_TYPE;
-
     public static int ALT_ITEM_DELETION_TIME;
-
     public static int ALT_ITEM_DELETION_RANGE;
-
     public static boolean ALT_GMSHOP;
-
     public static int ALT_GMSHOP_MIN_ID;
-
     public static int ALT_GMSHOP_MAX_ID;
-
     public static boolean ALT_HALLOWEENIVENT;
-
     public static boolean ALT_TALKINGSCROLLQUEST;
-
     public static int WHOIS_CONTER; // #### 뻥튀기 외부화(아우라) ####
-
     public static boolean ALT_WHO_COMMAND;
-
     public static boolean ALT_REVIVAL_POTION;
-
     public static int ALT_WAR_TIME;
-
     public static int ALT_WAR_TIME_UNIT;
-
     public static int ALT_WAR_INTERVAL;
-
     public static int ALT_WAR_INTERVAL_UNIT;
-
     public static int ALT_RATE_OF_DUTY;
-
     public static boolean SPAWN_HOME_POINT;
-
     public static int SPAWN_HOME_POINT_RANGE;
-
     public static int SPAWN_HOME_POINT_COUNT;
-
     public static int SPAWN_HOME_POINT_DELAY;
-
     public static boolean INIT_BOSS_SPAWN;
-
     public static int ELEMENTAL_STONE_AMOUNT;
-
     public static int HOUSE_TAX_INTERVAL;
-
     public static int MAX_DOLL_COUNT;
-
     public static boolean RETURN_TO_NATURE;
-
     public static int MAX_NPC_ITEM;
-
     public static int MAX_PERSONAL_WAREHOUSE_ITEM;
-
     public static int MAX_CLAN_WAREHOUSE_ITEM;
-
     public static boolean DELETE_CHARACTER_AFTER_7DAYS;
-
     public static int BUFF_PRICE;
-
     public static int Quest_Yes;
-
     public static int Quest_No;
-
     public static int NPC_DELETION_TIME;
-
     /**
      * CharSettings control
      */
     public static int PRINCE_MAX_HP;
-
     public static int PRINCE_MAX_MP;
-
     public static int KNIGHT_MAX_HP;
-
     public static int KNIGHT_MAX_MP;
-
     public static int ELF_MAX_HP;
-
     public static int ELF_MAX_MP;
-
     public static int WIZARD_MAX_HP;
-
     public static int WIZARD_MAX_MP;
-
     public static int DARKELF_MAX_HP;
-
     public static int DARKELF_MAX_MP;
-
     public static int DRAGONKNIGHT_MAX_HP;
-
     public static int DRAGONKNIGHT_MAX_MP;
-
     public static int BLACKWIZARD_MAX_HP;
-
     public static int BLACKWIZARD_MAX_MP;
-
     public static int LV1_EXP;
-
     public static int LV2_EXP;
-
     public static int LV3_EXP;
-
     public static int LV4_EXP;
-
     public static int LV5_EXP;
-
     public static int LV6_EXP;
-
     public static int LV7_EXP;
-
     public static int LV8_EXP;
-
     public static int LV9_EXP;
-
     public static int LV10_EXP;
-
     public static int LV11_EXP;
-
     public static int LV12_EXP;
-
     public static int LV13_EXP;
-
     public static int LV14_EXP;
-
     public static int LV15_EXP;
-
     public static int LV16_EXP;
-
     public static int LV17_EXP;
-
     public static int LV18_EXP;
-
     public static int LV19_EXP;
-
     public static int LV20_EXP;
-
     public static int LV21_EXP;
-
     public static int LV22_EXP;
-
     public static int LV23_EXP;
-
     public static int LV24_EXP;
-
     public static int LV25_EXP;
-
     public static int LV26_EXP;
-
     public static int LV27_EXP;
-
     public static int LV28_EXP;
-
     public static int LV29_EXP;
-
     public static int LV30_EXP;
-
     public static int LV31_EXP;
-
     public static int LV32_EXP;
-
     public static int LV33_EXP;
-
     public static int LV34_EXP;
-
     public static int LV35_EXP;
-
     public static int LV36_EXP;
-
     public static int LV37_EXP;
-
     public static int LV38_EXP;
-
     public static int LV39_EXP;
-
     public static int LV40_EXP;
-
     public static int LV41_EXP;
-
     public static int LV42_EXP;
-
     public static int LV43_EXP;
-
     public static int LV44_EXP;
-
     public static int LV45_EXP;
-
     public static int LV46_EXP;
-
     public static int LV47_EXP;
-
     public static int LV48_EXP;
-
     public static int LV49_EXP;
-
     public static int LV50_EXP;
-
     public static int LV51_EXP;
-
     public static int LV52_EXP;
-
     public static int LV53_EXP;
-
     public static int LV54_EXP;
-
     public static int LV55_EXP;
-
     public static int LV56_EXP;
-
     public static int LV57_EXP;
-
     public static int LV58_EXP;
-
     public static int LV59_EXP;
-
     public static int LV60_EXP;
-
     public static int LV61_EXP;
-
     public static int LV62_EXP;
-
     public static int LV63_EXP;
-
     public static int LV64_EXP;
-
     public static int LV65_EXP;
-
     public static int LV66_EXP;
-
     public static int LV67_EXP;
-
     public static int LV68_EXP;
-
     public static int LV69_EXP;
-
     public static int LV70_EXP;
-
     public static int LV71_EXP;
-
     public static int LV72_EXP;
-
     public static int LV73_EXP;
-
     public static int LV74_EXP;
-
     public static int LV75_EXP;
-
     public static int LV76_EXP;
-
     public static int LV77_EXP;
-
     public static int LV78_EXP;
-
     public static int LV79_EXP;
-
     public static int LV80_EXP;
-
     public static int LV81_EXP;
-
     public static int LV82_EXP;
-
     public static int LV83_EXP;
-
     public static int LV84_EXP;
-
     public static int LV85_EXP;
-
     public static int LV86_EXP;
-
     public static int LV87_EXP;
-
     public static int LV88_EXP;
-
     public static int LV89_EXP;
-
     public static int LV90_EXP;
-
     public static int LV91_EXP;
-
     public static int LV92_EXP;
-
     public static int LV93_EXP;
-
     public static int LV94_EXP;
-
     public static int LV95_EXP;
-
     public static int LV96_EXP;
-
     public static int LV97_EXP;
-
     public static int LV98_EXP;
-
     public static int LV99_EXP;
 
-    /**
-     * Configuration files
-     */
-    public static final String SERVER_CONFIG_FILE = "./config/server.properties";
-
-    public static final String RATES_CONFIG_FILE = "./config/rates.properties";
-
-    public static final String ALT_SETTINGS_FILE = "./config/altsettings.properties";
-
-    public static final String CHAR_SETTINGS_CONFIG_FILE = "./config/charsettings.properties";
-
-    /**
-     * 그 외의 설정
-     */
-
-    // NPC로부터 들이마실 수 있는 MP한계
-    public static final int MANA_DRAIN_LIMIT_PER_NPC = 40;
-
-    // 1회의 공격으로 들이마실 수 있는 MP한계(SOM, 강철 SOM)
-    public static final int MANA_DRAIN_LIMIT_PER_SOM_ATTACK = 9;
-
-    // NPC로부터 들이마실 수 있는 HP한계 // (파멸의 대검)
-    public static final int HP_DRAIN_LIMIT_PER_NPC = 30;
-
-    // 1회의 공격으로 들이마실 수 있는 HP한계 (파멸의 대검)
-    public static final int HP_DRAIN_LIMIT_PER_HP_ATTACK = 15;
+    private Config() {
+    }
 
     public static void load() {
         _log.info("loading gameserver config");
@@ -1328,8 +1083,5 @@ public final class Config {
             return false;
         }
         return true;
-    }
-
-    private Config() {
     }
 }

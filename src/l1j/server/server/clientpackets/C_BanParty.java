@@ -19,44 +19,44 @@
 
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.ClientThread;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_ServerMessage;
+
+import java.util.logging.Logger;
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
 
 public class C_BanParty extends ClientBasePacket {
 
-	private static final String C_BAN_PARTY = "[C] C_BanParty";
-	private static Logger _log = Logger.getLogger(C_BanParty.class.getName());
+    private static final String C_BAN_PARTY = "[C] C_BanParty";
+    private static Logger _log = Logger.getLogger(C_BanParty.class.getName());
 
-	public C_BanParty(byte decrypt[], ClientThread client) throws Exception {
-		super(decrypt);
-		String s = readS();
+    public C_BanParty(byte decrypt[], ClientThread client) throws Exception {
+        super(decrypt);
+        String s = readS();
 
-		L1PcInstance player = client.getActiveChar();
-		if (!player.getParty().isLeader(player)) {
-			// 파티 리더가 아닌 경우
-			player.sendPackets(new S_ServerMessage(427)); // 파티의 리더만을 추방할 수 있습니다.
-			return;
-		}
+        L1PcInstance player = client.getActiveChar();
+        if (!player.getParty().isLeader(player)) {
+            // 파티 리더가 아닌 경우
+            player.sendPackets(new S_ServerMessage(427)); // 파티의 리더만을 추방할 수 있습니다.
+            return;
+        }
 
-		for (L1PcInstance member : player.getParty().getMembers()) {
-			if (member.getName().toLowerCase().equals(s.toLowerCase())) {
-				player.getParty().kickMember(member);
-				return;
-			}
-		}
-		// 발견되지 않았다
-		player.sendPackets(new S_ServerMessage(426, s)); // %0는 파티 멤버가 아닙니다.
-	}
+        for (L1PcInstance member : player.getParty().getMembers()) {
+            if (member.getName().toLowerCase().equals(s.toLowerCase())) {
+                player.getParty().kickMember(member);
+                return;
+            }
+        }
+        // 발견되지 않았다
+        player.sendPackets(new S_ServerMessage(426, s)); // %0는 파티 멤버가 아닙니다.
+    }
 
-	@Override
-	public String getType() {
-		return C_BAN_PARTY;
-	}
+    @Override
+    public String getType() {
+        return C_BAN_PARTY;
+    }
 
 }

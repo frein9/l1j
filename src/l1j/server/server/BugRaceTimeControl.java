@@ -18,56 +18,54 @@
  */
 package l1j.server.server;
 
-import java.util.logging.Logger;
+import l1j.server.Config;
+import l1j.server.server.model.event.BugRace;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.logging.Logger;
-import l1j.server.Config;
-import l1j.server.server.model.L1World;
-import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.model.event.BugRace;//버경
 
 public class BugRaceTimeControl implements Runnable {
-	private static Logger _log = Logger.getLogger(BugRaceTimeControl.class
-			.getName());
+    private static Logger _log = Logger.getLogger(BugRaceTimeControl.class
+            .getName());
 
-	private static BugRaceTimeControl _instance;
+    private static BugRaceTimeControl _instance;
 
-	public static BugRaceTimeControl getInstance() {
-		if (_instance == null) {
-			_instance = new BugRaceTimeControl();
-		}
-		return _instance;
-	}
+    public static BugRaceTimeControl getInstance() {
+        if (_instance == null) {
+            _instance = new BugRaceTimeControl();
+        }
+        return _instance;
+    }
 
-	@Override
-	public void run() {
-		try {
-			while (true) {
-				checkBugRaceTime();
-				Thread.sleep(60000);
-			}
-		} catch (Exception e1) {
-		}
-	}
-	private Calendar getRealTime() {
-		  TimeZone _tz = TimeZone.getTimeZone(Config.TIME_ZONE);
-		  Calendar cal = Calendar.getInstance(_tz);
-		  return cal;
-		 }
+    @Override
+    public void run() {
+        try {
+            while (true) {
+                checkBugRaceTime();
+                Thread.sleep(60000);
+            }
+        } catch (Exception e1) {
+        }
+    }
 
-// 버그레이스시작부분
-   private void checkBugRaceTime() {   // 버경시간체크
-   SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
-    int nowtime = Integer.valueOf(sdf.format(getRealTime().getTime()));
-	int BugRaceTime = Config.RATE_BUGRACE_TIME;
-     if (nowtime % BugRaceTime == 0) {           
+    private Calendar getRealTime() {
+        TimeZone _tz = TimeZone.getTimeZone(Config.TIME_ZONE);
+        Calendar cal = Calendar.getInstance(_tz);
+        return cal;
+    }
+
+    // 버그레이스시작부분
+    private void checkBugRaceTime() {   // 버경시간체크
+        SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
+        int nowtime = Integer.valueOf(sdf.format(getRealTime().getTime()));
+        int BugRaceTime = Config.RATE_BUGRACE_TIME;
+        if (nowtime % BugRaceTime == 0) {
             BugRace.getInstance();
-     } else {
-      return;
-     } 
-     } 
+        } else {
+            return;
+        }
+    }
 
 }

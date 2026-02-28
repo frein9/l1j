@@ -18,82 +18,79 @@
  */
 package l1j.server.server;
 
-import java.util.logging.Logger;
+import l1j.server.Config;
+import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.L1World;
+import l1j.server.server.serverpackets.S_SkillIconExp;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.logging.Logger;
-import l1j.server.Config;
-import l1j.server.server.model.L1World;
-import l1j.server.server.model.L1Location;
-import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.serverpackets.S_SystemMessage;
-import l1j.server.server.serverpackets.S_SkillIconExp;
-import l1j.server.server.Announcements;
 
 public class AinTimeController implements Runnable {
-	private static Logger _log = Logger.getLogger(AinTimeController.class
-			.getName());
+    private static Logger _log = Logger.getLogger(AinTimeController.class
+            .getName());
 
-	private static AinTimeController _instance;
+    private static AinTimeController _instance;
 
-	public static AinTimeController getInstance() {
-		if (_instance == null) {
-			_instance = new AinTimeController();
-		}
-		return _instance;
-	}
+    public static AinTimeController getInstance() {
+        if (_instance == null) {
+            _instance = new AinTimeController();
+        }
+        return _instance;
+    }
 
-	@Override
-	public void run() {
-		try {
-			while (true) {
-				checkAinTime();     // 추가
-				Thread.sleep(60000);
-			}
-		} catch (Exception e1) {
-		}
-	}
-	private Calendar getRealTime() {
-		  TimeZone _tz = TimeZone.getTimeZone(Config.TIME_ZONE);
-		  Calendar cal = Calendar.getInstance(_tz);
-		  return cal;
-	}
+    @Override
+    public void run() {
+        try {
+            while (true) {
+                checkAinTime();     // 추가
+                Thread.sleep(60000);
+            }
+        } catch (Exception e1) {
+        }
+    }
 
-	private void checkAinTime() {
-		  SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
-		  int nowtime = Integer.valueOf(sdf.format(getRealTime().getTime()));
+    private Calendar getRealTime() {
+        TimeZone _tz = TimeZone.getTimeZone(Config.TIME_ZONE);
+        Calendar cal = Calendar.getInstance(_tz);
+        return cal;
+    }
 
-		int ainTime = Config.RATE_AIN_TIME;
-		int ainTime1 = Config.RATE_AIN_OUTTIME;
-		
-		if (nowtime % ainTime == 0) {
-		for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
-			 if (pc.getLevel() >= 49) {  // 추가
-             if (pc.getAinPoint() < 200 && pc.getMap().isSafetyZone(pc.getLocation())) {  // 아인하사드의 축복 충전
-				pc.setAinPoint(pc.getAinPoint() + 1);
-				pc.sendPackets(new S_SkillIconExp(pc.getAinPoint()));
-			 }
-			 } else {
-				 return;
-			 }
-		}
-		}
-	 if (nowtime % ainTime1 == 0) {
-		for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
-			 if (pc.getLevel() >= 49) {  // 추가
-             if (pc.getAinPoint() < 200 && pc.getMap().isSafetyZone(pc.getLocation())) {  // 아인하사드의 축복 충전
-				pc.setAinPoint(pc.getAinPoint() + 1);
-				pc.sendPackets(new S_SkillIconExp(pc.getAinPoint()));
-		    }
-		} else {
-			return;
-		} 
-	}
+    private void checkAinTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
+        int nowtime = Integer.valueOf(sdf.format(getRealTime().getTime()));
+
+        int ainTime = Config.RATE_AIN_TIME;
+        int ainTime1 = Config.RATE_AIN_OUTTIME;
+
+        if (nowtime % ainTime == 0) {
+            for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
+                if (pc.getLevel() >= 49) {  // 추가
+                    if (pc.getAinPoint() < 200 && pc.getMap().isSafetyZone(pc.getLocation())) {  // 아인하사드의 축복 충전
+                        pc.setAinPoint(pc.getAinPoint() + 1);
+                        pc.sendPackets(new S_SkillIconExp(pc.getAinPoint()));
+                    }
+                } else {
+                    return;
+                }
+            }
+        }
+        if (nowtime % ainTime1 == 0) {
+            for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
+                if (pc.getLevel() >= 49) {  // 추가
+                    if (pc.getAinPoint() < 200 && pc.getMap().isSafetyZone(pc.getLocation())) {  // 아인하사드의 축복 충전
+                        pc.setAinPoint(pc.getAinPoint() + 1);
+                        pc.sendPackets(new S_SkillIconExp(pc.getAinPoint()));
+                    }
+                } else {
+                    return;
+                }
+            }
+        }
+    }
 }
-		}
-		}
 	
 
 

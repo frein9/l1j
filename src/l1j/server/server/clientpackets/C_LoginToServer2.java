@@ -148,7 +148,7 @@ import static l1j.server.server.model.skill.L1SkillId.WIND_SHACKLE;
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
 //
-public class C_LoginToServer extends ClientBasePacket {
+public class C_LoginToServer2 extends ClientBasePacket {
 
     private static final String C_LOGIN_TO_SERVER = "[C] C_LoginToServer";
     private static Logger _log = Logger.getLogger(C_LoginToServer.class.getName());
@@ -158,7 +158,7 @@ public class C_LoginToServer extends ClientBasePacket {
     private int _lvl_status; // 보너스 스테이터스 무버그상태
     private int _All_base;  // 현재 캐릭터의 베이스상태
 
-    public C_LoginToServer(byte abyte0[], ClientThread client)
+    public C_LoginToServer2(byte abyte0[], ClientThread client)
             throws FileNotFoundException, Exception {
         super(abyte0);
 
@@ -445,24 +445,24 @@ public class C_LoginToServer extends ClientBasePacket {
         //서버 접속 알림 운영자만 보임
         for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
             if (player.isGm()) {
-                player.sendPackets(new S_SystemMessage("\\fU" + pc.getName() + " 님이 접속. \\fR IP:" + client.getIp() + " 계정:" + client.getAccountName()));
+                player.sendPackets(new S_SystemMessage("\\fU" + pc.getName() + " 님이 접속. \\fVIP:" + client.getIp() + " 계정:" + client.getAccountName()));
             }
         }
         pc.sendPackets(new S_OwnCharStatus(pc));
 
         if (pc.getHellTime() > 0) {
             pc.beginHell(false);
-        }
-        //지존소스추가
-/*
-   zizon(pc); 
+
+            //지존소스추가
+
+/*    zizon(pc);
    }
     private void zizon(L1PcInstance pc){
     Connection con33 = null;
     int q = 0;
     int i = 0;
     int x = pc.getExp();
-    
+
     try {
      con33 = L1DatabaseFactory.getInstance().getConnection();
      Statement pstm22 = con33.createStatement();
@@ -472,8 +472,8 @@ public class C_LoginToServer extends ClientBasePacket {
       if (!pc.isGm() && rs22.getInt("Exp") <= x) { // 영자일경우 제외
        break;
       }
-     }
-     if (q == 1) {
+
+    if (q == 1) {
       L1World.getInstance().broadcastPacketToAll(new S_SystemMessage("\\fU서버랭킹 1위 "+ pc.getName()+ " 님이 오셨습니다.")); //멘트는 서버에맞춰 적당하게 변경하세요
       pc.sendPackets(new S_CastleMaster(6, pc.getId()));
     if (! pc.getInventory().checkItem(555109)) { // 지존아이템체크부분
@@ -515,14 +515,14 @@ test--;
         new S_CastleMaster(8, pc.getId()));
 }
 }
-
 /////////////////////////////////랭킹1위에게만 아템사용 (삭제부분)///////////////
-     rs22.close();//여기부터 아래까지 리소스삭제부분 
+     rs22.close();//여기부터 아래까지 리소스삭제부분
      pstm22.close();
      con33.close();
-    } catch (Exception e) { 
+    } catch (Exception e) {
      // TODO: handle exception
-    } */
+    */
+        }
 
 
         if (CheckMail(pc) > 0) {

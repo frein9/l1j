@@ -21,55 +21,53 @@
 
 package l1j.server.server;
 
-import java.util.logging.Logger;
+import l1j.server.Config;
+import l1j.server.server.model.L1PetRace;
+import l1j.server.server.model.L1World;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
-import l1j.server.Config;
-import l1j.server.server.model.L1World;
-import l1j.server.server.model.L1Object;
-import l1j.server.server.GeneralThreadPool;
-import l1j.server.server.model.L1PetRace;
-import l1j.server.server.serverpackets.S_SystemMessage;
+import java.util.logging.Logger;
 
 public class PetRaceController implements Runnable {
-	private static Logger _log = Logger.getLogger(PetRaceController.class.getName());
+    private static Logger _log = Logger.getLogger(PetRaceController.class.getName());
 
-	private static PetRaceController _instance;
+    private static PetRaceController _instance;
 
-	public static PetRaceController getInstance() {
-		if (_instance == null) {
-			_instance = new PetRaceController();
-		}
-		return _instance;
-	}
+    public static PetRaceController getInstance() {
+        if (_instance == null) {
+            _instance = new PetRaceController();
+        }
+        return _instance;
+    }
 
-	@Override
-	public void run() {
-		try {
-			while (true) {
-				PetRaceTime();
-				Thread.sleep(60 * 1000);
-			}
-		} catch (Exception e1) {
-		}
-	}
-	private Calendar getRealTime() {
-		TimeZone _tz = TimeZone.getTimeZone(Config.TIME_ZONE);
-		Calendar cal = Calendar.getInstance(_tz);
-		return cal;
-	}
+    @Override
+    public void run() {
+        try {
+            while (true) {
+                PetRaceTime();
+                Thread.sleep(60 * 1000);
+            }
+        } catch (Exception e1) {
+        }
+    }
 
-	private void PetRaceTime() {
-		SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
-		int nowtime = Integer.valueOf(sdf.format(getRealTime().getTime()));
-		int nowtime2 = getRealTime().get(Calendar.MINUTE);
+    private Calendar getRealTime() {
+        TimeZone _tz = TimeZone.getTimeZone(Config.TIME_ZONE);
+        Calendar cal = Calendar.getInstance(_tz);
+        return cal;
+    }
 
-			L1PetRace pe11 = new L1PetRace();
-			if(!pe11.isStartGame()){
-				pe11.start(1); // 스타트
-				L1World.getInstance().setPetRace(pe11);
-			}
-	} 
+    private void PetRaceTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
+        int nowtime = Integer.valueOf(sdf.format(getRealTime().getTime()));
+        int nowtime2 = getRealTime().get(Calendar.MINUTE);
+
+        L1PetRace pe11 = new L1PetRace();
+        if (!pe11.isStartGame()) {
+            pe11.start(1); // 스타트
+            L1World.getInstance().setPetRace(pe11);
+        }
+    }
 }

@@ -20,33 +20,33 @@
 
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.ClientThread;
 import l1j.server.server.datatables.BuddyTable;
-import l1j.server.server.model.L1Buddy;
 import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.L1Buddy;
 import l1j.server.server.serverpackets.S_Buddy;
+
+import java.util.logging.Logger;
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
 
 public class C_Buddy extends ClientBasePacket {
 
-	private static final String C_BUDDY = "[C] C_Buddy";
-	private static Logger _log = Logger.getLogger(C_Buddy.class.getName());
+    private static final String C_BUDDY = "[C] C_Buddy";
+    private static Logger _log = Logger.getLogger(C_Buddy.class.getName());
 
-	public C_Buddy(byte abyte0[], ClientThread clientthread) {
-		super(abyte0);
-		L1PcInstance pc = clientthread.getActiveChar();
-		L1Buddy buddy = BuddyTable.getInstance().getBuddyTable(
-				pc.getId());
-		pc.sendPackets(new S_Buddy(pc.getId(), buddy));
-	}
+    public C_Buddy(byte abyte0[], ClientThread clientthread) {
+        super(abyte0);
+        L1PcInstance pc = clientthread.getActiveChar();
+        L1Buddy buddy = BuddyTable.getInstance().getBuddyTable(
+                pc.getId());
+        pc.sendPackets(new S_Buddy(pc.getId(), buddy));
+    }
 
-	@Override
-	public String getType() {
-		return C_BUDDY;
-	}
+    @Override
+    public String getType() {
+        return C_BUDDY;
+    }
 
 }

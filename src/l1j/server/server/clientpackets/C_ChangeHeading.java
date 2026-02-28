@@ -18,34 +18,34 @@
  */
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.ClientThread;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_ChangeHeading;
 
+import java.util.logging.Logger;
+
 public class C_ChangeHeading extends ClientBasePacket {
-	private static final String C_CHANGE_HEADING = "[C] C_ChangeHeading";
-	private static Logger _log = Logger.getLogger(C_ChangeHeading.class
-			.getName());
+    private static final String C_CHANGE_HEADING = "[C] C_ChangeHeading";
+    private static Logger _log = Logger.getLogger(C_ChangeHeading.class
+            .getName());
 
-	public C_ChangeHeading(byte[] decrypt, ClientThread client) {
-		super(decrypt);
-		int heading = readC();
+    public C_ChangeHeading(byte[] decrypt, ClientThread client) {
+        super(decrypt);
+        int heading = readC();
 
-		L1PcInstance pc = client.getActiveChar();
+        L1PcInstance pc = client.getActiveChar();
 
-		pc.setHeading(heading);
+        pc.setHeading(heading);
 
-		_log.finest("Change Heading : " + pc.getHeading());
+        _log.finest("Change Heading : " + pc.getHeading());
 
-		if (!pc.isGmInvis() && !pc.isGhost() && !pc.isInvisble()) {
-			pc.broadcastPacket(new S_ChangeHeading(pc));
-		}
-	}
+        if (!pc.isGmInvis() && !pc.isGhost() && !pc.isInvisble()) {
+            pc.broadcastPacket(new S_ChangeHeading(pc));
+        }
+    }
 
-	@Override
-	public String getType() {
-		return C_CHANGE_HEADING;
-	}
+    @Override
+    public String getType() {
+        return C_CHANGE_HEADING;
+    }
 }

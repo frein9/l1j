@@ -119,10 +119,11 @@ import static l1j.server.server.model.skill.L1SkillId.SOUL_OF_FLAME;
 
 public class GMCommands {
     private static Logger _log = Logger.getLogger(GMCommands.class.getName());
-
-    boolean spawnTF = false;
-
     private static GMCommands _instance;
+    boolean spawnTF = false;
+    private int _spawnId = 0;
+    private String _lastCmd = "";
+    private String _faviCom = "";
 
     private GMCommands() {
     }
@@ -132,6 +133,49 @@ public class GMCommands {
             _instance = new GMCommands();
         }
         return _instance;
+    }
+
+    public static boolean isHpBarTarget(L1Object obj) {
+        if (obj instanceof L1MonsterInstance) {
+            return true;
+        }
+        if (obj instanceof L1PcInstance) {
+            return true;
+        }
+        if (obj instanceof L1SummonInstance) {
+            return true;
+        }
+        if (obj instanceof L1PetInstance) {
+            return true;
+        }
+        return false;
+    }
+
+    //## A112 암호변경 추가
+    /* 암호 변경 소스 - 당신 */
+    // 입력받은 암호의 인코딩 메소드 - Account.java 참조.
+    private static String encodePassword(String rawPassword)
+            throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        byte buf[] = rawPassword.getBytes("UTF-8");
+        buf = MessageDigest.getInstance("SHA").digest(buf);
+
+        return Base64.encodeBytes(buf);
+    }
+
+    /* 입력받은 암호에 한글이 포함되지 않았는지 확인해 주는 메소드 */
+    /* 실제로 암호가 한글로 바뀌어버리면 클라이언트에서는 입력할 방법이 없다. */
+    private static boolean isDisitAlpha(String str) {
+        boolean check = true;
+        for (int i = 0; i < str.length(); i++) {
+            if (!Character.isDigit(str.charAt(i))    // 숫자가 아니라면
+                    && Character.isLetterOrDigit(str.charAt(i))    // 특수문자라면
+                    && !Character.isUpperCase(str.charAt(i))    // 대문자가 아니라면
+                    && !Character.isLowerCase(str.charAt(i))) {    // 소문자가 아니라면
+                check = false;
+                break;
+            }
+        }
+        return check;
     }
 
     private String complementClassName(String className) {
@@ -405,7 +449,6 @@ public class GMCommands {
     private void BugRace() {
         BugRace.getInstance();
     }
-
 
     private void popcon(L1PcInstance gm, String cmd) {
         try {
@@ -1023,7 +1066,6 @@ public class GMCommands {
         }
     }
 
-
     private void recall(L1PcInstance gm, String pcName) {
         try {
             L1PcInstance target = L1World.getInstance().getPlayer(pcName);
@@ -1089,6 +1131,32 @@ public class GMCommands {
         }
     }
 
+	/*private void makeItemSet(L1PcInstance gm, String param) {
+		try {
+			String name = new StringTokenizer(param).nextToken();
+			List<ItemSetItem> list = GMCommandsConfig.ITEM_SETS.get(name);
+			if (list == null) {
+				gm.sendPackets(new S_SystemMessage(name + " 미정의된 세트입니다"));
+				return;
+			}
+			for (ItemSetItem item : list) {
+				L1Item temp = ItemTable.getInstance().getTemplate(item.getId());
+				if (!temp.isStackable() && 0 != item.getEnchant()) {
+					for (int i= 0; i < item.getAmount(); i++) {
+						L1ItemInstance inst = ItemTable.getInstance()
+								.createItem(item.getId());
+						inst.setEnchantLevel(item.getEnchant());
+						gm.getInventory().storeItem(inst);
+					}
+				} else {
+					gm.getInventory().storeItem(item.getId(), item.getAmount());
+				}
+			}
+		} catch (Exception e) {
+			gm.sendPackets(new S_SystemMessage(".아이템셋트 세트명으로 입력해 주세요."));
+		}
+	}*/
+
     private void polymorph(L1PcInstance gm, String param) {
         try {
             StringTokenizer st = new StringTokenizer(param);
@@ -1129,7 +1197,7 @@ public class GMCommands {
                 pc.sendPackets(new S_ServerMessage(286, String.valueOf(time))); // \f3게임에 적합하지 않는 행동이기 (위해)때문에, 향후%0분간 채팅을 금지합니다.
                 gm.sendPackets(new S_ServerMessage(287, name)); // %0의 채팅을 금지했습니다.
                 L1World.getInstance().broadcastPacketToAll(
-                        new S_SystemMessage("" + name + "님은 현재 채팅금지 중입니다."));
+                        new S_SystemMessage(name + "님은 현재 채팅금지 중입니다."));
             }
         } catch (Exception e) {
             gm.sendPackets(new S_SystemMessage(
@@ -1187,8 +1255,6 @@ public class GMCommands {
         }
     }
 
-    private int _spawnId = 0;
-
     /**
      * GM커멘드.tospawn 로부터 불린다.지정한 spawnid의 좌표에 난다.
      */
@@ -1220,32 +1286,6 @@ public class GMCommands {
                     "Error    usage:.tospawn spawnid|+|-"));
         }
     }
-
-	/*private void makeItemSet(L1PcInstance gm, String param) {
-		try {
-			String name = new StringTokenizer(param).nextToken();
-			List<ItemSetItem> list = GMCommandsConfig.ITEM_SETS.get(name);
-			if (list == null) {
-				gm.sendPackets(new S_SystemMessage(name + " 미정의된 세트입니다"));
-				return;
-			}
-			for (ItemSetItem item : list) {
-				L1Item temp = ItemTable.getInstance().getTemplate(item.getId());
-				if (!temp.isStackable() && 0 != item.getEnchant()) {
-					for (int i= 0; i < item.getAmount(); i++) {
-						L1ItemInstance inst = ItemTable.getInstance()
-								.createItem(item.getId());
-						inst.setEnchantLevel(item.getEnchant());
-						gm.getInventory().storeItem(inst);
-					}
-				} else {
-					gm.getInventory().storeItem(item.getId(), item.getAmount());
-				}
-			}
-		} catch (Exception e) {
-			gm.sendPackets(new S_SystemMessage(".아이템셋트 세트명으로 입력해 주세요."));
-		}
-	}*/
 
     private void givesItem(L1PcInstance gm, String param) {
         try {
@@ -1943,6 +1983,7 @@ public class GMCommands {
             gm.sendPackets(new S_SystemMessage(".누구 또는 .누구 전체 라고 입력해 주세요."));
         }
     }
+// ########## 계정 생성 추가           #########
 
     private void checkEnchant(L1PcInstance gm, String param) {
         try {
@@ -1976,7 +2017,6 @@ public class GMCommands {
             gm.sendPackets(new S_SystemMessage(".아덴검사 [액수]를 입력 해주세요."));
         }
     }
-
 
     private void chainfo(L1PcInstance gm, String param) {
         try {
@@ -2012,7 +2052,7 @@ public class GMCommands {
             int _normal = 0;
 
             con = L1DatabaseFactory.getInstance().getConnection();
-            pstm = con.prepareStatement("SELECT login FROM accounts WHERE login=?");
+            pstm = con.prepareStatement("SELECT LOGIN FROM ACCOUNTS WHERE LOGIN=?");
             pstm.setString(1, LoginName);
             find = pstm.executeQuery();
 
@@ -2021,7 +2061,7 @@ public class GMCommands {
             }
 
             if (login == null) {
-                pstm2 = con.prepareStatement("INSERT INTO accounts SET login=?,password=?,lastactive=?,access_level=?,ip=?,host=?,banned=? ");
+                pstm2 = con.prepareStatement("INSERT INTO ACCOUNTS SET login=?,password=?,lastactive=?,access_level=?,ip=?,host=?,banned=? ");
                 pstm2.setString(1, LoginName);
                 pstm2.setString(2, password);
                 pstm2.setString(3, _lastactive);
@@ -2046,24 +2086,6 @@ public class GMCommands {
         } catch (Exception exception) {
             gm.sendPackets(new S_SystemMessage(".계정추가 계정명 비밀번호 를입력해주세요"));
         }
-    }
-// ########## 계정 생성 추가           #########
-
-
-    public static boolean isHpBarTarget(L1Object obj) {
-        if (obj instanceof L1MonsterInstance) {
-            return true;
-        }
-        if (obj instanceof L1PcInstance) {
-            return true;
-        }
-        if (obj instanceof L1SummonInstance) {
-            return true;
-        }
-        if (obj instanceof L1PetInstance) {
-            return true;
-        }
-        return false;
     }
 
     private void hpBar(L1PcInstance gm, String param) {
@@ -2103,8 +2125,6 @@ public class GMCommands {
         }
     }
 
-    private String _lastCmd = "";
-
     private void redo(L1PcInstance gm, String param) {
         try {
             if (_lastCmd.isEmpty()) {
@@ -2127,8 +2147,6 @@ public class GMCommands {
             gm.sendPackets(new S_SystemMessage(".r 커멘드 에러"));
         }
     }
-
-    private String _faviCom = "";
 
     private void favorite(L1PcInstance gm, String param) {
         try {
@@ -2191,17 +2209,6 @@ public class GMCommands {
         }
     }
 
-    //## A112 암호변경 추가
-    /* 암호 변경 소스 - 당신 */
-    // 입력받은 암호의 인코딩 메소드 - Account.java 참조.
-    private static String encodePassword(String rawPassword)
-            throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        byte buf[] = rawPassword.getBytes("UTF-8");
-        buf = MessageDigest.getInstance("SHA").digest(buf);
-
-        return Base64.encodeBytes(buf);
-    }
-
     /* 실제 암호 변경 메소드 */
     private void to_Change_Passwd(L1PcInstance gm, L1PcInstance pc, String passwd) {
         try {
@@ -2232,22 +2239,6 @@ public class GMCommands {
             con.close();
         } catch (Exception e) {
         }
-    }
-
-    /* 입력받은 암호에 한글이 포함되지 않았는지 확인해 주는 메소드 */
-    /* 실제로 암호가 한글로 바뀌어버리면 클라이언트에서는 입력할 방법이 없다. */
-    private static boolean isDisitAlpha(String str) {
-        boolean check = true;
-        for (int i = 0; i < str.length(); i++) {
-            if (!Character.isDigit(str.charAt(i))    // 숫자가 아니라면
-                    && Character.isLetterOrDigit(str.charAt(i))    // 특수문자라면
-                    && !Character.isUpperCase(str.charAt(i))    // 대문자가 아니라면
-                    && !Character.isLowerCase(str.charAt(i))) {    // 소문자가 아니라면
-                check = false;
-                break;
-            }
-        }
-        return check;
     }
 
     /* 암호 변경에 필요한 변수를 입력받는다. */

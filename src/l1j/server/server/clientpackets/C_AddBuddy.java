@@ -20,20 +20,18 @@
 
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.ClientThread;
 import l1j.server.server.datatables.BuddyTable;
 import l1j.server.server.datatables.CharacterTable;
-import l1j.server.server.model.L1Buddy;
 import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.serverpackets.S_ServerMessage;
-import l1j.server.server.templates.L1CharName;
+import l1j.server.server.model.L1Buddy;
 import l1j.server.server.model.L1World;
 import l1j.server.server.serverpackets.S_Message_YN;
+import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.serverpackets.S_SystemMessage;
+import l1j.server.server.templates.L1CharName;
 
-
+import java.util.logging.Logger;
 
 
 // Referenced classes of package l1j.server.server.clientpackets:
@@ -41,38 +39,39 @@ import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class C_AddBuddy extends ClientBasePacket {
 
-	private static final String C_ADD_BUDDY = "[C] C_AddBuddy";
-	private static Logger _log = Logger.getLogger(C_AddBuddy.class.getName());
+    private static final String C_ADD_BUDDY = "[C] C_AddBuddy";
+    private static Logger _log = Logger.getLogger(C_AddBuddy.class.getName());
 
-	public C_AddBuddy(byte[] decrypt, ClientThread client) {
-		super(decrypt);
-		L1PcInstance pc = client.getActiveChar();
-		BuddyTable buddyTable = BuddyTable.getInstance();
-		L1Buddy buddyList = buddyTable.getBuddyTable(pc.getId());
-		String charName = readS();
+    public C_AddBuddy(byte[] decrypt, ClientThread client) {
+        super(decrypt);
+        L1PcInstance pc = client.getActiveChar();
+        BuddyTable buddyTable = BuddyTable.getInstance();
+        L1Buddy buddyList = buddyTable.getBuddyTable(pc.getId());
+        String charName = readS();
 
-		if (charName.equalsIgnoreCase(pc.getName())) {
-			return;
-		} else if (buddyList.containsName(charName)) {
-			pc.sendPackets(new S_ServerMessage(1052, charName)); // %s
-																	// (은)는 이미 등록되어 있습니다.
-			return;
-		}
+        if (charName.equalsIgnoreCase(pc.getName())) {
+            return;
+        } else if (buddyList.containsName(charName)) {
+            pc.sendPackets(new S_ServerMessage(1052, charName)); // %s
+            // (은)는 이미 등록되어 있습니다.
+            return;
+        }
 
-for (L1CharName cn : CharacterTable.getInstance(). getCharNameList()) {
-  if (charName.equalsIgnoreCase(cn.getName())) {
-    int objId = cn.getId();
-    L1PcInstance target = (L1PcInstance) L1World.getInstance().findObject(objId);
-    if (target != null) { // 친구추가할 대상이 있으면    
-     target.setTempID(pc.getId()); // 상대의 오브젝트 ID를 보존해 둔다
-     target.sendPackets(new S_Message_YN(622, pc.getName() + "님이 친구 등록을 요청합니다."));
+        for (L1CharName cn : CharacterTable.getInstance().getCharNameList()) {
+            if (charName.equalsIgnoreCase(cn.getName())) {
+                int objId = cn.getId();
+                L1PcInstance target = (L1PcInstance) L1World.getInstance().findObject(objId);
+                if (target != null) { // 친구추가할 대상이 있으면
+                    target.setTempID(pc.getId()); // 상대의 오브젝트 ID를 보존해 둔다
+                    target.sendPackets(new S_Message_YN(622, pc.getName() + "님이 친구 등록을 요청합니다."));
+                }
+            }
+        }
+        pc.sendPackets(new S_SystemMessage(charName + "님에게 친구 등록을 요청합니다."));
     }
-   }
-  }
-  pc.sendPackets(new S_SystemMessage(charName +"님에게 친구 등록을 요청합니다."));
- }
-	@Override
-	public String getType() {
-		return C_ADD_BUDDY;
-	}
+
+    @Override
+    public String getType() {
+        return C_ADD_BUDDY;
+    }
 }

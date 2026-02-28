@@ -54,14 +54,13 @@ import java.util.logging.Logger;
  */
 public class Server {
     /**
-     * 메세지 로그용.
-     */
-    private static Logger _log = Logger.getLogger(Server.class.getName());
-
-    /**
      * 로그 설정 파일의 폴더.
      */
     private static final String LOG_PROP = "./config/log.properties";
+    /**
+     * 메세지 로그용.
+     */
+    private static Logger _log = Logger.getLogger(Server.class.getName());
 
     /**
      * 서버 메인.
@@ -88,8 +87,7 @@ public class Server {
         }
 
         // L1DatabaseFactory 초기설정
-        L1DatabaseFactory.setDatabaseSettings(Config.DB_DRIVER, Config.DB_URL,
-                Config.DB_LOGIN, Config.DB_PASSWORD);
+        L1DatabaseFactory.setDatabaseSettings(Config.DB_DRIVER, Config.DB_URL, Config.DB_LOGIN, Config.DB_PASSWORD);
         L1DatabaseFactory.getInstance();
         FileDbInitializer.initializeIfNeeded();
 

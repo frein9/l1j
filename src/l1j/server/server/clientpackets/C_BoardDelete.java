@@ -19,36 +19,37 @@
 
 package l1j.server.server.clientpackets;
 
-import java.util.logging.Logger;
 import l1j.server.server.ClientThread;
 import l1j.server.server.datatables.BoardTable;
+import l1j.server.server.model.Instance.L1BoardInstance;
 import l1j.server.server.model.L1Object;
 import l1j.server.server.model.L1World;
-import l1j.server.server.model.Instance.L1BoardInstance;
+
+import java.util.logging.Logger;
 
 // Referenced classes of package l1j.server.server.clientpackets:
 // ClientBasePacket
 
 public class C_BoardDelete extends ClientBasePacket {
 
-	private static final String C_BOARD_DELETE = "[C] C_BoardDelete";
-	private static Logger _log = Logger.getLogger(C_BoardDelete.class
-			.getName());
+    private static final String C_BOARD_DELETE = "[C] C_BoardDelete";
+    private static Logger _log = Logger.getLogger(C_BoardDelete.class
+            .getName());
 
-	public C_BoardDelete(byte decrypt[], ClientThread client) {
-		super(decrypt);
-		int objId = readD();
-		int topicId = readD();
-		L1Object obj = L1World.getInstance().findObject(objId);
-		L1BoardInstance board = (L1BoardInstance) obj;
-		if (board != null) {
-			BoardTable.getInstance().deleteTopic(topicId);
-		}
-	}
+    public C_BoardDelete(byte decrypt[], ClientThread client) {
+        super(decrypt);
+        int objId = readD();
+        int topicId = readD();
+        L1Object obj = L1World.getInstance().findObject(objId);
+        L1BoardInstance board = (L1BoardInstance) obj;
+        if (board != null) {
+            BoardTable.getInstance().deleteTopic(topicId);
+        }
+    }
 
-	@Override
-	public String getType() {
-		return C_BOARD_DELETE;
-	}
+    @Override
+    public String getType() {
+        return C_BOARD_DELETE;
+    }
 
 }

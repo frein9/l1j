@@ -60,7 +60,35 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
     public static boolean startup = false;
 
     public static Checkbox noticeCheckbox, cbChatChat, cbChatShout, cbChatTrade, cbChatParty, cbChatClan, cbChatGlobal, cbChatWhisper, cbChatNormal;
-
+    //account make
+    public static Button btCreateAcc = new Button("계정생성");
+    public static Label lbID = new Label("　아이디");
+    public static Label lbPwd = new Label("비밀번호");
+    public static Label lbAccLv = new Label("계정레벨");
+    public static TextField tfID = new TextField("", 10);
+    public static TextField tfPwd = new TextField("", 10);
+    public static TextField tfAccLv = new TextField("", 10);
+    public static Button btDelAcc = new Button("계정삭제");
+    public static Label lbDelID = new Label("    아이디");
+    public static TextField tfDelID = new TextField("", 10);
+    public static List list = null;
+    public static JFrame 선물주기JFrame, 이동시키기Frame, 변신시키기Frame, allPresentJFrame, 배율설정JFrame,
+            인첸설정JFrame, 나머지설정JFrame;
+    public static JFrame 계정생성2 = new JFrame("계정 생성");
+    public static JFrame 계정삭제2 = new JFrame("계정 삭제");
+    public static JFrame 패킷출력JFrame = new JFrame("패킷출력창");
+    public static Menu serverMenu, serverMenuSub, 도구, 도구Sub;
+    public static MenuItem serverStart, serverDown, userNick, 배율설정, 인첸설정, 나머지설정, 컴퓨터끄기,
+            끄기, 다시시작, 달빛프로그램, 나비켓실행, 계정생성하기, 계정삭제하기;
+    public static MenuItem 캐릭터삭제 = new MenuItem("캐릭터삭제");
+    public static MenuItem 패킷출력 = new MenuItem("패킷출력");
+    public static TextArea chatlog, tarea;
+    public static TextArea 패킷출력창 = new TextArea("", 0, 0, 1);
+    public static TextField chat, 닉네임, 선물주기닉네임, 변신닉네임, 이동닉네임,
+            아이템번호, 인첸트레벨, 아이템갯수, X좌표, Y좌표, 맵번호,
+            몬스터번호, 경험치, 아이템, 아데나, 라우풀, 펫경험치,
+            무기인첸, 아머인첸, 악세속성인첸, 채창레벨, 무게설정, 지급시간, 지급갯수;
+    static MemoryMonitor memorymonitor;
     Button btGift = new Button("선물주기");
     Button btShift = new Button("이동시키기");
     Button btTansformation = new Button("변신시키기");
@@ -70,45 +98,6 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
     Button btRate = new Button("배율적용");
     Button btEnchan = new Button("인첸적용");
     Button btOther = new Button("나머지적용");
-
-    //account make
-    public static Button btCreateAcc = new Button("계정생성");
-    public static Label lbID = new Label("　아이디");
-    public static Label lbPwd = new Label("비밀번호");
-    public static Label lbAccLv = new Label("계정레벨");
-    public static TextField tfID = new TextField("", 10);
-    public static TextField tfPwd = new TextField("", 10);
-    public static TextField tfAccLv = new TextField("", 10);
-
-    public static Button btDelAcc = new Button("계정삭제");
-    public static Label lbDelID = new Label("    아이디");
-    public static TextField tfDelID = new TextField("", 10);
-
-    static MemoryMonitor memorymonitor;
-
-    public static List list = null;
-
-    public static JFrame 선물주기JFrame, 이동시키기Frame, 변신시키기Frame, allPresentJFrame, 배율설정JFrame,
-            인첸설정JFrame, 나머지설정JFrame;
-    public static JFrame 계정생성2 = new JFrame("계정 생성");
-    public static JFrame 계정삭제2 = new JFrame("계정 삭제");
-    public static JFrame 패킷출력JFrame = new JFrame("패킷출력창");
-
-    public static Menu serverMenu, serverMenuSub, 도구, 도구Sub;
-
-    public static MenuItem serverStart, serverDown, userNick, 배율설정, 인첸설정, 나머지설정, 컴퓨터끄기,
-            끄기, 다시시작, 달빛프로그램, 나비켓실행, 계정생성하기, 계정삭제하기;
-    public static MenuItem 캐릭터삭제 = new MenuItem("캐릭터삭제");
-    public static MenuItem 패킷출력 = new MenuItem("패킷출력");
-
-    public static TextArea chatlog, tarea;
-    public static TextArea 패킷출력창 = new TextArea("", 0, 0, 1);
-
-    public static TextField chat, 닉네임, 선물주기닉네임, 변신닉네임, 이동닉네임,
-            아이템번호, 인첸트레벨, 아이템갯수, X좌표, Y좌표, 맵번호,
-            몬스터번호, 경험치, 아이템, 아데나, 라우풀, 펫경험치,
-            무기인첸, 아머인첸, 악세속성인첸, 채창레벨, 무게설정, 지급시간, 지급갯수;
-
     // 아이콘
     Image im = Toolkit.getDefaultToolkit().getImage("Leaf/images/LinFree_Leaf.gif");
 
@@ -358,6 +347,17 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
         serverStart();
         // 채팅 텍스트필드로 포커스 이동
         chat.requestFocus();
+    }
+
+    private static String encodePassword2(String rawPassword) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        byte buf[] = rawPassword.getBytes("UTF-8");
+        buf = MessageDigest.getInstance("SHA").digest(buf);
+
+        return Base64.encodeBytes(buf);
+    }
+
+    public static void main(String args[]) {
+        new Leaf("Server Manager");
     }
 
     // 사용자 메소드 시작
@@ -915,6 +915,7 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
 
         serverDownCount(10);
     }
+    // 사용자 메소드 끝
 
     public void shutdownR() {
         try {
@@ -925,14 +926,7 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
 
         serverDownCount(10);
     }
-
-    private static String encodePassword2(String rawPassword) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        byte buf[] = rawPassword.getBytes("UTF-8");
-        buf = MessageDigest.getInstance("SHA").digest(buf);
-
-        return Base64.encodeBytes(buf);
-    }
-    // 사용자 메소드 끝
+    // 각 메뉴이벤트 끝
 
     // 각 메뉴이벤트 시작
     public void actionPerformed(ActionEvent e) {
@@ -1137,7 +1131,7 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
         else if (menu == "변신시키기") 변신전달();
         else if (menu == "영구추방") 영구추방시키기();
     }
-    // 각 메뉴이벤트 끝
+    // 아이템 리스너 끝
 
     // 아이템 리스너 시작
     public void itemStateChanged(ItemEvent ie) {
@@ -1211,7 +1205,6 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
             }
         }
     }
-    // 아이템 리스너 끝
 
     // 마우스 이벤트 시작
     public void mouseClicked(MouseEvent e) {
@@ -1230,10 +1223,10 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
 
     public void mouseEntered(MouseEvent e) {
     }
+    // 마우스 이벤트 끝
 
     public void mouseExited(MouseEvent e) {
     }
-    // 마우스 이벤트 끝
 
     // Enter키 이벤트로 엔터가 눌리면 데이터를 전송할수 있게 한다.
     class EnterKey extends KeyAdapter {
@@ -1248,9 +1241,5 @@ public class Leaf extends Frame implements ActionListener, ItemListener, MouseLi
                 chat.setText("");
             }
         }
-    }
-
-    public static void main(String args[]) {
-        new Leaf("Server Manager");
     }
 }
