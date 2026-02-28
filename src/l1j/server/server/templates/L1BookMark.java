@@ -19,12 +19,6 @@
 
 package l1j.server.server.templates;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import l1j.server.L1DatabaseFactory;
 import l1j.server.server.IdFactory;
 import l1j.server.server.model.Instance.L1PcInstance;
@@ -32,146 +26,152 @@ import l1j.server.server.serverpackets.S_Bookmarks;
 import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.utils.SQLUtil;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class L1BookMark {
-	private static Logger _log = Logger.getLogger(L1BookMark.class.getName());
+    private static Logger _log = Logger.getLogger(L1BookMark.class.getName());
 
-	private int _charId;
+    private int _charId;
 
-	private int _id;
+    private int _id;
 
-	private String _name;
+    private String _name;
 
-	private int _locX;
+    private int _locX;
 
-	private int _locY;
+    private int _locY;
 
-	private short _mapId;
+    private short _mapId;
 
-	public L1BookMark() {
-	}
+    public L1BookMark() {
+    }
 
-	public static void deleteBookmark(L1PcInstance player, String s) {
-		L1BookMark book = player.getBookMark(s);
-		if (book != null) {
-			Connection con = null;
-			PreparedStatement pstm = null;
-			try {
+    public static void deleteBookmark(L1PcInstance player, String s) {
+        L1BookMark book = player.getBookMark(s);
+        if (book != null) {
+            Connection con = null;
+            PreparedStatement pstm = null;
+            try {
 
-				con = L1DatabaseFactory.getInstance().getConnection();
-				pstm = con
-						.prepareStatement("DELETE FROM character_teleport WHERE id=? ");
-				pstm.setInt(1, book.getId());
-				pstm.execute();
-				player.removeBookMark(book);
-			} catch (SQLException e) {
-				_log.log(Level.SEVERE, "북마크의 삭제로 에러가 발생했습니다.", e);
-			} finally {
-				SQLUtil.close(pstm);
-				SQLUtil.close(con);
-			}
-		}
-	}
+                con = L1DatabaseFactory.getInstance().getConnection();
+                pstm = con
+                        .prepareStatement("DELETE FROM CHARACTER_TELEPORT WHERE ID=? ");
+                pstm.setInt(1, book.getId());
+                pstm.execute();
+                player.removeBookMark(book);
+            } catch (SQLException e) {
+                _log.log(Level.SEVERE, "북마크의 삭제로 에러가 발생했습니다.", e);
+            } finally {
+                SQLUtil.close(pstm);
+                SQLUtil.close(con);
+            }
+        }
+    }
 
-	public static void addBookmark(L1PcInstance pc, String s) {
-		// 클라이언트측에서 체크되기 (위해)때문에 불요
+    public static void addBookmark(L1PcInstance pc, String s) {
+        // 클라이언트측에서 체크되기 (위해)때문에 불요
 //		if (s.length() > 12) {
 //			pc.sendPackets(new S_ServerMessage(204));
 //			return;
 //		}
 
-		if (!pc.getMap().isMarkable()) {
-			pc.sendPackets(new S_ServerMessage(214)); // \f1여기를 기억할 수가 없습니다.
-			return;
-		}
+        if (!pc.getMap().isMarkable()) {
+            pc.sendPackets(new S_ServerMessage(214)); // \f1여기를 기억할 수가 없습니다.
+            return;
+        }
 
-		int size = pc.getBookMarkSize();
-		if (size > 49) {
-			return;
-		}
+        int size = pc.getBookMarkSize();
+        if (size > 49) {
+            return;
+        }
 
-		if (pc.getBookMark(s) == null) {
-			L1BookMark bookmark = new L1BookMark();
-			bookmark.setId(IdFactory.getInstance().nextId());
-			bookmark.setCharId(pc.getId());
-			bookmark.setName(s);
-			bookmark.setLocX(pc.getX());
-			bookmark.setLocY(pc.getY());
-			bookmark.setMapId(pc.getMapId());
+        if (pc.getBookMark(s) == null) {
+            L1BookMark bookmark = new L1BookMark();
+            bookmark.setId(IdFactory.getInstance().nextId());
+            bookmark.setCharId(pc.getId());
+            bookmark.setName(s);
+            bookmark.setLocX(pc.getX());
+            bookmark.setLocY(pc.getY());
+            bookmark.setMapId(pc.getMapId());
 
-			Connection con = null;
-			PreparedStatement pstm = null;
+            Connection con = null;
+            PreparedStatement pstm = null;
 
-			try {
-				con = L1DatabaseFactory.getInstance().getConnection();
-				pstm = con
-						.prepareStatement("INSERT INTO character_teleport SET id = ?, char_id = ?, name = ?, locx = ?, locy = ?, mapid = ? ");
-				pstm.setInt(1, bookmark.getId());
-				pstm.setInt(2, bookmark.getCharId());
-				pstm.setString(3, bookmark.getName());
-				pstm.setInt(4, bookmark.getLocX());
-				pstm.setInt(5, bookmark.getLocY());
-				pstm.setInt(6, bookmark.getMapId());
-				pstm.execute();
-			} catch (SQLException e) {
-				_log.log(Level.SEVERE, "북마크의 추가로 에러가 발생했습니다.", e);
-			} finally {
-				SQLUtil.close(pstm);
-				SQLUtil.close(con);
-			}
+            try {
+                con = L1DatabaseFactory.getInstance().getConnection();
+                pstm = con
+                        .prepareStatement("INSERT INTO CHARACTER_TELEPORT SET id = ?, char_id = ?, NAME = ?, locx = ?, locy = ?, mapid = ? ");
+                pstm.setInt(1, bookmark.getId());
+                pstm.setInt(2, bookmark.getCharId());
+                pstm.setString(3, bookmark.getName());
+                pstm.setInt(4, bookmark.getLocX());
+                pstm.setInt(5, bookmark.getLocY());
+                pstm.setInt(6, bookmark.getMapId());
+                pstm.execute();
+            } catch (SQLException e) {
+                _log.log(Level.SEVERE, "북마크의 추가로 에러가 발생했습니다.", e);
+            } finally {
+                SQLUtil.close(pstm);
+                SQLUtil.close(con);
+            }
 
-			pc.addBookMark(bookmark);
-			pc.sendPackets(new S_Bookmarks(s, bookmark.getMapId(),
-					bookmark.getId()));
-		} else {
-			pc.sendPackets(new S_ServerMessage(327)); // 같은 이름이 벌써 존재하고 있습니다.
-		}
-	}
+            pc.addBookMark(bookmark);
+            pc.sendPackets(new S_Bookmarks(s, bookmark.getMapId(),
+                    bookmark.getId()));
+        } else {
+            pc.sendPackets(new S_ServerMessage(327)); // 같은 이름이 벌써 존재하고 있습니다.
+        }
+    }
 
-	public int getId() {
-		return _id;
-	}
+    public int getId() {
+        return _id;
+    }
 
-	public void setId(int i) {
-		_id = i;
-	}
+    public void setId(int i) {
+        _id = i;
+    }
 
-	public int getCharId() {
-		return _charId;
-	}
+    public int getCharId() {
+        return _charId;
+    }
 
-	public void setCharId(int i) {
-		_charId = i;
-	}
+    public void setCharId(int i) {
+        _charId = i;
+    }
 
-	public String getName() {
-		return _name;
-	}
+    public String getName() {
+        return _name;
+    }
 
-	public void setName(String s) {
-		_name = s;
-	}
+    public void setName(String s) {
+        _name = s;
+    }
 
-	public int getLocX() {
-		return _locX;
-	}
+    public int getLocX() {
+        return _locX;
+    }
 
-	public void setLocX(int i) {
-		_locX = i;
-	}
+    public void setLocX(int i) {
+        _locX = i;
+    }
 
-	public int getLocY() {
-		return _locY;
-	}
+    public int getLocY() {
+        return _locY;
+    }
 
-	public void setLocY(int i) {
-		_locY = i;
-	}
+    public void setLocY(int i) {
+        _locY = i;
+    }
 
-	public short getMapId() {
-		return _mapId;
-	}
+    public short getMapId() {
+        return _mapId;
+    }
 
-	public void setMapId(short i) {
-		_mapId = i;
-	}
+    public void setMapId(short i) {
+        _mapId = i;
+    }
 }

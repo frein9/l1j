@@ -22,37 +22,37 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TelnetCommandResult {
-	private final int _code;
-	private final String _codeMessage;
-	private final String _result;
+    private final int _code;
+    private final String _codeMessage;
+    private final String _result;
 
-	private static final Map<Integer, String> _codeMessages = new HashMap<Integer, String>();
+    private static final Map<Integer, String> _codeMessages = new HashMap<Integer, String>();
 
-	public static final int CMD_OK = 0;
-	public static final int CMD_NOT_FOUND = 1;
-	public static final int CMD_INTERNAL_ERROR = 2;
+    public static final int CMD_OK = 0;
+    public static final int CMD_NOT_FOUND = 1;
+    public static final int CMD_INTERNAL_ERROR = 2;
 
-	static {
-		_codeMessages.put(CMD_OK, "OK");
-		_codeMessages.put(CMD_NOT_FOUND, "Not Found");
-		_codeMessages.put(CMD_INTERNAL_ERROR, "Internal Error");
-	}
+    static {
+        _codeMessages.put(CMD_OK, "OK");
+        _codeMessages.put(CMD_NOT_FOUND, "Not Found");
+        _codeMessages.put(CMD_INTERNAL_ERROR, "Internal Error");
+    }
 
-	public TelnetCommandResult(int code, String result) {
-		_code = code;
-		_result = result;
-		_codeMessage = _codeMessages.get(code);
-	}
+    public TelnetCommandResult(int code, String result) {
+        _code = code;
+        _result = result;
+        _codeMessage = _codeMessages.get(code);
+    }
 
-	public int getCode() {
-		return _code;
-	}
+    public int getCode() {
+        return _code;
+    }
 
-	public String getCodeMessage() {
-		return _codeMessage;
-	}
+    public String getCodeMessage() {
+        return _codeMessage;
+    }
 
-	public String getResult() {
-		return _result;
-	}
+    public String getResult() {
+        return _result;
+    }
 }

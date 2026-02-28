@@ -22,16 +22,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TelnetCommandList {
-	private static Map<String, TelnetCommand> _cmds = new HashMap<String, TelnetCommand>();
-	static {
-		_cmds.put("echo", new EchoCommand());
-		_cmds.put("playerid", new PlayerIdCommand());
-		_cmds.put("charstatus", new CharStatusCommand());
-		_cmds.put("globalchat", new GlobalChatCommand());
-		_cmds.put("shutdown", new ShutDownCommand());
-	}
+    private static Map<String, TelnetCommand> _cmds = new HashMap<String, TelnetCommand>();
 
-	public static TelnetCommand get(String name) {
-		return _cmds.get(name.toLowerCase());
-	}
+    static {
+        _cmds.put("echo", new EchoCommand());
+        _cmds.put("playerid", new PlayerIdCommand());
+        _cmds.put("charstatus", new CharStatusCommand());
+        _cmds.put("globalchat", new GlobalChatCommand());
+        _cmds.put("shutdown", new ShutDownCommand());
+    }
+
+    public static TelnetCommand get(String name) {
+        return _cmds.get(name.toLowerCase());
+    }
 }

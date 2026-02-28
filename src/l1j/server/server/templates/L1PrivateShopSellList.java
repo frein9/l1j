@@ -22,46 +22,46 @@ package l1j.server.server.templates;
 // L1PrivateShopSellList
 
 public class L1PrivateShopSellList {
-	public L1PrivateShopSellList() {
-	}
+    public L1PrivateShopSellList() {
+    }
 
-	private int _itemObjectId;
+    private int _itemObjectId;
 
-	public void setItemObjectId(int i) {
-		_itemObjectId = i;
-	}
+    public void setItemObjectId(int i) {
+        _itemObjectId = i;
+    }
 
-	public int getItemObjectId() {
-		return _itemObjectId;
-	}
+    public int getItemObjectId() {
+        return _itemObjectId;
+    }
 
-	private int _sellTotalCount; // 팔 예정의 개수
+    private int _sellTotalCount; // 팔 예정의 개수
 
-	public void setSellTotalCount(int i) {
-		_sellTotalCount = i;
-	}
+    public void setSellTotalCount(int i) {
+        _sellTotalCount = i;
+    }
 
-	public int getSellTotalCount() {
-		return _sellTotalCount;
-	}
+    public int getSellTotalCount() {
+        return _sellTotalCount;
+    }
 
-	private int _sellPrice;
+    private int _sellPrice;
 
-	public void setSellPrice(int i) {
-		_sellPrice = i;
-	}
+    public void setSellPrice(int i) {
+        _sellPrice = i;
+    }
 
-	public int getSellPrice() {
-		return _sellPrice;
-	}
+    public int getSellPrice() {
+        return _sellPrice;
+    }
 
-	private int _sellCount; // 판 누계
+    private int _sellCount; // 판 누계
 
-	public void setSellCount(int i) {
-		_sellCount = i;
-	}
+    public void setSellCount(int i) {
+        _sellCount = i;
+    }
 
-	public int getSellCount() {
-		return _sellCount;
-	}
+    public int getSellCount() {
+        return _sellCount;
+    }
 }

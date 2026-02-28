@@ -18,47 +18,47 @@
  */
 package l1j.server.telnet;
 
+import l1j.server.Config;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import l1j.server.Config;
-
 public class TelnetServer {
-	private static TelnetServer _instance;
+    private static TelnetServer _instance;
 
-	private class ServerThread extends Thread {
-		ServerSocket _sock;
+    private class ServerThread extends Thread {
+        ServerSocket _sock;
 
-		@Override
-		public void run() {
-			try {
-				_sock = new ServerSocket(Config.TELNET_SERVER_PORT);
+        @Override
+        public void run() {
+            try {
+                _sock = new ServerSocket(Config.TELNET_SERVER_PORT);
 
-				while (true) {
-					Socket sock = _sock.accept();
-					new TelnetConnection(sock);
-				}
-			} catch (IOException e) {
-			}
-			try {
-				_sock.close();
-			} catch (IOException e) {
-			}
-		}
-	}
+                while (true) {
+                    Socket sock = _sock.accept();
+                    new TelnetConnection(sock);
+                }
+            } catch (IOException e) {
+            }
+            try {
+                _sock.close();
+            } catch (IOException e) {
+            }
+        }
+    }
 
-	private TelnetServer() {
-	}
+    private TelnetServer() {
+    }
 
-	public void start() {
-		new ServerThread().start();
-	}
+    public void start() {
+        new ServerThread().start();
+    }
 
-	public static TelnetServer getInstance() {
-		if (_instance == null) {
-			_instance = new TelnetServer();
-		}
-		return _instance;
-	}
+    public static TelnetServer getInstance() {
+        if (_instance == null) {
+            _instance = new TelnetServer();
+        }
+        return _instance;
+    }
 }

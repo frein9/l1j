@@ -22,25 +22,25 @@ import java.util.Random;
 
 public class NumberUtil {
 
-	/**
-	 * 소수를 소수점 제2정도까지의 확률로 위나 아래에 만 정수를 돌려준다.
-	 * 예를 들면 1.3은30%의 확률로 잘라 버려70%의 확률로 끝맺을 수 있다.
-	 * 
-	 * @param number - 원래의 소수
-	 * @return 말 수 있었던 정수
-	 */
-	public static int randomRound(double number) {
-		double percentage = (number - Math.floor(number)) * 100;
-		
-		if (percentage == 0) {
-			return ((int) number);
-		} else {
-			int r = new Random().nextInt(100);
-			if (r < percentage) {
-				return ((int) number + 1);
-			} else {
-				return ((int) number);
-			}
-		}
-	}
+    /**
+     * 소수를 소수점 제2정도까지의 확률로 위나 아래에 만 정수를 돌려준다.
+     * 예를 들면 1.3은30%의 확률로 잘라 버려70%의 확률로 끝맺을 수 있다.
+     *
+     * @param number - 원래의 소수
+     * @return 말 수 있었던 정수
+     */
+    public static int randomRound(double number) {
+        double percentage = (number - Math.floor(number)) * 100;
+
+        if (percentage == 0) {
+            return ((int) number);
+        } else {
+            int r = new Random().nextInt(100);
+            if (r < percentage) {
+                return ((int) number + 1);
+            } else {
+                return ((int) number);
+            }
+        }
+    }
 }

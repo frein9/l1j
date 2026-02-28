@@ -22,732 +22,740 @@ import java.io.Serializable;
 
 public abstract class L1Item implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public L1Item() {
-	}
+    public L1Item() {
+    }
 
-	// ■■■■■■ L1EtcItem, L1Weapon, L1Armor 에 공통되는 항목 ■■■■■■
+    // ■■■■■■ L1EtcItem, L1Weapon, L1Armor 에 공통되는 항목 ■■■■■■
 
-	private int _type2; // ● 0=L1EtcItem, 1=L1Weapon, 2=L1Armor
+    private int _type2; // ● 0=L1EtcItem, 1=L1Weapon, 2=L1Armor
 
-	/**
-	 * @return 0 if L1EtcItem, 1 if L1Weapon, 2 if L1Armor
-	 */
-	public int getType2() {
-		return _type2;
-	}
+    /**
+     * @return 0 if L1EtcItem, 1 if L1Weapon, 2 if L1Armor
+     */
+    public int getType2() {
+        return _type2;
+    }
 
-	public void setType2(int type) {
-		_type2 = type;
-	}
+    public void setType2(int type) {
+        _type2 = type;
+    }
 
-	private int _itemId; // ● 아이템 ID
+    private int _itemId; // ● 아이템 ID
 
-	public int getItemId() {
-		return _itemId;
-	}
+    public int getItemId() {
+        return _itemId;
+    }
 
-	public void setItemId(int itemId) {
-		_itemId = itemId;
-	}
+    public void setItemId(int itemId) {
+        _itemId = itemId;
+    }
 
-	private String _name; // ● 아이템명
+    private String _name; // ● 아이템명
 
-	public String getName() {
-		return _name;
-	}
+    public String getName() {
+        return _name;
+    }
 
-	public void setName(String name) {
-		_name = name;
-	}
+    public void setName(String name) {
+        _name = name;
+    }
 
-	private String _nameId; // ● 네임 ID
+    private String _nameId; // ● 네임 ID
 
-	public String getNameId() {
-		return _nameId;
-	}
+    public String getNameId() {
+        return _nameId;
+    }
 
-	public void setNameId(String nameid) {
-		_nameId = nameid;
-	}
-	private int _price; // ● 가격
+    public void setNameId(String nameid) {
+        _nameId = nameid;
+    }
 
-	public int get_price() {
-		return _price;
-	}
+    private int _price; // ● 가격
 
-	public void set_price(int price) {
-		_price = price;
-	}
+    public int get_price() {
+        return _price;
+    }
 
-	/* 버그베어 경주 관련 항목 */
-	private String _개이름;
-	private double _배율;
+    public void set_price(int price) {
+        _price = price;
+    }
 
-	public String get_개이름(){
-		return _개이름;
-	}public void set_개이름(String _개이름){
-		this._개이름 = _개이름;
-	}
+    /* 버그베어 경주 관련 항목 */
+    private String _개이름;
+    private double _배율;
 
-	public void set_배율(double _배율){
-		this._배율 = _배율;
-	}public double get_배율(){
-		return _배율;
-	}
+    public String get_개이름() {
+        return _개이름;
+    }
 
+    public void set_개이름(String _개이름) {
+        this._개이름 = _개이름;
+    }
+
+    public void set_배율(double _배율) {
+        this._배율 = _배율;
+    }
+
+    public double get_배율() {
+        return _배율;
+    }
+
+    //	########## (넬) A75 용해제 추가 관련 *해커스 ##########
+    private int _solvent;
+
+    public int getSolvent() {
+        return _solvent;
+    }
+
+    public void setSolvent(int solvent) {
+        _solvent = solvent;
+    }
 //	########## (넬) A75 용해제 추가 관련 *해커스 ##########
-	private int _solvent;
-
-	public int getSolvent() {
-		return _solvent;
-	}
-
-	public void setSolvent(int solvent) {
-		_solvent=solvent;
-	}
-//	########## (넬) A75 용해제 추가 관련 *해커스 ##########
-
-
-	private int _type; // ● 상세한 타입
-
-	/**
-	 * 아이템의 종류를 돌려준다.<br>
-	 * 
-	 * @return
-	 * <p>
-	 * [etcitem]<br>
-	 * 0:arrow, 1:wand, 2:light, 3:gem, 4:totem, 5:firecracker, 6:potion,
-	 * 7:food, 8:scroll, 9:questitem, 10:spellbook, 11:petitem, 12:other,
-	 * 13:material, 14:event, 15:sting
-	 * </p>
-	 * <p>
-	 * [weapon]<br>
-	 * 1:sword, 2:dagger, 3:tohandsword, 4:bow, 5:spear, 6:blunt, 7:staff,
-	 * 8:throwingknife, 9:arrow, 10:gauntlet, 11:claw, 12:edoryu, 13:singlebow,
-	 * 14:singlespear, 15:tohandblunt, 16:tohandstaff
-	 * </p>
-	 * <p>
-	 * [armor]<br>
-	 * 1:helm, 2:armor, 3:T, 4:cloak, 5:glove, 6:boots, 7:shield, 8:amulet,
-	 * 9:ring, 10:belt, 11:ring2, 12:earring
-	 */
-	public int getType() {
-		return _type;
-	}
-
-	public void setType(int type) {
-		_type = type;
-	}
-
-	private int _type1; // ● 타입
-
-	/**
-	 * 아이템의 종류를 돌려준다.<br>
-	 * 
-	 * @return
-	 * <p>
-	 * [weapon]<br>
-	 * sword:4, dagger:46, tohandsword:50, bow:20, blunt:11, spear:24, staff:40,
-	 * throwingknife:2922, arrow:66, gauntlet:62, claw:58, edoryu:54,
-	 * singlebow:20, singlespear:24, tohandblunt:11, tohandstaff:40
-	 * </p>
-	 */
-	public int getType1() {
-		return _type1;
-	}
-
-	public void setType1(int type1) {
-		_type1 = type1;
-	}
-
-	private int _material; // ● 소재
-
-	/**
-	 * 아이템의 소재를 돌려준다
-	 * 
-	 * @return 0:none 1:액체 2:web 3:식물성 4:동물성 5:지 6:포 7:피 8:목 9:골 10:룡의 린 11:철
-	 *         12:강철 13:동 14:은 15:금 16:플라티나 17:미스릴 18:브락크미스릴 19:유리 20:보석
-	 *         21:광물 22:오리하르콘
-	 */
-	public int getMaterial() {
-		return _material;
-	}
-
-	public void setMaterial(int material) {
-		_material = material;
-	}
-
-	private int _weight; // ● 중량
-
-	public int getWeight() {
-		return _weight;
-	}
-
-	public void setWeight(int weight) {
-		_weight = weight;
-	}
-
-	private int _gfxId; // ● 목록내의 그래픽 ID
-
-	public int getGfxId() {
-		return _gfxId;
-	}
-
-	public void setGfxId(int gfxId) {
-		_gfxId = gfxId;
-	}
-
-	private int _groundGfxId; // ● 지면에 두었을 때의 그래픽 ID
 
-	public int getGroundGfxId() {
-		return _groundGfxId;
-	}
 
-	public void setGroundGfxId(int groundGfxId) {
-		_groundGfxId = groundGfxId;
-	}
+    private int _type; // ● 상세한 타입
+
+    /**
+     * 아이템의 종류를 돌려준다.<br>
+     *
+     * @return <p>
+     * [etcitem]<br>
+     * 0:arrow, 1:wand, 2:light, 3:gem, 4:totem, 5:firecracker, 6:potion,
+     * 7:food, 8:scroll, 9:questitem, 10:spellbook, 11:petitem, 12:other,
+     * 13:material, 14:event, 15:sting
+     * </p>
+     * <p>
+     * [weapon]<br>
+     * 1:sword, 2:dagger, 3:tohandsword, 4:bow, 5:spear, 6:blunt, 7:staff,
+     * 8:throwingknife, 9:arrow, 10:gauntlet, 11:claw, 12:edoryu, 13:singlebow,
+     * 14:singlespear, 15:tohandblunt, 16:tohandstaff
+     * </p>
+     * <p>
+     * [armor]<br>
+     * 1:helm, 2:armor, 3:T, 4:cloak, 5:glove, 6:boots, 7:shield, 8:amulet,
+     * 9:ring, 10:belt, 11:ring2, 12:earring
+     */
+    public int getType() {
+        return _type;
+    }
+
+    public void setType(int type) {
+        _type = type;
+    }
+
+    private int _type1; // ● 타입
+
+    /**
+     * 아이템의 종류를 돌려준다.<br>
+     *
+     * @return <p>
+     * [weapon]<br>
+     * sword:4, dagger:46, tohandsword:50, bow:20, blunt:11, spear:24, staff:40,
+     * throwingknife:2922, arrow:66, gauntlet:62, claw:58, edoryu:54,
+     * singlebow:20, singlespear:24, tohandblunt:11, tohandstaff:40
+     * </p>
+     */
+    public int getType1() {
+        return _type1;
+    }
+
+    public void setType1(int type1) {
+        _type1 = type1;
+    }
+
+    private int _material; // ● 소재
+
+    /**
+     * 아이템의 소재를 돌려준다
+     *
+     * @return 0:none 1:액체 2:web 3:식물성 4:동물성 5:지 6:포 7:피 8:목 9:골 10:룡의 린 11:철
+     * 12:강철 13:동 14:은 15:금 16:플라티나 17:미스릴 18:브락크미스릴 19:유리 20:보석
+     * 21:광물 22:오리하르콘
+     */
+    public int getMaterial() {
+        return _material;
+    }
+
+    public void setMaterial(int material) {
+        _material = material;
+    }
+
+    private int _weight; // ● 중량
+
+    public int getWeight() {
+        return _weight;
+    }
+
+    public void setWeight(int weight) {
+        _weight = weight;
+    }
+
+    private int _gfxId; // ● 목록내의 그래픽 ID
+
+    public int getGfxId() {
+        return _gfxId;
+    }
+
+    public void setGfxId(int gfxId) {
+        _gfxId = gfxId;
+    }
+
+    private int _groundGfxId; // ● 지면에 두었을 때의 그래픽 ID
+
+    public int getGroundGfxId() {
+        return _groundGfxId;
+    }
+
+    public void setGroundGfxId(int groundGfxId) {
+        _groundGfxId = groundGfxId;
+    }
+
+    private int _minLevel; // ● 사용, 장비 가능 최소 LV
+
+    private int _itemDescId;
 
-	private int _minLevel; // ● 사용, 장비 가능 최소 LV
+    /**
+     * 감정시에 표시되는 ItemDesc.tbl의 메세지 ID를 돌려준다.
+     */
+    public int getItemDescId() {
+        return _itemDescId;
+    }
 
-	private int _itemDescId;
+    public void setItemDescId(int descId) {
+        _itemDescId = descId;
+    }
 
-	/**
-	 * 감정시에 표시되는 ItemDesc.tbl의 메세지 ID를 돌려준다.
-	 */
-	public int getItemDescId() {
-		return _itemDescId;
-	}
+    public int getMinLevel() {
+        return _minLevel;
+    }
 
-	public void setItemDescId(int descId) {
-		_itemDescId = descId;
-	}
+    public void setMinLevel(int level) {
+        _minLevel = level;
+    }
 
-	public int getMinLevel() {
-		return _minLevel;
-	}
+    private int _maxLevel; // ● 사용, 장비 가능 최대 LV
 
-	public void setMinLevel(int level) {
-		_minLevel = level;
-	}
+    public int getMaxLevel() {
+        return _maxLevel;
+    }
 
-	private int _maxLevel; // ● 사용, 장비 가능 최대 LV
+    public void setMaxLevel(int maxlvl) {
+        _maxLevel = maxlvl;
+    }
 
-	public int getMaxLevel() {
-		return _maxLevel;
-	}
+    private int _bless; // ● 축복 상태
 
-	public void setMaxLevel(int maxlvl) {
-		_maxLevel = maxlvl;
-	}
+    public int getBless() {
+        return _bless;
+    }
 
-	private int _bless; // ● 축복 상태
+    public void setBless(int i) {
+        _bless = i;
+    }
 
-	public int getBless() {
-		return _bless;
-	}
+    private boolean _tradable; // ● 트레이드가능/불가
 
-	public void setBless(int i) {
-		_bless = i;
-	}
+    public boolean isTradable() {
+        return _tradable;
+    }
 
-	private boolean _tradable; // ● 트레이드가능/불가
+    public void setTradable(boolean flag) {
+        _tradable = flag;
+    }
 
-	public boolean isTradable() {
-		return _tradable;
-	}
+    private boolean _cantDelete; // ● 삭제 불가
 
-	public void setTradable(boolean flag) {
-		_tradable = flag;
-	}
+    public boolean isCantDelete() {
+        return _cantDelete;
+    }
 
-	private boolean _cantDelete; // ● 삭제 불가
+    public void setCantDelete(boolean flag) {
+        _cantDelete = flag;
+    }
 
-	public boolean isCantDelete() {
-		return _cantDelete;
-	}
+    private boolean _save_at_once;
 
-	public void setCantDelete(boolean flag) {
-		_cantDelete = flag;
-	}
+    /**
+     * 아이템의 개수가 변화했을 때에 곧바로 DB에 기입해야할 것인가를 돌려준다.
+     */
+    public boolean isToBeSavedAtOnce() {
+        return _save_at_once;
+    }
 
-	private boolean _save_at_once;
+    public void setToBeSavedAtOnce(boolean flag) {
+        _save_at_once = flag;
+    }
 
-	/**
-	 * 아이템의 개수가 변화했을 때에 곧바로 DB에 기입해야할 것인가를 돌려준다.
-	 */
-	public boolean isToBeSavedAtOnce() {
-		return _save_at_once;
-	}
+    // ■■■■■■ L1EtcItem, L1Weapon 에 공통되는 항목 ■■■■■■
 
-	public void setToBeSavedAtOnce(boolean flag) {
-		_save_at_once = flag;
-	}
+    private int _dmgSmall = 0; // ● 최소 데미지
 
-	// ■■■■■■ L1EtcItem, L1Weapon 에 공통되는 항목 ■■■■■■
+    public int getDmgSmall() {
+        return _dmgSmall;
+    }
 
-	private int _dmgSmall = 0; // ● 최소 데미지
+    public void setDmgSmall(int dmgSmall) {
+        _dmgSmall = dmgSmall;
+    }
 
-	public int getDmgSmall() {
-		return _dmgSmall;
-	}
+    private int _dmgLarge = 0; // ● 최대 데미지
 
-	public void setDmgSmall(int dmgSmall) {
-		_dmgSmall = dmgSmall;
-	}
+    public int getDmgLarge() {
+        return _dmgLarge;
+    }
 
-	private int _dmgLarge = 0; // ● 최대 데미지
+    public void setDmgLarge(int dmgLarge) {
+        _dmgLarge = dmgLarge;
+    }
 
-	public int getDmgLarge() {
-		return _dmgLarge;
-	}
+    // ■■■■■■ L1EtcItem, L1Armor 에 공통되는 항목 ■■■■■■
 
-	public void setDmgLarge(int dmgLarge) {
-		_dmgLarge = dmgLarge;
-	}
+    // ■■■■■■ L1Weapon, L1Armor 에 공통되는 항목 ■■■■■■
 
-	// ■■■■■■ L1EtcItem, L1Armor 에 공통되는 항목 ■■■■■■
+    private int _safeEnchant = 0; // ● OE안전권
 
-	// ■■■■■■ L1Weapon, L1Armor 에 공통되는 항목 ■■■■■■
+    public int get_safeenchant() {
+        return _safeEnchant;
+    }
 
-	private int _safeEnchant = 0; // ● OE안전권
+    public void set_safeenchant(int safeenchant) {
+        _safeEnchant = safeenchant;
+    }
 
-	public int get_safeenchant() {
-		return _safeEnchant;
-	}
+    private boolean _useRoyal = false; // ● 로열 클래스를 장비 할 수 있을까
 
-	public void set_safeenchant(int safeenchant) {
-		_safeEnchant = safeenchant;
-	}
+    public boolean isUseRoyal() {
+        return _useRoyal;
+    }
 
-	private boolean _useRoyal = false; // ● 로열 클래스를 장비 할 수 있을까
+    public void setUseRoyal(boolean flag) {
+        _useRoyal = flag;
+    }
 
-	public boolean isUseRoyal() {
-		return _useRoyal;
-	}
+    private boolean _useKnight = false; // ● 나이트 클래스를 장비 할 수 있을까
 
-	public void setUseRoyal(boolean flag) {
-		_useRoyal = flag;
-	}
+    public boolean isUseKnight() {
+        return _useKnight;
+    }
 
-	private boolean _useKnight = false; // ● 나이트 클래스를 장비 할 수 있을까
+    public void setUseKnight(boolean flag) {
+        _useKnight = flag;
+    }
 
-	public boolean isUseKnight() {
-		return _useKnight;
-	}
+    private boolean _useElf = false; // ● 에르프 클래스를 장비 할 수 있을까
 
-	public void setUseKnight(boolean flag) {
-		_useKnight = flag;
-	}
+    public boolean isUseElf() {
+        return _useElf;
+    }
 
-	private boolean _useElf = false; // ● 에르프 클래스를 장비 할 수 있을까
+    public void setUseElf(boolean flag) {
+        _useElf = flag;
+    }
 
-	public boolean isUseElf() {
-		return _useElf;
-	}
+    private boolean _useMage = false; // ● 메이지크라스를 장비 할 수 있을까
 
-	public void setUseElf(boolean flag) {
-		_useElf = flag;
-	}
+    public boolean isUseMage() {
+        return _useMage;
+    }
 
-	private boolean _useMage = false; // ● 메이지크라스를 장비 할 수 있을까
+    public void setUseMage(boolean flag) {
+        _useMage = flag;
+    }
 
-	public boolean isUseMage() {
-		return _useMage;
-	}
+    private boolean _useDarkelf = false; // ● 다크 에르프 클래스를 장비 할 수 있을까
 
-	public void setUseMage(boolean flag) {
-		_useMage = flag;
-	}
+    public boolean isUseDarkelf() {
+        return _useDarkelf;
+    }
 
-	private boolean _useDarkelf = false; // ● 다크 에르프 클래스를 장비 할 수 있을까
+    public void setUseDarkelf(boolean flag) {
+        _useDarkelf = flag;
+    }
 
-	public boolean isUseDarkelf() {
-		return _useDarkelf;
-	}
+    private boolean _useDragonKnight = false;
 
-	public void setUseDarkelf(boolean flag) {
-		_useDarkelf = flag;
-	}
-	private boolean _useDragonKnight = false;
+    public boolean isUseDragonKnight() {
+        return _useDragonKnight;
+    }
 
-	public boolean isUseDragonKnight() {
-		return _useDragonKnight;
-	}
+    public void setUseDragonKnight(boolean flag) {
+        _useDragonKnight = flag;
+    }
 
-	public void setUseDragonKnight(boolean flag) {
-		_useDragonKnight = flag;
-	}
+    private boolean _useBlackwizard = false;
 
-	private boolean _useBlackwizard = false;
+    public boolean isUseBlackwizard() {
+        return _useBlackwizard;
+    }
 
-	public boolean isUseBlackwizard() {
-		return _useBlackwizard;
-	}
+    public void setUseBlackwizard(boolean flag) {
+        _useBlackwizard = flag;
+    }
 
-	public void setUseBlackwizard(boolean flag) {
-		_useBlackwizard = flag;
-	}
+    private byte _addstr = 0; // ● STR 보정
 
-	private byte _addstr = 0; // ● STR 보정
+    public byte get_addstr() {
+        return _addstr;
+    }
 
-	public byte get_addstr() {
-		return _addstr;
-	}
+    public void set_addstr(byte addstr) {
+        _addstr = addstr;
+    }
 
-	public void set_addstr(byte addstr) {
-		_addstr = addstr;
-	}
+    private byte _adddex = 0; // ● DEX 보정
 
-	private byte _adddex = 0; // ● DEX 보정
+    public byte get_adddex() {
+        return _adddex;
+    }
 
-	public byte get_adddex() {
-		return _adddex;
-	}
+    public void set_adddex(byte adddex) {
+        _adddex = adddex;
+    }
 
-	public void set_adddex(byte adddex) {
-		_adddex = adddex;
-	}
+    private byte _addcon = 0; // ● CON 보정
 
-	private byte _addcon = 0; // ● CON 보정
+    public byte get_addcon() {
+        return _addcon;
+    }
 
-	public byte get_addcon() {
-		return _addcon;
-	}
+    public void set_addcon(byte addcon) {
+        _addcon = addcon;
+    }
 
-	public void set_addcon(byte addcon) {
-		_addcon = addcon;
-	}
+    private byte _addint = 0; // ● INT 보정
 
-	private byte _addint = 0; // ● INT 보정
+    public byte get_addint() {
+        return _addint;
+    }
 
-	public byte get_addint() {
-		return _addint;
-	}
+    public void set_addint(byte addint) {
+        _addint = addint;
+    }
 
-	public void set_addint(byte addint) {
-		_addint = addint;
-	}
+    private byte _addwis = 0; // ● WIS 보정
 
-	private byte _addwis = 0; // ● WIS 보정
+    public byte get_addwis() {
+        return _addwis;
+    }
 
-	public byte get_addwis() {
-		return _addwis;
-	}
+    public void set_addwis(byte addwis) {
+        _addwis = addwis;
+    }
 
-	public void set_addwis(byte addwis) {
-		_addwis = addwis;
-	}
+    private byte _addcha = 0; // ● CHA 보정
 
-	private byte _addcha = 0; // ● CHA 보정
+    public byte get_addcha() {
+        return _addcha;
+    }
 
-	public byte get_addcha() {
-		return _addcha;
-	}
+    public void set_addcha(byte addcha) {
+        _addcha = addcha;
+    }
 
-	public void set_addcha(byte addcha) {
-		_addcha = addcha;
-	}
+    private int _addhp = 0; // ● HP보정
 
-	private int _addhp = 0; // ● HP보정
+    public int get_addhp() {
+        return _addhp;
+    }
 
-	public int get_addhp() {
-		return _addhp;
-	}
+    public void set_addhp(int addhp) {
+        _addhp = addhp;
+    }
 
-	public void set_addhp(int addhp) {
-		_addhp = addhp;
-	}
+    private int _addmp = 0; // ● MP보정
 
-	private int _addmp = 0; // ● MP보정
+    public int get_addmp() {
+        return _addmp;
+    }
 
-	public int get_addmp() {
-		return _addmp;
-	}
+    public void set_addmp(int addmp) {
+        _addmp = addmp;
+    }
 
-	public void set_addmp(int addmp) {
-		_addmp = addmp;
-	}
+    private int _addhpr = 0; // ● HPR 보정
 
-	private int _addhpr = 0; // ● HPR 보정
+    public int get_addhpr() {
+        return _addhpr;
+    }
 
-	public int get_addhpr() {
-		return _addhpr;
-	}
+    public void set_addhpr(int addhpr) {
+        _addhpr = addhpr;
+    }
 
-	public void set_addhpr(int addhpr) {
-		_addhpr = addhpr;
-	}
+    private int _addmpr = 0; // ● MPR 보정
 
-	private int _addmpr = 0; // ● MPR 보정
+    public int get_addmpr() {
+        return _addmpr;
+    }
 
-	public int get_addmpr() {
-		return _addmpr;
-	}
+    public void set_addmpr(int addmpr) {
+        _addmpr = addmpr;
+    }
 
-	public void set_addmpr(int addmpr) {
-		_addmpr = addmpr;
-	}
+    private int _addsp = 0; // ● SP보정
 
-	private int _addsp = 0; // ● SP보정
+    public int get_addsp() {
+        return _addsp;
+    }
 
-	public int get_addsp() {
-		return _addsp;
-	}
+    public void set_addsp(int addsp) {
+        _addsp = addsp;
+    }
 
-	public void set_addsp(int addsp) {
-		_addsp = addsp;
-	}
+    private int _mdef = 0; // ● MR
 
-	private int _mdef = 0; // ● MR
+    public int get_mdef() {
+        return _mdef;
+    }
 
-	public int get_mdef() {
-		return _mdef;
-	}
+    public void set_mdef(int i) {
+        this._mdef = i;
+    }
 
-	public void set_mdef(int i) {
-		this._mdef = i;
-	}
+    private boolean _isHasteItem = false; // ● 헤이 파업 효과의 유무
 
-	private boolean _isHasteItem = false; // ● 헤이 파업 효과의 유무
+    public boolean isHasteItem() {
+        return _isHasteItem;
+    }
 
-	public boolean isHasteItem() {
-		return _isHasteItem;
-	}
+    public void setHasteItem(boolean flag) {
+        _isHasteItem = flag;
+    }
 
-	public void setHasteItem(boolean flag) {
-		_isHasteItem = flag;
-	}
+    private boolean _isBraveItem = false; // ● 용기아이템
 
-	private boolean _isBraveItem = false; // ● 용기아이템 
+    public boolean isBraveItem() {
+        return _isBraveItem;
+    }
 
-	public boolean isBraveItem() { 
-	    return _isBraveItem; 
-	 } 
-	
-	public void setBraveItem(boolean flag) { 
-	    _isBraveItem = flag; 
-	 } 
+    public void setBraveItem(boolean flag) {
+        _isBraveItem = flag;
+    }
 
-	private int _maxUseTime = 0; // ● 사용 가능한 시간
+    private int _maxUseTime = 0; // ● 사용 가능한 시간
 
-	public int getMaxUseTime() {
-		return _maxUseTime;
-	}
+    public int getMaxUseTime() {
+        return _maxUseTime;
+    }
 
-	public void setMaxUseTime(int i) {
-		_maxUseTime = i;
-	}
+    public void setMaxUseTime(int i) {
+        _maxUseTime = i;
+    }
 
-	private int _upacselv;
+    private int _upacselv;
 
-	public int getUpacselv() {
-		return _upacselv;
-	}
+    public int getUpacselv() {
+        return _upacselv;
+    }
 
-	public void setUpacselv(int upacselv) {
-		_upacselv = upacselv;
-	}
+    public void setUpacselv(int upacselv) {
+        _upacselv = upacselv;
+    }
 
-	private int _useType;
+    private int _useType;
 
-	/**
-	 * 사용했을 때의 리액션을 결정하는 타입을 돌려준다.
-	 */
-	public int getUseType() {
-		return _useType;
-	}
+    /**
+     * 사용했을 때의 리액션을 결정하는 타입을 돌려준다.
+     */
+    public int getUseType() {
+        return _useType;
+    }
 
-	public void setUseType(int useType) {
-		_useType = useType;
-	}
+    public void setUseType(int useType) {
+        _useType = useType;
+    }
 
-	private int _foodVolume;
+    private int _foodVolume;
 
-	/**
-	 * 고기등의 아이템으로 설정되어 있는 만복도를 돌려준다.
-	 */
-	public int getFoodVolume() {
-		return _foodVolume;
-	}
+    /**
+     * 고기등의 아이템으로 설정되어 있는 만복도를 돌려준다.
+     */
+    public int getFoodVolume() {
+        return _foodVolume;
+    }
 
-	public void setFoodVolume(int volume) {
-		_foodVolume = volume;
-	}
+    public void setFoodVolume(int volume) {
+        _foodVolume = volume;
+    }
 
-	/**
-	 * 램프등의 아이템으로 설정되어 있는 밝음을 돌려준다.
-	 */
-	public int getLightRange() {
-		if (_itemId == 40001) { // 램프
-			return 11;
-		} else if (_itemId == 40002) { // 랜턴
-			return 14;
-		} else if (_itemId == 40004) { // 매직 랜턴
-			return 14;
-		} else if (_itemId == 40005) { // 양초
-			return 8;
-		} else {
-			return 0;
-		}
-	}
+    /**
+     * 램프등의 아이템으로 설정되어 있는 밝음을 돌려준다.
+     */
+    public int getLightRange() {
+        if (_itemId == 40001) { // 램프
+            return 11;
+        } else if (_itemId == 40002) { // 랜턴
+            return 14;
+        } else if (_itemId == 40004) { // 매직 랜턴
+            return 14;
+        } else if (_itemId == 40005) { // 양초
+            return 8;
+        } else {
+            return 0;
+        }
+    }
 
-	/**
-	 * 램프등의 연료의 양을 돌려준다.
-	 */
-	public int getLightFuel() {
-		if (_itemId == 40001) { // 램프
-			return 600;
-		} else if (_itemId == 40002) { // 랜턴
-			return 0;
-		} else if (_itemId == 40003) { // 랜턴 오일
-			return 600;
-		} else if (_itemId == 40004) { // 매직 랜턴
-			return 0;
-		} else if (_itemId == 40005) { // 양초
-			return 600;
-		} else {
-			return 0;
-		}
-	}
+    /**
+     * 램프등의 연료의 양을 돌려준다.
+     */
+    public int getLightFuel() {
+        if (_itemId == 40001) { // 램프
+            return 600;
+        } else if (_itemId == 40002) { // 랜턴
+            return 0;
+        } else if (_itemId == 40003) { // 랜턴 오일
+            return 600;
+        } else if (_itemId == 40004) { // 매직 랜턴
+            return 0;
+        } else if (_itemId == 40005) { // 양초
+            return 600;
+        } else {
+            return 0;
+        }
+    }
 
-	// ■■■■■■ L1EtcItem 로 오버라이드(override) 하는 항목 ■■■■■■
+    // ■■■■■■ L1EtcItem 로 오버라이드(override) 하는 항목 ■■■■■■
 
-	public int get_consumeType() {
-		return 0;
-	}
-	public boolean isStackable() {
-		return false;
-	}
+    public int get_consumeType() {
+        return 0;
+    }
 
-	public int get_locx() {
-		return 0;
-	}
+    public boolean isStackable() {
+        return false;
+    }
 
-	public int get_locy() {
-		return 0;
-	}
+    public int get_locx() {
+        return 0;
+    }
 
-	public short get_mapid() {
-		return 0;
-	}
+    public int get_locy() {
+        return 0;
+    }
 
-	public int get_delayid() {
-		return 0;
-	}
+    public short get_mapid() {
+        return 0;
+    }
 
-	public int get_delaytime() {
-		return 0;
-	}
+    public int get_delayid() {
+        return 0;
+    }
 
-	public int getMaxChargeCount() {
-		return 0;
-	}
-	public int 	get_delayEffect() {
-		return 0;
-	}
-	public int 	get_durability() {
-		return 0;
-	}
+    public int get_delaytime() {
+        return 0;
+    }
 
+    public int getMaxChargeCount() {
+        return 0;
+    }
 
-	// ■■■■■■ L1Weapon 로 오버라이드(override) 하는 항목 ■■■■■■
-	public int getHitModifier() {
-		return 0;
-	}
+    public int get_delayEffect() {
+        return 0;
+    }
 
-	public int getDmgModifier() {
-		return 0;
-	}
+    public int get_durability() {
+        return 0;
+    }
 
-	public int getDoubleDmgChance() {
-		return 0;
-	}
 
-	public int getMagicDmgModifier() {
-		return 0;
-	}
+    // ■■■■■■ L1Weapon 로 오버라이드(override) 하는 항목 ■■■■■■
+    public int getHitModifier() {
+        return 0;
+    }
 
-	public int get_canbedmg() {
-		return 0;
-	}
+    public int getDmgModifier() {
+        return 0;
+    }
 
-	public boolean isTwohandedWeapon() {
-		return false;
-	}
+    public int getDoubleDmgChance() {
+        return 0;
+    }
 
-	// ■■■■■■ L1Armor 로 오버라이드(override) 하는 항목 ■■■■■■
-	public int get_ac() {
-		return 0;
-	}
+    public int getMagicDmgModifier() {
+        return 0;
+    }
 
-	public int getDamageReduction() {
-		return 0;
-	}
+    public int get_canbedmg() {
+        return 0;
+    }
 
-	public int getWeightReduction() {
-		return 0;
-	}
+    public boolean isTwohandedWeapon() {
+        return false;
+    }
 
-	public int getBowHitRate() {
-		return 0;
-	}
-	
-	public int getBowDmgModifier() {
-		  return 0;
-	}
+    // ■■■■■■ L1Armor 로 오버라이드(override) 하는 항목 ■■■■■■
+    public int get_ac() {
+        return 0;
+    }
 
-	public int get_defense_water() {
-		return 0;
-	}
+    public int getDamageReduction() {
+        return 0;
+    }
 
-	public int get_defense_fire() {
-		return 0;
-	}
+    public int getWeightReduction() {
+        return 0;
+    }
 
-	public int get_defense_earth() {
-		return 0;
-	}
+    public int getBowHitRate() {
+        return 0;
+    }
 
-	public int get_defense_wind() {
-		return 0;
-	}
+    public int getBowDmgModifier() {
+        return 0;
+    }
 
-	public int get_regist_stun() {
-		return 0;
-	}
+    public int get_defense_water() {
+        return 0;
+    }
 
-	public int get_regist_stone() {
-		return 0;
-	}
+    public int get_defense_fire() {
+        return 0;
+    }
 
-	public int get_regist_sleep() {
-		return 0;
-	}
+    public int get_defense_earth() {
+        return 0;
+    }
 
-	public int get_regist_freeze() {
-		return 0;
-	}
+    public int get_defense_wind() {
+        return 0;
+    }
 
-	public int get_regist_sustain() {
-		return 0;
-	}
+    public int get_regist_stun() {
+        return 0;
+    }
 
-	public int get_regist_blind() {
-		return 0;
-	}
-	public int get_regist_stan() {
-		return 0;
-	}
+    public int get_regist_stone() {
+        return 0;
+    }
 
-	private int Solidity; // 아이템 강도
+    public int get_regist_sleep() {
+        return 0;
+    }
 
-	public int getSolidity(){
-		return Solidity;	
-	}
-	
-	public void setSolidity(int i){
-		Solidity = i;
-	}
+    public int get_regist_freeze() {
+        return 0;
+    }
+
+    public int get_regist_sustain() {
+        return 0;
+    }
+
+    public int get_regist_blind() {
+        return 0;
+    }
+
+    public int get_regist_stan() {
+        return 0;
+    }
+
+    private int Solidity; // 아이템 강도
+
+    public int getSolidity() {
+        return Solidity;
+    }
+
+    public void setSolidity(int i) {
+        Solidity = i;
+    }
 }

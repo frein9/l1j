@@ -52,359 +52,360 @@ import l1j.server.server.model.Instance.L1ScarecrowInstance;
 
 public class CalcExp {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private static Logger _log = Logger.getLogger(CalcExp.class.getName());
+    private static Logger _log = Logger.getLogger(CalcExp.class.getName());
 
-	private static Random _random = new Random(System.nanoTime()); // 추가해주세요
+    private static Random _random = new Random(System.nanoTime()); // 추가해주세요
 
 
-	public static final int MAX_EXP = ExpTable.getExpByLevel(100) - 1;
+    public static final int MAX_EXP = ExpTable.getExpByLevel(100) - 1;
 
-	private CalcExp() {
-	}
-	private static L1NpcInstance _npc = null;
+    private CalcExp() {
+    }
 
-	public static void calcExp(L1PcInstance l1pcinstance, int targetid,
-			ArrayList acquisitorList, ArrayList hateList, int exp) {
+    private static L1NpcInstance _npc = null;
 
-		int i = 0;
-		double party_level = 0;
-		double dist = 0;
-		int member_exp = 0;
-		int member_lawful = 0;
-		L1Object l1object = L1World.getInstance().findObject(targetid);
-		L1NpcInstance npc = (L1NpcInstance) l1object;
+    public static void calcExp(L1PcInstance l1pcinstance, int targetid,
+                               ArrayList acquisitorList, ArrayList hateList, int exp) {
 
-		// 헤이트의 합계를 취득
-		L1Character acquisitor;
-		int hate = 0;
-		int acquire_exp = 0;
-		int acquire_lawful = 0;
-		int party_exp = 0;
-		int party_lawful = 0;
-		int totalHateExp = 0;
-		int totalHateLawful = 0;
-		int partyHateExp = 0;
-		int partyHateLawful = 0;
-		int ownHateExp = 0;
+        int i = 0;
+        double party_level = 0;
+        double dist = 0;
+        int member_exp = 0;
+        int member_lawful = 0;
+        L1Object l1object = L1World.getInstance().findObject(targetid);
+        L1NpcInstance npc = (L1NpcInstance) l1object;
 
-		if (acquisitorList.size() != hateList.size()) {
-			return;
-		}
-		for (i = hateList.size() - 1; i >= 0; i--) {
-			acquisitor = (L1Character) acquisitorList.get(i);
-			hate = (Integer) hateList.get(i);
-			if (acquisitor != null && !acquisitor.isDead()) {
-				totalHateExp += hate;
-				if (acquisitor instanceof L1PcInstance) {
-					totalHateLawful += hate;
-				}
-			} else { // null였거나 죽어 있으면(자) 배제
-				acquisitorList.remove(i);
-				hateList.remove(i);
-			}
-		}
-		if (totalHateExp == 0) { // 취득자가 없는 경우
-			return;
-		}
+        // 헤이트의 합계를 취득
+        L1Character acquisitor;
+        int hate = 0;
+        int acquire_exp = 0;
+        int acquire_lawful = 0;
+        int party_exp = 0;
+        int party_lawful = 0;
+        int totalHateExp = 0;
+        int totalHateLawful = 0;
+        int partyHateExp = 0;
+        int partyHateLawful = 0;
+        int ownHateExp = 0;
 
-		if (l1object != null && !(npc instanceof L1PetInstance)
-				&& !(npc instanceof L1SummonInstance)) {
-			// int exp = npc.get_exp();
-			if (!L1World.getInstance().isProcessingContributionTotal()
-					&& l1pcinstance.getHomeTownId() > 0) {
-				int contribution = npc.getLevel() / 10;
-				l1pcinstance.addContribution(contribution);
-			}
-			int lawful = npc.getLawful();
+        if (acquisitorList.size() != hateList.size()) {
+            return;
+        }
+        for (i = hateList.size() - 1; i >= 0; i--) {
+            acquisitor = (L1Character) acquisitorList.get(i);
+            hate = (Integer) hateList.get(i);
+            if (acquisitor != null && !acquisitor.isDead()) {
+                totalHateExp += hate;
+                if (acquisitor instanceof L1PcInstance) {
+                    totalHateLawful += hate;
+                }
+            } else { // null였거나 죽어 있으면(자) 배제
+                acquisitorList.remove(i);
+                hateList.remove(i);
+            }
+        }
+        if (totalHateExp == 0) { // 취득자가 없는 경우
+            return;
+        }
 
-			if (l1pcinstance.isInParty()) { // 파티중
-				// 파티의 헤이트의 합계를 산출
-				// 파티 멤버 이외에는 그대로 배분
-				partyHateExp = 0;
-				partyHateLawful = 0;
-				for (i = hateList.size() - 1; i >= 0; i--) {
-					acquisitor = (L1Character) acquisitorList.get(i);
-					hate = (Integer) hateList.get(i);
-					if (acquisitor instanceof L1PcInstance) {
-						L1PcInstance pc = (L1PcInstance) acquisitor;
-						if (pc == l1pcinstance) {
-							partyHateExp += hate;
-							partyHateLawful += hate;
-						} else if (l1pcinstance.getParty().isMember(pc)) {
-							partyHateExp += hate;
-							partyHateLawful += hate;
-						} else {
-							if (totalHateExp > 0) {
-								acquire_exp = (exp * hate / totalHateExp);
-							}
-							if (totalHateLawful > 0) {
-								acquire_lawful = (lawful * hate / totalHateLawful);
-							}
-							AddExp(pc, acquire_exp, acquire_lawful);
-						}
-					} else if (acquisitor instanceof L1PetInstance) {
-						L1PetInstance pet = (L1PetInstance) acquisitor;
-						L1PcInstance master = (L1PcInstance) pet.getMaster();
-						if (master == l1pcinstance) {
-							partyHateExp += hate;
-						} else if (l1pcinstance.getParty().isMember(master)) {
-							partyHateExp += hate;
-						} else {
-							if (totalHateExp > 0) {
-								acquire_exp = (exp * hate / totalHateExp);
-							}
-							AddExpPet(pet, acquire_exp);
-						}
-					} else if (acquisitor instanceof L1SummonInstance) {
-						L1SummonInstance summon = (L1SummonInstance) acquisitor;
-						L1PcInstance master = (L1PcInstance) summon.getMaster();
-						if (master == l1pcinstance) {
-							partyHateExp += hate;
-						} else if (l1pcinstance.getParty().isMember(master)) {
-							partyHateExp += hate;
-						} else {
-						}
-					}
-				}
-				if (totalHateExp > 0) {
-					party_exp = (exp * partyHateExp / totalHateExp);
-				}
-				if (totalHateLawful > 0) {
-					party_lawful = (lawful * partyHateLawful / totalHateLawful);
-				}
+        if (l1object != null && !(npc instanceof L1PetInstance)
+                && !(npc instanceof L1SummonInstance)) {
+            // int exp = npc.get_exp();
+            if (!L1World.getInstance().isProcessingContributionTotal()
+                    && l1pcinstance.getHomeTownId() > 0) {
+                int contribution = npc.getLevel() / 10;
+                l1pcinstance.addContribution(contribution);
+            }
+            int lawful = npc.getLawful();
 
-				// EXP, 로우훌 배분
+            if (l1pcinstance.isInParty()) { // 파티중
+                // 파티의 헤이트의 합계를 산출
+                // 파티 멤버 이외에는 그대로 배분
+                partyHateExp = 0;
+                partyHateLawful = 0;
+                for (i = hateList.size() - 1; i >= 0; i--) {
+                    acquisitor = (L1Character) acquisitorList.get(i);
+                    hate = (Integer) hateList.get(i);
+                    if (acquisitor instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) acquisitor;
+                        if (pc == l1pcinstance) {
+                            partyHateExp += hate;
+                            partyHateLawful += hate;
+                        } else if (l1pcinstance.getParty().isMember(pc)) {
+                            partyHateExp += hate;
+                            partyHateLawful += hate;
+                        } else {
+                            if (totalHateExp > 0) {
+                                acquire_exp = (exp * hate / totalHateExp);
+                            }
+                            if (totalHateLawful > 0) {
+                                acquire_lawful = (lawful * hate / totalHateLawful);
+                            }
+                            AddExp(pc, acquire_exp, acquire_lawful);
+                        }
+                    } else if (acquisitor instanceof L1PetInstance) {
+                        L1PetInstance pet = (L1PetInstance) acquisitor;
+                        L1PcInstance master = (L1PcInstance) pet.getMaster();
+                        if (master == l1pcinstance) {
+                            partyHateExp += hate;
+                        } else if (l1pcinstance.getParty().isMember(master)) {
+                            partyHateExp += hate;
+                        } else {
+                            if (totalHateExp > 0) {
+                                acquire_exp = (exp * hate / totalHateExp);
+                            }
+                            AddExpPet(pet, acquire_exp);
+                        }
+                    } else if (acquisitor instanceof L1SummonInstance) {
+                        L1SummonInstance summon = (L1SummonInstance) acquisitor;
+                        L1PcInstance master = (L1PcInstance) summon.getMaster();
+                        if (master == l1pcinstance) {
+                            partyHateExp += hate;
+                        } else if (l1pcinstance.getParty().isMember(master)) {
+                            partyHateExp += hate;
+                        } else {
+                        }
+                    }
+                }
+                if (totalHateExp > 0) {
+                    party_exp = (exp * partyHateExp / totalHateExp);
+                }
+                if (totalHateLawful > 0) {
+                    party_lawful = (lawful * partyHateLawful / totalHateLawful);
+                }
 
-				// 프리보나스
-				double pri_bonus = 0;
-				L1PcInstance leader = l1pcinstance.getParty().getLeader();
-				if (leader.isCrown()
-						&& (l1pcinstance.knownsObject(leader)
-								|| l1pcinstance.equals(leader))) {
-					pri_bonus = 0.059;
-				}
+                // EXP, 로우훌 배분
 
-				// PT경험치의 계산
-				L1PcInstance[] ptMembers = l1pcinstance.getParty().getMembers();
-				double pt_bonus = 0;
-				for (L1PcInstance each : ptMembers) {
-					if (l1pcinstance.knownsObject(each)
-							|| l1pcinstance.equals(each)) {
-						party_level += each.getLevel() * each.getLevel();
-					}
-					if (l1pcinstance.knownsObject(each)) {
-						pt_bonus += 0.04;
-					}
-				}
+                // 프리보나스
+                double pri_bonus = 0;
+                L1PcInstance leader = l1pcinstance.getParty().getLeader();
+                if (leader.isCrown()
+                        && (l1pcinstance.knownsObject(leader)
+                        || l1pcinstance.equals(leader))) {
+                    pri_bonus = 0.059;
+                }
 
-				party_exp = (int) (party_exp * (1 + pt_bonus + pri_bonus));
+                // PT경험치의 계산
+                L1PcInstance[] ptMembers = l1pcinstance.getParty().getMembers();
+                double pt_bonus = 0;
+                for (L1PcInstance each : ptMembers) {
+                    if (l1pcinstance.knownsObject(each)
+                            || l1pcinstance.equals(each)) {
+                        party_level += each.getLevel() * each.getLevel();
+                    }
+                    if (l1pcinstance.knownsObject(each)) {
+                        pt_bonus += 0.04;
+                    }
+                }
 
-				// 자캐릭터와 그 애완동물·사몬의 헤이트의 합계를 산출
-				if (party_level > 0) {
-					dist = ((l1pcinstance.getLevel() * l1pcinstance.getLevel()) / party_level);
-				}
-				member_exp = (int) (party_exp * dist);
-				member_lawful = (int) (party_lawful * dist);
+                party_exp = (int) (party_exp * (1 + pt_bonus + pri_bonus));
 
-				ownHateExp = 0;
-				for (i = hateList.size() - 1; i >= 0; i--) {
-					acquisitor = (L1Character) acquisitorList.get(i);
-					hate = (Integer) hateList.get(i);
-					if (acquisitor instanceof L1PcInstance) {
-						L1PcInstance pc = (L1PcInstance) acquisitor;
-						if (pc == l1pcinstance) {
-							ownHateExp += hate;
-						}
-					} else if (acquisitor instanceof L1PetInstance) {
-						L1PetInstance pet = (L1PetInstance) acquisitor;
-						L1PcInstance master = (L1PcInstance) pet.getMaster();
-						if (master == l1pcinstance) {
-							ownHateExp += hate;
-						}
-					} else if (acquisitor instanceof L1SummonInstance) {
-						L1SummonInstance summon = (L1SummonInstance) acquisitor;
-						L1PcInstance master = (L1PcInstance) summon.getMaster();
-						if (master == l1pcinstance) {
-							ownHateExp += hate;
-						}
-					}
-				}
-				// 자캐릭터와 그 애완동물·사몬에 분배
-				if (ownHateExp != 0) { // 공격에 참가하고 있었다
-					for (i = hateList.size() - 1; i >= 0; i--) {
-						acquisitor = (L1Character) acquisitorList.get(i);
-						hate = (Integer) hateList.get(i);
-						if (acquisitor instanceof L1PcInstance) {
-							L1PcInstance pc = (L1PcInstance) acquisitor;
-							if (pc == l1pcinstance) {
-								if (ownHateExp > 0) {
-									acquire_exp = (member_exp * hate / ownHateExp);
-								}
-								AddExp(pc, acquire_exp, member_lawful);
-							}
-						} else if (acquisitor instanceof L1PetInstance) {
-							L1PetInstance pet = (L1PetInstance) acquisitor;
-							L1PcInstance master = (L1PcInstance) pet
-									.getMaster();
-							if (master == l1pcinstance) {
-								if (ownHateExp > 0) {
-									acquire_exp = (member_exp * hate / ownHateExp);
-								}
-								AddExpPet(pet, acquire_exp);
-							}
-						} else if (acquisitor instanceof L1SummonInstance) {
-						}
-					}
-				} else { // 공격에 참가하고 있지 않았다
-					// 자캐릭터에만 분배
-					AddExp(l1pcinstance, member_exp, member_lawful);
-				}
+                // 자캐릭터와 그 애완동물·사몬의 헤이트의 합계를 산출
+                if (party_level > 0) {
+                    dist = ((l1pcinstance.getLevel() * l1pcinstance.getLevel()) / party_level);
+                }
+                member_exp = (int) (party_exp * dist);
+                member_lawful = (int) (party_lawful * dist);
 
-				// 파티 멤버와 그 애완동물·사몬의 헤이트의 합계를 산출
-				for (int cnt = 0; cnt < ptMembers.length; cnt++) {
-					if (l1pcinstance.knownsObject(ptMembers[cnt])) {
-						if (party_level > 0) {
-							dist = ((ptMembers[cnt].getLevel() * ptMembers[cnt]
-									.getLevel()) / party_level);
-						}
-						member_exp = (int) (party_exp * dist);
-						member_lawful = (int) (party_lawful * dist);
+                ownHateExp = 0;
+                for (i = hateList.size() - 1; i >= 0; i--) {
+                    acquisitor = (L1Character) acquisitorList.get(i);
+                    hate = (Integer) hateList.get(i);
+                    if (acquisitor instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) acquisitor;
+                        if (pc == l1pcinstance) {
+                            ownHateExp += hate;
+                        }
+                    } else if (acquisitor instanceof L1PetInstance) {
+                        L1PetInstance pet = (L1PetInstance) acquisitor;
+                        L1PcInstance master = (L1PcInstance) pet.getMaster();
+                        if (master == l1pcinstance) {
+                            ownHateExp += hate;
+                        }
+                    } else if (acquisitor instanceof L1SummonInstance) {
+                        L1SummonInstance summon = (L1SummonInstance) acquisitor;
+                        L1PcInstance master = (L1PcInstance) summon.getMaster();
+                        if (master == l1pcinstance) {
+                            ownHateExp += hate;
+                        }
+                    }
+                }
+                // 자캐릭터와 그 애완동물·사몬에 분배
+                if (ownHateExp != 0) { // 공격에 참가하고 있었다
+                    for (i = hateList.size() - 1; i >= 0; i--) {
+                        acquisitor = (L1Character) acquisitorList.get(i);
+                        hate = (Integer) hateList.get(i);
+                        if (acquisitor instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) acquisitor;
+                            if (pc == l1pcinstance) {
+                                if (ownHateExp > 0) {
+                                    acquire_exp = (member_exp * hate / ownHateExp);
+                                }
+                                AddExp(pc, acquire_exp, member_lawful);
+                            }
+                        } else if (acquisitor instanceof L1PetInstance) {
+                            L1PetInstance pet = (L1PetInstance) acquisitor;
+                            L1PcInstance master = (L1PcInstance) pet
+                                    .getMaster();
+                            if (master == l1pcinstance) {
+                                if (ownHateExp > 0) {
+                                    acquire_exp = (member_exp * hate / ownHateExp);
+                                }
+                                AddExpPet(pet, acquire_exp);
+                            }
+                        } else if (acquisitor instanceof L1SummonInstance) {
+                        }
+                    }
+                } else { // 공격에 참가하고 있지 않았다
+                    // 자캐릭터에만 분배
+                    AddExp(l1pcinstance, member_exp, member_lawful);
+                }
 
-						ownHateExp = 0;
-						for (i = hateList.size() - 1; i >= 0; i--) {
-							acquisitor = (L1Character) acquisitorList.get(i);
-							hate = (Integer) hateList.get(i);
-							if (acquisitor instanceof L1PcInstance) {
-								L1PcInstance pc = (L1PcInstance) acquisitor;
-								if (pc == ptMembers[cnt]) {
-									ownHateExp += hate;
-								}
-							} else if (acquisitor instanceof L1PetInstance) {
-								L1PetInstance pet = (L1PetInstance) acquisitor;
-								L1PcInstance master = (L1PcInstance) pet
-										.getMaster();
-								if (master == ptMembers[cnt]) {
-									ownHateExp += hate;
-								}
-							} else if (acquisitor instanceof L1SummonInstance) {
-								L1SummonInstance summon = (L1SummonInstance) acquisitor;
-								L1PcInstance master = (L1PcInstance) summon
-										.getMaster();
-								if (master == ptMembers[cnt]) {
-									ownHateExp += hate;
-								}
-							}
-						}
-						// 파티 멤버와 그 애완동물·사몬에 분배
-						if (ownHateExp != 0) { // 공격에 참가하고 있었다
-							for (i = hateList.size() - 1; i >= 0; i--) {
-								acquisitor = (L1Character) acquisitorList
-										.get(i);
-								hate = (Integer) hateList.get(i);
-								if (acquisitor instanceof L1PcInstance) {
-									L1PcInstance pc = (L1PcInstance) acquisitor;
-									if (pc == ptMembers[cnt]) {
-										if (ownHateExp > 0) {
-											acquire_exp = (member_exp * hate / ownHateExp);
-										}
-										AddExp(pc, acquire_exp, member_lawful);
-									}
-								} else if (acquisitor instanceof L1PetInstance) {
-									L1PetInstance pet = (L1PetInstance) acquisitor;
-									L1PcInstance master = (L1PcInstance) pet
-											.getMaster();
-									if (master == ptMembers[cnt]) {
-										if (ownHateExp > 0) {
-											acquire_exp = (member_exp * hate / ownHateExp);
-										}
-										AddExpPet(pet, acquire_exp);
-									}
-								} else if (acquisitor instanceof L1SummonInstance) {
-								}
-							}
-						} else { // 공격에 참가하고 있지 않았다
-							// 파티 멤버에만 분배
-							AddExp(ptMembers[cnt], member_exp, member_lawful);
-						}
-					}
-				}
-			} else { // 파티를 짜지 않았다
-				// EXP, 로우훌의 분배
-				for (i = hateList.size() - 1; i >= 0; i--) {
-					acquisitor = (L1Character) acquisitorList.get(i);
-					hate = (Integer) hateList.get(i);
-					acquire_exp = (exp * hate / totalHateExp);
-					if (acquisitor instanceof L1PcInstance) {
-						if (totalHateLawful > 0) {
-							acquire_lawful = (lawful * hate / totalHateLawful);
-						}
-					}
+                // 파티 멤버와 그 애완동물·사몬의 헤이트의 합계를 산출
+                for (int cnt = 0; cnt < ptMembers.length; cnt++) {
+                    if (l1pcinstance.knownsObject(ptMembers[cnt])) {
+                        if (party_level > 0) {
+                            dist = ((ptMembers[cnt].getLevel() * ptMembers[cnt]
+                                    .getLevel()) / party_level);
+                        }
+                        member_exp = (int) (party_exp * dist);
+                        member_lawful = (int) (party_lawful * dist);
 
-					if (acquisitor instanceof L1PcInstance) {
-						L1PcInstance pc = (L1PcInstance) acquisitor;
-						AddExp(pc, acquire_exp, acquire_lawful);
-					} else if (acquisitor instanceof L1PetInstance) {
-						L1PetInstance pet = (L1PetInstance) acquisitor;
-						AddExpPet(pet, acquire_exp);
-					} else if (acquisitor instanceof L1SummonInstance) {
-					}
-				}
-			}
-		}
-	}
+                        ownHateExp = 0;
+                        for (i = hateList.size() - 1; i >= 0; i--) {
+                            acquisitor = (L1Character) acquisitorList.get(i);
+                            hate = (Integer) hateList.get(i);
+                            if (acquisitor instanceof L1PcInstance) {
+                                L1PcInstance pc = (L1PcInstance) acquisitor;
+                                if (pc == ptMembers[cnt]) {
+                                    ownHateExp += hate;
+                                }
+                            } else if (acquisitor instanceof L1PetInstance) {
+                                L1PetInstance pet = (L1PetInstance) acquisitor;
+                                L1PcInstance master = (L1PcInstance) pet
+                                        .getMaster();
+                                if (master == ptMembers[cnt]) {
+                                    ownHateExp += hate;
+                                }
+                            } else if (acquisitor instanceof L1SummonInstance) {
+                                L1SummonInstance summon = (L1SummonInstance) acquisitor;
+                                L1PcInstance master = (L1PcInstance) summon
+                                        .getMaster();
+                                if (master == ptMembers[cnt]) {
+                                    ownHateExp += hate;
+                                }
+                            }
+                        }
+                        // 파티 멤버와 그 애완동물·사몬에 분배
+                        if (ownHateExp != 0) { // 공격에 참가하고 있었다
+                            for (i = hateList.size() - 1; i >= 0; i--) {
+                                acquisitor = (L1Character) acquisitorList
+                                        .get(i);
+                                hate = (Integer) hateList.get(i);
+                                if (acquisitor instanceof L1PcInstance) {
+                                    L1PcInstance pc = (L1PcInstance) acquisitor;
+                                    if (pc == ptMembers[cnt]) {
+                                        if (ownHateExp > 0) {
+                                            acquire_exp = (member_exp * hate / ownHateExp);
+                                        }
+                                        AddExp(pc, acquire_exp, member_lawful);
+                                    }
+                                } else if (acquisitor instanceof L1PetInstance) {
+                                    L1PetInstance pet = (L1PetInstance) acquisitor;
+                                    L1PcInstance master = (L1PcInstance) pet
+                                            .getMaster();
+                                    if (master == ptMembers[cnt]) {
+                                        if (ownHateExp > 0) {
+                                            acquire_exp = (member_exp * hate / ownHateExp);
+                                        }
+                                        AddExpPet(pet, acquire_exp);
+                                    }
+                                } else if (acquisitor instanceof L1SummonInstance) {
+                                }
+                            }
+                        } else { // 공격에 참가하고 있지 않았다
+                            // 파티 멤버에만 분배
+                            AddExp(ptMembers[cnt], member_exp, member_lawful);
+                        }
+                    }
+                }
+            } else { // 파티를 짜지 않았다
+                // EXP, 로우훌의 분배
+                for (i = hateList.size() - 1; i >= 0; i--) {
+                    acquisitor = (L1Character) acquisitorList.get(i);
+                    hate = (Integer) hateList.get(i);
+                    acquire_exp = (exp * hate / totalHateExp);
+                    if (acquisitor instanceof L1PcInstance) {
+                        if (totalHateLawful > 0) {
+                            acquire_lawful = (lawful * hate / totalHateLawful);
+                        }
+                    }
 
-	private static void AddExp(L1PcInstance pc, int exp, int lawful) {
-		int Ain_Exp = (int) (exp);
-		int add_lawful = (int) (lawful * Config.RATE_LA) * -1;
-		pc.addLawful(add_lawful);
+                    if (acquisitor instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) acquisitor;
+                        AddExp(pc, acquire_exp, acquire_lawful);
+                    } else if (acquisitor instanceof L1PetInstance) {
+                        L1PetInstance pet = (L1PetInstance) acquisitor;
+                        AddExpPet(pet, acquire_exp);
+                    } else if (acquisitor instanceof L1SummonInstance) {
+                    }
+                }
+            }
+        }
+    }
 
-		double exppenalty = ExpTable.getPenaltyRate(pc.getLevel());
-		double foodBonus = 1.0;
-		double expposion = 1.0;
-		double buffBonus = 1.0;
+    private static void AddExp(L1PcInstance pc, int exp, int lawful) {
+        int Ain_Exp = (int) (exp);
+        int add_lawful = (int) (lawful * Config.RATE_LA) * -1;
+        pc.addLawful(add_lawful);
+
+        double exppenalty = ExpTable.getPenaltyRate(pc.getLevel());
+        double foodBonus = 1.0;
+        double expposion = 1.0;
+        double buffBonus = 1.0;
         double ainBonus = 1.0;  // 아인하사드의 축복
 
 
-		if (pc.hasSkillEffect(L1SkillId.COOKING_1_7_N) // 버섯스프 경험치 증가 1%
-				|| pc.hasSkillEffect(L1SkillId.COOKING_1_7_S)) {
-			foodBonus = 1.01;
-		}
-		if (pc.hasSkillEffect(L1SkillId.COOKING_1_15_N) // 크랩살스프 경험치 증가 2%
-				|| pc.hasSkillEffect(L1SkillId.COOKING_1_15_S)) {
-			foodBonus = 1.02;
-		}
-		if (pc.hasSkillEffect(L1SkillId.COOKING_1_23_N) // 바실리스크 알 경험치 증가 3%
-				|| pc.hasSkillEffect(L1SkillId.COOKING_1_23_S)) {
-			foodBonus = 1.03;
-		}
-		if (pc.hasSkillEffect(3549) == true) {
+        if (pc.hasSkillEffect(L1SkillId.COOKING_1_7_N) // 버섯스프 경험치 증가 1%
+                || pc.hasSkillEffect(L1SkillId.COOKING_1_7_S)) {
+            foodBonus = 1.01;
+        }
+        if (pc.hasSkillEffect(L1SkillId.COOKING_1_15_N) // 크랩살스프 경험치 증가 2%
+                || pc.hasSkillEffect(L1SkillId.COOKING_1_15_S)) {
+            foodBonus = 1.02;
+        }
+        if (pc.hasSkillEffect(L1SkillId.COOKING_1_23_N) // 바실리스크 알 경험치 증가 3%
+                || pc.hasSkillEffect(L1SkillId.COOKING_1_23_S)) {
+            foodBonus = 1.03;
+        }
+        if (pc.hasSkillEffect(3549) == true) {
             foodBonus = 1.20;
-        }  
-		if (pc.hasSkillEffect(L1SkillId.EXP_POTION)) {
-			expposion = 1.20;
-		}
-		if (pc.hasSkillEffect(7383)) {
+        }
+        if (pc.hasSkillEffect(L1SkillId.EXP_POTION)) {
+            expposion = 1.20;
+        }
+        if (pc.hasSkillEffect(7383)) {
             buffBonus = 1.20;
-        } 
-		if (pc.getAinPoint() > 0) {   // 아인하사드의 축복
-			
-   if (!(_npc instanceof L1PetInstance || _npc instanceof L1SummonInstance
-     || _npc instanceof L1ScarecrowInstance)) { // 펫/서먼/허수아비는 제외
-            ainBonus = 1.7;
-            pc.setStExp(pc.getStExp() + Ain_Exp);
-            if (pc.getStExp() >= 5500 && pc.getAinPoint() > 0){
-             pc.setAinPoint(pc.getAinPoint() - 1);
-             pc.setStExp(pc.getStExp() - pc.getStExp());
-             pc.sendPackets(new S_SkillIconExp(pc.getAinPoint()));
-             }
+        }
+        if (pc.getAinPoint() > 0) {   // 아인하사드의 축복
+
+            if (!(_npc instanceof L1PetInstance || _npc instanceof L1SummonInstance
+                    || _npc instanceof L1ScarecrowInstance)) { // 펫/서먼/허수아비는 제외
+                ainBonus = 1.7;
+                pc.setStExp(pc.getStExp() + Ain_Exp);
+                if (pc.getStExp() >= 5500 && pc.getAinPoint() > 0) {
+                    pc.setAinPoint(pc.getAinPoint() - 1);
+                    pc.setStExp(pc.getStExp() - pc.getStExp());
+                    pc.sendPackets(new S_SkillIconExp(pc.getAinPoint()));
+                }
             }
-          } 
- 
+        }
+
 ////////////////////  코마 버프사 추가  //////////////////////
 
-		int add_exp = (int) (exp * exppenalty * Config.RATE_XP * foodBonus * expposion * buffBonus * ainBonus);	
+        int add_exp = (int) (exp * exppenalty * Config.RATE_XP * foodBonus * expposion * buffBonus * ainBonus);
 
 
         /*스텟창*/
@@ -414,9 +415,9 @@ public class CalcExp {
 			pc.sendPackets(new S_bonusstats(pc.getId(), 1));
 			}
 		}*/ // 보류
-		/*스텟창*/
-		
-		/* 폭렙 방지*/
+        /*스텟창*/
+
+        /* 폭렙 방지*/
 		
 		/* L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
   if (pc.getLevel() == 1 || pc.getLevel() == 2  || pc.getLevel() == 3 || pc.getLevel() == 4 || pc.getLevel() == 5 || pc.getLevel() == 6
@@ -452,118 +453,117 @@ public class CalcExp {
   } else { 
    pc.addExp(add_exp); 
   }*/
-		/* 폭렙 방지 */
-		
-	/////////////////////////////성던 경험치 증가////////////
-		if(pc.getMapId() == 523 || pc.getMapId() == 524 || pc.getMapId() == 88
-				 || pc.getMapId() == 783 || pc.getMapId() == 784 || pc.getMapId() == 23 || pc.getMapId() == 24
-				 || pc.getMapId() == 240 || pc.getMapId() == 241 || pc.getMapId() == 242 || pc.getMapId() == 243
-				 || pc.getMapId() == 248 || pc.getMapId() == 249 || pc.getMapId() == 250 || pc.getMapId() == 251
-				 || pc.getMapId() == 257 || pc.getMapId() == 258 || pc.getMapId() == 259)////맵아뒤입니다.
-		  {
-		   pc.addExp(add_exp * 6/5);/// 숫자가 배율입니다.
-		  // add_exp += add_exp * 0.5;// 
-		  }else{
+        /* 폭렙 방지 */
 
-	if (pc.get_autogo()==1){ //오토인증을 입력받기위해 대기중
-          pc.set_autook(1);  // 오토인증 성공시 0을 입력받기위한
-          pc.set_autoct(pc.get_autoct()+1); 
-         }
-  
-    if (pc.get_autook()==0){ // 오토인증 성공시
-          pc.set_autoct(0); // 오토 카운트 초기화
-         }
-  
-    if (pc.get_autoct() >= 7){ //오토 실패 7번 강제종료
-         pc.sendPackets(new S_Disconnect()); // 여기 수정시 압류및 제제를 가함
-         }
-      String code ; // 랜덤 코드를 정하는 스트링 선언
-      int autoch = 0; // 오토인증을 랜덤으로 뜨게하기위해
-        autoch = _random.nextInt(250);  // 여기 수치를 높이면 높일수록 인증코드뜰 확률 적어짐
-    if(autoch == 177 && pc.get_autoct()==0) { // 250/1확률로 오토인증코드 표시 && 오토카운트 0일때
-        pc.set_autogo(1);
-   
-       code = String.format("%04d", new Object[] { //랜덤 코드를 정하는 스트링
-              Integer.valueOf(_random.nextInt(10000))
-          });
-        pc.set_autocode(code); // 정해진 코드를 저장하는 스트링
-      String chatText = "오토 방지 코드"+"["+pc.get_autocode()+"]"+"를  채팅창에 입력하십시오. 3회 미입력시 게임종료";
-       S_ChatPacket s_chatpacket1 = new S_ChatPacket(pc, chatText, Opcodes.S_OPCODE_NORMALCHAT, 2);
-       pc.sendPackets(s_chatpacket1);
-   
-   
-          }
+        /////////////////////////////성던 경험치 증가////////////
+        if (pc.getMapId() == 523 || pc.getMapId() == 524 || pc.getMapId() == 88
+                || pc.getMapId() == 783 || pc.getMapId() == 784 || pc.getMapId() == 23 || pc.getMapId() == 24
+                || pc.getMapId() == 240 || pc.getMapId() == 241 || pc.getMapId() == 242 || pc.getMapId() == 243
+                || pc.getMapId() == 248 || pc.getMapId() == 249 || pc.getMapId() == 250 || pc.getMapId() == 251
+                || pc.getMapId() == 257 || pc.getMapId() == 258 || pc.getMapId() == 259)////맵아뒤입니다. {
+            pc.addExp(add_exp * 6 / 5);/// 숫자가 배율입니다.
+            // add_exp += add_exp * 0.5;//
+        } else {
 
-   if(pc.get_autoct()==3){ // 오토인증 뜨고 무시하고 몹3마리 잡을시 두번째 새로운 오토인증
-      pc.set_autogo(1);
-      code = String.format("%04d", new Object[] {
-               Integer.valueOf(_random.nextInt(10000))
-          });
-       pc.set_autocode(code);
-     String chatText = "오토 방지 코드"+"["+pc.get_autocode()+"]"+"를  채팅창에 입력하십시오. 2회 미입력시 게임종료";
-      S_ChatPacket s_chatpacket1 = new S_ChatPacket(pc, chatText, Opcodes.S_OPCODE_NORMALCHAT, 2);
-      pc.sendPackets(s_chatpacket1);
+            if (pc.get_autogo() == 1) { //오토인증을 입력받기위해 대기중
+                pc.set_autook(1);  // 오토인증 성공시 0을 입력받기위한
+                pc.set_autoct(pc.get_autoct() + 1);
+            }
+
+            if (pc.get_autook() == 0) { // 오토인증 성공시
+                pc.set_autoct(0); // 오토 카운트 초기화
+            }
+
+            if (pc.get_autoct() >= 7) { //오토 실패 7번 강제종료
+                pc.sendPackets(new S_Disconnect()); // 여기 수정시 압류및 제제를 가함
+            }
+            String code; // 랜덤 코드를 정하는 스트링 선언
+            int autoch = 0; // 오토인증을 랜덤으로 뜨게하기위해
+            autoch = _random.nextInt(250);  // 여기 수치를 높이면 높일수록 인증코드뜰 확률 적어짐
+            if (autoch == 177 && pc.get_autoct() == 0) { // 250/1확률로 오토인증코드 표시 && 오토카운트 0일때
+                pc.set_autogo(1);
+
+                code = String.format("%04d", new Object[]{ //랜덤 코드를 정하는 스트링
+                        Integer.valueOf(_random.nextInt(10000))
+                });
+                pc.set_autocode(code); // 정해진 코드를 저장하는 스트링
+                String chatText = "오토 방지 코드" + "[" + pc.get_autocode() + "]" + "를  채팅창에 입력하십시오. 3회 미입력시 게임종료";
+                S_ChatPacket s_chatpacket1 = new S_ChatPacket(pc, chatText, Opcodes.S_OPCODE_NORMALCHAT, 2);
+                pc.sendPackets(s_chatpacket1);
+
+
+            }
+
+            if (pc.get_autoct() == 3) { // 오토인증 뜨고 무시하고 몹3마리 잡을시 두번째 새로운 오토인증
+                pc.set_autogo(1);
+                code = String.format("%04d", new Object[]{
+                        Integer.valueOf(_random.nextInt(10000))
+                });
+                pc.set_autocode(code);
+                String chatText = "오토 방지 코드" + "[" + pc.get_autocode() + "]" + "를  채팅창에 입력하십시오. 2회 미입력시 게임종료";
+                S_ChatPacket s_chatpacket1 = new S_ChatPacket(pc, chatText, Opcodes.S_OPCODE_NORMALCHAT, 2);
+                pc.sendPackets(s_chatpacket1);
+            }
+
+            if (pc.get_autoct() == 6) { //두번째 오토인증 무시후 몹 3마리더 잡을시 마지막 오토인증
+                pc.set_autogo(1);
+                code = String.format("%04d", new Object[]{
+                        Integer.valueOf(_random.nextInt(10000))
+                });
+                pc.set_autocode(code);
+                String chatText = "오토 방지 코드" + "[" + code + "]" + "를 채팅창에 입력하십시오. 미입력시 게임종료";
+                S_ChatPacket s_chatpacket1 = new S_ChatPacket(pc, chatText, Opcodes.S_OPCODE_NORMALCHAT, 2);
+                pc.sendPackets(s_chatpacket1);
+            }
+            pc.addExp(add_exp);
+        }
+    }
+
+    /// /////////////////////////성던 경험치 증가////////////
+
+
+    private static void AddExpPet(L1PetInstance pet, int exp) {
+        L1PcInstance pc = (L1PcInstance) pet.getMaster();
+
+        int petNpcId = pet.getNpcTemplate().get_npcId();
+        int petItemObjId = pet.getItemObjId();
+
+        int levelBefore = pet.getLevel();
+//		int totalExp = (int) (exp * Config.RATE_XP + pet.getExp()); // ########## A116 원본 소스 주석 처리 
+        int totalExp = (int) (exp * Config.RATE_PET_XP + pet.getExp()); // ########## A137 펫 경험치 배율 설정 외부화 [넬]
+        if (totalExp >= ExpTable.getExpByLevel(51)) {
+            totalExp = ExpTable.getExpByLevel(51) - 1;
+        }
+        pet.setExp(totalExp);
+
+        pet.setLevel(ExpTable.getLevelByExp(totalExp));
+
+        int expPercentage = ExpTable.getExpPercentage(pet.getLevel(), totalExp);
+
+        int gap = pet.getLevel() - levelBefore;
+        for (int i = 1; i <= gap; i++) {
+            IntRange hpUpRange = pet.getPetType().getHpUpRange();
+            IntRange mpUpRange = pet.getPetType().getMpUpRange();
+            pet.addMaxHp(hpUpRange.randomValue());
+            pet.addMaxMp(mpUpRange.randomValue());
         }
 
-   if(pc.get_autoct() == 6){ //두번째 오토인증 무시후 몹 3마리더 잡을시 마지막 오토인증
-      pc.set_autogo(1);
-      code = String.format("%04d", new Object[] {
-              Integer.valueOf(_random.nextInt(10000))
-         });
-      pc.set_autocode(code);
-     String chatText = "오토 방지 코드"+"["+code+"]"+"를 채팅창에 입력하십시오. 미입력시 게임종료";
-      S_ChatPacket s_chatpacket1 = new S_ChatPacket(pc, chatText, Opcodes.S_OPCODE_NORMALCHAT, 2);
-      pc.sendPackets(s_chatpacket1); 
-   }
-			   pc.addExp(add_exp);
-		  }
- }
+        pet.setExpPercent(expPercentage);
+        pc.sendPackets(new S_PetPack(pet, pc));
 
-////////////////////////////성던 경험치 증가////////////
-
-
-	private static void AddExpPet(L1PetInstance pet, int exp) {
-		L1PcInstance pc = (L1PcInstance) pet.getMaster();
-
-		int petNpcId = pet.getNpcTemplate().get_npcId();
-		int petItemObjId = pet.getItemObjId();
-
-		int levelBefore = pet.getLevel();
-//		int totalExp = (int) (exp * Config.RATE_XP + pet.getExp()); // ########## A116 원본 소스 주석 처리 
-		int totalExp = (int) (exp * Config.RATE_PET_XP + pet.getExp()); // ########## A137 펫 경험치 배율 설정 외부화 [넬] 
-		if (totalExp >= ExpTable.getExpByLevel(51)) {
-			totalExp = ExpTable.getExpByLevel(51) - 1;
-		}
-		pet.setExp(totalExp);
-
-		pet.setLevel(ExpTable.getLevelByExp(totalExp));
-
-		int expPercentage = ExpTable.getExpPercentage(pet.getLevel(), totalExp);
-
-		int gap = pet.getLevel() - levelBefore;
-		for (int i = 1; i <= gap; i++) {
-			IntRange hpUpRange = pet.getPetType().getHpUpRange();
-			IntRange mpUpRange = pet.getPetType().getMpUpRange();
-			pet.addMaxHp(hpUpRange.randomValue());
-			pet.addMaxMp(mpUpRange.randomValue());
-		}
-
-		pet.setExpPercent(expPercentage);
-		pc.sendPackets(new S_PetPack(pet, pc));
-
-		if (gap != 0) { // 레벨업하면(자) DB에 기입한다
-			L1Pet petTemplate = PetTable.getInstance()
-					.getTemplate(petItemObjId);
-			if (petTemplate == null) { // PetTable에 없다
-				_log.warning("L1Pet == null");
-				return;
-			}
-			petTemplate.set_exp(pet.getExp());
-			petTemplate.set_level(pet.getLevel());
-			petTemplate.set_hp(pet.getMaxHp());
-			petTemplate.set_mp(pet.getMaxMp());
-			PetTable.getInstance().storePet(petTemplate); // DB에 기입해
-			pc.sendPackets(new S_ServerMessage(320, pet.getName())); // \f1%0의 레벨이 올랐습니다.
-		}
-	}
+        if (gap != 0) { // 레벨업하면(자) DB에 기입한다
+            L1Pet petTemplate = PetTable.getInstance()
+                    .getTemplate(petItemObjId);
+            if (petTemplate == null) { // PetTable에 없다
+                _log.warning("L1Pet == null");
+                return;
+            }
+            petTemplate.set_exp(pet.getExp());
+            petTemplate.set_level(pet.getLevel());
+            petTemplate.set_hp(pet.getMaxHp());
+            petTemplate.set_mp(pet.getMaxMp());
+            PetTable.getInstance().storePet(petTemplate); // DB에 기입해
+            pc.sendPackets(new S_ServerMessage(320, pet.getName())); // \f1%0의 레벨이 올랐습니다.
+        }
+    }
 }

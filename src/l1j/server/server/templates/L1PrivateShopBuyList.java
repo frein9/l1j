@@ -22,46 +22,46 @@ package l1j.server.server.templates;
 // L1PrivateShopBuyList
 
 public class L1PrivateShopBuyList {
-	public L1PrivateShopBuyList() {
-	}
+    public L1PrivateShopBuyList() {
+    }
 
-	private int _itemObjectId;
+    private int _itemObjectId;
 
-	public void setItemObjectId(int i) {
-		_itemObjectId = i;
-	}
+    public void setItemObjectId(int i) {
+        _itemObjectId = i;
+    }
 
-	public int getItemObjectId() {
-		return _itemObjectId;
-	}
+    public int getItemObjectId() {
+        return _itemObjectId;
+    }
 
-	private int _buyTotalCount; // 살 예정의 개수
+    private int _buyTotalCount; // 살 예정의 개수
 
-	public void setBuyTotalCount(int i) {
-		_buyTotalCount = i;
-	}
+    public void setBuyTotalCount(int i) {
+        _buyTotalCount = i;
+    }
 
-	public int getBuyTotalCount() {
-		return _buyTotalCount;
-	}
+    public int getBuyTotalCount() {
+        return _buyTotalCount;
+    }
 
-	private int _buyPrice;
+    private int _buyPrice;
 
-	public void setBuyPrice(int i) {
-		_buyPrice = i;
-	}
+    public void setBuyPrice(int i) {
+        _buyPrice = i;
+    }
 
-	public int getBuyPrice() {
-		return _buyPrice;
-	}
+    public int getBuyPrice() {
+        return _buyPrice;
+    }
 
-	private int _buyCount; // 산 누계
+    private int _buyCount; // 산 누계
 
-	public void setBuyCount(int i) {
-		_buyCount = i;
-	}
+    public void setBuyCount(int i) {
+        _buyCount = i;
+    }
 
-	public int getBuyCount() {
-		return _buyCount;
-	}
+    public int getBuyCount() {
+        return _buyCount;
+    }
 }

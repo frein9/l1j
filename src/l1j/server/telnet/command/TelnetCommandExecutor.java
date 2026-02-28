@@ -19,34 +19,36 @@
 package l1j.server.telnet.command;
 
 import java.util.StringTokenizer;
-import static l1j.server.telnet.command.TelnetCommandResult.*;
+
+import static l1j.server.telnet.command.TelnetCommandResult.CMD_INTERNAL_ERROR;
+import static l1j.server.telnet.command.TelnetCommandResult.CMD_NOT_FOUND;
 
 public class TelnetCommandExecutor {
-	private static TelnetCommandExecutor _instance = new TelnetCommandExecutor();
+    private static TelnetCommandExecutor _instance = new TelnetCommandExecutor();
 
-	public static TelnetCommandExecutor getInstance() {
-		return _instance;
-	}
+    public static TelnetCommandExecutor getInstance() {
+        return _instance;
+    }
 
-	public TelnetCommandResult execute(String cmd) {
-		try {
-			StringTokenizer tok = new StringTokenizer(cmd, " ");
-			String name = tok.nextToken();
+    public TelnetCommandResult execute(String cmd) {
+        try {
+            StringTokenizer tok = new StringTokenizer(cmd, " ");
+            String name = tok.nextToken();
 
-			TelnetCommand command = TelnetCommandList.get(name);
-			if (command == null) {
-				return new TelnetCommandResult(CMD_NOT_FOUND, cmd
-						+ " not found");
-			}
+            TelnetCommand command = TelnetCommandList.get(name);
+            if (command == null) {
+                return new TelnetCommandResult(CMD_NOT_FOUND, cmd
+                        + " not found");
+            }
 
-			String args = "";
-			if (name.length() + 1 < cmd.length()) {
-				args = cmd.substring(name.length() + 1);
-			}
-			return command.execute(args);
-		} catch (Exception e) {
-			return new TelnetCommandResult(CMD_INTERNAL_ERROR, e
-					.getLocalizedMessage());
-		}
-	}
+            String args = "";
+            if (name.length() + 1 < cmd.length()) {
+                args = cmd.substring(name.length() + 1);
+            }
+            return command.execute(args);
+        } catch (Exception e) {
+            return new TelnetCommandResult(CMD_INTERNAL_ERROR, e
+                    .getLocalizedMessage());
+        }
+    }
 }

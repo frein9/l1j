@@ -30,87 +30,85 @@ import java.util.Random;
  * </p>
  */
 public class IntRange {
-	private static final Random _rnd = new Random();
-	private int _low;
-	private int _high;
+    private static final Random _rnd = new Random();
+    private int _low;
+    private int _high;
 
-	public IntRange(int low, int high) {
-		_low = low;
-		_high = high;
-	}
+    public IntRange(int low, int high) {
+        _low = low;
+        _high = high;
+    }
 
-	public IntRange(IntRange range) {
-		this(range._low, range._high);
-	}
+    public IntRange(IntRange range) {
+        this(range._low, range._high);
+    }
 
-	/**
-	 * 수치 i가, 범위내에 있을까를 돌려준다.
-	 * 
-	 * @param i
-	 *            수치
-	 * @return 범위내이면 true
-	 */
-	public boolean includes(int i) {
-		return (_low <= i) && (i <= _high);
-	}
+    /**
+     * 수치 i가, 범위내에 있을까를 돌려준다.
+     *
+     * @param i 수치
+     * @return 범위내이면 true
+     */
+    public boolean includes(int i) {
+        return (_low <= i) && (i <= _high);
+    }
 
-	public static boolean includes(int i, int low, int high) {
-		return (low <= i) && (i <= high);
-	}
+    public static boolean includes(int i, int low, int high) {
+        return (low <= i) && (i <= high);
+    }
 
-	/**
-	 * 수치 i를, 이 범위내에 말다.
-	 * 
-	 * @param i
-	 *            수치
-	 * @return 말 수 있었던 값
-	 */
-	public int ensure(int i) {
-		int r = i;
-		r = (_low <= r) ?  r : _low;
-		r = (r <= _high) ?  r : _high;
-		return r;
-	}
+    /**
+     * 수치 i를, 이 범위내에 말다.
+     *
+     * @param i 수치
+     * @return 말 수 있었던 값
+     */
+    public int ensure(int i) {
+        int r = i;
+        r = (_low <= r) ? r : _low;
+        r = (r <= _high) ? r : _high;
+        return r;
+    }
 
-	public static int ensure(int n, int low, int high) {
-		int r = n;
-		r = (low <= r) ?  r : low;
-		r = (r <= high) ?  r : high;
-		return r;
-	}
+    public static int ensure(int n, int low, int high) {
+        int r = n;
+        r = (low <= r) ? r : low;
+        r = (r <= high) ? r : high;
+        return r;
+    }
 
-	/**
-	 * 이 범위내로부터 랜덤인 값을 생성한다.
-	 * 
-	 * @return 범위내의 랜덤인 값
-	 */
-	public int randomValue() {
-		return _rnd.nextInt(getWidth() + 1) + _low;
-	}
+    /**
+     * 이 범위내로부터 랜덤인 값을 생성한다.
+     *
+     * @return 범위내의 랜덤인 값
+     */
+    public int randomValue() {
+        return _rnd.nextInt(getWidth() + 1) + _low;
+    }
 
-	public int getLow() {
-		return _low;
-	}
+    public int getLow() {
+        return _low;
+    }
 
-	public int getHigh() {
-		return _high;
-	}
+    public int getHigh() {
+        return _high;
+    }
 
-	public int getWidth() {
-		return _high - _low;
-	}
+    public int getWidth() {
+        return _high - _low;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof IntRange)) {
-			return false;
-		}
-		IntRange range = (IntRange) obj;
-		return (this._low == range._low) && (this._high == range._high);
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof IntRange)) {
+            return false;
+        }
+        IntRange range = (IntRange) obj;
+        return (this._low == range._low) && (this._high == range._high);
+    }
 
-	@Override
-	public String toString() {
-		return "low=" + _low + ", high=" + _high;
-	}
+    @Override
+    public String toString() {
+        return "low=" + _low + ", high=" + _high;
+    }
 }

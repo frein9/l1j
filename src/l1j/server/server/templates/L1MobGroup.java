@@ -19,39 +19,39 @@
 
 package l1j.server.server.templates;
 
+import l1j.server.server.utils.collections.Lists;
+
 import java.util.Collections;
 import java.util.List;
 
-import l1j.server.server.utils.collections.Lists;
-
 public class L1MobGroup {
-	private final int _id;
-	private final int _leaderId;
-	private final List<L1NpcCount> _minions = Lists.newArrayList();
-	private final boolean _isRemoveGroupIfLeaderDie;
+    private final int _id;
+    private final int _leaderId;
+    private final List<L1NpcCount> _minions = Lists.newArrayList();
+    private final boolean _isRemoveGroupIfLeaderDie;
 
-	public L1MobGroup(int id, int leaderId, List<L1NpcCount> minions,
-			boolean isRemoveGroupIfLeaderDie) {
-		_id = id;
-		_leaderId = leaderId;
-		_minions.addAll(minions); // 참조 카피가 빠르지만, 불변성을 보증할 수 없다
-		_isRemoveGroupIfLeaderDie = isRemoveGroupIfLeaderDie;
-	}
+    public L1MobGroup(int id, int leaderId, List<L1NpcCount> minions,
+                      boolean isRemoveGroupIfLeaderDie) {
+        _id = id;
+        _leaderId = leaderId;
+        _minions.addAll(minions); // 참조 카피가 빠르지만, 불변성을 보증할 수 없다
+        _isRemoveGroupIfLeaderDie = isRemoveGroupIfLeaderDie;
+    }
 
-	public int getId() {
-		return _id;
-	}
+    public int getId() {
+        return _id;
+    }
 
-	public int getLeaderId() {
-		return _leaderId;
-	}
+    public int getLeaderId() {
+        return _leaderId;
+    }
 
-	public List<L1NpcCount> getMinions() {
-		return Collections.unmodifiableList(_minions);
-	}
+    public List<L1NpcCount> getMinions() {
+        return Collections.unmodifiableList(_minions);
+    }
 
-	public boolean isRemoveGroupIfLeaderDie() {
-		return _isRemoveGroupIfLeaderDie;
-	}
+    public boolean isRemoveGroupIfLeaderDie() {
+        return _isRemoveGroupIfLeaderDie;
+    }
 
 }

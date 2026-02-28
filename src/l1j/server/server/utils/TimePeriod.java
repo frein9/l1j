@@ -18,39 +18,39 @@
  */
 package l1j.server.server.utils;
 
+import l1j.server.server.model.gametime.L1GameTime;
+
 import java.sql.Time;
 import java.util.logging.Logger;
 
-import l1j.server.server.model.gametime.L1GameTime;
-
 public class TimePeriod {
-	private static Logger _log = Logger.getLogger(TimePeriod.class.getName());
+    private static Logger _log = Logger.getLogger(TimePeriod.class.getName());
 
-	private final Time _timeStart;
-	private final Time _timeEnd;
+    private final Time _timeStart;
+    private final Time _timeEnd;
 
-	public TimePeriod(Time timeStart, Time timeEnd) {
-		if (timeStart.equals(timeEnd)) {
-			throw new IllegalArgumentException(
-					"timeBegin must not equals timeEnd");
-		}
+    public TimePeriod(Time timeStart, Time timeEnd) {
+        if (timeStart.equals(timeEnd)) {
+            throw new IllegalArgumentException(
+                    "timeBegin must not equals timeEnd");
+        }
 
-		_timeStart = timeStart;
-		_timeEnd = timeEnd;
-	}
+        _timeStart = timeStart;
+        _timeEnd = timeEnd;
+    }
 
-	private boolean includes(L1GameTime time, Time timeStart, Time timeEnd) {
-		Time when = time.toTime();
-		return timeStart.compareTo(when) <= 0 && 0 < timeEnd.compareTo(when);
-	}
+    private boolean includes(L1GameTime time, Time timeStart, Time timeEnd) {
+        Time when = time.toTime();
+        return timeStart.compareTo(when) <= 0 && 0 < timeEnd.compareTo(when);
+    }
 
-	public boolean includes(L1GameTime time) {
-		/*
-		 * 알기 힘든 논리··· timeStart after timeEnd 때(예:18:00~06:00)
-		 * timeEnd~timeStart(06:00~18:00)의 범위내가 아니면,
-		 * timeStart~timeEnd(18:00~06:00)의 범위내라고 볼 수 있다
-		 */
-		return _timeStart.after(_timeEnd) ?  ! includes(time, _timeEnd,
-				_timeStart) : includes(time, _timeStart, _timeEnd);
-	}
+    public boolean includes(L1GameTime time) {
+        /*
+         * 알기 힘든 논리··· timeStart after timeEnd 때(예:18:00~06:00)
+         * timeEnd~timeStart(06:00~18:00)의 범위내가 아니면,
+         * timeStart~timeEnd(18:00~06:00)의 범위내라고 볼 수 있다
+         */
+        return _timeStart.after(_timeEnd) ? !includes(time, _timeEnd,
+                _timeStart) : includes(time, _timeStart, _timeEnd);
+    }
 }

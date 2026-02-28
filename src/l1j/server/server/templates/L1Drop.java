@@ -21,39 +21,39 @@ package l1j.server.server.templates;
 import java.util.logging.Logger;
 
 public class L1Drop {
-	private static Logger _log = Logger.getLogger(L1Drop.class.getName());
+    private static Logger _log = Logger.getLogger(L1Drop.class.getName());
 
-	int _mobId;
-	int _itemId;
-	int _min;
-	int _max;
-	int _chance;
+    int _mobId;
+    int _itemId;
+    int _min;
+    int _max;
+    int _chance;
 
-	public L1Drop(int mobId, int itemId, int min, int max, int chance) {
-		_mobId = mobId;
-		_itemId = itemId;
-		_min = min;
-		_max = max;
-		_chance = chance;
-	}
+    public L1Drop(int mobId, int itemId, int min, int max, int chance) {
+        _mobId = mobId;
+        _itemId = itemId;
+        _min = min;
+        _max = max;
+        _chance = chance;
+    }
 
-	public int getChance() {
-		return _chance;
-	}
+    public int getChance() {
+        return _chance;
+    }
 
-	public int getItemid() {
-		return _itemId;
-	}
+    public int getItemid() {
+        return _itemId;
+    }
 
-	public int getMax() {
-		return _max;
-	}
+    public int getMax() {
+        return _max;
+    }
 
-	public int getMin() {
-		return _min;
-	}
+    public int getMin() {
+        return _min;
+    }
 
-	public int getMobid() {
-		return _mobId;
-	}
+    public int getMobid() {
+        return _mobId;
+    }
 }

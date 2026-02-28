@@ -19,23 +19,23 @@
 package l1j.server.server.templates;
 
 public class L1NpcCount {
-	private final int _id;
-	private final int _count;
+    private final int _id;
+    private final int _count;
 
-	public L1NpcCount(int id, int count) {
-		_id = id;
-		_count = count;
-	}
+    public L1NpcCount(int id, int count) {
+        _id = id;
+        _count = count;
+    }
 
-	public int getId() {
-		return _id;
-	}
+    public int getId() {
+        return _id;
+    }
 
-	public int getCount() {
-		return _count;
-	}
+    public int getCount() {
+        return _count;
+    }
 
-	public boolean isZero() {
-		return _id == 0 && _count == 0;
-	}
+    public boolean isZero() {
+        return _id == 0 && _count == 0;
+    }
 }

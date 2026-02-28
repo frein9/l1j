@@ -19,16 +19,17 @@
 package l1j.server.server.templates;
 
 public class L1RaceTicket extends L1Item {
-	public L1RaceTicket() {
-	}
+    public L1RaceTicket() {
+    }
 
-	private boolean _stackable;
-	public boolean isStackable() {
-		return _stackable;
-	}
+    private boolean _stackable;
 
-	public void set_stackable(boolean stackable) {
-		_stackable = stackable;
-	}
+    public boolean isStackable() {
+        return _stackable;
+    }
+
+    public void set_stackable(boolean stackable) {
+        _stackable = stackable;
+    }
 
 }
