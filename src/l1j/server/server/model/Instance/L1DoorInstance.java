@@ -18,342 +18,341 @@
  */
 package l1j.server.server.model.Instance;
 
-import java.util.logging.Logger;
-
 import l1j.server.server.ActionCodes;
 import l1j.server.server.GeneralThreadPool;
 import l1j.server.server.model.L1Attack;
 import l1j.server.server.model.L1Character;
 import l1j.server.server.model.L1World;
-import l1j.server.server.serverpackets.S_RemoveObject;
 import l1j.server.server.serverpackets.S_DoActionGFX;
 import l1j.server.server.serverpackets.S_Door;
 import l1j.server.server.serverpackets.S_DoorPack;
+import l1j.server.server.serverpackets.S_RemoveObject;
 import l1j.server.server.templates.L1Npc;
+
+import java.util.logging.Logger;
 
 public class L1DoorInstance extends L1NpcInstance {
 
-	private static final long serialVersionUID = 1L;
-	public static final int PASS = 0;
-	public static final int NOT_PASS = 1;
+    private static final long serialVersionUID = 1L;
+    public static final int PASS = 0;
+    public static final int NOT_PASS = 1;
 
-	private static Logger _log = Logger.getLogger(L1DoorInstance.class
-			.getName());
+    private static Logger _log = Logger.getLogger(L1DoorInstance.class.getName());
 
-	public L1DoorInstance(L1Npc template) {
-		super(template);
-	}
+    public L1DoorInstance(L1Npc template) {
+        super(template);
+    }
 
-	@Override
-	public void onAction(L1PcInstance pc) {
-		if (getMaxHp() == 0 || getMaxHp() == 1) { // 파괴 불가능한 문은 대상외
-			return;
-		}
+    @Override
+    public void onAction(L1PcInstance pc) {
+        if (getMaxHp() == 0 || getMaxHp() == 1) { // 파괴 불가능한 문은 대상외
+            return;
+        }
 
-		if (getCurrentHp() > 0 && !isDead()) {
-			L1Attack attack = new L1Attack(pc, this);
-			if (attack.calcHit()) {
-				attack.calcDamage();
-				attack.addPcPoisonAttack(pc, this);
-			}
-			attack.action();
-			attack.commit();
-		}
-	}
+        if (getCurrentHp() > 0 && !isDead()) {
+            L1Attack attack = new L1Attack(pc, this);
+            if (attack.calcHit()) {
+                attack.calcDamage();
+                attack.addPcPoisonAttack(pc, this);
+            }
+            attack.action();
+            attack.commit();
+        }
+    }
 
-	@Override
-	public void onPerceive(L1PcInstance perceivedFrom) {
-		perceivedFrom.addKnownObject(this);
-		perceivedFrom.sendPackets(new S_DoorPack(this));
-		sendDoorPacket(perceivedFrom);
-	}
+    @Override
+    public void onPerceive(L1PcInstance perceivedFrom) {
+        perceivedFrom.addKnownObject(this);
+        perceivedFrom.sendPackets(new S_DoorPack(this));
+        sendDoorPacket(perceivedFrom);
+    }
 
-	@Override
-	public void deleteMe() {
-		setPassable(PASS);
-		sendDoorPacket(null);
+    @Override
+    public void deleteMe() {
+        setPassable(PASS);
+        sendDoorPacket(null);
 
-		_destroyed = true;
-		if (getInventory() != null) {
-			getInventory().clearItems();
-		}
-		allTargetClear();
-		_master = null;
-		L1World.getInstance().removeVisibleObject(this);
-		L1World.getInstance().removeObject(this);
-		for (L1PcInstance pc : L1World.getInstance().getRecognizePlayer(this)) {
-			pc.removeKnownObject(this);
-			pc.sendPackets(new S_RemoveObject(this));
-		}
-		removeAllKnownObjects();
-	}
+        _destroyed = true;
+        if (getInventory() != null) {
+            getInventory().clearItems();
+        }
+        allTargetClear();
+        _master = null;
+        L1World.getInstance().removeVisibleObject(this);
+        L1World.getInstance().removeObject(this);
+        for (L1PcInstance pc : L1World.getInstance().getRecognizePlayer(this)) {
+            pc.removeKnownObject(this);
+            pc.sendPackets(new S_RemoveObject(this));
+        }
+        removeAllKnownObjects();
+    }
 
-	@Override
-	public void receiveDamage(L1Character attacker, int damage) {
-		if (getMaxHp() == 0 || getMaxHp() == 1) { // 파괴 불가능한 문은 대상외
-			return;
-		}
+    @Override
+    public void receiveDamage(L1Character attacker, int damage) {
+        if (getMaxHp() == 0 || getMaxHp() == 1) { // 파괴 불가능한 문은 대상외
+            return;
+        }
 
-		if (getCurrentHp() > 0 && !isDead()) {
-			int newHp = getCurrentHp() - damage;
-			if (newHp <= 0 && !isDead()) {
-				setCurrentHpDirect(0);
-				setDead(true);
-				setStatus(ActionCodes.ACTION_DoorDie);
-				Death death = new Death(attacker);
-				GeneralThreadPool.getInstance().execute(death);
-			}
-			if (newHp > 0) {
-				setCurrentHp(newHp);
-				if ((getMaxHp() * 1 / 6) > getCurrentHp()) {
-					if (_crackStatus != 5) {
-						broadcastPacket(new S_DoActionGFX(getId(),
-								ActionCodes.ACTION_DoorAction5));
-						setStatus(ActionCodes.ACTION_DoorAction5);
-						_crackStatus = 5;
-					}
-				} else if ((getMaxHp() * 2 / 6) > getCurrentHp()) {
-					if (_crackStatus != 4) {
-						broadcastPacket(new S_DoActionGFX(getId(),
-								ActionCodes.ACTION_DoorAction4));
-						setStatus(ActionCodes.ACTION_DoorAction4);
-						_crackStatus = 4;
-					}
-				} else if ((getMaxHp() * 3 / 6) > getCurrentHp()) {
-					if (_crackStatus != 3) {
-						broadcastPacket(new S_DoActionGFX(getId(),
-								ActionCodes.ACTION_DoorAction3));
-						setStatus(ActionCodes.ACTION_DoorAction3);
-						_crackStatus = 3;
-					}
-				} else if ((getMaxHp() * 4 / 6) > getCurrentHp()) {
-					if (_crackStatus != 2) {
-						broadcastPacket(new S_DoActionGFX(getId(),
-								ActionCodes.ACTION_DoorAction2));
-						setStatus(ActionCodes.ACTION_DoorAction2);
-						_crackStatus = 2;
-					}
-				} else if ((getMaxHp() * 5 / 6) > getCurrentHp()) {
-					if (_crackStatus != 1) {
-						broadcastPacket(new S_DoActionGFX(getId(),
-								ActionCodes.ACTION_DoorAction1));
-						setStatus(ActionCodes.ACTION_DoorAction1);
-						_crackStatus = 1;
-					}
-				}
-			}
-		} else if (!isDead()) { // 만약을 위해
-			setDead(true);
-			setStatus(ActionCodes.ACTION_DoorDie);
-			Death death = new Death(attacker);
-			GeneralThreadPool.getInstance().execute(death);
-		}
-	}
+        if (getCurrentHp() > 0 && !isDead()) {
+            int newHp = getCurrentHp() - damage;
+            if (newHp <= 0 && !isDead()) {
+                setCurrentHpDirect(0);
+                setDead(true);
+                setStatus(ActionCodes.ACTION_DoorDie);
+                Death death = new Death(attacker);
+                GeneralThreadPool.getInstance().execute(death);
+            }
+            if (newHp > 0) {
+                setCurrentHp(newHp);
+                if ((getMaxHp() * 1 / 6) > getCurrentHp()) {
+                    if (_crackStatus != 5) {
+                        broadcastPacket(new S_DoActionGFX(getId(),
+                                ActionCodes.ACTION_DoorAction5));
+                        setStatus(ActionCodes.ACTION_DoorAction5);
+                        _crackStatus = 5;
+                    }
+                } else if ((getMaxHp() * 2 / 6) > getCurrentHp()) {
+                    if (_crackStatus != 4) {
+                        broadcastPacket(new S_DoActionGFX(getId(),
+                                ActionCodes.ACTION_DoorAction4));
+                        setStatus(ActionCodes.ACTION_DoorAction4);
+                        _crackStatus = 4;
+                    }
+                } else if ((getMaxHp() * 3 / 6) > getCurrentHp()) {
+                    if (_crackStatus != 3) {
+                        broadcastPacket(new S_DoActionGFX(getId(),
+                                ActionCodes.ACTION_DoorAction3));
+                        setStatus(ActionCodes.ACTION_DoorAction3);
+                        _crackStatus = 3;
+                    }
+                } else if ((getMaxHp() * 4 / 6) > getCurrentHp()) {
+                    if (_crackStatus != 2) {
+                        broadcastPacket(new S_DoActionGFX(getId(),
+                                ActionCodes.ACTION_DoorAction2));
+                        setStatus(ActionCodes.ACTION_DoorAction2);
+                        _crackStatus = 2;
+                    }
+                } else if ((getMaxHp() * 5 / 6) > getCurrentHp()) {
+                    if (_crackStatus != 1) {
+                        broadcastPacket(new S_DoActionGFX(getId(),
+                                ActionCodes.ACTION_DoorAction1));
+                        setStatus(ActionCodes.ACTION_DoorAction1);
+                        _crackStatus = 1;
+                    }
+                }
+            }
+        } else if (!isDead()) { // 만약을 위해
+            setDead(true);
+            setStatus(ActionCodes.ACTION_DoorDie);
+            Death death = new Death(attacker);
+            GeneralThreadPool.getInstance().execute(death);
+        }
+    }
 
-	@Override
-	public void setCurrentHp(int i) {
-		int currentHp = i;
-		if (currentHp >= getMaxHp()) {
-			currentHp = getMaxHp();
-		}
-		setCurrentHpDirect(currentHp);
-	}
+    @Override
+    public void setCurrentHp(int i) {
+        int currentHp = i;
+        if (currentHp >= getMaxHp()) {
+            currentHp = getMaxHp();
+        }
+        setCurrentHpDirect(currentHp);
+    }
 
-	class Death implements Runnable {
-		L1Character _lastAttacker;
+    class Death implements Runnable {
+        L1Character _lastAttacker;
 
-		public Death(L1Character lastAttacker) {
-			_lastAttacker = lastAttacker;
-		}
+        public Death(L1Character lastAttacker) {
+            _lastAttacker = lastAttacker;
+        }
 
-		@Override
-		public void run() {
-			setCurrentHpDirect(0);
-			setDead(true);
-			setStatus(ActionCodes.ACTION_DoorDie);
+        @Override
+        public void run() {
+            setCurrentHpDirect(0);
+            setDead(true);
+            setStatus(ActionCodes.ACTION_DoorDie);
 
-			getMap().setPassable(getLocation(), true);
+            getMap().setPassable(getLocation(), true);
 
-			broadcastPacket(new S_DoActionGFX(getId(), ActionCodes
-					.ACTION_DoorDie));
-			setPassable(PASS);
-			sendDoorPacket(null);
-		}
-	}
+            broadcastPacket(new S_DoActionGFX(getId(), ActionCodes
+                    .ACTION_DoorDie));
+            setPassable(PASS);
+            sendDoorPacket(null);
+        }
+    }
 
-	private void sendDoorPacket(L1PcInstance pc) {
-		int entranceX = getEntranceX();
-		int entranceY = getEntranceY();
-		int leftEdgeLocation = getLeftEdgeLocation();
-		int rightEdgeLocation = getRightEdgeLocation();
+    private void sendDoorPacket(L1PcInstance pc) {
+        int entranceX = getEntranceX();
+        int entranceY = getEntranceY();
+        int leftEdgeLocation = getLeftEdgeLocation();
+        int rightEdgeLocation = getRightEdgeLocation();
 
-		int size = rightEdgeLocation - leftEdgeLocation;
-		if (size == 0) { // 1 매스 분의폭의 문
-			sendPacket(pc, entranceX, entranceY);
-		} else { // 2 매스분 이상의 폭이 있는 문
-			if (getDirection() == 0) { // /방향
-				for (int x = leftEdgeLocation; x <= rightEdgeLocation; x++) {
-					sendPacket(pc, x, entranceY);
-				}
-			} else { // ＼방향
-				for (int y = leftEdgeLocation; y <= rightEdgeLocation; y++) {
-					sendPacket(pc, entranceX, y);
-				}
-			}
-		}
-	}
+        int size = rightEdgeLocation - leftEdgeLocation;
+        if (size == 0) { // 1 매스 분의폭의 문
+            sendPacket(pc, entranceX, entranceY);
+        } else { // 2 매스분 이상의 폭이 있는 문
+            if (getDirection() == 0) { // /방향
+                for (int x = leftEdgeLocation; x <= rightEdgeLocation; x++) {
+                    sendPacket(pc, x, entranceY);
+                }
+            } else { // ＼방향
+                for (int y = leftEdgeLocation; y <= rightEdgeLocation; y++) {
+                    sendPacket(pc, entranceX, y);
+                }
+            }
+        }
+    }
 
-	private void sendPacket(L1PcInstance pc, int x, int y) {
-		S_Door packet = new S_Door(x, y, getDirection(), getPassable());
-		if (pc != null) { // onPerceive() 경유의 경우
-			// 열려 있는 경우는 통행 불가 패킷 송신 불요
-			if (getOpenStatus() == ActionCodes.ACTION_Close) {
-				pc.sendPackets(packet);
-			}
-		} else {
-			broadcastPacket(packet);
-		}
-	}
+    private void sendPacket(L1PcInstance pc, int x, int y) {
+        S_Door packet = new S_Door(x, y, getDirection(), getPassable());
+        if (pc != null) { // onPerceive() 경유의 경우
+            // 열려 있는 경우는 통행 불가 패킷 송신 불요
+            if (getOpenStatus() == ActionCodes.ACTION_Close) {
+                pc.sendPackets(packet);
+            }
+        } else {
+            broadcastPacket(packet);
+        }
+    }
 
-	public void open() {
-		if (isDead()) {
-			return;
-		}
-		if (getOpenStatus() == ActionCodes.ACTION_Close) {
-			setOpenStatus(ActionCodes.ACTION_Open);
-			setPassable(L1DoorInstance.PASS);
-			broadcastPacket(new S_DoorPack(this));
-			sendDoorPacket(null);
-		}
-	}
+    public void open() {
+        if (isDead()) {
+            return;
+        }
+        if (getOpenStatus() == ActionCodes.ACTION_Close) {
+            setOpenStatus(ActionCodes.ACTION_Open);
+            setPassable(L1DoorInstance.PASS);
+            broadcastPacket(new S_DoorPack(this));
+            sendDoorPacket(null);
+        }
+    }
 
-	public void close() {
-		if (isDead()) {
-			return;
-		}
-		if (getOpenStatus() == ActionCodes.ACTION_Open) {
-			setOpenStatus(ActionCodes.ACTION_Close);
-			setPassable(L1DoorInstance.NOT_PASS);
-			broadcastPacket(new S_DoorPack(this));
-			sendDoorPacket(null);
-		}
-	}
+    public void close() {
+        if (isDead()) {
+            return;
+        }
+        if (getOpenStatus() == ActionCodes.ACTION_Open) {
+            setOpenStatus(ActionCodes.ACTION_Close);
+            setPassable(L1DoorInstance.NOT_PASS);
+            broadcastPacket(new S_DoorPack(this));
+            sendDoorPacket(null);
+        }
+    }
 
-	public void repairGate() {
-		if (getMaxHp() > 1) {
-			setDead(false);
-			setCurrentHp(getMaxHp());
-			setStatus(0);
-			setCrackStatus(0);
-			setOpenStatus(ActionCodes.ACTION_Open);
-			close();
-		}
-	}
+    public void repairGate() {
+        if (getMaxHp() > 1) {
+            setDead(false);
+            setCurrentHp(getMaxHp());
+            setStatus(0);
+            setCrackStatus(0);
+            setOpenStatus(ActionCodes.ACTION_Open);
+            close();
+        }
+    }
 
-	private int _doorId = 0;
+    private int _doorId = 0;
 
-	public int getDoorId() {
-		return _doorId;
-	}
+    public int getDoorId() {
+        return _doorId;
+    }
 
-	public void setDoorId(int i) {
-		_doorId = i;
-	}
+    public void setDoorId(int i) {
+        _doorId = i;
+    }
 
-	private int _direction = 0; // 문의 방향
+    private int _direction = 0; // 문의 방향
 
-	public int getDirection() {
-		return _direction;
-	}
+    public int getDirection() {
+        return _direction;
+    }
 
-	public void setDirection(int i) {
-		if (i == 0 || i == 1) {
-			_direction = i;
-		}
-	}
+    public void setDirection(int i) {
+        if (i == 0 || i == 1) {
+            _direction = i;
+        }
+    }
 
-	public int getEntranceX() {
-		int entranceX = 0;
-		if (getDirection() == 0) { // /방향
-			entranceX = getX();
-		} else { // ＼방향
-			entranceX = getX() - 1;
-		}
-		return entranceX;
-	}
+    public int getEntranceX() {
+        int entranceX = 0;
+        if (getDirection() == 0) { // /방향
+            entranceX = getX();
+        } else { // ＼방향
+            entranceX = getX() - 1;
+        }
+        return entranceX;
+    }
 
-	public int getEntranceY() {
-		int entranceY = 0;
-		if (getDirection() == 0) { // /방향
-			entranceY = getY() + 1;
-		} else { // ＼방향
-			entranceY = getY();
-		}
-		return entranceY;
-	}
+    public int getEntranceY() {
+        int entranceY = 0;
+        if (getDirection() == 0) { // /방향
+            entranceY = getY() + 1;
+        } else { // ＼방향
+            entranceY = getY();
+        }
+        return entranceY;
+    }
 
-	private int _leftEdgeLocation = 0; // 문의 좌단의 좌표(문의 방향으로부터 X축orY축을 결정한다)
+    private int _leftEdgeLocation = 0; // 문의 좌단의 좌표(문의 방향으로부터 X축orY축을 결정한다)
 
-	public int getLeftEdgeLocation() {
-		return _leftEdgeLocation;
-	}
+    public int getLeftEdgeLocation() {
+        return _leftEdgeLocation;
+    }
 
-	public void setLeftEdgeLocation(int i) {
-		_leftEdgeLocation = i;
-	}
+    public void setLeftEdgeLocation(int i) {
+        _leftEdgeLocation = i;
+    }
 
-	private int _rightEdgeLocation = 0; // 문의 우단의 좌표(문의 방향으로부터 X축orY축을 결정한다)
+    private int _rightEdgeLocation = 0; // 문의 우단의 좌표(문의 방향으로부터 X축orY축을 결정한다)
 
-	public int getRightEdgeLocation() {
-		return _rightEdgeLocation;
-	}
+    public int getRightEdgeLocation() {
+        return _rightEdgeLocation;
+    }
 
-	public void setRightEdgeLocation(int i) {
-		_rightEdgeLocation = i;
-	}
+    public void setRightEdgeLocation(int i) {
+        _rightEdgeLocation = i;
+    }
 
-	private int _openStatus = ActionCodes.ACTION_Close;
+    private int _openStatus = ActionCodes.ACTION_Close;
 
-	public int getOpenStatus() {
-		return _openStatus;
-	}
+    public int getOpenStatus() {
+        return _openStatus;
+    }
 
-	public void setOpenStatus(int i) {
-		if (i == ActionCodes.ACTION_Open || i == ActionCodes.ACTION_Close) {
-			_openStatus = i;
-		}
-	}
+    public void setOpenStatus(int i) {
+        if (i == ActionCodes.ACTION_Open || i == ActionCodes.ACTION_Close) {
+            _openStatus = i;
+        }
+    }
 
-	private int _passable = NOT_PASS;
+    private int _passable = NOT_PASS;
 
-	public int getPassable() {
-		return _passable;
-	}
+    public int getPassable() {
+        return _passable;
+    }
 
-	public void setPassable(int i) {
-		if (i == PASS || i == NOT_PASS) {
-			_passable = i;
-		}
-	}
+    public void setPassable(int i) {
+        if (i == PASS || i == NOT_PASS) {
+            _passable = i;
+        }
+    }
 
-	private int _keeperId = 0;
+    private int _keeperId = 0;
 
-	public int getKeeperId() {
-		return _keeperId;
-	}
+    public int getKeeperId() {
+        return _keeperId;
+    }
 
-	public void setKeeperId(int i) {
-		_keeperId = i;
-	}
+    public void setKeeperId(int i) {
+        _keeperId = i;
+    }
 
-	private int _crackStatus;
+    private int _crackStatus;
 
-	public int getCrackStatus() {
-		return _crackStatus;
-	}
+    public int getCrackStatus() {
+        return _crackStatus;
+    }
 
-	public void setCrackStatus(int i) {
-		_crackStatus = i;
-	}
+    public void setCrackStatus(int i) {
+        _crackStatus = i;
+    }
 
 }

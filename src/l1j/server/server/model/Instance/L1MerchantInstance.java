@@ -59,7 +59,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 	private static Logger _log = Logger.getLogger(L1MerchantInstance.class
 			.getName());
 
-	/**
+	/** 
 	 * @param template
 	 */
 	public L1MerchantInstance(L1Npc template) {

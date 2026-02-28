@@ -18,129 +18,123 @@
  */
 package l1j.server.server.model.Instance;
 
-import java.util.ArrayList;
-import java.util.concurrent.ScheduledFuture;
-import java.util.logging.Logger;
-
 import l1j.server.server.ActionCodes;
 import l1j.server.server.GeneralThreadPool;
 import l1j.server.server.WarTimeController;
-import l1j.server.server.model.L1Character;
 import l1j.server.server.model.L1CastleLocation;
 import l1j.server.server.model.L1Magic;
 import l1j.server.server.model.L1Object;
 import l1j.server.server.model.L1World;
-import l1j.server.server.model.Instance.L1MonsterInstance;
-import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_DoActionGFX;
 import l1j.server.server.serverpackets.S_RemoveObject;
 import l1j.server.server.templates.L1Npc;
-import static l1j.server.server.model.skill.L1SkillId.*;
+
+import java.util.concurrent.ScheduledFuture;
+import java.util.logging.Logger;
 
 public class L1EffectInstance extends L1NpcInstance {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private static Logger _log = Logger.getLogger(L1EffectInstance.class
-			.getName());
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    private static Logger _log = Logger.getLogger(L1EffectInstance.class.getName());
 
-	private ScheduledFuture<?> _effectFuture;
-	private static final int FW_DAMAGE_INTERVAL = 1000;
+    private ScheduledFuture<?> _effectFuture;
+    private static final int FW_DAMAGE_INTERVAL = 1000;
 
-	public L1EffectInstance(L1Npc template) {
-		super(template);
+    public L1EffectInstance(L1Npc template) {
+        super(template);
 
-		if (getNpcTemplate().get_npcId() == 81157) { // FW
-			_effectFuture = GeneralThreadPool.getInstance().schedule(
-					new FwDamageTimer(this), 0);
-		}
-	}
+        if (getNpcTemplate().get_npcId() == 81157) { // FW
+            _effectFuture = GeneralThreadPool.getInstance().schedule(
+                    new FwDamageTimer(this), 0);
+        }
+    }
 
-	@Override
-	public void onAction(L1PcInstance pc) {
-	}
+    @Override
+    public void onAction(L1PcInstance pc) {
+    }
 
-	@Override
-	public void deleteMe() {
-		_destroyed = true;
-		if (getInventory() != null) {
-			getInventory().clearItems();
-		}
-		allTargetClear();
-		_master = null;
-		L1World.getInstance().removeVisibleObject(this);
-		L1World.getInstance().removeObject(this);
-		for (L1PcInstance pc : L1World.getInstance().getRecognizePlayer(this)) {
-			pc.removeKnownObject(this);
-			pc.sendPackets(new S_RemoveObject(this));
-		}
-		removeAllKnownObjects();
-	}
+    @Override
+    public void deleteMe() {
+        _destroyed = true;
+        if (getInventory() != null) {
+            getInventory().clearItems();
+        }
+        allTargetClear();
+        _master = null;
+        L1World.getInstance().removeVisibleObject(this);
+        L1World.getInstance().removeObject(this);
+        for (L1PcInstance pc : L1World.getInstance().getRecognizePlayer(this)) {
+            pc.removeKnownObject(this);
+            pc.sendPackets(new S_RemoveObject(this));
+        }
+        removeAllKnownObjects();
+    }
 
-	class FwDamageTimer implements Runnable {
-		private L1EffectInstance _effect;
+    class FwDamageTimer implements Runnable {
+        private L1EffectInstance _effect;
 
-		public FwDamageTimer(L1EffectInstance effect) {
-			_effect = effect;
-		}
+        public FwDamageTimer(L1EffectInstance effect) {
+            _effect = effect;
+        }
 
-		@Override
-		public void run() {
-			while (!_destroyed) {
-				try {
-					for (L1Object objects : L1World.getInstance()
-							.getVisibleObjects(_effect, 0)) {
-						if (objects instanceof L1PcInstance) {
-							L1PcInstance pc = (L1PcInstance) objects;
-							if (pc.isDead()) {
-								continue;
-							}
-							if (pc.getId() == pc.getId()) { // 파이어월 자기자신은 안맞도록 Qoo
-								continue;
-							}
-							if (pc.getZoneType() == 1) {
-								boolean isNowWar = false;
-								int castleId = L1CastleLocation
-										.getCastleIdByArea(pc);
-								if (castleId > 0) {
-									isNowWar = WarTimeController.getInstance()
-											.isNowWar(castleId);
-								}
-								if (!isNowWar) {
-									continue;
-								}								
-							}
-							L1Magic magic = new L1Magic(_effect, pc);
-							int damage = magic.calcPcFireWallDamage();
-							if (damage == 0) {
-								continue;
-							}
-							pc.sendPackets(new S_DoActionGFX(pc.getId(),
-									ActionCodes.ACTION_Damage));
-							pc.broadcastPacket(new S_DoActionGFX(pc.getId(),
-									ActionCodes.ACTION_Damage));
-							pc.receiveDamage(_effect, damage);
-						} else if (objects instanceof L1MonsterInstance) {
-							L1MonsterInstance mob = (L1MonsterInstance) objects;
-							if (mob.isDead()) {
-								continue;
-							}
-							L1Magic magic = new L1Magic(_effect, mob);
-							int damage = magic.calcNpcFireWallDamage();
-							if (damage == 0) {
-								continue;
-							}
-							mob.broadcastPacket(new S_DoActionGFX(mob.getId(),
-									ActionCodes.ACTION_Damage));
-							mob.receiveDamage(_effect, damage);
-						}
-					}
-					Thread.sleep(FW_DAMAGE_INTERVAL);
-				} catch (InterruptedException ignore) {
-					// ignore
-				}
-			}
-		}
-	}
+        @Override
+        public void run() {
+            while (!_destroyed) {
+                try {
+                    for (L1Object objects : L1World.getInstance()
+                            .getVisibleObjects(_effect, 0)) {
+                        if (objects instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) objects;
+                            if (pc.isDead()) {
+                                continue;
+                            }
+                            if (pc.getId() == pc.getId()) { // 파이어월 자기자신은 안맞도록 Qoo
+                                continue;
+                            }
+                            if (pc.getZoneType() == 1) {
+                                boolean isNowWar = false;
+                                int castleId = L1CastleLocation
+                                        .getCastleIdByArea(pc);
+                                if (castleId > 0) {
+                                    isNowWar = WarTimeController.getInstance()
+                                            .isNowWar(castleId);
+                                }
+                                if (!isNowWar) {
+                                    continue;
+                                }
+                            }
+                            L1Magic magic = new L1Magic(_effect, pc);
+                            int damage = magic.calcPcFireWallDamage();
+                            if (damage == 0) {
+                                continue;
+                            }
+                            pc.sendPackets(new S_DoActionGFX(pc.getId(),
+                                    ActionCodes.ACTION_Damage));
+                            pc.broadcastPacket(new S_DoActionGFX(pc.getId(),
+                                    ActionCodes.ACTION_Damage));
+                            pc.receiveDamage(_effect, damage);
+                        } else if (objects instanceof L1MonsterInstance) {
+                            L1MonsterInstance mob = (L1MonsterInstance) objects;
+                            if (mob.isDead()) {
+                                continue;
+                            }
+                            L1Magic magic = new L1Magic(_effect, mob);
+                            int damage = magic.calcNpcFireWallDamage();
+                            if (damage == 0) {
+                                continue;
+                            }
+                            mob.broadcastPacket(new S_DoActionGFX(mob.getId(),
+                                    ActionCodes.ACTION_Damage));
+                            mob.receiveDamage(_effect, damage);
+                        }
+                    }
+                    Thread.sleep(FW_DAMAGE_INTERVAL);
+                } catch (InterruptedException ignore) {
+                    // ignore
+                }
+            }
+        }
+    }
 }
